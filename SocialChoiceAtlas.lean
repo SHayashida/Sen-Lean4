@@ -9,3 +9,5 @@ import SocialChoiceAtlas.Axioms.Liberalism
 import SocialChoiceAtlas.Axioms.Rationality
 import SocialChoiceAtlas.Sen.BaseCase24.Spec
 import SocialChoiceAtlas.Sen.BaseCase24.Theorem
+-- Optional (SAT/BVDecide/LRAT): this is large and solver-backed, so keep it out of default imports.
+-- import SocialChoiceAtlas.Sen.BaseCase24.SATSen

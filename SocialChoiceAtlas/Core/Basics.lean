@@ -27,17 +27,40 @@ scoped notation "P " R => strictPart R
 def cycle3 (S : α → α → Prop) : Prop :=
   ∃ a b c, a ≠ b ∧ b ≠ c ∧ c ≠ a ∧ S a b ∧ S b c ∧ S c a
 
-/-- Acyclicity (3-cycle version): no 3-cycle exists.
-    This is sufficient for Sen's impossibility theorem. -/
+/-- A 4-cycle exists in a strict relation S. -/
+def cycle4 (S : α → α → Prop) : Prop :=
+  ∃ a b c d,
+    a ≠ b ∧ b ≠ c ∧ c ≠ d ∧ d ≠ a ∧
+    S a b ∧ S b c ∧ S c d ∧ S d a
+
+/-- Acyclicity: there is no (nonempty) directed cycle.
+We formalize this as `∀ a, ¬ Relation.TransGen S a a`. -/
 def Acyclic (S : α → α → Prop) : Prop :=
-  ¬∃ a b c, S a b ∧ S b c ∧ S c a
+  ∀ a, ¬ Relation.TransGen S a a
 
 /-- A 3-cycle implies the relation is not acyclic. -/
 theorem cycle3_implies_not_acyclic {S : α → α → Prop} (h : cycle3 S) : ¬Acyclic S := by
   intro hAcyclic
-  unfold cycle3 at h
   rcases h with ⟨a, b, c, _, _, _, hab, hbc, hca⟩
-  exact hAcyclic ⟨a, b, c, hab, hbc, hca⟩
+  have hab' : Relation.TransGen S a b := Relation.TransGen.single hab
+  have hbc' : Relation.TransGen S b c := Relation.TransGen.single hbc
+  have hca' : Relation.TransGen S c a := Relation.TransGen.single hca
+  have hac : Relation.TransGen S a c := Relation.TransGen.trans hab' hbc'
+  have haa : Relation.TransGen S a a := Relation.TransGen.trans hac hca'
+  exact (hAcyclic a) haa
+
+/-- A 4-cycle implies the relation is not acyclic. -/
+theorem cycle4_implies_not_acyclic {S : α → α → Prop} (h : cycle4 S) : ¬Acyclic S := by
+  intro hAcyclic
+  rcases h with ⟨a, b, c, d, _, _, _, _, hab, hbc, hcd, hda⟩
+  have hab' : Relation.TransGen S a b := Relation.TransGen.single hab
+  have hbc' : Relation.TransGen S b c := Relation.TransGen.single hbc
+  have hcd' : Relation.TransGen S c d := Relation.TransGen.single hcd
+  have hda' : Relation.TransGen S d a := Relation.TransGen.single hda
+  have hac : Relation.TransGen S a c := Relation.TransGen.trans hab' hbc'
+  have had : Relation.TransGen S a d := Relation.TransGen.trans hac hcd'
+  have haa : Relation.TransGen S a a := Relation.TransGen.trans had hda'
+  exact (hAcyclic a) haa
 
 /-- Irreflexivity of strict part follows from its definition. -/
 theorem strictPart_irrefl (R : α → α → Prop) (x : α) : ¬strictPart R x x := by

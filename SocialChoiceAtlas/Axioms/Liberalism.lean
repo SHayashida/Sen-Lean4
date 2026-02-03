@@ -27,21 +27,22 @@ variable {Voter : Type u} {Alt : Type v} [DecidableEq Alt] [Fintype Alt]
     - when i prefers x to y, society strictly prefers x to y
     - when i prefers y to x, society strictly prefers y to x -/
 def Decisive (F : SWF Voter Alt) (i : Voter) (x y : Alt) : Prop :=
-  (∀ p, prefers_i p i x y → strictPart (F p) x y) ∧
-  (∀ p, prefers_i p i y x → strictPart (F p) y x)
+  ∀ p, (prefers_i p i x y → strictPart (F p) x y) ∧
+    (prefers_i p i y x → strictPart (F p) y x)
 
 /-- Minimal liberalism: there exist two distinct voters, each decisive
     over some (possibly overlapping) pair of alternatives. -/
 def MINLIB (F : SWF Voter Alt) : Prop :=
   ∃ i j : Voter, i ≠ j ∧
-    ∃ x y : Alt, x ≠ y ∧ Decisive F i x y ∧
-    ∃ z w : Alt, z ≠ w ∧ Decisive F j z w
+    ∃ x y z w : Alt,
+      x ≠ y ∧ z ≠ w ∧ Decisive F i x y ∧ Decisive F j z w
 
 /-- Symmetric decisiveness: decisive in both directions (convenience lemma). -/
 theorem Decisive.symm {F : SWF Voter Alt} {i : Voter} {x y : Alt}
     (h : Decisive F i x y) : Decisive F i y x := by
-  constructor <;> intro p hp
-  · exact h.2 p hp
-  · exact h.1 p hp
+  intro p
+  constructor <;> intro hp
+  · exact (h p).2 hp
+  · exact (h p).1 hp
 
 end SocialChoiceAtlas

@@ -35,12 +35,16 @@ def SocialTotal (F : SWF Voter Alt) : Prop :=
 /-- Transitivity implies acyclicity for strict relations. -/
 theorem SocialTransitive.toAcyclic {F : SWF Voter Alt}
     (hTrans : SocialTransitive F) : SocialAcyclic F := by
-  intro p
-  unfold Acyclic
-  push_neg
-  intro a b c hab hbc hca
-  have hac := hTrans p a b c hab hbc
-  have haa := hTrans p a c a hac hca
-  exact strictPart_irrefl (F p) a haa
+  intro p a hCycle
+  have hLoop : strictPart (F p) a a := by
+    -- Transitivity collapses any `TransGen` cycle into a one-step self-edge.
+    have hTransGen :
+        ∀ {x y : Alt}, Relation.TransGen (strictPart (F p)) x y → strictPart (F p) x y := by
+      intro x y hxy
+      induction hxy with
+      | single h => exact h
+      | tail hab hbc ih => exact hTrans p _ _ _ ih hbc
+    exact hTransGen hCycle
+  exact strictPart_irrefl (F p) a hLoop
 
 end SocialChoiceAtlas

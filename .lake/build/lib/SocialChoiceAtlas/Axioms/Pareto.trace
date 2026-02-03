@@ -2,4 +2,4 @@
  [{"message":
    ".> LEAN_PATH=././.lake/packages/Cli/.lake/build/lib:././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/LeanSearchClient/.lake/build/lib:././.lake/packages/plausible/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib DYLD_LIBRARY_PATH= /Users/linda/.elan/toolchains/leanprover--lean4---v4.15.0/bin/lean -Dpp.unicode.fun=true -DautoImplicit=false ././././SocialChoiceAtlas/Axioms/Pareto.lean -R ./././. -o ././.lake/build/lib/SocialChoiceAtlas/Axioms/Pareto.olean -i ././.lake/build/lib/SocialChoiceAtlas/Axioms/Pareto.ilean -c ././.lake/build/ir/SocialChoiceAtlas/Axioms/Pareto.c --json",
    "level": "trace"}],
- "depHash": "1554586438734352825"}
+ "depHash": "16409215339845179172"}

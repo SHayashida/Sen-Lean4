@@ -16,13 +16,17 @@ extern "C" {
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210___closed__2;
 LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking0123;
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210___closed__1;
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_mkRanking4(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_mkRanking(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_profile2___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking0123___closed__4;
 LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210;
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210___closed__3;
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking0123___closed__3;
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210___closed__4;
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking0123___closed__1;
+uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_profile2(lean_object*, lean_object*, lean_object*);
 static lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_ranking0123___closed__2;
 LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_mkRanking___boxed(lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_mkRanking(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
@@ -151,6 +155,55 @@ _start:
 lean_object* x_1; 
 x_1 = l_SocialChoiceAtlas_Sen_BaseCase24_ranking3210___closed__4;
 return x_1;
+}
+}
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_profile2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+_start:
+{
+lean_object* x_4; uint8_t x_5; 
+x_4 = lean_unsigned_to_nat(0u);
+x_5 = lean_nat_dec_eq(x_3, x_4);
+if (x_5 == 0)
+{
+lean_inc(x_2);
+return x_2;
+}
+else
+{
+lean_inc(x_1);
+return x_1;
+}
+}
+}
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_profile2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+_start:
+{
+lean_object* x_4; 
+x_4 = l_SocialChoiceAtlas_Sen_BaseCase24_profile2(x_1, x_2, x_3);
+lean_dec(x_3);
+lean_dec(x_2);
+lean_dec(x_1);
+return x_4;
+}
+}
+LEAN_EXPORT lean_object* l_SocialChoiceAtlas_Sen_BaseCase24_mkRanking4(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+_start:
+{
+lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; 
+x_6 = lean_box(0);
+x_7 = lean_alloc_ctor(1, 2, 0);
+lean_ctor_set(x_7, 0, x_4);
+lean_ctor_set(x_7, 1, x_6);
+x_8 = lean_alloc_ctor(1, 2, 0);
+lean_ctor_set(x_8, 0, x_3);
+lean_ctor_set(x_8, 1, x_7);
+x_9 = lean_alloc_ctor(1, 2, 0);
+lean_ctor_set(x_9, 0, x_2);
+lean_ctor_set(x_9, 1, x_8);
+x_10 = lean_alloc_ctor(1, 2, 0);
+lean_ctor_set(x_10, 0, x_1);
+lean_ctor_set(x_10, 1, x_9);
+return x_10;
 }
 }
 lean_object* initialize_Init(uint8_t builtin, lean_object*);

@@ -1,0 +1,5 @@
+{"log":
+ [{"message":
+   ".> LEAN_PATH=././.lake/packages/Cli/.lake/build/lib:././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/LeanSearchClient/.lake/build/lib:././.lake/packages/plausible/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib DYLD_LIBRARY_PATH= /Users/linda/.elan/toolchains/leanprover--lean4---v4.15.0/bin/lean -Dpp.unicode.fun=true -DautoImplicit=false ././././SocialChoiceAtlas/Sen/BaseCase24/Spec.lean -R ./././. -o ././.lake/build/lib/SocialChoiceAtlas/Sen/BaseCase24/Spec.olean -i ././.lake/build/lib/SocialChoiceAtlas/Sen/BaseCase24/Spec.ilean -c ././.lake/build/ir/SocialChoiceAtlas/Sen/BaseCase24/Spec.c --json",
+   "level": "trace"}],
+ "depHash": "9308854266868075892"}

@@ -1,0 +1,8 @@
+{"log":
+ [{"message":
+   ".> LEAN_PATH=././.lake/packages/Cli/.lake/build/lib:././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/LeanSearchClient/.lake/build/lib:././.lake/packages/plausible/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib DYLD_LIBRARY_PATH= /Users/linda/.elan/toolchains/leanprover--lean4---v4.15.0/bin/lean -Dpp.unicode.fun=true -DautoImplicit=false ././././SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean -R ./././. -o ././.lake/build/lib/SocialChoiceAtlas/Sen/BaseCase24/Theorem.olean -i ././.lake/build/lib/SocialChoiceAtlas/Sen/BaseCase24/Theorem.ilean -c ././.lake/build/ir/SocialChoiceAtlas/Sen/BaseCase24/Theorem.c --json",
+   "level": "trace"},
+  {"message":
+   "././././SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean:114:6: declaration uses 'sorry'",
+   "level": "warning"}],
+ "depHash": "4171173732262643416"}

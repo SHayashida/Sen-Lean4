@@ -1,100 +1,21 @@
-# SAT/LRAT Certificate Verification
+# SocialChoiceAtlas - Sen's Impossibility Theorem in Lean 4
 
-This directory contains LRAT proof certificates for SAT-based verification of social choice impossibility theorems.
+Formal verification of Sen's "Impossibility of a Paretian Liberal" theorem using SAT-based proof certificates in Lean 4.
 
 ## Overview
 
-The SocialChoiceAtlas project uses SAT solvers to verify finite instances of impossibility theorems, particularly Sen's "Impossibility of a Paretian Liberal" theorem. The proof certificates are imported into Lean 4 for kernel-level verification, ensuring the highest level of mathematical rigor.
+This project formalizes and verifies Sen's classic impossibility theorem from social choice theory. We use SAT solvers to verify finite base cases, producing LRAT proof certificates that are checked by Lean 4's kernel for the highest level of mathematical rigor.
 
-## Current Implementation
+## Sen's Theorem
 
-### Sen's Theorem Base Case (n=2, m=4)
-
-We have implemented a verified base case for Sen's theorem with:
-- **n = 2** voters
-- **m = 4** alternatives
-
-The implementation uses Lean 4's `Std.Tactic.BVDecide` framework for SAT-based verification.
-
-## Workflow
-
-### Internal Workflow with BVDecide
-
-The recommended approach for this repository uses Lean's built-in SAT solver integration:
-
-1. **Build with `bv_decide`** (solver runs during compilation):
-   ```bash
-   lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated
-   ```
-
-2. **Generate LRAT certificate** (one-time):
-   - Edit [SocialChoiceAtlas/Sen/BaseCase24/SATSenGenerated.lean](../SocialChoiceAtlas/Sen/BaseCase24/SATSenGenerated.lean) and replace `bv_decide` with `bv_decide?` in the `sen24_unsat` theorem
-   - Rebuild to generate the certificate:
-     ```bash
-     lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated
-     ```
-
-3. **Cache the certificate**:
-   - The generated `.lrat` file will be placed next to `SATSenGenerated.lean`
-   - Switch the proof to `bv_check "sen24_unsat.lrat"` for fast cached verification
-   - Commit the `.lrat` file to the repository
-
-### Problem Encoding
-
-The Sen theorem is encoded as a CNF (Conjunctive Normal Form) formula representing the impossibility of simultaneously satisfying:
-- **Pareto Optimality**: If all voters prefer x to y, society prefers x to y
-- **Minimal Liberalism**: Each voter is decisive on at least one pair of alternatives
+Sen's theorem states that there is no social decision function that simultaneously satisfies:
+- **Pareto Optimality**: If all voters prefer x to y, society must prefer x to y
+- **Minimal Liberalism**: Each voter is decisive on at least one pair of alternatives  
 - **Rational Social Preference**: Social preferences form a transitive and complete ordering
-
-#### Variables
-
-- `p_i_x_y`: voter i prefers alternative x to alternative y in profile p
-- `s_p_x_y`: society strictly prefers x to y under profile p
-
-#### Constraints
-
-- Unanimity constraints (Pareto)
-- Minimal decisiveness constraints (Liberalism)
-- Acyclicity constraints (Rationality)
-- Negation of satisfiability (proving UNSAT establishes the impossibility)
-
-### External SAT Solving with LRAT (Alternative Approach)
-
-For larger instances, you can use external SAT solvers that produce LRAT proofs:
-
-```bash
-# Using CaDiCaL
-cadical problem.cnf --lrat proof.lrat
-
-# Using Kissat  
-kissat problem.cnf --lrat=proof.lrat
-```
-
-#### Certificate Trimming (Optional)
-
-LRAT certificates can be large. Use `lrat-trim` to reduce size:
-
-```bash
-lrat-trim proof.lrat proof_trimmed.lrat
-```
-
-#### Lean Verification
-
-Replace `bv_decide` with `bv_check` to use the cached certificate:
-
-```lean
--- In SocialChoiceAtlas/Sen/BaseCase24/SAT.lean
-theorem sen_sat_verified : encoded_impossibility := by
-  bv_check "Certificates/sen_basecase24.lrat"
-```
 
 ## Repository Structure
 
 ```
-Certificates/
-├── README.md                    # This file
-└── (future) LRAT certificates for additional base cases
-
 SocialChoiceAtlas/
 ├── Core/
 │   ├── Basics.lean              # Fundamental definitions
@@ -111,6 +32,10 @@ SocialChoiceAtlas/
         ├── SAT.lean             # SAT encoding
         ├── SATSen.lean          # SAT verification
         └── SATSenGenerated.lean # Generated SAT proof
+
+Certificates/                    # LRAT proof certificates
+scripts/
+└── gen_sen24_sat.py            # Generates SAT encoding
 ```
 
 ## Advantages of Certificate-Based Proofs
@@ -135,6 +60,7 @@ SocialChoiceAtlas/
 
 - [Lean 4](https://leanprover.github.io/) (version specified in `lean-toolchain`)
 - [Lake](https://github.com/leanprover/lake) (Lean's build system)
+- Python 3.x (for encoding generation)
 
 ### Build Instructions
 
@@ -145,29 +71,28 @@ lake build
 # Build only the Sen base case
 lake build SocialChoiceAtlas.Sen.BaseCase24
 
-# Build with SAT verification (slower, generates proof)
+# Build with SAT verification (generates proof)
 lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated
 ```
+
+### Verification Workflow
+
+For detailed instructions on generating and caching LRAT certificates, see [Certificates/README.md](Certificates/README.md).
+
+Quick overview:
+1. Replace `bv_decide` with `bv_decide?` in the theorem
+2. Run Lean with an absolute path to generate the `.lrat` file
+3. Switch to `bv_check "certificate.lrat"` for fast verification
+4. Commit the certificate to the repository
 
 ## References
 
 - Sen, A. K. (1970). "The Impossibility of a Paretian Liberal". *Journal of Political Economy*, 78(1), 152-157.
 - [Lean 4 Documentation](https://leanprover.github.io/lean4/doc/)
 - [Mathlib4](https://github.com/leanprover-community/mathlib4)
+- Heule, M. (2017). "The DRAT format and DRAT-trim checker"
+- Geist, C. & Endriss, U. (2011). "Automated Search for Impossibility Theorems in Social Choice Theory"
 
 ## License
 
 This project is part of the SocialChoiceAtlas research effort exploring formal verification of social choice theory theorems.
-| 3          | 5                | TODO   |
-
-## Tools Required
-
-- [CaDiCaL](https://github.com/arminbiere/cadical) - SAT solver with LRAT
-- [DRAT-trim](https://github.com/marijnheule/drat-trim) - Certificate trimmer
-- Python 3.x - For CNF encoding scripts
-
-## References
-
-- Heule, M. (2017). "The DRAT format and DRAT-trim checker"
-- Lean 4 `bv_decide` documentation
-- Geist, C. & Endriss, U. (2011). "Automated Search for Impossibility Theorems"

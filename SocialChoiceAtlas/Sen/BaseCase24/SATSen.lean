@@ -1,14 +1,12 @@
 /-
-SAT-backed (BVDecide/LRAT) verification for Sen's base case (n=2, m=4).
+SAT-backed (LRAT) verification for Sen's base case (n=2, m=4).
 
 This module is intentionally independent from the constructive proof in
 `SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean`.
+
+Build just this module with:
+  `lake build SocialChoiceAtlas.Sen.BaseCase24.SATSen`
 -/
-import SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated
+import SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 
-namespace SocialChoiceAtlas.Sen.BaseCase24
-
-export SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated (sen24_unsat)
-
-end SocialChoiceAtlas.Sen.BaseCase24
-
+-- Re-export via import only; `sen24_cnf_unsat` is in namespace `SocialChoiceAtlas.Sen.BaseCase24`.

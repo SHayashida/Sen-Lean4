@@ -12,6 +12,10 @@ This script:
 Usage:
   python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf \
     --manifest Certificates/sen24.manifest.json
+
+Flags:
+  --strict-duplicates   Fail on duplicate literals in a clause (default: warn + de-dup)
+  --fail-on-tautology   Fail on tautological clauses (default: warn + ignore)
 """
 
 from __future__ import annotations
@@ -155,14 +159,20 @@ def parse_dimacs(path: Path) -> tuple[int, int, list[tuple[int, list[int]]]]:
     return nvars, nclauses, clauses
 
 
-def canon_clause(lits: list[int], *, path: Path, lineno: int) -> tuple[tuple[int, ...], bool]:
+def canon_clause(
+    lits: list[int], *, path: Path, lineno: int, strict_duplicates: bool
+) -> tuple[tuple[int, ...], bool, bool]:
     seen = set()
+    had_dups = False
     for lit in lits:
         if lit in seen:
-            raise AuditError(f"{path}:{lineno}: duplicate literal {lit} in clause {lits}")
+            had_dups = True
+            if strict_duplicates:
+                raise AuditError(f"{path}:{lineno}: duplicate literal {lit} in clause {lits}")
+            continue
         seen.add(lit)
     taut = any((-lit) in seen for lit in seen)
-    return tuple(sorted(seen)), taut
+    return tuple(sorted(seen)), taut, had_dups
 
 
 def all_rankings(alts: list[int]) -> list[tuple[int, ...]]:
@@ -391,7 +401,63 @@ def top_k(counter: Counter[tuple[int, ...]], k: int) -> list[tuple[tuple[int, ..
     return sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))[:k]
 
 
-def audit(cnf_path: Path, manifest_path: Path | None) -> None:
+def _fmt_counts(counts: dict[str, int], keys: list[str]) -> str:
+    return "{" + ", ".join(f"{k}={counts.get(k, '∅')}" for k in keys) + "}"
+
+
+def _validate_manifest(man: Manifest, schema: Schema, *, cnf_nvars: int, cnf_nclauses: int) -> None:
+    # Basic field agreement with CNF header
+    if man.nvars != cnf_nvars:
+        raise AuditError(f"manifest.nvars={man.nvars} but CNF header nvars={cnf_nvars}")
+    if man.nclauses != cnf_nclauses:
+        raise AuditError(f"manifest.nclauses={man.nclauses} but CNF header nclauses={cnf_nclauses}")
+
+    # Agreement with derived schema
+    if man.nranks != schema.nranks:
+        raise AuditError(f"manifest.nranks={man.nranks} expected {schema.nranks}")
+    if man.nprofiles != schema.nprofiles:
+        raise AuditError(f"manifest.nprofiles={man.nprofiles} expected {schema.nprofiles}")
+    if man.npairs != schema.npairs:
+        raise AuditError(f"manifest.npairs={man.npairs} expected {schema.npairs}")
+    if man.n_p_vars != schema.n_p_vars:
+        raise AuditError(f"manifest.n_p_vars={man.n_p_vars} expected {schema.n_p_vars}")
+    if man.p_var_range != (schema.p_var_start, schema.p_var_end):
+        raise AuditError(
+            f"manifest.p_var_range={man.p_var_range} expected {(schema.p_var_start, schema.p_var_end)}"
+        )
+    expected_aux = None if schema.aux_start is None else (schema.aux_start, schema.aux_end)
+    if man.aux_var_range != expected_aux:
+        raise AuditError(f"manifest.aux_var_range={man.aux_var_range} expected {expected_aux}")
+
+    # Internal manifest arithmetic sanity
+    if man.nprofiles * man.npairs != man.n_p_vars:
+        raise AuditError(
+            f"manifest n_p_vars mismatch: nprofiles*npairs={man.nprofiles * man.npairs} but n_p_vars={man.n_p_vars}"
+        )
+    if man.category_counts is None:
+        raise AuditError("manifest.category_counts missing")
+    required = {"asymm", "un", "minlib", "no_cycle3", "no_cycle4"}
+    missing = sorted(required - set(man.category_counts.keys()))
+    if missing:
+        raise AuditError(f"manifest.category_counts missing keys: {missing}")
+    cat_sum = sum(int(v) for v in man.category_counts.values())
+    if cat_sum != man.nclauses:
+        raise AuditError(
+            f"sum(manifest.category_counts.values())={cat_sum} but manifest.nclauses={man.nclauses}"
+        )
+    if cat_sum != cnf_nclauses:
+        raise AuditError(
+            f"sum(manifest.category_counts.values())={cat_sum} but CNF header nclauses={cnf_nclauses}"
+        )
+
+
+def audit(
+    cnf_path: Path,
+    manifest_path: Path | None,
+    *,
+    strict_duplicates: bool,
+    fail_on_tautology: bool,
+) -> None:
     man = None
     if manifest_path is not None:
         man = load_manifest(manifest_path, cnf_path)
@@ -400,26 +466,49 @@ def audit(cnf_path: Path, manifest_path: Path | None) -> None:
     schema = build_schema(man, cnf_nvars=cnf_nvars)
 
     if man is not None:
-        if man.nvars != cnf_nvars:
-            raise AuditError(f"manifest.nvars={man.nvars} but CNF header nvars={cnf_nvars}")
-        if man.nclauses != cnf_nclauses:
-            raise AuditError(
-                f"manifest.nclauses={man.nclauses} but CNF header nclauses={cnf_nclauses}"
-            )
-        if man.p_var_range != (schema.p_var_start, schema.p_var_end):
-            raise AuditError(
-                f"manifest.p_var_range={man.p_var_range} expected {(schema.p_var_start, schema.p_var_end)}"
-            )
+        _validate_manifest(man, schema, cnf_nvars=cnf_nvars, cnf_nclauses=cnf_nclauses)
 
     # Canonicalize clauses; separate tautologies (allowed but warned).
-    tautologies: list[tuple[int, ...]] = []
+    warn_cap = 20
+    duplicate_count = 0
+    duplicate_examples: list[str] = []
+    tautology_count = 0
+    tautology_examples: list[str] = []
+
     actual_all: Counter[tuple[int, ...]] = Counter()
     for lineno, lits in raw_clauses:
-        cl, taut = canon_clause(lits, path=cnf_path, lineno=lineno)
+        cl, taut, had_dups = canon_clause(
+            lits, path=cnf_path, lineno=lineno, strict_duplicates=strict_duplicates
+        )
+        if had_dups:
+            duplicate_count += 1
+            if len(duplicate_examples) < warn_cap:
+                duplicate_examples.append(f"{cnf_path}:{lineno}: {lits} 0")
         if taut:
-            tautologies.append(cl)
+            tautology_count += 1
+            if len(tautology_examples) < warn_cap:
+                tautology_examples.append(f"{cnf_path}:{lineno}: {lits} 0")
             continue
         actual_all[cl] += 1
+
+    if duplicate_count and not strict_duplicates:
+        print(
+            f"[warning] duplicate literals in {duplicate_count} clause(s); de-duplicated for comparison"
+        )
+        for ex in duplicate_examples:
+            print(f"  {ex}")
+        if duplicate_count > len(duplicate_examples):
+            print(f"  ... ({duplicate_count - len(duplicate_examples)} more)")
+
+    if tautology_count:
+        prefix = "[error]" if fail_on_tautology else "[warning]"
+        print(f"{prefix} tautological clauses: {tautology_count} (ignored for comparison)")
+        for ex in tautology_examples:
+            print(f"  {ex}")
+        if tautology_count > len(tautology_examples):
+            print(f"  ... ({tautology_count - len(tautology_examples)} more)")
+        if fail_on_tautology:
+            raise AuditError("tautological clause(s) present (use without --fail-on-tautology to ignore)")
 
     # Expected clauses (multisets)
     exp_asymm = expected_asymm(schema)
@@ -518,6 +607,24 @@ def audit(cnf_path: Path, manifest_path: Path | None) -> None:
 
         unexpected[lits] += cnt
 
+    def unclassified_reason(lits: tuple[int, ...]) -> str:
+        allowed_lens = {1, 2, 3, 4, schema.npairs}
+        if len(lits) not in allowed_lens:
+            return f"length not in {sorted(allowed_lens)}"
+        if schema.aux_start is not None and any(
+            schema.aux_start <= abs(x) <= (schema.aux_end or schema.aux_start) for x in lits
+        ):
+            return "contains aux vars in unexpected places"
+        has_pos = any(x > 0 for x in lits)
+        has_neg = any(x < 0 for x in lits)
+        if has_pos and has_neg:
+            return "mixed signs not matching any category"
+        return "shape not matching any category"
+
+    unexpected_reasons: dict[tuple[int, ...], str] = {}
+    for cl in unexpected:
+        unexpected_reasons[cl] = unclassified_reason(cl)
+
     # Report / compare category-by-category.
     errors: list[str] = []
 
@@ -554,9 +661,16 @@ def audit(cnf_path: Path, manifest_path: Path | None) -> None:
 
     if unexpected:
         errors.append(f"unclassified: {sum(unexpected.values())} clauses")
+        len_hist: Counter[int] = Counter()
+        for cl, n in unexpected.items():
+            len_hist[len(cl)] += n
         print("[unclassified] unexpected clause shapes (top 10):")
         for cl, n in top_k(unexpected, 10):
-            print(f"  {n}×  {fmt_clause(cl)}")
+            print(f"  {n}×  {fmt_clause(cl)}  # {unexpected_reasons.get(cl, '')}")
+        print(
+            "[unclassified] length histogram: "
+            + ", ".join(f"{k}:{len_hist[k]}" for k in sorted(len_hist))
+        )
 
     # Cross-check manifest counts (if present).
     if man is not None:
@@ -568,32 +682,55 @@ def audit(cnf_path: Path, manifest_path: Path | None) -> None:
             "no_cycle4": sum(exp_c4.values()),
         }
         for k, exp_n in expected_counts.items():
-            if k not in man.category_counts:
-                errors.append(f"manifest missing category_counts[{k!r}]")
-                continue
             if man.category_counts[k] != exp_n:
                 errors.append(
                     f"manifest.category_counts[{k}]={man.category_counts[k]} expected {exp_n}"
                 )
 
-    if tautologies:
-        print(f"[warning] tautological clauses ignored for comparison: {len(tautologies)}")
-
     if errors:
         print("\nFAILED:")
         for e in errors:
             print(f"- {e}")
+        if man is not None:
+            keys = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+            print(
+                "[summary] "
+                f"manifest nvars={man.nvars} nclauses={man.nclauses} counts={_fmt_counts(man.category_counts, keys)}; "
+                f"expected counts={_fmt_counts(expected_counts, keys)}"
+            )
         raise AuditError("CNF audit failed")
 
     print("\nOK: CNF matches spec and manifest.")
+    if man is not None:
+        keys = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+        print(
+            "[summary] "
+            f"manifest nvars={man.nvars} nclauses={man.nclauses} counts={_fmt_counts(man.category_counts, keys)}; "
+            f"expected counts={_fmt_counts(expected_counts, keys)}"
+        )
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("cnf", type=Path, help="DIMACS CNF file (e.g. Certificates/sen24.cnf)")
     ap.add_argument("--manifest", type=Path, default=None, help="JSON manifest path")
+    ap.add_argument(
+        "--strict-duplicates",
+        action="store_true",
+        help="Fail if any clause contains duplicate literals (default: warn + de-duplicate)",
+    )
+    ap.add_argument(
+        "--fail-on-tautology",
+        action="store_true",
+        help="Fail if any tautological clause is present (default: warn + ignore)",
+    )
     args = ap.parse_args()
-    audit(args.cnf, args.manifest)
+    audit(
+        args.cnf,
+        args.manifest,
+        strict_duplicates=args.strict_duplicates,
+        fail_on_tautology=args.fail_on_tautology,
+    )
 
 
 if __name__ == "__main__":

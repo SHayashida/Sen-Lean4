@@ -13,6 +13,6 @@ require mathlib from git
 @[default_target]
 lean_lib «SocialChoiceAtlas» where
   -- Build only the library root (and its imports) by default.
-  -- SAT/LRAT modules like `SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated` are optional
+  -- SAT/LRAT modules like `SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF` are optional
   -- and can be built explicitly when a certificate is available.
   globs := #[`SocialChoiceAtlas]

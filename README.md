@@ -1,98 +1,63 @@
-# SocialChoiceAtlas - Sen's Impossibility Theorem in Lean 4
+# SocialChoiceAtlas: Sen Base Case (Lean 4 + LRAT)
 
-Formal verification of Sen's "Impossibility of a Paretian Liberal" theorem using SAT-based proof certificates in Lean 4.
+This repository contains a formalized base case of Sen's impossibility theorem
+for `n = 2` voters and `m = 4` alternatives, with:
 
-## Overview
+- a pure Lean proof (`Theorem.lean`), and
+- an independent SAT certificate pipeline (DIMACS CNF + LRAT) checked in Lean.
 
-This project formalizes and verifies Sen's classic impossibility theorem from social choice theory. We use SAT solvers to verify finite base cases, producing LRAT proof certificates that are checked by Lean 4's kernel for the highest level of mathematical rigor.
+For the exact claim boundary ("what is guaranteed / not guaranteed"),
+see `ZENODO_CLAIMS.md`.
 
-## Sen's Theorem
+## Zenodo-ready layout
 
-Sen's theorem states that there is no social decision function that simultaneously satisfies:
-- **Pareto Optimality**: If all voters prefer x to y, society must prefer x to y
-- **Minimal Liberalism**: Each voter is decisive on at least one pair of alternatives  
-- **Rational Social Preference**: Social preferences form a transitive and complete ordering
-
-## Repository Structure
-
-```
+```text
 SocialChoiceAtlas/
-├── Core/
-│   ├── Basics.lean              # Fundamental definitions
-│   ├── Ranking.lean             # Preference rankings
-│   └── Profile.lean             # Voter profiles
-├── Axioms/
-│   ├── Pareto.lean              # Pareto optimality
-│   ├── Liberalism.lean          # Minimal liberalism
-│   └── Rationality.lean         # Rational social preference
-└── Sen/
-    └── BaseCase24/
-        ├── Spec.lean            # Specification for n=2, m=4
-        ├── Theorem.lean         # Main theorem statement
-        ├── SAT.lean             # SAT encoding
-        ├── SATSen.lean          # SAT verification
-        └── SATSenGenerated.lean # Generated SAT proof
-
-Certificates/                    # LRAT proof certificates
-scripts/
-└── gen_sen24_sat.py            # Generates SAT encoding
+├── SocialChoiceAtlas/
+│   ├── Core/
+│   ├── Axioms/
+│   └── Sen/BaseCase24/
+│       ├── Spec.lean
+│       ├── Theorem.lean
+│       ├── SAT.lean
+│       ├── SATSen.lean
+│       └── SATSenCNF.lean
+├── Certificates/
+│   ├── README.md
+│   ├── CNF_AUDIT.md
+│   ├── sen24.cnf
+│   ├── sen24.lrat
+│   └── sen24.manifest.json
+├── scripts/
+│   ├── gen_sen24_dimacs.py
+│   └── check_sen24_cnf.py
+├── ZENODO_CLAIMS.md
+├── SocialChoiceAtlas.lean
+├── lakefile.lean
+└── lean-toolchain
 ```
 
-## Advantages of Certificate-Based Proofs
-
-1. **Reproducibility**: The same certificate verifies on any machine with Lean 4
-2. **Speed**: Verification is O(n) in certificate size, much faster than re-solving
-3. **Trust**: Lean's kernel checks the proof, not the SAT solver
-4. **Transparency**: The entire proof can be inspected and verified independently
-5. **Extensibility**: Easy to add new base cases with different parameters
-
-## Future Work
-
-| Voters (n) | Alternatives (m) | Status      | Notes |
-|------------|------------------|-------------|-------|
-| 2          | 4                | ✓ Complete  | Current implementation |
-| 2          | 5                | Planned     | Larger search space |
-| 3          | 4                | Planned     | More complex interactions |
-
-## Building and Verifying
-
-### Prerequisites
-
-- [Lean 4](https://leanprover.github.io/) (version specified in `lean-toolchain`)
-- [Lake](https://github.com/leanprover/lake) (Lean's build system)
-- Python 3.x (for encoding generation)
-
-### Build Instructions
+## Reproducibility commands
 
 ```bash
-# Build the entire project
+# 1) Lean proof artifacts
 lake build
 
-# Build only the Sen base case
-lake build SocialChoiceAtlas.Sen.BaseCase24
+# 2) (optional) regenerate CNF + manifest
+python3 scripts/gen_sen24_dimacs.py
 
-# Build with SAT verification (generates proof)
-lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenGenerated
+# 3) (optional) audit CNF structure against spec
+python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json
+
+# 4) (optional) regenerate LRAT from CNF
+cadical --lrat --no-binary Certificates/sen24.cnf Certificates/sen24.lrat
+
+# 5) verify LRAT in Lean
+lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 ```
-
-### Verification Workflow
-
-For detailed instructions on generating and caching LRAT certificates, see [Certificates/README.md](Certificates/README.md).
-
-Quick overview:
-1. Replace `bv_decide` with `bv_decide?` in the theorem
-2. Run Lean with an absolute path to generate the `.lrat` file
-3. Switch to `bv_check "certificate.lrat"` for fast verification
-4. Commit the certificate to the repository
 
 ## References
 
 - Sen, A. K. (1970). "The Impossibility of a Paretian Liberal". *Journal of Political Economy*, 78(1), 152-157.
-- [Lean 4 Documentation](https://leanprover.github.io/lean4/doc/)
-- [Mathlib4](https://github.com/leanprover-community/mathlib4)
-- Heule, M. (2017). "The DRAT format and DRAT-trim checker"
-- Geist, C. & Endriss, U. (2011). "Automated Search for Impossibility Theorems in Social Choice Theory"
-
-## License
-
-This project is part of the SocialChoiceAtlas research effort exploring formal verification of social choice theory theorems.
+- Geist, C. & Endriss, U. (2011). "Automated Search for Impossibility Theorems in Social Choice Theory".
+- Lean 4 and mathlib4 documentation.

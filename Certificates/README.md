@@ -13,7 +13,8 @@ Verification is done in Lean via `Mathlib.Tactic.Sat.FromLRAT`.
 ## Regeneration and verification
 
 1. Regenerate CNF + manifest:
-   - `python3 scripts/gen_sen24_dimacs.py`
+   - `python3 scripts/gen_dimacs.py --n 2 --m 4 --axioms asymm,un,minlib,no_cycle3,no_cycle4`
+   - (backward compatible) `python3 scripts/gen_sen24_dimacs.py`
 2. Run structural audits:
    - `python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json`
 3. Regenerate LRAT from CNF (example: CaDiCaL):

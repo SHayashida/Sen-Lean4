@@ -26,3 +26,5 @@ jobs:
       - name: Baseline audit + Lean certificate check
         run: ./scripts/ci_phase1.sh
 
+      - name: Phase2 atlas smoke
+        run: ./scripts/ci_phase2_smoke.sh

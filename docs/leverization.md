@@ -15,7 +15,7 @@ python3 scripts/gen_dimacs.py \
 Audit baseline artifact:
 
 ```bash
-python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json
+python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json --strict-duplicates --fail-on-tautology
 ```
 
 Lean verification of committed LRAT:
@@ -35,13 +35,18 @@ python3 scripts/gen_dimacs.py \
 ```
 
 This produces an auditable CNF+manifest for a relaxed axiom set (solver outcome may differ by axiom set).
+You can audit it with:
+
+```bash
+python3 scripts/check_sen24_cnf.py /tmp/sen24_no_minlib.cnf --manifest /tmp/sen24_no_minlib.manifest.json
+```
 
 ## Phase1 Done criteria
 
 - Baseline `Certificates/sen24.cnf` + `Certificates/sen24.manifest.json` stay auditable.
 - `scripts/gen_sen24_dimacs.py` remains backward compatible (thin wrapper).
 - New modular CLI supports selectable axiom subsets.
+- Auditor accepts subset manifests (`category_counts` with 0/full category counts).
 - CI runs:
   - baseline CNF audit, and
   - Lean target `SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF`.
-

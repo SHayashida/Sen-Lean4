@@ -9,6 +9,7 @@ Verification is done in Lean via `Mathlib.Tactic.Sat.FromLRAT`.
 - `sen24.lrat`: LRAT certificate (UNSAT proof trace)
 - `sen24.manifest.json`: schema/count metadata for CNF audits
 - `CNF_AUDIT.md`: audit checklist and invariants
+- `atlas/case_11111/`: committed proof-carrying atlas UNSAT artifact
 
 ## Regeneration and verification
 

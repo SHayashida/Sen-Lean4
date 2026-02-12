@@ -40,6 +40,8 @@ results/<YYYYMMDD>/atlas_v1/
     summary.json
     model.json      # SAT and model parsed
     proof.lrat      # UNSAT and proof emitted/supported
+    mus.json        # Week2 enrichment (for UNSAT)
+    mcs.json        # Week2 enrichment (for UNSAT)
 ```
 
 `case_id` uses a stable bitmask over `axiom_universe` order:
@@ -54,3 +56,41 @@ results/<YYYYMMDD>/atlas_v1/
 - `status_counts` over `{SAT, UNSAT, UNKNOWN, PRUNED}`
 - per-case summaries (`status`, selected axioms, clause counts, artifact pointers).
 
+## Week2: MUS/MCS enrichment
+
+After `run_atlas.py`, enrich UNSAT cases with one MUS and one small MCS candidate:
+
+```bash
+python3 scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1
+```
+
+This updates `atlas.json` in-place and writes per-case `mus.json` / `mcs.json`.
+
+## Week3: proof-carrying + explainable outputs
+
+Generate atlas cases with UNSAT proof emission:
+
+```bash
+python3 scripts/run_atlas.py \
+  --outdir results/<YYYYMMDD>/atlas_v1 \
+  --jobs 4 \
+  --emit-proof unsat-only
+```
+
+Verify the committed proof-carrying atlas case in Lean:
+
+```bash
+lake build SocialChoiceAtlas.Sen.Atlas.Case11111
+```
+
+Create a human-readable SAT rule sketch for one SAT case:
+
+```bash
+python3 scripts/decode_model.py --case-dir results/<YYYYMMDD>/atlas_v1/case_00000
+```
+
+Create atlas boundary summary markdown:
+
+```bash
+python3 scripts/summarize_atlas.py --outdir results/<YYYYMMDD>/atlas_v1
+```

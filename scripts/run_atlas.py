@@ -81,6 +81,10 @@ def make_cases(axiom_universe: list[str], case_masks: list[int] | None) -> list[
 
 
 def _extract_status(text: str, return_code: int | None) -> str:
+    if return_code == 10:
+        return "SAT"
+    if return_code == 20:
+        return "UNSAT"
     upper = text.upper()
     if "UNSATISFIABLE" in upper:
         return "UNSAT"
@@ -88,10 +92,6 @@ def _extract_status(text: str, return_code: int | None) -> str:
         return "SAT"
     if " UNKNOWN" in f" {upper} ":
         return "UNKNOWN"
-    if return_code == 10:
-        return "SAT"
-    if return_code == 20:
-        return "UNSAT"
     return "UNKNOWN"
 
 
@@ -146,7 +146,7 @@ def _build_solver_cmd(
     cnf_path: Path,
     proof_path: Path,
     model_path: Path,
-    emit_proof: bool,
+    with_proof: bool,
 ) -> list[str]:
     if solver_template is not None:
         rendered = solver_template.format(
@@ -158,7 +158,7 @@ def _build_solver_cmd(
         return shlex.split(rendered)
 
     if solver == "cadical":
-        if emit_proof:
+        if with_proof:
             return [
                 solver,
                 "-w",
@@ -175,26 +175,28 @@ def _build_solver_cmd(
 def _write_solver_log(
     path: Path,
     *,
-    cmd: list[str] | None,
-    return_code: int | None,
-    stdout: str,
-    stderr: str,
-    duration_sec: float,
     dry_run: bool,
-    error: str | None = None,
+    attempts: list[dict[str, object]],
 ) -> None:
     lines: list[str] = []
     lines.append(f"dry_run: {dry_run}")
-    if cmd is not None:
-        lines.append("command: " + " ".join(shlex.quote(x) for x in cmd))
-    lines.append(f"return_code: {return_code}")
-    lines.append(f"duration_sec: {duration_sec:.6f}")
-    if error is not None:
-        lines.append(f"error: {error}")
-    lines.append("----- STDOUT -----")
-    lines.append(stdout.rstrip("\n"))
-    lines.append("----- STDERR -----")
-    lines.append(stderr.rstrip("\n"))
+    for idx, attempt in enumerate(attempts, start=1):
+        lines.append(f"attempt: {idx}")
+        lines.append(f"with_proof: {attempt.get('with_proof')}")
+        cmd = attempt.get("cmd")
+        if cmd is not None:
+            lines.append("command: " + " ".join(shlex.quote(str(x)) for x in cmd))
+        lines.append(f"return_code: {attempt.get('return_code')}")
+        duration_sec = float(attempt.get("duration_sec", 0.0))
+        lines.append(f"duration_sec: {duration_sec:.6f}")
+        error = attempt.get("error")
+        if error is not None:
+            lines.append(f"error: {error}")
+        lines.append("----- STDOUT -----")
+        lines.append(str(attempt.get("stdout", "")).rstrip("\n"))
+        lines.append("----- STDERR -----")
+        lines.append(str(attempt.get("stderr", "")).rstrip("\n"))
+        lines.append("")
     path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
@@ -205,7 +207,7 @@ def run_case(
     solver: str,
     solver_template: str | None,
     dry_run: bool,
-    emit_proof: bool,
+    emit_proof_mode: str,
 ) -> dict[str, object]:
     case_dir = outdir / case.case_id
     case_dir.mkdir(parents=True, exist_ok=True)
@@ -217,6 +219,9 @@ def run_case(
     proof_path = case_dir / "proof.lrat"
     model_path = case_dir / "model.txt"
     model_json_path = case_dir / "model.json"
+    for stale in (proof_path, model_path, model_json_path):
+        if stale.exists():
+            stale.unlink()
 
     manifest = run_generation(
         n=2,
@@ -234,69 +239,105 @@ def run_case(
     model_observed = False
     proof_file: str | None = None
     solver_error: str | None = None
+    attempts: list[dict[str, object]] = []
 
     if dry_run:
+        status = "UNKNOWN"
         _write_solver_log(
             solver_log_path,
-            cmd=None,
-            return_code=None,
-            stdout="dry-run: solver execution skipped",
-            stderr="",
-            duration_sec=0.0,
             dry_run=True,
+            attempts=[
+                {
+                    "with_proof": False,
+                    "cmd": None,
+                    "return_code": None,
+                    "duration_sec": 0.0,
+                    "stdout": "dry-run: solver execution skipped",
+                    "stderr": "",
+                    "error": None,
+                }
+            ],
         )
     else:
-        command = _build_solver_cmd(
-            solver=solver,
-            solver_template=solver_template,
-            cnf_path=cnf_path,
-            proof_path=proof_path,
-            model_path=model_path,
-            emit_proof=emit_proof,
+        def execute_attempt(with_proof: bool) -> tuple[str, dict[str, object]]:
+            cmd = _build_solver_cmd(
+                solver=solver,
+                solver_template=solver_template,
+                cnf_path=cnf_path,
+                proof_path=proof_path,
+                model_path=model_path,
+                with_proof=with_proof,
+            )
+            t0 = time.perf_counter()
+            try:
+                proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+                took = time.perf_counter() - t0
+                status_local = _extract_status(f"{proc.stdout}\n{proc.stderr}", proc.returncode)
+                return (
+                    status_local,
+                    {
+                        "with_proof": with_proof,
+                        "cmd": cmd,
+                        "return_code": proc.returncode,
+                        "duration_sec": took,
+                        "stdout": proc.stdout,
+                        "stderr": proc.stderr,
+                        "error": None,
+                    },
+                )
+            except FileNotFoundError as ex:
+                took = time.perf_counter() - t0
+                return (
+                    "UNKNOWN",
+                    {
+                        "with_proof": with_proof,
+                        "cmd": cmd,
+                        "return_code": None,
+                        "duration_sec": took,
+                        "stdout": "",
+                        "stderr": "",
+                        "error": str(ex),
+                    },
+                )
+
+        first_with_proof = emit_proof_mode == "always"
+        status, attempt = execute_attempt(first_with_proof)
+        attempts.append(attempt)
+
+        if status == "UNSAT" and emit_proof_mode == "unsat-only":
+            if not proof_path.exists():
+                status2, attempt2 = execute_attempt(True)
+                attempts.append(attempt2)
+                if status2 != "UNKNOWN":
+                    status = status2
+
+        merged_duration = sum(float(at.get("duration_sec", 0.0)) for at in attempts)
+        duration_sec = merged_duration
+        command = list(attempts[-1]["cmd"]) if attempts and attempts[-1].get("cmd") is not None else None
+        return_code = attempts[-1].get("return_code") if attempts else None
+        if attempts and attempts[-1].get("error") is not None:
+            solver_error = str(attempts[-1].get("error"))
+
+        _write_solver_log(
+            solver_log_path,
+            dry_run=False,
+            attempts=attempts,
         )
-        t0 = time.perf_counter()
-        try:
-            proc = subprocess.run(command, capture_output=True, text=True, check=False)
-            return_code = proc.returncode
-            duration_sec = time.perf_counter() - t0
-            merged = f"{proc.stdout}\n{proc.stderr}"
-            status = _extract_status(merged, return_code)
-            _write_solver_log(
-                solver_log_path,
-                cmd=command,
-                return_code=return_code,
-                stdout=proc.stdout,
-                stderr=proc.stderr,
-                duration_sec=duration_sec,
-                dry_run=False,
-            )
-            if status == "SAT":
-                model_observed = _has_v_lines(proc.stdout)
-                model_true_vars = _parse_true_vars_from_v_lines(proc.stdout, int(manifest["nvars"]))
-                if model_path.exists():
-                    model_text = model_path.read_text(encoding="utf-8", errors="ignore")
-                    model_observed = model_observed or _has_v_lines(model_text)
-                    if not model_true_vars:
-                        model_true_vars = _parse_true_vars_from_model_file(
-                            model_text,
-                            int(manifest["nvars"]),
-                        )
-            if status == "UNSAT" and proof_path.exists():
-                proof_file = proof_path.name
-        except FileNotFoundError as ex:
-            duration_sec = time.perf_counter() - t0
-            solver_error = str(ex)
-            status = "UNKNOWN"
-            _write_solver_log(
-                solver_log_path,
-                cmd=command,
-                return_code=None,
-                stdout="",
-                stderr="",
-                duration_sec=duration_sec,
-                dry_run=False,
-                error=solver_error,
-            )
+
+        if status == "SAT":
+            stdout_all = "\n".join(str(at.get("stdout", "")) for at in attempts)
+            model_observed = _has_v_lines(stdout_all)
+            model_true_vars = _parse_true_vars_from_v_lines(stdout_all, int(manifest["nvars"]))
+            if model_path.exists():
+                model_text = model_path.read_text(encoding="utf-8", errors="ignore")
+                model_observed = model_observed or _has_v_lines(model_text)
+                if not model_true_vars:
+                    model_true_vars = _parse_true_vars_from_model_file(
+                        model_text,
+                        int(manifest["nvars"]),
+                    )
+        if status == "UNSAT" and proof_path.exists():
+            proof_file = proof_path.name
 
     if status == "SAT" and model_observed:
         model_json_path.write_text(
@@ -313,6 +354,20 @@ def run_case(
             encoding="utf-8",
         )
 
+    proof: dict[str, object] | None = None
+    if status == "UNSAT" and proof_file is not None:
+        proof_cmd = None
+        for at in reversed(attempts):
+            if bool(at.get("with_proof")) and at.get("cmd") is not None:
+                proof_cmd = " ".join(shlex.quote(str(x)) for x in list(at["cmd"]))
+                break
+        proof = {
+            "format": "lrat",
+            "path": proof_file,
+            "solver": solver,
+            "cmd": proof_cmd,
+        }
+
     summary: dict[str, object] = {
         "case_id": case.case_id,
         "mask_int": case.mask,
@@ -328,6 +383,7 @@ def run_case(
         "duration_sec": duration_sec,
         "solver_error": solver_error,
         "proof_file": proof_file,
+        "proof": proof,
         "model_file": model_json_path.name if model_json_path.exists() else None,
         "files": {
             "cnf": cnf_path.name,
@@ -353,7 +409,7 @@ def run_all_cases(
     solver: str,
     solver_template: str | None,
     dry_run: bool,
-    emit_proof: bool,
+    emit_proof_mode: str,
     jobs: int,
     prune: str,
 ) -> list[dict[str, object]]:
@@ -366,7 +422,7 @@ def run_all_cases(
                     solver=solver,
                     solver_template=solver_template,
                     dry_run=dry_run,
-                    emit_proof=emit_proof,
+                    emit_proof_mode=emit_proof_mode,
                 )
                 for case in cases
             ]
@@ -380,7 +436,7 @@ def run_all_cases(
                     solver=solver,
                     solver_template=solver_template,
                     dry_run=dry_run,
-                    emit_proof=emit_proof,
+                    emit_proof_mode=emit_proof_mode,
                 ): case
                 for case in cases
             }
@@ -429,7 +485,7 @@ def run_all_cases(
             solver=solver,
             solver_template=solver_template,
             dry_run=dry_run,
-            emit_proof=emit_proof,
+            emit_proof_mode=emit_proof_mode,
         )
         results_by_mask[case.mask] = summary
         if summary.get("status") == "UNSAT":
@@ -469,8 +525,14 @@ def main() -> None:
     ap.add_argument("--dry-run", action="store_true", help="Generate CNF/manifest only.")
     ap.add_argument(
         "--emit-proof",
-        action="store_true",
-        help="Request UNSAT proof output when solver supports it (cadical: proof.lrat).",
+        nargs="?",
+        const="always",
+        default="unsat-only",
+        choices=["unsat-only", "always", "never"],
+        help=(
+            "Proof emission policy for UNSAT traces. "
+            "Use '--emit-proof' (same as always), '--emit-proof unsat-only' (default), or '--emit-proof never'."
+        ),
     )
     ap.add_argument(
         "--case-masks",
@@ -496,7 +558,7 @@ def main() -> None:
         solver=args.solver,
         solver_template=args.solver_template,
         dry_run=args.dry_run,
-        emit_proof=args.emit_proof,
+        emit_proof_mode=args.emit_proof,
         jobs=args.jobs,
         prune=args.prune,
     )

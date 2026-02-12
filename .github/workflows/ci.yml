@@ -15,6 +15,11 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install SAT solver (cadical)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cadical
+
       - name: Install Lean toolchain (elan)
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y

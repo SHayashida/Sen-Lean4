@@ -71,6 +71,8 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - Runner: `scripts/run_atlas.py`
 - Usage and artifact format: `docs/phase2_atlas.md`
 - CI smoke: `./scripts/ci_phase2_smoke.sh`
+- MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
+- Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
 ## References
 

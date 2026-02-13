@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 name = "no_cycle4"
 category_key = "no_cycle4"
+SUPPORTS_SYMMETRY_ALTS = True
 
 
 def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
@@ -25,4 +26,3 @@ def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
 
 def expected_count(schema: "Sen24Schema") -> int:
     return schema.n_profiles * len(schema.quads)
-

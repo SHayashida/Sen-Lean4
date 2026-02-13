@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 name = "un"
 category_key = "un"
+SUPPORTS_SYMMETRY_ALTS = True
 
 
 def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
@@ -24,4 +25,3 @@ def expected_count(schema: "Sen24Schema") -> int:
             if schema.both_prefer(p, a, b):
                 count += 1
     return count
-

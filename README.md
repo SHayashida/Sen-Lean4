@@ -74,6 +74,26 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
 - Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
+## Safety assumptions
+
+- Monotone pruning safety contract: `docs/assumptions_monotone_pruning.md`
+- Symmetry reduction safety contract: `docs/safety_symmetry_reduction.md`
+- Public repository security checklist: `docs/public_repo_security.md`
+
+## Local private instructions
+
+If you need private/local agent instructions, create `AGENTS.local.md` at repo root.
+This file is git-ignored by default and can extend local workflow notes without changing the public `AGENTS.md`.
+
+## Paper/Docs map
+
+For paper-facing claim discipline and reproducibility narrative, use:
+`docs/related_work_notes.md` (positioning vs ATMS/MAXSAT/OMT/Constraint Hierarchies),
+`docs/paper_claims_map.md` (claim→evidence→commands), and
+`docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
+For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
+For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
+
 ## References
 
 - Sen, A. K. (1970). "The Impossibility of a Paretian Liberal". *Journal of Political Economy*, 78(1), 152-157.

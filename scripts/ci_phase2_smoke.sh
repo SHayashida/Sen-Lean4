@@ -6,6 +6,8 @@ TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 OUT_DIR="$TMP_DIR/atlas_v1"
+SYM_OUT="$TMP_DIR/atlas_sym"
+PRUNE_OUT="$TMP_DIR/atlas_prune"
 
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
@@ -105,3 +107,70 @@ python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$OUT_DIR"
 test -s "$OUT_DIR/atlas_summary.md"
 grep -q "UNSAT cases" "$OUT_DIR/atlas_summary.md"
 grep -q "case_11111" "$OUT_DIR/atlas_summary.md"
+
+python3 "$ROOT_DIR/scripts/run_atlas.py" \
+  --jobs 1 \
+  --prune none \
+  --symmetry alts \
+  --case-masks 0,1,31 \
+  --emit-proof never \
+  --outdir "$SYM_OUT"
+
+python3 - "$SYM_OUT/atlas.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+atlas = json.loads(Path(sys.argv[1]).read_text())
+if atlas.get("symmetry_mode") != "alts":
+    raise SystemExit("symmetry_mode is not alts")
+if int(atlas.get("equiv_classes_total", 0)) < 1:
+    raise SystemExit("equiv_classes_total missing/invalid")
+cases = atlas.get("cases", [])
+if not isinstance(cases, list) or not cases:
+    raise SystemExit("missing cases in symmetry run")
+sample = cases[0]
+if not sample.get("equiv_class_id") or not sample.get("representative_case"):
+    raise SystemExit("missing per-case symmetry mapping")
+print("symmetry_ok", atlas.get("equiv_classes_total"))
+PY
+
+python3 "$ROOT_DIR/scripts/run_atlas.py" \
+  --jobs 1 \
+  --prune monotone \
+  --prune-check \
+  --emit-proof never \
+  --outdir "$PRUNE_OUT"
+
+python3 - "$PRUNE_OUT/atlas.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+atlas = json.loads(Path(sys.argv[1]).read_text())
+if int(atlas.get("cases_total", -1)) != 32:
+    raise SystemExit("cases_total mismatch for prune run")
+status = atlas.get("status_counts", {})
+sat = int(status.get("SAT", 0))
+unsat = int(status.get("UNSAT", 0))
+unknown = int(status.get("UNKNOWN", 0))
+if sat + unsat + unknown != 32:
+    raise SystemExit("status totals do not match cases_total")
+if sat != 30 or unsat != 2:
+    raise SystemExit(f"unexpected SAT/UNSAT totals: SAT={sat} UNSAT={unsat}")
+cases = atlas.get("cases", [])
+pruned = [c for c in cases if not bool(c.get("solved", False))]
+if not pruned:
+    raise SystemExit("expected at least one inferred/pruned case")
+for c in pruned:
+    if c.get("status") in {"SAT", "UNSAT"} and not c.get("pruned_by"):
+        raise SystemExit("inferred SAT/UNSAT case missing pruned_by metadata")
+prune_stats = atlas.get("prune_stats", {})
+if int(prune_stats.get("solver_calls_avoided", 0)) <= 0:
+    raise SystemExit("solver_calls_avoided should be positive in monotone prune run")
+print("prune_ok", len(pruned))
+PY
+
+python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$PRUNE_OUT"
+test -s "$PRUNE_OUT/atlas_summary.md"
+grep -q "Symmetry classes" "$PRUNE_OUT/atlas_summary.md"

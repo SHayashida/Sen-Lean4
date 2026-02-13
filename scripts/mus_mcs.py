@@ -347,9 +347,13 @@ def main() -> None:
 
     all_cases: list[dict[str, Any]] = list(atlas_obj.get("cases", []))
     target_cases = []
+    skipped_unsolved: list[str] = []
     for case in all_cases:
         status = str(case.get("status", "UNKNOWN"))
         if status != "UNSAT":
+            continue
+        if not bool(case.get("solved", True)):
+            skipped_unsolved.append(str(case.get("case_id", "")))
             continue
         cid = str(case.get("case_id", ""))
         if case_filter is not None and cid not in case_filter:
@@ -360,7 +364,13 @@ def main() -> None:
         target_cases = target_cases[: args.max_unsat_cases]
 
     if not target_cases:
-        raise RuntimeError("No UNSAT cases selected for MUS/MCS extraction.")
+        detail = ""
+        if skipped_unsolved:
+            detail = (
+                " (all UNSAT candidates are inferred/pruned with solved=false; "
+                "re-run run_atlas.py with --prune none or include a solved UNSAT case)"
+            )
+        raise RuntimeError(f"No UNSAT solved cases selected for MUS/MCS extraction.{detail}")
 
     tmp_dir = args.tmp_dir if args.tmp_dir is not None else outdir / "mus_tmp"
     oracle = SatOracle(

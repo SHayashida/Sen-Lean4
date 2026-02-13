@@ -53,8 +53,8 @@ results/<YYYYMMDD>/atlas_v1/
 
 `atlas.json` contains:
 - run metadata (`solver`, `prune`, `jobs`, `dry_run`, universe order)
-- `status_counts` over `{SAT, UNSAT, UNKNOWN, PRUNED}`
-- per-case summaries (`status`, selected axioms, clause counts, artifact pointers).
+- `status_counts` over `{SAT, UNSAT, UNKNOWN}`
+- per-case summaries (`status`, `solved`, selected axioms, clause counts, artifact pointers).
 
 ## Week2: MUS/MCS enrichment
 
@@ -101,3 +101,47 @@ Create atlas boundary summary markdown:
 ```bash
 python3 scripts/summarize_atlas.py --outdir results/<YYYYMMDD>/atlas_v1
 ```
+
+## Week4: symmetry classes (alts)
+
+Compute equivalence classes using alternative relabeling (`S4`) on semantic SAT outputs:
+
+```bash
+python3 scripts/run_atlas.py \
+  --outdir /tmp/atlas_w4 \
+  --jobs 4 \
+  --symmetry alts
+```
+
+Notes:
+- Week4 symmetry is **alts-only** (`--symmetry alts`), not voter relabeling.
+- Canonicalization uses semantic SAT outputs (`model.json` social bits), not CNF text.
+- `atlas.json` includes `equiv_classes_total`, `equiv_class_histogram`, `representatives`, and per-case
+  `equiv_class_id` / `representative_case` / `orbit_size`.
+
+## Week4: monotone pruning
+
+Use monotone closure over already-solved cases:
+- if `S` is SAT, all subsets of `S` are SAT (inferred, solver skipped)
+- if `U` is UNSAT, all supersets of `U` are UNSAT (inferred, solver skipped)
+
+```bash
+python3 scripts/run_atlas.py \
+  --outdir /tmp/atlas_w4p \
+  --prune monotone \
+  --prune-check
+```
+
+Notes:
+- Inferred cases are marked `solved=false` with `pruned_by` evidence in `atlas.json`.
+- In prune mode, SAT/UNSAT status totals still cover all 32 cases for the 5-axiom sen24 universe.
+- `prune_stats` and `oracle_stats` report solver calls avoided and inferred SAT/UNSAT counts.
+
+MUS/MCS on prune outputs:
+- `scripts/mus_mcs.py` only processes `UNSAT` cases with `solved=true`.
+- If all UNSAT cases are inferred (`solved=false`), rerun atlas with `--prune none` for those case masks.
+
+## Optional incremental SAT
+
+Week4 keeps solver mode in batch mode only. Incremental SAT via assumptions is deferred to a later phase to avoid
+destabilizing the CNF schema and CI path.

@@ -91,6 +91,8 @@ For paper-facing claim discipline and reproducibility narrative, use:
 `docs/related_work_notes.md` (positioning vs ATMS/MAXSAT/OMT/Constraint Hierarchies),
 `docs/paper_claims_map.md` (claim→evidence→commands), and
 `docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
+For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
+For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
 
 ## References
 

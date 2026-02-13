@@ -83,6 +83,26 @@ python3 scripts/run_atlas.py --outdir /tmp/atlas_c4 --jobs 1 --prune monotone --
 
 ---
 
+## C5. SAT gallery extraction yields auditable non-trivial SAT rule examples
+
+- **Claim**: Relaxed SAT cases can be filtered into a deterministic, auditable gallery with explicit SAT witness validation.
+- **Evidence (fields/files)**:
+  - `scripts/build_sat_gallery.py` outputs: `gallery.json`, `gallery.md`
+  - `scripts/validate_sat_witness.py` reports embedded under `entries[*].validator_stats`
+  - schema/repro fields: `gallery_schema_version`, `atlas.atlas_sha256`, `entries[*].model_validated`
+- **Canonical command**:
+
+```bash
+python3 scripts/run_atlas.py --outdir /tmp/atlas_c5 --jobs 4 --prune none && python3 scripts/build_sat_gallery.py --atlas-outdir /tmp/atlas_c5 --top-k 5 --min-k 1
+```
+
+- **Artifacts to inspect**:
+  - `/tmp/atlas_c5/gallery.json`
+  - `/tmp/atlas_c5/gallery.md`
+  - `/tmp/atlas_c5/case_*/model.json`
+
+---
+
 ## Scope note
 
 All claims are intentionally scoped to sen24 and the current axiom universe. They are not claims of general `n,m` scaling.

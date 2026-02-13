@@ -8,17 +8,21 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
+EVAL_OUT="$TMP_DIR/eval_smoke"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
 test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
 test -f "$ROOT_DIR/docs/public_repo_security.md"
+test -f "$ROOT_DIR/docs/evaluation_plan.md"
+test -f "$ROOT_DIR/docs/sat_gallery.md"
 
 # doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
 grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C2\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C3\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C4\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C5\.' "$ROOT_DIR/docs/paper_claims_map.md"
 
 grep -Fq '## Artifact policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
 grep -Fq '## `atlas_schema_version` policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
@@ -31,6 +35,14 @@ grep -Fq '## What we do not claim' "$ROOT_DIR/docs/related_work_notes.md"
 grep -Fq '## AGENTS policy' "$ROOT_DIR/docs/public_repo_security.md"
 grep -Fq '## CI secret handling' "$ROOT_DIR/docs/public_repo_security.md"
 grep -Fq '## Least-privilege `GITHUB_TOKEN`' "$ROOT_DIR/docs/public_repo_security.md"
+
+grep -Fq '## Metrics' "$ROOT_DIR/docs/evaluation_plan.md"
+grep -Fq '## Configurations' "$ROOT_DIR/docs/evaluation_plan.md"
+grep -Fq '## Reproducibility' "$ROOT_DIR/docs/evaluation_plan.md"
+
+grep -Fq '## Motivation' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## Non-trivial heuristics' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## Reproduction commands' "$ROOT_DIR/docs/sat_gallery.md"
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -253,3 +265,102 @@ PY
 python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$PRUNE_OUT"
 test -s "$PRUNE_OUT/atlas_summary.md"
 grep -q "Symmetry classes" "$PRUNE_OUT/atlas_summary.md"
+
+python3 "$ROOT_DIR/scripts/eval_atlas.py" \
+  --outdir "$EVAL_OUT" \
+  --repeat 1 \
+  --configs none_none \
+  --jobs 1 \
+  --case-masks 0,1,31
+
+MPLBACKEND=Agg python3 "$ROOT_DIR/scripts/plot_eval.py" \
+  --eval-json "$EVAL_OUT/eval.json"
+
+test -s "$EVAL_OUT/eval.json"
+test -s "$EVAL_OUT/eval.csv"
+test -s "$EVAL_OUT/figures/runtime_boxplot.png"
+
+python3 - "$EVAL_OUT/eval.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+obj = json.loads(Path(sys.argv[1]).read_text())
+schema = obj.get("eval_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("eval_schema_version missing or invalid")
+
+repro = obj.get("reproducibility")
+if not isinstance(repro, dict):
+    raise SystemExit("missing reproducibility block")
+
+git = repro.get("git", {})
+py = repro.get("python", {})
+solver = repro.get("solver", {})
+if not isinstance(git, dict) or "commit" not in git:
+    raise SystemExit("missing reproducibility.git.commit")
+if not isinstance(py, dict) or "version" not in py:
+    raise SystemExit("missing reproducibility.python.version")
+if "platform" not in repro:
+    raise SystemExit("missing reproducibility.platform")
+if not isinstance(solver, dict):
+    raise SystemExit("missing reproducibility.solver")
+for k in ("version_raw", "version", "path", "sha256"):
+    if k not in solver:
+        raise SystemExit(f"missing reproducibility.solver.{k}")
+if "/Users/" in str(solver.get("path", "")):
+    raise SystemExit("reproducibility.solver.path must be sanitized")
+
+seeds = obj.get("seeds")
+if not isinstance(seeds, list) or not seeds:
+    raise SystemExit("missing seeds[]")
+if "seed_policy" not in obj:
+    raise SystemExit("missing seed_policy")
+print("eval_meta_ok")
+PY
+
+python3 "$ROOT_DIR/scripts/build_sat_gallery.py" \
+  --atlas-outdir "$OUT_DIR" \
+  --top-k 2 \
+  --min-k 1
+
+test -s "$OUT_DIR/gallery.json"
+test -s "$OUT_DIR/gallery.md"
+
+python3 - "$OUT_DIR/gallery.json" "$OUT_DIR/gallery.md" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+gallery = json.loads(Path(sys.argv[1]).read_text())
+gallery_md = Path(sys.argv[2]).read_text()
+
+schema = gallery.get("gallery_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("gallery_schema_version missing or invalid")
+
+entries = gallery.get("entries", [])
+if not isinstance(entries, list) or len(entries) < 1:
+    raise SystemExit("gallery must contain at least one entry")
+
+for entry in entries:
+    if entry.get("model_validated") is not True:
+        raise SystemExit(f"gallery entry not validated: {entry.get('case_id')}")
+    files = entry.get("files", {})
+    for _, path in files.items():
+        if path is None:
+            continue
+        if str(path).startswith("/"):
+            raise SystemExit("gallery file path must be relative")
+        if re.match(r"^[A-Za-z]:\\\\", str(path)):
+            raise SystemExit("gallery file path must not use Windows absolute prefix")
+
+gallery_text = json.dumps(gallery, sort_keys=True)
+if "/Users/" in gallery_text or "/Users/" in gallery_md:
+    raise SystemExit("gallery output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", gallery_text) or re.search(r"[A-Za-z]:\\\\", gallery_md):
+    raise SystemExit("gallery output leaks Windows absolute path")
+
+print("gallery_ok", len(entries))
+PY

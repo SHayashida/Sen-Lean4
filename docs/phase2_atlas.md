@@ -66,6 +66,8 @@ Paper-facing references:
 - `docs/related_work_notes.md`
 - `docs/paper_claims_map.md`
 - `docs/reproducibility_appendix.md`
+- `docs/evaluation_plan.md`
+- `docs/sat_gallery.md`
 - `docs/public_repo_security.md`
 
 Local/private instructions:

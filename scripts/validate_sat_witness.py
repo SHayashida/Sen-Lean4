@@ -51,6 +51,13 @@ def parse_dimacs(path: Path) -> CNF:
         raise ValueError(
             f"clause count mismatch: header={nclauses_declared} parsed={len(clauses)}"
         )
+    for cidx, clause in enumerate(clauses, start=1):
+        for lit in clause:
+            var = abs(lit)
+            if var == 0 or var > nvars:
+                raise ValueError(
+                    f"literal out of range in clause {cidx}: {lit} (allowed vars: 1..{nvars})"
+                )
 
     return CNF(nvars=nvars, nclauses=nclauses_declared, clauses=clauses)
 

@@ -127,6 +127,7 @@ Phase 2 は「単なる総当たり」ではなく、**境界同定の知的操�
 - 生成物にハッシュを付け、再現手順をREADME/Certificates/READMEに残す
 - 監査スクリプトは **仕様（manifest）と独立**に期待値を再構築できること
 - Lean 側は “重い生成済み式” を直接 import しない方針を維持（CNF+include_str+LRAT検証）
+- `Certificates/atlas/` の固定コミットは原則1ケース（`case_11111`）に限定し、他ケースは `results/...` / `/tmp` で再生成してハッシュで追跡すること
 - 変更時は必ず以下が通ること:
   - `python scripts/gen_*.py`（再生成）
   - `python scripts/check_*.py ... --manifest ...`
@@ -162,6 +163,7 @@ SATが返す解が「独裁」など自明になりがち。以下のいずれ�
 - フィルタリング: 独裁・定数・単一個人支配などを検出して除外
 - 目的関数: “なるべく非自明”を誘導（後段でMAXSAT/OMT/PBに接続してもよい）
 - 論文では「自明解を除いた上で、面白いルールを抽出できる」点を示す
+- 少なくとも `decode_model` 等で軽量な自明解スコア（例: dictatorship score, constancy, neutrality偏差）を出力し、説明可能性を確保する
 
 ### 13.2 Complexity creep (実装過多) 問題
 - 対称性利用の厳密証明を Lean 側で頑張りすぎない（泥沼化する）

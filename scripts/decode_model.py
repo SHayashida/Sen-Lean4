@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+from collections import Counter
 from pathlib import Path
 
 
@@ -56,9 +57,55 @@ def main() -> None:
     for p in by_profile:
         by_profile[p] = sorted(by_profile[p])
 
+    social_true_set = set(p_true)
+
+    def social_bool(profile_idx: int, pair_idx: int) -> bool:
+        var = 1 + profile_idx * npairs + pair_idx
+        return var in social_true_set
+
     rankings = list(itertools.permutations([0, 1, 2, 3], 4))
     if len(rankings) != nranks:
         raise ValueError(f"ranking count mismatch: expected {nranks}, got {len(rankings)}")
+
+    pos_maps = [{a: i for i, a in enumerate(r)} for r in rankings]
+
+    total_atoms = nprofiles * npairs
+    match_counts = [0, 0]
+    pair_support = [0 for _ in range(npairs)]
+    signatures: set[tuple[int, ...]] = set()
+
+    for p in range(nprofiles):
+        r0_idx = p // nranks
+        r1_idx = p % nranks
+        pos0 = pos_maps[r0_idx]
+        pos1 = pos_maps[r1_idx]
+        signature_bits: list[int] = []
+
+        for pair_idx, (a, b) in enumerate(pair_order):
+            social = social_bool(p, pair_idx)
+            if social:
+                pair_support[pair_idx] += 1
+            pref0 = pos0[a] < pos0[b]
+            pref1 = pos1[a] < pos1[b]
+            if social == pref0:
+                match_counts[0] += 1
+            if social == pref1:
+                match_counts[1] += 1
+            signature_bits.append(1 if social else 0)
+
+        signatures.add(tuple(signature_bits))
+
+    dictatorship_score_v0 = match_counts[0] / total_atoms if total_atoms > 0 else 0.0
+    dictatorship_score_v1 = match_counts[1] / total_atoms if total_atoms > 0 else 0.0
+    support_mode, _ = Counter(pair_support).most_common(1)[0]
+    neutrality_violation_count = sum(1 for x in pair_support if x != support_mode)
+    pair_constancy_score = (
+        sum(max(s / nprofiles, 1.0 - (s / nprofiles)) for s in pair_support) / npairs if npairs > 0 else 0.0
+    )
+    distinct_social_outcomes = len(signatures)
+    constant_function = distinct_social_outcomes == 1
+    dictator_like_v0 = dictatorship_score_v0 >= 0.98
+    dictator_like_v1 = dictatorship_score_v1 >= 0.98
 
     profile_ids = list(range(min(nprofiles, max(0, args.max_profiles))))
     lines: list[str] = []
@@ -74,6 +121,23 @@ def main() -> None:
     lines.append("- `p_var` (`1..n_p_vars`): social strict preference bit `P[p,a,b]`.")
     lines.append("- `aux_var` (`n_p_vars+1..`): auxiliary encoding bits (e.g., MINLIB selectors).")
     lines.append("- profile index convention: `p = r0 * nranks + r1`.")
+    lines.append("")
+    lines.append("## Heuristic triviality scores")
+    lines.append("")
+    lines.append("- `dictatorship_score_voter0`: fraction of `(p,a,b)` where social bit equals voter0 strict preference.")
+    lines.append("- `dictatorship_score_voter1`: fraction of `(p,a,b)` where social bit equals voter1 strict preference.")
+    lines.append("- `neutrality_violation_count` (heuristic): ordered pairs whose support differs from modal support.")
+    lines.append("- `pair_constancy_score`: average per-pair constancy over profiles (`1.0` means constant by pair).")
+    lines.append("- `distinct_social_outcomes`: number of distinct social edge signatures across profiles.")
+    lines.append("")
+    lines.append(f"- dictatorship_score_voter0: `{dictatorship_score_v0:.4f}`")
+    lines.append(f"- dictatorship_score_voter1: `{dictatorship_score_v1:.4f}`")
+    lines.append(f"- neutrality_violation_count: `{neutrality_violation_count}` / `{npairs}`")
+    lines.append(f"- pair_constancy_score: `{pair_constancy_score:.4f}`")
+    lines.append(f"- distinct_social_outcomes: `{distinct_social_outcomes}`")
+    lines.append(f"- constant_function_flag: `{constant_function}`")
+    lines.append(f"- dictator_like_voter0_flag: `{dictator_like_v0}`")
+    lines.append(f"- dictator_like_voter1_flag: `{dictator_like_v1}`")
     lines.append("")
     lines.append("## Profile samples")
     lines.append("")
@@ -96,4 +160,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

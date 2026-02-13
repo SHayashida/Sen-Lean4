@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shlex
 import subprocess
@@ -30,6 +31,14 @@ class CaseSpec:
     case_id: str
     axioms_on: list[str]
     axioms_off: list[str]
+
+
+def _sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def parse_axiom_list(raw: str) -> list[str]:
@@ -356,6 +365,7 @@ def run_case(
 
     proof: dict[str, object] | None = None
     if status == "UNSAT" and proof_file is not None:
+        proof_sha256 = _sha256_file(proof_path)
         proof_cmd = None
         for at in reversed(attempts):
             if bool(at.get("with_proof")) and at.get("cmd") is not None:
@@ -364,6 +374,7 @@ def run_case(
         proof = {
             "format": "lrat",
             "path": proof_file,
+            "sha256": proof_sha256,
             "solver": solver,
             "cmd": proof_cmd,
         }
@@ -391,9 +402,19 @@ def run_case(
             "solver_log": solver_log_path.name,
             "summary": summary_path.name,
         },
+        "reproduce": {
+            "command": (
+                f"python3 scripts/run_atlas.py --outdir <atlas_outdir> --case-masks {case.mask} "
+                f"--jobs 1 --prune none --emit-proof {emit_proof_mode}"
+            ),
+            "case_mask": case.mask,
+            "case_bits": case.bitstring,
+            "axioms_on": case.axioms_on,
+        },
         "manifest": {
             "nvars": int(manifest["nvars"]),
             "nclauses": int(manifest["nclauses"]),
+            "cnf_sha256": manifest.get("cnf_sha256"),
             "category_counts": manifest["category_counts"],
             "minlib": manifest["minlib"],
         },

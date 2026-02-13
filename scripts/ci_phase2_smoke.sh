@@ -53,6 +53,13 @@ if summary.get("status") != "UNSAT":
     raise SystemExit("case_11111 is not UNSAT in smoke run")
 if not proof or proof.get("format") != "lrat" or proof.get("path") != "proof.lrat":
     raise SystemExit("missing proof metadata in case_11111 summary")
+if not proof.get("sha256"):
+    raise SystemExit("missing proof sha256 in case_11111 summary")
+manifest = summary.get("manifest", {})
+if not manifest.get("cnf_sha256"):
+    raise SystemExit("missing cnf sha256 in case_11111 summary")
+if not summary.get("reproduce", {}).get("command"):
+    raise SystemExit("missing reproduce command in case_11111 summary")
 print("proof_meta_ok")
 PY
 

@@ -83,11 +83,18 @@ Verify the committed proof-carrying atlas case in Lean:
 lake build SocialChoiceAtlas.Sen.Atlas.Case11111
 ```
 
+Storage policy:
+
+- `Certificates/atlas/` is reserved for one fixed committed proof-carrying case (`case_11111`) to keep CI deterministic.
+- Other atlas proofs should be generated under `results/...` or `/tmp`, tracked by hash (`summary.json.manifest.cnf_sha256`, `summary.json.proof.sha256`) and reproduce command (`summary.json.reproduce.command`).
+
 Create a human-readable SAT rule sketch for one SAT case:
 
 ```bash
 python3 scripts/decode_model.py --case-dir results/<YYYYMMDD>/atlas_v1/case_00000
 ```
+
+`rule.md` now includes lightweight heuristic scores (dictatorship/constancy/neutrality-support variation) to flag trivial SAT solutions early.
 
 Create atlas boundary summary markdown:
 

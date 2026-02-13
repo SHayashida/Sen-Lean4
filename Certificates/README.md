@@ -11,6 +11,12 @@ Verification is done in Lean via `Mathlib.Tactic.Sat.FromLRAT`.
 - `CNF_AUDIT.md`: audit checklist and invariants
 - `atlas/case_11111/`: committed proof-carrying atlas UNSAT artifact
 
+Policy:
+
+- Keep baseline artifacts (`sen24.*`) immutable.
+- Keep committed atlas proof artifacts to a single fixed case (`atlas/case_11111`) for CI stability.
+- For other atlas cases, generate under `results/...` or `/tmp`; track reproducibility via hashes and reproduce command stored in each case `summary.json`.
+
 ## Regeneration and verification
 
 1. Regenerate CNF + manifest:

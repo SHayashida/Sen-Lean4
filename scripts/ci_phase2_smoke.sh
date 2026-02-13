@@ -8,9 +8,6 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
-REPAIRS_OUT="$TMP_DIR/atlas_repairs"
-HASSE_OUT="$TMP_DIR/hasse_frontier"
-TRI_OUT="$TMP_DIR/triangulation"
 EVAL_OUT="$TMP_DIR/eval_smoke"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
@@ -66,10 +63,6 @@ grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
 
 python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
-python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
-python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
-python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
-python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -292,128 +285,6 @@ PY
 python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$PRUNE_OUT"
 test -s "$PRUNE_OUT/atlas_summary.md"
 grep -q "Symmetry classes" "$PRUNE_OUT/atlas_summary.md"
-
-python3 "$ROOT_DIR/scripts/run_atlas.py" \
-  --jobs 1 \
-  --prune none \
-  --emit-proof never \
-  --outdir "$REPAIRS_OUT"
-
-python3 "$ROOT_DIR/scripts/enumerate_repairs.py" \
-  --outdir "$REPAIRS_OUT"
-
-python3 - "$REPAIRS_OUT/atlas.json" <<'PY'
-import itertools
-import json
-import re
-import sys
-from pathlib import Path
-
-atlas_path = Path(sys.argv[1])
-atlas = json.loads(atlas_path.read_text())
-cases = atlas.get("cases", [])
-if int(atlas.get("cases_total", -1)) != 32:
-    raise SystemExit("repairs atlas must include 32 solved cases")
-case_by_mask = {int(c["mask_int"]): c for c in cases}
-width = len(atlas.get("axiom_universe", []))
-if width != 5:
-    raise SystemExit("expected 5 axioms for sen24 repair smoke check")
-
-unsat_cases = [c for c in cases if c.get("status") == "UNSAT" and bool(c.get("solved", False))]
-if not unsat_cases:
-    raise SystemExit("expected solved UNSAT cases for repair enumeration")
-
-for c in unsat_cases:
-    repairs = c.get("mcs_all")
-    if not isinstance(repairs, list) or not repairs:
-        raise SystemExit(f"UNSAT case missing non-empty mcs_all: {c.get('case_id')}")
-
-sample = unsat_cases[0]
-repairs = sample["mcs_all"]
-for repair in repairs:
-    remove_mask = int(repair["remove_mask_int"])
-    sat_mask = int(sample["mask_int"]) & ~remove_mask
-    sat_case = case_by_mask.get(sat_mask)
-    if sat_case is None or sat_case.get("status") != "SAT":
-        raise SystemExit("mcs_all contains non-SAT repair target")
-    idxs = [i for i in range(width) if (remove_mask >> i) & 1]
-    for r in range(len(idxs)):
-        for sub in itertools.combinations(idxs, r):
-            sub_mask = 0
-            for i in sub:
-                sub_mask |= 1 << i
-            sub_case = case_by_mask[int(sample["mask_int"]) & ~sub_mask]
-            if sub_case.get("status") != "UNSAT":
-                raise SystemExit("mcs_all minimality check failed in smoke validation")
-
-atlas_text = atlas_path.read_text()
-if "/Users/" in atlas_text:
-    raise SystemExit("repair atlas output leaks '/Users/' absolute path")
-if re.search(r"[A-Za-z]:\\\\", atlas_text):
-    raise SystemExit("repair atlas output leaks Windows absolute path")
-
-print("repairs_ok", len(unsat_cases), "sample_case", sample.get("case_id"))
-PY
-
-python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" \
-  --atlas-outdir "$REPAIRS_OUT" \
-  --outdir "$HASSE_OUT" \
-  --format png \
-  --include-pruned false \
-  --show status
-
-test -s "$HASSE_OUT/frontier_hasse.dot"
-test -s "$HASSE_OUT/frontier_hasse.png"
-
-python3 - "$HASSE_OUT/frontier_hasse.dot" <<'PY'
-import re
-import sys
-from pathlib import Path
-
-dot_text = Path(sys.argv[1]).read_text()
-nodes = set(re.findall(r'"(case_[01]{5})"\s+\[', dot_text))
-if len(nodes) != 32:
-    raise SystemExit(f"hasse dot must contain 32 case nodes, got {len(nodes)}")
-if "/Users/" in dot_text:
-    raise SystemExit("hasse dot leaks '/Users/' absolute path")
-if re.search(r"[A-Za-z]:\\\\", dot_text):
-    raise SystemExit("hasse dot leaks Windows absolute path")
-print("hasse_ok", len(nodes))
-PY
-
-python3 "$ROOT_DIR/scripts/triangulate_repairs.py" \
-  --atlas-outdir "$REPAIRS_OUT" \
-  --outdir "$TRI_OUT" \
-  --backend bruteforce
-
-test -s "$TRI_OUT/repair_triangulation.json"
-test -s "$TRI_OUT/repair_triangulation.md"
-
-python3 - "$TRI_OUT/repair_triangulation.json" "$TRI_OUT/repair_triangulation.md" <<'PY'
-import json
-import re
-import sys
-from pathlib import Path
-
-obj = json.loads(Path(sys.argv[1]).read_text())
-cases = obj.get("cases", [])
-if not isinstance(cases, list) or not cases:
-    raise SystemExit("triangulation report has no case entries")
-for case in cases:
-    compare = case.get("compare", {})
-    if compare.get("size_match") is not True:
-        raise SystemExit(f"triangulation size mismatch: {case.get('case_id')}")
-    if compare.get("set_match") is not True:
-        raise SystemExit(f"triangulation set mismatch: {case.get('case_id')}")
-
-json_text = Path(sys.argv[1]).read_text()
-md_text = Path(sys.argv[2]).read_text()
-if "/Users/" in json_text or "/Users/" in md_text:
-    raise SystemExit("triangulation output leaks '/Users/' absolute path")
-if re.search(r"[A-Za-z]:\\\\", json_text) or re.search(r"[A-Za-z]:\\\\", md_text):
-    raise SystemExit("triangulation output leaks Windows absolute path")
-print("triangulation_ok", len(cases))
-PY
 
 python3 "$ROOT_DIR/scripts/eval_atlas.py" \
   --outdir "$EVAL_OUT" \

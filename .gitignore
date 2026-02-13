@@ -4,3 +4,5 @@
 *.c
 *.c.hash
 *.trace
+AGENTS.local.md
+AGENTS_PRIVATE.md

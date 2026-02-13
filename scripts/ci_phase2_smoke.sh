@@ -12,6 +12,7 @@ PRUNE_OUT="$TMP_DIR/atlas_prune"
 test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
 test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
+test -f "$ROOT_DIR/docs/public_repo_security.md"
 
 # doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
 grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
@@ -26,6 +27,20 @@ grep -Fq '## Solver metadata policy' "$ROOT_DIR/docs/reproducibility_appendix.md
 grep -Fq '## Positioning (short)' "$ROOT_DIR/docs/related_work_notes.md"
 grep -Fq '## Comparison matrix' "$ROOT_DIR/docs/related_work_notes.md"
 grep -Fq '## What we do not claim' "$ROOT_DIR/docs/related_work_notes.md"
+
+grep -Fq '## AGENTS policy' "$ROOT_DIR/docs/public_repo_security.md"
+grep -Fq '## CI secret handling' "$ROOT_DIR/docs/public_repo_security.md"
+grep -Fq '## Least-privilege `GITHUB_TOKEN`' "$ROOT_DIR/docs/public_repo_security.md"
+
+# AGENTS public-safety gates
+if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
+  echo "AGENTS.md must be English-only (Japanese script detected)." >&2
+  exit 1
+fi
+if grep -nEi 'API_KEY=|BEGIN[[:space:]]+PRIVATE[[:space:]]+KEY|token=' "$ROOT_DIR/AGENTS.md"; then
+  echo "AGENTS.md contains secret-like patterns." >&2
+  exit 1
+fi
 
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \

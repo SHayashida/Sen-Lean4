@@ -66,6 +66,11 @@ Paper-facing references:
 - `docs/related_work_notes.md`
 - `docs/paper_claims_map.md`
 - `docs/reproducibility_appendix.md`
+- `docs/public_repo_security.md`
+
+Local/private instructions:
+- You can add `AGENTS.local.md` at repo root for machine-local guidance.
+- It is git-ignored and must not contain repo-public content changes.
 
 ## Week2: MUS/MCS enrichment
 

@@ -78,6 +78,12 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 
 - Monotone pruning safety contract: `docs/assumptions_monotone_pruning.md`
 - Symmetry reduction safety contract: `docs/safety_symmetry_reduction.md`
+- Public repository security checklist: `docs/public_repo_security.md`
+
+## Local private instructions
+
+If you need private/local agent instructions, create `AGENTS.local.md` at repo root.
+This file is git-ignored by default and can extend local workflow notes without changing the public `AGENTS.md`.
 
 ## Paper/Docs map
 

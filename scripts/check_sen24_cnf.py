@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Mechanical auditor for `Certificates/sen24.cnf` (Sen base case, n=2 voters, m=4 alts).
+Mechanical auditor for Sen base-case CNFs (n=2 voters, m=4 alts).
 
 This script:
   - parses DIMACS CNF (comments ignored),
   - validates header / literal ranges / clause well-formedness,
-  - recomputes the expected clauses for each category from the encoding spec,
+  - recomputes expected clauses for each category from the encoding spec,
+  - supports axiom subsets via manifest category_counts (0 or full-category count),
   - compares expected vs observed (as multisets, i.e. including duplicates),
   - prints a category report and fails with non-zero exit code on mismatch.
 
@@ -46,6 +47,8 @@ SPEC_PAIRS = [
     (3, 1),
     (3, 2),
 ]
+CATEGORY_KEYS = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+AXIOM_KEYS = {"asymm", "un", "minlib", "no_cycle3", "no_cycle4"}
 
 
 class AuditError(RuntimeError):
@@ -64,6 +67,7 @@ def sha256_file(path: Path) -> str:
 class Manifest:
     alts: list[int]
     pair_order: list[tuple[int, int]]
+    axioms: list[str]
     nranks: int
     nprofiles: int
     npairs: int
@@ -97,6 +101,7 @@ def load_manifest(path: Path, cnf_path: Path) -> Manifest:
     return Manifest(
         alts=alts,
         pair_order=pair_order,
+        axioms=[str(x) for x in obj.get("axioms", [])],
         nranks=int(obj["nranks"]),
         nprofiles=int(obj["nprofiles"]),
         npairs=int(obj["npairs"]),
@@ -405,7 +410,14 @@ def _fmt_counts(counts: dict[str, int], keys: list[str]) -> str:
     return "{" + ", ".join(f"{k}={counts.get(k, '∅')}" for k in keys) + "}"
 
 
-def _validate_manifest(man: Manifest, schema: Schema, *, cnf_nvars: int, cnf_nclauses: int) -> None:
+def _validate_manifest(
+    man: Manifest,
+    schema: Schema,
+    *,
+    cnf_nvars: int,
+    cnf_nclauses: int,
+    full_counts: dict[str, int],
+) -> None:
     # Basic field agreement with CNF header
     if man.nvars != cnf_nvars:
         raise AuditError(f"manifest.nvars={man.nvars} but CNF header nvars={cnf_nvars}")
@@ -436,10 +448,13 @@ def _validate_manifest(man: Manifest, schema: Schema, *, cnf_nvars: int, cnf_ncl
         )
     if man.category_counts is None:
         raise AuditError("manifest.category_counts missing")
-    required = {"asymm", "un", "minlib", "no_cycle3", "no_cycle4"}
+    required = set(CATEGORY_KEYS)
     missing = sorted(required - set(man.category_counts.keys()))
     if missing:
         raise AuditError(f"manifest.category_counts missing keys: {missing}")
+    unknown_keys = sorted(set(man.category_counts.keys()) - required)
+    if unknown_keys:
+        raise AuditError(f"manifest.category_counts has unknown keys: {unknown_keys}")
     cat_sum = sum(int(v) for v in man.category_counts.values())
     if cat_sum != man.nclauses:
         raise AuditError(
@@ -449,6 +464,42 @@ def _validate_manifest(man: Manifest, schema: Schema, *, cnf_nvars: int, cnf_ncl
         raise AuditError(
             f"sum(manifest.category_counts.values())={cat_sum} but CNF header nclauses={cnf_nclauses}"
         )
+
+    if man.minlib_mode not in {"selectors_v1", "disabled"}:
+        raise AuditError(
+            f"manifest.minlib.mode must be 'selectors_v1' or 'disabled', got {man.minlib_mode!r}"
+        )
+    if man.minlib_mode == "disabled":
+        if man.aux_var_range is not None:
+            raise AuditError("manifest.minlib.mode='disabled' requires aux_var_range=null")
+        if man.category_counts.get("minlib", 0) != 0:
+            raise AuditError("manifest.minlib.mode='disabled' requires category_counts.minlib=0")
+    else:
+        if man.aux_var_range is None:
+            raise AuditError("manifest.minlib.mode='selectors_v1' requires aux_var_range")
+
+    for key in CATEGORY_KEYS:
+        count = int(man.category_counts[key])
+        full = int(full_counts[key])
+        if count not in {0, full}:
+            raise AuditError(
+                f"manifest.category_counts[{key}]={count} must be either 0 or full={full}"
+            )
+
+    if man.axioms:
+        unknown_axioms = sorted(set(man.axioms) - AXIOM_KEYS)
+        if unknown_axioms:
+            raise AuditError(f"manifest.axioms contains unknown entries: {unknown_axioms}")
+        for key in CATEGORY_KEYS:
+            should_be_on = key in man.axioms
+            count = int(man.category_counts[key])
+            full = int(full_counts[key])
+            expected_count = full if should_be_on else 0
+            if count != expected_count:
+                raise AuditError(
+                    f"manifest mismatch for {key}: axioms says {'on' if should_be_on else 'off'} "
+                    f"but category_counts[{key}]={count} (expected {expected_count})"
+                )
 
 
 def audit(
@@ -464,9 +515,27 @@ def audit(
 
     cnf_nvars, cnf_nclauses, raw_clauses = parse_dimacs(cnf_path)
     schema = build_schema(man, cnf_nvars=cnf_nvars)
+    exp_asymm_full = expected_asymm(schema)
+    exp_un_full = expected_un(schema)
+    exp_c3_full = expected_no_cycle3(schema)
+    exp_c4_full = expected_no_cycle4(schema)
+    exp_minlib_full_parts = expected_minlib_selectors(schema) if schema.aux_start is not None else {}
+    full_counts = {
+        "asymm": sum(exp_asymm_full.values()),
+        "un": sum(exp_un_full.values()),
+        "minlib": sum(sum(c.values()) for c in exp_minlib_full_parts.values()),
+        "no_cycle3": sum(exp_c3_full.values()),
+        "no_cycle4": sum(exp_c4_full.values()),
+    }
 
     if man is not None:
-        _validate_manifest(man, schema, cnf_nvars=cnf_nvars, cnf_nclauses=cnf_nclauses)
+        _validate_manifest(
+            man,
+            schema,
+            cnf_nvars=cnf_nvars,
+            cnf_nclauses=cnf_nclauses,
+            full_counts=full_counts,
+        )
 
     # Canonicalize clauses; separate tautologies (allowed but warned).
     warn_cap = 20
@@ -511,17 +580,37 @@ def audit(
             raise AuditError("tautological clause(s) present (use without --fail-on-tautology to ignore)")
 
     # Expected clauses (multisets)
-    exp_asymm = expected_asymm(schema)
-    exp_un = expected_un(schema)
-    exp_c3 = expected_no_cycle3(schema)
-    exp_c4 = expected_no_cycle4(schema)
-
-    exp_minlib_parts: dict[str, Counter[tuple[int, ...]]] = {}
     if man is None:
-        raise AuditError("manifest is required for MINLIB audit (aux vars + mode)")
-    if man.minlib_mode != "selectors_v1":
-        raise AuditError(f"unsupported MINLIB mode in manifest: {man.minlib_mode!r}")
-    exp_minlib_parts = expected_minlib_selectors(schema)
+        raise AuditError("manifest is required for full category audit")
+
+    def category_enabled(key: str) -> bool:
+        count = int(man.category_counts.get(key, 0))
+        full = int(full_counts[key])
+        if count == 0:
+            return False
+        if count == full:
+            return True
+        raise AuditError(
+            f"manifest.category_counts[{key}]={count} is invalid; expected 0 or {full}"
+        )
+
+    exp_asymm = exp_asymm_full if category_enabled("asymm") else Counter()
+    exp_un = exp_un_full if category_enabled("un") else Counter()
+    exp_c3 = exp_c3_full if category_enabled("no_cycle3") else Counter()
+    exp_c4 = exp_c4_full if category_enabled("no_cycle4") else Counter()
+
+    exp_minlib_parts: dict[str, Counter[tuple[int, ...]]] = {
+        "minlib_or0": Counter(),
+        "minlib_or1": Counter(),
+        "minlib_impl0": Counter(),
+        "minlib_impl1": Counter(),
+    }
+    if category_enabled("minlib"):
+        if man.minlib_mode != "selectors_v1":
+            raise AuditError(
+                f"MINLIB clauses present but unsupported manifest minlib mode: {man.minlib_mode!r}"
+            )
+        exp_minlib_parts = exp_minlib_full_parts
 
     expected_by_cat: dict[str, Counter[tuple[int, ...]]] = {
         "asymm": exp_asymm,
@@ -692,7 +781,7 @@ def audit(
         for e in errors:
             print(f"- {e}")
         if man is not None:
-            keys = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+            keys = CATEGORY_KEYS
             print(
                 "[summary] "
                 f"manifest nvars={man.nvars} nclauses={man.nclauses} counts={_fmt_counts(man.category_counts, keys)}; "
@@ -702,7 +791,7 @@ def audit(
 
     print("\nOK: CNF matches spec and manifest.")
     if man is not None:
-        keys = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+        keys = CATEGORY_KEYS
         print(
             "[summary] "
             f"manifest nvars={man.nvars} nclauses={man.nclauses} counts={_fmt_counts(man.category_counts, keys)}; "

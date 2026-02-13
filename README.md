@@ -43,8 +43,8 @@ SocialChoiceAtlas/
 # 1) Lean proof artifacts
 lake build
 
-# 2) (optional) regenerate CNF + manifest
-python3 scripts/gen_sen24_dimacs.py
+# 2) (optional) regenerate CNF + manifest (leverized CLI, baseline axiom set)
+python3 scripts/gen_dimacs.py --n 2 --m 4 --axioms asymm,un,minlib,no_cycle3,no_cycle4
 
 # 3) (optional) audit CNF structure against spec
 python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json
@@ -54,7 +54,25 @@ cadical --lrat --no-binary Certificates/sen24.cnf Certificates/sen24.lrat
 
 # 5) verify LRAT in Lean
 lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
+
+# 6) Phase1/1.5 CI-equivalent local check
+./scripts/ci_phase1.sh
 ```
+
+## Leverized generator (Phase1)
+
+- New modular generator: `scripts/gen_dimacs.py`
+- Backward-compatible baseline wrapper: `scripts/gen_sen24_dimacs.py`
+- Axiom modules live under `encoding/axioms/`
+- Phase1 usage and done criteria: `docs/leverization.md`
+
+## Atlas runner (Phase2 Week1)
+
+- Runner: `scripts/run_atlas.py`
+- Usage and artifact format: `docs/phase2_atlas.md`
+- CI smoke: `./scripts/ci_phase2_smoke.sh`
+- MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
+- Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
 ## References
 

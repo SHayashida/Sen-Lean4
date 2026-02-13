@@ -74,6 +74,11 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
 - Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
+## Safety assumptions
+
+- Monotone pruning safety contract: `docs/assumptions_monotone_pruning.md`
+- Symmetry reduction safety contract: `docs/safety_symmetry_reduction.md`
+
 ## References
 
 - Sen, A. K. (1970). "The Impossibility of a Paretian Liberal". *Journal of Political Economy*, 78(1), 152-157.

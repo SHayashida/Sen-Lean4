@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 name = "minlib_selectors_v1"
 category_key = "minlib"
+SUPPORTS_SYMMETRY_ALTS = True
 
 
 def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
@@ -30,4 +31,3 @@ def expected_count(schema: "Sen24Schema") -> int:
     if not schema.include_minlib_selectors:
         return 0
     return 2 + 2 * schema.n_profiles * schema.n_pairs
-

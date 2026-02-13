@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 name = "asymm"
 category_key = "asymm"
+SUPPORTS_SYMMETRY_ALTS = True
 
 
 def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
@@ -18,4 +19,3 @@ def encode(schema: "Sen24Schema", out_clauses: list[list[int]]) -> None:
 
 def expected_count(schema: "Sen24Schema") -> int:
     return schema.n_profiles * schema.n_pairs
-

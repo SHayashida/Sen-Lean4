@@ -25,6 +25,32 @@ for case_id in case_00000 case_10000 case_11111; do
   test -f "$OUT_DIR/$case_id/summary.json"
 done
 
+python3 - "$OUT_DIR/atlas.json" "$OUT_DIR/case_11111/summary.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+atlas = json.loads(Path(sys.argv[1]).read_text())
+schema_version = atlas.get("atlas_schema_version")
+if not isinstance(schema_version, int) or schema_version < 1:
+    raise SystemExit("atlas_schema_version missing or invalid")
+summary = json.loads(Path(sys.argv[2]).read_text())
+for obj_name, obj in [("atlas", atlas), ("summary", summary)]:
+    solver_info = obj.get("solver_info")
+    env_info = obj.get("environment_info")
+    if not isinstance(solver_info, dict):
+        raise SystemExit(f"{obj_name}: missing solver_info")
+    for k in ("solver_path", "solver_version_raw", "solver_version", "solver_sha256"):
+        if k not in solver_info:
+            raise SystemExit(f"{obj_name}: missing solver_info.{k}")
+    if not isinstance(env_info, dict):
+        raise SystemExit(f"{obj_name}: missing environment_info")
+    for k in ("python_version", "platform", "git_commit"):
+        if k not in env_info:
+            raise SystemExit(f"{obj_name}: missing environment_info.{k}")
+print("runtime_meta_ok")
+PY
+
 python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
   "$OUT_DIR/case_00000/sen24.cnf" \
   --manifest "$OUT_DIR/case_00000/sen24.manifest.json" \
@@ -112,6 +138,7 @@ python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
   --prune none \
   --symmetry alts \
+  --symmetry-check \
   --case-masks 0,1,31 \
   --emit-proof never \
   --outdir "$SYM_OUT"
@@ -126,6 +153,20 @@ if atlas.get("symmetry_mode") != "alts":
     raise SystemExit("symmetry_mode is not alts")
 if int(atlas.get("equiv_classes_total", 0)) < 1:
     raise SystemExit("equiv_classes_total missing/invalid")
+symmetry_check = atlas.get("symmetry_check", {})
+if not isinstance(symmetry_check, dict):
+    raise SystemExit("missing symmetry_check block")
+if symmetry_check.get("enabled") is not True:
+    raise SystemExit("symmetry_check should be enabled")
+if "checked_k" not in symmetry_check or "mismatches" not in symmetry_check:
+    raise SystemExit("symmetry_check stats are incomplete")
+if "checked_cases" not in symmetry_check:
+    raise SystemExit("symmetry_check.checked_cases is missing")
+if int(symmetry_check.get("mismatches", -1)) != 0:
+    raise SystemExit("symmetry_check mismatches should be 0 in smoke run")
+checked_cases = atlas.get("checked_cases")
+if not isinstance(checked_cases, list):
+    raise SystemExit("atlas.checked_cases is missing")
 cases = atlas.get("cases", [])
 if not isinstance(cases, list) or not cases:
     raise SystemExit("missing cases in symmetry run")
@@ -165,6 +206,11 @@ if not pruned:
 for c in pruned:
     if c.get("status") in {"SAT", "UNSAT"} and not c.get("pruned_by"):
         raise SystemExit("inferred SAT/UNSAT case missing pruned_by metadata")
+    if c.get("status") in {"SAT", "UNSAT"}:
+        pb = c["pruned_by"]
+        for key in ("derived_status", "rule", "witness_case_id"):
+            if key not in pb:
+                raise SystemExit(f"missing pruned_by.{key} in inferred case {c.get('case_id')}")
 prune_stats = atlas.get("prune_stats", {})
 if int(prune_stats.get("solver_calls_avoided", 0)) <= 0:
     raise SystemExit("solver_calls_avoided should be positive in monotone prune run")

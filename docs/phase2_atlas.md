@@ -53,8 +53,14 @@ results/<YYYYMMDD>/atlas_v1/
 
 `atlas.json` contains:
 - run metadata (`solver`, `prune`, `jobs`, `dry_run`, universe order)
+- `atlas_schema_version` (top-level schema version for compatibility checks)
+- runtime reproducibility metadata (`solver_info`, `environment_info`)
 - `status_counts` over `{SAT, UNSAT, UNKNOWN}`
 - per-case summaries (`status`, `solved`, selected axioms, clause counts, artifact pointers).
+
+Safety assumption references:
+- `docs/assumptions_monotone_pruning.md`
+- `docs/safety_symmetry_reduction.md`
 
 ## Week2: MUS/MCS enrichment
 
@@ -110,12 +116,15 @@ Compute equivalence classes using alternative relabeling (`S4`) on semantic SAT 
 python3 scripts/run_atlas.py \
   --outdir /tmp/atlas_w4 \
   --jobs 4 \
-  --symmetry alts
+  --symmetry alts \
+  --symmetry-check
 ```
 
 Notes:
 - Week4 symmetry is **alts-only** (`--symmetry alts`), not voter relabeling.
 - Canonicalization uses semantic SAT outputs (`model.json` social bits), not CNF text.
+- Safety guardrail: if selected axioms are not marked `SUPPORTS_SYMMETRY_ALTS=True`, run fails unless `--symmetry-unsafe-ok` is set.
+- `--symmetry-check` re-solves sampled non-representatives and records `symmetry_check` stats + `checked_cases` in `atlas.json`.
 - `atlas.json` includes `equiv_classes_total`, `equiv_class_histogram`, `representatives`, and per-case
   `equiv_class_id` / `representative_case` / `orbit_size`.
 
@@ -136,6 +145,7 @@ Notes:
 - Inferred cases are marked `solved=false` with `pruned_by` evidence in `atlas.json`.
 - In prune mode, SAT/UNSAT status totals still cover all 32 cases for the 5-axiom sen24 universe.
 - `prune_stats` and `oracle_stats` report solver calls avoided and inferred SAT/UNSAT counts.
+- Prune evidence is validated: inferred SAT/UNSAT requires `pruned_by.derived_status/rule/witness_case_id`, with solved witness and lattice relation checks.
 
 MUS/MCS on prune outputs:
 - `scripts/mus_mcs.py` only processes `UNSAT` cases with `solved=true`.

@@ -1,0 +1,13 @@
+\section{Limitations and Scope}
+
+This paper intentionally targets a killable instance (sen24).
+We do not claim direct scalability to arbitrary $n,m$.
+
+Safe acceleration features (monotone pruning and symmetry reduction) are only valid under explicit assumptions and runtime guards.
+These assumptions are specified in:
+\begin{itemize}[leftmargin=*]
+  \item \texttt{docs/assumptions\_monotone\_pruning.md}
+  \item \texttt{docs/safety\_symmetry\_reduction.md}
+\end{itemize}
+
+Future work should expand scale while preserving proof-carrying checks and schema-level reproducibility contracts.

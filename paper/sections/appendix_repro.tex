@@ -1,0 +1,42 @@
+\section{Reproducibility Appendix}
+
+\subsection{Claim-to-artifact map}
+Claims C1--C5 are mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{C1}: atlas frontier generation.
+  \item \textbf{C2}: MUS/MCS boundary explanation.
+  \item \textbf{C3}: proof-carrying UNSAT verification in Lean.
+  \item \textbf{C4}: safety-guarded acceleration (symmetry/pruning).
+  \item \textbf{C5}: SAT Gallery extraction with witness validation.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{0.08\linewidth} p{0.42\linewidth} p{0.44\linewidth}}
+\toprule
+Claim & Canonical command & Primary artifact \\
+\midrule
+C1 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} & \texttt{/tmp/atlas\_c1/atlas.json} \\
+C2 & \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json} \\
+C3 & \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/proof.lrat} \\
+C4 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --prune monotone --symmetry alts --symmetry-check --prune-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
+C5 & \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
+\bottomrule
+\end{tabular}
+\caption{Compact C1--C5 claim map with one canonical command per claim.}
+\label{tab:claims-map}
+\end{table}
+
+\subsection{Schema and metadata contracts}
+Reproducibility relies on versioned machine-readable outputs:
+\begin{itemize}[leftmargin=*]
+  \item \texttt{atlas\_schema\_version}
+  \item \texttt{eval\_schema\_version}
+  \item solver/environment metadata and seed policy fields
+\end{itemize}
+
+See \texttt{docs/reproducibility\_appendix.md} for policy details.
+
+\subsection{Baseline protection}
+Protected baseline artifacts remain unchanged and must be treated as immutable references in normal development.

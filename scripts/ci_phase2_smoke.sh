@@ -16,6 +16,19 @@ test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
 test -f "$ROOT_DIR/docs/public_repo_security.md"
 test -f "$ROOT_DIR/docs/evaluation_plan.md"
 test -f "$ROOT_DIR/docs/sat_gallery.md"
+test -f "$ROOT_DIR/paper/main.tex"
+test -f "$ROOT_DIR/paper/README.md"
+test -f "$ROOT_DIR/paper/sections/00_abstract.tex"
+test -f "$ROOT_DIR/paper/sections/01_intro.tex"
+test -f "$ROOT_DIR/paper/sections/02_problem_and_positioning.tex"
+test -f "$ROOT_DIR/paper/sections/03_system_design.tex"
+test -f "$ROOT_DIR/paper/sections/04_methods.tex"
+test -f "$ROOT_DIR/paper/sections/05_evaluation.tex"
+test -f "$ROOT_DIR/paper/sections/06_case_study_sen24.tex"
+test -f "$ROOT_DIR/paper/sections/07_related_work.tex"
+test -f "$ROOT_DIR/paper/sections/08_limitations_and_scope.tex"
+test -f "$ROOT_DIR/paper/sections/09_conclusion.tex"
+test -f "$ROOT_DIR/paper/sections/appendix_repro.tex"
 
 # doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
 grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
@@ -43,6 +56,12 @@ grep -Fq '## Reproducibility' "$ROOT_DIR/docs/evaluation_plan.md"
 grep -Fq '## Motivation' "$ROOT_DIR/docs/sat_gallery.md"
 grep -Fq '## Non-trivial heuristics' "$ROOT_DIR/docs/sat_gallery.md"
 grep -Fq '## Reproduction commands' "$ROOT_DIR/docs/sat_gallery.md"
+
+grep -Fq '## Build' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
+
+python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then

@@ -93,6 +93,7 @@ For paper-facing claim discipline and reproducibility narrative, use:
 `docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
 For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
 For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
+For the LaTeX paper workspace and frontier figure workflow, see `paper/README.md`.
 
 ## References
 

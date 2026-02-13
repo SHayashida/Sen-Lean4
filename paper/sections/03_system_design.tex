@@ -1,0 +1,17 @@
+\section{System Design}
+
+The implementation follows four separable layers.
+
+\paragraph{Spec.}
+Lean definitions capture relation primitives, axioms, and theorem statements for sen24.
+
+\paragraph{Encode.}
+Python generators emit DIMACS CNF with manifests that record schema parameters, per-category clause counts, and hashes.
+
+\paragraph{Solve.}
+External SAT solvers produce SAT models or UNSAT proof traces.
+
+\paragraph{Check.}
+Trusted checks include: (i) CNF audit scripts against the manifest contract, (ii) LRAT verification in Lean for committed UNSAT references, and (iii) SAT witness validation against CNF.
+
+This separation enables fast heuristic experimentation in Python while preserving proof-carrying trust guarantees in the checking layer.

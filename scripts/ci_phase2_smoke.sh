@@ -9,6 +9,23 @@ OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
 
+test -f "$ROOT_DIR/docs/related_work_notes.md"
+test -f "$ROOT_DIR/docs/paper_claims_map.md"
+test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
+
+grep -q "scripts/run_atlas.py" "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q "scripts/mus_mcs.py" "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q "Case11111" "$ROOT_DIR/docs/paper_claims_map.md"
+
+grep -q "atlas_schema_version" "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -q "solver_version_raw" "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -q "Certificates/atlas/case_11111" "$ROOT_DIR/docs/reproducibility_appendix.md"
+
+grep -q "ATMS" "$ROOT_DIR/docs/related_work_notes.md"
+grep -q "MAXSAT" "$ROOT_DIR/docs/related_work_notes.md"
+grep -q "OMT" "$ROOT_DIR/docs/related_work_notes.md"
+grep -q "Constraint Hierarchies" "$ROOT_DIR/docs/related_work_notes.md"
+
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
   --prune none \

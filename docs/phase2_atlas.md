@@ -62,6 +62,11 @@ Safety assumption references:
 - `docs/assumptions_monotone_pruning.md`
 - `docs/safety_symmetry_reduction.md`
 
+Paper-facing references:
+- `docs/related_work_notes.md`
+- `docs/paper_claims_map.md`
+- `docs/reproducibility_appendix.md`
+
 ## Week2: MUS/MCS enrichment
 
 After `run_atlas.py`, enrich UNSAT cases with one MUS and one small MCS candidate:

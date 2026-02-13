@@ -79,6 +79,13 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - Monotone pruning safety contract: `docs/assumptions_monotone_pruning.md`
 - Symmetry reduction safety contract: `docs/safety_symmetry_reduction.md`
 
+## Paper/Docs map
+
+For paper-facing claim discipline and reproducibility narrative, use:
+`docs/related_work_notes.md` (positioning vs ATMS/MAXSAT/OMT/Constraint Hierarchies),
+`docs/paper_claims_map.md` (claim→evidence→commands), and
+`docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
+
 ## References
 
 - Sen, A. K. (1970). "The Impossibility of a Paretian Liberal". *Journal of Political Economy*, 78(1), 152-157.

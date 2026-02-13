@@ -34,11 +34,15 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
 class Candidate:
     case_id: str
     case: dict[str, Any]
+    case_dir: Path
     metrics: dict[str, Any]
     model_validated: bool
     validator_stats: dict[str, Any]
     non_trivial: bool
+    nontriviality_report: dict[str, Any]
     rule_path: Path | None
+    rule_card_md_path: Path | None
+    rule_card_tex_path: Path | None
     model_path: Path | None
     cnf_path: Path
     manifest_path: Path
@@ -159,16 +163,276 @@ def _compute_metrics(model_path: Path, manifest_path: Path) -> dict[str, Any]:
     }
 
 
-def _is_non_trivial(metrics: dict[str, Any], thresholds: dict[str, float]) -> bool:
+def _build_nontriviality_report(metrics: dict[str, Any], thresholds: dict[str, float]) -> dict[str, Any]:
     distinct = float(metrics.get("distinct_social_outcomes", 0.0))
     dictatorship_max = float(metrics.get("dictatorship_score_max", 1.0))
     constant_rate = float(metrics.get("constant_function_rate", 1.0))
 
-    return (
-        distinct >= float(thresholds["min_distinct_social_outcomes"])
-        and dictatorship_max <= float(thresholds["max_dictatorship_score_max"])
-        and constant_rate <= float(thresholds["max_constant_function_rate"])
+    excluded_reasons: list[str] = []
+    if distinct < float(thresholds["min_distinct_social_outcomes"]):
+        excluded_reasons.append("distinct_social_outcomes_below_threshold")
+    if dictatorship_max > float(thresholds["max_dictatorship_score_max"]):
+        excluded_reasons.append("dictatorship_score_max_above_threshold")
+    if constant_rate > float(thresholds["max_constant_function_rate"]):
+        excluded_reasons.append("constant_function_rate_above_threshold")
+
+    included_reasons = ["passes_non_triviality_thresholds"] if not excluded_reasons else []
+    return {
+        "passes_non_triviality": len(excluded_reasons) == 0,
+        "included_reasons": included_reasons,
+        "excluded_reasons": excluded_reasons,
+        "thresholds": {
+            "min_distinct_social_outcomes": float(thresholds["min_distinct_social_outcomes"]),
+            "max_dictatorship_score_max": float(thresholds["max_dictatorship_score_max"]),
+            "max_constant_function_rate": float(thresholds["max_constant_function_rate"]),
+        },
+    }
+
+
+def _fmt_perm(perm: tuple[int, ...]) -> str:
+    return "[" + ",".join(str(x) for x in perm) + "]"
+
+
+def _tex_escape(text: str) -> str:
+    out = text
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "~": r"\textasciitilde{}",
+        "^": r"\textasciicircum{}",
+    }
+    for src, dst in replacements.items():
+        out = out.replace(src, dst)
+    return out
+
+
+def _build_rule_witnesses(
+    *,
+    model_path: Path,
+    manifest_path: Path,
+    max_witnesses: int = 3,
+) -> list[dict[str, Any]]:
+    model = _load_json(model_path)
+    manifest = _load_json(manifest_path)
+    nprofiles = int(manifest["nprofiles"])
+    npairs = int(manifest["npairs"])
+    nranks = int(manifest["nranks"])
+    pair_order = [tuple(x) for x in manifest["pair_order"]]
+    n_p_vars = int(manifest["n_p_vars"])
+
+    rankings = list(itertools.permutations([0, 1, 2, 3], 4))
+    if len(rankings) != nranks:
+        raise ValueError(f"ranking count mismatch: expected {nranks}, got {len(rankings)}")
+    pos_maps = [{a: i for i, a in enumerate(r)} for r in rankings]
+
+    true_vars = {int(v) for v in model.get("true_vars", []) if 1 <= int(v) <= n_p_vars}
+
+    def social_bit(profile_idx: int, pair_idx: int) -> int:
+        var = 1 + profile_idx * npairs + pair_idx
+        return 1 if var in true_vars else 0
+
+    profile_rows: list[dict[str, Any]] = []
+    sig_to_profile: dict[tuple[int, ...], int] = {}
+    nonconstant_pair: tuple[int, int] | None = None
+    mismatch_v0: int | None = None
+    mismatch_v1: int | None = None
+
+    for p in range(nprofiles):
+        r0_idx = p // nranks
+        r1_idx = p % nranks
+        r0 = rankings[r0_idx]
+        r1 = rankings[r1_idx]
+        pos0 = pos_maps[r0_idx]
+        pos1 = pos_maps[r1_idx]
+        social_bits = [social_bit(p, i) for i in range(npairs)]
+
+        pref0_bits = [1 if pos0[a] < pos0[b] else 0 for (a, b) in pair_order]
+        pref1_bits = [1 if pos1[a] < pos1[b] else 0 for (a, b) in pair_order]
+        differs_v0 = any(s != v for s, v in zip(social_bits, pref0_bits))
+        differs_v1 = any(s != v for s, v in zip(social_bits, pref1_bits))
+        edges = [f"{a}>{b}" for i, (a, b) in enumerate(pair_order) if social_bits[i] == 1]
+
+        signature = tuple(social_bits)
+        if signature not in sig_to_profile:
+            sig_to_profile[signature] = p
+            if len(sig_to_profile) >= 2 and nonconstant_pair is None:
+                first_sig, second_sig = list(sig_to_profile.values())[:2]
+                nonconstant_pair = (first_sig, second_sig)
+        if mismatch_v0 is None and differs_v0:
+            mismatch_v0 = p
+        if mismatch_v1 is None and differs_v1:
+            mismatch_v1 = p
+
+        profile_rows.append(
+            {
+                "profile_id": p,
+                "r0": r0,
+                "r1": r1,
+                "edges": edges,
+                "differs_v0": differs_v0,
+                "differs_v1": differs_v1,
+            }
+        )
+
+    selected_profile_ids: list[int] = []
+    if nonconstant_pair is not None:
+        selected_profile_ids.extend([nonconstant_pair[0], nonconstant_pair[1]])
+    if mismatch_v0 is not None:
+        selected_profile_ids.append(mismatch_v0)
+    if mismatch_v1 is not None:
+        selected_profile_ids.append(mismatch_v1)
+
+    deduped_ids: list[int] = []
+    seen: set[int] = set()
+    for pid in selected_profile_ids:
+        if pid in seen:
+            continue
+        seen.add(pid)
+        deduped_ids.append(pid)
+        if len(deduped_ids) >= max_witnesses:
+            break
+
+    if not deduped_ids:
+        deduped_ids = [0]
+
+    witnesses: list[dict[str, Any]] = []
+    profile_lookup = {int(row["profile_id"]): row for row in profile_rows}
+    for pid in deduped_ids:
+        row = profile_lookup[pid]
+        witness_tags: list[str] = []
+        if nonconstant_pair is not None and pid in nonconstant_pair:
+            witness_tags.append("non_constant_witness")
+        if row["differs_v0"]:
+            witness_tags.append("non_dictatorship_voter0_witness")
+        if row["differs_v1"]:
+            witness_tags.append("non_dictatorship_voter1_witness")
+        if not witness_tags:
+            witness_tags.append("fallback_sample")
+
+        witnesses.append(
+            {
+                "profile_id": int(row["profile_id"]),
+                "r0": list(row["r0"]),
+                "r1": list(row["r1"]),
+                "social_edges": list(row["edges"]),
+                "differs_from_voter0": bool(row["differs_v0"]),
+                "differs_from_voter1": bool(row["differs_v1"]),
+                "witness_tags": witness_tags,
+            }
+        )
+
+    return witnesses
+
+
+def _write_rule_cards(
+    *,
+    case_id: str,
+    case_dir: Path,
+    axioms_on: list[str],
+    metrics: dict[str, Any],
+    nontriviality_report: dict[str, Any],
+    model_validated: bool,
+    manifest_path: Path,
+    model_path: Path | None,
+) -> tuple[Path, Path]:
+    md_path = case_dir / "rule_card.md"
+    tex_path = case_dir / "rule_card.tex"
+
+    witnesses: list[dict[str, Any]] = []
+    if model_path is not None and model_path.exists():
+        witnesses = _build_rule_witnesses(model_path=model_path, manifest_path=manifest_path, max_witnesses=3)
+
+    md_lines: list[str] = []
+    md_lines.append(f"# Rule Card: `{case_id}`")
+    md_lines.append("")
+    md_lines.append("## Key metrics")
+    md_lines.append("")
+    md_lines.append(f"- axioms_on: `{', '.join(axioms_on)}`")
+    md_lines.append(f"- model_validated: `{model_validated}`")
+    md_lines.append(f"- distinct_social_outcomes: `{metrics.get('distinct_social_outcomes')}`")
+    md_lines.append(f"- dictatorship_score_max: `{float(metrics.get('dictatorship_score_max', 1.0)):.4f}`")
+    md_lines.append(f"- constant_function_rate: `{float(metrics.get('constant_function_rate', 1.0)):.4f}`")
+    md_lines.append(f"- neutrality_violation_count: `{metrics.get('neutrality_violation_count')}`")
+    md_lines.append("")
+    md_lines.append("## Non-triviality report")
+    md_lines.append("")
+    md_lines.append(f"- passes_non_triviality: `{bool(nontriviality_report.get('passes_non_triviality', False))}`")
+    md_lines.append(
+        f"- included_reasons: `{', '.join(nontriviality_report.get('included_reasons', [])) or '(none)'}`"
     )
+    md_lines.append(
+        f"- excluded_reasons: `{', '.join(nontriviality_report.get('excluded_reasons', [])) or '(none)'}`"
+    )
+    md_lines.append("")
+    md_lines.append("## Profile witnesses")
+    md_lines.append("")
+    for idx, witness in enumerate(witnesses, start=1):
+        md_lines.append(f"### Witness {idx}")
+        md_lines.append(
+            f"- profile_id: `{witness['profile_id']}`; tags: `{', '.join(witness['witness_tags'])}`"
+        )
+        md_lines.append(f"- voter0 ranking: `{_fmt_perm(tuple(witness['r0']))}`")
+        md_lines.append(f"- voter1 ranking: `{_fmt_perm(tuple(witness['r1']))}`")
+        md_lines.append(f"- social edges: `{', '.join(witness['social_edges']) or '(none)'}`")
+        md_lines.append(
+            f"- differs_from_voter0: `{witness['differs_from_voter0']}`, "
+            f"differs_from_voter1: `{witness['differs_from_voter1']}`"
+        )
+        md_lines.append("")
+    if not witnesses:
+        md_lines.append("- no witness profiles available (model unavailable)")
+        md_lines.append("")
+
+    md_path.write_text("\n".join(md_lines).rstrip() + "\n", encoding="utf-8")
+
+    tex_lines: list[str] = []
+    tex_lines.append(r"\subsection*{Rule Card: " + _tex_escape(case_id) + "}")
+    tex_lines.append(r"\begin{itemize}")
+    tex_lines.append(r"\item axioms\_on: \texttt{" + _tex_escape(", ".join(axioms_on)) + "}")
+    tex_lines.append(r"\item model\_validated: \texttt{" + _tex_escape(str(model_validated)) + "}")
+    tex_lines.append(
+        r"\item distinct\_social\_outcomes: \texttt{" + _tex_escape(str(metrics.get("distinct_social_outcomes"))) + "}"
+    )
+    tex_lines.append(
+        r"\item dictatorship\_score\_max: \texttt{"
+        + _tex_escape(f"{float(metrics.get('dictatorship_score_max', 1.0)):.4f}")
+        + "}"
+    )
+    tex_lines.append(
+        r"\item constant\_function\_rate: \texttt{"
+        + _tex_escape(f"{float(metrics.get('constant_function_rate', 1.0)):.4f}")
+        + "}"
+    )
+    tex_lines.append(r"\end{itemize}")
+    tex_lines.append(r"\paragraph{Profile witnesses.}")
+    tex_lines.append(r"\begin{enumerate}")
+    for witness in witnesses:
+        tex_lines.append(
+            r"\item \texttt{p="
+            + _tex_escape(str(witness["profile_id"]))
+            + "} tags=\texttt{"
+            + _tex_escape(", ".join(witness["witness_tags"]))
+            + r"}; "
+            + r"$r_0$=\texttt{"
+            + _tex_escape(_fmt_perm(tuple(witness["r0"])))
+            + r"}, $r_1$=\texttt{"
+            + _tex_escape(_fmt_perm(tuple(witness["r1"])))
+            + r"}; edges=\texttt{"
+            + _tex_escape(", ".join(witness["social_edges"]) or "(none)")
+            + r"}."
+        )
+    if not witnesses:
+        tex_lines.append(r"\item no witness profiles available.")
+    tex_lines.append(r"\end{enumerate}")
+    tex_path.write_text("\n".join(tex_lines).rstrip() + "\n", encoding="utf-8")
+
+    return md_path, tex_path
 
 
 def _rank_key(candidate: Candidate) -> tuple[float, float, int, str]:
@@ -220,6 +484,11 @@ def main() -> None:
     ap.add_argument("--unique-by", choices=["none", "equiv_class"], default="equiv_class")
     ap.add_argument("--require-model", dest="require_model", action="store_true", default=True)
     ap.add_argument("--allow-missing-model", action="store_true", help="Allow gallery entries without model.json")
+    ap.add_argument(
+        "--allow-trivial-fallback",
+        action="store_true",
+        help="If non-trivial candidates are fewer than min-k, fill with best remaining SAT candidates.",
+    )
     ap.add_argument("--thresholds-json", type=Path, default=None)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -314,16 +583,21 @@ def main() -> None:
         if not rule_path.exists() and model_path.exists() and not args.dry_run:
             _run_decode_model(case_dir)
 
-        non_trivial = _is_non_trivial(metrics, thresholds)
+        nontriviality_report = _build_nontriviality_report(metrics, thresholds)
+        non_trivial = bool(nontriviality_report["passes_non_triviality"])
         candidates.append(
             Candidate(
                 case_id=case_id,
                 case=case,
+                case_dir=case_dir,
                 metrics=metrics,
                 model_validated=model_validated,
                 validator_stats=validator_stats,
                 non_trivial=non_trivial,
+                nontriviality_report=nontriviality_report,
                 rule_path=rule_path if rule_path.exists() else None,
+                rule_card_md_path=None,
+                rule_card_tex_path=None,
                 model_path=model_path if model_path.exists() else None,
                 cnf_path=cnf_path,
                 manifest_path=manifest_path,
@@ -352,19 +626,22 @@ def main() -> None:
         deduped = list(candidates)
 
     ranked = sorted(deduped, key=_rank_key)
-    selected = [c for c in ranked if c.non_trivial][: args.top_k]
-    if len(selected) < args.min_k:
+    non_trivial_ranked = [c for c in ranked if c.non_trivial]
+    selected = list(non_trivial_ranked[: args.top_k])
+    if len(selected) < args.min_k and args.allow_trivial_fallback:
         for c in ranked:
             if c in selected:
                 continue
             selected.append(c)
             if len(selected) >= args.min_k:
                 break
-    selected = selected[: args.top_k]
+        selected = selected[: args.top_k]
 
     if args.min_k > 0 and len(selected) < args.min_k:
         raise RuntimeError(
-            f"Could not build gallery with min_k={args.min_k}; selected={len(selected)}, sat_candidates={len(ranked)}"
+            "Could not build gallery with requested non-trivial minimum: "
+            f"min_k={args.min_k}, selected={len(selected)}, non_trivial_candidates={len(non_trivial_ranked)}, "
+            "set --allow-trivial-fallback to relax this constraint"
         )
 
     if args.dry_run:
@@ -375,7 +652,8 @@ def main() -> None:
             )
         print(
             f"dry-run summary: sat_cases={len(sat_cases)} candidates={len(candidates)} "
-            f"deduped={len(deduped)} selected={len(selected)} skipped={skipped}"
+            f"deduped={len(deduped)} non_trivial={len(non_trivial_ranked)} "
+            f"selected={len(selected)} skipped={skipped}"
         )
         return
 
@@ -386,6 +664,16 @@ def main() -> None:
         case_id = c.case_id
         case = c.case
         rule_path = c.rule_path
+        rule_card_md_path, rule_card_tex_path = _write_rule_cards(
+            case_id=case_id,
+            case_dir=c.case_dir,
+            axioms_on=list(case.get("axioms_on", [])),
+            metrics=c.metrics,
+            nontriviality_report=c.nontriviality_report,
+            model_validated=c.model_validated,
+            manifest_path=c.manifest_path,
+            model_path=c.model_path,
+        )
 
         rule_excerpt: list[str] = []
         if rule_path is not None and rule_path.exists():
@@ -400,6 +688,7 @@ def main() -> None:
             "status": case.get("status"),
             "solved": bool(case.get("solved", False)),
             "non_trivial": c.non_trivial,
+            "nontriviality_report": c.nontriviality_report,
             "model_validated": c.model_validated,
             "validator_stats": c.validator_stats,
             "metrics": {
@@ -410,6 +699,8 @@ def main() -> None:
             },
             "files": {
                 "rule_md": _relpath(rule_path, outdir),
+                "rule_card_md": _relpath(rule_card_md_path, outdir),
+                "rule_card_tex": _relpath(rule_card_tex_path, outdir),
                 "model_json": _relpath(c.model_path, outdir),
                 "sen24_cnf": _relpath(c.cnf_path, outdir),
                 "sen24_manifest": _relpath(c.manifest_path, outdir),
@@ -453,10 +744,12 @@ def main() -> None:
             "min_k": args.min_k,
             "unique_by": unique_mode,
             "require_model": require_model,
+            "allow_trivial_fallback": bool(args.allow_trivial_fallback),
             "thresholds": thresholds,
             "sat_cases_total": len(sat_cases),
             "candidate_count": len(candidates),
             "deduped_count": len(deduped),
+            "non_trivial_count": len(non_trivial_ranked),
             "selected_count": len(entries),
             "skipped": skipped,
         },
@@ -502,13 +795,22 @@ def main() -> None:
         md_lines.append(f"- orbit_size: `{entry.get('orbit_size')}`")
         md_lines.append(f"- representative_case: `{entry.get('representative_case')}`")
         md_lines.append(f"- model_validated: `{entry['model_validated']}`")
+        md_lines.append(f"- non_trivial: `{entry['non_trivial']}`")
         md_lines.append(
             f"- metrics: distinct=`{entry['metrics']['distinct_social_outcomes']}`, "
             f"dict_max=`{float(entry['metrics']['dictatorship_score_max']):.4f}`, "
             f"constant_rate=`{float(entry['metrics']['constant_function_rate']):.4f}`"
         )
         md_lines.append(
+            "- nontriviality: included=`"
+            + (", ".join(entry["nontriviality_report"]["included_reasons"]) or "(none)")
+            + "`, excluded=`"
+            + (", ".join(entry["nontriviality_report"]["excluded_reasons"]) or "(none)")
+            + "`"
+        )
+        md_lines.append(
             f"- files: rule=`{entry['files']['rule_md']}`, model=`{entry['files']['model_json']}`, "
+            f"rule_card_md=`{entry['files']['rule_card_md']}`, rule_card_tex=`{entry['files']['rule_card_tex']}`, "
             f"cnf=`{entry['files']['sen24_cnf']}`, manifest=`{entry['files']['sen24_manifest']}`"
         )
         md_lines.append("")
@@ -527,6 +829,13 @@ def main() -> None:
 
     _safe_text_assert(gallery_json_path.read_text(encoding="utf-8"))
     _safe_text_assert(gallery_md)
+    for entry in entries:
+        rule_card_md_rel = entry["files"].get("rule_card_md")
+        rule_card_tex_rel = entry["files"].get("rule_card_tex")
+        if rule_card_md_rel:
+            _safe_text_assert((outdir / str(rule_card_md_rel)).read_text(encoding="utf-8"))
+        if rule_card_tex_rel:
+            _safe_text_assert((outdir / str(rule_card_tex_rel)).read_text(encoding="utf-8"))
 
     gallery_md_path.write_text(gallery_md, encoding="utf-8")
 

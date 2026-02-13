@@ -1,0 +1,16 @@
+\section{Introduction}
+
+Classical impossibility theorems explain why certain axiom sets cannot hold simultaneously, but engineering workflows also need the complementary question: \emph{which minimal lever changes restore feasibility}.
+This paper frames that question as an auditable systems problem.
+
+Our central thesis is practical: a small, proof-carrying atlas can already provide publishable insight if it couples (i) strict reproducibility, (ii) explicit safety assumptions, and (iii) boundary explanation artifacts.
+We operationalize this thesis in sen24 with five claim blocks (C1--C5) mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+
+Contributions are systems-oriented:
+\begin{itemize}[leftmargin=*]
+  \item A Spec/Encode/Solve/Check architecture that keeps solver heuristics separate from trusted checking.
+  \item Frontier identification with MUS/MCS for UNSAT explanations.
+  \item Proof-carrying UNSAT workflow (CNF+LRAT+Lean).
+  \item SAT Gallery extraction with solver-independent witness validation.
+  \item Lightweight but strict reproducibility gates in CI.
+\end{itemize}

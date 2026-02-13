@@ -1,0 +1,28 @@
+\section{Evaluation}
+
+Evaluation is driven by the harness in \texttt{scripts/eval\_atlas.py}, which repeats a fixed configuration grid and stores run-level metrics in \texttt{eval.json}/\texttt{eval.csv}.
+
+\subsection{Configuration grid}
+We compare four modes: no symmetry/no pruning, symmetry only, pruning only, and symmetry plus pruning.
+
+\subsection{Metrics}
+Core metrics include wall-clock runtime, solved-vs-inferred case counts, equivalence-class statistics, proof coverage, MUS sizes, and SAT triviality indicators.
+
+\subsection{Figure placeholders}
+Figure generation scripts produce runtime and frontier views directly from machine-readable outputs.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Config & Runtime (s) & Solved & Inferred & UNSAT \\
+\midrule
+none\_none & TODO & TODO & TODO & TODO \\
+alts\_none & TODO & TODO & TODO & TODO \\
+none\_monotone & TODO & TODO & TODO & TODO \\
+alts\_monotone & TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{tabular}
+\caption{Evaluation summary placeholder populated from \texttt{eval.csv}.}
+\label{tab:eval}
+\end{table}

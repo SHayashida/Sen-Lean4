@@ -1,0 +1,17 @@
+\section{Methods}
+
+\subsection{Atlas enumeration}
+We enumerate axiom subsets over a fixed universe and solve each case to obtain SAT/UNSAT status.
+Outputs include per-case CNF/manifest/summary and top-level \texttt{atlas.json}.
+
+\subsection{Boundary extraction}
+For UNSAT solved cases, we run a deletion-based MUS procedure and a small MCS search (single removals first, then bounded pairs).
+This provides minimal contradiction and repair evidence at low implementation risk.
+
+\subsection{Proof-carrying UNSAT policy}
+For canonical UNSAT references, we retain CNF+LRAT and verify in Lean.
+For atlas runs, proof metadata is recorded with hash-based linkage and replay commands.
+
+\subsection{SAT Gallery with witness validation}
+SAT cases are filtered by lightweight non-trivial heuristics and ranked deterministically.
+Each selected witness is validated against CNF using a solver-independent checker that parses DIMACS and model assignments directly.

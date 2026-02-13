@@ -13,18 +13,19 @@ test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
 test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
 
-grep -q "scripts/run_atlas.py" "$ROOT_DIR/docs/paper_claims_map.md"
-grep -q "scripts/mus_mcs.py" "$ROOT_DIR/docs/paper_claims_map.md"
-grep -q "Case11111" "$ROOT_DIR/docs/paper_claims_map.md"
+# doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
+grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C2\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C3\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C4\.' "$ROOT_DIR/docs/paper_claims_map.md"
 
-grep -q "atlas_schema_version" "$ROOT_DIR/docs/reproducibility_appendix.md"
-grep -q "solver_version_raw" "$ROOT_DIR/docs/reproducibility_appendix.md"
-grep -q "Certificates/atlas/case_11111" "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -Fq '## Artifact policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -Fq '## `atlas_schema_version` policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -Fq '## Solver metadata policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
 
-grep -q "ATMS" "$ROOT_DIR/docs/related_work_notes.md"
-grep -q "MAXSAT" "$ROOT_DIR/docs/related_work_notes.md"
-grep -q "OMT" "$ROOT_DIR/docs/related_work_notes.md"
-grep -q "Constraint Hierarchies" "$ROOT_DIR/docs/related_work_notes.md"
+grep -Fq '## Positioning (short)' "$ROOT_DIR/docs/related_work_notes.md"
+grep -Fq '## Comparison matrix' "$ROOT_DIR/docs/related_work_notes.md"
+grep -Fq '## What we do not claim' "$ROOT_DIR/docs/related_work_notes.md"
 
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \

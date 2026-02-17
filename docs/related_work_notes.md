@@ -45,6 +45,16 @@ The repository keeps a transparent bridge:
 
 This semantics-aware chain is a key distinction from “opaque optimization run only” workflows.
 
+## MaxSAT/OMT triangulation policy in this repository
+
+We treat optimization tooling as a triangulation baseline, not as the primary claim axis. In Phase4-W4, `scripts/triangulate_repairs.py` compares axiom-level repair minima (`mcs_min_size`/`mcs_min_all`) against an independent optimum baseline (solver-backed brute-force by default, optional MaxSAT-style backend selection). This baseline answers "is the minimum repair size consistent with optimization?" while preserving our core artifact stack:
+
+- full inclusion-minimal repair sets (not only one optimum value),
+- proof-carrying UNSAT references checked in Lean,
+- validated non-trivial SAT rule cards.
+
+So the relationship to MAXSAT/OMT is complementary: optimization provides a check on optimum size/value, while atlas + MUS/MCS + proof-carrying outputs provide richer causal and audit artifacts.
+
 ## When not to use this framing
 
 - If the primary objective is high-dimensional objective optimization (not frontier mapping), MAXSAT/OMT-first may be a better fit.

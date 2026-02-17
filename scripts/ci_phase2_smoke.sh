@@ -8,6 +8,7 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
+REPAIRS_OUT="$TMP_DIR/atlas_repairs"
 EVAL_OUT="$TMP_DIR/eval_smoke"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
@@ -62,6 +63,7 @@ grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
 
 python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -76,13 +78,13 @@ fi
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
   --prune none \
-  --case-masks 0,1,31 \
+  --case-masks 0,2,31 \
   --emit-proof unsat-only \
   --outdir "$OUT_DIR"
 
 test -f "$OUT_DIR/atlas.json"
 
-for case_id in case_00000 case_10000 case_11111; do
+for case_id in case_00000 case_01000 case_11111; do
   test -f "$OUT_DIR/$case_id/sen24.cnf"
   test -f "$OUT_DIR/$case_id/sen24.manifest.json"
   test -f "$OUT_DIR/$case_id/solver.log"
@@ -122,8 +124,8 @@ python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
   --fail-on-tautology
 
 python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
-  "$OUT_DIR/case_10000/sen24.cnf" \
-  --manifest "$OUT_DIR/case_10000/sen24.manifest.json" \
+  "$OUT_DIR/case_01000/sen24.cnf" \
+  --manifest "$OUT_DIR/case_01000/sen24.manifest.json" \
   --strict-duplicates \
   --fail-on-tautology
 
@@ -285,6 +287,68 @@ python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$PRUNE_OUT"
 test -s "$PRUNE_OUT/atlas_summary.md"
 grep -q "Symmetry classes" "$PRUNE_OUT/atlas_summary.md"
 
+python3 "$ROOT_DIR/scripts/run_atlas.py" \
+  --jobs 1 \
+  --prune none \
+  --emit-proof never \
+  --outdir "$REPAIRS_OUT"
+
+python3 "$ROOT_DIR/scripts/enumerate_repairs.py" \
+  --outdir "$REPAIRS_OUT"
+
+python3 - "$REPAIRS_OUT/atlas.json" <<'PY'
+import itertools
+import json
+import re
+import sys
+from pathlib import Path
+
+atlas_path = Path(sys.argv[1])
+atlas = json.loads(atlas_path.read_text())
+cases = atlas.get("cases", [])
+if int(atlas.get("cases_total", -1)) != 32:
+    raise SystemExit("repairs atlas must include 32 solved cases")
+case_by_mask = {int(c["mask_int"]): c for c in cases}
+width = len(atlas.get("axiom_universe", []))
+if width != 5:
+    raise SystemExit("expected 5 axioms for sen24 repair smoke check")
+
+unsat_cases = [c for c in cases if c.get("status") == "UNSAT" and bool(c.get("solved", False))]
+if not unsat_cases:
+    raise SystemExit("expected solved UNSAT cases for repair enumeration")
+
+for c in unsat_cases:
+    repairs = c.get("mcs_all")
+    if not isinstance(repairs, list) or not repairs:
+        raise SystemExit(f"UNSAT case missing non-empty mcs_all: {c.get('case_id')}")
+
+sample = unsat_cases[0]
+repairs = sample["mcs_all"]
+for repair in repairs:
+    remove_mask = int(repair["remove_mask_int"])
+    sat_mask = int(sample["mask_int"]) & ~remove_mask
+    sat_case = case_by_mask.get(sat_mask)
+    if sat_case is None or sat_case.get("status") != "SAT":
+        raise SystemExit("mcs_all contains non-SAT repair target")
+    idxs = [i for i in range(width) if (remove_mask >> i) & 1]
+    for r in range(len(idxs)):
+        for sub in itertools.combinations(idxs, r):
+            sub_mask = 0
+            for i in sub:
+                sub_mask |= 1 << i
+            sub_case = case_by_mask[int(sample["mask_int"]) & ~sub_mask]
+            if sub_case.get("status") != "UNSAT":
+                raise SystemExit("mcs_all minimality check failed in smoke validation")
+
+atlas_text = atlas_path.read_text()
+if "/Users/" in atlas_text:
+    raise SystemExit("repair atlas output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", atlas_text):
+    raise SystemExit("repair atlas output leaks Windows absolute path")
+
+print("repairs_ok", len(unsat_cases), "sample_case", sample.get("case_id"))
+PY
+
 python3 "$ROOT_DIR/scripts/eval_atlas.py" \
   --outdir "$EVAL_OUT" \
   --repeat 1 \
@@ -339,14 +403,14 @@ print("eval_meta_ok")
 PY
 
 python3 "$ROOT_DIR/scripts/build_sat_gallery.py" \
-  --atlas-outdir "$OUT_DIR" \
+  --atlas-outdir "$REPAIRS_OUT" \
   --top-k 2 \
   --min-k 1
 
-test -s "$OUT_DIR/gallery.json"
-test -s "$OUT_DIR/gallery.md"
+test -s "$REPAIRS_OUT/gallery.json"
+test -s "$REPAIRS_OUT/gallery.md"
 
-python3 - "$OUT_DIR/gallery.json" "$OUT_DIR/gallery.md" <<'PY'
+python3 - "$REPAIRS_OUT/gallery.json" "$REPAIRS_OUT/gallery.md" <<'PY'
 import json
 import re
 import sys
@@ -366,6 +430,11 @@ if not isinstance(entries, list) or len(entries) < 1:
 for entry in entries:
     if entry.get("model_validated") is not True:
         raise SystemExit(f"gallery entry not validated: {entry.get('case_id')}")
+    if entry.get("non_trivial") is not True:
+        raise SystemExit(f"gallery entry failed non-trivial filter: {entry.get('case_id')}")
+    report = entry.get("nontriviality_report", {})
+    if report.get("passes_non_triviality") is not True:
+        raise SystemExit(f"gallery entry missing nontriviality report pass: {entry.get('case_id')}")
     files = entry.get("files", {})
     for _, path in files.items():
         if path is None:
@@ -375,10 +444,21 @@ for entry in entries:
         if re.match(r"^[A-Za-z]:\\\\", str(path)):
             raise SystemExit("gallery file path must not use Windows absolute prefix")
 
+rule_card = entries[0].get("files", {}).get("rule_card_md")
+if not rule_card:
+    raise SystemExit("rule_card_md missing from first gallery entry")
+rule_card_path = Path(sys.argv[1]).parent / rule_card
+if not rule_card_path.exists() or rule_card_path.stat().st_size == 0:
+    raise SystemExit("rule_card.md missing or empty")
+rule_card_text = rule_card_path.read_text()
+for anchor in ("# Rule Card:", "## Key metrics", "## Profile witnesses"):
+    if anchor not in rule_card_text:
+        raise SystemExit(f"rule_card.md missing anchor: {anchor}")
+
 gallery_text = json.dumps(gallery, sort_keys=True)
-if "/Users/" in gallery_text or "/Users/" in gallery_md:
+if "/Users/" in gallery_text or "/Users/" in gallery_md or "/Users/" in rule_card_text:
     raise SystemExit("gallery output leaks '/Users/' absolute path")
-if re.search(r"[A-Za-z]:\\\\", gallery_text) or re.search(r"[A-Za-z]:\\\\", gallery_md):
+if re.search(r"[A-Za-z]:\\\\", gallery_text) or re.search(r"[A-Za-z]:\\\\", gallery_md) or re.search(r"[A-Za-z]:\\\\", rule_card_text):
     raise SystemExit("gallery output leaks Windows absolute path")
 
 print("gallery_ok", len(entries))

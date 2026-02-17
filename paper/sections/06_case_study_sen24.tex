@@ -24,3 +24,9 @@ For a fully solved atlas run (\texttt{--prune none}), axiom-level repair sets ar
 Each selected SAT gallery entry is accompanied by \texttt{rule\_card.md} and \texttt{rule\_card.tex},
 including non-triviality metrics and concrete profile witnesses. SAT assignments are checked with
 \texttt{scripts/validate\_sat\_witness.py} before rule cards are emitted.
+
+\paragraph{Triangulation and poset structure artifacts.}
+The optimization-side triangulation report is generated as \texttt{repair\_triangulation.md} via
+\texttt{scripts/triangulate\_repairs.py}, comparing independent optimum repair sizes against
+\texttt{mcs\_min\_size}/\texttt{mcs\_min\_all}. The frontier structure is rendered as a subset-poset/Hasse graph
+(\texttt{frontier\_hasse.dot} and \texttt{frontier\_hasse.png}) via \texttt{scripts/plot\_hasse\_frontier.py}.

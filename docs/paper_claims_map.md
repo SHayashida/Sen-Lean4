@@ -98,8 +98,28 @@ python3 scripts/run_atlas.py --outdir /tmp/atlas_c5 --jobs 4 --prune none && pyt
 
 - **Artifacts to inspect**:
   - `/tmp/atlas_c5/gallery.json`
-  - `/tmp/atlas_c5/gallery.md`
-  - `/tmp/atlas_c5/case_*/model.json`
+- `/tmp/atlas_c5/gallery.md`
+- `/tmp/atlas_c5/case_*/model.json`
+
+---
+
+## C6. Repair triangulation matches an independent optimum baseline
+
+- **Claim**: `mcs_min_size` / `mcs_min_all` from repair enumeration matches an independent optimum baseline computed by solver-backed triangulation.
+- **Evidence (fields/files)**:
+  - `scripts/enumerate_repairs.py` outputs: `cases[*].mcs_all`, `cases[*].mcs_min_size`, `cases[*].mcs_min_all`
+  - `scripts/triangulate_repairs.py` outputs: `repair_triangulation.json`, `repair_triangulation.md`
+  - verdict fields: `cases[*].compare.{size_match,set_match}`
+- **Canonical command**:
+
+```bash
+python3 scripts/run_atlas.py --outdir /tmp/atlas_c6 --jobs 4 --prune none && python3 scripts/enumerate_repairs.py --outdir /tmp/atlas_c6 && python3 scripts/triangulate_repairs.py --atlas-outdir /tmp/atlas_c6 --outdir /tmp/atlas_c6
+```
+
+- **Artifacts to inspect**:
+  - `/tmp/atlas_c6/atlas.json`
+  - `/tmp/atlas_c6/repair_triangulation.json`
+  - `/tmp/atlas_c6/repair_triangulation.md`
 
 ---
 

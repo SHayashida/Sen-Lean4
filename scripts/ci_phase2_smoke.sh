@@ -9,6 +9,8 @@ OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
 REPAIRS_OUT="$TMP_DIR/atlas_repairs"
+HASSE_OUT="$TMP_DIR/hasse_frontier"
+TRI_OUT="$TMP_DIR/triangulation"
 EVAL_OUT="$TMP_DIR/eval_smoke"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
@@ -37,6 +39,7 @@ grep -q '^## C2\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C3\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C4\.' "$ROOT_DIR/docs/paper_claims_map.md"
 grep -q '^## C5\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C6\.' "$ROOT_DIR/docs/paper_claims_map.md"
 
 grep -Fq '## Artifact policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
 grep -Fq '## `atlas_schema_version` policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
@@ -63,7 +66,9 @@ grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
 
 python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -347,6 +352,66 @@ if re.search(r"[A-Za-z]:\\\\", atlas_text):
     raise SystemExit("repair atlas output leaks Windows absolute path")
 
 print("repairs_ok", len(unsat_cases), "sample_case", sample.get("case_id"))
+PY
+
+python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" \
+  --atlas-outdir "$REPAIRS_OUT" \
+  --outdir "$HASSE_OUT" \
+  --format png \
+  --include-pruned false \
+  --show status
+
+test -s "$HASSE_OUT/frontier_hasse.dot"
+test -s "$HASSE_OUT/frontier_hasse.png"
+
+python3 - "$HASSE_OUT/frontier_hasse.dot" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+dot_text = Path(sys.argv[1]).read_text()
+nodes = set(re.findall(r'"(case_[01]{5})"\s+\[', dot_text))
+if len(nodes) != 32:
+    raise SystemExit(f"hasse dot must contain 32 case nodes, got {len(nodes)}")
+if "/Users/" in dot_text:
+    raise SystemExit("hasse dot leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", dot_text):
+    raise SystemExit("hasse dot leaks Windows absolute path")
+print("hasse_ok", len(nodes))
+PY
+
+python3 "$ROOT_DIR/scripts/triangulate_repairs.py" \
+  --atlas-outdir "$REPAIRS_OUT" \
+  --outdir "$TRI_OUT" \
+  --backend bruteforce
+
+test -s "$TRI_OUT/repair_triangulation.json"
+test -s "$TRI_OUT/repair_triangulation.md"
+
+python3 - "$TRI_OUT/repair_triangulation.json" "$TRI_OUT/repair_triangulation.md" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+obj = json.loads(Path(sys.argv[1]).read_text())
+cases = obj.get("cases", [])
+if not isinstance(cases, list) or not cases:
+    raise SystemExit("triangulation report has no case entries")
+for case in cases:
+    compare = case.get("compare", {})
+    if compare.get("size_match") is not True:
+        raise SystemExit(f"triangulation size mismatch: {case.get('case_id')}")
+    if compare.get("set_match") is not True:
+        raise SystemExit(f"triangulation set mismatch: {case.get('case_id')}")
+
+json_text = Path(sys.argv[1]).read_text()
+md_text = Path(sys.argv[2]).read_text()
+if "/Users/" in json_text or "/Users/" in md_text:
+    raise SystemExit("triangulation output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", json_text) or re.search(r"[A-Za-z]:\\\\", md_text):
+    raise SystemExit("triangulation output leaks Windows absolute path")
+print("triangulation_ok", len(cases))
 PY
 
 python3 "$ROOT_DIR/scripts/eval_atlas.py" \

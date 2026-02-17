@@ -17,10 +17,10 @@ For SAT examples, the gallery records deterministic ranking and witness-validati
 
 \paragraph{Reproducible repair tables.}
 For a fully solved atlas run (\texttt{--prune none}), axiom-level repair sets are enumerated with
-\texttt{scripts/enumerate\_repairs.py}. The resulting \texttt{mcs\_all}/\texttt{mcs\_min\_all} fields in
+\texttt{scripts/enumerate\_repairs.py}. The resulting \texttt{mcs\_all}, \texttt{mcs\_min\_size}, and \texttt{mcs\_min\_all} fields in
 \texttt{atlas.json} provide inclusion-minimal SAT repairs per UNSAT case.
 
-\paragraph{Validated SAT rule cards.}
+\paragraph{Validated non-trivial SAT rule cards.}
 Each selected SAT gallery entry is accompanied by \texttt{rule\_card.md} and \texttt{rule\_card.tex},
 including non-triviality metrics and concrete profile witnesses. SAT assignments are checked with
 \texttt{scripts/validate\_sat\_witness.py} before rule cards are emitted.

@@ -69,6 +69,7 @@ python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then

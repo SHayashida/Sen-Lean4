@@ -33,6 +33,13 @@ python3 scripts/eval_atlas.py --outdir /tmp/atlas_eval_paper --repeat 3 --jobs 4
 python3 scripts/plot_eval.py --eval-json /tmp/atlas_eval_paper/eval.json --outdir paper/figures/generated
 ```
 
+## Reproduce evidence bundle
+
+```bash
+python3 scripts/build_evidence_bundle.py --mode tiny --outdir /tmp/sen24_bundle_tiny --solver cadical --jobs 1
+python3 scripts/gen_paper_tables.py --atlas-outdir /tmp/sen24_bundle_tiny/atlas --outdir /tmp/sen24_bundle_tiny/paper/tables/generated
+```
+
 ## Public repo safety
 
 - Do not include local absolute paths, secrets, or private tokens in paper text or generated artifacts.

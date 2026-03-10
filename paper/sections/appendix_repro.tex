@@ -1,14 +1,15 @@
 \section{Reproducibility Appendix}
 
 \subsection{Claim-to-artifact map}
-Claims C1--C5 are mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+Claims C1--C6 are mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
 
 \begin{itemize}[leftmargin=*]
   \item \textbf{C1}: atlas frontier generation.
-  \item \textbf{C2}: MUS/MCS boundary explanation.
+  \item \textbf{C2}: one MUS and one small MCS candidate for boundary explanation.
   \item \textbf{C3}: proof-carrying UNSAT verification in Lean.
   \item \textbf{C4}: safety-guarded acceleration (symmetry/pruning).
   \item \textbf{C5}: SAT Gallery extraction with witness validation.
+  \item \textbf{C6}: full repair enumeration plus triangulation against an independent optimum baseline.
 \end{itemize}
 
 \begin{table}[h]
@@ -17,16 +18,20 @@ Claims C1--C5 are mapped to concrete commands and artifacts in \texttt{docs/pape
 \toprule
 Claim & Canonical command & Primary artifact \\
 \midrule
-C1 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} & \texttt{/tmp/atlas\_c1/atlas.json} \\
-C2 & \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json} \\
-C3 & \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/proof.lrat} \\
-C4 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --prune monotone --symmetry alts --symmetry-check --prune-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
-C5 & \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
+C1 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} \newline \texttt{python3 scripts/summarize\_atlas.py --outdir /tmp/atlas\_c1} & \texttt{/tmp/atlas\_c1/atlas.json} \\
+C2 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c2 --jobs 4 --prune none} \newline \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json}, \texttt{mcs.json} \\
+C3 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/proof.lrat} \\
+C4 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
+C5 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c5 --jobs 4 --prune none} \newline \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
+C6 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c6 --jobs 4 --prune none} \newline \texttt{python3 scripts/enumerate\_repairs.py --outdir /tmp/atlas\_c6} \newline \texttt{python3 scripts/triangulate\_repairs.py --atlas-outdir /tmp/atlas\_c6 --outdir /tmp/atlas\_c6} & \texttt{/tmp/atlas\_c6/repair\_triangulation.json} \\
 \bottomrule
 \end{tabular}
-\caption{Compact C1--C5 claim map with one canonical command per claim.}
+\caption{Compact C1--C6 claim map with one canonical command per claim.}
 \label{tab:claims-map}
 \end{table}
+
+For the sen24 acyclicity bridge used in the paper text, run:
+\texttt{python3 scripts/check\_acyclicity\_short\_cycles.py --json-out /tmp/sen24\_short\_cycles.json}.
 
 \subsection{Schema and metadata contracts}
 Reproducibility relies on versioned machine-readable outputs:

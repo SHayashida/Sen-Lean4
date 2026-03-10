@@ -1,6 +1,6 @@
 \section{System Design}
 
-The implementation follows four separable layers.
+The implementation follows four separable layers. The purpose of the split is not software modularity alone; it is to keep the trusted computing base (TCB) small and explicit.
 
 \paragraph{Spec.}
 Lean definitions capture relation primitives, axioms, and theorem statements for sen24.
@@ -14,4 +14,57 @@ External SAT solvers produce SAT models or UNSAT proof traces.
 \paragraph{Check.}
 Trusted checks include: (i) CNF audit scripts against the manifest contract, (ii) LRAT verification in Lean for committed UNSAT references, and (iii) SAT witness validation against CNF.
 
-This separation enables fast heuristic experimentation in Python while preserving proof-carrying trust guarantees in the checking layer.
+This separation enables fast heuristic experimentation in Python while preserving a narrow proof-carrying core in the checking layer.
+
+\subsection{Trust Model and Chain of Trust}
+
+Figure~\ref{fig:chain-of-trust} fixes what is trusted, what is not, and what kind of tampering is expected to be detectable.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.96\linewidth}{
+\small
+\textbf{Trusted semantics/checking.} Lean definitions and semantic theorems; the Lean kernel and \texttt{FromLRAT}; the independent sen24 auditor; committed artifact hashes.\\
+\textbf{Untrusted search/execution.} The external SAT solver, the Python encoder as an implementation artifact, the OS, and the filesystem.\\
+\textbf{Chain of trust.} Lean spec $\rightarrow$ audited DIMACS + manifest $\rightarrow$ untrusted SAT solving $\rightarrow$ LRAT/model outputs $\rightarrow$ Lean LRAT replay or SAT witness validation.\\
+\textbf{Detection surface.} CNF or manifest drift is exposed by hash mismatches and audit failure; LRAT tampering fails kernel checking; SAT model tampering fails witness validation; metadata tampering is not itself a proof failure but is auditable by replay against recorded hashes and commands.
+}}
+\caption{The sen24 trust model. Solvers are used for search, not as trusted decision or proof oracles.}
+\label{fig:chain-of-trust}
+\end{figure}
+
+\subsection{Proof, Audit, and Assumption}
+
+We make three distinct kinds of guarantee.
+
+\paragraph{Proof.}
+The semantic sen24 theorem is proved in Lean, and committed UNSAT references are replayed in Lean from LRAT. These statements depend on the Lean kernel rather than on the SAT solver.
+
+\paragraph{Audited invariant.}
+The DIMACS side is checked against a fixed sen24 schema: variable numbering, clause-family membership, manifest consistency, and hash linkage are reconstructed independently of the generator. For the rationality side, we also run a finite sen24 check showing that, under asymmetry on four alternatives, forbidding directed 3-cycles and 4-cycles is equivalent to acyclicity.
+
+\paragraph{Assumption.}
+We do not claim a fully mechanized encoding-correctness proof from Lean semantics to Python-generated CNF. The generator is trusted to implement the audited sen24 contract, and that contract is what reviewers can inspect and replay.
+
+\subsection{Claims, Artifacts, and Commands}
+
+Table~\ref{tab:claims-body} is the body-level claim map extracted from \texttt{docs/paper\_claims\_map.md}. Its purpose is to keep the paper-level claims tied to one canonical command and one primary artifact per claim.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.16\linewidth} p{0.43\linewidth} p{0.31\linewidth}}
+\toprule
+Claim & Canonical command & Primary artifact \\
+\midrule
+C1 frontier & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} \newline \texttt{python3 scripts/summarize\_atlas.py --outdir /tmp/atlas\_c1} & \texttt{/tmp/atlas\_c1/atlas.json} \\
+C2 one MUS + one small MCS & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c2 --jobs 4 --prune none} \newline \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json}, \texttt{mcs.json} \\
+C3 kernel-checked UNSAT & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/*} \\
+C4 guarded acceleration & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
+C5 validated SAT gallery & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c5 --jobs 4 --prune none} \newline \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
+C6 repair triangulation & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c6 --jobs 4 --prune none} \newline \texttt{python3 scripts/enumerate\_repairs.py --outdir /tmp/atlas\_c6} \newline \texttt{python3 scripts/triangulate\_repairs.py --atlas-outdir /tmp/atlas\_c6 --outdir /tmp/atlas\_c6} & \texttt{/tmp/atlas\_c6/repair\_triangulation.json} \\
+\bottomrule
+\end{tabular}
+\caption{Body-level claim-to-artifact-to-command map for the sen24 paper claims.}
+\label{tab:claims-body}
+\end{table}

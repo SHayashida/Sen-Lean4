@@ -37,6 +37,24 @@ Fallback behavior:
 
 - If probing fails, values may be `"unknown"`; this is explicit and auditable.
 
+## Trust model and guarantee boundary
+
+The repository uses three distinct guarantee layers.
+
+- Proof:
+  - `SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean` proves the semantic sen24 impossibility statement in Lean.
+  - `SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean` and `SocialChoiceAtlas/Sen/Atlas/Case11111.lean`
+    kernel-check committed LRAT certificates for exact DIMACS files.
+- Audited invariants:
+  - `scripts/check_sen24_cnf.py` checks the sen24 CNF schema independently of the generator.
+  - `scripts/check_acyclicity_short_cycles.py` exhaustively verifies that, on four alternatives and under
+    asymmetry, forbidding directed 3-cycles and 4-cycles is equivalent to `Acyclic`.
+  - manifests and per-artifact hashes make byte-level drift explicit.
+- Assumptions:
+  - the Python encoder is not fully proved correct in Lean;
+  - the OS, filesystem, and SAT solver are untrusted for correctness and are accepted only through audited
+    artifacts, replay, and kernel checking.
+
 ## Determinism notes
 
 - Monotone pruning uses sequential evaluation (even if `--jobs > 1` is passed, it is ignored with warning) to keep inference order deterministic.
@@ -50,6 +68,9 @@ Fallback behavior:
 # Phase1 baseline integrity
 ./scripts/ci_phase1.sh
 
+# Finite sen24 check for the short-cycle/acyclicity bridge
+python3 scripts/check_acyclicity_short_cycles.py --json-out /tmp/sen24_short_cycles.json
+
 # Phase2 smoke (atlas generation + checks + Lean case check)
 ./scripts/ci_phase2_smoke.sh
 
@@ -61,3 +82,4 @@ lake build SocialChoiceAtlas.Sen.Atlas.Case11111
 
 - Reproducibility is strongest for fixed sen24 scope and committed baseline artifacts.
 - Cross-platform solver packaging differences can change `solver_version_raw`; this is why both raw and normalized forms are stored.
+- Encoding correctness is an audit contract plus finite sen24 checks, not a fully mechanized semantics-to-CNF proof.

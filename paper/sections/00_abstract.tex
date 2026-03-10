@@ -1,6 +1,6 @@
 \begin{abstract}
-We present a proof-carrying, semantics-aware Possibility Atlas pipeline for computational social choice.
-The system treats axioms as engineering levers, enumerates SAT/UNSAT regions, extracts boundary explanations (MUS/MCS), and validates UNSAT evidence with LRAT plus Lean kernel checking.
-For SAT regions, we add a deterministic gallery extraction layer with solver-independent witness validation against CNF.
-Our scope is intentionally small (Sen base case: $n=2$, $m=4$), but the pipeline demonstrates reproducible artifact discipline, explicit safety assumptions for acceleration (monotone pruning and symmetry reduction), and paper-ready evaluation outputs.
+We present a verification-first Possibility Atlas pipeline for computational social choice.
+The contribution is not a new social-choice theorem, but a narrow chain of trust that turns SAT search into auditable evidence: Lean semantics and theorems on one side, DIMACS generation plus manifest auditing in the middle, and LRAT checked by the Lean kernel on the other.
+For the fixed Sen base case ($n=2$, $m=4$), the system enumerates SAT/UNSAT regions, extracts one MUS and one small MCS candidate for boundary explanation, and validates SAT witnesses independently of solver output strings.
+We state the guarantee boundary explicitly: semantic theorems and LRAT replay are proved in Lean, schema conformance is audited mechanically, and encoding correctness is claimed only up to audited sen24 invariants plus a finite check that short-cycle constraints coincide with acyclicity on four alternatives.
 \end{abstract}

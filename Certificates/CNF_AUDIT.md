@@ -83,13 +83,41 @@ Let `s[p,a,b]` be the Bool meaning “society strictly prefers `a` over `b` unde
 - record `p_var_range` and `aux_var_range`,
 - record `cnf_sha256` matching the CNF file.
 
-## 5) How to run the audit
+## 5) Guarantee boundary: proof vs audit vs assumption
+
+This repository does **not** claim a fully mechanized end-to-end proof that the
+Python encoder implements the Lean semantics for every clause family.
+Instead, the guarantee boundary is intentionally split as follows.
+
+**Proved in Lean**
+
+- `SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean` proves the semantic sen24 impossibility statement
+  (`UN ∧ MINLIB -> not SocialAcyclic`) on the fixed finite domain.
+- `SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean` checks the committed LRAT proof for the exact
+  bytes of `Certificates/sen24.cnf`, so the Lean kernel certifies UNSAT of that audited CNF instance.
+
+**Audited mechanically**
+
+- `scripts/check_sen24_cnf.py` reconstructs the sen24 schema independently of the generator and checks:
+  header counts, variable ranges, clause-family membership, manifest consistency, and CNF hash linkage.
+- `scripts/check_acyclicity_short_cycles.py` exhaustively checks the finite sen24 bridge used by the CNF:
+  on four alternatives, every asymmetric relation is acyclic iff it has no directed 3-cycle and no directed
+  4-cycle.
+
+**Assumed / outside the current proof boundary**
+
+- The Python generator itself is trusted to follow the audited sen24 schema contract.
+- The semantic reading of each clause family is justified by the auditor contract and finite checks above,
+  not by a full Lean proof of encoding correctness for arbitrary encoders or arbitrary `m`.
+
+## 6) How to run the audit
 
 1. Regenerate CNF + manifest:
    - `python3 scripts/gen_sen24_dimacs.py`
 2. Run the mechanical audit:
    - `python3 scripts/check_sen24_cnf.py Certificates/sen24.cnf --manifest Certificates/sen24.manifest.json`
-3. (Optional) regenerate LRAT and re-check in Lean:
+3. Run the sen24 short-cycle bridge check:
+   - `python3 scripts/check_acyclicity_short_cycles.py --json-out /tmp/sen24_short_cycles.json`
+4. (Optional) regenerate LRAT and re-check in Lean:
    - `cadical --lrat --no-binary Certificates/sen24.cnf Certificates/sen24.lrat`
    - `lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF`
-

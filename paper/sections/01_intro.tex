@@ -3,14 +3,13 @@
 Classical impossibility theorems explain why certain axiom sets cannot hold simultaneously, but engineering workflows also need the complementary question: \emph{which minimal lever changes restore feasibility}.
 This paper frames that question as an auditable systems problem.
 
-Our central thesis is practical: a small, proof-carrying atlas can already provide publishable insight if it couples (i) strict reproducibility, (ii) explicit safety assumptions, and (iii) boundary explanation artifacts.
-We operationalize this thesis in sen24 with five claim blocks (C1--C5) mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+Our central thesis is practical: a small, proof-carrying atlas can already provide publishable insight if it fixes one clear chain of trust.
+In this paper, the golden thread is \emph{auditable verification}: external SAT search is allowed to be heuristic and untrusted, but the final evidence must reduce either to Lean proofs or to replayable, independently audited artifacts.
+We operationalize this thesis in sen24 with claim blocks C1--C6 mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
 
-Contributions are systems-oriented:
+\paragraph{Big Three Contributions.}
 \begin{itemize}[leftmargin=*]
-  \item A Spec/Encode/Solve/Check architecture that keeps solver heuristics separate from trusted checking.
-  \item Frontier identification with MUS/MCS for UNSAT explanations.
-  \item Proof-carrying UNSAT workflow (CNF+LRAT+Lean).
-  \item SAT Gallery extraction with solver-independent witness validation.
-  \item Lightweight but strict reproducibility gates in CI.
+  \item \textbf{Hybrid verification architecture.} We separate Lean semantics and theorem statements from SAT search, then attach LRAT certificates so that final UNSAT claims are checked by the Lean kernel rather than trusted to the solver.
+  \item \textbf{Auditable CNF pipeline.} We pair DIMACS generation with manifests, independent auditing, clause-family invariants, and replay commands, so encoding drift is detectable instead of implicit.
+  \item \textbf{Sen24 as dual evidence.} The fixed base case provides both a constructive Lean-side impossibility witness and a committed proof-carrying UNSAT instance, giving one semantic proof path and one exhaustive certificate path for the same small scope.
 \end{itemize}

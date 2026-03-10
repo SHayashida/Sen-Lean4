@@ -1,6 +1,8 @@
 \begin{abstract}
-We present a verification-first Possibility Atlas pipeline for computational social choice.
-The contribution is not a new social-choice theorem, but a narrow chain of trust that turns SAT search into auditable evidence: Lean semantics and theorems on one side, DIMACS generation plus manifest auditing in the middle, and LRAT checked by the Lean kernel on the other.
-For the fixed Sen base case ($n=2$, $m=4$), the system enumerates SAT/UNSAT regions, extracts one MUS and one small MCS candidate for boundary explanation, and validates SAT witnesses independently of solver output strings.
-We state the guarantee boundary explicitly: semantic theorems and LRAT replay are proved in Lean, schema conformance is audited mechanically, and encoding correctness is claimed only up to audited sen24 invariants plus a finite check that short-cycle constraints coincide with acyclicity on four alternatives.
+We study impossibility analysis as an auditable search problem over axiom levers rather than as a claim of general theorem automation.
+Our target is the fixed Sen base case sen24 ($n=2$, $m=4$), where we build a small-scope possibility atlas that records which axiom combinations are SAT or UNSAT and ties each result to replayable evidence.
+The pipeline separates specification, encoding, solving, and checking: Lean fixes the semantic layer, Python emits DIMACS plus manifests, external SAT solvers search, LRAT traces are replayed in Lean for committed UNSAT references, and SAT models are checked independently by a witness validator.
+Within this scope, the atlas identifies the sen24 SAT/UNSAT boundary, explains boundary UNSAT cases by extracting one MUS and one small MCS candidate, and presents validated SAT rule examples through deterministic gallery and rule-card exports.
+To keep the trust model explicit, we distinguish proved facts, mechanically audited invariants, and remaining assumptions: semantic theorems and LRAT replay are proved in Lean; CNF schema conformance is audited; and the rationality-side short-cycle encoding is justified only for sen24 by a finite check showing that, under asymmetry on four alternatives, forbidding directed 3-cycles and 4-cycles coincides with acyclicity.
+The repository also packages commands, hashes, metadata, and paper-facing artifacts into a reproducible evidence bundle so that the sen24 frontier, boundary explanations, and SAT witnesses can be regenerated and audited without trusting the solver alone.
 \end{abstract}

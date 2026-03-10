@@ -1,10 +1,23 @@
 \section{Related Work and Positioning}
 
-Our position aligns with, but does not replace, existing lines of work:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Constraint Hierarchies}: prioritize conflicting constraints; we focus on explicit SAT/UNSAT atlas structure.
-  \item \textbf{ATMS}: track assumption consistency; we add proof-carrying audit artifacts and kernel-level checks.
-  \item \textbf{OMT/MAXSAT}: optimize objective values; we prioritize boundary explanation and reproducible verification contracts.
-\end{itemize}
+This paper sits in computational social choice, but its contribution is framed as a small-scope systems case study rather than as a new impossibility theorem or a general scaling result.
+The object of study is the sen24 feasibility boundary: which axiom-lever combinations are SAT or UNSAT, which boundary cases admit a concrete explanation, and which artifacts can be replayed and audited afterward.
+That emphasis on boundary identification, explicit evidence, and replayable outputs is what turns the case study into an AI/Systems contribution.
 
-The main differentiator is verification-first systems integration: semantics-aware encoding, manifest-audited generation, and proof-carrying checking.
+Constraint Hierarchies and Assumption-Based Truth Maintenance Systems are natural reference points because they both reason about conflicting constraints or assumptions.
+We differ from them in output and trust model.
+Our primary deliverable is not only a consistent assignment or a justification structure, but an auditable atlas whose cases are tied to concrete artifacts: frontier summaries, one MUS and one small MCS candidate for boundary explanation, committed proof-carrying UNSAT references, and validated SAT rule cards.
+In other words, we use conflicting-assumption structure to organize cause and repair, but we package the result as proof-/witness-carrying evidence rather than as inference bookkeeping alone.
+
+MAXSAT and OMT are also close neighbors because they can optimize soft-constraint violations or compute minimum relaxations.
+We do not position this paper as a replacement for those methods or as a speed comparison against them.
+Instead, the paper uses optimization-style reasoning only as a triangulation baseline for the stronger C6 stage: repair enumeration is compared against an independent optimum baseline, while the main contribution remains causal boundary mapping, MUS/MCS-style explanation at the paper's conservative claim level, and validated SAT witness artifacts.
+The difference matters because an optimum value alone does not provide the paper's central outputs: a reproducible frontier, explicit boundary explanations, and audit-ready rule artifacts.
+
+The systems angle is therefore not raw solving power but auditable integration.
+The repository fixes a chain from semantic specification to DIMACS generation, manifest auditing, SAT/UNSAT outputs, LRAT replay in Lean for committed UNSAT references, SAT witness validation, and reproducible paper-facing artifacts.
+Evidence bundles, schema/version fields, deterministic render paths, and CI-backed smoke checks are part of the contribution because they make the sen24 atlas inspectable by a reviewer without trusting the solver as the final authority.
+
+The scope remains intentionally narrow.
+We claim only a sen24 case study under a small-scope hypothesis, not a general account of arbitrary $n,m$, not a complete survey of social-choice theorem proving, and not a formal Lean proof of pruning or symmetry heuristics.
+The value of the paper is that even under those limits, an auditable possibility atlas can connect boundary, cause, repair, and witness in a form that is useful for verified, AI-assisted rule design.

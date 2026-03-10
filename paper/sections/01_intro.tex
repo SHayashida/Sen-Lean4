@@ -1,28 +1,29 @@
 \section{Introduction}
 
-Classical impossibility theorems explain why certain axiom sets cannot hold simultaneously, but engineering workflows also need the complementary question: \emph{which minimal lever changes restore feasibility}.
-This paper frames that question as an auditable systems problem.
+Classical impossibility theorems identify combinations of axioms that cannot be satisfied simultaneously, but they do not by themselves answer the engineering question that follows: if a design is impossible, \emph{which lever changes restore feasibility, and what evidence should we trust when we make that change}?
+This paper studies that question in AI/Systems terms by treating axioms as explicit levers, enumerating a small design space, and recording the SAT/UNSAT boundary together with auditable evidence for each outcome.
 
-Our central thesis is practical: a small, proof-carrying atlas can already provide publishable insight if it fixes one clear chain of trust.
-In this paper, the golden thread is \emph{auditable verification}: external SAT search is allowed to be heuristic and untrusted, but the final evidence must reduce either to Lean proofs or to replayable, independently audited artifacts.
-We operationalize this thesis in sen24 with claim blocks C1--C6 mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+Modern solvers and optimization tools are essential for this search, but they are not the whole story.
+They can optimize, check consistency, or produce candidate repairs, yet a paper-ready result also needs a clear boundary map, an explanation of why boundary cases fail, concrete SAT witnesses for feasible designs, and a chain of trust that does not collapse to ``the solver said so.''
+Our contribution is therefore an \emph{auditable possibility atlas}: a small-scope record of boundary, cause, repair, and witness artifacts whose proof obligations and audit obligations are stated separately.
+This matters in practice because AI-assisted institutional design needs proof-/witness-carrying decision artifacts, not only optimized outputs.
 
-\paragraph{Big Three Contributions.}
+The paper-level contribution ladder follows the official claims map exactly:
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Hybrid verification architecture.} We separate Lean semantics and theorem statements from SAT search, then attach LRAT certificates so that final UNSAT claims are checked by the Lean kernel rather than trusted to the solver.
-  \item \textbf{Auditable CNF pipeline.} We pair DIMACS generation with manifests, independent auditing, clause-family invariants, and replay commands, so encoding drift is detectable instead of implicit.
-  \item \textbf{Sen24 as dual evidence.} The fixed base case provides both a constructive Lean-side impossibility witness and a committed proof-carrying UNSAT instance, giving one semantic proof path and one exhaustive certificate path for the same small scope.
-\end{itemize}
-
-\paragraph{Official Claim Ladder.}
-The paper-level claims follow the current official map exactly:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{C1}: sen24 axiom-lever enumeration yields a reproducible SAT/UNSAT frontier.
-  \item \textbf{C2}: UNSAT boundary cases are explainable via one MUS and one small MCS candidate.
-  \item \textbf{C3}: UNSAT evidence can be attached as LRAT and checked in Lean.
-  \item \textbf{C4}: symmetry reduction and monotone pruning are used only under explicit assumptions and runtime validators.
-  \item \textbf{C5}: relaxed SAT cases yield a deterministic, auditable gallery with explicit SAT witness validation.
+  \item \textbf{C1}: for sen24, axiom-lever enumeration yields a reproducible SAT/UNSAT frontier;
+  \item \textbf{C2}: UNSAT boundary cases are explainable via one MUS and one small MCS candidate;
+  \item \textbf{C3}: UNSAT evidence can be attached as LRAT and checked in Lean;
+  \item \textbf{C4}: symmetry reduction and monotone pruning are guarded by explicit assumptions and runtime validators;
+  \item \textbf{C5}: relaxed SAT cases can be filtered into a deterministic, auditable gallery with explicit SAT witness validation;
   \item \textbf{C6}: repair enumeration is checked against an independent optimum baseline by triangulation.
 \end{itemize}
 
-This ladder is intentionally conservative. It distinguishes what the repository can produce from what each revision re-verifies, and it does not broaden sen24 evidence into a claim about arbitrary $n,m$.
+The stance of the paper is deliberately narrow.
+We work only at sen24, we treat auditability as the primary systems requirement, and we do not promote small-scope evidence into a claim about arbitrary $n,m$ or a fully mechanized encoding-correctness theorem for the Python generator.
+The goal is to show that a killable instance can still support a meaningful proof-/witness-carrying atlas when the trusted computing base and guarantee boundary are made explicit.
+
+Section~3 defines the trust model and the proof/audit/assumption split.
+Section~4 describes the sen24 encoding and the paper-facing artifact contract.
+Section~5 reports the claim-by-claim evidence checklist and re-verification status for this revision.
+Section~6 presents the sen24 case study, including frontier artifacts, one MUS plus one small MCS candidate, validated SAT rule cards, and the stronger C6 repair triangulation stage.
+Section~8 closes with the scope limits that keep the paper honest.

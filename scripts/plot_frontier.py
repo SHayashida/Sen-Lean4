@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import argparse
-import base64
 import json
+import struct
+import zlib
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -54,10 +55,14 @@ def _matrix(values: list[int], cols: int = 8, fill: int = 0) -> list[list[int]]:
 
 
 def _write_placeholder_png(path: Path) -> None:
-    one_pixel_png = base64.b64decode(
-        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO3Zf90AAAAASUVORK5CYII="
-    )
-    path.write_bytes(one_pixel_png)
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        crc = zlib.crc32(tag + data) & 0xFFFFFFFF
+        return struct.pack("!I", len(data)) + tag + data + struct.pack("!I", crc)
+
+    ihdr = struct.pack("!IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+    idat = zlib.compress(b"\x00\xff\xff\xff")
+    png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")
+    path.write_bytes(png)
 
 
 def _validate_atlas(atlas: dict[str, Any]) -> list[dict[str, Any]]:

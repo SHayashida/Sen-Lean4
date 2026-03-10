@@ -7,6 +7,7 @@ This directory contains a public LaTeX skeleton for the AI/Systems-first paper f
 From repository root:
 
 ```bash
+python3 scripts/render_paper_assets.py --mode tiny
 make -C paper pdf
 ```
 
@@ -14,30 +15,43 @@ Output PDF and auxiliary files are written under `paper/build/`.
 
 ## Reproduce figures
 
-1. Generate atlas data (example):
+Regenerate the paper-facing frontier figures directly:
 
 ```bash
-python3 scripts/run_atlas.py --outdir /tmp/atlas_phase4_paper --jobs 4 --prune none
+python3 scripts/render_paper_assets.py --mode tiny
 ```
 
-2. Generate frontier figures:
+This writes:
+
+- `paper/figures/generated/frontier_matrix.png`
+- `paper/figures/generated/frontier_boundary.png`
+- `paper/figures/generated/frontier_hasse.dot`
+- `paper/figures/generated/frontier_hasse.png`
+
+## Paper Assets
+
+Canonical reviewer path:
 
 ```bash
-python3 scripts/plot_frontier.py --atlas-outdir /tmp/atlas_phase4_paper --outdir paper/figures/generated --format png
+python3 scripts/render_paper_assets.py --mode tiny
 ```
 
-3. (Optional) Generate evaluation figures:
+Canonical paper-ready path:
 
 ```bash
-python3 scripts/eval_atlas.py --outdir /tmp/atlas_eval_paper --repeat 3 --jobs 4
-python3 scripts/plot_eval.py --eval-json /tmp/atlas_eval_paper/eval.json --outdir paper/figures/generated
+python3 scripts/render_paper_assets.py --mode full
 ```
 
-## Reproduce evidence bundle
+If an existing atlas already contains gallery, triangulation, baseline, and rule-card outputs, reuse it:
 
 ```bash
-python3 scripts/build_evidence_bundle.py --mode tiny --outdir /tmp/sen24_bundle_tiny --solver cadical --jobs 1
-python3 scripts/gen_paper_tables.py --atlas-outdir /tmp/sen24_bundle_tiny/atlas --outdir /tmp/sen24_bundle_tiny/paper/tables/generated
+python3 scripts/render_paper_assets.py --mode tiny --atlas-outdir results/paper_assets/tiny_bundle/atlas
+```
+
+The artifact contract is fixed in:
+
+```bash
+docs/paper_artifact_contract.md
 ```
 
 ## Public repo safety

@@ -14,9 +14,11 @@ TRI_OUT="$TMP_DIR/triangulation"
 EVAL_OUT="$TMP_DIR/eval_smoke"
 BUNDLE_OUT="$TMP_DIR/evidence_bundle"
 BUNDLE_OUT_2="$TMP_DIR/evidence_bundle_2"
+PAPER_ASSETS_OUT="$TMP_DIR/paper_assets"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
+test -f "$ROOT_DIR/docs/paper_artifact_contract.md"
 test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
 test -f "$ROOT_DIR/docs/public_repo_security.md"
 test -f "$ROOT_DIR/docs/evaluation_plan.md"
@@ -80,6 +82,7 @@ python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/maxsat_baseline.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/gen_paper_tables.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -629,4 +632,33 @@ h2 = sha256(b2)
 if h1 != h2:
     raise SystemExit(f"determinism failed: {h1} != {h2}")
 print("bundle_deterministic_ok", h1)
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT"
+
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.dot"
+test -s "$PAPER_ASSETS_OUT/tables/generated/repairs_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/gallery_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/triangulation_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/selected_rule_card.tex"
+
+python3 - "$PAPER_ASSETS_OUT" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+text_suffixes = {".tex", ".json", ".md", ".dot"}
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in text_suffixes):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_ok")
 PY

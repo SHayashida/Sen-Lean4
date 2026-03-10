@@ -91,7 +91,7 @@ def _build_repairs_table(cases: list[dict[str, Any]]) -> list[str]:
     lines.append(r"\small")
     lines.append(r"\begin{tabular}{lrrrrr}")
     lines.append(r"\toprule")
-    lines.append(r"Case & MUS & MCS$_\min$ & $|$MCS$_\min|$ & Orbit & Solved \\")
+    lines.append(r"Case & MUS & MCS$_{\min}$ & Count(MCS$_{\min}$) & Orbit & Solved \\")
     lines.append(r"\midrule")
     if not unsat_cases:
         lines.append(r"(none) & -- & -- & -- & -- & -- \\")
@@ -164,7 +164,7 @@ def _build_triangulation_table(triangulation: dict[str, Any], baseline: dict[str
     lines.append(r"\small")
     lines.append(r"\begin{tabular}{lrrrrr}")
     lines.append(r"\toprule")
-    lines.append(r"Case & OptDrop & MCS$_\min$ & Baseline$_\min$ & SizeMatch & SetMatch \\")
+    lines.append(r"Case & OptDrop & MCS$_{\min}$ & Baseline$_{\min}$ & SizeMatch & SetMatch \\")
     lines.append(r"\midrule")
     if not tri_cases:
         if baseline_case:

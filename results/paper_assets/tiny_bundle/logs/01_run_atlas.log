@@ -1,0 +1,6 @@
+command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/run_atlas.py' --outdir '<bundle_outdir>/atlas' --solver cadical --jobs 1 --prune none --symmetry none --emit-proof unsat-only --case-masks 0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23
+return_code: 0
+duration_sec: 0.662860
+----- STDOUT -----
+Wrote results/paper_assets/tiny_bundle/atlas/atlas.json
+----- STDERR -----

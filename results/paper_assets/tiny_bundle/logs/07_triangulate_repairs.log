@@ -1,0 +1,7 @@
+command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/triangulate_repairs.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/atlas' --backend bruteforce --solver cadical
+return_code: 0
+duration_sec: 0.260594
+----- STDOUT -----
+Wrote results/paper_assets/tiny_bundle/atlas/repair_triangulation.json
+Wrote results/paper_assets/tiny_bundle/atlas/repair_triangulation.md
+----- STDERR -----

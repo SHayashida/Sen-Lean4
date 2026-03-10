@@ -1,0 +1,6 @@
+command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/mus_mcs.py' --outdir '<bundle_outdir>/atlas' --solver cadical --max-pair-trials 20
+return_code: 0
+duration_sec: 0.054708
+----- STDOUT -----
+Wrote results/paper_assets/tiny_bundle/atlas/atlas.json
+----- STDERR -----

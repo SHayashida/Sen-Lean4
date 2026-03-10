@@ -1,0 +1,7 @@
+command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/plot_frontier.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/figures/generated' --format png
+return_code: 0
+duration_sec: 0.028873
+----- STDOUT -----
+Wrote results/paper_assets/tiny_bundle/paper/figures/generated/frontier_matrix.png
+Wrote results/paper_assets/tiny_bundle/paper/figures/generated/frontier_boundary.png
+----- STDERR -----

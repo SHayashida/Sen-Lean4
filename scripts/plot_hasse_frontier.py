@@ -2,10 +2,11 @@
 from __future__ import annotations
 
 import argparse
-import base64
 import json
 import shutil
+import struct
 import subprocess
+import zlib
 from pathlib import Path
 from typing import Any
 
@@ -69,10 +70,14 @@ def _escape_dot_label(text: str) -> str:
 
 def _write_placeholder(path: Path, fmt: str) -> None:
     if fmt == "png":
-        one_pixel_png = base64.b64decode(
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO3Zf90AAAAASUVORK5CYII="
-        )
-        path.write_bytes(one_pixel_png)
+        def chunk(tag: bytes, data: bytes) -> bytes:
+            crc = zlib.crc32(tag + data) & 0xFFFFFFFF
+            return struct.pack("!I", len(data)) + tag + data + struct.pack("!I", crc)
+
+        ihdr = struct.pack("!IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+        idat = zlib.compress(b"\x00\xff\xff\xff")
+        png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")
+        path.write_bytes(png)
         return
     if fmt == "svg":
         path.write_text(

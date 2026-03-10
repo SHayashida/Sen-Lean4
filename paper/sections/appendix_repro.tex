@@ -30,8 +30,33 @@ C6 & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c6 --jobs 4 --pr
 \label{tab:claims-map}
 \end{table}
 
+\subsection{Verification status in this revision}
+In Table~\ref{tab:verification-status}, ``Repo-capable'' means the repository contains the machinery and documented artifacts for the check. ``Re-verified now'' means the command was actually re-run in this revision.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{p{0.17\linewidth} p{0.08\linewidth} p{0.11\linewidth} p{0.28\linewidth} p{0.28\linewidth}}
+\toprule
+Check / artifact & Repo-capable & Re-verified now & Command & Expected artifact(s) \\
+\midrule
+sen24 acyclicity finite check & Yes & Yes & \texttt{python3 scripts/check\_acyclicity\_short\_cycles.py --json-out results/verification/sen24\_short\_cycles.json} & \texttt{results/verification/sen24\_short\_cycles.json} \\
+Phase1 baseline audit + Lean replay & Yes & Yes & \texttt{./scripts/ci\_phase1.sh} & phase1 CNF audit outputs; Lean build for \texttt{SATSenCNF} \\
+Paper PDF build & Yes & Yes & \texttt{make -C paper pdf} & \texttt{paper/build/main.pdf} \\
+Phase2 smoke harness & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & smoke atlas, symmetry/prune checks, repair outputs, gallery outputs, bundle outputs \\
+Tiny evidence bundle & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & \texttt{bundle.json}; generated figures and paper tables in the tiny bundle \\
+Full sen24 atlas (\texttt{--prune none}) & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & 32-case \texttt{atlas.json} used for repair and gallery smoke checks \\
+Full repair enumeration + triangulation & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & \texttt{mcs\_all}; \texttt{repair\_triangulation.json}; \texttt{repair\_triangulation.md} \\
+SAT gallery + rule cards & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & \texttt{gallery.json}; \texttt{gallery.md}; per-case \texttt{rule\_card.md}/\texttt{.tex} \\
+Committed Lean proof case \texttt{case\_11111} & Yes & Yes & \texttt{./scripts/ci\_phase2\_smoke.sh} & committed proof-carrying case plus \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} \\
+\bottomrule
+\end{tabular}
+\caption{Verification accounting for this revision. Status is marked ``Yes'' only when the command was actually re-run now.}
+\label{tab:verification-status}
+\end{table}
+
 For the sen24 acyclicity bridge used in the paper text, run:
-\texttt{python3 scripts/check\_acyclicity\_short\_cycles.py --json-out /tmp/sen24\_short\_cycles.json}.
+\texttt{python3 scripts/check\_acyclicity\_short\_cycles.py --json-out results/verification/sen24\_short\_cycles.json}.
 
 \subsection{Schema and metadata contracts}
 Reproducibility relies on versioned machine-readable outputs:

@@ -13,3 +13,16 @@ We operationalize this thesis in sen24 with claim blocks C1--C6 mapped to concre
   \item \textbf{Auditable CNF pipeline.} We pair DIMACS generation with manifests, independent auditing, clause-family invariants, and replay commands, so encoding drift is detectable instead of implicit.
   \item \textbf{Sen24 as dual evidence.} The fixed base case provides both a constructive Lean-side impossibility witness and a committed proof-carrying UNSAT instance, giving one semantic proof path and one exhaustive certificate path for the same small scope.
 \end{itemize}
+
+\paragraph{Official Claim Ladder.}
+The paper-level claims follow the current official map exactly:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{C1}: sen24 axiom-lever enumeration yields a reproducible SAT/UNSAT frontier.
+  \item \textbf{C2}: UNSAT boundary cases are explainable via one MUS and one small MCS candidate.
+  \item \textbf{C3}: UNSAT evidence can be attached as LRAT and checked in Lean.
+  \item \textbf{C4}: symmetry reduction and monotone pruning are used only under explicit assumptions and runtime validators.
+  \item \textbf{C5}: relaxed SAT cases yield a deterministic, auditable gallery with explicit SAT witness validation.
+  \item \textbf{C6}: repair enumeration is checked against an independent optimum baseline by triangulation.
+\end{itemize}
+
+This ladder is intentionally conservative. It distinguishes what the repository can produce from what each revision re-verifies, and it does not broaden sen24 evidence into a claim about arbitrary $n,m$.

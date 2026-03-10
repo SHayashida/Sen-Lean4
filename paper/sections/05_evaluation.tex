@@ -1,28 +1,29 @@
 \section{Evaluation}
 
-Evaluation is driven by the harness in \texttt{scripts/eval\_atlas.py}, which repeats a fixed configuration grid and stores run-level metrics in \texttt{eval.json}/\texttt{eval.csv}.
+This section is organized as a claim-by-claim evidence checklist rather than a fresh benchmark report.
+The goal of the current revision is to state, for each official claim C1--C6, which artifact supports it and what was actually re-verified now.
+The runtime harness in \texttt{scripts/eval\_atlas.py} was re-run at smoke scope inside \texttt{./scripts/ci\_phase2\_smoke.sh}, but it is used here only as a sanity check on metadata and plotting, not as a new performance claim.
 
-\subsection{Configuration grid}
-We compare four modes: no symmetry/no pruning, symmetry only, pruning only, and symmetry plus pruning.
+\paragraph{C1: reproducible frontier generation.}
+Primary support comes from \texttt{scripts/run\_atlas.py}, \texttt{atlas.json}, \texttt{atlas\_summary.md}, and per-case \texttt{summary.json}.
+This revision re-verified C1 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which re-runs a full 32-case sen24 atlas in the repair smoke path and checks the resulting frontier artifacts.
 
-\subsection{Metrics}
-Core metrics include wall-clock runtime, solved-vs-inferred case counts, equivalence-class statistics, proof coverage, MUS sizes, and SAT triviality indicators.
+\paragraph{C2: one MUS and one small MCS candidate.}
+Primary support comes from \texttt{scripts/mus\_mcs.py} and the embedded \texttt{mus}/\texttt{mcs} fields in \texttt{atlas.json}.
+This revision re-verified the smoke-scope version of C2 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which regenerates \texttt{mus.json} and \texttt{mcs.json} for the committed UNSAT boundary case \texttt{case\_11111}.
 
-\subsection{Figure placeholders}
-Figure generation scripts produce runtime and frontier views directly from machine-readable outputs.
+\paragraph{C3: proof-carrying UNSAT.}
+Primary support comes from the committed reference \texttt{Certificates/atlas/case\_11111/\{sen24.cnf,proof.lrat\}}, the Lean target \texttt{SocialChoiceAtlas.Sen.Atlas.Case11111}, and proof metadata in regenerated summaries.
+This revision re-verified C3 through both \texttt{./scripts/ci\_phase1.sh} and \texttt{./scripts/ci\_phase2\_smoke.sh}, which rebuild Lean proof targets and check the committed proof-carrying case.
 
-\begin{table}[t]
-\centering
-\begin{tabular}{lrrrr}
-\toprule
-Config & Runtime (s) & Solved & Inferred & UNSAT \\
-\midrule
-none\_none & TODO & TODO & TODO & TODO \\
-alts\_none & TODO & TODO & TODO & TODO \\
-none\_monotone & TODO & TODO & TODO & TODO \\
-alts\_monotone & TODO & TODO & TODO & TODO \\
-\bottomrule
-\end{tabular}
-\caption{Evaluation summary placeholder populated from \texttt{eval.csv}.}
-\label{tab:eval}
-\end{table}
+\paragraph{C4: guarded symmetry reduction and monotone pruning.}
+Primary support comes from \texttt{docs/assumptions\_monotone\_pruning.md}, \texttt{docs/safety\_symmetry\_reduction.md}, and the runtime guardrail fields in \texttt{atlas.json}.
+This revision re-verified C4 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which executes both symmetry-checked and prune-checked atlas runs and validates their metadata.
+
+\paragraph{C5: auditable SAT gallery.}
+Primary support comes from \texttt{scripts/build\_sat\_gallery.py}, \texttt{gallery.json}, \texttt{gallery.md}, per-case \texttt{rule\_card.md}/\texttt{rule\_card.tex}, and embedded SAT witness-validation statistics.
+This revision re-verified C5 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which rebuilds a small gallery, checks that selected entries are non-trivial and validated, and confirms that rule-card artifacts exist.
+
+\paragraph{C6: repair triangulation against an independent optimum baseline.}
+Primary support comes from \texttt{scripts/enumerate\_repairs.py}, \texttt{scripts/triangulate\_repairs.py}, \texttt{repair\_triangulation.json}, and the comparison fields \texttt{size\_match}/\texttt{set\_match}.
+This revision re-verified C6 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which re-runs full repair enumeration and triangulation on a solved 32-case sen24 atlas.

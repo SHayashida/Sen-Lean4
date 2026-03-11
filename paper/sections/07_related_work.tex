@@ -1,7 +1,7 @@
 \section{Related Work and Positioning}
 
 The closest prior context is SAT-based computational social choice.
-That line already showed that SAT solving can be used to prove impossibility results, search for axiomatizations, and discover proofs in small finite domains; it includes the style associated with Tang and Lin, later automated exploration and proof discovery by Geist and Endriss \citep{geist2011automated}, and MUS-oriented explanation work associated with Brandt and Geist.
+That line already showed that SAT solving can be used to prove impossibility results, search for axiomatizations, and discover proofs in small finite domains; it includes impossibility proving by Tang and Lin \citep{tanglin2009computer}, later automated exploration and proof discovery by Geist and Endriss \citep{geist2011automated}, and later SAT-based synthesis work by Brandt and Geist \citep{brandtgeist2016strategyproof}.
 Our paper does not claim novelty for ``using SAT in social choice,'' for extracting contradictions, or for small-scope automated theorem search by itself.
 Its narrower contribution is to package one fixed sen24 search workflow as an explicit auditable contract whose outputs are replayable artifacts rather than solver conclusions alone.
 
@@ -15,7 +15,7 @@ We differ from that tradition not by stronger proof checking, but by the way it 
 The central artifact is not a bare proof trace: it is an auditable atlas with a reproducible frontier, one MUS and one small MCS candidate for boundary explanation, committed proof-carrying UNSAT references, validated SAT rule cards, stronger repair triangulation as a separate stage, and explicit commands and hashes for replay.
 The value of the package is that a reviewer can inspect where kernel-checked proof ends, where mechanical auditing begins, and where assumptions remain.
 
-Constraint Hierarchies, ATMS, MAXSAT, and OMT remain relevant only as secondary contrasts.
+Constraint Hierarchies, ATMS, MAXSAT, and OMT remain relevant only as secondary contrasts \citep{borning1992constraint,dekleer1986atms,bacchus2021maxsat,sebastiani2015omt}.
 They reason about conflicting constraints, consistency under assumptions, or optimal relaxations, and they are useful reference points for the repair side of the story.
 But this paper does not position itself as a replacement for them or as a speed comparison against them.
 Their role here is narrower: optimization-style reasoning appears as the independent triangulation baseline for C6, whereas the main contribution remains auditable boundary mapping, conservative MUS/MCS explanation, and replayable SAT/UNSAT evidence artifacts.

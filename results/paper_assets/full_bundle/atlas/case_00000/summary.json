@@ -15,9 +15,9 @@
     "results/paper_assets/full_bundle/atlas/case_00000/sen24.cnf"
   ],
   "dry_run": false,
-  "duration_sec": 0.007041875000000003,
+  "duration_sec": 0.009235624999999997,
   "environment_info": {
-    "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
+    "git_commit": "07609341304a149de5f47660514ccee9f4d614a9",
     "platform": "macOS-15.6.1-arm64-arm-64bit",
     "python_version": "3.9.6"
   },

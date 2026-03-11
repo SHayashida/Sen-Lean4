@@ -1,6 +1,6 @@
 command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/maxsat_baseline.py' --atlas-outdir '<bundle_outdir>/atlas' --case-id case_11111 --solver cadical
 return_code: 0
-duration_sec: 0.079991
+duration_sec: 0.078912
 ----- STDOUT -----
 Wrote results/paper_assets/full_bundle/atlas/maxsat_baseline.json
 ----- STDERR -----

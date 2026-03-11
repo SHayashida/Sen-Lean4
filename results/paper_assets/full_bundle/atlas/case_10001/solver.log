@@ -3,7 +3,7 @@ attempt: 1
 with_proof: False
 command: cadical -w results/paper_assets/full_bundle/atlas/case_10001/model.txt results/paper_assets/full_bundle/atlas/case_10001/sen24.cnf
 return_code: 10
-duration_sec: 0.023068
+duration_sec: 0.027946
 ----- STDOUT -----
 c --- [ banner ] -------------------------------------------------------------
 c 
@@ -48,12 +48,12 @@ c
 c process time taken by individual solving procedures
 c (percentage relative to process time for solving)
 c 
-c         0.01 3303.25% parse
-c         0.00   78.57% lucky
-c         0.00   78.57% search
+c         0.01 2786.05% parse
+c         0.00   89.77% lucky
+c         0.00   89.77% search
 c         0.00    0.00% simplify
 c   =================================
-c         0.00    2.57% solve
+c         0.00    3.02% solve
 c 
 c last line shows process time for solving
 c (percentage relative to total process time)
@@ -88,7 +88,7 @@ c --- [ resources ] ----------------------------------------------------------
 c 
 c total process time since initialization:         0.01    seconds
 c total real time since initialization:            0.01    seconds
-c maximum resident set size of process:         5296.00    MB
+c maximum resident set size of process:         6064.00    MB
 c 
 c --- [ shutting down ] ------------------------------------------------------
 c 

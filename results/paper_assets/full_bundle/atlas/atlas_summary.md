@@ -16,7 +16,7 @@
 - solver_sha256: `eee5786b12f606ed94339c128156e568b523fa12a2e3870774d19a1b3725988e`
 - python_version: `3.9.6`
 - platform: `macOS-15.6.1-arm64-arm-64bit`
-- git_commit: `5d6f630b8632263c0d3abad25b2d6b54fa41fb04`
+- git_commit: `07609341304a149de5f47660514ccee9f4d614a9`
 
 ## Symmetry classes
 

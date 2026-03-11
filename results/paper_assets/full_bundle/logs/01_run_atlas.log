@@ -1,6 +1,6 @@
 command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/run_atlas.py' --outdir '<bundle_outdir>/atlas' --solver cadical --jobs 4 --prune none --symmetry none --emit-proof unsat-only
 return_code: 0
-duration_sec: 1.306255
+duration_sec: 1.448985
 ----- STDOUT -----
 Wrote results/paper_assets/full_bundle/atlas/atlas.json
 ----- STDERR -----

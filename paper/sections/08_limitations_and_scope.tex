@@ -7,14 +7,14 @@ The semantic scope is also fixed:
 \begin{itemize}[leftmargin=*]
   \item the domain is sen24 only;
   \item Universal Domain is represented by linear orders on four alternatives;
-  \item the \texttt{NO\_CYCLE3}/\texttt{NO\_CYCLE4} encoding is justified only through the sen24 finite Python check under asymmetry, not as a general replacement for \texttt{Acyclic} and not as a Lean proof of encoding correctness.
+  \item the \code{NO_CYCLE3}/\code{NO_CYCLE4} encoding is justified only through the sen24 finite Python check under asymmetry, not as a general replacement for \code{Acyclic} and not as a Lean proof of encoding correctness.
 \end{itemize}
 
 Safe acceleration features (monotone pruning and symmetry reduction) are only valid under explicit assumptions and runtime guards.
 These assumptions are specified in:
 \begin{itemize}[leftmargin=*]
-  \item \texttt{docs/assumptions\_monotone\_pruning.md}
-  \item \texttt{docs/safety\_symmetry\_reduction.md}
+  \item \code{docs/assumptions_monotone_pruning.md}
+  \item \code{docs/safety_symmetry_reduction.md}
 \end{itemize}
 
 Future work should expand scale only if the same proof/audit/assumption split remains explicit.

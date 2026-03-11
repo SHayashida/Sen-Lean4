@@ -26,7 +26,7 @@ Figure~\ref{fig:chain-of-trust} fixes what is trusted, what is not, and what kin
 \centering
 \fbox{\parbox{0.96\linewidth}{
 \small
-\textbf{Trusted semantics/checking.} Lean definitions and semantic theorems; the Lean kernel and \texttt{FromLRAT}; the independent sen24 auditor; committed artifact hashes.\\
+\textbf{Trusted semantics/checking.} Lean definitions and semantic theorems; the Lean kernel and \code{FromLRAT}; the independent sen24 auditor; committed artifact hashes.\\
 \textbf{Untrusted search/execution.} The external SAT solver, the Python encoder as an implementation artifact, the OS, and the filesystem.\\
 \textbf{Chain of trust.} Lean spec $\rightarrow$ audited DIMACS + manifest $\rightarrow$ untrusted SAT solving $\rightarrow$ LRAT/model outputs $\rightarrow$ Lean LRAT replay or SAT witness validation.\\
 \textbf{Detection surface.} CNF or manifest drift is exposed by hash mismatches and audit failure; LRAT tampering fails kernel checking; SAT model tampering fails witness validation; metadata tampering is not itself a proof failure but is auditable by replay against recorded hashes and commands.
@@ -68,21 +68,21 @@ None of the three clauses, by itself, proves full semantic equivalence between t
 
 \subsection{Claims, Artifacts, and Commands}
 
-Table~\ref{tab:claims-body} is the body-level claim map extracted from \texttt{docs/paper\_claims\_map.md}. Its purpose is to keep the paper-level claims tied to one canonical command and one primary artifact per claim.
+Table~\ref{tab:claims-body} is the body-level claim map extracted from \code{docs/paper_claims_map.md}. Its purpose is to keep the paper-level claims tied to one canonical command and one primary artifact per claim.
 
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{p{0.16\linewidth} p{0.43\linewidth} p{0.31\linewidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.16\linewidth} >{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}p{0.31\linewidth}}
 \toprule
 Claim & Canonical command & Primary artifact \\
 \midrule
-C1 frontier & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} \newline \texttt{python3 scripts/summarize\_atlas.py --outdir /tmp/atlas\_c1} & \texttt{/tmp/atlas\_c1/atlas.json} \\
-C2 one MUS + one small MCS & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c2 --jobs 4 --prune none} \newline \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json}, \texttt{mcs.json} \\
-C3 committed kernel-checked UNSAT & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/*} \\
-C4 guarded acceleration & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
-C5 validated SAT gallery & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c5 --jobs 4 --prune none} \newline \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
-C6 repair triangulation & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c6 --jobs 4 --prune none} \newline \texttt{python3 scripts/enumerate\_repairs.py --outdir /tmp/atlas\_c6} \newline \texttt{python3 scripts/triangulate\_repairs.py --atlas-outdir /tmp/atlas\_c6 --outdir /tmp/atlas\_c6} & \texttt{/tmp/atlas\_c6/repair\_triangulation.json} \\
+C1 frontier & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c1 --jobs 4 --prune none} \newline \code{python3 scripts/summarize_atlas.py --outdir /tmp/atlas_c1} & \code{/tmp/atlas_c1/atlas.json} \\
+C2 one MUS + one small MCS & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c2 --jobs 4 --prune none} \newline \code{python3 scripts/mus_mcs.py --outdir /tmp/atlas_c2} & \code{/tmp/atlas_c2/case_*/mus.json}, \code{mcs.json} \\
+C3 committed kernel-checked UNSAT & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \code{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \code{Certificates/atlas/case_11111/*} \\
+C4 guarded acceleration & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \code{/tmp/atlas_c4/atlas.json} \\
+C5 validated SAT gallery & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c5 --jobs 4 --prune none} \newline \code{python3 scripts/build_sat_gallery.py --atlas-outdir /tmp/atlas_c5 --top-k 5 --min-k 1} & \code{/tmp/atlas_c5/gallery.json} \\
+C6 repair triangulation & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c6 --jobs 4 --prune none} \newline \code{python3 scripts/enumerate_repairs.py --outdir /tmp/atlas_c6} \newline \code{python3 scripts/triangulate_repairs.py --atlas-outdir /tmp/atlas_c6 --outdir /tmp/atlas_c6} & \code{/tmp/atlas_c6/repair_triangulation.json} \\
 \bottomrule
 \end{tabular}
 \caption{Body-level claim-to-artifact-to-command map for the sen24 paper claims.}

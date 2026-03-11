@@ -3,26 +3,26 @@
 The sen24 atlas is the fixed case study where the paper's trust argument becomes concrete.
 It supplies two different but complementary evidence paths:
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Semantic path.} \texttt{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} proves the sen24 impossibility statement in Lean by constructing witness profiles that force 3-cycles or 4-cycles.
-  \item \textbf{Artifact path.} \texttt{SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean} replays an LRAT certificate for the committed DIMACS baseline, proving UNSAT of the audited CNF instance in the Lean kernel.
+  \item \textbf{Semantic path.} \code{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} proves the sen24 impossibility statement in Lean by constructing witness profiles that force 3-cycles or 4-cycles.
+  \item \textbf{Artifact path.} \code{SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean} replays an LRAT certificate for the committed DIMACS baseline, proving UNSAT of the audited CNF instance in the Lean kernel.
 \end{itemize}
 
 These paths are intentionally linked but not conflated. The semantic theorem is a statement about social-choice axioms. The LRAT replay is a statement about one concrete CNF artifact. The paper's chain of trust is the argument that these two forms of evidence are compatible under an explicit audit contract.
 Proposition~\ref{prop:sen24-contract} is the formal summary of that contract.
 
 \paragraph{Acyclicity bridge for four alternatives.}
-The main sen24-specific semantic gap is that the CNF uses \texttt{NO\_CYCLE3}/\texttt{NO\_CYCLE4}, while the Lean side uses \texttt{Acyclic}.
-We do not leave this implicit. The repository includes \texttt{scripts/check\_acyclicity\_short\_cycles.py}, which exhaustively checks all relations on the four-alternative domain and verifies that, under asymmetry, acyclicity is equivalent to the absence of directed 3-cycles and 4-cycles.
+The main sen24-specific semantic gap is that the CNF uses \code{NO_CYCLE3}/\code{NO_CYCLE4}, while the Lean side uses \code{Acyclic}.
+We do not leave this implicit. The repository includes \code{scripts/check_acyclicity_short_cycles.py}, which exhaustively checks all relations on the four-alternative domain and verifies that, under asymmetry, acyclicity is equivalent to the absence of directed 3-cycles and 4-cycles.
 This justifies the sen24 encoding choice without overclaiming a general theorem for arbitrary numbers of alternatives.
 
 \paragraph{Frontier structure (C1).}
-The case study cites generated assets fixed under \texttt{paper/figures/generated/} and \texttt{paper/tables/generated/}.
+The case study cites generated assets fixed under \code{paper/figures/generated/} and \code{paper/tables/generated/}.
 Figure~\ref{fig:sen24-frontier-matrix} shows the full sen24 SAT/UNSAT frontier, Figure~\ref{fig:sen24-frontier-structure} shows the boundary slice of the subset-poset/Hasse structure, and Table~\ref{tab:sen24-boundary-local} supports the narrower C2 boundary explanation.
 
 \begin{figure}[t]
 \centering
 \input{figures/generated/frontier_matrix.tex}
-\caption{Full 32-case sen24 frontier generated from \texttt{atlas.json}. Each cell records one axiom-lever combination and its SAT/UNSAT status. This figure supports the official C1 frontier claim; the statuses themselves are atlas artifacts, while proof-carrying replay is attached separately only to committed UNSAT references.}
+\caption{Full 32-case sen24 frontier generated from \code{atlas.json}. Each cell records one axiom-lever combination and its SAT/UNSAT status. This figure supports the official C1 frontier claim; the statuses themselves are atlas artifacts, while proof-carrying replay is attached separately only to committed UNSAT references.}
 \label{fig:sen24-frontier-matrix}
 \end{figure}
 
@@ -38,7 +38,7 @@ For SAT examples, the gallery records deterministic ranking and witness-validati
 
 \paragraph{UNSAT boundary explanation (C2).}
 The official C2 claim remains narrow: one MUS and one small MCS candidate per boundary case.
-In the paper, that claim is supported by the per-case \texttt{mus.json} / \texttt{mcs.json} artifacts and summarized in Table~\ref{tab:sen24-boundary-local}; it is not stated as full repair enumeration.
+In the paper, that claim is supported by the per-case \code{mus.json} / \code{mcs.json} artifacts and summarized in Table~\ref{tab:sen24-boundary-local}; it is not stated as full repair enumeration.
 
 \begin{table}[t]
 \centering
@@ -48,25 +48,25 @@ In the paper, that claim is supported by the per-case \texttt{mus.json} / \textt
 \end{table}
 
 \paragraph{Validated non-trivial SAT rule cards.}
-Each selected SAT gallery entry is accompanied by \texttt{rule\_card.md} and \texttt{rule\_card.tex},
+Each selected SAT gallery entry is accompanied by \code{rule_card.md} and \code{rule_card.tex},
 including non-triviality metrics and concrete profile witnesses. SAT assignments are checked with
-\texttt{scripts/validate\_sat\_witness.py} before rule cards are emitted.
+\code{scripts/validate_sat_witness.py} before rule cards are emitted.
 Table~\ref{tab:sen24-gallery} is the frozen paper-facing summary supporting the validated SAT-example part of the argument, and the selected rule-card export is fixed at
-\texttt{tables/generated/selected\_rule\_card.tex}.
+\code{tables/generated/selected_rule_card.tex}.
 
 \input{tables/generated/gallery_table.tex}
 
 \paragraph{Repair enumeration and triangulation (C6).}
 The stronger C6 stage begins only after the narrower C2 boundary explanation: a fully solved atlas run
-enumerates \texttt{mcs\_all}, \texttt{mcs\_min\_size}, and \texttt{mcs\_min\_all}, then compares those outputs against an independent optimum baseline by triangulation.
-The paper freezes these outputs as \texttt{repairs\_table.tex} and \texttt{triangulation\_table.tex}; the first reports the stronger repair enumeration output and the second reports the independent triangulation check.
+enumerates \code{mcs_all}, \code{mcs_min_size}, and \code{mcs_min_all}, then compares those outputs against an independent optimum baseline by triangulation.
+The paper freezes these outputs as \code{repairs_table.tex} and \code{triangulation_table.tex}; the first reports the stronger repair enumeration output and the second reports the independent triangulation check.
 
 \input{tables/generated/repairs_table.tex}
 
 \paragraph{Triangulation and poset structure artifacts.}
-The optimization-side triangulation report is generated as \texttt{repair\_triangulation.md} via
-\texttt{scripts/triangulate\_repairs.py}, comparing independent optimum repair sizes against
-\texttt{mcs\_min\_size}/\texttt{mcs\_min\_all}. The frontier structure is rendered as a subset-poset/Hasse graph
-(\texttt{frontier\_hasse.dot} and \texttt{frontier\_hasse.png}) via \texttt{scripts/plot\_hasse\_frontier.py}.
+The optimization-side triangulation report is generated as \code{repair_triangulation.md} via
+\code{scripts/triangulate_repairs.py}, comparing independent optimum repair sizes against
+\code{mcs_min_size}/\code{mcs_min_all}. The frontier structure is rendered as a subset-poset/Hasse graph
+(\code{frontier_hasse.dot} and \code{frontier_hasse.png}) via \code{scripts/plot_hasse_frontier.py}.
 
 \input{tables/generated/triangulation_table.tex}

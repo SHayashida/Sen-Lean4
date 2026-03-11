@@ -96,18 +96,20 @@ Instead, the guarantee boundary is intentionally split as follows.
 - `SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean` checks the committed LRAT proof for the exact
   bytes of `Certificates/sen24.cnf`, so the Lean kernel certifies UNSAT of that audited CNF instance.
 
-**Audited mechanically**
+**Audited mechanically (outside the Lean kernel)**
 
 - `scripts/check_sen24_cnf.py` reconstructs the sen24 schema independently of the generator and checks:
   header counts, variable ranges, clause-family membership, manifest consistency, and CNF hash linkage.
+  This certifies artifact-level schema conformance for the committed sen24 CNF family; it does not prove
+  that the Python encoder is semantically correct for every clause family.
 - `scripts/check_acyclicity_short_cycles.py` exhaustively checks the finite sen24 bridge used by the CNF:
   on four alternatives, every asymmetric relation is acyclic iff it has no directed 3-cycle and no directed
-  4-cycle.
+  4-cycle. This is a finite Python check for the exact sen24 domain, not a general theorem and not a Lean proof.
 
 **Assumed / outside the current proof boundary**
 
 - The Python generator itself is trusted to follow the audited sen24 schema contract.
-- The semantic reading of each clause family is justified by the auditor contract and finite checks above,
+- The semantic reading of each clause family is justified by the auditor contract and the sen24 finite checks above,
   not by a full Lean proof of encoding correctness for arbitrary encoders or arbitrary `m`.
 
 ## 6) How to run the audit

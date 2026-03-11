@@ -43,13 +43,13 @@ We separate three kinds of checked statement and one explicit assumption boundar
 The semantic sen24 theorem is proved in Lean, and committed UNSAT references are replayed in Lean from LRAT. These statements depend on the Lean kernel rather than on the SAT solver.
 
 \paragraph{Audited invariant.}
-The DIMACS side is checked against a fixed sen24 schema: variable numbering, clause-family membership, manifest consistency, and hash linkage are reconstructed independently of the generator. For the rationality side, we also run a finite sen24 check showing that, under asymmetry on four alternatives, forbidding directed 3-cycles and 4-cycles is equivalent to acyclicity.
+The DIMACS side is checked against a fixed sen24 schema: variable numbering, clause-family membership, manifest consistency, and hash linkage are reconstructed independently of the generator. For the rationality side, we also run a finite sen24 Python check showing that, under asymmetry on four alternatives, forbidding directed 3-cycles and 4-cycles is equivalent to acyclicity. This bridge is an audited finite-domain fact for sen24, not a Lean theorem and not an end-to-end encoding-correctness result.
 
 \paragraph{Witness validation.}
 Reported SAT rules are checked at the artifact level: the witness validator confirms that a concrete model satisfies a concrete CNF instance, but this is not a semantic proof of the rule beyond that instance.
 
 \paragraph{Assumption.}
-We do not claim a fully mechanized encoding-correctness proof from Lean semantics to Python-generated CNF. The generator is trusted to implement the audited sen24 contract, and that contract is what reviewers can inspect and replay.
+We do not claim a fully mechanized encoding-correctness proof from Lean semantics to Python-generated CNF. The generator is trusted to implement the audited sen24 contract, and the short-cycle/acyclicity bridge remains outside the trusted kernel as a sen24-specific finite check. Those boundaries are what reviewers can inspect and replay.
 
 \begin{proposition}[Sen24 audit contract]
 \label{prop:sen24-contract}
@@ -64,7 +64,7 @@ This proposition does not prove global semantic correctness of the entire encodi
 
 Proposition~\ref{prop:sen24-contract} is the paper's central guarantee statement.
 Its three clauses are deliberately different in strength: clause (1) is an audit claim about artifacts, clause (2) is a kernel-checked proof claim for committed reference UNSAT instances, and clause (3) is a witness-validation claim for reported SAT instances.
-None of the three clauses, by itself, proves full semantic equivalence between the Lean axioms and the Python encoding; that bridge remains the explicit assumption boundary.
+None of the three clauses, by itself, proves full semantic equivalence between the Lean axioms and the Python encoding; that bridge remains the explicit assumption boundary, with the short-cycle/acyclicity step justified only by the sen24 finite check above.
 
 \subsection{Claims, Artifacts, and Commands}
 

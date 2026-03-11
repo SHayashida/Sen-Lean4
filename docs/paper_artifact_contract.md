@@ -1,8 +1,11 @@
 # Paper Artifact Contract
 
 This document is the single source of truth for paper-facing artifacts used by the sen24 manuscript.
-It is intentionally aligned with the current official claims map in `docs/paper_claims_map.md`.
-It does not broaden any claim.
+The official source of truth for claim scope remains:
+- `docs/paper_claims_map.md`
+- `paper/sections/appendix_repro.tex`
+
+This artifact contract is intentionally aligned with those files and does not broaden any claim.
 
 ## Canonical commands
 

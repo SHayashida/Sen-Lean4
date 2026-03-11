@@ -3,6 +3,7 @@
 This section is organized as a claim-by-claim evidence checklist rather than a fresh benchmark report.
 The goal of the current revision is to state, for each official claim C1--C6, which artifact supports it and what was actually re-verified now.
 The runtime harness in \texttt{scripts/eval\_atlas.py} was re-run at smoke scope inside \texttt{./scripts/ci\_phase2\_smoke.sh}, but it is used here only as a sanity check on metadata and plotting, not as a new performance claim.
+The sen24 short-cycle/acyclicity bridge is tracked separately as an audited finite Python check, not as a Lean-side proof obligation under C1--C6.
 
 \paragraph{C1: reproducible frontier generation.}
 Primary support comes from \texttt{scripts/run\_atlas.py}, \texttt{atlas.json}, \texttt{atlas\_summary.md}, and per-case \texttt{summary.json}.

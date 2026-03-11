@@ -9,7 +9,9 @@ bridge used in the paper:
   Acyclic <-> (no directed 3-cycle and no directed 4-cycle).
 
 The result is an audited finite-domain fact for sen24. It is not claimed as a
-general theorem for arbitrary domain sizes.
+general theorem for arbitrary domain sizes, and it is not part of the trusted
+Lean kernel. Its role is to check the exact four-alternative bridge used by the
+sen24 CNF/audit contract.
 """
 
 from __future__ import annotations

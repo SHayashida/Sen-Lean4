@@ -55,6 +55,11 @@ The repository uses three distinct guarantee layers.
   - the OS, filesystem, and SAT solver are untrusted for correctness and are accepted only through audited
     artifacts, replay, and kernel checking.
 
+More precisely, the two Python checks above certify different things:
+- `scripts/check_sen24_cnf.py` certifies schema/manifest/clause-family/hash consistency for the sen24 CNF family.
+- `scripts/check_acyclicity_short_cycles.py` certifies only the finite four-alternative bridge used in sen24.
+Neither script is a Lean proof of end-to-end semantic encoding correctness.
+
 ## Determinism notes
 
 - Monotone pruning uses sequential evaluation (even if `--jobs > 1` is passed, it is ignored with warning) to keep inference order deterministic.
@@ -83,3 +88,4 @@ lake build SocialChoiceAtlas.Sen.Atlas.Case11111
 - Reproducibility is strongest for fixed sen24 scope and committed baseline artifacts.
 - Cross-platform solver packaging differences can change `solver_version_raw`; this is why both raw and normalized forms are stored.
 - Encoding correctness is an audit contract plus finite sen24 checks, not a fully mechanized semantics-to-CNF proof.
+- The short-cycle/acyclicity bridge is sen24-specific and remains outside the trusted kernel.

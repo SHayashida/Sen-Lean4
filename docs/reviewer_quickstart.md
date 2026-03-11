@@ -1,6 +1,9 @@
 # Reviewer Quickstart
 
 This guide provides a reviewer-oriented reproduction path for claims `C1`–`C6` with a tiny run and a full run.
+The official source of truth for claim boundaries is:
+- `docs/paper_claims_map.md`
+- `paper/sections/appendix_repro.tex`
 
 ## 10-minute path (tiny evidence bundle)
 
@@ -52,8 +55,8 @@ This mapping is aligned with `docs/paper_claims_map.md`.
 - `C3`: committed proof-carrying reference `Certificates/atlas/case_11111/**` and Lean target `SocialChoiceAtlas.Sen.Atlas.Case11111`
 - `C4`: atlas fields `symmetry_check`, `checked_cases`, `prune_stats`, `cases[*].pruned_by`
 - `C5`: `atlas/gallery.json`, `atlas/gallery.md`, per-case `rule_card.md/.tex`, witness validation stats
-- `C6`: `atlas/repair_triangulation.json`, `atlas/repair_triangulation.md`, comparison fields `size_match`/`set_match`
-  and `atlas/maxsat_baseline.json` (tiny MAXSAT-style sanity baseline for minimum repair size)
+- `C6`: `atlas/repair_triangulation.json`, `atlas/repair_triangulation.md`, comparison fields `size_match`/`set_match`,
+  and `atlas/maxsat_baseline.json` as an independent optimum baseline used for triangulation
 
 ## What to verify
 

@@ -1,13 +1,16 @@
 # SocialChoiceAtlas: Sen Base Case (Lean 4 + LRAT)
 
-This repository contains a formalized base case of Sen's impossibility theorem
+This repository contains a fixed sen24 case study of Sen's impossibility theorem
 for `n = 2` voters and `m = 4` alternatives, with:
 
-- a pure Lean proof (`Theorem.lean`), and
-- an independent SAT certificate pipeline (DIMACS CNF + LRAT) checked in Lean.
+- a Lean theorem development for the sen24 semantic statement (`Theorem.lean`), and
+- an independent SAT certificate pipeline (DIMACS CNF + LRAT) with committed reference artifacts checked in Lean.
 
-For the exact claim boundary ("what is guaranteed / not guaranteed"),
-see `ZENODO_CLAIMS.md`.
+For the exact public claim boundary, use:
+- `docs/paper_claims_map.md`
+- `paper/sections/appendix_repro.tex`
+
+These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
 
 ## Zenodo-ready layout
 
@@ -72,7 +75,7 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - Usage and artifact format: `docs/phase2_atlas.md`
 - CI smoke: `./scripts/ci_phase2_smoke.sh`
 - MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
-- Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
+- Week3 committed proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
 ## Safety assumptions
 
@@ -88,9 +91,9 @@ This file is git-ignored by default and can extend local workflow notes without 
 ## Paper/Docs map
 
 For paper-facing claim discipline and reproducibility narrative, use:
-`docs/related_work_notes.md` (positioning vs ATMS/MAXSAT/OMT/Constraint Hierarchies),
-`docs/paper_claims_map.md` (claim→evidence→commands), and
-`docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
+`docs/paper_claims_map.md` and `paper/sections/appendix_repro.tex` as the official claim boundary,
+`docs/related_work_notes.md` for positioning,
+and `docs/reproducibility_appendix.md` for artifact policy, `atlas_schema_version`, and solver metadata policy.
 For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
 For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
 For the LaTeX paper workspace and frontier figure workflow, see `paper/README.md`.

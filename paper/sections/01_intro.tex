@@ -1,7 +1,7 @@
 \section{Introduction}
 
 Classical impossibility theorems identify combinations of axioms that cannot be satisfied simultaneously, but they do not by themselves answer the engineering question that follows: if a design is impossible, \emph{which lever changes restore feasibility, and what evidence should we trust when we make that change}?
-This paper studies that question in AI/Systems terms by treating axioms as explicit levers, enumerating a small design space, and recording the SAT/UNSAT boundary together with auditable evidence for each outcome.
+This paper studies that question in automated-reasoning and systems terms by treating axioms as explicit levers, enumerating a small design space, and recording the SAT/UNSAT boundary together with auditable evidence for each outcome.
 
 Modern solvers and optimization tools are essential for this search, but they are not the whole story.
 They can optimize, check consistency, or produce candidate repairs, yet a paper-ready result also needs a clear boundary map, an explanation of why boundary cases fail, concrete SAT witnesses for feasible designs, and a chain of trust that does not collapse to ``the solver said so.''
@@ -31,4 +31,5 @@ Section~3 defines the trust model and the proof/audit/assumption split.
 Section~4 describes the sen24 encoding and the paper-facing artifact contract.
 Section~5 reports the claim-by-claim evidence accounting and re-verification status for this revision.
 Section~6 presents the sen24 case study, including frontier artifacts, one MUS plus one small MCS candidate, validated SAT rule cards, and the stronger C6 repair triangulation stage.
+Section~7 positions the paper against prior COMSOC-SAT and certificate-checking work.
 Section~8 closes with the scope limits that keep the paper honest.

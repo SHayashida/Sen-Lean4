@@ -37,13 +37,16 @@ Figure~\ref{fig:chain-of-trust} fixes what is trusted, what is not, and what kin
 
 \subsection{Proof, Audit, and Assumption}
 
-We make three distinct kinds of guarantee.
+We separate three kinds of checked statement and one explicit assumption boundary.
 
 \paragraph{Proof.}
 The semantic sen24 theorem is proved in Lean, and committed UNSAT references are replayed in Lean from LRAT. These statements depend on the Lean kernel rather than on the SAT solver.
 
 \paragraph{Audited invariant.}
 The DIMACS side is checked against a fixed sen24 schema: variable numbering, clause-family membership, manifest consistency, and hash linkage are reconstructed independently of the generator. For the rationality side, we also run a finite sen24 check showing that, under asymmetry on four alternatives, forbidding directed 3-cycles and 4-cycles is equivalent to acyclicity.
+
+\paragraph{Witness validation.}
+Reported SAT rules are checked at the artifact level: the witness validator confirms that a concrete model satisfies a concrete CNF instance, but this is not a semantic proof of the rule beyond that instance.
 
 \paragraph{Assumption.}
 We do not claim a fully mechanized encoding-correctness proof from Lean semantics to Python-generated CNF. The generator is trusted to implement the audited sen24 contract, and that contract is what reviewers can inspect and replay.

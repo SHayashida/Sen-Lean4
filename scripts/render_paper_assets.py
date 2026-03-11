@@ -33,6 +33,7 @@ TABLE_NAMES = [
     "repairs_table.tex",
     "gallery_table.tex",
     "triangulation_table.tex",
+    "verification_stats_table.tex",
 ]
 
 
@@ -143,6 +144,10 @@ def _render_from_existing_atlas(atlas_outdir: Path, figure_outdir: Path, table_o
             str(atlas_outdir),
             "--outdir",
             str(table_outdir),
+            "--bundle-outdir",
+            str(atlas_outdir.parent),
+            "--tiny-bundle-outdir",
+            str(atlas_outdir.parent.parent / "tiny_bundle"),
         ]
     )
     outputs = [figure_outdir / name for name in FIGURE_NAMES] + [table_outdir / name for name in TABLE_NAMES]

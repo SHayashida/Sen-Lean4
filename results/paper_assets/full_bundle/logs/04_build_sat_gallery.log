@@ -1,6 +1,6 @@
 command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/build_sat_gallery.py' --atlas-outdir '<bundle_outdir>/atlas' --top-k 5 --min-k 1
 return_code: 0
-duration_sec: 1.955744
+duration_sec: 1.884681
 ----- STDOUT -----
 Wrote results/paper_assets/full_bundle/atlas/gallery.json
 Wrote results/paper_assets/full_bundle/atlas/gallery.md

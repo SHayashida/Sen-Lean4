@@ -5,6 +5,11 @@ The goal of the current revision is to state, for each official claim C1--C6, wh
 The runtime harness in \texttt{scripts/eval\_atlas.py} was re-run at smoke scope inside \texttt{./scripts/ci\_phase2\_smoke.sh}, but it is used here only as a sanity check on metadata and plotting, not as a new performance claim.
 The sen24 short-cycle/acyclicity bridge is tracked separately as an audited finite Python check, not as a Lean-side proof obligation under C1--C6.
 
+\input{tables/generated/verification_stats_table.tex}
+
+Table~\ref{tab:sen24-verification-stats} supplies the minimal quantitative context used in this paper: fixed committed artifact sizes, current full/tiny artifact status, and optional local timing values from generated logs.
+These rows are evidence bookkeeping, not portable benchmarks.
+
 \paragraph{C1: reproducible frontier generation.}
 Primary support comes from \texttt{scripts/run\_atlas.py}, \texttt{atlas.json}, \texttt{atlas\_summary.md}, and per-case \texttt{summary.json}.
 This revision re-verified C1 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which re-runs a full 32-case sen24 atlas in the repair smoke path and checks the resulting frontier artifacts.

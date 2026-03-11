@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 TABLE_SCHEMA_VERSION = 1
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -76,6 +77,22 @@ def _assert_safe_text(text: str) -> None:
         raise ValueError("generated table contains disallowed '/Users/' fragment")
     if re.search(r"[A-Za-z]:\\", text):
         raise ValueError("generated table contains disallowed Windows absolute path fragment")
+
+
+def _parse_duration_from_log(path: Path) -> float | None:
+    if not path.exists():
+        return None
+    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        if line.startswith("duration_sec:"):
+            try:
+                return float(line.split(":", 1)[1].strip())
+            except Exception:
+                return None
+    return None
+
+
+def _fmt_status(ok: bool, yes_text: str = "available", no_text: str = "not available") -> str:
+    return yes_text if ok else no_text
 
 
 def _build_repairs_table(cases: list[dict[str, Any]]) -> list[str]:
@@ -195,6 +212,76 @@ def _build_triangulation_table(triangulation: dict[str, Any], baseline: dict[str
     return lines
 
 
+def _build_verification_stats_table(
+    *,
+    committed_manifest: dict[str, Any],
+    committed_lrat_size: int | None,
+    atlas: dict[str, Any],
+    bundle_root: Path | None,
+    tiny_bundle_root: Path | None,
+) -> list[str]:
+    cases_total = _fmt_int(atlas.get("cases_total"))
+    status_counts = atlas.get("status_counts", {})
+    sat_count = _fmt_int(status_counts.get("SAT"))
+    unsat_count = _fmt_int(status_counts.get("UNSAT"))
+
+    atlas_duration = None
+    paper_asset_duration = None
+    if bundle_root is not None:
+        logs_dir = bundle_root / "logs"
+        atlas_duration = _parse_duration_from_log(logs_dir / "01_run_atlas.log")
+        plot_frontier = _parse_duration_from_log(logs_dir / "05_plot_frontier.log") or 0.0
+        plot_hasse = _parse_duration_from_log(logs_dir / "06_plot_hasse.log") or 0.0
+        gen_tables = _parse_duration_from_log(logs_dir / "10_gen_paper_tables.log") or 0.0
+        if any(v > 0.0 for v in (plot_frontier, plot_hasse, gen_tables)):
+            paper_asset_duration = plot_frontier + plot_hasse + gen_tables
+
+    tiny_bundle_present = False
+    tiny_bundle_duration = None
+    if tiny_bundle_root is not None and (tiny_bundle_root / "bundle.json").exists():
+        tiny_bundle_present = True
+        tiny_bundle_duration = _parse_duration_from_log(tiny_bundle_root / "logs" / "01_run_atlas.log")
+
+    committed_reference_present = (
+        (REPO_ROOT / "Certificates" / "atlas" / "case_11111" / "proof.lrat").exists()
+        and (REPO_ROOT / "SocialChoiceAtlas" / "Sen" / "Atlas" / "Case11111.lean").exists()
+    )
+
+    rows = [
+        ("Committed sen24 CNF variables", _fmt_int(committed_manifest.get("nvars")), "invariant"),
+        ("Committed sen24 CNF clauses", _fmt_int(committed_manifest.get("nclauses")), "invariant"),
+        ("Committed LRAT proof size (bytes)", _fmt_int(committed_lrat_size), "invariant for the committed reference"),
+        ("Committed Lean replay target", _fmt_status(committed_reference_present, yes_text="available", no_text="missing"), "committed reference only"),
+        ("Full sen24 atlas status", f"generated ({cases_total} cases; {sat_count} SAT, {unsat_count} UNSAT)", "current full artifact set"),
+        ("Tiny evidence bundle status", _fmt_status(tiny_bundle_present, yes_text="available", no_text="not generated here"), "tiny reviewer path"),
+    ]
+
+    if atlas_duration is not None:
+        rows.append(("Full atlas generation time (s)", _fmt_float(atlas_duration, digits=3), "environment-specific log value"))
+    if paper_asset_duration is not None:
+        rows.append(("Paper asset render time (s)", _fmt_float(paper_asset_duration, digits=3), "environment-specific log value"))
+    if tiny_bundle_duration is not None:
+        rows.append(("Tiny atlas generation time (s)", _fmt_float(tiny_bundle_duration, digits=3), "environment-specific log value"))
+
+    lines: list[str] = []
+    lines.append(f"% table_schema_version={TABLE_SCHEMA_VERSION}")
+    lines.append(r"\begin{table}[t]")
+    lines.append(r"\centering")
+    lines.append(r"\small")
+    lines.append(r"\begin{tabular}{p{0.39\linewidth} p{0.21\linewidth} p{0.28\linewidth}}")
+    lines.append(r"\toprule")
+    lines.append(r"Item & Value & Scope \\")
+    lines.append(r"\midrule")
+    for item, value, scope in rows:
+        lines.append(f"{_tex_escape(item)} & {_tex_escape(value)} & {_tex_escape(scope)} \\\\")
+    lines.append(r"\bottomrule")
+    lines.append(r"\end{tabular}")
+    lines.append(r"\caption{Minimal quantitative verification facts for sen24. CNF counts and committed LRAT size are invariant artifact properties. Timing rows, when present, are local log values from the current generated bundles and are environment-specific measurements rather than benchmark claims.}")
+    lines.append(r"\label{tab:sen24-verification-stats}")
+    lines.append(r"\end{table}")
+    return lines
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate deterministic paper table fragments from atlas artifacts")
     parser.add_argument("--atlas-outdir", type=Path, required=True, help="Atlas output directory containing atlas.json")
@@ -204,6 +291,8 @@ def main() -> None:
         default=Path("paper") / "tables" / "generated",
         help="Output directory for generated LaTeX table fragments",
     )
+    parser.add_argument("--bundle-outdir", type=Path, help="Optional bundle root containing logs for environment-specific timing rows")
+    parser.add_argument("--tiny-bundle-outdir", type=Path, help="Optional tiny bundle root for tiny evidence-bundle status/timing rows")
     args = parser.parse_args()
 
     atlas_path = args.atlas_outdir / "atlas.json"
@@ -240,21 +329,38 @@ def main() -> None:
     repairs_tex = args.outdir / "repairs_table.tex"
     gallery_tex = args.outdir / "gallery_table.tex"
     triangulation_tex = args.outdir / "triangulation_table.tex"
+    verification_stats_tex = args.outdir / "verification_stats_table.tex"
+
+    committed_manifest_path = REPO_ROOT / "Certificates" / "atlas" / "case_11111" / "sen24.manifest.json"
+    committed_lrat_path = REPO_ROOT / "Certificates" / "atlas" / "case_11111" / "proof.lrat"
+    if not committed_manifest_path.exists():
+        raise FileNotFoundError(f"missing committed manifest: {committed_manifest_path}")
+    committed_manifest = _load_json(committed_manifest_path)
+    committed_lrat_size = committed_lrat_path.stat().st_size if committed_lrat_path.exists() else None
 
     repairs_lines = _build_repairs_table(cases)
     gallery_lines = _build_gallery_table(gallery_entries)
     triangulation_lines = _build_triangulation_table(triangulation, baseline)
+    verification_stats_lines = _build_verification_stats_table(
+        committed_manifest=committed_manifest,
+        committed_lrat_size=committed_lrat_size,
+        atlas=atlas,
+        bundle_root=args.bundle_outdir,
+        tiny_bundle_root=args.tiny_bundle_outdir,
+    )
 
     _write(repairs_tex, repairs_lines)
     _write(gallery_tex, gallery_lines)
     _write(triangulation_tex, triangulation_lines)
+    _write(verification_stats_tex, verification_stats_lines)
 
-    for path in (repairs_tex, gallery_tex, triangulation_tex):
+    for path in (repairs_tex, gallery_tex, triangulation_tex, verification_stats_tex):
         _assert_safe_text(path.read_text(encoding="utf-8"))
 
     print(f"Wrote {repairs_tex}")
     print(f"Wrote {gallery_tex}")
     print(f"Wrote {triangulation_tex}")
+    print(f"Wrote {verification_stats_tex}")
 
 
 if __name__ == "__main__":

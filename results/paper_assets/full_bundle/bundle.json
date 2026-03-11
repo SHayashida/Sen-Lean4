@@ -4,12 +4,12 @@
     "files": [
       {
         "path": "atlas/atlas.json",
-        "sha256": "d78a14522b841bcebaaf3f2b595f7e7a2ce168a4cea6700112ed8bec135caef4",
-        "size_bytes": 100363
+        "sha256": "7246655ebc63bc07676dbb9b78da6d56daf99f244a90ee0afde23a254acbe893",
+        "size_bytes": 100347
       },
       {
         "path": "atlas/atlas_summary.md",
-        "sha256": "345050257cad5f1a0a942378b1564165e3fdcd511f852a0b7424b18cb9ccc062",
+        "sha256": "782ebf636bcdc8ae8270eb9a9975e1a5c5a889a2005843597525b47ca658b5d1",
         "size_bytes": 2438
       },
       {
@@ -34,8 +34,8 @@
       },
       {
         "path": "atlas/case_00000/summary.json",
-        "sha256": "2032db2cf33efa266ccadc7d1f4dc7765f1cb87a6a6493bd7d1e5089a7e1b416",
-        "size_bytes": 1882
+        "sha256": "8927e41b8c3161a5f068821069117344a8eccd1b73040f2c4b24a357ef7ebef9",
+        "size_bytes": 1883
       },
       {
         "path": "atlas/case_00001/model.json",
@@ -59,8 +59,8 @@
       },
       {
         "path": "atlas/case_00001/summary.json",
-        "sha256": "356694d71d34100fd7422e934254a91b87bdd7f147f30ab3997bd46f334dd6cc",
-        "size_bytes": 1918
+        "sha256": "e3221252994c785a874e02cf73cf0098dbfde79f9b3d2272c3d215f5ce851d8d",
+        "size_bytes": 1919
       },
       {
         "path": "atlas/case_00010/model.json",
@@ -84,7 +84,7 @@
       },
       {
         "path": "atlas/case_00010/summary.json",
-        "sha256": "b40f06cd59318713d5dd08b9546d99fa84b10bd8bc2ba8d6e868edffe831547c",
+        "sha256": "f1875c0c90284a713ede693b45d4e65273bd90181cca6a46f98b77bd1ebc2a19",
         "size_bytes": 1916
       },
       {
@@ -109,7 +109,7 @@
       },
       {
         "path": "atlas/case_00011/summary.json",
-        "sha256": "313d2c003838665baf9bc7d469ad94658d367351ec2c6f01eeaaafe67706074d",
+        "sha256": "9cb70c122ae124bf873e94fef257b987b2ed85a417cf2aa3e251dc466b64e6c4",
         "size_bytes": 1941
       },
       {
@@ -134,8 +134,8 @@
       },
       {
         "path": "atlas/case_00100/summary.json",
-        "sha256": "605f7571e876abdce061a1235e005acb3b282718f07b52cedb956278d1a7e58e",
-        "size_bytes": 1924
+        "sha256": "37c07ffc10f41f45e75fea136cc010bd910e6f8de5e7e2a4b2099ccfbbbab567",
+        "size_bytes": 1915
       },
       {
         "path": "atlas/case_00101/model.json",
@@ -159,7 +159,7 @@
       },
       {
         "path": "atlas/case_00101/summary.json",
-        "sha256": "d063cc09deab40a592783d1164c525cbc95cce1fd1c83c7b72f513bd2baafba0",
+        "sha256": "3adb82e590d75f5f450b12288d61088e161a60ee8a7c69b82139c2b5119f969f",
         "size_bytes": 1949
       },
       {
@@ -184,7 +184,7 @@
       },
       {
         "path": "atlas/case_00110/summary.json",
-        "sha256": "187124270cfbe6498b93dc24bf10a27da09eafa30f3de5d8e5b67d651096723c",
+        "sha256": "fb5133fd3a0f1493cca25f6c023336d912939c91889cca6403bb94969d983cf8",
         "size_bytes": 1948
       },
       {
@@ -209,8 +209,8 @@
       },
       {
         "path": "atlas/case_00111/summary.json",
-        "sha256": "74cdd18bc8a9b76223a4978bd8dbcde0ffcc203f364ffd70857c425162ef7bf5",
-        "size_bytes": 1972
+        "sha256": "c9a3948dc513bd4c23bb17808d345221184b59da8da4b2604f00873faaa8e8c0",
+        "size_bytes": 1971
       },
       {
         "path": "atlas/case_01000/model.json",
@@ -244,7 +244,7 @@
       },
       {
         "path": "atlas/case_01000/summary.json",
-        "sha256": "456f117ac59f87c84db79a6474037021d17f63a3e7d9cdc6594f98bded32d980",
+        "sha256": "bae45815ba96ecaadf2474e36845d8629fb0b4dbd7427a9efa722f691cc5d3cc",
         "size_bytes": 1914
       },
       {
@@ -279,8 +279,8 @@
       },
       {
         "path": "atlas/case_01001/summary.json",
-        "sha256": "2db20f46e57b5ce23a48eb556105f406d27f3b631c140e9ab77a5045f4199af0",
-        "size_bytes": 1940
+        "sha256": "dd893c05c99d64cdc26c910e7fcd59e26ed93c218b67aa121fba67aba0786dfe",
+        "size_bytes": 1941
       },
       {
         "path": "atlas/case_01010/model.json",
@@ -314,8 +314,8 @@
       },
       {
         "path": "atlas/case_01010/summary.json",
-        "sha256": "cd5b0fb496844fa44fce0adf323113433adf8863a7eafa76c6ac2f7789f9d388",
-        "size_bytes": 1941
+        "sha256": "c0583aa9d663487c25d35a5cd8ba9a42c387717aefd24b8fc6768c87152b05a1",
+        "size_bytes": 1940
       },
       {
         "path": "atlas/case_01011/model.json",
@@ -349,8 +349,8 @@
       },
       {
         "path": "atlas/case_01011/summary.json",
-        "sha256": "85cd9e75a336549e88e9159098ffc6e0c89f9f84be5a45b3c3a1762b76dab49b",
-        "size_bytes": 1963
+        "sha256": "d224d40bf00b1f3d641f77886788044ba23b0c3bb51927684ce0e4ed613bb40e",
+        "size_bytes": 1964
       },
       {
         "path": "atlas/case_01100/model.json",
@@ -374,7 +374,7 @@
       },
       {
         "path": "atlas/case_01100/summary.json",
-        "sha256": "ae326b398d376621b77b5edd5ff7018cb633febbe9c74cff359cbcdb69d106b7",
+        "sha256": "2b4daab42758de4b1b73f03986f34bd047b886d2ae3bfc590b23f4229849f17a",
         "size_bytes": 1939
       },
       {
@@ -399,8 +399,8 @@
       },
       {
         "path": "atlas/case_01101/summary.json",
-        "sha256": "556ce749f7fef5b545a7a8c3c5930ba75840c2856fc8a224cd6f904208e1d75c",
-        "size_bytes": 1979
+        "sha256": "2baaaf4eb59358a8b7cafba826ba7831b7b33859e3565f4fbc5c599788bb9a5c",
+        "size_bytes": 1978
       },
       {
         "path": "atlas/case_01110/model.json",
@@ -424,7 +424,7 @@
       },
       {
         "path": "atlas/case_01110/summary.json",
-        "sha256": "7924f29c90d401a8756edf947a8f9f596027acf4904a65e367e2a31f3cf2cfbe",
+        "sha256": "b6a08e01230918992b53c416c145788730f97f1825a5f1a7920191c2a6f65d47",
         "size_bytes": 1979
       },
       {
@@ -449,8 +449,8 @@
       },
       {
         "path": "atlas/case_01111/summary.json",
-        "sha256": "a1d481d6bfd29845f99432c88e646f4692dc456fdef53178bad9f52a55de4cbc",
-        "size_bytes": 2002
+        "sha256": "419d9d04be9f913e947592313071ce5009a09f4d24a12ba70c6ddfaa0dfe0fbb",
+        "size_bytes": 2001
       },
       {
         "path": "atlas/case_10000/model.json",
@@ -474,8 +474,8 @@
       },
       {
         "path": "atlas/case_10000/summary.json",
-        "sha256": "846dbbf43fb0933f1dca68f5eb58600fe08dd340042c0b0e751c259a89b08b97",
-        "size_bytes": 1910
+        "sha256": "5fdb555a34f6ba2c00ca9de991e09c05814ea434d44a629c62fcdcee64c88c9f",
+        "size_bytes": 1911
       },
       {
         "path": "atlas/case_10001/model.json",
@@ -499,8 +499,8 @@
       },
       {
         "path": "atlas/case_10001/summary.json",
-        "sha256": "de7e7dfd43ff6ebb3c21be1943237d61d3830b0510b31ce7427f07a5632b5bd0",
-        "size_bytes": 1928
+        "sha256": "db4c741ae5d2cab3d61ecf38ec42cd8bd52cde59122b150253ed46b55a810a18",
+        "size_bytes": 1936
       },
       {
         "path": "atlas/case_10010/model.json",
@@ -524,7 +524,7 @@
       },
       {
         "path": "atlas/case_10010/summary.json",
-        "sha256": "869c2b5f2c3a0bf4e282ff29fd7bb55f682e5413f92600ce6533bea9c5db226b",
+        "sha256": "97ffab6f389759edf787274e435d9b631c007860d7044fe3bc4974e40552389e",
         "size_bytes": 1933
       },
       {
@@ -549,7 +549,7 @@
       },
       {
         "path": "atlas/case_10011/summary.json",
-        "sha256": "318532142e753d81671e5c8c03076be2f78948e72998838517341c39ac9c59bc",
+        "sha256": "a080c5e5e71f2cc8de48bac21dc1e66afa3c1370c531a6f397651fd37f94d9b6",
         "size_bytes": 1959
       },
       {
@@ -574,7 +574,7 @@
       },
       {
         "path": "atlas/case_10100/summary.json",
-        "sha256": "ddd630d8d91867496b52187e0b2a6be67eb73366bbf2b57987bb8f54b2185e2e",
+        "sha256": "306713889b2f66ec50b2069cd24f1a0f51d79d308080f6543013634dcccfd228",
         "size_bytes": 1941
       },
       {
@@ -599,8 +599,8 @@
       },
       {
         "path": "atlas/case_10101/summary.json",
-        "sha256": "375ed643b5e9c2896dd6331bc462ebc448616f12e02bee5d4069f9b55b57d4f8",
-        "size_bytes": 1982
+        "sha256": "f46a380ff6d9d9ab9b45249ca9b0e07c69dcf75c21469fcad9ddaa0c0a66d4b7",
+        "size_bytes": 1973
       },
       {
         "path": "atlas/case_10110/model.json",
@@ -624,7 +624,7 @@
       },
       {
         "path": "atlas/case_10110/summary.json",
-        "sha256": "282d019866f78dd9ff7359933938fe330baa59caa90c1ec363b4607960cc7fb7",
+        "sha256": "c0b6c57792c889f623a170c146bd0b9da3e0176f8de432856c997e448ed4f6fa",
         "size_bytes": 1967
       },
       {
@@ -649,8 +649,8 @@
       },
       {
         "path": "atlas/case_10111/summary.json",
-        "sha256": "cbb926b8579faaca2624d8e5871490db64341a715e69c8d8b6f12548994d1881",
-        "size_bytes": 1989
+        "sha256": "2a9561f95ce5cf969f60e256f1fe4d10fdb267c34e476bd9567838cdc26cbc69",
+        "size_bytes": 1990
       },
       {
         "path": "atlas/case_11000/model.json",
@@ -684,8 +684,8 @@
       },
       {
         "path": "atlas/case_11000/summary.json",
-        "sha256": "6c78646c7fac1077223d38e376f3777e0a12e1d0d8b8d99e3e520dbad3801e91",
-        "size_bytes": 1932
+        "sha256": "bd4da4b7d508dd6ef078ebb22dc000c62f7cf8ad4c534c210d3bcf74fef0efee",
+        "size_bytes": 1923
       },
       {
         "path": "atlas/case_11001/model.json",
@@ -709,7 +709,7 @@
       },
       {
         "path": "atlas/case_11001/summary.json",
-        "sha256": "b1d42af2da9b2808a03944390da3037ea0033de9da6e798c6e5735ca2c57b85f",
+        "sha256": "dad1884ac7cd2894e2b0e9ca625e72d237d75a445e5ecfa8b56a0dccc986fd1b",
         "size_bytes": 1959
       },
       {
@@ -734,7 +734,7 @@
       },
       {
         "path": "atlas/case_11010/summary.json",
-        "sha256": "a27fc6d9c62630b3aa94e484bf78fa56a25e64dee629f0913943d62fdef49e77",
+        "sha256": "df4bc78cf2215af3316ca6247e41519c6f8cd9a4695c80258f805370af537f60",
         "size_bytes": 1959
       },
       {
@@ -759,8 +759,8 @@
       },
       {
         "path": "atlas/case_11011/summary.json",
-        "sha256": "0c466f458a5bea141b421cfcd1508ad62e462e71b95bfa826bdde80cd9b1e45f",
-        "size_bytes": 1982
+        "sha256": "124fa0ec544d0ae7266d088f90d355b26e24abab46255f1ee9f323eae33fb101",
+        "size_bytes": 1981
       },
       {
         "path": "atlas/case_11100/model.json",
@@ -784,7 +784,7 @@
       },
       {
         "path": "atlas/case_11100/summary.json",
-        "sha256": "fe54d295111de538e2328125b97afef9dc95ffaf27a648fbba3a00f801c00abb",
+        "sha256": "92a382b2f5808023aba4349e5033849383b4cc4671ab78201544eb9f71a9e4d0",
         "size_bytes": 1956
       },
       {
@@ -814,8 +814,8 @@
       },
       {
         "path": "atlas/case_11101/summary.json",
-        "sha256": "7f36417bc0530157105255c6f490422b175fa771af88ae0ef8851d7e169239a4",
-        "size_bytes": 6065
+        "sha256": "dbf3ce55585ebe0fb99d6000e8aeed8facd8c7f82de1d9484667f1506647f616",
+        "size_bytes": 6066
       },
       {
         "path": "atlas/case_11110/model.json",
@@ -839,7 +839,7 @@
       },
       {
         "path": "atlas/case_11110/summary.json",
-        "sha256": "84b2451e3682029104feed35472874e9fe55466351b6c8702af3dc879c22e3f8",
+        "sha256": "293c111211a32e62ee52f50164fe4bb6da5b2b8130c2064fa62b5c2adf89bc67",
         "size_bytes": 1997
       },
       {
@@ -869,12 +869,12 @@
       },
       {
         "path": "atlas/case_11111/summary.json",
-        "sha256": "d40d75771545f2de80049a450661dd05e7276573ffd0dd0ce66f942e7d4eb35d",
-        "size_bytes": 6242
+        "sha256": "7ec301c08c333b7e8b43f73ea90c2a36e4d71fa132864d63a1f1f3352906097c",
+        "size_bytes": 6243
       },
       {
         "path": "atlas/gallery.json",
-        "sha256": "66b2abdd0cd5082f69feaa9e46016075cdc3b8e23f771790cca12e625cd6d2b1",
+        "sha256": "511dde2b3709993baec64e75461c8e03bc1d06d8a056fef75c7ef1be030b0561",
         "size_bytes": 13989
       },
       {
@@ -884,12 +884,12 @@
       },
       {
         "path": "atlas/maxsat_baseline.json",
-        "sha256": "d9e70d635953dcecd5f088ee75d95a1854093a362d5b3573054033095a082b62",
+        "sha256": "d909eff485b51103f990e76003fecbabc4bac51da8a7357b2e11926567993704",
         "size_bytes": 1030
       },
       {
         "path": "atlas/repair_triangulation.json",
-        "sha256": "3b135a55603374fc3e190bccab6c2158b61293b5cf0c197983ffc19fc6546c56",
+        "sha256": "8be924c0f4faea34d93c480209ff73257910d04ebe82e9a1ac687bd14ccf575c",
         "size_bytes": 2349
       },
       {
@@ -1021,6 +1021,11 @@
         "path": "paper/tables/generated/triangulation_table.tex",
         "sha256": "cc85683178b422ce27bd77becdd1c6b4ed78d3fa10721636c8c5918f98d03cd2",
         "size_bytes": 426
+      },
+      {
+        "path": "paper/tables/generated/verification_stats_table.tex",
+        "sha256": "b0190c45632de0bf62bd76871cd78a004995169302e34ffdb45d6c16fa4bd1c9",
+        "size_bytes": 962
       }
     ],
     "paper_dir": "paper"
@@ -1054,7 +1059,7 @@
   "commands": [
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/run_atlas.py' --outdir '<bundle_outdir>/atlas' --solver cadical --jobs 4 --prune none --symmetry none --emit-proof unsat-only",
-      "duration_sec": 1.3521954580000002,
+      "duration_sec": 1.306254833,
       "log": "logs/01_run_atlas.log",
       "name": "01_run_atlas",
       "return_code": 0,
@@ -1062,7 +1067,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/mus_mcs.py' --outdir '<bundle_outdir>/atlas' --solver cadical --max-pair-trials 20",
-      "duration_sec": 0.058097666999999964,
+      "duration_sec": 0.053284458000000035,
       "log": "logs/02_mus_mcs.log",
       "name": "02_mus_mcs",
       "return_code": 0,
@@ -1070,7 +1075,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/enumerate_repairs.py' --outdir '<bundle_outdir>/atlas'",
-      "duration_sec": 0.03407387500000003,
+      "duration_sec": 0.03287987499999989,
       "log": "logs/03_enumerate_repairs.log",
       "name": "03_enumerate_repairs",
       "return_code": 0,
@@ -1078,7 +1083,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/build_sat_gallery.py' --atlas-outdir '<bundle_outdir>/atlas' --top-k 5 --min-k 1",
-      "duration_sec": 1.9557439159999999,
+      "duration_sec": 1.884680834,
       "log": "logs/04_build_sat_gallery.log",
       "name": "04_build_sat_gallery",
       "return_code": 0,
@@ -1086,7 +1091,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/plot_frontier.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/figures/generated' --format png",
-      "duration_sec": 0.02979095900000006,
+      "duration_sec": 0.02829925000000033,
       "log": "logs/05_plot_frontier.log",
       "name": "05_plot_frontier",
       "return_code": 0,
@@ -1094,7 +1099,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/plot_hasse_frontier.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/figures/generated' --format png --include-pruned false --show status",
-      "duration_sec": 0.034508125000000334,
+      "duration_sec": 0.030667792000000027,
       "log": "logs/06_plot_hasse.log",
       "name": "06_plot_hasse",
       "return_code": 0,
@@ -1102,7 +1107,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/triangulate_repairs.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/atlas' --backend bruteforce --solver cadical",
-      "duration_sec": 0.617370792,
+      "duration_sec": 0.9541982089999999,
       "log": "logs/07_triangulate_repairs.log",
       "name": "07_triangulate_repairs",
       "return_code": 0,
@@ -1110,7 +1115,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/maxsat_baseline.py' --atlas-outdir '<bundle_outdir>/atlas' --case-id case_11111 --solver cadical",
-      "duration_sec": 0.07618504099999956,
+      "duration_sec": 0.0799912909999998,
       "log": "logs/08_maxsat_baseline.log",
       "name": "08_maxsat_baseline",
       "return_code": 0,
@@ -1118,7 +1123,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/summarize_atlas.py' --outdir '<bundle_outdir>/atlas'",
-      "duration_sec": 0.0324464579999999,
+      "duration_sec": 0.03157795799999974,
       "log": "logs/09_summarize_atlas.log",
       "name": "09_summarize_atlas",
       "return_code": 0,
@@ -1126,7 +1131,7 @@
     },
     {
       "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/gen_paper_tables.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/tables/generated'",
-      "duration_sec": 0.03227120800000005,
+      "duration_sec": 0.031698500000000074,
       "log": "logs/10_gen_paper_tables.log",
       "name": "10_gen_paper_tables",
       "return_code": 0,
@@ -1141,9 +1146,9 @@
     "symmetry": "none",
     "tiny_case_masks": null
   },
-  "generated_at_utc": "2026-03-11T11:55:02.119698+00:00",
+  "generated_at_utc": "2026-03-11T13:08:06.282826+00:00",
   "metadata": {
-    "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+    "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
     "platform": "macOS-15.6.1-arm64-arm-64bit",
     "python_version": "3.9.6",
     "solver_info": {

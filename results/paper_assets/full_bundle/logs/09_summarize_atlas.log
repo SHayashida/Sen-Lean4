@@ -1,6 +1,6 @@
 command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/summarize_atlas.py' --outdir '<bundle_outdir>/atlas'
 return_code: 0
-duration_sec: 0.032446
+duration_sec: 0.031578
 ----- STDOUT -----
 Wrote results/paper_assets/full_bundle/atlas/atlas_summary.md
 ----- STDERR -----

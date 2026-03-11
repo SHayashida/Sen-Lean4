@@ -557,6 +557,7 @@ test -s "$BUNDLE_OUT/paper/figures/generated/frontier_hasse.png"
 test -s "$BUNDLE_OUT/paper/tables/generated/repairs_table.tex"
 test -s "$BUNDLE_OUT/paper/tables/generated/gallery_table.tex"
 test -s "$BUNDLE_OUT/paper/tables/generated/triangulation_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/verification_stats_table.tex"
 test -s "$BUNDLE_OUT/atlas/maxsat_baseline.json"
 
 python3 - "$BUNDLE_OUT" <<'PY'
@@ -647,6 +648,7 @@ test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.dot"
 test -s "$PAPER_ASSETS_OUT/tables/generated/repairs_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/gallery_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/triangulation_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/verification_stats_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/selected_rule_card.tex"
 test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.tex"
 

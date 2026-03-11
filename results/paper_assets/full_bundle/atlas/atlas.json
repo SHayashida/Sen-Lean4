@@ -25,9 +25,9 @@
         "results/paper_assets/full_bundle/atlas/case_00000/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.00890112500000001,
+      "duration_sec": 0.007041875000000003,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -105,9 +105,9 @@
         "results/paper_assets/full_bundle/atlas/case_10000/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.014031374999999999,
+      "duration_sec": 0.0062696670000000065,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -187,9 +187,9 @@
         "results/paper_assets/full_bundle/atlas/case_01000/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.006656624999999999,
+      "duration_sec": 0.006794624999999999,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -269,9 +269,9 @@
         "results/paper_assets/full_bundle/atlas/case_11000/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.017098832999999994,
+      "duration_sec": 0.013413333,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -352,9 +352,9 @@
         "results/paper_assets/full_bundle/atlas/case_00100/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.019657916999999997,
+      "duration_sec": 0.024801667,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -434,9 +434,9 @@
         "results/paper_assets/full_bundle/atlas/case_10100/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.014318708999999985,
+      "duration_sec": 0.013018082999999986,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -517,9 +517,9 @@
         "results/paper_assets/full_bundle/atlas/case_01100/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.013499208000000013,
+      "duration_sec": 0.013238749999999994,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -600,9 +600,9 @@
         "results/paper_assets/full_bundle/atlas/case_11100/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.025777208999999995,
+      "duration_sec": 0.023212625000000014,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -684,9 +684,9 @@
         "results/paper_assets/full_bundle/atlas/case_00010/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.024444374999999963,
+      "duration_sec": 0.024226917000000014,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -766,9 +766,9 @@
         "results/paper_assets/full_bundle/atlas/case_10010/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.01190691599999999,
+      "duration_sec": 0.02299791699999998,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -849,9 +849,9 @@
         "results/paper_assets/full_bundle/atlas/case_01010/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.010315832999999996,
+      "duration_sec": 0.02769270800000001,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -932,9 +932,9 @@
         "results/paper_assets/full_bundle/atlas/case_11010/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.024164541999999956,
+      "duration_sec": 0.036847958999999986,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1016,9 +1016,9 @@
         "results/paper_assets/full_bundle/atlas/case_00110/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.03222799999999998,
+      "duration_sec": 0.01581291600000001,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1099,9 +1099,9 @@
         "results/paper_assets/full_bundle/atlas/case_10110/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.028182458999999938,
+      "duration_sec": 0.016032000000000046,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1183,9 +1183,9 @@
         "results/paper_assets/full_bundle/atlas/case_01110/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.012450708000000033,
+      "duration_sec": 0.021367958999999992,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1267,9 +1267,9 @@
         "results/paper_assets/full_bundle/atlas/case_11110/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.023134917000000033,
+      "duration_sec": 0.032937375000000046,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1352,9 +1352,9 @@
         "results/paper_assets/full_bundle/atlas/case_00001/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.02273466700000004,
+      "duration_sec": 0.011536542000000094,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1434,9 +1434,9 @@
         "results/paper_assets/full_bundle/atlas/case_10001/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.013927833,
+      "duration_sec": 0.02306754100000008,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1517,9 +1517,9 @@
         "results/paper_assets/full_bundle/atlas/case_01001/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.01162658399999994,
+      "duration_sec": 0.026895541999999995,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1600,9 +1600,9 @@
         "results/paper_assets/full_bundle/atlas/case_11001/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.047715042000000096,
+      "duration_sec": 0.015269499999999936,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1684,9 +1684,9 @@
         "results/paper_assets/full_bundle/atlas/case_00101/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.029484541000000086,
+      "duration_sec": 0.014491458000000068,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1767,9 +1767,9 @@
         "results/paper_assets/full_bundle/atlas/case_10101/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.016865499999999978,
+      "duration_sec": 0.028090167,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1851,9 +1851,9 @@
         "results/paper_assets/full_bundle/atlas/case_01101/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.019274542000000006,
+      "duration_sec": 0.02654195799999992,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -1938,9 +1938,9 @@
         "results/paper_assets/full_bundle/atlas/case_11101/proof.lrat"
       ],
       "dry_run": false,
-      "duration_sec": 0.04690695899999997,
+      "duration_sec": 0.029861332999999934,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2203,9 +2203,9 @@
         "results/paper_assets/full_bundle/atlas/case_00011/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.03657675000000005,
+      "duration_sec": 0.03998454200000001,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2286,9 +2286,9 @@
         "results/paper_assets/full_bundle/atlas/case_10011/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.02167941700000009,
+      "duration_sec": 0.03660345899999995,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2370,9 +2370,9 @@
         "results/paper_assets/full_bundle/atlas/case_01011/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.02434599999999998,
+      "duration_sec": 0.030078124999999956,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2454,9 +2454,9 @@
         "results/paper_assets/full_bundle/atlas/case_11011/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.047801583000000036,
+      "duration_sec": 0.01766379099999993,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2539,9 +2539,9 @@
         "results/paper_assets/full_bundle/atlas/case_00111/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.019279875000000057,
+      "duration_sec": 0.04091966700000005,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2623,9 +2623,9 @@
         "results/paper_assets/full_bundle/atlas/case_10111/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.02039649999999993,
+      "duration_sec": 0.018810374999999935,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2708,9 +2708,9 @@
         "results/paper_assets/full_bundle/atlas/case_01111/sen24.cnf"
       ],
       "dry_run": false,
-      "duration_sec": 0.015333999999999959,
+      "duration_sec": 0.01664191699999984,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -2795,9 +2795,9 @@
         "results/paper_assets/full_bundle/atlas/case_11111/proof.lrat"
       ],
       "dry_run": false,
-      "duration_sec": 0.03098770899999992,
+      "duration_sec": 0.028250791999999914,
       "environment_info": {
-        "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+        "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
         "platform": "macOS-15.6.1-arm64-arm-64bit",
         "python_version": "3.9.6"
       },
@@ -3056,7 +3056,7 @@
   "dry_run": false,
   "emit_proof": "unsat-only",
   "environment_info": {
-    "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+    "git_commit": "5d6f630b8632263c0d3abad25b2d6b54fa41fb04",
     "platform": "macOS-15.6.1-arm64-arm-64bit",
     "python_version": "3.9.6"
   },
@@ -3450,13 +3450,13 @@
     }
   },
   "equiv_classes_total": 32,
-  "generated_at_utc": "2026-03-11T11:54:59.207967+00:00",
+  "generated_at_utc": "2026-03-11T13:08:03.118045+00:00",
   "jobs": 4,
   "m": 4,
   "mask_bit_order": "bit i corresponds to axiom_universe[i], case_id uses this left-to-right bitstring",
   "mus_mcs": {
     "case_ids_filter": null,
-    "generated_at_utc": "2026-03-11T11:54:59.268683+00:00",
+    "generated_at_utc": "2026-03-11T13:08:03.173282+00:00",
     "max_pair_trials": 20,
     "max_unsat_cases": null,
     "oracle_stats": {
@@ -3499,7 +3499,7 @@
     "solver_calls_avoided": 0
   },
   "repair_enumeration": {
-    "generated_at_utc": "2026-03-11T11:54:59.304404+00:00",
+    "generated_at_utc": "2026-03-11T13:08:03.207813+00:00",
     "method": "axiom_level_full_enumeration_v1",
     "processed_unsat_cases": 2
   },

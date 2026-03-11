@@ -3,7 +3,7 @@ attempt: 1
 with_proof: False
 command: cadical -w results/paper_assets/full_bundle/atlas/case_11000/model.txt results/paper_assets/full_bundle/atlas/case_11000/sen24.cnf
 return_code: 10
-duration_sec: 0.017099
+duration_sec: 0.013413
 ----- STDOUT -----
 c --- [ banner ] -------------------------------------------------------------
 c 
@@ -48,12 +48,12 @@ c
 c process time taken by individual solving procedures
 c (percentage relative to process time for solving)
 c 
-c         0.00 1277.70% parse
-c         0.00   85.61% search
-c         0.00   84.17% lucky
+c         0.00 1217.02% parse
+c         0.00   85.82% lucky
+c         0.00   85.82% search
 c         0.00    0.00% simplify
 c   =================================
-c         0.00    5.01% solve
+c         0.00    5.22% solve
 c 
 c last line shows process time for solving
 c (percentage relative to total process time)
@@ -65,7 +65,7 @@ c lucky:                         1       100.00 %  of tried
 c minimized:                     0         0.00 %  learned literals
 c shrunken:                      0         0.00 %  learned literals
 c minishrunken:                  0         0.00 %  learned literals
-c propagations:               3456        24.86 M  per second
+c propagations:               3456        24.51 M  per second
 c ticks:                      6912         2.00    propagation
 c 
 c seconds are measured in process time for solving

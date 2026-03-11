@@ -1,0 +1,50 @@
+{
+  "initial_axioms": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle4"
+  ],
+  "initial_bits": "11101",
+  "initial_mask": 23,
+  "method": "deletion_v1",
+  "minimal_verified": true,
+  "mus_axioms": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle4"
+  ],
+  "mus_bits": "11101",
+  "mus_mask": 23,
+  "size": 4,
+  "status": "ok",
+  "time_ms": 0,
+  "trace": [
+    {
+      "drop_axiom": "asymm",
+      "status": "SAT",
+      "trial_bits": "01101",
+      "trial_mask": 22
+    },
+    {
+      "drop_axiom": "un",
+      "status": "SAT",
+      "trial_bits": "10101",
+      "trial_mask": 21
+    },
+    {
+      "drop_axiom": "minlib",
+      "status": "SAT",
+      "trial_bits": "11001",
+      "trial_mask": 19
+    },
+    {
+      "drop_axiom": "no_cycle4",
+      "status": "SAT",
+      "trial_bits": "11100",
+      "trial_mask": 7
+    }
+  ],
+  "unknown_hits": 0
+}

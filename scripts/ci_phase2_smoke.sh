@@ -640,12 +640,15 @@ python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
   --outdir "$PAPER_ASSETS_OUT"
 
 test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.tex"
 test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.tex"
 test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.dot"
 test -s "$PAPER_ASSETS_OUT/tables/generated/repairs_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/gallery_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/triangulation_table.tex"
 test -s "$PAPER_ASSETS_OUT/tables/generated/selected_rule_card.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.tex"
 
 python3 - "$PAPER_ASSETS_OUT" <<'PY'
 import re

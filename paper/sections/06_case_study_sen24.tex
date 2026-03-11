@@ -8,6 +8,7 @@ It supplies two different but complementary evidence paths:
 \end{itemize}
 
 These paths are intentionally linked but not conflated. The semantic theorem is a statement about social-choice axioms. The LRAT replay is a statement about one concrete CNF artifact. The paper's chain of trust is the argument that these two forms of evidence are compatible under an explicit audit contract.
+Proposition~\ref{prop:sen24-contract} is the formal summary of that contract.
 
 \paragraph{Acyclicity bridge for four alternatives.}
 The main sen24-specific semantic gap is that the CNF uses \texttt{NO\_CYCLE3}/\texttt{NO\_CYCLE4}, while the Lean side uses \texttt{Acyclic}.
@@ -16,35 +17,41 @@ This justifies the sen24 encoding choice without overclaiming a general theorem 
 
 \paragraph{Frontier structure (C1).}
 The paper-facing frontier assets are fixed under \texttt{paper/figures/generated/}.
-Figure~\ref{fig:sen24-frontier-matrix} records the full sen24 SAT/UNSAT frontier, while Figure~\ref{fig:sen24-frontier-structure} records the boundary-focused view and the subset-poset/Hasse structure.
+Figure~\ref{fig:sen24-frontier-matrix} records the full sen24 SAT/UNSAT frontier, Figure~\ref{fig:sen24-frontier-structure} records the boundary slice of the subset-poset/Hasse structure, and Table~\ref{tab:sen24-boundary-local} records the local C2 boundary explanation.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/generated/frontier_matrix.png}
-\caption{sen24 frontier matrix generated from \texttt{atlas.json}. This is the primary paper figure for the official C1 frontier claim.}
+\input{figures/generated/frontier_matrix.tex}
+\caption{Full 32-case sen24 frontier generated from \texttt{atlas.json}. Each cell records one axiom-lever combination and its SAT/UNSAT status. This figure supports the official C1 frontier claim; the statuses themselves are atlas artifacts, while proof-carrying replay is attached separately only to committed UNSAT references.}
 \label{fig:sen24-frontier-matrix}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.49\linewidth]{figures/generated/frontier_boundary.png}
-\includegraphics[width=0.49\linewidth]{figures/generated/frontier_hasse.png}
-\caption{Boundary-oriented and Hasse/poset views of the sen24 frontier. The boundary view supports the official C2 framing, while the Hasse graph records the lattice structure used for the frontier narrative.}
+\input{figures/generated/frontier_hasse.tex}
+\caption{Boundary slice of the sen24 subset poset. The figure shows the two UNSAT cases together with their immediate solved predecessors, making the local frontier geometry visible without implying that the whole atlas is kernel-checked. Proof-carrying replay remains attached only to committed reference artifacts.}
 \label{fig:sen24-frontier-structure}
 \end{figure}
 
-For UNSAT verification, the committed reference case uses LRAT checked by Lean.
+For UNSAT verification, the committed reference case uses LRAT checked by Lean as specified in Proposition~\ref{prop:sen24-contract}.
 For SAT examples, the gallery records deterministic ranking and witness-validation statistics for each selected case.
 
 \paragraph{UNSAT boundary explanation (C2).}
 The official C2 claim remains narrow: one MUS and one small MCS candidate per boundary case.
-In the paper, that claim is supported by the per-case \texttt{mus.json} / \texttt{mcs.json} artifacts together with the boundary figure above; it is not stated as full repair enumeration.
+In the paper, that claim is supported by the per-case \texttt{mus.json} / \texttt{mcs.json} artifacts and summarized in Table~\ref{tab:sen24-boundary-local}; it is not stated as full repair enumeration.
+
+\begin{table}[t]
+\centering
+\input{figures/generated/frontier_boundary.tex}
+\caption{Local sen24 boundary explanation for the official C2 claim. Each row records one UNSAT boundary case together with one MUS and one small MCS candidate extracted from the per-case artifacts.}
+\label{tab:sen24-boundary-local}
+\end{table}
 
 \paragraph{Validated non-trivial SAT rule cards.}
 Each selected SAT gallery entry is accompanied by \texttt{rule\_card.md} and \texttt{rule\_card.tex},
 including non-triviality metrics and concrete profile witnesses. SAT assignments are checked with
 \texttt{scripts/validate\_sat\_witness.py} before rule cards are emitted.
-Table~\ref{tab:sen24-gallery} is the frozen paper-facing summary, and the selected rule-card export is fixed at
+Table~\ref{tab:sen24-gallery} is the frozen paper-facing summary supporting the validated SAT-example part of the argument, and the selected rule-card export is fixed at
 \texttt{tables/generated/selected\_rule\_card.tex}.
 
 \input{tables/generated/gallery_table.tex}
@@ -52,7 +59,7 @@ Table~\ref{tab:sen24-gallery} is the frozen paper-facing summary, and the select
 \paragraph{Repair enumeration and triangulation (C6).}
 The stronger C6 stage begins only after the narrower C2 boundary explanation: a fully solved atlas run
 enumerates \texttt{mcs\_all}, \texttt{mcs\_min\_size}, and \texttt{mcs\_min\_all}, then compares those outputs against an independent optimum baseline by triangulation.
-The paper freezes these outputs as \texttt{repairs\_table.tex} and \texttt{triangulation\_table.tex}.
+The paper freezes these outputs as \texttt{repairs\_table.tex} and \texttt{triangulation\_table.tex}; the first reports the stronger repair enumeration output and the second reports the independent triangulation check.
 
 \input{tables/generated/repairs_table.tex}
 

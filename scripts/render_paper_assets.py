@@ -22,9 +22,12 @@ DEFAULT_PAPER_ROOT = Path("paper")
 DEFAULT_BUNDLE_ROOT = Path("results") / "paper_assets"
 FIGURE_NAMES = [
     "frontier_matrix.png",
+    "frontier_matrix.tex",
     "frontier_boundary.png",
+    "frontier_boundary.tex",
     "frontier_hasse.dot",
     "frontier_hasse.png",
+    "frontier_hasse.tex",
 ]
 TABLE_NAMES = [
     "repairs_table.tex",
@@ -100,27 +103,6 @@ def _require_upstream_artifacts(atlas_outdir: Path) -> None:
                 f"missing upstream artifact for --atlas-outdir reuse: {path}"
             )
     _find_selected_rule_card(atlas_outdir)
-
-
-def _copy_bundle_paper_assets(bundle_outdir: Path, figure_outdir: Path, table_outdir: Path) -> list[Path]:
-    copied: list[Path] = []
-    bundle_figures = bundle_outdir / "paper" / "figures" / "generated"
-    bundle_tables = bundle_outdir / "paper" / "tables" / "generated"
-    for name in FIGURE_NAMES:
-        src = bundle_figures / name
-        if not src.exists():
-            raise FileNotFoundError(f"missing bundled figure: {src}")
-        dst = figure_outdir / name
-        _copy_file(src, dst)
-        copied.append(dst)
-    for name in TABLE_NAMES:
-        src = bundle_tables / name
-        if not src.exists():
-            raise FileNotFoundError(f"missing bundled table: {src}")
-        dst = table_outdir / name
-        _copy_file(src, dst)
-        copied.append(dst)
-    return copied
 
 
 def _render_from_existing_atlas(atlas_outdir: Path, figure_outdir: Path, table_outdir: Path) -> list[Path]:
@@ -244,7 +226,7 @@ def main() -> None:
     if args.atlas_outdir is None:
         bundle_outdir = _build_bundle_if_needed(args.mode, deterministic)
         atlas_outdir = bundle_outdir / "atlas"
-        generated.extend(_copy_bundle_paper_assets(bundle_outdir, figure_outdir, table_outdir))
+        generated.extend(_render_from_existing_atlas(atlas_outdir, figure_outdir, table_outdir))
     else:
         atlas_outdir = args.atlas_outdir
         generated.extend(_render_from_existing_atlas(atlas_outdir, figure_outdir, table_outdir))

@@ -1,0 +1,119 @@
+{
+  "axioms_on": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle4"
+  ],
+  "case_id": "case_11101",
+  "mask_int": 23,
+  "mcs_all": [
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "no_cycle4"
+      ],
+      "remove_bits": "00001",
+      "remove_mask_int": 16,
+      "sat_case_bits": "11100",
+      "sat_case_id": "case_11100",
+      "sat_case_mask_int": 7,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "minlib"
+      ],
+      "remove_bits": "00100",
+      "remove_mask_int": 4,
+      "sat_case_bits": "11001",
+      "sat_case_id": "case_11001",
+      "sat_case_mask_int": 19,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "un"
+      ],
+      "remove_bits": "01000",
+      "remove_mask_int": 2,
+      "sat_case_bits": "10101",
+      "sat_case_id": "case_10101",
+      "sat_case_mask_int": 21,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "asymm"
+      ],
+      "remove_bits": "10000",
+      "remove_mask_int": 1,
+      "sat_case_bits": "01101",
+      "sat_case_id": "case_01101",
+      "sat_case_mask_int": 22,
+      "sat_case_status": "SAT",
+      "size": 1
+    }
+  ],
+  "mcs_min_all": [
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "no_cycle4"
+      ],
+      "remove_bits": "00001",
+      "remove_mask_int": 16,
+      "sat_case_bits": "11100",
+      "sat_case_id": "case_11100",
+      "sat_case_mask_int": 7,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "minlib"
+      ],
+      "remove_bits": "00100",
+      "remove_mask_int": 4,
+      "sat_case_bits": "11001",
+      "sat_case_id": "case_11001",
+      "sat_case_mask_int": 19,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "un"
+      ],
+      "remove_bits": "01000",
+      "remove_mask_int": 2,
+      "sat_case_bits": "10101",
+      "sat_case_id": "case_10101",
+      "sat_case_mask_int": 21,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "asymm"
+      ],
+      "remove_bits": "10000",
+      "remove_mask_int": 1,
+      "sat_case_bits": "01101",
+      "sat_case_id": "case_01101",
+      "sat_case_mask_int": 22,
+      "sat_case_status": "SAT",
+      "size": 1
+    }
+  ],
+  "mcs_min_size": 1
+}

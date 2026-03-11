@@ -15,6 +15,8 @@ External SAT solvers produce SAT models or UNSAT proof traces.
 Trusted checks include: (i) CNF audit scripts against the manifest contract, (ii) LRAT verification in Lean for committed UNSAT references, and (iii) SAT witness validation against CNF.
 
 This separation enables fast heuristic experimentation in Python while preserving a narrow proof-carrying core in the checking layer.
+In this paper, \emph{proof-carrying} means that a concrete CNF artifact is accompanied by an LRAT trace that is replayed by Lean for a committed reference case.
+\emph{Audited} means that artifact-level conformance is checked mechanically against the sen24 manifest contract without claiming a full semantic encoding-correctness proof.
 
 \subsection{Trust Model and Chain of Trust}
 
@@ -46,6 +48,21 @@ The DIMACS side is checked against a fixed sen24 schema: variable numbering, cla
 \paragraph{Assumption.}
 We do not claim a fully mechanized encoding-correctness proof from Lean semantics to Python-generated CNF. The generator is trusted to implement the audited sen24 contract, and that contract is what reviewers can inspect and replay.
 
+\begin{proposition}[Sen24 audit contract]
+\label{prop:sen24-contract}
+Suppose that a sen24 artifact bundle contains a CNF instance, its manifest, and either an LRAT trace or a SAT witness model.
+\begin{enumerate}[leftmargin=*]
+  \item If the sen24 auditor passes on the CNF/manifest pair, then that pair satisfies the audited sen24 artifact contract: schema conformance, variable-domain reconstruction, clause-family accounting, and recorded hash linkage.
+  \item If Lean successfully replays the corresponding LRAT trace for a committed reference CNF instance, then that concrete CNF instance is UNSAT in the Lean kernel.
+  \item If the SAT witness validator succeeds on a reported model/CNF pair, then that concrete model satisfies that concrete CNF instance.
+\end{enumerate}
+This proposition does not prove global semantic correctness of the entire encoding pipeline, does not make the atlas as a whole proof-carrying, and still depends on the explicit assumptions and audited surfaces stated above.
+\end{proposition}
+
+Proposition~\ref{prop:sen24-contract} is the paper's central guarantee statement.
+Its three clauses are deliberately different in strength: clause (1) is an audit claim about artifacts, clause (2) is a kernel-checked proof claim for committed reference UNSAT instances, and clause (3) is a witness-validation claim for reported SAT instances.
+None of the three clauses, by itself, proves full semantic equivalence between the Lean axioms and the Python encoding; that bridge remains the explicit assumption boundary.
+
 \subsection{Claims, Artifacts, and Commands}
 
 Table~\ref{tab:claims-body} is the body-level claim map extracted from \texttt{docs/paper\_claims\_map.md}. Its purpose is to keep the paper-level claims tied to one canonical command and one primary artifact per claim.
@@ -59,7 +76,7 @@ Claim & Canonical command & Primary artifact \\
 \midrule
 C1 frontier & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c1 --jobs 4 --prune none} \newline \texttt{python3 scripts/summarize\_atlas.py --outdir /tmp/atlas\_c1} & \texttt{/tmp/atlas\_c1/atlas.json} \\
 C2 one MUS + one small MCS & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c2 --jobs 4 --prune none} \newline \texttt{python3 scripts/mus\_mcs.py --outdir /tmp/atlas\_c2} & \texttt{/tmp/atlas\_c2/case\_*/mus.json}, \texttt{mcs.json} \\
-C3 kernel-checked UNSAT & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/*} \\
+C3 committed kernel-checked UNSAT & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \texttt{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \texttt{Certificates/atlas/case\_11111/*} \\
 C4 guarded acceleration & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \texttt{/tmp/atlas\_c4/atlas.json} \\
 C5 validated SAT gallery & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c5 --jobs 4 --prune none} \newline \texttt{python3 scripts/build\_sat\_gallery.py --atlas-outdir /tmp/atlas\_c5 --top-k 5 --min-k 1} & \texttt{/tmp/atlas\_c5/gallery.json} \\
 C6 repair triangulation & \texttt{python3 scripts/run\_atlas.py --outdir /tmp/atlas\_c6 --jobs 4 --prune none} \newline \texttt{python3 scripts/enumerate\_repairs.py --outdir /tmp/atlas\_c6} \newline \texttt{python3 scripts/triangulate\_repairs.py --atlas-outdir /tmp/atlas\_c6 --outdir /tmp/atlas\_c6} & \texttt{/tmp/atlas\_c6/repair\_triangulation.json} \\

@@ -1,4 +1,4 @@
-\section{Evaluation}
+\section{Verification Status and Evidence Accounting}
 
 This section is organized as a claim-by-claim evidence checklist rather than a fresh benchmark report.
 The goal of the current revision is to state, for each official claim C1--C6, which artifact supports it and what was actually re-verified now.
@@ -12,7 +12,7 @@ This revision re-verified C1 through \texttt{./scripts/ci\_phase2\_smoke.sh}, wh
 Primary support comes from \texttt{scripts/mus\_mcs.py} and the embedded \texttt{mus}/\texttt{mcs} fields in \texttt{atlas.json}.
 This revision re-verified the smoke-scope version of C2 through \texttt{./scripts/ci\_phase2\_smoke.sh}, which regenerates \texttt{mus.json} and \texttt{mcs.json} for the committed UNSAT boundary case \texttt{case\_11111}.
 
-\paragraph{C3: proof-carrying UNSAT.}
+\paragraph{C3: committed proof-carrying UNSAT.}
 Primary support comes from the committed reference \texttt{Certificates/atlas/case\_11111/\{sen24.cnf,proof.lrat\}}, the Lean target \texttt{SocialChoiceAtlas.Sen.Atlas.Case11111}, and proof metadata in regenerated summaries.
 This revision re-verified C3 through both \texttt{./scripts/ci\_phase1.sh} and \texttt{./scripts/ci\_phase2\_smoke.sh}, which rebuild Lean proof targets and check the committed proof-carrying case.
 

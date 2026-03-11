@@ -1,0 +1,258 @@
+{
+  "axioms_off": [
+    "no_cycle3"
+  ],
+  "axioms_on": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle4"
+  ],
+  "case_id": "case_11101",
+  "command": [
+    "cadical",
+    "-w",
+    "results/paper_assets/full_bundle/atlas/case_11101/model.txt",
+    "--lrat",
+    "--no-binary",
+    "results/paper_assets/full_bundle/atlas/case_11101/sen24.cnf",
+    "results/paper_assets/full_bundle/atlas/case_11101/proof.lrat"
+  ],
+  "dry_run": false,
+  "duration_sec": 0.04690695899999997,
+  "environment_info": {
+    "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python_version": "3.9.6"
+  },
+  "files": {
+    "cnf": "sen24.cnf",
+    "manifest": "sen24.manifest.json",
+    "solver_log": "solver.log",
+    "summary": "summary.json"
+  },
+  "inferred": false,
+  "manifest": {
+    "category_counts": {
+      "asymm": 6912,
+      "minlib": 13826,
+      "no_cycle3": 0,
+      "no_cycle4": 13824,
+      "un": 1728
+    },
+    "cnf_sha256": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384",
+    "minlib": {
+      "mode": "selectors_v1"
+    },
+    "nclauses": 36290,
+    "nvars": 6936
+  },
+  "mask_bits": "11101",
+  "mask_int": 23,
+  "mcs": {
+    "method": "single_then_pairs_v1",
+    "removed_axioms": [
+      "asymm"
+    ],
+    "removed_mask_bits": "10000",
+    "sat_bits": "01101",
+    "sat_mask": 22,
+    "size": 1,
+    "status": "ok",
+    "time_ms": 0,
+    "trials": 1
+  },
+  "mcs_all": [
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "no_cycle4"
+      ],
+      "remove_bits": "00001",
+      "remove_mask_int": 16,
+      "sat_case_bits": "11100",
+      "sat_case_id": "case_11100",
+      "sat_case_mask_int": 7,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "minlib"
+      ],
+      "remove_bits": "00100",
+      "remove_mask_int": 4,
+      "sat_case_bits": "11001",
+      "sat_case_id": "case_11001",
+      "sat_case_mask_int": 19,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "un"
+      ],
+      "remove_bits": "01000",
+      "remove_mask_int": 2,
+      "sat_case_bits": "10101",
+      "sat_case_id": "case_10101",
+      "sat_case_mask_int": 21,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "asymm"
+      ],
+      "remove_bits": "10000",
+      "remove_mask_int": 1,
+      "sat_case_bits": "01101",
+      "sat_case_id": "case_01101",
+      "sat_case_mask_int": 22,
+      "sat_case_status": "SAT",
+      "size": 1
+    }
+  ],
+  "mcs_min_all": [
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "no_cycle4"
+      ],
+      "remove_bits": "00001",
+      "remove_mask_int": 16,
+      "sat_case_bits": "11100",
+      "sat_case_id": "case_11100",
+      "sat_case_mask_int": 7,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "minlib"
+      ],
+      "remove_bits": "00100",
+      "remove_mask_int": 4,
+      "sat_case_bits": "11001",
+      "sat_case_id": "case_11001",
+      "sat_case_mask_int": 19,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "un"
+      ],
+      "remove_bits": "01000",
+      "remove_mask_int": 2,
+      "sat_case_bits": "10101",
+      "sat_case_id": "case_10101",
+      "sat_case_mask_int": 21,
+      "sat_case_status": "SAT",
+      "size": 1
+    },
+    {
+      "minimality_verified": true,
+      "remove_axioms": [
+        "asymm"
+      ],
+      "remove_bits": "10000",
+      "remove_mask_int": 1,
+      "sat_case_bits": "01101",
+      "sat_case_id": "case_01101",
+      "sat_case_mask_int": 22,
+      "sat_case_status": "SAT",
+      "size": 1
+    }
+  ],
+  "mcs_min_size": 1,
+  "model_file": null,
+  "model_stats": null,
+  "mus": {
+    "initial_axioms": [
+      "asymm",
+      "un",
+      "minlib",
+      "no_cycle4"
+    ],
+    "initial_bits": "11101",
+    "initial_mask": 23,
+    "method": "deletion_v1",
+    "minimal_verified": true,
+    "mus_axioms": [
+      "asymm",
+      "un",
+      "minlib",
+      "no_cycle4"
+    ],
+    "mus_bits": "11101",
+    "mus_mask": 23,
+    "size": 4,
+    "status": "ok",
+    "time_ms": 0,
+    "trace": [
+      {
+        "drop_axiom": "asymm",
+        "status": "SAT",
+        "trial_bits": "01101",
+        "trial_mask": 22
+      },
+      {
+        "drop_axiom": "un",
+        "status": "SAT",
+        "trial_bits": "10101",
+        "trial_mask": 21
+      },
+      {
+        "drop_axiom": "minlib",
+        "status": "SAT",
+        "trial_bits": "11001",
+        "trial_mask": 19
+      },
+      {
+        "drop_axiom": "no_cycle4",
+        "status": "SAT",
+        "trial_bits": "11100",
+        "trial_mask": 7
+      }
+    ],
+    "unknown_hits": 0
+  },
+  "proof": {
+    "cmd": "cadical -w results/paper_assets/full_bundle/atlas/case_11101/model.txt --lrat --no-binary results/paper_assets/full_bundle/atlas/case_11101/sen24.cnf results/paper_assets/full_bundle/atlas/case_11101/proof.lrat",
+    "format": "lrat",
+    "path": "proof.lrat",
+    "sha256": "7f019db8bb32914ba2ff183099106b47f3b17d589c4132257c16f3148565d747",
+    "solver": "cadical"
+  },
+  "proof_file": "proof.lrat",
+  "reproduce": {
+    "axioms_on": [
+      "asymm",
+      "un",
+      "minlib",
+      "no_cycle4"
+    ],
+    "case_bits": "11101",
+    "case_mask": 23,
+    "command": "python3 scripts/run_atlas.py --outdir <atlas_outdir> --case-masks 23 --jobs 1 --prune none --emit-proof unsat-only"
+  },
+  "return_code": 20,
+  "solved": true,
+  "solver": "cadical",
+  "solver_error": null,
+  "solver_info": {
+    "solver_name": "cadical",
+    "solver_path": "/opt/homebrew/Cellar/cadical/3.0.0/bin/cadical",
+    "solver_sha256": "eee5786b12f606ed94339c128156e568b523fa12a2e3870774d19a1b3725988e",
+    "solver_version": "3.0.0",
+    "solver_version_raw": "3.0.0"
+  },
+  "solver_template": null,
+  "status": "UNSAT"
+}

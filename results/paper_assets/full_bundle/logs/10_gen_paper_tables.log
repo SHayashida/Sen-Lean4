@@ -1,0 +1,8 @@
+command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/gen_paper_tables.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/tables/generated'
+return_code: 0
+duration_sec: 0.032271
+----- STDOUT -----
+Wrote results/paper_assets/full_bundle/paper/tables/generated/repairs_table.tex
+Wrote results/paper_assets/full_bundle/paper/tables/generated/gallery_table.tex
+Wrote results/paper_assets/full_bundle/paper/tables/generated/triangulation_table.tex
+----- STDERR -----

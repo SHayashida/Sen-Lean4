@@ -1,23 +1,25 @@
 \section{Related Work and Positioning}
 
-This paper sits in computational social choice, but its contribution is framed as a small-scope systems case study rather than as a new impossibility theorem or a general scaling result.
-The object of study is the sen24 feasibility boundary: which axiom-lever combinations are SAT or UNSAT, which boundary cases admit a concrete explanation, and which artifacts can be replayed and audited afterward.
-That emphasis on boundary identification, explicit evidence, and replayable outputs is what turns the case study into an AI/Systems contribution.
+The closest prior context is SAT-based computational social choice.
+That line already showed that SAT solving can be used to prove impossibility results, search for axiomatizations, and discover proofs in small finite domains; it includes the style associated with Tang and Lin, later automated exploration and proof discovery by Geist and Endriss \citep{geist2011automated}, and MUS-oriented explanation work associated with Brandt and Geist.
+Our paper does not claim novelty for ``using SAT in social choice,'' for extracting contradictions, or for small-scope automated theorem search by itself.
+Its narrower contribution is to package one fixed sen24 search workflow as an explicit auditable contract whose outputs are replayable artifacts rather than solver conclusions alone.
 
-Constraint Hierarchies and Assumption-Based Truth Maintenance Systems are natural reference points because they both reason about conflicting constraints or assumptions.
-We differ from them in output and trust model.
-Our primary deliverable is not only a consistent assignment or a justification structure, but an auditable atlas whose cases are tied to concrete artifacts: frontier summaries, one MUS and one small MCS candidate for boundary explanation, committed proof-carrying UNSAT references, and validated SAT rule cards.
-In other words, we use conflicting-assumption structure to organize cause and repair, but we package the result as proof-/witness-carrying evidence rather than as inference bookkeeping alone.
+This difference is about contract structure, not theorem content.
+Prior COMSOC-SAT work is the direct intellectual predecessor for boundary search and explanation, and we build squarely on that perspective.
+What we add is a paper-level separation between proof, audit, and assumption: semantic Lean theorems on one side, manifest-audited CNF artifacts in the middle, committed LRAT replay for reference UNSAT cases, and independently validated SAT witnesses for displayed feasible rules.
+In that sense, the paper is closer to certificate-backed automated reasoning than to a new impossibility proof technique.
 
-MAXSAT and OMT are also close neighbors because they can optimize soft-constraint violations or compute minimum relaxations.
-We do not position this paper as a replacement for those methods or as a speed comparison against them.
-Instead, the paper uses optimization-style reasoning only as a triangulation baseline for the stronger C6 stage: repair enumeration is compared against an independent optimum baseline, while the main contribution remains causal boundary mapping, MUS/MCS-style explanation at the paper's conservative claim level, and validated SAT witness artifacts.
-The difference matters because an optimum value alone does not provide the paper's central outputs: a reproducible frontier, explicit boundary explanations, and audit-ready rule artifacts.
+Certificate checking and proof-carrying automated reasoning form the second comparison point.
+We differ from that tradition not by stronger proof checking, but by the way it is embedded into a social-choice workflow.
+The central artifact is not a bare proof trace: it is an auditable atlas with a reproducible frontier, one MUS and one small MCS candidate for boundary explanation, committed proof-carrying UNSAT references, validated SAT rule cards, and explicit commands and hashes for replay.
+The value of the package is that a reviewer can inspect where kernel-checked proof ends, where mechanical auditing begins, and where assumptions remain.
 
-The systems angle is therefore not raw solving power but auditable integration.
-The repository fixes a chain from semantic specification to DIMACS generation, manifest auditing, SAT/UNSAT outputs, LRAT replay in Lean for committed UNSAT references, SAT witness validation, and reproducible paper-facing artifacts.
-Evidence bundles, schema/version fields, deterministic render paths, and CI-backed smoke checks are part of the contribution because they make the sen24 atlas inspectable by a reviewer without trusting the solver as the final authority.
+Constraint Hierarchies, ATMS, MAXSAT, and OMT remain relevant only as secondary contrasts.
+They reason about conflicting constraints, consistency under assumptions, or optimal relaxations, and they are useful reference points for the repair side of the story.
+But this paper does not position itself as a replacement for them or as a speed comparison against them.
+Their role here is narrower: optimization-style reasoning appears as the independent triangulation baseline for C6, whereas the main contribution remains auditable boundary mapping, conservative MUS/MCS explanation, and replayable SAT/UNSAT evidence artifacts.
 
-The scope remains intentionally narrow.
-We claim only a sen24 case study under a small-scope hypothesis, not a general account of arbitrary $n,m$, not a complete survey of social-choice theorem proving, and not a formal Lean proof of pruning or symmetry heuristics.
-The value of the paper is that even under those limits, an auditable possibility atlas can connect boundary, cause, repair, and witness in a form that is useful for verified, AI-assisted rule design.
+The scope is intentionally narrow.
+We claim only a sen24 case study under a small-scope hypothesis, not a general account of arbitrary $n,m$, not completeness for multiple theorem families, and not formal Lean verification of symmetry or pruning heuristics.
+The point is that even under those limits, the paper makes one JAR-relevant contribution precise: a small social-choice impossibility search can be presented as an auditable reasoning workflow with a visible trust contract.

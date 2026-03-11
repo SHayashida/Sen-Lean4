@@ -68,6 +68,19 @@ def _escape_dot_label(text: str) -> str:
     return text.replace("\\", "\\\\").replace("\"", "\\\"")
 
 
+def _latex_escape(text: str) -> str:
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "_": r"\_",
+        "%": r"\%",
+        "&": r"\&",
+        "#": r"\#",
+        "{": r"\{",
+        "}": r"\}",
+    }
+    return "".join(replacements.get(ch, ch) for ch in text)
+
+
 def _write_placeholder(path: Path, fmt: str) -> None:
     if fmt == "png":
         def chunk(tag: bytes, data: bytes) -> bytes:
@@ -106,6 +119,85 @@ def _render_dot(dot_path: Path, image_path: Path, fmt: str) -> None:
     )
     if proc.returncode != 0:
         _write_placeholder(image_path, fmt)
+
+
+def _status_fill(case: dict[str, Any]) -> str:
+    status_key = _status_for_label(case)
+    if status_key.startswith("UNSAT"):
+        return "red!18"
+    if status_key.startswith("SAT"):
+        return "green!18"
+    if status_key.startswith("PRUNED"):
+        return "gray!22"
+    return "white"
+
+
+def _write_boundary_hasse_tex(cases: list[dict[str, Any]], outdir: Path) -> Path:
+    case_by_mask = {int(c["mask_int"]): c for c in cases}
+    unsat_masks = sorted(
+        int(c["mask_int"]) for c in cases if _status_for_label(c).startswith("UNSAT")
+    )
+    selected_masks: set[int] = set(unsat_masks)
+    for mask in unsat_masks:
+        for bit in range(5):
+            bit_mask = 1 << bit
+            if mask & bit_mask:
+                pred = mask ^ bit_mask
+                if pred in case_by_mask:
+                    selected_masks.add(pred)
+
+    selected = [case_by_mask[mask] for mask in sorted(selected_masks)]
+    groups: dict[int, list[dict[str, Any]]] = {}
+    for case in selected:
+        pop = str(case.get("mask_bits", "")).count("1")
+        groups.setdefault(pop, []).append(case)
+    for row in groups.values():
+        row.sort(key=lambda c: int(c.get("mask_int", 0)))
+
+    y_levels = {pop: idx for idx, pop in enumerate(sorted(groups.keys()))}
+
+    lines: list[str] = []
+    lines.append(r"\begingroup")
+    lines.append(r"\centering")
+    lines.append(r"\begin{tikzpicture}[x=1.65cm,y=1.25cm]")
+    lines.append(
+        r"\tikzstyle{frontiernode}=[draw, rounded corners=2pt, minimum width=1.7cm, minimum height=0.8cm, align=center, font=\scriptsize]"
+    )
+
+    positions: dict[str, tuple[float, float]] = {}
+    for pop in sorted(groups.keys()):
+        row = groups[pop]
+        start_x = -0.5 * (len(row) - 1)
+        y = float(y_levels[pop])
+        for i, case in enumerate(row):
+            x = start_x + float(i)
+            case_id = str(case["case_id"])
+            positions[case_id] = (x, y)
+            bits = _latex_escape(str(case.get("mask_bits", "")))
+            status = _latex_escape(_status_for_label(case))
+            fill = _status_fill(case)
+            lines.append(
+                rf'\node[frontiernode, fill={fill}] ({case_id}) at ({x:.2f},{y:.2f}) {{\texttt{{{bits}}}\\{status}}};'
+            )
+
+    selected_masks_sorted = sorted(selected_masks)
+    for mask_a in selected_masks_sorted:
+        for mask_b in selected_masks_sorted:
+            if _is_cover(mask_a, mask_b, selected_masks_sorted):
+                src = str(case_by_mask[mask_a]["case_id"])
+                dst = str(case_by_mask[mask_b]["case_id"])
+                lines.append(rf"\draw[->, thin] ({src}) -- ({dst});")
+
+    lines.append(r"\end{tikzpicture}")
+    lines.append(r"\par\medskip")
+    lines.append(
+        r"\scriptsize Boundary slice: unsatisfiable cases and their immediate solved predecessors in the subset poset."
+    )
+    lines.append(r"\endgroup")
+
+    path = outdir / "frontier_hasse.tex"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
 
 
 def build_hasse_dot(
@@ -177,6 +269,7 @@ def build_hasse_dot(
     lines.append("}")
     dot_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
+    _write_boundary_hasse_tex(cases, outdir)
     _render_dot(dot_path, image_path, image_format)
     return dot_path, image_path
 

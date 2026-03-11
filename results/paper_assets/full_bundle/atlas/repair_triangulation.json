@@ -1,0 +1,118 @@
+{
+  "atlas_schema_version": 1,
+  "atlas_sha256": "d78a14522b841bcebaaf3f2b595f7e7a2ce168a4cea6700112ed8bec135caef4",
+  "backend_note": null,
+  "backend_requested": "bruteforce",
+  "backend_used": "bruteforce",
+  "cases": [
+    {
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "case_id": "case_11101",
+      "compare": {
+        "mcs_min_all": [
+          [
+            "asymm"
+          ],
+          [
+            "minlib"
+          ],
+          [
+            "no_cycle4"
+          ],
+          [
+            "un"
+          ]
+        ],
+        "mcs_min_size": 1,
+        "set_match": true,
+        "size_match": true
+      },
+      "optimum_drop_count": 1,
+      "optimum_repairs": [
+        [
+          "asymm"
+        ],
+        [
+          "minlib"
+        ],
+        [
+          "no_cycle4"
+        ],
+        [
+          "un"
+        ]
+      ],
+      "verdict": "match"
+    },
+    {
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_11111",
+      "compare": {
+        "mcs_min_all": [
+          [
+            "asymm"
+          ],
+          [
+            "minlib"
+          ],
+          [
+            "no_cycle4"
+          ],
+          [
+            "un"
+          ]
+        ],
+        "mcs_min_size": 1,
+        "set_match": true,
+        "size_match": true
+      },
+      "optimum_drop_count": 1,
+      "optimum_repairs": [
+        [
+          "asymm"
+        ],
+        [
+          "minlib"
+        ],
+        [
+          "no_cycle4"
+        ],
+        [
+          "un"
+        ]
+      ],
+      "verdict": "match"
+    }
+  ],
+  "generated_at_utc": "2026-03-11T11:55:01.942124+00:00",
+  "oracle_stats": {
+    "cache_hits": 0,
+    "cache_misses": 9,
+    "cache_size": 9,
+    "checks_total": 9,
+    "sat_checks": 8,
+    "unsat_checks": 1
+  },
+  "reproduce": {
+    "command": "python3 scripts/triangulate_repairs.py --atlas-outdir <atlas_outdir> --outdir <outdir> --backend bruteforce --solver cadical"
+  },
+  "solver_info": {
+    "solver_name": "cadical",
+    "solver_path": "<absolute>/cadical",
+    "solver_sha256": "eee5786b12f606ed94339c128156e568b523fa12a2e3870774d19a1b3725988e",
+    "solver_version": "3.0.0",
+    "solver_version_raw": "3.0.0"
+  },
+  "triangulation_schema_version": 1
+}

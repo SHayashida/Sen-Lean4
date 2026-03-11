@@ -1,0 +1,82 @@
+{
+  "axioms_off": [
+    "minlib"
+  ],
+  "axioms_on": [
+    "asymm",
+    "un",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "case_id": "case_11011",
+  "command": [
+    "cadical",
+    "-w",
+    "results/jar_full_atlas/case_11011/model.txt",
+    "results/jar_full_atlas/case_11011/sen24.cnf"
+  ],
+  "dry_run": false,
+  "duration_sec": 0.018563625000000084,
+  "environment_info": {
+    "git_commit": "715875954e207ddae947077c27d4e908459887b6",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python_version": "3.9.6"
+  },
+  "files": {
+    "cnf": "sen24.cnf",
+    "manifest": "sen24.manifest.json",
+    "solver_log": "solver.log",
+    "summary": "summary.json"
+  },
+  "inferred": false,
+  "manifest": {
+    "category_counts": {
+      "asymm": 6912,
+      "minlib": 0,
+      "no_cycle3": 13824,
+      "no_cycle4": 13824,
+      "un": 1728
+    },
+    "cnf_sha256": "43a21f54de06e13025e3b49ea407e1736ff66a203f4c8a47165ce52c37eeb55b",
+    "minlib": {
+      "mode": "disabled"
+    },
+    "nclauses": 36288,
+    "nvars": 6912
+  },
+  "mask_bits": "11011",
+  "mask_int": 27,
+  "model_file": "model.json",
+  "model_stats": {
+    "n_aux_true": 0,
+    "n_p_true": 1728,
+    "n_true": 1728,
+    "social_true_density": 0.25
+  },
+  "proof": null,
+  "proof_file": null,
+  "reproduce": {
+    "axioms_on": [
+      "asymm",
+      "un",
+      "no_cycle3",
+      "no_cycle4"
+    ],
+    "case_bits": "11011",
+    "case_mask": 27,
+    "command": "python3 scripts/run_atlas.py --outdir <atlas_outdir> --case-masks 27 --jobs 1 --prune none --emit-proof unsat-only"
+  },
+  "return_code": 10,
+  "solved": true,
+  "solver": "cadical",
+  "solver_error": null,
+  "solver_info": {
+    "solver_name": "cadical",
+    "solver_path": "/opt/homebrew/Cellar/cadical/3.0.0/bin/cadical",
+    "solver_sha256": "eee5786b12f606ed94339c128156e568b523fa12a2e3870774d19a1b3725988e",
+    "solver_version": "3.0.0",
+    "solver_version_raw": "3.0.0"
+  },
+  "solver_template": null,
+  "status": "SAT"
+}

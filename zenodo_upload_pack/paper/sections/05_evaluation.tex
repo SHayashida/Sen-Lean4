@@ -1,0 +1,35 @@
+\section{Verification Status and Evidence Accounting}
+
+This section is organized as a claim-by-claim evidence checklist rather than a fresh benchmark report.
+The goal of the current revision is to state, for each official claim C1--C6, which artifact supports it and what was actually re-verified now.
+The runtime harness in \code{scripts/eval_atlas.py} was re-run at smoke scope inside \code{./scripts/ci_phase2_smoke.sh}, but it is used here only as a sanity check on metadata and plotting, not as a new performance claim.
+The sen24 short-cycle/acyclicity bridge is tracked separately as an audited finite Python check, not as a Lean-side proof obligation under C1--C6.
+
+\input{tables/generated/verification_stats_table.tex}
+
+Table~\ref{tab:sen24-verification-stats} supplies the minimal quantitative context used in this paper: fixed committed artifact sizes, current full/tiny artifact status, and optional local timing values from generated logs.
+These rows are evidence bookkeeping, not portable benchmarks.
+
+\paragraph{C1: reproducible frontier generation.}
+Primary support comes from \code{scripts/run_atlas.py}, \code{atlas.json}, \code{atlas_summary.md}, and per-case \code{summary.json}.
+This revision re-verified C1 through \code{./scripts/ci_phase2_smoke.sh}, which re-runs a full 32-case sen24 atlas in the repair smoke path and checks the resulting frontier artifacts.
+
+\paragraph{C2: one MUS and one small MCS candidate.}
+Primary support comes from \code{scripts/mus_mcs.py} and the embedded \code{mus}/\code{mcs} fields in \code{atlas.json}.
+This revision re-verified the smoke-scope version of C2 through \code{./scripts/ci_phase2_smoke.sh}, which regenerates \code{mus.json} and \code{mcs.json} for the committed UNSAT boundary case \code{case_11111}.
+
+\paragraph{C3: committed proof-carrying UNSAT.}
+Primary support comes from the committed reference artifacts under \code{Certificates/atlas/case_11111/}, the Lean target \code{SocialChoiceAtlas.Sen.Atlas.Case11111}, and proof metadata in regenerated summaries.
+This revision re-verified C3 through both \code{./scripts/ci_phase1.sh} and \code{./scripts/ci_phase2_smoke.sh}, which rebuild Lean proof targets and check the committed proof-carrying case.
+
+\paragraph{C4: guarded symmetry reduction and monotone pruning.}
+Primary support comes from \code{docs/assumptions_monotone_pruning.md}, \code{docs/safety_symmetry_reduction.md}, and the runtime guardrail fields in \code{atlas.json}.
+This revision re-verified C4 through \code{./scripts/ci_phase2_smoke.sh}, which executes both symmetry-checked and prune-checked atlas runs and validates their metadata.
+
+\paragraph{C5: auditable SAT gallery.}
+Primary support comes from \code{scripts/build_sat_gallery.py}, \code{gallery.json}, \code{gallery.md}, per-case \code{rule_card.md}/\code{rule_card.tex}, and embedded SAT witness-validation statistics.
+This revision re-verified C5 through \code{./scripts/ci_phase2_smoke.sh}, which rebuilds a small gallery, checks that selected entries are non-trivial and validated, and confirms that rule-card artifacts exist.
+
+\paragraph{C6: repair triangulation against an independent optimum baseline.}
+Primary support comes from \code{scripts/enumerate_repairs.py}, \code{scripts/triangulate_repairs.py}, \code{repair_triangulation.json}, and the comparison fields \code{size_match}/\code{set_match}.
+This revision re-verified C6 through \code{./scripts/ci_phase2_smoke.sh}, which re-runs full repair enumeration and triangulation on a solved 32-case sen24 atlas.

@@ -1,0 +1,22 @@
+% table_schema_version=1
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.39\linewidth} p{0.21\linewidth} p{0.28\linewidth}}
+\toprule
+Item & Value & Scope \\
+\midrule
+Committed sen24 CNF variables & 6936 & invariant \\
+Committed sen24 CNF clauses & 50114 & invariant \\
+Committed LRAT proof size (bytes) & 437016 & invariant for the committed reference \\
+Committed Lean replay target & available & committed reference only \\
+Full sen24 atlas status & generated (32 cases; 30 SAT, 2 UNSAT) & current full artifact set \\
+Tiny evidence bundle status & available & tiny reviewer path \\
+Full atlas generation time (s) & 1.449 & environment-specific log value \\
+Paper asset render time (s) & 0.098 & environment-specific log value \\
+Tiny atlas generation time (s) & 0.663 & environment-specific log value \\
+\bottomrule
+\end{tabular}
+\caption{Minimal quantitative verification facts for sen24. CNF counts and committed LRAT size are invariant artifact properties. Timing rows, when present, are local log values from the current generated bundles and are environment-specific measurements rather than benchmark claims.}
+\label{tab:sen24-verification-stats}
+\end{table}

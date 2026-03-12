@@ -1,0 +1,35 @@
+\section{Introduction}
+
+Classical impossibility theorems identify combinations of axioms that cannot be satisfied simultaneously, but they do not by themselves answer the engineering question that follows: if a design is impossible, \emph{which lever changes restore feasibility, and what evidence should we trust when we make that change}?
+This paper studies that question in automated-reasoning and systems terms by treating axioms as explicit levers, enumerating a small design space, and recording the SAT/UNSAT boundary together with auditable evidence for each outcome.
+
+Modern solvers and optimization tools are essential for this search, but they are not the whole story.
+They can optimize, check consistency, or produce candidate repairs, yet a paper-ready result also needs a clear boundary map, an explanation of why boundary cases fail, concrete SAT witnesses for feasible designs, and a chain of trust that does not collapse to ``the solver said so.''
+Our contribution is therefore an \emph{auditable possibility atlas}: a small-scope record of boundary, cause, repair, and witness artifacts whose proof obligations and audit obligations are stated separately.
+This matters in practice because solver-assisted institutional design needs proof-/witness-carrying decision artifacts, not only optimized outputs.
+
+What is new here is not SAT in social choice.
+The closest prior line is SAT-based computational social choice, including impossibility proving by Tang and Lin \citep{tanglin2009computer}, automated exploration and proof discovery in the Geist--Endriss line \citep{geist2011automated}, and later SAT-based synthesis work by Brandt and Geist \citep{brandtgeist2016strategyproof}.
+This paper does not claim a new social-choice theorem or a new SAT proof method.
+Its contribution is to package one fixed sen24 search workflow as an explicit auditable contract: what is proved in Lean, what is only audited against manifests and side conditions, what remains assumed, and which artifacts a reviewer can replay.
+
+The paper-level contribution ladder follows the official claims map exactly:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{C1}: for sen24, axiom-lever enumeration yields a reproducible SAT/UNSAT frontier;
+  \item \textbf{C2}: UNSAT boundary cases are explainable via one MUS and one small MCS candidate;
+  \item \textbf{C3}: a committed UNSAT reference can be attached as LRAT and checked in Lean;
+  \item \textbf{C4}: symmetry reduction and monotone pruning are guarded by explicit assumptions and runtime validators;
+  \item \textbf{C5}: relaxed SAT cases can be filtered into a deterministic, auditable gallery with explicit SAT witness validation;
+  \item \textbf{C6}: repair enumeration is checked against an independent optimum baseline by triangulation.
+\end{itemize}
+
+The stance of the paper is deliberately narrow.
+We work only at sen24, we treat auditability as the primary systems requirement, and we do not promote small-scope evidence into a claim about arbitrary $n,m$ or a fully mechanized encoding-correctness theorem for the Python generator.
+The goal is to show that a killable instance can still support a meaningful auditable atlas with committed proof-carrying UNSAT references and validated SAT witnesses when the trusted computing base and guarantee boundary are made explicit.
+
+Section~3 defines the trust model and the proof/audit/assumption split.
+Section~4 describes the sen24 encoding and the paper-facing artifact contract.
+Section~5 reports the claim-by-claim evidence accounting and re-verification status for this revision.
+Section~6 presents the sen24 case study, including frontier artifacts, one MUS plus one small MCS candidate, validated SAT rule cards, and the stronger C6 repair triangulation stage.
+Section~7 positions the paper against prior COMSOC-SAT and certificate-checking work.
+Section~8 closes with the scope limits that keep the paper honest.

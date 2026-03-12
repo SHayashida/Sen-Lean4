@@ -1,9 +1,0 @@
-{
-  "asymmetric_relations_checked": 729,
-  "counterexample_count": 0,
-  "counterexamples": [],
-  "domain_size": 4,
-  "property": "For asymmetric relations on four alternatives, Acyclic iff forbidding directed 3-cycles and 4-cycles.",
-  "relations_total": 65536,
-  "status": "ok"
-}

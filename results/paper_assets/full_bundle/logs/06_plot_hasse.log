@@ -1,7 +1,0 @@
-command: /Applications/Xcode.app/Contents/Developer/usr/bin/python3 '<redacted-home>/plot_hasse_frontier.py' --atlas-outdir '<bundle_outdir>/atlas' --outdir '<bundle_outdir>/paper/figures/generated' --format png --include-pruned false --show status
-return_code: 0
-duration_sec: 0.035766
------ STDOUT -----
-Wrote results/paper_assets/full_bundle/paper/figures/generated/frontier_hasse.dot
-Wrote results/paper_assets/full_bundle/paper/figures/generated/frontier_hasse.png
------ STDERR -----

@@ -1,7 +1,8 @@
 \section{Sen24 Case Study}
 
-The sen24 atlas is the fixed case study where the paper's trust argument becomes concrete.
-It supplies two different but complementary evidence paths:
+The sen24 atlas is the fixed case study where the paper's central argument becomes concrete.
+It turns the abstract claim ladder into one connected line of evidence: frontier first, then local boundary explanation, then validated SAT witnesses, then the stronger repair-triangulation stage, all under the audit contract of Proposition~\ref{prop:sen24-contract}.
+The atlas supplies two different but complementary evidence paths:
 \begin{itemize}[leftmargin=*]
   \item \textbf{Semantic path.} \code{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} proves the sen24 impossibility statement in Lean by constructing witness profiles that force 3-cycles or 4-cycles.
   \item \textbf{Artifact path.} \code{SocialChoiceAtlas/Sen/BaseCase24/SATSenCNF.lean} replays an LRAT certificate for the committed DIMACS baseline, proving UNSAT of the audited CNF instance in the Lean kernel.

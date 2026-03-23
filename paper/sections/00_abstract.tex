@@ -1,11 +1,11 @@
 \begin{abstract}
-We present an auditable possibility atlas for the fixed Sen base case sen24 ($n=2$, $m=4$).
-The central object is not a generic theorem-proving pipeline but a reproducible map of which axiom combinations are feasible or infeasible, together with evidence that can be replayed and checked.
-For sen24, axiom-lever enumeration yields a SAT/UNSAT frontier; boundary UNSAT cases are explained by one MUS and one small MCS candidate; relaxed SAT cases are turned into validated rule examples through a deterministic gallery; and a stronger repair stage reports full repair enumeration checked by triangulation against an independent optimum baseline.
+Classical impossibility theorems identify infeasible axiom sets, but they do not by themselves answer the engineering question of which lever changes restore feasibility or what evidence should be trusted when that search is automated.
+We address this question by constructing an auditable possibility atlas for a fixed finite instance of Sen's impossibility of a Paretian liberal (sen24, $n=2$, $m=4$).
+Across 32 axiom configurations induced by five levers, the atlas records which combinations are SAT or UNSAT and ties each outcome to replayable evidence.
+It identifies the sen24 SAT/UNSAT frontier, explains boundary UNSAT cases by one MUS and one small MCS candidate, and turns relaxed SAT cases into validated rule examples through deterministic gallery and rule-card artifacts.
+Beyond this local boundary explanation stage, a stronger repair stage reports full repair enumeration and checks it by triangulation against an independent optimum baseline.
 
-The paper's contribution is therefore a small-scope automated-reasoning contract over atlas artifacts.
-Lean fixes the sen24 semantic theorem and kernel-checks committed LRAT replays for a reference UNSAT case, Python generates DIMACS CNF plus manifests, external SAT solvers perform the search, and reported SAT models are checked independently by a witness validator.
-To keep the guarantee boundary explicit, we separate what is proved, audited, witness-validated, and assumed: Lean covers the semantic theorem and the committed proof replay; CNF schema, manifest linkage, and clause-family accounting are mechanically audited; SAT witnesses are validated against concrete CNF instances; and the short-cycle encoding used for rationality is connected to acyclicity only by a sen24-specific finite Python check.
-
-The repository packages commands, hashes, metadata, and paper-facing artifacts into a reproducible evidence bundle, so that the sen24 frontier, its local boundary explanations, the stronger repair outputs, and the SAT witness examples can be regenerated and audited without trusting solver output alone.
+The contribution is therefore not SAT solving in social choice per se, but an auditable workflow around atlas artifacts with an explicit proof/audit/witness split.
+The committed sen24 semantic theorem and a committed LRAT replay are checked in Lean; CNF schema conformance, manifest linkage, and clause-family accounting are mechanically audited; reported SAT models are witness-validated against concrete CNF instances; and the short-cycle encoding used for rationality is connected to acyclicity only by a sen24-specific finite Python check.
+The repository packages commands, hashes, metadata, and paper-facing artifacts into a reproducible evidence bundle, so that the frontier, its boundary explanations, the stronger repair outputs, and the SAT witness examples can be regenerated and audited without trusting solver output alone.
 \end{abstract}

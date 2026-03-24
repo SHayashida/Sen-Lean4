@@ -1,5 +1,11 @@
 # Reproducibility Appendix (Phase3)
 
+## Canonical repository
+
+The canonical public repository for this artifact is:
+
+- https://github.com/SHayashida/Sen-Lean4
+
 ## Artifact policy
 
 - Baseline artifacts are fixed and protected:

@@ -1,10 +1,20 @@
 .DS_Store
+.AppleDouble
+.LSOverride
 .lake/
 *.olean
 *.ilean
 *.c
 *.c.hash
 *.trace
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.python-version
 AGENTS.local.md
 AGENTS_PRIVATE.md
 results/
@@ -27,5 +37,8 @@ paper/**/*.log
 paper/**/*.fls
 paper/**/*.fdb_latexmk
 paper/**/*.synctex.gz
+# Keep preprint PDFs out of git (upload PDFs to jxiv separately).
+paper/**/*preprint*.pdf
+paper/**/*submission*.pdf
 # Uncomment if you want to keep generated PDFs out of git:
 # paper/**/*.pdf

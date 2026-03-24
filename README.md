@@ -12,6 +12,18 @@ For the exact public claim boundary, use:
 
 These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
 
+## Preprint submission policy (jxiv)
+
+- Canonical repository URL: https://github.com/SHayashida/Sen-Lean4
+- Preprint PDFs are **not** pushed to this repository.
+- The repository tracks source and reproducibility assets (Lean/spec/scripts/docs), and each preprint submission should be tied to a specific commit hash or tag.
+
+Recommended practice for each submission:
+
+1. Build locally (`make -C paper pdf`).
+2. Record the commit hash used for the uploaded PDF.
+3. Upload only the PDF to jxiv; keep reproducibility sources in this repository.
+
 ## Zenodo-ready layout
 
 ```text

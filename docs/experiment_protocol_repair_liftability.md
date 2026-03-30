@@ -21,7 +21,19 @@ and justify pivoting to Candidate B (encoding sensitivity).
 
 ## Prerequisites (Blockers — must be resolved before running)
 
-See `docs/axiom_semantics_scaling.md` for the required axiom semantics memo.
+**The experiment cannot start immediately. The actual order is:**
+
+```
+Step 0:   Generalized encoder + auditor implemented
+          → docs/schema_generalization_design.md
+Step 0.5: axiom_semantics_scaling.md signed off
+          → docs/axiom_semantics_scaling.md
+Step 1:   base-case triples fixed  (experiment begins here)
+Step 2+:  repair liftability test
+```
+
+See `docs/schema_generalization_design.md` for Step 0 implementation tasks.
+See `docs/axiom_semantics_scaling.md` for the required axiom semantics sign-off.
 
 Specifically, confirm that all five levers:
 

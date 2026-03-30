@@ -1,19 +1,20 @@
 # Axiom Semantics Scaling Memo
 ## Prerequisite for Repair Liftability Experiment
 
-**Status:** Must be completed before running `experiment_protocol_repair_liftability.md`  
+**Status:** INCOMPLETE — sign-off not yet possible  
+**Blocker:** Repository is currently `sen24`-fixed. Parametric schema/auditor must be
+implemented before this memo can be completed.  
+**See:** `docs/schema_generalization_design.md` for the required implementation step.  
 **Location:** `docs/axiom_semantics_scaling.md`
 
 ---
 
 ## Purpose
 
-This memo confirms that all axiom levers used in the repair liftability experiment
-are interpreted as instances of the **same axiom schema** across different case sizes.
-
-If lever semantics change as (n, m) grows, observed non-liftability could be an artifact
-of semantic drift rather than genuine repair structure change.
-This would invalidate the experiment's conclusions.
+Confirm that all axiom levers used in the repair liftability experiment are interpreted
+as instances of the **same axiom schema** across cases (2,4), (2,5), and (3,4).
+Observed non-liftability must be attributable to genuine repair structure change,
+not to semantic drift in the encoding.
 
 ---
 
@@ -27,123 +28,171 @@ This would invalidate the experiment's conclusions.
 
 ---
 
+## Current Repository Limitation
+
+The existing codebase (`gen_sen24_dimacs.py`, `check_sen24_cnf.py`, `schema.py`) is
+**fixed to n=2, m=4**. The confirmation below cannot be completed until a parametric
+schema and parametric auditor are implemented.
+
+Do not attempt to sign off this memo using the current `sen24`-fixed tools.
+
+---
+
 ## Lever-by-Lever Analysis
 
 ### `asymm` — Asymmetry
 
-**Schema:** For all individuals i, alternatives x, y: if xPᵢy then ¬yPᵢx.
+**Schema:** ∀i, ∀x≠y: xPᵢy → ¬yPᵢx
 
-**Scaling behavior:** Quantifies over all pairs within each individual's preference.
-Number of CNF clauses scales with m(m−1)/2 per individual, but the schema is identical.
+**Scaling:** Clause count scales as n·m(m−1)/2. Schema is structurally unchanged.  
+**Risk:** Low.
 
-**Status:** ☐ Confirmed uniform across (2,4), (2,5), (3,4)
+| Check | Current status | After generalization |
+|---|---|---|
+| Same logical form across cases | ☐ unverified | ☐ to confirm |
+| CNF clause structure invariant | ☐ unverified | ☐ to confirm |
 
 ---
 
-### `un` — Unrestricted Domain / Universal Domain
+### `un` — Unanimity (Pareto)
 
-**Schema:** All preference profiles over the alternatives are in the domain.
+**⚠️ Correction from v0.1:** This lever is **Unanimity / Pareto**, not Universal Domain.
+Universal Domain is a background assumption of the encoding (all profiles are admitted),
+not a separate axiom lever. Treating `un` as Universal Domain is a category error that
+would cause the entire schema confirmation to target the wrong axiom.
 
-**Scaling behavior:** In CNF encoding, this is typically implicit (no domain restriction clauses).
-Confirm that the encoding does not introduce profile filtering for larger (n, m).
+**Schema:** ∀x,y: (∀i: xPᵢy) → xPy
 
-**Status:** ☐ Confirmed uniform across (2,4), (2,5), (3,4)
+**Scaling:** Quantifies over all voter–alternative combinations.
+Schema is structurally unchanged; clause count scales with n and m(m−1)/2.  
+**Risk:** Low, but must confirm quantifier structure is not hard-coded to n=2.
+
+| Check | Current status | After generalization |
+|---|---|---|
+| Correctly identified as Pareto, not Universal Domain | ✓ confirmed in this memo | ✓ |
+| Quantifier structure not hard-coded to n=2 | ☐ unverified | ☐ to confirm |
+| Clause count scales correctly with n,m | ☐ unverified | ☐ to confirm |
 
 ---
 
 ### `minlib` — Minimal Liberalism
 
-**Schema:** There exist at least two individuals each of whom is decisive over at least one pair.
+**⚠️ Strong blocker — not a light check.**
 
-**Scaling behavior:** The schema quantifies existentially over individuals and pairs.
-With more individuals (n=3) or more alternatives (m=5), the condition becomes *easier* to satisfy
-(more candidates for decisive pairs), but the schema itself is unchanged.
+**Schema:** ∃ at least two distinct individuals i≠j, each decisive over at least one pair.  
+Decisive(i,x,y) := (xPᵢy → xPy) ∧ (yPᵢx → yPx)
 
-**Key check:** Confirm that the CNF encoding uses the same existential structure and
-does not hard-code individual indices in a way that changes meaning at n=3.
+**Why this is a strong blocker:**
 
-**Status:** ☐ Confirmed uniform across (2,4), (2,5), (3,4)
+Moving to n=3 changes:
+- How selectors are represented (which individual holds which decisive pair)
+- The existential structure (must ensure ≥2 distinct decisive individuals among 3)
+- Voter index handling: if individual indices are hard-coded, the schema breaks at n=3
+
+The current encoder was designed for n=2. At n=3, the existential quantification
+over individuals must be verified not to collapse into n=2 semantics or to inadvertently
+require all 3 individuals to be decisive.
+
+**Status: Cannot be confirmed without generalized encoder.**
+
+| Check | Current status | After generalization |
+|---|---|---|
+| Existential quantification over individuals is parametric | ☐ BLOCKED | ☐ to confirm |
+| No hard-coded individual indices | ☐ BLOCKED | ☐ to confirm |
+| Decisiveness structure correct at n=3 | ☐ BLOCKED | ☐ to confirm |
 
 ---
 
 ### `no_cycle3` — Acyclicity (length 3)
 
-**Schema:** For all triples of alternatives x, y, z:
-¬(xPy ∧ yPz ∧ zPx) in the social preference.
+**Schema:** ∀x,y,z distinct: ¬(xPy ∧ yPz ∧ zPx)
 
-**Scaling behavior:** ⚠️ **Requires careful attention.**
+**Coverage by case:**
 
-At m=4, the number of triples is C(4,3) = 4.
-At m=5, the number of triples is C(5,3) = 10.
+| Case | # triples C(m,3) |
+|---|---|
+| (2,4) | 4 |
+| (2,5) | 10 |
+| (3,4) | 4 |
 
-The schema is the same, but:
-- The condition covers more triples at larger m.
-- `no_cycle3` alone may be *weaker relative to* `no_cycle4` at larger m,
-  because longer cycles become available.
+The logical form is the same instance schema. However, at m=5, `no_cycle3 ∧ no_cycle4`
+still permits length-5 cycles. The effective acyclicity constraint is qualitatively
+weaker at m=5 than at m=4.
 
-**Key question:** Is `no_cycle3` at (2,5) or (3,4) the same *normative constraint*
-as at (2,4), or does it permit more pathological structures due to additional alternatives?
+**Key judgment required before sign-off:** If non-liftability is observed at (2,5),
+is it because repair structure genuinely changed, or because `no_cycle3/4` permits
+longer cycles that were absent at m=4? This confound must be explicitly resolved.
 
-**Status:** ☐ Analyzed — see notes below
+| Check | Current status | After generalization |
+|---|---|---|
+| Same logical form across cases | ☐ unverified | ☐ to confirm |
+| Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
 
-*Notes:*
-> [Fill in after analysis]
+*Notes (fill after analysis):*
+> [To be completed]
 
 ---
 
 ### `no_cycle4` — Acyclicity (length 4)
 
-**Schema:** For all 4-tuples of alternatives x, y, z, w:
-¬(xPy ∧ yPz ∧ zPw ∧ wPx) in the social preference.
+**Schema:** ∀x,y,z,w distinct: ¬(xPy ∧ yPz ∧ zPw ∧ wPx)
 
-**Scaling behavior:** ⚠️ **Requires careful attention.**
+**Coverage by case:**
 
-At m=4, there is exactly C(4,4) = 1 four-cycle to prohibit.
-At m=5, there are C(5,4) = 5 four-cycles.
-At (n=3, m=4), the number of four-cycles is the same as (n=2, m=4),
-but the social preference function maps from a larger profile space.
+| Case | # 4-tuples C(m,4) |
+|---|---|
+| (2,4) | 1 |
+| (2,5) | 5 |
+| (3,4) | 1 |
 
-**Key question:** Does the combined `no_cycle3 ∧ no_cycle4` impose the same
-*effective* rationality constraint at (2,5) and (3,4) as at (2,4)?
+Same structural situation as `no_cycle3`. At m=5, five 4-cycles must be prohibited
+versus one at m=4. The schema is the same instance form, but coverage differs.
 
-**Status:** ☐ Analyzed — see notes below
+| Check | Current status | After generalization |
+|---|---|---|
+| Same logical form across cases | ☐ unverified | ☐ to confirm |
+| Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
 
-*Notes:*
-> [Fill in after analysis]
+*Notes (fill after analysis):*
+> [To be completed]
 
 ---
 
-## Combined Assessment
+## Combined Status Table
 
-| Lever | Uniform schema? | Effective strength change? | Safe to use in experiment? |
+| Lever | Schema uniform? | Effective strength change? | Blocker level |
 |---|---|---|---|
-| `asymm` | ☐ | Scales proportionally | ☐ |
-| `un` | ☐ | No change expected | ☐ |
-| `minlib` | ☐ | Easier to satisfy at larger n,m | ☐ |
-| `no_cycle3` | ☐ | **Covers more triples — check** | ☐ |
-| `no_cycle4` | ☐ | **Covers more tuples — check** | ☐ |
+| `asymm` | ☐ | Low | Weak |
+| `un` (= Pareto) | ☐ | Low | Weak |
+| `minlib` | ☐ | **High at n=3** | **Strong blocker** |
+| `no_cycle3` | ☐ | Medium at m=5 | Moderate — judgment required |
+| `no_cycle4` | ☐ | Medium at m=5 | Moderate — judgment required |
 
 ---
 
 ## Decision Gate
 
-**Proceed with experiment if:**
-All levers are confirmed as instances of the same schema, AND
-any effective strength changes are documented and judged not to confound
-the repair liftability results.
+**Proceed with experiment only if:**
 
-**Block experiment if:**
-`no_cycle3` or `no_cycle4` impose qualitatively different constraints at larger (n, m)
-in a way that could produce spurious non-liftability.
+1. Parametric encoder and auditor implemented (`docs/schema_generalization_design.md`)
+2. All schema-uniformity checks verified against generalized implementation
+3. `minlib` existential structure confirmed correct at n=3
+4. `no_cycle3/4` effective-strength confound explicitly judged not to invalidate results
+5. All sign-off checkboxes below are checked
 
-In the blocking case, consider either:
-1. Replacing `no_cycle3/4` with a uniform acyclicity condition (`SocialAcyclic` in Lean spec), or
-2. Treating the encoding difference as Candidate B material (encoding sensitivity).
+**Do not proceed if:**
+- `minlib` existential structure is unverified at n=3
+- `no_cycle3/4` confound is unresolved and a non-liftability result is observed
+  (result would be ambiguous and unusable as Candidate A evidence)
 
 ---
 
-## Sign-off
+## Sign-off (complete only after generalized implementation)
 
-- [ ] Axiom semantics confirmed
-- [ ] Decision gate passed
+- [ ] `asymm`: schema confirmed uniform, clause structure verified
+- [ ] `un` (Pareto): schema confirmed uniform, not confused with Universal Domain
+- [ ] `minlib`: existential structure verified at n=3, no hard-coded indices
+- [ ] `no_cycle3`: schema uniform; effective-strength confound assessed and resolved
+- [ ] `no_cycle4`: schema uniform; effective-strength confound assessed and resolved
+- [ ] Generalized auditor produces clean audit for all three cases
 - [ ] Experiment cleared to run

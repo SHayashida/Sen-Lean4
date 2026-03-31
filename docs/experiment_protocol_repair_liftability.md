@@ -34,6 +34,7 @@ Step 2+:  repair liftability test
 
 See `docs/schema_generalization_design.md` for Step 0 implementation tasks.
 See `docs/axiom_semantics_scaling.md` for the required axiom semantics sign-off.
+See `docs/no_cycle_interpretation_note.md` for the Step 0.5 claim-scope restriction.
 
 Specifically, confirm that all five levers:
 
@@ -46,6 +47,10 @@ Specifically, confirm that all five levers:
 are interpreted as instances of the **same axiom schema** across cases (2,4), (2,5), and (3,4).
 In particular, `no_cyclek` may change in effective strength as case size grows;
 this must be documented before results can be trusted.
+
+For this experiment, `no_cycle3` and `no_cycle4` are treated as **local rationality approximations**.
+Therefore, any Candidate A result involving `(2,5)` must be interpreted only within that restricted
+local-rationality setting. At this stage, the experiment is not evidence about full acyclicity families.
 
 ---
 
@@ -119,6 +124,7 @@ Consider pivoting to Candidate B (encoding sensitivity / `docs/candidate_b_encod
 
 **At least one non-liftability pattern**
 → Continue with Candidate A. Promote that row as the concrete example for the core proposition.
+Interpret it within the `no_cycle3` / `no_cycle4` local-rationality family unless a stronger encoding is added later.
 
 **Results differ between (2,5) and (3,4)**
 → Family-size-dependent repair structure. Worth investigating further.

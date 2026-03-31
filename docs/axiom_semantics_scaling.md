@@ -1,10 +1,9 @@
 # Axiom Semantics Scaling Memo
 ## Prerequisite for Repair Liftability Experiment
 
-**Status:** INCOMPLETE — sign-off not yet possible  
-**Blocker:** Repository is currently `sen24`-fixed. Parametric schema/auditor must be
-implemented before this memo can be completed.  
-**See:** `docs/schema_generalization_design.md` for the required implementation step.  
+**Status:** INCOMPLETE — schema-uniformity evidence is now in place, but final sign-off is still not possible.  
+**Remaining blocker:** Step 0 is implemented; sign-off is still blocked on the effective-strength and claim-scope judgment for `no_cycle3` and `no_cycle4`.  
+**See:** `docs/schema_generalization_design.md` and `docs/schema_generalization_tasklist.md`.  
 **Location:** `docs/axiom_semantics_scaling.md`
 
 ---
@@ -36,13 +35,31 @@ This memo therefore separates two questions that must not be conflated:
 
 ---
 
-## Current Repository Limitation
+## Current Repository State
 
-The existing codebase (`gen_sen24_dimacs.py`, `check_sen24_cnf.py`, `schema.py`) is
-**fixed to `n=2, m=4`**. The confirmation below cannot be completed until a parametric
-schema and parametric auditor are implemented.
+The Step 0 prerequisite is now implemented:
 
-Do **not** attempt to sign off this memo using the current `sen24`-fixed tools.
+- `encoding/schema.py` provides `FiniteSchema(n, m, minlib_mode=...)`.
+- `scripts/gen_dimacs.py` now emits parametric CNFs for `(2,4)`, `(2,5)`, and `(3,4)`.
+- `scripts/check_parametric_cnf.py` audits the generalized schema family.
+- `scripts/check_sen24_cnf.py` remains the exact baseline auditor for the committed Sen24 artifact.
+
+Do **not** treat this as experiment sign-off yet. The remaining open question is not schema generation,
+but whether `no_cycle3` and `no_cycle4` are acceptable as Candidate A evidence once `m=5` allows longer cycles.
+
+---
+
+## Evidence Snapshot
+
+Schema-uniformity evidence has been generated and audited for:
+
+| Case | Encoding | `minlib` mode | `nvars` | `nclauses` |
+|---|---|---|---:|---:|
+| `(2,4)` generalized base-size run | `finite_schema_v1` | `pair_selectors_v1` | 6937 | 50115 |
+| `(2,5)` | `finite_schema_v1` | `pair_selectors_v1` | 288041 | 3528003 |
+| `(3,4)` | `finite_schema_v1` | `pair_selectors_v1` | 165927 | 1347847 |
+
+The exact commands, category counts, and CNF hashes are recorded in `docs/schema_generalization_tasklist.md`.
 
 ---
 
@@ -70,8 +87,8 @@ Low.
 | Check | Current status | After generalization |
 |---|---|---|
 | Lean-side target identified correctly | ✓ | ✓ |
-| Same CNF-side logical pattern across cases | ☐ unverified | ☐ to confirm |
-| Clause family remains profile-local social asymmetry | ☐ unverified | ☐ to confirm |
+| Same CNF-side logical pattern across cases | ✓ confirmed by `check_parametric_cnf.py` | ✓ |
+| Clause family remains profile-local social asymmetry | ✓ confirmed by audited runs | ✓ |
 
 ---
 
@@ -110,14 +127,14 @@ Low to moderate until quantifier structure is confirmed parametric.
 |---|---|---|
 | Correctly identified as Pareto, not Universal Domain | ✓ confirmed in this memo | ✓ |
 | Lean-side target identified correctly | ✓ | ✓ |
-| All-voter quantification not hard-coded to `n=2` | ☐ unverified | ☐ to confirm |
-| Same CNF-side implication pattern across cases | ☐ unverified | ☐ to confirm |
+| All-voter quantification not hard-coded to `n=2` | ✓ confirmed via `FiniteSchema.all_voters_prefer` and audited `(3,4)` run | ✓ |
+| Same CNF-side implication pattern across cases | ✓ confirmed by audited runs | ✓ |
 
 ---
 
 ### `minlib` — Minimal Liberalism
 
-**⚠️ Strong blocker — not a light check.**
+**⚠️ Step 0 blocker resolved in code, but still worth treating as a sensitive lever.**
 
 **Lean-side target schema**  
 There exist at least two distinct individuals `i ≠ j`, each decisive over at least one pair.
@@ -142,19 +159,23 @@ Moving to `n=3` changes:
 - how distinctness of decisive individuals is enforced,
 - whether voter indices are hard-coded.
 
-If the current encoding is still effectively tied to two named voters,
-then the schema is **not** yet confirmed across `(2,4)`, `(2,5)`, `(3,4)`.
+The repository now uses a parametric witness structure for generalized runs:
 
-**Status**  
-Cannot be confirmed without generalized encoder.
+- one selector per unordered pair of distinct voters,
+- one decisive-witness variable per `(voter, ordered pair)`,
+- two support clauses per selected voter pair, and
+- profile-local decisiveness implications for each decisive witness.
+
+This removes fixed names such as `pref0/pref1` or `sel0/sel1` from the generalized path.
+The legacy Sen24 selector layout remains available only as a compatibility mode for the committed `(2,4)` artifact.
 
 | Check | Current status | After generalization |
 |---|---|---|
 | Lean-side target identified correctly | ✓ | ✓ |
-| Existential quantification over individuals is parametric | ☐ BLOCKED | ☐ to confirm |
-| No hard-coded individual indices | ☐ BLOCKED | ☐ to confirm |
-| Distinctness of two decisive individuals preserved at `n=3` | ☐ BLOCKED | ☐ to confirm |
-| CNF-side witness structure is uniform across cases | ☐ BLOCKED | ☐ to confirm |
+| Existential quantification over individuals is parametric | ✓ confirmed by `pair_selectors_v1` | ✓ |
+| No hard-coded individual indices | ✓ confirmed on generalized path | ✓ |
+| Distinctness of two decisive individuals preserved at `n=3` | ✓ confirmed via unordered voter-pair selectors on `(3,4)` | ✓ |
+| CNF-side witness structure is uniform across cases | ✓ confirmed for generalized `(2,4)`, `(2,5)`, `(3,4)` runs | ✓ |
 
 ---
 
@@ -196,12 +217,12 @@ Moderate.
 | Check | Current status | After generalization |
 |---|---|---|
 | Lean-side role correctly identified as local approximation, not full acyclicity | ✓ | ✓ |
-| Same local CNF clause pattern across cases | ☐ unverified | ☐ to confirm |
-| Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
-| Candidate A usability judged explicitly | ☐ unverified | ☐ judgment required |
+| Same local CNF clause pattern across cases | ✓ confirmed by audited runs | ✓ |
+| Effective-strength confound assessed | ✓ documented; still not resolved for sign-off | ☐ judgment required |
+| Candidate A usability judged explicitly | ☐ still open | ☐ judgment required |
 
-*Notes (fill after analysis):*
-> [To be completed]
+*Notes:*
+> Step 0 confirms schema uniformity only. At `m=5`, the local short-cycle ban still allows 5-cycles, so the later interpretive judgment remains separate.
 
 ---
 
@@ -237,12 +258,12 @@ Moderate.
 | Check | Current status | After generalization |
 |---|---|---|
 | Lean-side role correctly identified as local approximation, not full acyclicity | ✓ | ✓ |
-| Same local CNF clause pattern across cases | ☐ unverified | ☐ to confirm |
-| Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
-| Candidate A usability judged explicitly | ☐ unverified | ☐ judgment required |
+| Same local CNF clause pattern across cases | ✓ confirmed by audited runs | ✓ |
+| Effective-strength confound assessed | ✓ documented; still not resolved for sign-off | ☐ judgment required |
+| Candidate A usability judged explicitly | ☐ still open | ☐ judgment required |
 
-*Notes (fill after analysis):*
-> [To be completed]
+*Notes:*
+> Step 0 confirms schema uniformity only. At `m=5`, banning all 4-cycles still does not imply full acyclicity because 5-cycles remain available.
 
 ---
 
@@ -250,11 +271,11 @@ Moderate.
 
 | Lever | Schema uniform? | Effective-strength confound? | Candidate A usable? | Blocker level |
 |---|---|---|---|---|
-| `asymm` | ☐ | Low | Likely yes | Weak |
-| `un` (= Pareto) | ☐ | Low | Likely yes | Weak |
-| `minlib` | ☐ | High at `n=3` | No, until generalized | **Strong blocker** |
-| `no_cycle3` | ☐ | Medium at `m=5` | Judgment required | Moderate |
-| `no_cycle4` | ☐ | Medium at `m=5` | Judgment required | Moderate |
+| `asymm` | ✓ | Low | Likely yes | Weak |
+| `un` (= Pareto) | ✓ | Low | Likely yes | Weak |
+| `minlib` | ✓ | Low for schema uniformity; still a sensitive lever semantically | Yes for Step 0 | Resolved for Step 0 |
+| `no_cycle3` | ✓ | Medium at `m=5` | Judgment required | Moderate |
+| `no_cycle4` | ✓ | Medium at `m=5` | Judgment required | Moderate |
 
 ---
 
@@ -279,10 +300,10 @@ Moderate.
 
 ## Sign-off (complete only after generalized implementation)
 
-- [ ] `asymm`: Lean target and CNF pattern confirmed uniform
-- [ ] `un` (Pareto): correctly identified; CNF pattern confirmed uniform
-- [ ] `minlib`: existential structure verified at `n=3`, no hard-coded indices
+- [x] `asymm`: Lean target and CNF pattern confirmed uniform
+- [x] `un` (Pareto): correctly identified; CNF pattern confirmed uniform
+- [x] `minlib`: existential structure verified at `n=3`, no hard-coded indices
 - [ ] `no_cycle3`: local schema uniform; confound assessed; Candidate A usability decided
 - [ ] `no_cycle4`: local schema uniform; confound assessed; Candidate A usability decided
-- [ ] Generalized auditor produces clean audit for all three cases
+- [x] Generalized auditor produces clean audit for all three cases
 - [ ] Experiment cleared to run

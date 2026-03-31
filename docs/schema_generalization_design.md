@@ -1,7 +1,7 @@
 # Schema Generalization Design Memo
 ## Step 0 for Repair Liftability Experiment
 
-**Status:** Required before `docs/axiom_semantics_scaling.md` can be signed off  
+**Status:** Step 0 implementation landed in code on 2026-03-31; this memo remains the design reference for the resulting evidence.  
 **Location:** `docs/schema_generalization_design.md`  
 **Feeds into:** `docs/axiom_semantics_scaling.md` → `docs/experiment_protocol_repair_liftability.md`
 
@@ -27,6 +27,21 @@ cannot be treated as trustworthy until a **parametric schema** and **parametric 
 exist and the five experimental levers are shown to be size-variants of the same schema.
 
 This memo defines the required Step 0.
+
+---
+
+## 1.5 Current implementation status
+
+The repository now contains the Step 0 code path described below:
+
+- `encoding/schema.py` now exposes a parametric `FiniteSchema(n, m, minlib_mode=...)`.
+- `Sen24Schema(...)` remains as a backward-compatible wrapper for the legacy `(2,4)` workflow.
+- `scripts/gen_dimacs.py` now generates `(2,4)`, `(2,5)`, and `(3,4)` from the same schema layer.
+- `scripts/check_parametric_cnf.py` audits the generalized schema family without silently assuming `m=4`.
+- The committed Sen24 artifact path is preserved by keeping legacy `minlib` mode `selectors_v1` as the default compatibility mode at `(2,4)`.
+- Neighboring cases use parametric `minlib` mode `pair_selectors_v1`, which removes fixed two-voter selector assumptions.
+
+Concrete audit evidence and commands are recorded in `docs/schema_generalization_tasklist.md`.
 
 ---
 

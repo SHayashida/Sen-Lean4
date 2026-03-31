@@ -1,0 +1,647 @@
+{
+  "axiom_family": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "date": "20260401",
+  "experiment": "repair_liftability_step2",
+  "generated_at_utc": "2026-03-31T15:35:33.321668+00:00",
+  "rows": [
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib/repaired.cnf",
+      "duration_sec": 0.320725,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "repaired_package_key": "asymm+un+minlib",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib/repaired.cnf",
+      "duration_sec": 0.188311,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "repaired_package_key": "asymm+un+minlib",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle4/repaired.cnf",
+      "duration_sec": 0.512173,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle4/repaired.cnf",
+      "duration_sec": 0.177702,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle4/repaired.cnf",
+      "duration_sec": 0.920982,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle4/repaired.cnf",
+      "duration_sec": 0.30082,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle4/repaired.cnf",
+      "duration_sec": 0.736045,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle4/repaired.cnf",
+      "duration_sec": 0.261893,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib_no_cycle3/repaired.cnf",
+      "duration_sec": 0.430674,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib_no_cycle3/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "repaired_package_key": "asymm+un+minlib+no_cycle3",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_minlib_no_cycle3/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib_no_cycle3/repaired.cnf",
+      "duration_sec": 0.283219,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib_no_cycle3/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "repaired_package_key": "asymm+un+minlib+no_cycle3",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_minlib_no_cycle3/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 0.691266,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_un_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 0.269524,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_un_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 1.087555,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/asymm_minlib_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 0.403376,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/asymm_minlib_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 0.897223,
+      "m_target": 5,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 2,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n2_m5/un_minlib_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5"
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle3_no_cycle4/repaired.cnf",
+      "duration_sec": 0.354201,
+      "m_target": 4,
+      "manifest_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle3_no_cycle4/repaired.manifest.json",
+      "n_target": 3,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "sat_status": "SAT",
+      "solver": "cadical",
+      "solver_log_path": "results/20260401/repair_liftability/step2_cnfs/n3_m4/un_minlib_no_cycle3_no_cycle4/solver.log",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4"
+    }
+  ],
+  "schema_version": "1",
+  "scope_note": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Results for (2,5) are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "solver": "cadical",
+  "source_triples": "results/20260401/repair_liftability/base_triples.json",
+  "step": "Step 2: Apply each repair to larger cases",
+  "summary": {
+    "by_target": {
+      "n2_m5": {
+        "SAT": 8,
+        "UNSAT": 0,
+        "total": 8
+      },
+      "n3_m4": {
+        "SAT": 8,
+        "UNSAT": 0,
+        "total": 8
+      }
+    },
+    "n_step1_triples_consumed": 8,
+    "n_step2_rows_emitted": 16,
+    "target_cases": [
+      "n2_m5",
+      "n3_m4"
+    ]
+  }
+}

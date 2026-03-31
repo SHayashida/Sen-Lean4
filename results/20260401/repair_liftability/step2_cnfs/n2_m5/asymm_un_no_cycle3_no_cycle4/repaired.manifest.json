@@ -1,0 +1,133 @@
+{
+  "alts": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "aux_var_range": null,
+  "axioms": [
+    "asymm",
+    "un",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "category_counts": {
+    "asymm": 288000,
+    "minlib": 0,
+    "no_cycle3": 864000,
+    "no_cycle4": 1728000,
+    "un": 72000
+  },
+  "cnf_sha256": "a2dfd1ff3b875b47848be5d2482adafe869f4d09ab99f6ad086ef58dae5af4c3",
+  "encoding": "finite_schema_v1",
+  "minlib": {
+    "mode": "disabled"
+  },
+  "n_alts": 5,
+  "n_p_vars": 288000,
+  "n_voters": 2,
+  "nclauses": 2952000,
+  "npairs": 20,
+  "nprofiles": 14400,
+  "nquads": 120,
+  "nranks": 120,
+  "ntriples": 60,
+  "nvars": 288000,
+  "p_var_range": [
+    1,
+    288000
+  ],
+  "pair_order": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      3
+    ]
+  ],
+  "profile_order": "itertools.product(range(nranks), repeat=2) lex",
+  "quad_order": "itertools.permutations(ALT,4) lex",
+  "ranking_order": "itertools.permutations(ALT,5) lex",
+  "schema_version": 1,
+  "triple_order": "itertools.permutations(ALT,3) lex",
+  "voters": [
+    0,
+    1
+  ]
+}

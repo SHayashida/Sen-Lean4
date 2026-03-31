@@ -1,0 +1,133 @@
+{
+  "alts": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "aux_var_range": [
+    165889,
+    165927
+  ],
+  "axioms": [
+    "asymm",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "category_counts": {
+    "asymm": 165888,
+    "minlib": 497671,
+    "no_cycle3": 331776,
+    "no_cycle4": 331776,
+    "un": 0
+  },
+  "cnf_sha256": "aa9817c9d80a9622dc2f1edcc8ac8a41a3157f1a68acdf60a034596c35cb58c4",
+  "encoding": "finite_schema_v1",
+  "minlib": {
+    "decisive_selector_count": 36,
+    "decisive_var_range": [
+      165892,
+      165927
+    ],
+    "decisive_voters": [
+      0,
+      1,
+      2
+    ],
+    "mode": "pair_selectors_v1",
+    "pair_selector_count": 3,
+    "pair_selector_order": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "pair_selector_var_range": [
+      165889,
+      165891
+    ]
+  },
+  "n_alts": 4,
+  "n_p_vars": 165888,
+  "n_voters": 3,
+  "nclauses": 1327111,
+  "npairs": 12,
+  "nprofiles": 13824,
+  "nquads": 24,
+  "nranks": 24,
+  "ntriples": 24,
+  "nvars": 165927,
+  "p_var_range": [
+    1,
+    165888
+  ],
+  "pair_order": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "profile_order": "itertools.product(range(nranks), repeat=3) lex",
+  "quad_order": "itertools.permutations(ALT,4) lex",
+  "ranking_order": "itertools.permutations(ALT,4) lex",
+  "schema_version": 1,
+  "triple_order": "itertools.permutations(ALT,3) lex",
+  "voters": [
+    0,
+    1,
+    2
+  ]
+}

@@ -187,6 +187,8 @@ That means:
 
 `un` is safe only if its generalized encoder is explicitly aligned with the Lean-side `UN` semantics.
 
+This lever must be treated as profile-local unanimity-to-social-preference implication, not as a domain restriction lever.
+
 ---
 
 ## 5.3 `minlib`

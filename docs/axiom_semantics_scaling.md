@@ -12,9 +12,17 @@ implemented before this memo can be completed.
 ## Purpose
 
 Confirm that all axiom levers used in the repair liftability experiment are interpreted
-as instances of the **same axiom schema** across cases (2,4), (2,5), and (3,4).
-Observed non-liftability must be attributable to genuine repair structure change,
+as instances of the **same axiom schema** across cases `(2,4)`, `(2,5)`, and `(3,4)`.
+
+Observed non-liftability must be attributable to genuine repair-structure change,
 not to semantic drift in the encoding.
+
+This memo therefore separates two questions that must not be conflated:
+
+1. **Schema uniformity:** Is the same logical schema being instantiated at different sizes?
+2. **Experimental usability:** Even if the schema is uniform, is the lever still safe to use
+   as evidence for **Candidate A** (repair non-liftability), or does effective-strength drift
+   make the result ambiguous?
 
 ---
 
@@ -31,10 +39,10 @@ not to semantic drift in the encoding.
 ## Current Repository Limitation
 
 The existing codebase (`gen_sen24_dimacs.py`, `check_sen24_cnf.py`, `schema.py`) is
-**fixed to n=2, m=4**. The confirmation below cannot be completed until a parametric
+**fixed to `n=2, m=4`**. The confirmation below cannot be completed until a parametric
 schema and parametric auditor are implemented.
 
-Do not attempt to sign off this memo using the current `sen24`-fixed tools.
+Do **not** attempt to sign off this memo using the current `sen24`-fixed tools.
 
 ---
 
@@ -42,36 +50,68 @@ Do not attempt to sign off this memo using the current `sen24`-fixed tools.
 
 ### `asymm` — Asymmetry
 
-**Schema:** ∀i, ∀x≠y: xPᵢy → ¬yPᵢx
+**Lean-side target schema**  
+The social strict relation should be asymmetric.
 
-**Scaling:** Clause count scales as n·m(m−1)/2. Schema is structurally unchanged.  
-**Risk:** Low.
+**CNF-side finite instance pattern**  
+For each profile `p` and each ordered pair of distinct alternatives `(a,b)`:
+
+- `¬P_p(a,b) ∨ ¬P_p(b,a)`
+
+where `P_p(a,b)` is the social strict preference variable at profile `p`.
+
+**Scaling**  
+The clause family is structurally unchanged.
+Only the number of instantiated profiles and ordered pairs changes.
+
+**Risk**  
+Low.
 
 | Check | Current status | After generalization |
 |---|---|---|
-| Same logical form across cases | ☐ unverified | ☐ to confirm |
-| CNF clause structure invariant | ☐ unverified | ☐ to confirm |
+| Lean-side target identified correctly | ✓ | ✓ |
+| Same CNF-side logical pattern across cases | ☐ unverified | ☐ to confirm |
+| Clause family remains profile-local social asymmetry | ☐ unverified | ☐ to confirm |
 
 ---
 
 ### `un` — Unanimity (Pareto)
 
-**⚠️ Correction from v0.1:** This lever is **Unanimity / Pareto**, not Universal Domain.
-Universal Domain is a background assumption of the encoding (all profiles are admitted),
-not a separate axiom lever. Treating `un` as Universal Domain is a category error that
-would cause the entire schema confirmation to target the wrong axiom.
+**⚠️ Correction from earlier drafts**  
+This lever is **Unanimity / Pareto**, **not** Universal Domain.
 
-**Schema:** ∀x,y: (∀i: xPᵢy) → xPy
+Universal Domain is a background assumption of the encoding
+(all profiles are admitted), not a separate axiom lever.
+Treating `un` as Universal Domain would target the wrong axiom entirely.
 
-**Scaling:** Quantifies over all voter–alternative combinations.
-Schema is structurally unchanged; clause count scales with n and m(m−1)/2.  
-**Risk:** Low, but must confirm quantifier structure is not hard-coded to n=2.
+**Lean-side target schema**  
+If all voters prefer `x` to `y`, then the social relation ranks `x` above `y`.
+
+**CNF-side finite instance pattern**  
+For each profile `p` and ordered pair `(a,b)`:
+
+- if all voters in `p` strictly prefer `a` to `b`,
+- then require the social relation at `p` to contain `a > b`.
+
+Representative clause pattern:
+
+- `¬AllPrefer_p(a,b) ∨ P_p(a,b)`
+
+where `AllPrefer_p(a,b)` abbreviates the all-voter antecedent at profile `p`.
+
+**Scaling**  
+The schema is structurally unchanged if the encoder truly quantifies over **all** voters.
+The main risk is accidental hard-coding to exactly two voter positions.
+
+**Risk**  
+Low to moderate until quantifier structure is confirmed parametric.
 
 | Check | Current status | After generalization |
 |---|---|---|
 | Correctly identified as Pareto, not Universal Domain | ✓ confirmed in this memo | ✓ |
-| Quantifier structure not hard-coded to n=2 | ☐ unverified | ☐ to confirm |
-| Clause count scales correctly with n,m | ☐ unverified | ☐ to confirm |
+| Lean-side target identified correctly | ✓ | ✓ |
+| All-voter quantification not hard-coded to `n=2` | ☐ unverified | ☐ to confirm |
+| Same CNF-side implication pattern across cases | ☐ unverified | ☐ to confirm |
 
 ---
 
@@ -79,79 +119,127 @@ Schema is structurally unchanged; clause count scales with n and m(m−1)/2.
 
 **⚠️ Strong blocker — not a light check.**
 
-**Schema:** ∃ at least two distinct individuals i≠j, each decisive over at least one pair.  
-Decisive(i,x,y) := (xPᵢy → xPy) ∧ (yPᵢx → yPx)
+**Lean-side target schema**  
+There exist at least two distinct individuals `i ≠ j`, each decisive over at least one pair.
 
-**Why this is a strong blocker:**
+**CNF-side finite instance pattern**  
+The finite encoder must represent:
 
-Moving to n=3 changes:
-- How selectors are represented (which individual holds which decisive pair)
-- The existential structure (must ensure ≥2 distinct decisive individuals among 3)
-- Voter index handling: if individual indices are hard-coded, the schema breaks at n=3
+- two **distinct** decisive individuals,
+- each with at least one decisive pair witness,
+- without relying on fixed voter identities such as “voter 0” and “voter 1”.
 
-The current encoder was designed for n=2. At n=3, the existential quantification
-over individuals must be verified not to collapse into n=2 semantics or to inadvertently
-require all 3 individuals to be decisive.
+Representative decisiveness meaning:
 
-**Status: Cannot be confirmed without generalized encoder.**
+- `Decisive(i,a,b)` means that individual `i` controls the social ranking of pair `(a,b)`.
+
+**Why this is a strong blocker**
+
+Moving to `n=3` changes:
+
+- how selectors are represented,
+- the existential structure over individuals,
+- how distinctness of decisive individuals is enforced,
+- whether voter indices are hard-coded.
+
+If the current encoding is still effectively tied to two named voters,
+then the schema is **not** yet confirmed across `(2,4)`, `(2,5)`, `(3,4)`.
+
+**Status**  
+Cannot be confirmed without generalized encoder.
 
 | Check | Current status | After generalization |
 |---|---|---|
+| Lean-side target identified correctly | ✓ | ✓ |
 | Existential quantification over individuals is parametric | ☐ BLOCKED | ☐ to confirm |
 | No hard-coded individual indices | ☐ BLOCKED | ☐ to confirm |
-| Decisiveness structure correct at n=3 | ☐ BLOCKED | ☐ to confirm |
+| Distinctness of two decisive individuals preserved at `n=3` | ☐ BLOCKED | ☐ to confirm |
+| CNF-side witness structure is uniform across cases | ☐ BLOCKED | ☐ to confirm |
 
 ---
 
-### `no_cycle3` — Acyclicity (length 3)
+### `no_cycle3` — Local 3-cycle Prohibition
 
-**Schema:** ∀x,y,z distinct: ¬(xPy ∧ yPz ∧ zPx)
+**Lean-side target schema**  
+This lever is **not** full `SocialAcyclic`.
+It is a finite local approximation to rationality / acyclicity.
 
-**Coverage by case:**
+**CNF-side finite instance pattern**  
+For each profile `p` and each triple of distinct alternatives `(a,b,c)`:
 
-| Case | # triples C(m,3) |
+- `¬(P_p(a,b) ∧ P_p(b,c) ∧ P_p(c,a))`
+
+equivalently as a clause:
+
+- `¬P_p(a,b) ∨ ¬P_p(b,c) ∨ ¬P_p(c,a)`
+
+**Coverage by case**
+
+| Case | # triples `C(m,3)` |
 |---|---|
 | (2,4) | 4 |
 | (2,5) | 10 |
 | (3,4) | 4 |
 
-The logical form is the same instance schema. However, at m=5, `no_cycle3 ∧ no_cycle4`
-still permits length-5 cycles. The effective acyclicity constraint is qualitatively
-weaker at m=5 than at m=4.
+**Scaling / confound**  
+The local clause pattern is the same, but at `m=5`, `no_cycle3 ∧ no_cycle4`
+still permits length-5 cycles. Thus the effective rationality constraint is weaker,
+relative to full acyclicity, at `m=5` than at `m=4`.
 
-**Key judgment required before sign-off:** If non-liftability is observed at (2,5),
-is it because repair structure genuinely changed, or because `no_cycle3/4` permits
-longer cycles that were absent at m=4? This confound must be explicitly resolved.
+**Key question for Candidate A**  
+If non-liftability is observed at `(2,5)`, is it due to genuine repair-structure change,
+or because longer cycles are newly available?
+
+**Risk**  
+Moderate.
 
 | Check | Current status | After generalization |
 |---|---|---|
-| Same logical form across cases | ☐ unverified | ☐ to confirm |
+| Lean-side role correctly identified as local approximation, not full acyclicity | ✓ | ✓ |
+| Same local CNF clause pattern across cases | ☐ unverified | ☐ to confirm |
 | Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
+| Candidate A usability judged explicitly | ☐ unverified | ☐ judgment required |
 
 *Notes (fill after analysis):*
 > [To be completed]
 
 ---
 
-### `no_cycle4` — Acyclicity (length 4)
+### `no_cycle4` — Local 4-cycle Prohibition
 
-**Schema:** ∀x,y,z,w distinct: ¬(xPy ∧ yPz ∧ zPw ∧ wPx)
+**Lean-side target schema**  
+As with `no_cycle3`, this lever is a local finite approximation, not full `SocialAcyclic`.
 
-**Coverage by case:**
+**CNF-side finite instance pattern**  
+For each profile `p` and each 4-tuple of distinct alternatives `(a,b,c,d)`:
 
-| Case | # 4-tuples C(m,4) |
+- `¬(P_p(a,b) ∧ P_p(b,c) ∧ P_p(c,d) ∧ P_p(d,a))`
+
+equivalently:
+
+- `¬P_p(a,b) ∨ ¬P_p(b,c) ∨ ¬P_p(c,d) ∨ ¬P_p(d,a)`
+
+**Coverage by case**
+
+| Case | # 4-tuples `C(m,4)` |
 |---|---|
 | (2,4) | 1 |
 | (2,5) | 5 |
 | (3,4) | 1 |
 
-Same structural situation as `no_cycle3`. At m=5, five 4-cycles must be prohibited
-versus one at m=4. The schema is the same instance form, but coverage differs.
+**Scaling / confound**  
+The local clause pattern is the same, but coverage changes materially with `m`.
+At `m=5`, five distinct 4-cycles must be ruled out, and even then 5-cycles remain possible.
+
+**Risk**  
+Moderate.
 
 | Check | Current status | After generalization |
 |---|---|---|
-| Same logical form across cases | ☐ unverified | ☐ to confirm |
+| Lean-side role correctly identified as local approximation, not full acyclicity | ✓ | ✓ |
+| Same local CNF clause pattern across cases | ☐ unverified | ☐ to confirm |
 | Effective-strength confound assessed | ☐ unverified | ☐ judgment required |
+| Candidate A usability judged explicitly | ☐ unverified | ☐ judgment required |
 
 *Notes (fill after analysis):*
 > [To be completed]
@@ -160,13 +248,13 @@ versus one at m=4. The schema is the same instance form, but coverage differs.
 
 ## Combined Status Table
 
-| Lever | Schema uniform? | Effective strength change? | Blocker level |
-|---|---|---|---|
-| `asymm` | ☐ | Low | Weak |
-| `un` (= Pareto) | ☐ | Low | Weak |
-| `minlib` | ☐ | **High at n=3** | **Strong blocker** |
-| `no_cycle3` | ☐ | Medium at m=5 | Moderate — judgment required |
-| `no_cycle4` | ☐ | Medium at m=5 | Moderate — judgment required |
+| Lever | Schema uniform? | Effective-strength confound? | Candidate A usable? | Blocker level |
+|---|---|---|---|---|
+| `asymm` | ☐ | Low | Likely yes | Weak |
+| `un` (= Pareto) | ☐ | Low | Likely yes | Weak |
+| `minlib` | ☐ | High at `n=3` | No, until generalized | **Strong blocker** |
+| `no_cycle3` | ☐ | Medium at `m=5` | Judgment required | Moderate |
+| `no_cycle4` | ☐ | Medium at `m=5` | Judgment required | Moderate |
 
 ---
 
@@ -176,23 +264,25 @@ versus one at m=4. The schema is the same instance form, but coverage differs.
 
 1. Parametric encoder and auditor implemented (`docs/schema_generalization_design.md`)
 2. All schema-uniformity checks verified against generalized implementation
-3. `minlib` existential structure confirmed correct at n=3
-4. `no_cycle3/4` effective-strength confound explicitly judged not to invalidate results
+3. `minlib` existential structure confirmed correct at `n=3`
+4. `no_cycle3/4` effective-strength confound explicitly resolved by either:
+   - a **stronger rationality encoding**, or
+   - an **explicit restriction of claim scope**
 5. All sign-off checkboxes below are checked
 
 **Do not proceed if:**
-- `minlib` existential structure is unverified at n=3
+- `minlib` existential structure is unverified at `n=3`
 - `no_cycle3/4` confound is unresolved and a non-liftability result is observed
-  (result would be ambiguous and unusable as Candidate A evidence)
+  (the result would be ambiguous and unusable as Candidate A evidence)
 
 ---
 
 ## Sign-off (complete only after generalized implementation)
 
-- [ ] `asymm`: schema confirmed uniform, clause structure verified
-- [ ] `un` (Pareto): schema confirmed uniform, not confused with Universal Domain
-- [ ] `minlib`: existential structure verified at n=3, no hard-coded indices
-- [ ] `no_cycle3`: schema uniform; effective-strength confound assessed and resolved
-- [ ] `no_cycle4`: schema uniform; effective-strength confound assessed and resolved
+- [ ] `asymm`: Lean target and CNF pattern confirmed uniform
+- [ ] `un` (Pareto): correctly identified; CNF pattern confirmed uniform
+- [ ] `minlib`: existential structure verified at `n=3`, no hard-coded indices
+- [ ] `no_cycle3`: local schema uniform; confound assessed; Candidate A usability decided
+- [ ] `no_cycle4`: local schema uniform; confound assessed; Candidate A usability decided
 - [ ] Generalized auditor produces clean audit for all three cases
 - [ ] Experiment cleared to run

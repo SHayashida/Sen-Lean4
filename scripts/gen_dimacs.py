@@ -30,6 +30,15 @@ from encoding.schema import (  # noqa: E402
 )
 
 CANONICAL_CATEGORY_KEYS = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
+LEGACY_MINLIB_SELECTOR_AXIOMS = {"minlib", "decisive_voter0", "decisive_voter1"}
+
+
+def _category_keys_for_run(axiom_names: list[str]) -> list[str]:
+    keys = CANONICAL_CATEGORY_KEYS[:]
+    for name in axiom_names:
+        if name not in keys:
+            keys.append(name)
+    return keys
 
 
 def _parse_axiom_names(raw: str) -> list[str]:
@@ -89,12 +98,12 @@ def run_generation(
     minlib_mode = resolve_minlib_mode(
         n=n,
         m=m,
-        minlib_enabled=("minlib" in axiom_names),
+        minlib_enabled=any(name in LEGACY_MINLIB_SELECTOR_AXIOMS for name in axiom_names),
         requested_mode=requested_minlib_mode,
     )
     schema = FiniteSchema(n=n, m=m, minlib_mode=minlib_mode)
 
-    category_counts = {key: 0 for key in CANONICAL_CATEGORY_KEYS}
+    category_counts = {key: 0 for key in _category_keys_for_run(axiom_names)}
     out_path.parent.mkdir(parents=True, exist_ok=True)
     tmp_handle = tempfile.NamedTemporaryFile(
         mode="w",

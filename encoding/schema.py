@@ -141,10 +141,6 @@ class FiniteSchema:
     def is_sen24(self) -> bool:
         return (self.n_voters, self.n_alts) == (2, 4)
 
-    @property
-    def uses_legacy_sen24_manifest(self) -> bool:
-        return self.is_sen24 and self.minlib_mode in {"disabled", LEGACY_MINLIB_MODE}
-
     def var_p(self, p: int, a: int, b: int) -> int:
         return 1 + p * self.n_pairs + self.pair_idx[(a, b)]
 
@@ -212,7 +208,13 @@ class FiniteSchema:
         cnf_sha256: str,
         nclauses: int,
     ) -> dict[str, object]:
-        if self.uses_legacy_sen24_manifest:
+        legacy_axioms = {"asymm", "un", "minlib", "no_cycle3", "no_cycle4"}
+        uses_legacy_manifest = (
+            self.is_sen24
+            and self.minlib_mode in {"disabled", LEGACY_MINLIB_MODE}
+            and set(axiom_names).issubset(legacy_axioms)
+        )
+        if uses_legacy_manifest:
             return self._legacy_manifest_dict(
                 category_counts=category_counts,
                 cnf_sha256=cnf_sha256,

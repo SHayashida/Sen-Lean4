@@ -1,8 +1,41 @@
-\section{Scope and Shared Infrastructure}
+\section{Scope \& Setup}
 
-The M1.5 workspace is designed to reuse repository-wide components such as the Lean development, SAT encoders, atlas runners, and evidence-generation scripts.
-Those components remain shared project infrastructure unless a future M1.5 claim requires a frozen copy for reproducibility.
+This paper uses only existing repository artifacts and does not report any new experiment.
+Its evidential core is the Candidate B bundle under
+\code{results/20260401/candidate\_b\_minlib\_granularity/},
+read together with the companion repository notes in
+\code{docs/three\_row\_test\_completed.md},
+\code{docs/candidate\_b\_minlib\_granularity.md},
+\code{docs/candidate\_a\_collapse\_note.md}, and
+\code{RESEARCH\_STATUS.md}.
 
-Paper-facing assets are isolated by workspace.
-Figures for M1.5 belong under \code{papers/m1_5/figures/generated/}, and tables belong under \code{papers/m1_5/tables/generated/}.
-This keeps M1 and M1.5 from writing into one another's manuscript paths even when they depend on the same upstream experimental outputs.
+\paragraph{Base-case scope.}
+All theorem statements and empirical claims are restricted to the Sen24 base case \((n,m)=(2,4)\).
+The paper does not use neighboring-case evidence as part of the main theorem.
+Those neighboring-case results remain relevant only as motivation for the pivot from Candidate A to Candidate B.
+
+\paragraph{Local-rationality scope.}
+The levers \code{no\_cycle3} and \code{no\_cycle4} are treated throughout as local forbidden-pattern approximations.
+They are not presented as full \code{SocialAcyclic}, and nothing in this paper should be read as a full-acyclicity or full-Sen-family claim.
+This scope restriction is part of the theorem statement's intended meaning, not merely a footnote.
+
+\paragraph{Lever notation.}
+We write \(\Lambda\) for a finite lever family and \(S \subseteq \Lambda\) for an active lever set.
+In the bundled witness family, the relevant levers are \code{asymm}, \code{un}, \code{minlib}, \code{no\_cycle3}, and \code{no\_cycle4}.
+In the split witness family, \code{minlib} is replaced by \code{decisive\_voter0} and \code{decisive\_voter1}.
+
+\paragraph{CNF notation.}
+For a lever-structured encoding map \(\varphi\), the symbol \(\varphi(S)\) denotes the CNF instance produced from the active lever set \(S\).
+We write \(\mathsf{SAT}\) and \(\mathsf{UNSAT}\) for the satisfiability status of that instance.
+When \(R \subseteq S\), the expression \(S \setminus R\) denotes removal of the levers in \(R\) before re-encoding.
+
+\paragraph{Repair notation.}
+The object of interest is not a clause-level MCS projection.
+It is a lever-level repair family associated with an encoded UNSAT instance.
+This paper calls that object the raw repair explanation.
+Grouped repair explanation is a separate presentation layer that is discussed only after the raw object has been fixed.
+
+\paragraph{Repository setup.}
+The manuscript uses the shared repository infrastructure for encoding, auditing, and artifact generation, but its paper files are confined to \code{papers/m1\_5/}.
+That separation mirrors the conceptual separation developed here:
+the underlying finite witness infrastructure may be shared, while the repair presentation layer requires its own explicit contract.

@@ -1,7 +1,35 @@
-\section{Related Work and Positioning}
+\section{Related Work \& Positioning}
 
-The repository decision implemented here is deliberately orthogonal to paper content.
-It separates manuscript management from shared research infrastructure: M1 remains stable, M1.5 receives its own workspace, and the shared codebase continues to support cumulative development.
+\paragraph{Diagnosis, MUS/MCS, and minimal repair.}
+This paper is close in spirit to diagnosis-oriented work that studies minimal conflict sets and minimal repairs, as well as assumption-based maintenance systems \citep{dekleer1986atms}.
+It is also adjacent to the repository's own MUS/MCS workflow.
+But the claim here is narrower and different.
+We do not present a new MUS/MCS algorithm, and we do not claim a full characterization theorem for repairs.
+Instead, we use an existing finite artifact bundle to isolate a representational fact:
+even when the encoded boundary is stable, raw lever-level repair explanation can remain non-canonical.
 
-TruthWeave may be introduced later as an audit layer for M1.5 if stronger claim, provenance, or reviewer-packet workflows become necessary.
-For now, the repository keeps its existing manuscript and artifact workflow as the source of truth and avoids a disruptive migration while M1 is active.
+\paragraph{SAT-based computational social choice.}
+The result is not a novelty claim about using SAT in social choice.
+That line is already well established, including computer-aided impossibility proofs and automated theorem search \citep{tanglin2009computer,geist2011automated}, as well as SAT-based synthesis of social choice functions \citep{brandtgeist2016strategyproof}.
+Our point is orthogonal.
+The Candidate B witness uses SAT-era infrastructure only as the means by which a finite, auditable comparison is produced.
+The paper's claim is about repair explanation canonicality under clause-equivalent encodings, not about SAT as a method.
+
+\paragraph{Transfer from finite witnesses.}
+The repository's three-row test uses the Geist--Endriss line as a positive example of finite-to-family transfer under suitable syntactic discipline, and the Grandi--Endriss discussion as a caution that such transfer can fail in other settings \citep{geist2011automated,grandiendriss2013}.
+M1.5 does not attempt to resolve that literature.
+It takes the repository's current finite-witness legitimization discussion as background and asks what remains open even after such legitimization succeeds in the base-case setting.
+
+\paragraph{Position relative to M1.}
+The closest internal reference point is M1, the companion manuscript under \code{paper/}.
+M1 is about proof, audit, witness, and assumption separation.
+M1.5 begins where that story stops.
+Once a finite impossibility witness has been made auditable enough for use, a second question appears: what counts as the right repair presentation?
+This paper answers that question negatively first.
+It shows that no representation-invariant raw repair presentation is delivered automatically by the finite witness alone.
+
+\paragraph{Constraint hierarchies and presentation contracts.}
+The abstraction-contract thesis is also distinct from weighted or prioritized constraint resolution in the style of constraint hierarchies \citep{borning1992constraint}.
+A grouping contract in this paper is not an optimization criterion and not a semantic ranking over axioms.
+It is a reporting rule for how raw lever-level repairs are aggregated into a human-facing explanation.
+That is precisely why it must be made explicit in an audit-oriented workflow.

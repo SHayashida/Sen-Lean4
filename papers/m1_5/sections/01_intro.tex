@@ -1,8 +1,42 @@
 \section{Introduction}
 
-The repository now supports two manuscript tracks inside one shared research codebase.
-The first paper (M1) remains under \code{paper/} and continues to use the established asset and reproducibility workflow.
-The second paper (M1.5) uses the dedicated workspace \code{papers/m1_5/} so that writing, figures, tables, and claim notes can evolve independently while still drawing on the same underlying Lean, SAT, and atlas infrastructure.
+The first paper in this repository, M1, is about the trust boundary around solver-supported finite impossibility evidence.
+Its central claim is that proof objects, artifact audits, semantic assumptions, and reported witnesses should be separated rather than collapsed into a single opaque verdict.
+That is a paper about diagnosability.
+This manuscript, M1.5, is not a continuation appendix to that claim.
+It addresses a different normative problem: once a finite impossibility witness has been made trustworthy enough to justify that a boundary is real, what determines the correct way to present the corresponding repairs?
 
-This separation is structural rather than branch-based.
-Shared code and reusable data continue to evolve on the common repository trunk, and paper submissions are expected to be frozen by commit hash and tag rather than by long-lived manuscript branches.
+That second question matters because audit-oriented use is increasingly explanation-oriented rather than proof-oriented.
+In human review, and even more in eventual AI-assisted institutional design settings, a solver output is rarely consumed as a bare UNSAT certificate.
+It is turned into a recommendation about which axiom or design commitment should be relaxed.
+If that recommendation depends on representational granularity rather than on the underlying impossibility alone, then trustworthy boundary evidence does not by itself deliver a trustworthy repair presentation.
+The normative gap is not about whether the impossibility is real; it is about how the repair space is grouped, named, and reported.
+
+The repository's recent experiments make that gap concrete.
+Candidate A asked whether repair liftability itself would fail across neighboring cases.
+Instead, the current five-lever family collapsed into size-1 minimal repairs throughout the tested neighboring runs, substantially weakening Candidate A and showing that the present granularity trivializes that line of separation.
+Candidate B then asked a narrower but cleaner question in the Sen24 base case \citep{sen1970}: does repair explanation change when the same impossibility is encoded at different lever granularities?
+The answer provided by the artifact bundle is yes, even under clause-equivalent base-case encodings.
+
+This is why M1.5 is distinct from M1.
+M1 established a proof--audit--witness contract for finite impossibility evidence.
+M1.5 studies repair presentation canonicality after that contract has done its job.
+The distinction is the repository's current two-layer view of auditability:
+finite witness legitimization and repair explanation canonicality are separate questions, and success on the first does not settle the second.
+
+The paper stays deliberately narrow.
+All claims are about the Sen24 base case \((n,m)=(2,4)\), not about arbitrary Sen or Arrow families.
+Moreover, the rationality levers \code{no\_cycle3} and \code{no\_cycle4} are treated only as local-rationality approximations, not as full \code{SocialAcyclic}.
+The theorem below is therefore an existence result grounded in one audited artifact bundle, not a general repair theory.
+
+Within that scope, the paper makes a concrete claim.
+We define raw repair explanation directly at the lever level, distinguish it from grouped repair explanation, and show that raw repair explanation is non-invariant under clause-equivalent encodings in the Sen24 base case.
+The resulting corollary is normative: finite witness legitimization does not automatically determine a canonical repair presentation, so audit-oriented repair reporting requires an explicit abstraction contract.
+
+The rest of the manuscript is organized as follows.
+Section~2 fixes scope, notation, and the local-rationality setting.
+Section~3 gives the theorem-facing definitions.
+Section~3b states the paper's contributions.
+Section~4 presents the Candidate B witness and proves the non-invariance theorem.
+Section~5 positions the paper relative to diagnosis, MUS/MCS explanation, SAT-based computational social choice, and the companion M1 manuscript.
+Section~6 concludes with limitations, open questions, and the abstraction-contract thesis.

@@ -1,13 +1,30 @@
 \section{Reproducibility Note}
 
-This appendix is specific to the M1.5 workspace.
-Its current contract is intentionally minimal:
+This manuscript is grounded in existing repository artifacts rather than new experiments.
+The main evidence sources used in the text are:
 
 \begin{itemize}[leftmargin=1.5em]
-\item manuscript root: \code{papers/m1_5/},
-\item asset entrypoint: \code{python3 scripts/render_paper_assets.py --paper-id m1_5 --mode tiny},
-\item PDF build command: \code{make -C papers/m1_5 pdf},
-\item submission snapshots should be recorded with commit hashes and paper-specific tags.
+\item \code{docs/three_row_test_completed.md},
+\item \code{docs/candidate_b_minlib_granularity.md},
+\item \code{docs/candidate_a_collapse_note.md},
+\item \code{docs/no_cycle_interpretation_note.md},
+\item \code{results/20260401/candidate_b_minlib_granularity/summary.md},
+\item \code{results/20260401/candidate_b_minlib_granularity/comparison.json},
+\item \code{results/20260401/repair_liftability/liftability_step3.md}.
 \end{itemize}
 
-This appendix does not alter the claim or reproducibility boundary of the existing M1 manuscript under \code{paper/}.
+The relevant experiment bundle was recorded on branch
+\code{codex/candidate-b-minlib-granularity}
+with reference commit hash
+\code{aa2e2c433920efb7b7104aadf69b77be9efe552b},
+as noted in \code{docs/three_row_test_completed.md}.
+
+The manuscript workspace itself lives under \code{papers/m1_5/}.
+The build command is:
+
+\begin{quote}
+\code{make -C papers/m1_5 pdf}
+\end{quote}
+
+No new solver runs are part of this paper draft.
+The role of this appendix is to point from the manuscript to the already existing repository artifacts that support the theorem statement and its scope restrictions.

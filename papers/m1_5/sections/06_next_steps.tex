@@ -1,10 +1,32 @@
-\section{Next Steps}
+\section{Limitations, Open Questions \& Conclusion}
 
-The next implementation steps for this workspace are straightforward:
+\paragraph{Base-case limitation.}
+The theorem is an existence result in the Sen24 base case only.
+It does not claim that raw repair explanation is non-invariant for every encoding comparison, every theorem family, or every finite impossibility witness.
+What is established is that the phenomenon already occurs in a tightly controlled base-case artifact bundle.
 
-\begin{enumerate}[leftmargin=1.5em]
-\item define the M1.5 paper-specific claim boundary,
-\item bind those claims to explicit result directories and artifacts,
-\item add figures and tables generated into this workspace only,
-\item freeze draft or submission states with tags rather than dedicated long-lived branches.
-\end{enumerate}
+\paragraph{Local-rationality limitation.}
+All arguments in this paper remain inside the current local-rationality setting induced by \code{no\_cycle3} and \code{no\_cycle4}.
+Those levers are local forbidden-pattern approximations, not full \code{SocialAcyclic}.
+Accordingly, the paper makes no full-acylcity claim and no full Sen-family or Arrow-family generality claim.
+
+\paragraph{What remains open.}
+The main open problem is the repair-canonicalization layer itself.
+This paper distinguishes raw repair explanation from grouped repair explanation, but it does not characterize when grouped repair explanations are invariant.
+At most, future work may identify sufficient conditions under explicit grouping contracts.
+That is an open question, not a theorem claimed here.
+
+\paragraph{Connection to future repair geometry work.}
+The next conceptual step is not necessarily another base-case witness.
+It is to study the geometry induced by abstraction contracts:
+which contracts preserve diagnosability, which collapse substantively different repairs, and which align with the social-choice semantics that a paper or audit report wants to foreground.
+That future work may connect to richer repair geometry, but it should build on the present distinction rather than erase it.
+
+\paragraph{Conclusion.}
+The Candidate B witness shows that clause-equivalent bundled and split encodings can agree on the existence of an impossibility boundary while disagreeing on the raw lever-level minimal repair family.
+That is enough to separate finite witness legitimization from repair presentation canonicality in the current repository evidence base.
+The main implication is normative: one may have a trustworthy finite witness without yet having a canonical repair explanation.
+
+Proof-carrying or witness-carrying finite impossibility evidence can legitimately certify that a boundary is real.
+It does not, by itself, determine how repairs should be grouped, named, or presented to a reviewer, designer, or downstream system.
+For audit-oriented repair presentation, an explicit abstraction contract is therefore not optional gloss but part of the reporting specification itself.

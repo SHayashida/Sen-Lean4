@@ -1,6 +1,9 @@
 \begin{abstract}
-This workspace is reserved for the second paper (M1.5) built on top of the shared SocialChoiceAtlas repository.
-At the current stage, the manuscript records repository boundaries rather than paper claims:
-shared code and data remain integrated on the main development line, while paper text, generated assets, and reproducibility notes are isolated under \code{papers/m1_5/}.
-This scaffold is intentionally conservative so that M1 can continue under \code{paper/} without destabilization while M1.5 develops its own claim boundary and evidence trail.
+M1 established a proof--audit--witness contract for trustworthy finite impossibility evidence in the Sen24 base case; M1.5 addresses a different question, namely whether such evidence also determines a canonical repair presentation.
+Working strictly in the Sen24 base case \((n,m)=(2,4)\) and within the current local-rationality setting induced by \code{no\_cycle3} and \code{no\_cycle4}, we compare a bundled liberalism lever \code{minlib} with a split encoding exposing \code{decisive\_voter0} and \code{decisive\_voter1}.
+The repository artifact bundle shows that the bundled and split witness CNFs are clause-multiset equivalent under the mapped comparison and that both witnesses are UNSAT.
+Nevertheless, their raw lever-level minimal repair families differ: the bundled witness exposes the singleton repair \code{minlib}, whereas the split witness exposes person-specific singleton repairs.
+We formalize this as an existence theorem showing that raw repair explanation is not invariant under clause-equivalent encodings in the Sen24 base case.
+The implication is normative rather than merely notational: finite witness legitimization can certify that a boundary is real, but it does not automatically determine how repairs should be grouped or presented.
+Audit-oriented repair reporting therefore needs an explicit abstraction contract in addition to proof-carrying or audit-carrying witness infrastructure.
 \end{abstract}

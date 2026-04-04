@@ -1,13 +1,94 @@
-\section{Results Plan}
+\section{Main Theorem \& Witness}
 
-This scaffold does not yet assert any paper-level results.
-Instead, it reserves a clean location for future M1.5 figures, tables, and result summaries.
-When claims are added, they should reference explicit result directories, manifests, or proof objects rather than informal local state.
+The grounding artifact bundle for this section is
+\code{results/20260401/candidate\_b\_minlib\_granularity/}.
+Within that bundle, the main witness is the paired comparison between the bundled witness
+\code{asymm+un+minlib+no\_cycle4}
+and the split witness
+\code{asymm+un+decisive\_voter0+decisive\_voter1+no\_cycle4}.
+All claims below remain within the current local-rationality setting and the Sen24 base case.
 
-In particular, M1.5 should document:
+\paragraph{Theorem 1 (Non-invariance of Raw Repair Explanation).}
+There exist lever-structured encodings \((\Lambda_b,\mathcal{S}_b,\varphi_b)\) and \((\Lambda_s,\mathcal{S}_s,\varphi_s)\), together with active lever sets \(S_b \in \mathcal{S}_b\) and \(S_s \in \mathcal{S}_s\), such that
+\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
+\item \(\varphi_b(S_b) \equiv_{\mathsf{CM}} \varphi_s(S_s)\);
+\item both \(\varphi_b(S_b)\) and \(\varphi_s(S_s)\) are \(\mathsf{UNSAT}\);
+\item
+\[
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_b}(\varphi_b(S_b))
+\not\equiv_{\mathsf{RRE}}
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_s}(\varphi_s(S_s)).
+\]
+\end{enumerate}
 
-\begin{itemize}[leftmargin=1.5em]
-\item the exact atlas or experiment outputs used for each figure or table,
-\item the command that regenerates each paper-facing asset,
-\item the commit hash or submission tag that freezes the paper state.
-\end{itemize}
+\paragraph{Proof.}
+We use the explicit Candidate B witness pair recorded in
+\code{results/20260401/candidate\_b\_minlib\_granularity/summary.md}
+and \code{comparison.json}.
+
+\begin{enumerate}[label=\textbf{Step \arabic*.},leftmargin=2.2em]
+\item
+Define \(\Lambda_b\) to be the bundled five-lever family consisting of
+\code{asymm}, \code{un}, \code{minlib}, \code{no\_cycle3}, and \code{no\_cycle4},
+and let \(S_b\) activate \code{asymm}, \code{un}, \code{minlib}, and \code{no\_cycle4}.
+Define \(\Lambda_s\) to be the split six-lever family consisting of
+\code{asymm}, \code{un}, \code{decisive\_voter0}, \code{decisive\_voter1}, \code{no\_cycle3}, and \code{no\_cycle4},
+and let \(S_s\) activate \code{asymm}, \code{un}, \code{decisive\_voter0}, \code{decisive\_voter1}, and \code{no\_cycle4}.
+Let \(\varphi_b\) and \(\varphi_s\) denote the corresponding repository encodings for the bundled and split families.
+
+\item
+The mapped comparison artifact reports that this bundled/split witness pair is clause-multiset equivalent under the designated comparison map and that the mapped bundled and split statuses agree.
+Hence, for this witness pair,
+\[
+\varphi_b(S_b) \equiv_{\mathsf{CM}} \varphi_s(S_s),
+\]
+and both encoded instances are \(\mathsf{UNSAT}\).
+This uses the mapped comparison artifact directly and does not require any appeal to a stronger semantic equivalence claim.
+
+\item
+Write \(a,u,m,d_0,d_1,c_4\) for the levers
+\code{asymm}, \code{un}, \code{minlib}, \code{decisive\_voter0}, \code{decisive\_voter1}, and \code{no\_cycle4}, respectively.
+The artifact summary reports the following raw lever-level minimal repair families:
+\[
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_b}(\varphi_b(S_b))
+=
+\bigl\{\{a\},\{u\},\{m\},\{c_4\}\bigr\},
+\]
+\[
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_s}(\varphi_s(S_s))
+=
+\bigl\{\{a\},\{u\},\{d_0\},\{d_1\},\{c_4\}\bigr\}.
+\]
+In particular, the bundled side contains the singleton repair \(\{m\}\), while the split side contains the person-specific singleton repairs \(\{d_0\}\) and \(\{d_1\}\).
+
+\item
+By Definition~4, \(\equiv_{\mathsf{RRE}}\) requires a bijection between the active lever sets.
+But \(|S_b|=4\) and \(|S_s|=5\), so no bijection \(S_b \to S_s\) exists.
+Equivalently, the two raw repair families contain different numbers of singleton repairs.
+Therefore
+\[
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_b}(\varphi_b(S_b))
+\not\equiv_{\mathsf{RRE}}
+\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_s}(\varphi_s(S_s)).
+\]
+The three required conditions are satisfied, so the claimed existence result follows.
+\end{enumerate}
+\hfill\(\square\)
+
+\paragraph{Witness interpretation.}
+The theorem is intentionally narrow.
+It says only that such a witness exists in the Sen24 base case and within the current local-rationality setting.
+It does not say that every clause-equivalent encoding must yield different raw repairs, nor does it characterize the full space of grouped repair invariance.
+
+\paragraph{Remark on the mapped comparison.}
+The comparison artifact also reports clause-multiset equality and status preservation across all \(32\) mapped bundled-to-split base-case packages.
+That broader result strengthens confidence in the repository comparison, but the proof above needs only the explicit witness pair.
+
+\paragraph{Corollary 1 (Abstraction-contract corollary).}
+Finite witness legitimization does not automatically determine a canonical repair presentation.
+Therefore, audit-oriented repair presentation cannot proceed without an explicit choice of abstraction contract.
+
+\paragraph{Discussion.}
+The corollary is about presentation discipline, not about weakening the underlying impossibility witness.
+The theorem shows that a proof-carrying or audit-carrying finite boundary can be stable while its raw repair explanation still changes with lever granularity.
+Any grouped repair presentation that merges \code{decisive\_voter0} and \code{decisive\_voter1} into a single liberalism-level report is therefore an additional modeling choice, not a fact forced by the finite witness alone.

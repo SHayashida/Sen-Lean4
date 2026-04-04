@@ -1,0 +1,13 @@
+\section{Reproducibility Note}
+
+This appendix is specific to the M1.5 workspace.
+Its current contract is intentionally minimal:
+
+\begin{itemize}[leftmargin=1.5em]
+\item manuscript root: \code{papers/m1_5/},
+\item asset entrypoint: \code{python3 scripts/render_paper_assets.py --paper-id m1_5 --mode tiny},
+\item PDF build command: \code{make -C papers/m1_5 pdf},
+\item submission snapshots should be recorded with commit hashes and paper-specific tags.
+\end{itemize}
+
+This appendix does not alter the claim or reproducibility boundary of the existing M1 manuscript under \code{paper/}.

@@ -24,6 +24,18 @@ Recommended practice for each submission:
 2. Record the commit hash used for the uploaded PDF.
 3. Upload only the PDF to jxiv; keep reproducibility sources in this repository.
 
+## Multi-paper workspace policy
+
+This repository uses one shared code/data trunk and separate in-repo manuscript workspaces.
+
+- `paper/` is the protected M1 manuscript workspace.
+- `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
+- Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.
+- Use short-lived branches for implementation work and manuscript edits.
+- Freeze submissions with tags and commit hashes rather than long-lived paper branches.
+
+For the repository-level policy, see `docs/paper_workspace_strategy.md` and `papers/README.md`.
+
 ## Zenodo-ready layout
 
 ```text
@@ -109,6 +121,8 @@ and `docs/reproducibility_appendix.md` for artifact policy, `atlas_schema_versio
 For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
 For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
 For the LaTeX paper workspace and frontier figure workflow, see `paper/README.md`.
+For the multi-paper repository policy and the M1.5 scaffold, see `docs/paper_workspace_strategy.md`,
+`papers/README.md`, and `papers/m1_5/README.md`.
 
 ## References
 

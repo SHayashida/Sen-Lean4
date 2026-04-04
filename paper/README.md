@@ -1,6 +1,9 @@
-# Paper Draft Workspace
+# Paper Draft Workspace (M1)
 
 This directory contains a public LaTeX skeleton for the AI/Systems-first paper framing of the Sen24 atlas pipeline.
+It remains the default M1 manuscript workspace.
+
+For the separate M1.5 manuscript workspace, see `papers/m1_5/README.md`.
 
 ## Build
 

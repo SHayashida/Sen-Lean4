@@ -20,6 +20,10 @@ GEN_PAPER_TABLES = SCRIPT_DIR / "gen_paper_tables.py"
 
 DEFAULT_PAPER_ROOT = Path("paper")
 DEFAULT_BUNDLE_ROOT = Path("results") / "paper_assets"
+PAPER_ROOTS_BY_ID = {
+    "m1": Path("paper"),
+    "m1_5": Path("papers") / "m1_5",
+}
 FIGURE_NAMES = [
     "frontier_matrix.png",
     "frontier_matrix.tex",
@@ -35,6 +39,33 @@ TABLE_NAMES = [
     "triangulation_table.tex",
     "verification_stats_table.tex",
 ]
+
+
+def _paper_key_for_root(paper_root: Path) -> str:
+    normalized = paper_root.as_posix().strip("/")
+    for paper_id, candidate in PAPER_ROOTS_BY_ID.items():
+        if candidate.as_posix() == normalized:
+            return paper_id
+    return paper_root.name or "paper"
+
+
+def _default_bundle_root_for_paper(paper_key: str) -> Path:
+    if paper_key in {"m1", "paper"}:
+        return DEFAULT_BUNDLE_ROOT
+    return DEFAULT_BUNDLE_ROOT / paper_key
+
+
+def _paper_subdir_for_bundle(*, paper_id: str | None, paper_root: Path, paper_key: str) -> str:
+    if paper_id is not None:
+        mapped = PAPER_ROOTS_BY_ID[paper_id]
+        return mapped.as_posix()
+    if not paper_root.is_absolute():
+        normalized = paper_root.as_posix().strip("/")
+        if normalized:
+            return normalized
+    if paper_key in {"m1", "paper"}:
+        return DEFAULT_PAPER_ROOT.as_posix()
+    return paper_key
 
 
 def _run(cmd: list[str]) -> None:
@@ -157,8 +188,14 @@ def _render_from_existing_atlas(atlas_outdir: Path, figure_outdir: Path, table_o
     return outputs
 
 
-def _build_bundle_if_needed(mode: str, deterministic: bool) -> Path:
-    bundle_outdir = DEFAULT_BUNDLE_ROOT / f"{mode}_bundle"
+def _build_bundle_if_needed(
+    mode: str,
+    deterministic: bool,
+    *,
+    bundle_root: Path,
+    paper_subdir: str,
+) -> Path:
+    bundle_outdir = bundle_root / f"{mode}_bundle"
     cmd = [
         sys.executable,
         str(BUILD_EVIDENCE_BUNDLE),
@@ -174,6 +211,8 @@ def _build_bundle_if_needed(mode: str, deterministic: bool) -> Path:
         "none",
         "--prune",
         "none",
+        "--paper-subdir",
+        paper_subdir,
     ]
     cmd.append("--deterministic" if deterministic else "--no-deterministic")
     _run(cmd)
@@ -189,10 +228,24 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--mode", choices=["tiny", "full"], default="tiny")
     parser.add_argument(
+        "--paper-id",
+        choices=sorted(PAPER_ROOTS_BY_ID.keys()),
+        help="Stable paper workspace identifier. Defaults to m1 behavior when omitted.",
+    )
+    parser.add_argument(
+        "--paper-root",
+        type=Path,
+        help="Paper workspace root directory. Mutually exclusive with --paper-id.",
+    )
+    parser.add_argument(
         "--outdir",
         type=Path,
-        default=DEFAULT_PAPER_ROOT,
-        help="Paper asset root directory; figures are written to <outdir>/figures/generated and tables to <outdir>/tables/generated",
+        help="Paper asset root directory; figures are written to <outdir>/figures/generated and tables to <outdir>/tables/generated. Defaults to the selected paper workspace root.",
+    )
+    parser.add_argument(
+        "--bundle-root",
+        type=Path,
+        help="Root directory for auto-built evidence bundles. Defaults to results/paper_assets or a paper-specific subdirectory under it.",
     )
     parser.add_argument(
         "--atlas-outdir",
@@ -218,9 +271,21 @@ def _build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = _build_parser().parse_args()
     deterministic = True if args.deterministic is None and args.mode == "tiny" else bool(args.deterministic)
+    if args.paper_id is not None and args.paper_root is not None:
+        raise ValueError("--paper-id and --paper-root are mutually exclusive")
 
-    figure_outdir = args.outdir / "figures" / "generated"
-    table_outdir = args.outdir / "tables" / "generated"
+    paper_root = args.paper_root or PAPER_ROOTS_BY_ID.get(args.paper_id, DEFAULT_PAPER_ROOT)
+    outdir = args.outdir or paper_root
+    paper_key = args.paper_id or _paper_key_for_root(paper_root)
+    bundle_root = args.bundle_root or _default_bundle_root_for_paper(paper_key)
+    paper_subdir = _paper_subdir_for_bundle(
+        paper_id=args.paper_id,
+        paper_root=paper_root,
+        paper_key=paper_key,
+    )
+
+    figure_outdir = outdir / "figures" / "generated"
+    table_outdir = outdir / "tables" / "generated"
     figure_outdir.mkdir(parents=True, exist_ok=True)
     table_outdir.mkdir(parents=True, exist_ok=True)
 
@@ -229,7 +294,12 @@ def main() -> None:
     generated: list[Path] = []
 
     if args.atlas_outdir is None:
-        bundle_outdir = _build_bundle_if_needed(args.mode, deterministic)
+        bundle_outdir = _build_bundle_if_needed(
+            args.mode,
+            deterministic,
+            bundle_root=bundle_root,
+            paper_subdir=paper_subdir,
+        )
         atlas_outdir = bundle_outdir / "atlas"
         generated.extend(_render_from_existing_atlas(atlas_outdir, figure_outdir, table_outdir))
     else:
@@ -248,6 +318,8 @@ def main() -> None:
     print("Generated paper assets:")
     for path in sorted(generated):
         print(_display_path(path))
+    print("Paper workspace:")
+    print(_display_path(outdir))
     print("Upstream atlas:")
     print(_display_path(atlas_outdir))
     if bundle_outdir is not None:

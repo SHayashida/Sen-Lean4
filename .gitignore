@@ -21,6 +21,7 @@ results/
 zenodo_upload_pack/
 paper/build/
 paper_private/
+papers/**/build/
 paper/main.aux
 paper/main.bbl
 paper/main.blg
@@ -37,8 +38,18 @@ paper/**/*.log
 paper/**/*.fls
 paper/**/*.fdb_latexmk
 paper/**/*.synctex.gz
+papers/**/*.aux
+papers/**/*.bbl
+papers/**/*.blg
+papers/**/*.log
+papers/**/*.fls
+papers/**/*.fdb_latexmk
+papers/**/*.synctex.gz
 # Keep preprint PDFs out of git (upload PDFs to jxiv separately).
 paper/**/*preprint*.pdf
 paper/**/*submission*.pdf
+papers/**/*preprint*.pdf
+papers/**/*submission*.pdf
 # Uncomment if you want to keep generated PDFs out of git:
 # paper/**/*.pdf
+# papers/**/*.pdf

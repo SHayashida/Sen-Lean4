@@ -1,9 +1,12 @@
-# Paper Artifact Contract
+# Paper Artifact Contract (M1)
 
 This document is the single source of truth for paper-facing artifacts used by the sen24 manuscript.
 The official source of truth for claim scope remains:
 - `docs/paper_claims_map.md`
 - `paper/sections/appendix_repro.tex`
+
+This contract applies to the existing M1 workspace under `paper/`.
+It does not define the claim or artifact boundary for `papers/m1_5/`.
 
 This artifact contract is intentionally aligned with those files and does not broaden any claim.
 

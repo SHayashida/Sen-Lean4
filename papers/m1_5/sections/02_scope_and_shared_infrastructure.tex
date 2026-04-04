@@ -1,0 +1,8 @@
+\section{Scope and Shared Infrastructure}
+
+The M1.5 workspace is designed to reuse repository-wide components such as the Lean development, SAT encoders, atlas runners, and evidence-generation scripts.
+Those components remain shared project infrastructure unless a future M1.5 claim requires a frozen copy for reproducibility.
+
+Paper-facing assets are isolated by workspace.
+Figures for M1.5 belong under \code{papers/m1_5/figures/generated/}, and tables belong under \code{papers/m1_5/tables/generated/}.
+This keeps M1 and M1.5 from writing into one another's manuscript paths even when they depend on the same upstream experimental outputs.

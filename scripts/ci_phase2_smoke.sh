@@ -15,6 +15,7 @@ EVAL_OUT="$TMP_DIR/eval_smoke"
 BUNDLE_OUT="$TMP_DIR/evidence_bundle"
 BUNDLE_OUT_2="$TMP_DIR/evidence_bundle_2"
 PAPER_ASSETS_OUT="$TMP_DIR/paper_assets"
+PAPER_ASSETS_OUT_M15="$TMP_DIR/papers_m1_5_assets"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
@@ -37,6 +38,15 @@ test -f "$ROOT_DIR/paper/sections/07_related_work.tex"
 test -f "$ROOT_DIR/paper/sections/08_limitations_and_scope.tex"
 test -f "$ROOT_DIR/paper/sections/09_conclusion.tex"
 test -f "$ROOT_DIR/paper/sections/appendix_repro.tex"
+test -f "$ROOT_DIR/docs/paper_workspace_strategy.md"
+test -f "$ROOT_DIR/papers/README.md"
+test -f "$ROOT_DIR/papers/m1_5/README.md"
+test -f "$ROOT_DIR/papers/m1_5/CLAIM_BOUNDARY.md"
+test -f "$ROOT_DIR/papers/m1_5/REPRODUCIBILITY.md"
+test -f "$ROOT_DIR/papers/m1_5/main.tex"
+test -f "$ROOT_DIR/papers/m1_5/Makefile"
+test -f "$ROOT_DIR/papers/m1_5/sections/00_abstract.tex"
+test -f "$ROOT_DIR/papers/m1_5/sections/appendix_repro.tex"
 
 # doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
 grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
@@ -74,6 +84,10 @@ grep -Fq 'scripts/maxsat_baseline.py' "$ROOT_DIR/docs/reviewer_quickstart.md"
 grep -Fq '## Build' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Branch model' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Manuscript workspaces' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Build' "$ROOT_DIR/papers/m1_5/README.md"
+grep -Fq '## Paper-specific contract' "$ROOT_DIR/papers/m1_5/README.md"
 
 python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
@@ -666,4 +680,32 @@ for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower(
     if re.search(r"[A-Za-z]:\\\\", text):
         raise SystemExit(f"paper asset output leaks Windows absolute path in {path}")
 print("paper_assets_ok")
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --paper-id m1_5 \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT_M15"
+
+test -s "$PAPER_ASSETS_OUT_M15/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT_M15/tables/generated/repairs_table.tex"
+
+python3 - "$PAPER_ASSETS_OUT_M15" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+if not (root / "figures" / "generated" / "frontier_matrix.png").exists():
+    raise SystemExit("missing M1.5 frontier matrix output")
+if not (root / "tables" / "generated" / "repairs_table.tex").exists():
+    raise SystemExit("missing M1.5 repairs table output")
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {".tex", ".dot", ".md", ".json"}):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"m1_5 paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"m1_5 paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_m15_ok")
 PY

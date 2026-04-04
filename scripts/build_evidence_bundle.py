@@ -274,6 +274,12 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Disable deterministic bundle normalization.",
     )
     parser.set_defaults(deterministic=None)
+    parser.add_argument(
+        "--paper-subdir",
+        type=Path,
+        default=Path("paper"),
+        help="Relative path inside the bundle where paper-facing figures/tables are written.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
@@ -284,11 +290,16 @@ def main() -> None:
         raise ValueError("--jobs must be >= 1")
 
     deterministic = args.deterministic if args.deterministic is not None else (args.mode == "tiny")
+    if args.paper_subdir.is_absolute():
+        raise ValueError("--paper-subdir must be relative")
+    if ".." in args.paper_subdir.parts:
+        raise ValueError("--paper-subdir must not contain '..'")
 
     bundle_outdir = args.outdir
     atlas_outdir = bundle_outdir / "atlas"
-    paper_fig_outdir = bundle_outdir / "paper" / "figures" / "generated"
-    paper_table_outdir = bundle_outdir / "paper" / "tables" / "generated"
+    paper_subdir = args.paper_subdir
+    paper_fig_outdir = bundle_outdir / paper_subdir / "figures" / "generated"
+    paper_table_outdir = bundle_outdir / paper_subdir / "tables" / "generated"
     logs_dir = bundle_outdir / "logs"
 
     if bundle_outdir.exists():
@@ -644,7 +655,7 @@ def main() -> None:
         },
         "artifacts": {
             "atlas_dir": "atlas",
-            "paper_dir": "paper",
+            "paper_dir": paper_subdir.as_posix(),
             "files": _collect_artifacts(bundle_outdir),
         },
         "reproduce": {

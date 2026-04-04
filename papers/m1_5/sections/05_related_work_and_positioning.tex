@@ -3,7 +3,7 @@
 
 \paragraph{Diagnosis, MUS/MCS, and minimal repair.}
 This paper is close in spirit to diagnosis-oriented work that studies minimal conflict sets and minimal repairs, as well as assumption-based maintenance systems \citep{dekleer1986atms}.
-It is also adjacent to the repository's own MUS/MCS workflow.
+It is also adjacent to the MUS/MCS workflow used in the present base-case study.
 But the claim here is narrower and different.
 We do not present a new MUS/MCS algorithm, and we do not claim a full characterization theorem for repairs.
 Instead, we use an existing finite artifact bundle to isolate a representational fact:
@@ -13,21 +13,19 @@ even when the encoded boundary is stable, raw lever-level repair explanation can
 The result is not a novelty claim about using SAT in social choice.
 That line is already well established, including computer-aided impossibility proofs and automated theorem search \citep{tanglin2009computer,geist2011automated}, as well as SAT-based synthesis of social choice functions \citep{brandtgeist2016strategyproof}.
 Our point is orthogonal.
-The Candidate B witness uses SAT-era infrastructure only as the means by which a finite, auditable comparison is produced.
+The present base-case witness uses SAT-era infrastructure only as the means by which a finite, auditable comparison is produced.
 The paper's claim is about repair explanation canonicality under clause-equivalent encodings, not about SAT as a method.
 
 \paragraph{Transfer from finite witnesses.}
-The repository's three-row test uses the Geist--Endriss line as a positive example of finite-to-family transfer under suitable syntactic discipline, and the Grandi--Endriss discussion as a caution that such transfer can fail in other settings \citep{geist2011automated,grandiendriss2013}.
-M1.5 does not attempt to resolve that literature.
-It takes the repository's current finite-witness legitimization discussion as background and asks what remains open even after such legitimization succeeds in the base-case setting.
+The Geist--Endriss line provides a positive example of finite-to-family transfer under suitable syntactic discipline, while Grandi and Endriss identify settings where such transfer can fail \citep{geist2011automated,grandiendriss2013}.
+The present paper does not attempt to resolve that literature.
+It takes finite-witness legitimization as background and asks what remains open even after such legitimization succeeds in the base-case setting: specifically, whether the witness also determines a canonical repair presentation.
 
-\paragraph{Position relative to M1.}
-The closest internal reference point is M1, the companion manuscript under \code{paper/}.
-M1 is about proof, audit, witness, and assumption separation.
-M1.5 begins where that story stops.
-Once a finite impossibility witness has been made auditable enough for use, a second question appears: what counts as the right repair presentation?
-This paper answers that question negatively first.
-It shows that no representation-invariant raw repair presentation is delivered automatically by the finite witness alone.
+\paragraph{Position relative to the proof--audit--witness separation program.}
+Recent work on trustworthy finite impossibility evidence has focused on separating proof objects, artifact audits, and semantic assumptions \citep{geist2011automated}.
+The present paper addresses the next layer: once such separation is achieved and a finite witness is made auditable, does it also determine how repairs should be presented?
+The answer given here is no.
+No representation-canonical raw repair presentation is delivered automatically by the finite witness alone; an additional abstraction contract is required.
 
 \paragraph{Constraint hierarchies and presentation contracts.}
 The abstraction-contract thesis is also distinct from weighted or prioritized constraint resolution in the style of constraint hierarchies \citep{borning1992constraint}.

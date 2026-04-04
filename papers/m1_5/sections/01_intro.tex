@@ -1,42 +1,32 @@
 \section{Introduction}
 
-The first paper in this repository, M1, is about the trust boundary around solver-supported finite impossibility evidence.
-Its central claim is that proof objects, artifact audits, semantic assumptions, and reported witnesses should be separated rather than collapsed into a single opaque verdict.
-That is a paper about diagnosability.
-This manuscript, M1.5, is not a continuation appendix to that claim.
-It addresses a different normative problem: once a finite impossibility witness has been made trustworthy enough to justify that a boundary is real, what determines the correct way to present the corresponding repairs?
+Finite impossibility results in social choice theory have increasingly been supported by SAT-based verification, which allows finite witness certificates to stand in for axiomatic proofs over infinite preference domains \citep{tanglin2009computer,geist2011automated}.
+Such finite witnesses raise a distinct question once they have been made trustworthy: once a solver has certified that a given combination of axioms is unsatisfiable, what does that certificate tell us about which axioms to relax and how to present the resulting repair options?
+In human-facing audit or institutional design workflows, a solver output is rarely consumed as a bare UNSAT certificate.
+It is turned into a recommendation about which design commitment should be relaxed.
+If that recommendation depends on representational choices---on how the axioms are decomposed, named, and encoded---then trustworthy boundary evidence does not by itself deliver a trustworthy repair presentation.
 
-That second question matters because audit-oriented use is increasingly explanation-oriented rather than proof-oriented.
-In human review, and even more in eventual AI-assisted institutional design settings, a solver output is rarely consumed as a bare UNSAT certificate.
-It is turned into a recommendation about which axiom or design commitment should be relaxed.
-If that recommendation depends on representational granularity rather than on the underlying impossibility alone, then trustworthy boundary evidence does not by itself deliver a trustworthy repair presentation.
-The normative gap is not about whether the impossibility is real; it is about how the repair space is grouped, named, and reported.
+The repair presentation question connects to a body of work on minimal unsatisfiable subsets (MUSes), minimal correction sets (MCSes), and explanation-oriented diagnosis \citep{dekleer1986atms}.
+In that literature, the granularity of fault representation is known to affect the structure of explanations.
+The present paper studies an analogous phenomenon in the finite social choice witness setting: when the same impossibility boundary is encoded at two different lever granularities, and when those encodings are clause-multiset equivalent---identical up to variable renaming---can the raw repair explanation still differ?
 
-The repository's recent experiments make that gap concrete.
-Candidate A asked whether repair liftability itself would fail across neighboring cases.
-Instead, the current five-lever family collapsed into size-1 minimal repairs throughout the tested neighboring runs, substantially weakening Candidate A and showing that the present granularity trivializes that line of separation.
-Candidate B then asked a narrower but cleaner question in the Sen24 base case \citep{sen1970}: does repair explanation change when the same impossibility is encoded at different lever granularities?
-The answer provided by the artifact bundle is yes, even under clause-equivalent base-case encodings.
+The answer given by the base-case witness studied here is yes.
+The paper studies the Sen24 base case \((n,m)=(2,4)\) \citep{sen1970}: a two-voter, four-alternative instance of Sen's Liberal Paradox.
+Two encodings of this impossibility boundary are compared: one uses a single bundled liberalism lever \code{minlib}, the other resolves it into person-specific levers \code{decisive\_voter0} and \code{decisive\_voter1}.
+These two encodings are clause-multiset equivalent, yet their raw lever-level minimal repair families differ under the natural lever correspondence between them.
 
-This is why M1.5 is distinct from M1.
-M1 established a proof--audit--witness contract for finite impossibility evidence.
-M1.5 studies repair presentation canonicality after that contract has done its job.
-The distinction is the repository's current two-layer view of auditability:
-finite witness legitimization and repair explanation canonicality are separate questions, and success on the first does not settle the second.
+This paper formalizes the comparison, defines the relevant notions of raw repair explanation, natural lever correspondence, and repair transport, and proves an existence theorem showing that clause-multiset equivalence does not guarantee canonical raw repair explanation.
+The normative corollary is that audit-oriented repair presentation cannot proceed by finite witness legitimization alone; it also requires an explicit abstraction contract specifying how repairs are to be compared or grouped across encodings.
 
 The paper stays deliberately narrow.
 All claims are about the Sen24 base case \((n,m)=(2,4)\), not about arbitrary Sen or Arrow families.
-Moreover, the rationality levers \code{no\_cycle3} and \code{no\_cycle4} are treated only as local-rationality approximations, not as full \code{SocialAcyclic}.
-The theorem below is therefore an existence result grounded in one audited artifact bundle, not a general repair theory.
+The rationality levers \code{no\_cycle3} and \code{no\_cycle4} are treated only as local-rationality approximations, not as full \code{SocialAcyclic}.
+The main result is therefore an existence result grounded in one audited base-case comparison, not a general repair theory.
 
-Within that scope, the paper makes a concrete claim.
-We define raw repair explanation directly at the lever level, distinguish it from grouped repair explanation, and show that raw repair explanation is non-invariant under clause-equivalent encodings in the Sen24 base case.
-The resulting corollary is normative: finite witness legitimization does not automatically determine a canonical repair presentation, so audit-oriented repair reporting requires an explicit abstraction contract.
-
-The rest of the manuscript is organized as follows.
+The rest of the paper is organized as follows.
 Section~\ref{sec:scope} fixes scope, notation, and the local-rationality setting.
 Section~\ref{sec:definitions} gives the theorem-facing definitions, including the notion of natural lever correspondence and repair transport that underpins the main result.
 The paper's contributions are summarized in Section~\ref{sec:contributions}.
-Section~\ref{sec:theorem} presents the Candidate~B witness and proves the non-invariance theorem.
-Section~\ref{sec:related} positions the paper relative to diagnosis, MUS/MCS explanation, SAT-based computational social choice, and the companion M1 manuscript.
+Section~\ref{sec:theorem} presents the base-case witness and proves the non-canonicality theorem.
+Section~\ref{sec:related} positions the paper relative to diagnosis, MUS/MCS explanation, SAT-based computational social choice, and related work on finite witness methodology.
 Section~\ref{sec:conclusion} concludes with limitations, open questions, and the abstraction-contract thesis.

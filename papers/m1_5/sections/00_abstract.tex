@@ -1,9 +1,13 @@
 \begin{abstract}
-M1 established a proof--audit--witness contract for trustworthy finite impossibility evidence in the Sen24 base case; M1.5 addresses a different question, namely whether such evidence also determines a canonical repair presentation.
-Working strictly in the Sen24 base case \((n,m)=(2,4)\) and within the current local-rationality setting induced by \code{no\_cycle3} and \code{no\_cycle4}, we compare a bundled liberalism lever \code{minlib} with a split encoding exposing \code{decisive\_voter0} and \code{decisive\_voter1}.
-The repository artifact bundle shows that the bundled and split witness CNFs are clause-multiset equivalent under the mapped comparison and that both witnesses are UNSAT.
-Nevertheless, their raw lever-level minimal repair families differ: the bundled witness exposes the singleton repair \code{minlib}, whereas the split witness exposes person-specific singleton repairs.
-We formalize this as an existence theorem showing that raw repair explanation is not invariant under clause-equivalent encodings in the Sen24 base case.
-The implication is normative rather than merely notational: finite witness legitimization can certify that a boundary is real, but it does not automatically determine how repairs should be grouped or presented.
-Audit-oriented repair reporting therefore needs an explicit abstraction contract in addition to proof-carrying or audit-carrying witness infrastructure.
+Trustworthy finite impossibility evidence requires separating proof, audit, and witness concerns; but even after that separation is achieved, a further question arises: does the witness determine a canonical repair presentation?
+A companion manuscript (M1) addresses the first layer---proof, audit, and witness separation---for the Sen24 base case.
+This paper addresses the second layer.
+Working strictly in the Sen24 base case \((n,m)=(2,4)\) and within the local-rationality setting induced by \code{no\_cycle3} and \code{no\_cycle4}, we compare two lever-structured encodings of the same impossibility boundary: a bundled encoding with a single liberalism lever \code{minlib}, and a split encoding exposing person-specific levers \code{decisive\_voter0} and \code{decisive\_voter1}.
+The two encodings are clause-multiset equivalent---they produce identical CNF clause multisets up to variable renaming---and both are UNSAT.
+We define raw repair explanation directly at the lever level and introduce a natural lever correspondence that transports bundled repairs to the split lever family.
+Under this transport, the bundled singleton repair \code{minlib} maps to the pair \{\code{decisive\_voter0},\;\code{decisive\_voter1}\}; but on the split side, each person-specific lever is individually a minimal repair, so the transported pair is not inclusion-minimal there.
+The transported and actual repair families therefore do not coincide.
+We state this as an existence theorem: raw repair explanation is not invariant under clause-equivalent encodings, even when compared through the natural lever correspondence.
+The implication is normative: finite witness legitimization can certify that a boundary is real, but it does not automatically determine a canonical repair presentation.
+Audit-oriented repair reporting therefore requires an explicit abstraction contract specifying how repairs are to be compared or grouped across encodings.
 \end{abstract}

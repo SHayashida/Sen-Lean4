@@ -57,7 +57,7 @@ Hence conditions~(1) and~(2) are satisfied.
 \medskip
 \noindent\textbf{Step 3 (Bundled raw repair family).}
 Write $a,u,m,c_4$ for the levers \code{asymm}, \code{un}, \code{minlib}, and \code{no\_cycle4}.
-The artifact summary reports the following raw lever-level minimal repair family on the bundled side:
+The artifact summary reports the following raw lever-level minimal repair family on the bundled side (see Appendix~\ref{sec:repair-artifact} for the exact artifact fields):
 \[
   \mathsf{Rep}^{\mathrm{raw}}_{\Lambda_b}(\varphi_b(S_b))
   = \bigl\{\{a\},\;\{u\},\;\{m\},\;\{c_4\}\bigr\}.
@@ -84,7 +84,7 @@ In particular, the bundled singleton repair $\{m\}$ becomes the two-element set 
 
 \medskip
 \noindent\textbf{Step 5 (Split raw repair family).}
-The artifact summary reports the following raw lever-level minimal repair family on the split side:
+The artifact summary reports the following raw lever-level minimal repair family on the split side (see Appendix~\ref{sec:repair-artifact}):
 \[
   \mathsf{Rep}^{\mathrm{raw}}_{\Lambda_s}(\varphi_s(S_s))
   = \bigl\{\{a\},\;\{u\},\;\{d_0\},\;\{d_1\},\;\{c_4\}\bigr\}.
@@ -123,6 +123,9 @@ It does not say that every clause-equivalent encoding pair must yield different 
 The broader mapped comparison artifact also reports clause-multiset equality and status preservation across all $32$ mapped bundled-to-split base-case packages.
 That wider result strengthens confidence in the comparison methodology, but the proof above uses only the explicit witness pair.
 \end{remark}
+
+A canonical raw repair presentation would require, for every clause-equivalent encoding pair and every natural lever correspondence between them, that the transported repair family coincides with the target-side repair family.
+Theorem~\ref{thm:non-invariance} shows that this requirement fails in at least one case, which suffices to establish that no such canonical presentation is delivered automatically by the witness alone.
 
 \begin{corollary}[Abstraction-contract corollary]
 \label{cor:abstraction-contract}

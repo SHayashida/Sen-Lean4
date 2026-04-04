@@ -81,3 +81,55 @@ on the split side, \code{decisive\_voter0} contributes $6{,}913$ clauses and \co
 The clause counts for all other lever categories (\code{asymm}, \code{un}, \code{no\_cycle4}) are identical between the two instances.
 This structure is consistent with a variable-renaming map $\rho$ that maps \code{minlib}-category variables to \code{decisive\_voter0}/\code{decisive\_voter1}-category variables while fixing all other variables.
 The full clause-level bijection under $\rho$ is certified by the mapped comparison artifact in \code{comparison.json}, which reports \code{clause\_multiset\_equal: true} for this witness pair.
+
+\subsection{Schematic Description of the Variable-Renaming Map}
+\label{sec:renaming-map}
+
+The variable-renaming map $\rho$ used to certify clause-multiset equivalence (Definition~\ref{def:clause-multiset-equiv}) has the following schematic structure:
+\begin{itemize}[leftmargin=1.5em]
+\item Variables belonging to the shared lever categories \code{asymm}, \code{un}, \code{no\_cycle3}, and \code{no\_cycle4} are \emph{fixed} by $\rho$: they have the same variable indices in both the bundled and split encodings.
+\item Variables belonging to the bundled lever category \code{minlib} ($13{,}826$ clauses) are mapped by $\rho$ to the union of the split lever categories \code{decisive\_voter0} ($6{,}913$ clauses) and \code{decisive\_voter1} ($6{,}913$ clauses). The split encoding resolves each bundled \code{minlib} clause into exactly one clause under \code{decisive\_voter0} or \code{decisive\_voter1}, preserving the clause structure.
+\item All clause counts outside \code{minlib}/\code{decisive\_voter}$i$ are identical between the two encodings, confirming that $\rho$ acts as the identity on the shared categories.
+\end{itemize}
+The full clause-by-clause bijection is certified by \code{comparison.json} across all $32$ mapped base-case packages.
+For the specific witness pair used in Theorem~\ref{thm:non-invariance}, the comparison reports \code{clause\_multiset\_equal: true}.
+
+\subsection{Artifact Grounding for the Raw Repair Families}
+\label{sec:repair-artifact}
+
+The raw minimal repair families stated in Steps~3 and~5 of the proof of Theorem~\ref{thm:non-invariance} are extracted from the artifact summary at
+\code{results/20260401/candidate\_b\_minlib\_granularity/summary.md}
+and the structured data in \code{comparison.json}.
+
+\paragraph{Bundled side}
+(witness: \code{asymm+un+minlib+no\_cycle4}, case \code{case\_11101}).
+The artifact field \code{bundled\_min\_repairs} reports:
+\begin{quote}
+\code{["no\_cycle4", "minlib", "un", "asymm"]}
+\end{quote}
+Each entry is a single lever whose removal from the active set $S_b$ restores satisfiability,
+and no proper subset of any such singleton is a repair (vacuously, since singletons have no proper nonempty subsets).
+Therefore:
+\[
+  \mathsf{Rep}^{\mathrm{raw}}_{\Lambda_b}(\varphi_b(S_b))
+  = \bigl\{\{\mathsf{asymm}\},\;\{\mathsf{un}\},\;\{\mathsf{minlib}\},\;\{\mathsf{no\_cycle4}\}\bigr\}.
+\]
+
+\paragraph{Split side}
+(witness: \code{asymm+un+decisive\_voter0+decisive\_voter1+no\_cycle4}, case \code{case\_111101}).
+The artifact field \code{split\_min\_repairs} reports:
+\begin{quote}
+\code{["no\_cycle4", "decisive\_voter1", "decisive\_voter0", "un", "asymm"]}
+\end{quote}
+Again, each entry is a single lever whose removal restores satisfiability.
+Therefore:
+\[
+  \mathsf{Rep}^{\mathrm{raw}}_{\Lambda_s}(\varphi_s(S_s))
+  = \bigl\{\{\mathsf{asymm}\},\;\{\mathsf{un}\},\;\{\mathsf{decisive\_voter0}\},\;\{\mathsf{decisive\_voter1}\},\;\{\mathsf{no\_cycle4}\}\bigr\}.
+\]
+
+\paragraph{Observation.}
+Both repair families consist entirely of singletons.
+On the bundled side there are four; on the split side there are five.
+The critical difference is that the bundled singleton $\{\mathsf{minlib}\}$ transports to the two-element set $\{\mathsf{decisive\_voter0},\, \mathsf{decisive\_voter1}\}$, which is \emph{not} inclusion-minimal on the split side because each person-specific singleton is already a repair.
+This is the artifact-level basis for Step~6 of the proof.

@@ -1,4 +1,5 @@
 \section{Reproducibility Note}
+\label{sec:repro}
 
 This manuscript is grounded in existing repository artifacts rather than new experiments.
 The main evidence sources used in the text are:
@@ -23,8 +24,60 @@ The manuscript workspace itself lives under \code{papers/m1_5/}.
 The build command is:
 
 \begin{quote}
-\code{make -C papers/m1_5 pdf}
+\code{make -C papers/m1\_5 pdf}
 \end{quote}
 
 No new solver runs are part of this paper draft.
 The role of this appendix is to point from the manuscript to the already existing repository artifacts that support the theorem statement and its scope restrictions.
+
+\subsection{Manifest Evidence for Clause-Multiset Equivalence}
+\label{sec:manifest-evidence}
+
+The clause-multiset equivalence claim in Step~2 of the proof of Theorem~\ref{thm:non-invariance} is grounded in the solver manifest files for the two witness instances.
+
+\paragraph{Bundled witness manifest}
+(\code{results/20260401/candidate\_b\_minlib\_granularity/bundled/case\_11101/summary.json}):
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Field & Value \\
+\midrule
+\code{nclauses} & $36{,}290$ \\
+\code{nvars}    & $6{,}936$ \\
+\code{category\_counts.asymm}      & $6{,}912$ \\
+\code{category\_counts.un}         & $1{,}728$ \\
+\code{category\_counts.minlib}     & $13{,}826$ \\
+\code{category\_counts.no\_cycle3} & $0$ \\
+\code{category\_counts.no\_cycle4} & $13{,}824$ \\
+\code{status} & \textsf{UNSAT} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Split witness manifest}
+(\code{results/20260401/candidate\_b\_minlib\_granularity/split/case\_111101/summary.json}):
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Field & Value \\
+\midrule
+\code{nclauses} & $36{,}290$ \\
+\code{nvars}    & $6{,}936$ \\
+\code{category\_counts.asymm}              & $6{,}912$ \\
+\code{category\_counts.un}                 & $1{,}728$ \\
+\code{category\_counts.decisive\_voter0}   & $6{,}913$ \\
+\code{category\_counts.decisive\_voter1}   & $6{,}913$ \\
+\code{category\_counts.no\_cycle3}         & $0$ \\
+\code{category\_counts.no\_cycle4}         & $13{,}824$ \\
+\code{status} & \textsf{UNSAT} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Key observations.}
+Both instances have identical total clause counts ($36{,}290$) and variable counts ($6{,}936$).
+The bundled lever \code{minlib} contributes $13{,}826$ clauses;
+on the split side, \code{decisive\_voter0} contributes $6{,}913$ clauses and \code{decisive\_voter1} contributes $6{,}913$ clauses, with $6{,}913 + 6{,}913 = 13{,}826$.
+The clause counts for all other lever categories (\code{asymm}, \code{un}, \code{no\_cycle4}) are identical between the two instances.
+This structure is consistent with a variable-renaming map $\rho$ that maps \code{minlib}-category variables to \code{decisive\_voter0}/\code{decisive\_voter1}-category variables while fixing all other variables.
+The full clause-level bijection under $\rho$ is certified by the mapped comparison artifact in \code{comparison.json}, which reports \code{clause\_multiset\_equal: true} for this witness pair.

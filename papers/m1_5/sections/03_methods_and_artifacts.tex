@@ -1,62 +1,99 @@
 \section{Definitions}
+\label{sec:definitions}
 
-\paragraph{Definition 1 (Lever-structured encoding).}
-A lever-structured encoding is a triple \((\Lambda,\mathcal{S},\varphi)\) such that:
+\begin{definition}[Lever-structured encoding]
+\label{def:lever-encoding}
+A \emph{lever-structured encoding} is a triple $(\Lambda,\mathcal{S},\varphi)$ such that:
 \begin{enumerate}[label=(\roman*),leftmargin=1.8em]
-\item \(\Lambda\) is a finite family of lever labels;
-\item \(\mathcal{S} \subseteq 2^\Lambda\) is a family of admissible active lever sets;
-\item \(\varphi : \mathcal{S} \to \mathsf{CNF}\) maps each active lever set \(S \in \mathcal{S}\) to a CNF instance \(\varphi(S)\).
+\item $\Lambda$ is a finite family of lever labels;
+\item $\mathcal{S} \subseteq 2^\Lambda$ is a family of admissible active lever sets;
+\item $\varphi : \mathcal{S} \to \mathsf{CNF}$ maps each active lever set $S \in \mathcal{S}$ to a CNF instance $\varphi(S)$.
 \end{enumerate}
-When \(S \in \mathcal{S}\) is fixed, the pair \((S,\varphi(S))\) is the encoded instance induced by that active lever set.
-The theorem in this paper is about such encoded instances, not about bare encodings with no active set specified.
+When $S \in \mathcal{S}$ is fixed, the pair $(S,\varphi(S))$ is the \emph{encoded instance} induced by that active lever set.
+The results in this paper concern such encoded instances, not bare encodings with no active set specified.
+\end{definition}
 
-\paragraph{Definition 2 (Clause-multiset equivalence).}
-Let \(\varphi_1(S_1)\) and \(\varphi_2(S_2)\) be two encoded CNF instances.
-We write
+\begin{definition}[Clause-multiset equivalence]
+\label{def:clause-multiset-equiv}
+Let $\phi_1$ and $\phi_2$ be CNF instances over variable sets $V_1$ and $V_2$, respectively.
+We say $\phi_1$ and $\phi_2$ are \emph{clause-multiset equivalent}, written
 \[
-\varphi_1(S_1) \equiv_{\mathsf{CM}} \varphi_2(S_2)
+  \phi_1 \equiv_{\mathsf{CM}} \phi_2,
 \]
-when the mapped comparison artifact establishes a clause-level bijection between the two clause multisets after applying the designated variable renaming map.
-In this manuscript, the scope of \(\equiv_{\mathsf{CM}}\) is restricted to the mapped comparisons reported in
-\code{results/20260401/candidate\_b\_minlib\_granularity/comparison.json}.
-We do not use \(\equiv_{\mathsf{CM}}\) as a synonym for unrestricted logical equivalence or unrestricted semantic equivalence.
-
-\paragraph{Definition 3 (Direct lever-level minimal repair family).}
-Let \((\Lambda,\mathcal{S},\varphi)\) be a lever-structured encoding, let \(S \in \mathcal{S}\), and suppose that \(\varphi(S)\) is \(\mathsf{UNSAT}\).
-The raw lever-level minimal repair family of \(\varphi(S)\) is
+if there exist a variable-renaming bijection $\rho : V_1 \to V_2$ and a bijection $\sigma$ between the clause multisets of $\phi_1$ and $\phi_2$ such that, for every clause $c$ of $\phi_1$,
 \[
-\mathsf{Rep}^{\mathrm{raw}}_\Lambda(\varphi(S))
-:=
-\left\{
-R \subseteq S \;\middle|\;
-\begin{array}{l}
-\varphi(S \setminus R)\text{ is }\mathsf{SAT}, \text{ and}\\[2pt]
-\varphi(S \setminus R')\text{ is }\mathsf{UNSAT}\text{ for every }R' \subsetneq R
-\end{array}
-\right\}.
+  \sigma(c) = \rho(c),
+\]
+where $\rho(c)$ denotes the clause obtained by replacing every literal $\ell$ in $c$ by $\rho(\ell)$, preserving polarity.
+
+In other words, $\phi_1 \equiv_{\mathsf{CM}} \phi_2$ holds iff the two instances have identical clause multisets up to a consistent variable renaming.
+In particular, clause-multiset equivalence implies $|V_1| = |V_2|$ and identical clause counts.
+\end{definition}
+
+\begin{remark}
+\label{rem:cm-witness}
+In the present witness, clause-multiset equivalence is certified by the mapped comparison artifact in \code{results/20260401/candidate\_b\_minlib\_granularity/comparison.json}.
+Both the bundled and split instances have $36{,}290$ clauses over $6{,}936$ variables (see Appendix~\ref{sec:repro} for manifest details).
+We do not use $\equiv_{\mathsf{CM}}$ as a synonym for unrestricted logical equivalence or unrestricted semantic equivalence.
+\end{remark}
+
+\begin{definition}[Raw lever-level minimal repair family]
+\label{def:raw-repair}
+Let $(\Lambda,\mathcal{S},\varphi)$ be a lever-structured encoding, let $S \in \mathcal{S}$, and suppose that $\varphi(S)$ is $\mathsf{UNSAT}$.
+The \emph{raw lever-level minimal repair family} of $\varphi(S)$ is
+\[
+  \mathsf{Rep}^{\mathrm{raw}}_\Lambda(\varphi(S))
+  :=
+  \left\{
+    R \subseteq S \;\middle|\;
+    \begin{array}{l}
+      \varphi(S \setminus R)\text{ is }\mathsf{SAT}, \text{ and}\\[2pt]
+      \varphi(S \setminus R')\text{ is }\mathsf{UNSAT}\text{ for every }R' \subsetneq R
+    \end{array}
+  \right\}.
 \]
 This definition is direct at the lever level.
-It does not define raw repair explanation as the image of a clause-level MCS projection.
+It does \emph{not} define raw repair explanation as the image of a clause-level MCS projection.
+\end{definition}
 
-\paragraph{Definition 4 (Raw repair explanation equivalence).}
-Let \(\mathcal{R}_1 \subseteq 2^{S_1}\) and \(\mathcal{R}_2 \subseteq 2^{S_2}\) be two raw repair families over active lever sets \(S_1\) and \(S_2\).
-We write
+\begin{definition}[Natural lever correspondence and repair transport]
+\label{def:transport}
+Let $(\Lambda_1,\mathcal{S}_1,\varphi_1)$ and $(\Lambda_2,\mathcal{S}_2,\varphi_2)$ be lever-structured encodings.
+A \emph{natural lever correspondence} from $\Lambda_1$ to $\Lambda_2$ is a map
 \[
-\mathcal{R}_1 \equiv_{\mathsf{RRE}} \mathcal{R}_2
+  \pi : \Lambda_1 \to 2^{\Lambda_2}
 \]
-iff there exists a bijection \(\pi : S_1 \to S_2\) such that
+such that the sets $\{\pi(\lambda)\}_{\lambda \in \Lambda_1}$ are pairwise disjoint and $\bigcup_{\lambda \in \Lambda_1} \pi(\lambda) \subseteq \Lambda_2$.
+
+Given $\pi$ and a lever subset $R \subseteq \Lambda_1$, the \emph{transport} of $R$ through $\pi$ is
 \[
-\mathcal{R}_2 = \{\pi[R] : R \in \mathcal{R}_1\},
-\qquad
-\pi[R] := \{\pi(r) : r \in R\}.
+  \pi(R) := \bigcup_{\lambda \in R} \pi(\lambda).
 \]
-Thus \(\equiv_{\mathsf{RRE}}\) preserves both the number of repairs and the cardinality of each repair set.
-In particular, the family whose only repair is the singleton \code{minlib}
-is not \(\equiv_{\mathsf{RRE}}\)-equivalent to the family whose only repair is the two-lever set
-consisting of \code{decisive\_voter0} and \code{decisive\_voter1}.
+The \emph{transported raw repair family} is
+\[
+  \pi_*\!\bigl(\mathsf{Rep}^{\mathrm{raw}}_{\Lambda_1}(\varphi_1(S_1))\bigr)
+  :=
+  \bigl\{\, \pi(R) \mid R \in \mathsf{Rep}^{\mathrm{raw}}_{\Lambda_1}(\varphi_1(S_1)) \,\bigr\}.
+\]
+\end{definition}
+
+\begin{remark}
+\label{rem:pi-witness}
+In the Candidate~B witness, the natural lever correspondence from the bundled family to the split family is:
+\[
+  \pi(\mathsf{minlib}) = \{\mathsf{decisive\_voter0},\, \mathsf{decisive\_voter1}\},
+\]
+with all other levers mapping to their singletons:
+$\pi(\mathsf{asymm}) = \{\mathsf{asymm}\}$,
+$\pi(\mathsf{un}) = \{\mathsf{un}\}$,
+$\pi(\mathsf{no\_cycle3}) = \{\mathsf{no\_cycle3}\}$,
+$\pi(\mathsf{no\_cycle4}) = \{\mathsf{no\_cycle4}\}$.
+This reflects the semantic design of the split encoding: the bundled lever \code{minlib} is resolved into two person-specific levers.
+A natural lever correspondence is not an arbitrary bijection; it is determined by the encoding design.
+\end{remark}
 
 \paragraph{Grouped repair explanation.}
-Grouped repair explanation is a different object from Definition~3.
+Grouped repair explanation is a different object from Definition~\ref{def:raw-repair}.
 It arises only after fixing an explicit abstraction contract that groups raw lever labels into presentation categories.
 This paper does not claim a complete characterization of when grouped repair explanation is invariant.
 Its narrower claim is that raw repair explanation can already fail to be invariant before any grouping contract is chosen.

@@ -1,31 +1,38 @@
 \section{Introduction}
 
 Finite impossibility results in social choice theory have increasingly been supported by SAT-based verification, which allows finite witness certificates to stand in for axiomatic proofs over infinite preference domains \citep{tanglin2009computer,geist2011automated}.
-Such finite witnesses raise a distinct question once they have been made trustworthy: once a solver has certified that a given combination of axioms is unsatisfiable, what does that certificate tell us about which axioms to relax and how to present the resulting repair options?
-In human-facing audit or institutional design workflows, a solver output is rarely consumed as a bare UNSAT certificate.
-It is turned into a recommendation about which design commitment should be relaxed.
-If that recommendation depends on representational choices---on how the axioms are decomposed, named, and encoded---then trustworthy boundary evidence does not by itself deliver a trustworthy repair presentation.
+A natural follow-up question arises once such a witness has been made trustworthy: once a solver has certified that a given combination of axioms is unsatisfiable, does that certificate also determine which axioms to relax and how to present the resulting repairs?
+The answer matters because audit-oriented use is explanation-oriented.
+A solver output is rarely consumed as a bare UNSAT certificate; it is turned into a recommendation about which design commitment should be relaxed.
+If that recommendation depends on representational choices rather than on the underlying impossibility alone, then a valid witness does not by itself deliver a canonical repair presentation.
 
-The repair presentation question connects to a body of work on minimal unsatisfiable subsets (MUSes), minimal correction sets (MCSes), and explanation-oriented diagnosis \citep{dekleer1986atms}.
-In that literature, the granularity of fault representation is known to affect the structure of explanations.
-The present paper studies an analogous phenomenon in the finite social choice witness setting: when the same impossibility boundary is encoded at two different lever granularities, and when those encodings are clause-multiset equivalent---identical up to variable renaming---can the raw repair explanation still differ?
+One might hope that this gap disappears under a strong enough comparison notion.
+If two encodings of the same impossibility boundary are not merely logically related but \emph{clause-multiset equivalent}---identical CNF clause multisets up to variable renaming, written $\equiv_{\mathsf{CM}}$---then surely the raw repair explanation should also agree?
+This paper shows that it does not.
+The comparison is carried out in the strongest representational-equivalence setting we can construct in the Sen24 base case: exact $\equiv_{\mathsf{CM}}$, not merely logical equivalence or satisfiability-status agreement.
+Even so, the raw lever-level minimal repair families differ under the natural lever correspondence between the two encodings.
 
-The answer given by the base-case witness studied here is yes.
-The paper studies the Sen24 base case \((n,m)=(2,4)\) \citep{sen1970}: a two-voter, four-alternative instance of Sen's Liberal Paradox.
-Two encodings of this impossibility boundary are compared: one uses a single bundled liberalism lever \code{minlib}, the other resolves it into person-specific levers \code{decisive\_voter0} and \code{decisive\_voter1}.
-These two encodings are clause-multiset equivalent, yet their raw lever-level minimal repair families differ under the natural lever correspondence between them.
+The connection to diagnosis is direct.
+In the MUS/MCS and explanation-oriented diagnosis literature \citep{dekleer1986atms}, the granularity of fault representation is known to affect the structure of explanations.
+The present paper isolates the same phenomenon in the finite social choice witness setting, under a stronger comparison guarantee than is typical: exact clause-multiset equivalence rules out the cheap explanation that one encoding is simply logically stronger or weaker than the other.
+The non-canonicality is therefore not a consequence of logical-strength drift; it is a structural feature of lever-level minimality under differing granularity.
 
-This paper formalizes the comparison, defines the relevant notions of raw repair explanation, natural lever correspondence, and repair transport, and proves an existence theorem showing that clause-multiset equivalence does not guarantee canonical raw repair explanation.
-The normative corollary is that audit-oriented repair presentation cannot proceed by finite witness legitimization alone; it also requires an explicit abstraction contract specifying how repairs are to be compared or grouped across encodings.
+Concretely, the paper studies the Sen24 base case \((n,m)=(2,4)\) \citep{sen1970}: a two-voter, four-alternative instance of Sen's Liberal Paradox.
+Two encodings are compared: one uses a single bundled liberalism lever \code{minlib}, the other resolves it into person-specific levers \code{decisive\_voter0} and \code{decisive\_voter1}.
+These encodings satisfy $\equiv_{\mathsf{CM}}$, yet the bundled singleton repair $\{\mathsf{minlib}\}$ transports to a two-element set that is not inclusion-minimal on the split side, where each person-specific lever is individually a minimal repair.
+
+The paper's contribution is a theorem showing that $\equiv_{\mathsf{CM}}$ does not guarantee canonical raw repair explanation, together with a normative corollary: finite witness legitimization alone does not settle repair presentation.
+Audit-oriented repair reporting requires an explicit abstraction contract specifying how repairs are to be compared or grouped across encodings.
+This identifies a missing layer between witness validity and repair presentation that, to our knowledge, has not been isolated in the finite social choice witness literature.
 
 The paper stays deliberately narrow.
 All claims are about the Sen24 base case \((n,m)=(2,4)\), not about arbitrary Sen or Arrow families.
 The rationality levers \code{no\_cycle3} and \code{no\_cycle4} are treated only as local-rationality approximations, not as full \code{SocialAcyclic}.
-The main result is therefore an existence result grounded in one audited base-case comparison, not a general repair theory.
+The main result is an existence theorem grounded in one audited base-case comparison, not a general repair theory.
 
 The rest of the paper is organized as follows.
 Section~\ref{sec:scope} fixes scope, notation, and the local-rationality setting.
-Section~\ref{sec:definitions} gives the theorem-facing definitions, including the notion of natural lever correspondence and repair transport that underpins the main result.
+Section~\ref{sec:definitions} gives the theorem-facing definitions, including clause-multiset equivalence ($\equiv_{\mathsf{CM}}$), natural lever correspondence, and repair transport.
 The paper's contributions are summarized in Section~\ref{sec:contributions}.
 Section~\ref{sec:theorem} presents the base-case witness and proves the non-canonicality theorem.
 Section~\ref{sec:related} positions the paper relative to diagnosis, MUS/MCS explanation, SAT-based computational social choice, and related work on finite witness methodology.

@@ -1,15 +1,15 @@
 \section{Main Theorem and Witness}
 \label{sec:theorem}
 
-The grounding artifact bundle for this section is
-\code{results/20260401/candidate\_b\_minlib\_granularity/}.
-Within that bundle, the main witness is the paired comparison between the bundled instance
+The present base-case witness consists of a paired comparison between the bundled instance
 \code{asymm+un+minlib+no\_cycle4}
 and the split instance
-\code{asymm+un+decisive\_voter0+decisive\_voter1+no\_cycle4}.
-All claims below remain within the current local-rationality setting and the Sen24 base case.
+\code{asymm+un+decisive\_voter0+decisive\_voter1+no\_cycle4},
+recorded in the artifact bundle at
+\code{results/20260401/candidate\_b\_minlib\_granularity/}.
+All claims below remain within the local-rationality setting and the Sen24 base case.
 
-\begin{theorem}[Non-invariance of raw repair explanation under natural lever correspondence]
+\begin{theorem}[Non-canonicality of raw repair explanation under $\equiv_{\mathsf{CM}}$]
 \label{thm:non-invariance}
 There exist lever-structured encodings $(\Lambda_b,\mathcal{S}_b,\varphi_b)$ and $(\Lambda_s,\mathcal{S}_s,\varphi_s)$, together with active lever sets $S_b \in \mathcal{S}_b$ and $S_s \in \mathcal{S}_s$, and a natural lever correspondence $\pi : \Lambda_b \to 2^{\Lambda_s}$ (Definition~\ref{def:transport}), such that:
 \begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
@@ -25,7 +25,7 @@ There exist lever-structured encodings $(\Lambda_b,\mathcal{S}_b,\varphi_b)$ and
 \end{theorem}
 
 \begin{proof}
-We use the explicit Candidate~B witness pair recorded in
+We use the base-case witness pair recorded in
 \code{results/20260401/candidate\_b\_minlib\_granularity/summary.md}
 and \code{comparison.json}.
 
@@ -37,7 +37,7 @@ and let $S_b = \{\mathsf{asymm},\, \mathsf{un},\, \mathsf{minlib},\, \mathsf{no\
 Define $\Lambda_s$ to be the split six-lever family
 $\{\mathsf{asymm},\, \mathsf{un},\, \mathsf{decisive\_voter0},\, \mathsf{decisive\_voter1},\, \mathsf{no\_cycle3},\, \mathsf{no\_cycle4}\}$,
 and let $S_s = \{\mathsf{asymm},\, \mathsf{un},\, \mathsf{decisive\_voter0},\, \mathsf{decisive\_voter1},\, \mathsf{no\_cycle4}\}$.
-Let $\varphi_b$ and $\varphi_s$ denote the corresponding repository encodings.
+Let $\varphi_b$ and $\varphi_s$ denote the corresponding encoding maps.
 Define the natural lever correspondence $\pi : \Lambda_b \to 2^{\Lambda_s}$ by
 \[
   \pi(\mathsf{minlib}) = \{\mathsf{decisive\_voter0},\, \mathsf{decisive\_voter1}\},

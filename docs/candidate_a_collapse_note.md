@@ -47,3 +47,11 @@ but a necessary constraint on what axiom granularity is required for the protoco
 Recording this constraint is itself a contribution to the audit framework design:
 the choice of axiom granularity is not neutral, and experiments that collapse at size-1 MCS
 must be redesigned before they can serve as separation evidence.
+
+Candidate A collapse was therefore not a failure.
+It established that size-1 MCS at the current five-lever granularity is a structural feature of the present setting,
+not just a one-off accident in a single case.
+That observation is what motivated the Candidate B granularity comparison on `minlib`:
+if the bundled granularity trivializes repair structure, the right next step is to refine the leverization and test whether repair explanation changes under controlled equivalence.
+Taken together, Candidate A and Candidate B now define the repository's current two-layer auditability picture:
+Candidate A isolates the witness-legitimization question, while Candidate B isolates the repair-canonicalization question.

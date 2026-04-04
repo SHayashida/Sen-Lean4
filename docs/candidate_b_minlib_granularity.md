@@ -160,3 +160,33 @@ All Candidate B conclusions in this branch remain restricted to the current loca
 This branch does **not** claim anything about full `SocialAcyclic`.
 
 If stronger rationality is introduced later, Candidate B would need a new controlled comparison rather than reusing this branch’s conclusion without qualification.
+
+---
+
+## Connection to 3-row test
+
+This branch fills the previously open 理由Y slot in Row 2 of the 3-row test.
+The missing reason was the precise way in which the Sen-type case separates from the Arrow-type case:
+in the Sen-type setting, the transfer problem is not the blocker, so the analysis reaches the repair-canonicalization layer;
+in the Arrow-type setting, finite-to-general transfer can fail before repair canonicalization is even reached.
+
+The concrete witness on this branch is the bundled versus split `minlib` comparison at `(2,4)`:
+
+- bundled `asymm+un+minlib+no_cycle4`
+- split `asymm+un+decisive_voter0+decisive_voter1+no_cycle4`
+
+This witness is valid under **exact clause-multiset equivalence**, not merely under abstract logical equivalence.
+That is the key control condition for the row-2 separation claim:
+the repair divergence cannot be explained away as a stronger split encoding artifact.
+
+The observed divergence is:
+
+- bundled minimal repair includes `{minlib}`
+- split minimal repairs include `{decisive_voter0}` and `{decisive_voter1}`
+
+So the Candidate B result supplies a concrete instance in which family-level use is already justified,
+the base-case encodings are clause-set equivalent under the intended mapping,
+and yet repair explanation remains granularity-sensitive.
+
+All of these conclusions remain inside the restricted local-rationality scope of `no_cycle3` / `no_cycle4`.
+This branch does not claim anything about full `SocialAcyclic`.

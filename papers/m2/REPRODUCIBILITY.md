@@ -30,6 +30,7 @@ Each M2 draft or submission should record:
 
 - the commit hash on `codex/m2-bridge`;
 - the submission tag, if any;
+- the Zenodo DOI, once the tagged release has been archived;
 - the build command used to typecheck the lift module;
 - the M2 smoke-gate outcome (`./scripts/ci_m2_smoke.sh`);
 - the decision-record state (`docs/gates/m2/aim_signoff.md`).
@@ -53,6 +54,8 @@ This file applies only to M2. It does not replace
 `docs/reproducibility_appendix.md`, the M1 paper-specific appendix under
 `paper/sections/appendix_repro.tex`, or the M1.5 reproducibility note under
 `papers/m1_5/REPRODUCIBILITY.md`.
+
+For the release procedure and DOI insertion pattern, see `papers/m2/ZENODO.md`.
 
 ## What is NOT reproduced here
 

@@ -32,6 +32,7 @@ Output PDF and auxiliary files are written under `papers/m2/build/`.
 
 - Claim boundary: `papers/m2/CLAIM_BOUNDARY.md`
 - Reproducibility note: `papers/m2/REPRODUCIBILITY.md`
+- Zenodo release note: `papers/m2/ZENODO.md`
 
 These files must remain specific to M2 and must not silently expand the claim
 scope of `paper/` (M1) or `papers/m1_5/` (M1.5).

@@ -2,8 +2,8 @@
 
 ## Bridge Theorems / Transfer Contract — construction-readiness record
 
-**Status:** Decisions 1 and 3 CONFIRMED. Decisions 2 and 4 SPECIFIED (Decision 2 designed below; Decision 4 deferred to a separate task).
-**Branch context:** `codex/m1_5-paper-draft` (recommend cutting `codex/m2-bridge` before scaffold lands).
+**Status:** Decisions 1, 2, and 3 LANDED on `codex/m2-bridge` (Stage 1+2: `sen_impossibility_lifts` kernel-checked at `SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean:545`; scope wall at `docs/m2_scope_wall.md`). Decision 4 DEFERRED to a separate task.
+**Branch context:** `codex/m2-bridge` (Stage 1+2 landed; `papers/m2/` scaffold lands next).
 **Program:** Auditable Abstraction Contracts — pillar M2 (Transfer Contract).
 **Purpose of this file:** record the four blocking decisions that must be fixed before the
 `SocialChoiceAtlas/Sen/Lifting/` skeleton and `papers/m2/` scaffold are generated, so that
@@ -194,6 +194,7 @@ witness*, which is documented and audited, not (yet) a Lean theorem.
 `docs/m2_scope_wall.md` may proceed now, using the staged prompt in
 `docs/gates/m2/impossibility_lift_prompt.md`.**
 
-Non-blocking recommendations before scaffold: cut `codex/m2-bridge`; add a `scripts/ci_m2_smoke.sh`
-placeholder wired into `.github/workflows/ci.yml`; author `docs/candidate_b_encoding_sensitivity.md`
-under Decision 4.
+Non-blocking recommendations before `papers/m2/` scaffold (Stage 1+2 already landed on
+`codex/m2-bridge`): add a `scripts/ci_m2_smoke.sh` placeholder wired into `.github/workflows/ci.yml`;
+author `docs/candidate_b_encoding_sensitivity.md` under Decision 4 (currently absent; referenced
+from `docs/experiment_protocol_repair_liftability.md`).

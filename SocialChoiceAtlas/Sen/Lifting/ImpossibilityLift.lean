@@ -22,16 +22,24 @@ finite case `(Voter := Fin 2, Alt := Fin 4)` to any finite case with
 `2 ≤ n` voters and `4 ≤ m` alternatives, by direct semantic construction
 on the strict social preference relation.
 
-This file is the **Stage 1** commit: it contains the module shell,
-imports, the namespace, and the single helper lemma `exists_not_mem_of_card_lt`
-which is the technical core of the "completion lemma" named in the M2
-prompt's obstacle section. Stage 2 will add the ranking-completion helper,
-the profile lift, the polymorphic port of `sen_not_acyclic_01`, and the main
-theorem.
+This file is the **Stage 2** deliverable: it contains the module shell,
+imports, the namespace, the completion lemma `exists_not_mem_of_card_lt`,
+the ranking-completion helpers (`rankingOfPrefix`, `ranking4Prefix`), the
+two-voter profile lift (`liftProfile`), the polymorphic port of
+`sen_not_acyclic_01` as five `private` sub-lemmas (`sen_lift_case_*`), and
+the main theorem `sen_impossibility_lifts` (see L545).
+
+The proof is stronger than the staged prompt anticipated: the cycle
+construction is supplied entirely by the alternatives that `MINLIB` already
+exposes (with `Decisive.symm` to resolve overlap orientation), so the
+`4 ≤ Fintype.card (Fin m)` completion lemma is kept as infrastructure but
+is not consumed by the final theorem; the hypotheses `_hn : 2 ≤ n` and
+`_hm : 4 ≤ m` are therefore underscore-prefixed (kept for statement
+symmetry with Sen's original formulation, and to document the lift scope).
 
 The companion plan is `docs/gates/m2/impossibility_lift_stage1_plan.md`.
 The scope wall (Proof layer vs. CNF Witness/Audit layer) is documented in
-`docs/m2_scope_wall.md` (added at Stage 2 alongside the main proof).
+`docs/m2_scope_wall.md`.
 -/
 
 namespace SocialChoiceAtlas.Sen.Lifting

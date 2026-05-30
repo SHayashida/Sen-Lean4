@@ -2,10 +2,10 @@
 \label{sec:scope}
 
 \paragraph{Layer-level scope.}
-M2 separates two layers that the surrounding program treats as independent.
+This paper separates two layers that the surrounding program treats as independent.
 The \emph{Lean Proof layer} establishes semantic statements at the axiom level using polymorphic Lean definitions of \(\mathtt{UN}\), \(\mathtt{MINLIB}\), \(\mathtt{Decisive}\), and \(\mathtt{SocialAcyclic}\).
 The \emph{CNF Witness/Audit layer} establishes finite-case satisfiability or unsatisfiability via clause-level encodings whose conformance to the Proof-layer axioms must itself be audited.
-M2's main positive deliverable belongs to the Proof layer; M2's main negative deliverable concerns the wall between the two layers.
+The main positive deliverable belongs to the Proof layer; the main negative deliverable concerns the wall between the two layers.
 
 \paragraph{Family scope.}
 The positive theorem ranges over all finite cases \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\) with \(2 \leq n\) and \(4 \leq m\).
@@ -22,16 +22,11 @@ The negative-side scope wall is exactly the statement that the Proof-layer lift 
 The paper contains
 (i) the polymorphic Lean signatures used by the lift theorem,
 (ii) the kernel-checked statement and proof sketch of \(\mathtt{sen\_impossibility\_lifts}\),
-(iii) the Negative \#1 scope wall, and
+(iii) the Proof-vs-Witness/Audit scope wall, and
 (iv) the artifact binding for both deliverables.
 The paper does \emph{not} contain
 (i) new solver experiments,
-(ii) any modification of the M1 or M1.5 manuscripts,
+(ii) any modification of the sibling Evidence-Contract or Explanation-Contract manuscripts,
 (iii) a family-level CNF certificate for full acyclicity, or
-(iv) a Candidate-B / Negative \#2 family-scale representation-canonicity result.
-These last two are explicitly deferred to M2.1.
-
-\paragraph{Public-repo safety.}
-The paper references repository-relative paths only.
-It does not contain local absolute paths, secrets, or internal-only infrastructure details, in line with \code{AGENTS.md} \S0.2 and \code{docs/public\_repo\_security.md}.
-The protected baseline artifacts \code{Certificates/sen24.cnf}, \code{Certificates/sen24.manifest.json}, \code{Certificates/sen24.lrat}, and \code{Certificates/atlas/case\_11111/**} are untouched by this paper, in line with \code{AGENTS.md} \S9.1.
+(iv) a family-scale representation-canonicity result.
+These last two are explicitly deferred to a companion paper (in preparation).

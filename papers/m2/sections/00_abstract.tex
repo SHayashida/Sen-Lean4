@@ -1,7 +1,7 @@
 \begin{abstract}
+When a finite impossibility witness in social choice theory is generalised to a case family, ``the witness transferred'' is not one claim but two: a Proof-layer transfer of the semantic argument, and a Witness/Audit-layer transfer of the CNF encoding that backed the original certificate, and they come apart.
+We demonstrate this layer split for Sen's Liberal Paradox by pairing a kernel-checked positive answer at the Lean Proof layer with an explicit scope wall against the CNF Witness/Audit layer.
 Finite impossibility witnesses in social choice theory are increasingly delivered as proof-carrying artifacts: a kernel-checked Lean theorem at a base case, plus a CNF certificate audited at the same base case.
-A natural follow-up question is whether such finite-case evidence transfers when the case is enlarged.
-This paper provides a kernel-checked positive answer at the Lean Proof layer for Sen's Liberal Paradox, and pairs it with an explicit negative-side scope wall against the CNF Witness/Audit layer.
 Concretely, we formalise and verify
 \(\mathtt{sen\_impossibility\_lifts}\):
 for any finite case with at least two voters and at least four alternatives, any social welfare function satisfying semantic unanimity (\(\mathtt{UN}\)) and minimal liberalism (\(\mathtt{MINLIB}\)) fails \(\mathtt{SocialAcyclic}\).

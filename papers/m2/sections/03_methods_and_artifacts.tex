@@ -45,7 +45,7 @@ All four definitions above are polymorphic in \(\mathtt{Voter}\) and \(\mathtt{A
 The lift therefore does not contribute new axioms or new social-choice content; it contributes a polymorphic instance of an existing argument, witnessed by a kernel-checked Lean module.
 
 \paragraph{Named non-obstacle.}
-During Stage 1 design (see Appendix~\ref{sec:repro}), the obvious worry was that the four-point cycle pattern at the lift would require a separate completion lemma to manufacture missing alternatives in \(\mathtt{Fin\ m}\) from \(\mathtt{\_hm : 4 \leq m}\).
+The obvious initial worry was that the four-point cycle pattern at the lift would require a separate completion lemma to manufacture missing alternatives in \(\mathtt{Fin\ m}\) from \(\mathtt{\_hm : 4 \leq m}\).
 The final proof avoids this entirely by case-splitting on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\); the alternatives needed to assemble the cycle are exactly those supplied by \(\mathtt{MINLIB}\) (with \(\mathtt{Decisive.symm}\) to fix orientation).
 The hypothesis \(\mathtt{\_hm}\) is therefore retained in the statement only for symmetry with Sen's original formulation and to document the lift scope; it is not consumed by the proof.
 The corresponding cardinality lemmas (\(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\)) remain in the module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).

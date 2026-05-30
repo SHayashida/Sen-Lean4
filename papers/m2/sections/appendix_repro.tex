@@ -1,37 +1,30 @@
 \section{Reproducibility Note}
 \label{sec:repro}
 
-This manuscript is grounded in a kernel-checked Lean module and an existing decision record rather than new solver experiments.
+This manuscript is grounded in a kernel-checked Lean module and repository-local reproducibility artifacts rather than new solver experiments.
 The main evidence sources used in the text are:
 
 \begin{itemize}[leftmargin=1.5em]
-\item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the M2 positive flagship theorem \(\mathtt{sen\_impossibility\_lifts}\) and its supporting helpers.
-\item \code{SocialChoiceAtlas.lean} --- the root import line that wires the lifting module into the default \(\mathtt{lake\ build}\) (Decision 3 in the aim sign-off).
+\item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the positive flagship theorem \(\mathtt{sen\_impossibility\_lifts}\) and its supporting helpers.
+\item \code{SocialChoiceAtlas.lean} --- the root import line that wires the lifting module into the default \(\mathtt{lake\ build}\).
 \item \code{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} --- the read-only source of the ported \(\mathtt{sen\_not\_acyclic\_01}\) case-split that the lift re-states polymorphically.
-\item \code{docs/m2\_scope\_wall.md} --- the Negative \#1 scope wall.
-\item \code{docs/gates/m2/aim\_signoff.md} --- the four-decision record, including the ratification of the M2/M2.1 split.
-\item \code{docs/gates/m2/impossibility\_lift\_prompt.md} and \code{docs/gates/m2/impossibility\_lift\_stage1\_plan.md} --- the staged construction prompts that produced the lift module.
+\item \code{docs/m2\_scope\_wall.md} --- the scope wall.
 \item \code{docs/no\_cycle\_interpretation\_note.md} and \code{docs/axiom\_semantics\_scaling.md} --- the prior repository notes that establish why the short-cycle encoding does not transfer past \(m = 4\).
 \item \code{scripts/check\_acyclicity\_short\_cycles.py} --- the finite check that audits the short-cycle encoding at the base case.
-\item \code{scripts/ci\_m2\_smoke.sh} --- the M2 smoke gate that fixes the invariants on the lifting module, the root import, the theorem signature, and the scope-wall document.
 \end{itemize}
-
-The construction branch is \code{codex/m2-bridge} and the corresponding pull request is \code{SHayashida/Sen-Lean4\#6}.
 
 \subsection{Build commands}
 \label{sec:build-commands}
 
-The narrow build command that exercises the M2 positive flagship is:
+The narrow build command that exercises the positive flagship is:
 \begin{quote}
 \code{lake build SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift}
 \end{quote}
 
-The M2 smoke-gate that pins the M2-specific invariants is:
+The full default kernel build is:
 \begin{quote}
-\code{./scripts/ci\_m2\_smoke.sh}
+\code{lake build}
 \end{quote}
-
-The full default \(\mathtt{lake\ build}\) exercises the lifting module via the root import in \code{SocialChoiceAtlas.lean}.
 
 The manuscript itself builds with:
 \begin{quote}
@@ -50,16 +43,13 @@ Theorem~\ref{thm:lift} (positive flagship) & \code{SocialChoiceAtlas/Sen/Lifting
 Default kernel build & \code{SocialChoiceAtlas.lean} (root import) \\
 Remark~\ref{rem:lean-form} (Lean form, \(\mathtt{\_hm}\) unused) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (docstring and proof body) \\
 Remark~\ref{rem:hm-unused} (overlap case analysis) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (five \(\mathtt{sen\_lift\_case\_*}\) sub-lemmas) \\
-Proposition~\ref{prop:scope-wall} (Negative \#1) & \code{docs/m2\_scope\_wall.md} \\
+Proposition~\ref{prop:scope-wall} (scope wall) & \code{docs/m2\_scope\_wall.md} \\
 Short-cycle scaling note & \code{docs/no\_cycle\_interpretation\_note.md} \\
-Step 0.5 sign-off & \code{docs/axiom\_semantics\_scaling.md} \\
-Decision record (D1--D3 LANDED, D4 RATIFIED-DEFERRED) & \code{docs/gates/m2/aim\_signoff.md} \\
-M2 smoke gate invariants & \code{scripts/ci\_m2\_smoke.sh} \\
+Axiom-semantics scaling note & \code{docs/axiom\_semantics\_scaling.md} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\paragraph{What is not part of M2 reproduction.}
+\paragraph{What is not part of this reproduction.}
 No new solver runs are part of this paper.
-The Candidate-B / Negative \#2 question (representation non-canonicity at family scale) is ratified-deferred to M2.1; its reproduction record will be authored alongside that milestone, not here.
-The protected baseline artifacts \code{Certificates/sen24.cnf}, \code{Certificates/sen24.manifest.json}, \code{Certificates/sen24.lrat}, and \code{Certificates/atlas/case\_11111/**} are not touched by this paper and remain bound to M1.
+The representation-canonicity question at family scale is deferred to a companion paper (in preparation); its reproduction record will be authored alongside that paper, not here.

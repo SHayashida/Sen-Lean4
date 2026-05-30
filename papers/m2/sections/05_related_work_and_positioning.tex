@@ -3,28 +3,28 @@
 
 \paragraph{SAT-based finite witnesses in social choice.}
 The line of work using SAT and automated reasoning to certify finite social-choice impossibility instances goes back at least to \citet{tanglin2009computer} and is developed further by \citet{geist2011automated} and \citet{brandtgeist2016strategyproof}.
-M2 belongs to the same lineage on the artifact side: the base-case CNF witness used by M1 sits inside that tradition.
-The contribution of M2 is orthogonal: it is not a new SAT-based existence result, but a kernel-checked Lean Proof-layer lift that does \emph{not} use a SAT certificate to extend the base case.
-It also makes an explicit witness-layer scope wall (Negative \#1) against the assumption that a base-case CNF certificate is a family-level CNF certificate.
+This paper belongs to the same lineage on the artifact side: the base-case CNF witness used by the Evidence-Contract paper sits inside that tradition.
+Our contribution is orthogonal: it is not a new SAT-based existence result, but a kernel-checked Lean Proof-layer lift that does \emph{not} use a SAT certificate to extend the base case.
+It also makes an explicit witness-layer scope wall against the assumption that a base-case CNF certificate is a family-level CNF certificate.
 That explicit scope wall is, to our reading, missing from the prior SAT-based finite-witness literature, which typically targets a single base case at a time.
 
 \paragraph{Lifting in computational social choice.}
 The lifting question---whether an axiomatic structure verified on small instances extends to larger instances---has a developed literature in judgment aggregation and binary aggregation, including \citet{grandiendriss2013}.
-M2's positive flagship is a particular polymorphic instance of this question for the Sen impossibility, delivered at the kernel-checked Lean level rather than via a separate transfer theorem.
-The methodological point inherited from this literature, and made sharper here, is that the lift question is per-axiom and per-property; M2's contribution is to show that for the Sen impossibility a polymorphic semantic proof suffices, and to make the corresponding witness-layer non-lift explicit as Negative \#1.
+Our positive flagship is a particular polymorphic instance of this question for the Sen impossibility, delivered at the kernel-checked Lean level rather than via a separate transfer theorem.
+The methodological point inherited from this literature, and made sharper here, is that the lift question is per-axiom and per-property; our contribution is to show that for the Sen impossibility a polymorphic semantic proof suffices, and to make the corresponding witness-layer non-lift explicit as a scope wall.
 
 \paragraph{Assumption-based diagnosis and MUS/MCS.}
-The non-canonicity of repair presentation studied in M1.5 is close in spirit to assumption-based and diagnosis-oriented work, including \citet{dekleer1986atms}.
+The non-canonicity of repair presentation studied in the Explanation-Contract paper is close in spirit to assumption-based and diagnosis-oriented work, including \citet{dekleer1986atms}.
 At family scale, this question becomes whether the \emph{representation} under which repairs are reported transfers when the case is enlarged.
-M2 does not address this question at family scale; it is ratified-deferred to M2.1 (Section~\ref{sec:conclusion}).
+This paper does not address this question at family scale; we leave it to a companion paper in preparation (Section~\ref{sec:conclusion}).
 The reason for the deferral is methodological, not technical: a family-scale representation-non-canonicity result requires fixing the witness class (bundled vs.\ split vs.\ clause-equivalent re-encoding) and its generator interface before exploration scripts proliferate.
 
-\paragraph{Position relative to M1 and M1.5.}
-M1 (Evidence Contract) established that the Sen24 base case is diagnosable as Proof / Audit / Witness.
-M1.5 (Explanation Contract) established that raw repair presentation is not canonical under clause-multiset equivalence at the base case.
-M2 (Transfer Contract) establishes that the Proof layer lifts unconditionally to all finite cases satisfying the same semantic axioms, while the Witness/Audit layer does not lift automatically.
-The four-contract program intentionally keeps these contracts separated: M1 is about diagnosability of the base case, M1.5 is about presentation-canonicity at the base case, and M2 is about layer-level transfer to the family.
-M2 thereby closes the chain that begins with the kernel-checked base case in M1: every claim that the Sen24 evidence transfers must now route through a separate Witness/Audit audit, even though the Proof-layer transfer is itself kernel-checked.
+\paragraph{Position relative to the Evidence- and Explanation-Contract papers.}
+The Evidence-Contract paper established that the Sen24 base case is diagnosable as Proof / Audit / Witness.
+The Explanation-Contract paper established that raw repair presentation is not canonical under clause-multiset equivalence at the base case.
+This paper, the Transfer Contract, establishes that the Proof layer lifts unconditionally to all finite cases satisfying the same semantic axioms, while the Witness/Audit layer does not lift automatically.
+The four-contract program intentionally keeps these contracts separated: the Evidence Contract is about diagnosability of the base case, the Explanation Contract is about presentation-canonicity at the base case, and the Transfer Contract is about layer-level transfer to the family.
+The present paper thereby closes the chain that begins with the kernel-checked base case of the Evidence Contract: every claim that the Sen24 evidence transfers must now route through a separate Witness/Audit audit, even though the Proof-layer transfer is itself kernel-checked.
 
 \paragraph{What this paper is \emph{not}.}
 The paper does not propose a new SAT or MUS/MCS algorithm.

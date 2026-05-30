@@ -1,4 +1,4 @@
-\section{Main Theorem and Scope-Wall Negative}
+\section{The Proof-Layer Lift and Its Witness-Layer Boundary}
 \label{sec:theorem}
 
 \subsection{The positive flagship}
@@ -42,17 +42,17 @@ The hypothesis \(\mathtt{\_hm}\) is retained in the statement only for symmetry 
 The Lean proof is structured as five \texttt{private} sub-lemmas, one per overlap branch (the disjoint case is one branch; two one-overlap orientations are two branches; the two-overlap case is one branch; a fifth branch covers \(\mathtt{Decisive.symm}\) reorientation).
 Together with the helper \(\mathtt{liftProfile}\) (lifting the base-case two-voter profile onto the two distinct decisive voters of \(\mathtt{Fin\ n}\)) and the ranking-completion helpers \(\mathtt{rankingOfPrefix}\) and \(\mathtt{ranking4Prefix}\), the five sub-lemmas reconstruct the Sen24 base-case case-split polymorphically.
 The top-level theorem then dispatches to the appropriate sub-lemma based on the membership tests \(z \in \{x,y\}\) and \(w \in \{x,y\}\).
-The full proof is checked by the Lean 4 kernel via the repository's default \(\mathtt{lake\ build}\).
+The full proof is checked by the Lean~4 kernel.
 
 \begin{remark}[What this is, what this is not]
 \label{rem:lift-scope}
 Theorem~\ref{thm:lift} is a Lean Proof-layer statement.
 It says exactly that Sen's original semantic argument extends, polymorphically and at the kernel-checked level, to all finite cases with at least two voters and at least four alternatives.
 It does \emph{not} say that the sen24 CNF encoding extends to such cases; it does \emph{not} say that any short-cycle CNF approximation lifts; and it does \emph{not} say that any repair presentation extends canonically.
-These are separate questions, addressed in Section~\ref{sec:negative} and deferred to M2.1 respectively.
+These are separate questions, addressed in Section~\ref{sec:negative} and deferred to a companion paper (in preparation) respectively.
 \end{remark}
 
-\subsection{Negative \#1: scope wall between Proof layer and Witness/Audit layer}
+\subsection{The scope wall between Proof layer and Witness/Audit layer}
 \label{sec:negative}
 
 The positive lift establishes proof-level transfer to full acyclicity.
@@ -60,9 +60,9 @@ It does not establish witness-level transfer.
 The CNF Witness/Audit layer in this repository uses the short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) as a stand-in for full acyclicity.
 At the Sen24 base case \((n,m)=(2,4)\), the equivalence between \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) and full acyclicity on the social strict relation was audited exhaustively by \code{scripts/check\_acyclicity\_short\_cycles.py}.
 At larger cases that audited equivalence does not transfer automatically: \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) still permits length-5 cycles at \(m = 5\), as documented in \code{docs/no\_cycle\_interpretation\_note.md}.
-The Step 0.5 sign-off in \code{docs/axiom\_semantics\_scaling.md} accordingly interprets evidence using these levers only within the local-rationality family they induce, not as evidence about full acyclicity at the family scale.
+Accordingly, evidence using these levers should be interpreted only within the local-rationality family they induce, not as evidence about full acyclicity at the family scale.
 
-\begin{proposition}[Scope wall, Negative \#1]
+\begin{proposition}[Scope wall]
 \label{prop:scope-wall}
 The Lean Proof-layer theorem named \code{sen_impossibility_lifts} does not automatically upgrade the sen24 CNF atlas into a family-level CNF certificate for full \code{SocialAcyclic}.
 The CNF Witness/Audit layer at \(m \geq 5\) remains scoped to the audited short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\), whose equivalence to full acyclicity was audited only at \(m = 4\).
@@ -70,11 +70,11 @@ A family-level CNF certificate for full acyclicity requires a stronger rationali
 \end{proposition}
 
 \paragraph{Status.}
-Proposition~\ref{prop:scope-wall} is, at the present milestone, a guarantee-boundary statement and an audit-policy statement, not a Lean theorem.
+Proposition~\ref{prop:scope-wall} is a guarantee-boundary statement and an audit-policy statement, not a Lean theorem.
 It is recorded in \code{docs/m2\_scope\_wall.md} and bound to the existing finite audit in \code{scripts/check\_acyclicity\_short\_cycles.py}.
-Promoting it to a Lean theorem would require formalising the short-cycle encoding as a Lean-side relation and proving the non-equivalence at \(m = 5\); that is recorded as a non-blocking M2 follow-up rather than as part of this milestone, in line with the M1.5 precedent that finite-witness legitimisation is text-first when the formalisation cost is asymmetric to the content.
+Promoting it to a Lean theorem would require formalising the short-cycle encoding as a Lean-side relation and proving the non-equivalence at \(m = 5\); we leave that to future work, in line with the precedent from the Explanation-Contract paper that finite-witness legitimisation is text-first when the formalisation cost is asymmetric to the content.
 
 \paragraph{Reading the boundary.}
-The boundary M2 records is between layers, not between theorem families.
+The boundary recorded here is between layers, not between theorem families.
 It is incorrect to read this paper as saying ``Sen's theorem holds in the local-rationality family but not in full acyclicity'': the kernel-checked positive lift already concludes at full \(\mathtt{SocialAcyclic}\) at the Proof layer.
-The point of Negative \#1 is that the \emph{CNF artifact} that backed the Sen24 evidence does not by itself become a CNF artifact for the larger case; a separately audited encoding contract is required at the Witness/Audit layer.
+The point of the scope wall is that the \emph{CNF artifact} that backed the Sen24 evidence does not by itself become a CNF artifact for the larger case; a separately audited encoding contract is required at the Witness/Audit layer.

@@ -22,8 +22,8 @@ M3/M4 will inherit M2's negative side as input.
 
 \paragraph{The positive side.}
 The positive flagship of M2 is the kernel-checked theorem
-\(\mathtt{sen\_impossibility\_lifts}\),
-stated at the Lean Proof layer and exercised on every CI run by the repository's default \(\mathtt{lake\ build}\).
+named \code{sen_impossibility_lifts},
+stated at the Lean Proof layer and exercised on every CI run by the repository's default \code{lake build}.
 The theorem says exactly what Sen's original argument says, instantiated polymorphically: no social welfare function on a finite voter set of size at least two and a finite alternative set of size at least four can simultaneously satisfy unanimity, minimal liberalism, and the requirement that the social strict preference relation be acyclic on every profile.
 Crucially, the lift is delivered at the level of full \(\mathtt{SocialAcyclic}\); it does not route through the CNF short-cycle approximation \(\mathtt{no\_cycle3 \wedge no\_cycle4}\).
 The proof strategy is a polymorphic port of the base-case case-split: from \(\mathtt{MINLIB}\) one obtains two distinct decisive voters and their decisive alternative pairs \((x,y)\) and \((z,w)\); the proof then case-splits on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\).

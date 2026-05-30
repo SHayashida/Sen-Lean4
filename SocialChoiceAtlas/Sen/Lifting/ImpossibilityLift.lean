@@ -48,21 +48,25 @@ open SocialChoiceAtlas
 
 /-! ### Completion-lemma core
 
-The named obstacle in the M2 prompt: lifting Sen's base-case proof from
-`(Fin 2, Fin 4)` to `(Fin n, Fin m)` requires that, given a small set of
-already-distinguished alternatives in `Fin m` (≤ 3 in the 1-overlap subcase
-of the 3-case analysis), we can extract a *fresh* alternative not in that
-set, so that the cycle-pattern construction goes through. The mathematical
-content reduces to the following Mathlib-style fact: a finset that is
-strictly smaller than the ambient finite type has an element of the
-ambient type outside it. -/
+The staged M2 prompt identified a possible completion obstacle: a direct
+four-point port of the `(Fin 2, Fin 4)` proof might need a fresh alternative
+outside a small set of already-distinguished alternatives. The final theorem
+does **not** consume that route: the overlap case analysis uses the two
+`MINLIB` decisive pairs directly (with `Decisive.symm` for orientation), so no
+alternative is constructed from `_hm : 4 ≤ m`.
+
+The lemmas in this section are retained as honest cardinality infrastructure
+and as a record of the avoided proof risk. The underlying mathematical fact is
+the following Mathlib-style statement: a finset that is strictly smaller than
+the ambient finite type has an element of the ambient type outside it. -/
 
 /--
 If a `Finset α` over a `Fintype α` has cardinality strictly less than
 `Fintype.card α`, then there exists an element of `α` not in the finset.
 
-This is the polymorphic completion lemma used to obtain fresh alternatives
-in `Fin m` from `4 ≤ m` (instantiated via `Fintype.card_fin`).
+This standalone completion lemma is available for future ports that genuinely
+need a fresh element. It is not used by `sen_impossibility_lifts`; the final M2
+proof avoids four-point completion from `_hm`.
 -/
 lemma exists_not_mem_of_card_lt
     {α : Type*} [DecidableEq α] [Fintype α]
@@ -79,9 +83,10 @@ lemma exists_not_mem_of_card_lt
 /-! ### H2 — `4 ≤ Fintype.card (Fin m)` from `4 ≤ m` -/
 
 /--
-If `4 ≤ m`, then `Fin m` has at least four elements. This is the immediate
-consumer of the prompt's `hm : 4 ≤ m` hypothesis and turns it into the form
-expected by `exists_not_mem_of_card_lt`.
+If `4 ≤ m`, then `Fin m` has at least four elements. This translates the
+prompt-style size hypothesis into a cardinality form for the completion
+infrastructure above. It is retained for clarity and reuse, but the final
+theorem does not consume `_hm`.
 -/
 lemma four_le_card_fin {m : ℕ} (hm : 4 ≤ m) : 4 ≤ Fintype.card (Fin m) := by
   simpa using hm
@@ -197,9 +202,9 @@ lemma rankingOfPrefix_prefers_getElem
   exact hij
 
 /-- Convenience constructor: a four-element ranking starting with `[a, b, c, d]`.
-The fresh alternative `d` is provided by the caller; for the lift this is
-supplied by `exists_not_mem_of_card_lt` (or, for the disjoint case, by the
-second decisive pair itself). -/
+All four elements are supplied explicitly by the caller. The final lift does
+not obtain any of them from `_hm`; the overlap case analysis avoids requiring
+four-point completion. -/
 noncomputable def ranking4Prefix {α : Type*} [DecidableEq α] [Fintype α]
     (a b c d : α) (h : ([a, b, c, d] : List α).Nodup) : Ranking α :=
   rankingOfPrefix [a, b, c, d] h
@@ -546,8 +551,8 @@ layer, see `docs/m2_scope_wall.md`.
 The hypothesis `hn : 2 ≤ n` is logically redundant — `MINLIB` already
 supplies two distinct voters in `Fin n`, so `Fin n` is automatically of
 cardinality at least two — but is kept for statement symmetry with Sen's
-original formulation. Similarly, `hm : 4 ≤ m` is implied by the existence
-of two `Decisive` pairs over `Fin m` in the disjoint case; the explicit
+original formulation. Similarly, the proof does not consume `hm : 4 ≤ m`; the
+overlap case analysis avoids requiring four-point completion. The explicit
 hypothesis matches the prompt's signature and documents the lift scope.
 -/
 theorem sen_impossibility_lifts

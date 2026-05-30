@@ -34,8 +34,9 @@ The manuscript itself builds with:
 \subsection{Artifact binding}
 \label{sec:artifact-binding}
 
-\begin{center}
-\begin{tabular}{ll}
+\begingroup
+\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth} >{\raggedright\arraybackslash}X@{}}
 \toprule
 Claim & Binding \\
 \midrule
@@ -47,8 +48,8 @@ Proposition~\ref{prop:scope-wall} (scope wall) & \code{docs/m2\_scope\_wall.md} 
 Short-cycle scaling note & \code{docs/no\_cycle\_interpretation\_note.md} \\
 Axiom-semantics scaling note & \code{docs/axiom\_semantics\_scaling.md} \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabularx}
+\endgroup
 
 \paragraph{What is not part of this reproduction.}
 No new solver runs are part of this paper.

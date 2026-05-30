@@ -38,3 +38,6 @@ jobs:
 
       - name: Phase2 atlas smoke
         run: ./scripts/ci_phase2_smoke.sh
+
+      - name: M2 bridge smoke
+        run: ./scripts/ci_m2_smoke.sh

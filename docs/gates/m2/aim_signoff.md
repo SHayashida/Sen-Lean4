@@ -2,8 +2,8 @@
 
 ## Bridge Theorems / Transfer Contract — construction-readiness record
 
-**Status:** Decisions 1, 2, and 3 LANDED on `codex/m2-bridge` (Stage 1+2: `sen_impossibility_lifts` kernel-checked at `SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean:545`; scope wall at `docs/m2_scope_wall.md`). Decision 4 DEFERRED to a separate task.
-**Branch context:** `codex/m2-bridge` (Stage 1+2 landed; `papers/m2/` scaffold lands next).
+**Status:** Decisions 1, 2, and 3 LANDED on `codex/m2-bridge` (Stage 1+2: `sen_impossibility_lifts` kernel-checked at `SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean:558`; scope wall at `docs/m2_scope_wall.md`; `papers/m2/` scaffold landed; PR #6 promoted to ready). Decision 4 RATIFIED-DEFERRED to milestone **M2.1** as Negative #2.
+**Branch context:** `codex/m2-bridge` (Stage 1+2 + `papers/m2/` scaffold landed).
 **Program:** Auditable Abstraction Contracts — pillar M2 (Transfer Contract).
 **Purpose of this file:** record the four blocking decisions that must be fixed before the
 `SocialChoiceAtlas/Sen/Lifting/` skeleton and `papers/m2/` scaffold are generated, so that
@@ -156,18 +156,28 @@ to the gate level of an optional SAT certificate.
 
 ---
 
-## Decision 4 — Candidate-B witness class (DEFERRED to a separate task)
+## Decision 4 — Candidate-B witness class (RATIFIED-DEFERRED: ships in M2.1, not M2)
 
-Negative #2 (representation non-canonicity at family scale) requires fixing the witness class
+**M2 vs. M2.1 split, ratified.** M2 ships as a coherent Transfer-Contract paper comprising
+(i) the positive Lean Proof-layer semantic lift `sen_impossibility_lifts`, and
+(ii) Negative #1, the Proof-vs-Witness/Audit scope wall (`docs/m2_scope_wall.md`).
+Candidate-B / Negative #2 (representation non-canonicity at family scale) is deferred to a
+separate milestone **M2.1** and does **not** receive a full main-results section in
+`papers/m2/`; only a forward pointer to M2.1 is allowed in Discussion / Future Work.
+
+**Blocking scope.** Decision 4 blocks **only M2.1 / Negative #2**. It does **not** block:
+
+- PR #6 promotion to ready-for-review;
+- the `papers/m2/` scaffold (positive lift + scope wall);
+- the `sen_impossibility_lifts` kernel-checked theorem.
+
+**What remains for M2.1.** Negative #2 requires fixing the witness class
 (bundled vs. split vs. clause-equivalent re-encoding) and its generator interface before
 exploration scripts proliferate. Until fixed, keep prototypes under
 `scripts/exploration/candidate_b/`; promote to `scripts/` only after they stabilize like
 `check_parametric_cnf.py` (CLI surface + `finite_schema_v1` manifest + parametric `(n,m)`).
 The missing `docs/candidate_b_encoding_sensitivity.md` (referenced from
-`docs/experiment_protocol_repair_liftability.md`) is to be authored as part of that task.
-
-**This decision does not block the positive bridge theorem or the scope-wall negative.** It blocks
-only Negative #2. Construction of `ImpossibilityLift.lean` may proceed now.
+`docs/experiment_protocol_repair_liftability.md`) is to be authored as part of M2.1.
 
 ---
 
@@ -188,7 +198,7 @@ witness*, which is documented and audited, not (yet) a Lean theorem.
 | 1. Three-deliverable flagship | CONFIRMED | no |
 | 2. Preservation P (P_lift / P_wall) + target theorem + named obstacle | DESIGNED | no |
 | 3. Default lake root import | CONFIRMED | no |
-| 4. Candidate-B witness class | DEFERRED | blocks Negative #2 ONLY |
+| 4. Candidate-B witness class | RATIFIED-DEFERRED → M2.1 | blocks **M2.1 / Negative #2 ONLY**; does NOT block PR #6, `papers/m2/`, or the positive lift theorem |
 
 **Verdict: construction of `SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean` and
 `docs/m2_scope_wall.md` may proceed now, using the staged prompt in

@@ -1,0 +1,27 @@
+\section{Contributions}
+\label{sec:contributions}
+
+\begin{itemize}[leftmargin=1.5em]
+\item We give a kernel-checked Lean Proof-layer theorem
+  \(\mathtt{sen\_impossibility\_lifts}\)
+  stating that for any finite case with at least two voters and at least four alternatives, any social welfare function satisfying semantic \(\mathtt{UN}\) and \(\mathtt{MINLIB}\) fails \(\mathtt{SocialAcyclic}\).
+  The conclusion reaches full acyclicity at the Proof layer; it does not route through the CNF short-cycle approximation \(\mathtt{no\_cycle3 \wedge no\_cycle4}\).
+
+\item We give a polymorphic port of the Sen24 base-case proof.
+  The lift does not redefine any axiom; the existing polymorphic Lean definitions of \(\mathtt{UN}\), \(\mathtt{MINLIB}\), \(\mathtt{Decisive}\), \(\mathtt{strictPart}\), and \(\mathtt{SocialAcyclic}\) are reused at the larger case.
+  The base-case case-split (two-overlap, one-overlap, disjoint) is re-stated polymorphically and re-applied at the larger case; the social-choice content of \(\mathtt{sen\_not\_acyclic\_01}\) is not re-proved.
+
+\item We identify and document the named non-obstacle.
+  The proof does not consume the hypothesis \(\mathtt{\_hm : 4 \leq m}\); the overlap case analysis avoids requiring a universal four-point completion in \(\mathtt{Fin\ m}\).
+  Specifically, two-overlap (\(\{z,w\} \subseteq \{x,y\}\)) gives an asymmetry contradiction at the social strict preference, one-overlap gives a 3-cycle, and disjointness gives a 4-cycle.
+  The cardinality completion lemmas remain in the module as honest infrastructure documenting an avoided proof risk and are not used by \(\mathtt{sen\_impossibility\_lifts}\).
+
+\item We make explicit the Proof-vs-Witness/Audit scope wall (Negative \#1).
+  The Lean lift establishes proof-level transfer to full acyclicity, but it does not automatically upgrade the sen24 CNF atlas into a family-level CNF certificate.
+  The CNF Witness/Audit layer remains scoped to the audited short-cycle encoding \(\mathtt{no\_cycle3 \wedge no\_cycle4}\) unless a stronger family-level rationality encoding is introduced and audited.
+  This is the contract body, not an appendix-level caveat: a complete Transfer Contract must record both sides of the boundary.
+
+\item We separate the present milestone from the deferred Candidate-B / Negative \#2 question.
+  The representation-non-canonicity phenomenon---whether the lever-level repair presentation under which repairs are reported transfers canonically at family scale---is real but is methodologically prior work: it requires fixing a witness class and a generator interface before it can be stated as a family-level theorem.
+  Accordingly we defer it to milestone M2.1 and treat it here only as a forward pointer (Section~\ref{sec:conclusion}).
+\end{itemize}

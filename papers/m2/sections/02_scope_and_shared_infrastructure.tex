@@ -1,0 +1,37 @@
+\section{Scope \& Setup}
+\label{sec:scope}
+
+\paragraph{Layer-level scope.}
+M2 separates two layers that the surrounding program treats as independent.
+The \emph{Lean Proof layer} establishes semantic statements at the axiom level using polymorphic Lean definitions of \(\mathtt{UN}\), \(\mathtt{MINLIB}\), \(\mathtt{Decisive}\), and \(\mathtt{SocialAcyclic}\).
+The \emph{CNF Witness/Audit layer} establishes finite-case satisfiability or unsatisfiability via clause-level encodings whose conformance to the Proof-layer axioms must itself be audited.
+M2's main positive deliverable belongs to the Proof layer; M2's main negative deliverable concerns the wall between the two layers.
+
+\paragraph{Family scope.}
+The positive theorem ranges over all finite cases \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\) with \(2 \leq n\) and \(4 \leq m\).
+It does not claim a result for infinite-domain social choice; it does not claim a result for Arrow's theorem; and it does not claim a result that bypasses \(\mathtt{UN}\) or \(\mathtt{MINLIB}\).
+The phrase ``Sen's impossibility lifts'' in this paper always means the semantic, finite-case lift in the sense above.
+
+\paragraph{Lever scope.}
+The CNF Witness/Audit layer in this repository uses an explicit lever schema in which rationality is approximated by the local short-cycle levers \(\mathtt{no\_cycle3}\) and \(\mathtt{no\_cycle4}\).
+At the base case \((n,m)=(2,4)\), \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) is equivalent to full acyclicity on the social strict preference, and that equivalence is audited exhaustively by \code{scripts/check\_acyclicity\_short\_cycles.py}.
+At larger cases the audited equivalence does not transfer automatically; the existing interpretation notes record that \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) still permits length-5 cycles at \(m=5\).
+The negative-side scope wall is exactly the statement that the Proof-layer lift does not by itself extend this audited equivalence.
+
+\paragraph{What is in this paper, what is not.}
+The paper contains
+(i) the polymorphic Lean signatures used by the lift theorem,
+(ii) the kernel-checked statement and proof sketch of \(\mathtt{sen\_impossibility\_lifts}\),
+(iii) the Negative \#1 scope wall, and
+(iv) the artifact binding for both deliverables.
+The paper does \emph{not} contain
+(i) new solver experiments,
+(ii) any modification of the M1 or M1.5 manuscripts,
+(iii) a family-level CNF certificate for full acyclicity, or
+(iv) a Candidate-B / Negative \#2 family-scale representation-canonicity result.
+These last two are explicitly deferred to M2.1.
+
+\paragraph{Public-repo safety.}
+The paper references repository-relative paths only.
+It does not contain local absolute paths, secrets, or internal-only infrastructure details, in line with \code{AGENTS.md} \S0.2 and \code{docs/public\_repo\_security.md}.
+The protected baseline artifacts \code{Certificates/sen24.cnf}, \code{Certificates/sen24.manifest.json}, \code{Certificates/sen24.lrat}, and \code{Certificates/atlas/case\_11111/**} are untouched by this paper, in line with \code{AGENTS.md} \S9.1.

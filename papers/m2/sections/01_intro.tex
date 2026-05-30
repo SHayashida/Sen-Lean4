@@ -1,0 +1,54 @@
+\section{Introduction}
+\label{sec:intro}
+
+SAT-based verification has made finite impossibility witnesses in social choice theory trustworthy at the artifact level: a CNF certificate, a proof log (e.g.\ LRAT), and a kernel-checked Lean import collectively certify that a specific combination of axioms is unsatisfiable at a fixed base case~\citep{tanglin2009computer,geist2011automated,brandtgeist2016strategyproof}.
+Once such a witness is trustworthy at the base case, the natural engineering question is whether it transfers when the case is enlarged.
+Two reasonable readings of ``transfer'' coexist in this setting, and they are not equivalent:
+\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
+\item \emph{Proof-layer transfer}: does the semantic axiom argument that underlies the base-case witness extend, at the kernel-checked level, to all finite cases satisfying the same axioms?
+\item \emph{Witness/Audit-layer transfer}: does the CNF encoding used to certify the base case continue to certify the enlarged case under the same lever schema?
+\end{enumerate}
+The first question is about the proof. The second is about the encoding contract that backed the original certificate. This paper argues that they must be answered separately, and that a Transfer Contract for a finite witness must record both answers.
+
+\paragraph{Result, in one sentence.}
+At the Lean Proof layer, Sen's impossibility lifts unconditionally from the Sen24 base case \((\mathtt{Fin}\ 2, \mathtt{Fin}\ 4)\) to all finite cases with at least two voters and at least four alternatives satisfying semantic \(\mathtt{UN}\) and \(\mathtt{MINLIB}\); at the CNF Witness/Audit layer, that lift does not automatically upgrade the sen24 short-cycle encoding into a family-level certificate.
+
+\paragraph{Why a Transfer Contract.}
+The four-contract program around this repository organises auditable abstraction in successive layers.
+M1 establishes the \emph{Evidence Contract}: the Sen24 base case is diagnosable as kernel-checked Lean (proof) plus CNF-manifest conformance (audit) plus SAT-model validation (witness).
+M1.5 establishes the \emph{Explanation Contract}: even under clause-multiset equivalence, raw lever-level minimal repairs are not canonical, so repair presentation requires an explicit abstraction layer.
+M2, the present paper, establishes the \emph{Transfer Contract}: when finite UNSAT/impossibility evidence at the base case is bridged to a case family, the Proof layer can be lifted unconditionally while the CNF Witness/Audit layer cannot, unless an enlarged encoding contract is separately authored and audited.
+M3/M4 will inherit M2's negative side as input.
+
+\paragraph{The positive side.}
+The positive flagship of M2 is the kernel-checked theorem
+\(\mathtt{sen\_impossibility\_lifts}\),
+stated at the Lean Proof layer and exercised on every CI run by the repository's default \(\mathtt{lake\ build}\).
+The theorem says exactly what Sen's original argument says, instantiated polymorphically: no social welfare function on a finite voter set of size at least two and a finite alternative set of size at least four can simultaneously satisfy unanimity, minimal liberalism, and the requirement that the social strict preference relation be acyclic on every profile.
+Crucially, the lift is delivered at the level of full \(\mathtt{SocialAcyclic}\); it does not route through the CNF short-cycle approximation \(\mathtt{no\_cycle3 \wedge no\_cycle4}\).
+The proof strategy is a polymorphic port of the base-case case-split: from \(\mathtt{MINLIB}\) one obtains two distinct decisive voters and their decisive alternative pairs \((x,y)\) and \((z,w)\); the proof then case-splits on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\).
+Two-overlap (i.e.\ \(\{z,w\}\subseteq\{x,y\}\)) gives an asymmetry contradiction at the social strict preference; one-overlap gives a 3-cycle; disjointness gives a 4-cycle.
+An important consequence of the case-split structure is that the hypothesis \(\mathtt{\_hm : 4 \leq m}\) is not consumed by the proof: the overlap case analysis avoids requiring a universal four-point completion in \(\mathtt{Fin\ m}\), since the four (or three) alternatives needed to assemble the cycle are supplied directly by \(\mathtt{MINLIB}\).
+The hypothesis is retained for statement symmetry with Sen's original formulation and to document the lift scope.
+
+\paragraph{The negative side (Negative \#1: scope wall).}
+The Lean lift establishes proof-level transfer; it does not establish witness-level transfer.
+The CNF Witness/Audit layer used at the Sen24 base case certifies only the short-cycle encoding \(\mathtt{no\_cycle3 \wedge no\_cycle4}\); equivalence between that short-cycle encoding and full acyclicity was audited only for four alternatives, by exhaustive finite check.
+For \(m \geq 5\) the audited equivalence does not transfer automatically: the existing interpretation notes record that \(\mathtt{no\_cycle3 \wedge no\_cycle4}\) still permits length-5 cycles at \(m=5\), so the local clause family is not a family-level CNF certificate for full \(\mathtt{SocialAcyclic}\).
+The scope wall is therefore between the Proof layer (which reaches full acyclicity) and the CNF Witness/Audit layer (which remains scoped to the audited short-cycle encoding), not merely between local-rationality and full-acyclicity theorem families.
+
+\paragraph{What is deferred.}
+M2 deliberately limits its scope.
+A separate Candidate-B question---whether the \emph{representation} under which repairs are reported (bundled vs.\ split, clause-equivalent re-encodings) transfers canonically at family scale---is the M1.5 non-canonicity phenomenon carried to the family level.
+It is a real boundary question, but it requires fixing a witness class and a generator interface before exploration scripts proliferate, and it does not block the positive lift or the scope wall.
+It is therefore ratified as a separate milestone, \emph{M2.1}.
+The present paper refers to it only as a forward pointer in Section~\ref{sec:conclusion}.
+
+\paragraph{Roadmap.}
+Section~\ref{sec:scope} fixes the formal setting and lever scope.
+Section~\ref{sec:definitions} states the Lean signatures used in the theorem statement.
+Section~\ref{sec:contributions} lists the contributions.
+Section~\ref{sec:theorem} states and discusses the kernel-checked theorem and the scope-wall negative.
+Section~\ref{sec:related} positions the result against the lifting, MUS/MCS, and assumption-based diagnosis literature.
+Section~\ref{sec:conclusion} records limitations, the M2/M2.1 split, and open questions.
+The appendix documents reproduction and the artifact binding from manuscript text to repository paths.

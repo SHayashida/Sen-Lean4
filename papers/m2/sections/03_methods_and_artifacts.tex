@@ -1,0 +1,51 @@
+\section{Definitions and Lean Signatures}
+\label{sec:definitions}
+
+The lift theorem is stated and proved against polymorphic Lean signatures already present in the repository at the time of writing.
+No axiom is redefined for the lift; the lift is a polymorphic re-instantiation of the base-case proof at \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\).
+The relevant signatures, summarised here for paper-reading purposes, live in the modules listed in Appendix~\ref{sec:repro}.
+
+\begin{definition}[Social welfare function]
+\label{def:swf}
+A \emph{social welfare function} on a finite voter set \(\mathtt{Voter}\) and a finite alternative set \(\mathtt{Alt}\) is a map
+\(F : \mathtt{Profile\ Voter\ Alt} \to (\mathtt{Alt} \to \mathtt{Alt} \to \mathtt{Prop})\),
+i.e.\ a function from preference profiles to a binary social relation on alternatives.
+In Lean this is the type abbreviation \(\mathtt{SWF\ Voter\ Alt}\).
+The strict part of the social relation is \(\mathtt{strictPart}\ (F\ p)\), with the standard definition \(R\ x\ y \wedge \neg R\ y\ x\).
+\end{definition}
+
+\begin{definition}[Universal preference predicate]
+\label{def:prefers}
+Given a profile \(p : \mathtt{Profile\ Voter\ Alt}\) and a voter \(i\), the predicate
+\(\mathtt{prefers\_i}\ p\ i\ x\ y\) holds when voter \(i\)'s ranking strictly prefers \(x\) to \(y\).
+\end{definition}
+
+\begin{definition}[Unanimity (semantic \(\mathtt{UN}\))]
+\label{def:un}
+\(\mathtt{UN}\ F\) holds when for every profile \(p\) and every pair of alternatives \(x,y\), if every voter prefers \(x\) to \(y\) then \((F\ p)\) strictly prefers \(x\) to \(y\).
+This is the polymorphic Lean definition; it does not depend on a particular base case.
+\end{definition}
+
+\begin{definition}[Decisiveness and minimal liberalism (semantic \(\mathtt{MINLIB}\))]
+\label{def:minlib}
+A voter \(i\) is \emph{decisive} on an ordered pair \((x,y)\) if for every profile \(p\), whenever \(i\) prefers \(x\) to \(y\) the social relation strictly prefers \(x\) to \(y\), and similarly with \((y,x)\) (\(\mathtt{Decisive.symm}\)).
+\(\mathtt{MINLIB}\ F\) holds when there exist two distinct voters \(i,j\) and alternative pairs \((x,y)\) and \((z,w)\) with \(x \neq y\) and \(z \neq w\), such that \(i\) is decisive on \((x,y)\) and \(j\) is decisive on \((z,w)\).
+\textbf{Important:} \(\mathtt{MINLIB}\) does \emph{not} guarantee that \(\{x,y,z,w\}\) are four distinct alternatives; the two decisive pairs may overlap.
+\end{definition}
+
+\begin{definition}[Acyclicity and \(\mathtt{SocialAcyclic}\)]
+\label{def:acyclic}
+A binary relation \(S\) on a finite set is \emph{acyclic} when no element has \(\mathtt{Relation.TransGen}\ S\) back to itself.
+The predicate \(\mathtt{SocialAcyclic}\ F\) holds when for every profile \(p\), the strict social preference \(\mathtt{strictPart}\ (F\ p)\) is acyclic.
+The base-case helper lemmas \(\mathtt{cycle3\_implies\_not\_acyclic}\) and \(\mathtt{cycle4\_implies\_not\_acyclic}\) are polymorphic and are reused unchanged at the lift.
+\end{definition}
+
+\paragraph{What is reused, not redefined.}
+All four definitions above are polymorphic in \(\mathtt{Voter}\) and \(\mathtt{Alt}\); the Sen24 base case is one instantiation (\(\mathtt{Voter := Fin\ 2}\), \(\mathtt{Alt := Fin\ 4}\)) of the same definitions used at the lift (\(\mathtt{Voter := Fin\ n}\), \(\mathtt{Alt := Fin\ m}\)).
+The lift therefore does not contribute new axioms or new social-choice content; it contributes a polymorphic instance of an existing argument, witnessed by a kernel-checked Lean module.
+
+\paragraph{Named non-obstacle.}
+During Stage 1 design (see Appendix~\ref{sec:repro}), the obvious worry was that the four-point cycle pattern at the lift would require a separate completion lemma to manufacture missing alternatives in \(\mathtt{Fin\ m}\) from \(\mathtt{\_hm : 4 \leq m}\).
+The final proof avoids this entirely by case-splitting on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\); the alternatives needed to assemble the cycle are exactly those supplied by \(\mathtt{MINLIB}\) (with \(\mathtt{Decisive.symm}\) to fix orientation).
+The hypothesis \(\mathtt{\_hm}\) is therefore retained in the statement only for symmetry with Sen's original formulation and to document the lift scope; it is not consumed by the proof.
+The corresponding cardinality lemmas (\(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\)) remain in the module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).

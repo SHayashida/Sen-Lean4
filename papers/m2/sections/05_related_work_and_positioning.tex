@@ -8,6 +8,12 @@ Our contribution is orthogonal: it is not a new SAT-based existence result, but 
 It also makes an explicit witness-layer scope wall against the assumption that a base-case CNF certificate is a family-level CNF certificate.
 That explicit scope wall is, to our reading, missing from the prior SAT-based finite-witness literature, which typically targets a single base case at a time.
 
+\paragraph{Formal verification and certified SAT checking.}
+The trust model used by the Evidence-Contract paper for the base case, and inherited here for the Proof layer, rests on Lean~4 \citep{moura2021lean4} for kernel-checked semantic proofs and on certified RAT/DRAT checking \citep{cruzfilipe2017lrat,wetzler2014drat} for the CNF witness side.
+Mechanized formalizations of social-choice theorems in proof assistants are themselves an established line \citep{nipkow2009social}.
+The present paper does not propose a new prover, a new clausal-proof format, or a new general mechanized social-choice theorem.
+Its contribution relative to that background is a kernel-checked Lean polymorphic lift of the Sen base case to the family, deliberately scoped so that the certified-checking infrastructure remains a witness-layer concern and is not re-claimed at the family scale.
+
 \paragraph{Lifting in computational social choice.}
 The lifting question---whether an axiomatic structure verified on small instances extends to larger instances---has a developed literature in judgment aggregation and binary aggregation, including \citet{grandiendriss2013}.
 Our positive flagship is a particular polymorphic instance of this question for the Sen impossibility, delivered at the kernel-checked Lean level rather than via a separate transfer theorem.

@@ -16,6 +16,12 @@ Our point is orthogonal.
 The present base-case witness uses SAT-era infrastructure only as the means by which a finite, auditable comparison is produced.
 The paper's claim is about repair explanation canonicality under clause-equivalent encodings, not about SAT as a method.
 
+\paragraph{Formal verification and certified SAT checking.}
+The trust model behind the finite artifact bundle used in this paper rests on a kernel-checked proof assistant \citep{moura2021lean4} for the semantic side and on certified RAT/DRAT proof checking \citep{cruzfilipe2017lrat,wetzler2014drat} for the CNF witness side.
+Mechanized formalizations of social-choice theorems in proof assistants are an established line in their own right \citep{nipkow2009social}.
+This paper does not propose a new prover, a new clausal-proof format, or a new mechanized social-choice theorem.
+The point of recording this background here is that the abstraction-contract claim about non-canonical raw repair presentation is made \emph{on top of} an already-auditable finite witness, not as a substitute for kernel-checked or certificate-checked infrastructure.
+
 \paragraph{Transfer from finite witnesses.}
 The Geist--Endriss line provides a positive example of finite-to-family transfer under suitable syntactic discipline, while Grandi and Endriss identify settings where such transfer can fail \citep{geist2011automated,grandiendriss2013}.
 The present paper does not attempt to resolve that literature.

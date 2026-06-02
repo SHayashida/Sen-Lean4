@@ -15,6 +15,11 @@ We differ from that tradition not by stronger proof checking, but by the way it 
 The central artifact is not a bare proof trace: it is an auditable atlas with a reproducible frontier, one MUS and one small MCS candidate for boundary explanation, committed proof-carrying UNSAT references, validated SAT rule cards, stronger repair triangulation as a separate stage, and explicit commands and hashes for replay.
 The value of the package is that a reviewer can inspect where kernel-checked proof ends, where mechanical auditing begins, and where assumptions remain.
 
+Formal verification and certified SAT checking provide the trust-model background for our Proof layer \citep{moura2021lean4,cruzfilipe2017lrat,wetzler2014drat}.
+Mechanized formalizations of social-choice theorems in proof assistants are an established line of work \citep{nipkow2009social}.
+Unlike those formalizations, we do not claim a new general mechanized social-choice theorem; unlike LRAT/DRAT work, we do not propose a new proof format or checker.
+Our contribution is their domain-specific integration into an auditable atlas workflow that separates semantic proof, CNF artifact audit, and SAT witness validation.
+
 Constraint Hierarchies, ATMS, MAXSAT, and OMT remain relevant only as secondary contrasts \citep{borning1992constraint,dekleer1986atms,bacchus2021maxsat,sebastiani2015omt}.
 They reason about conflicting constraints, consistency under assumptions, or optimal relaxations, and they are useful reference points for the repair side of the story.
 But this paper does not position itself as a replacement for them or as a speed comparison against them.

@@ -58,17 +58,39 @@ def main() -> None:
     lines.append("")
     lines.append("## Headline")
     lines.append("")
+    lines.append(f"- atlas_schema_version: `{atlas.get('atlas_schema_version', 'n/a')}`")
     lines.append(f"- cases_total: `{atlas.get('cases_total')}`")
     lines.append(f"- SAT: `{status_counts.get('SAT', 0)}`")
     lines.append(f"- UNSAT: `{status_counts.get('UNSAT', 0)}`")
     lines.append(f"- UNKNOWN: `{status_counts.get('UNKNOWN', 0)}`")
     lines.append("")
 
+    lines.append("## Runtime")
+    lines.append("")
+    solver_info = atlas.get("solver_info", {})
+    env_info = atlas.get("environment_info", {})
+    lines.append(f"- solver_path: `{solver_info.get('solver_path', 'n/a')}`")
+    lines.append(f"- solver_version_raw: `{solver_info.get('solver_version_raw', 'n/a')}`")
+    lines.append(f"- solver_version: `{solver_info.get('solver_version', 'n/a')}`")
+    lines.append(f"- solver_sha256: `{solver_info.get('solver_sha256', 'n/a')}`")
+    lines.append(f"- python_version: `{env_info.get('python_version', 'n/a')}`")
+    lines.append(f"- platform: `{env_info.get('platform', 'n/a')}`")
+    lines.append(f"- git_commit: `{env_info.get('git_commit', 'n/a')}`")
+    lines.append("")
+
     lines.append("## Symmetry classes")
     lines.append("")
     lines.append(f"- mode: `{atlas.get('symmetry_mode', 'none')}`")
+    lines.append(f"- symmetry_unsafe_axioms: `{atlas.get('symmetry_unsafe_axioms', [])}`")
     lines.append(f"- equivalence classes: `{atlas.get('equiv_classes_total', 'n/a')}`")
     lines.append(f"- UNSAT classes: `{atlas.get('unsat_equiv_classes', 'n/a')}`")
+    symmetry_check = atlas.get("symmetry_check", {})
+    lines.append(
+        f"- symmetry_check: enabled=`{symmetry_check.get('enabled', False)}` "
+        f"checked_k=`{symmetry_check.get('checked_k', 0)}` "
+        f"mismatches=`{symmetry_check.get('mismatches', 'n/a')}`"
+    )
+    lines.append(f"- checked_cases: `{atlas.get('checked_cases', [])}`")
     reps = atlas.get("representatives", [])
     if isinstance(reps, list) and reps:
         lines.append(f"- representatives ({len(reps)}): " + ", ".join(f"`{r}`" for r in reps))

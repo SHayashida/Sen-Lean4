@@ -53,8 +53,26 @@ results/<YYYYMMDD>/atlas_v1/
 
 `atlas.json` contains:
 - run metadata (`solver`, `prune`, `jobs`, `dry_run`, universe order)
+- `atlas_schema_version` (top-level schema version for compatibility checks)
+- runtime reproducibility metadata (`solver_info`, `environment_info`)
 - `status_counts` over `{SAT, UNSAT, UNKNOWN}`
 - per-case summaries (`status`, `solved`, selected axioms, clause counts, artifact pointers).
+
+Safety assumption references:
+- `docs/assumptions_monotone_pruning.md`
+- `docs/safety_symmetry_reduction.md`
+
+Paper-facing references:
+- `docs/related_work_notes.md`
+- `docs/paper_claims_map.md`
+- `docs/reproducibility_appendix.md`
+- `docs/evaluation_plan.md`
+- `docs/sat_gallery.md`
+- `docs/public_repo_security.md`
+
+Local/private instructions:
+- You can add `AGENTS.local.md` at repo root for machine-local guidance.
+- It is git-ignored and must not contain repo-public content changes.
 
 ## Week2: MUS/MCS enrichment
 
@@ -66,7 +84,7 @@ python3 scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1
 
 This updates `atlas.json` in-place and writes per-case `mus.json` / `mcs.json`.
 
-## Week3: proof-carrying + explainable outputs
+## Week3: committed proof-carrying + explainable outputs
 
 Generate atlas cases with UNSAT proof emission:
 
@@ -77,7 +95,7 @@ python3 scripts/run_atlas.py \
   --emit-proof unsat-only
 ```
 
-Verify the committed proof-carrying atlas case in Lean:
+Verify the committed proof-carrying reference case in Lean:
 
 ```bash
 lake build SocialChoiceAtlas.Sen.Atlas.Case11111
@@ -85,7 +103,7 @@ lake build SocialChoiceAtlas.Sen.Atlas.Case11111
 
 Storage policy:
 
-- `Certificates/atlas/` is reserved for one fixed committed proof-carrying case (`case_11111`) to keep CI deterministic.
+- `Certificates/atlas/` is reserved for one fixed committed proof-carrying reference case (`case_11111`) to keep CI deterministic.
 - Other atlas proofs should be generated under `results/...` or `/tmp`, tracked by hash (`summary.json.manifest.cnf_sha256`, `summary.json.proof.sha256`) and reproduce command (`summary.json.reproduce.command`).
 
 Create a human-readable SAT rule sketch for one SAT case:
@@ -110,12 +128,15 @@ Compute equivalence classes using alternative relabeling (`S4`) on semantic SAT 
 python3 scripts/run_atlas.py \
   --outdir /tmp/atlas_w4 \
   --jobs 4 \
-  --symmetry alts
+  --symmetry alts \
+  --symmetry-check
 ```
 
 Notes:
 - Week4 symmetry is **alts-only** (`--symmetry alts`), not voter relabeling.
 - Canonicalization uses semantic SAT outputs (`model.json` social bits), not CNF text.
+- Safety guardrail: if selected axioms are not marked `SUPPORTS_SYMMETRY_ALTS=True`, run fails unless `--symmetry-unsafe-ok` is set.
+- `--symmetry-check` re-solves sampled non-representatives and records `symmetry_check` stats + `checked_cases` in `atlas.json`.
 - `atlas.json` includes `equiv_classes_total`, `equiv_class_histogram`, `representatives`, and per-case
   `equiv_class_id` / `representative_case` / `orbit_size`.
 
@@ -136,6 +157,7 @@ Notes:
 - Inferred cases are marked `solved=false` with `pruned_by` evidence in `atlas.json`.
 - In prune mode, SAT/UNSAT status totals still cover all 32 cases for the 5-axiom sen24 universe.
 - `prune_stats` and `oracle_stats` report solver calls avoided and inferred SAT/UNSAT counts.
+- Prune evidence is validated: inferred SAT/UNSAT requires `pruned_by.derived_status/rule/witness_case_id`, with solved witness and lattice relation checks.
 
 MUS/MCS on prune outputs:
 - `scripts/mus_mcs.py` only processes `UNSAT` cases with `solved=true`.

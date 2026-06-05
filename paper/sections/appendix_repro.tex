@@ -1,0 +1,80 @@
+\section{Reproducibility Appendix}
+
+\subsection{Canonical repository}
+The canonical public repository for this artifact is:
+\url{https://github.com/SHayashida/Sen-Lean4}
+
+\subsection{Claim-to-artifact map}
+Claims C1--C6 are mapped to concrete commands and artifacts in \code{docs/paper_claims_map.md}.
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{C1}: atlas frontier generation.
+  \item \textbf{C2}: one MUS and one small MCS candidate for boundary explanation.
+  \item \textbf{C3}: committed proof-carrying UNSAT verification in Lean.
+  \item \textbf{C4}: safety-guarded acceleration (symmetry/pruning).
+  \item \textbf{C5}: SAT Gallery extraction with witness validation.
+  \item \textbf{C6}: full repair enumeration plus triangulation against an independent optimum baseline.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.07\linewidth} >{\raggedright\arraybackslash}p{0.38\linewidth} >{\raggedright\arraybackslash}p{0.39\linewidth}}
+\toprule
+Claim & Canonical command & Primary artifact \\
+\midrule
+C1 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c1 --jobs 4 --prune none} \newline \code{python3 scripts/summarize_atlas.py --outdir /tmp/atlas_c1} & \code{/tmp/atlas_c1/atlas.json} \\
+C2 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c2 --jobs 4 --prune none} \newline \code{python3 scripts/mus_mcs.py --outdir /tmp/atlas_c2} & \code{/tmp/atlas_c2/case_*/mus.json}, \code{mcs.json} \\
+C3 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c3 --jobs 1 --case-masks 31 --emit-proof unsat-only} \newline \code{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} & \code{Certificates/atlas/case_11111/proof.lrat} \\
+C4 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c4 --jobs 1 --prune monotone --prune-check --symmetry alts --symmetry-check} & \code{/tmp/atlas_c4/atlas.json} \\
+C5 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c5 --jobs 4 --prune none} \newline \code{python3 scripts/build_sat_gallery.py --atlas-outdir /tmp/atlas_c5 --top-k 5 --min-k 1} & \code{/tmp/atlas_c5/gallery.json} \\
+C6 & \code{python3 scripts/run_atlas.py --outdir /tmp/atlas_c6 --jobs 4 --prune none} \newline \code{python3 scripts/enumerate_repairs.py --outdir /tmp/atlas_c6} \newline \code{python3 scripts/triangulate_repairs.py --atlas-outdir /tmp/atlas_c6 --outdir /tmp/atlas_c6} & \code{/tmp/atlas_c6/repair_triangulation.json} \\
+\bottomrule
+\end{tabular}
+\caption{Compact C1--C6 claim map with one canonical command per claim.}
+\label{tab:claims-map}
+\end{table}
+
+\subsection{Verification status in this revision}
+In Table~\ref{tab:verification-status}, ``Repo-capable'' means the repository contains the machinery and documented artifacts for the check. ``Re-verified now'' means the command was actually re-run in this revision.
+For the sen24 bridge used in the paper text, the acyclicity check below is an audited finite Python check outside the trusted kernel; it is not counted as a Lean proof obligation.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.15\linewidth} >{\raggedright\arraybackslash}p{0.08\linewidth} >{\raggedright\arraybackslash}p{0.10\linewidth} >{\raggedright\arraybackslash}p{0.23\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth}}
+\toprule
+Check / artifact & Repo-capable & Re-verified now & Command & Expected artifact(s) \\
+\midrule
+sen24 acyclicity finite check & Yes & Yes & \code{python3 scripts/check_acyclicity_short_cycles.py --json-out results/verification/sen24_short_cycles.json} & \code{results/verification/sen24_short_cycles.json} \\
+Phase1 baseline audit + Lean replay & Yes & Yes & \code{./scripts/ci_phase1.sh} & phase1 CNF audit outputs; Lean build for \code{SATSenCNF} \\
+Paper PDF build & Yes & Yes & \code{make -C paper pdf} & \code{paper/build/main.pdf} \\
+Phase2 smoke harness & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & smoke atlas, symmetry/prune checks, repair outputs, gallery outputs, bundle outputs \\
+Tiny evidence bundle & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & \code{bundle.json}; generated figures and paper tables in the tiny bundle \\
+Full sen24 atlas (\code{--prune none}) & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & 32-case \code{atlas.json} used for repair and gallery smoke checks \\
+Full repair enumeration + triangulation & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & \code{mcs_all}; \code{repair_triangulation.json}; \code{repair_triangulation.md} \\
+SAT gallery + rule cards & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & \code{gallery.json}; \code{gallery.md}; per-case \code{rule_card.md}/\code{.tex} \\
+Committed Lean proof case \code{case_11111} & Yes & Yes & \code{./scripts/ci_phase2_smoke.sh} & committed proof-carrying case plus \code{lake build SocialChoiceAtlas.Sen.Atlas.Case11111} \\
+\bottomrule
+\end{tabular}
+\caption{Verification accounting for this revision. Status is marked ``Yes'' only when the command was actually re-run now.}
+\label{tab:verification-status}
+\end{table}
+
+For the sen24 acyclicity bridge used in the paper text, run:
+\code{python3 scripts/check_acyclicity_short_cycles.py --json-out results/verification/sen24_short_cycles.json}.
+
+\subsection{Schema and metadata contracts}
+Reproducibility relies on versioned machine-readable outputs:
+\begin{itemize}[leftmargin=*]
+  \item \code{atlas_schema_version}
+  \item \code{eval_schema_version}
+  \item solver/environment metadata and seed policy fields
+\end{itemize}
+
+See \code{docs/reproducibility_appendix.md} for policy details.
+
+\subsection{Baseline protection}
+Protected baseline artifacts remain unchanged and must be treated as immutable references in normal development.

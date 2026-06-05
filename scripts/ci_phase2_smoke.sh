@@ -8,22 +8,147 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 OUT_DIR="$TMP_DIR/atlas_v1"
 SYM_OUT="$TMP_DIR/atlas_sym"
 PRUNE_OUT="$TMP_DIR/atlas_prune"
+REPAIRS_OUT="$TMP_DIR/atlas_repairs"
+HASSE_OUT="$TMP_DIR/hasse_frontier"
+TRI_OUT="$TMP_DIR/triangulation"
+EVAL_OUT="$TMP_DIR/eval_smoke"
+BUNDLE_OUT="$TMP_DIR/evidence_bundle"
+BUNDLE_OUT_2="$TMP_DIR/evidence_bundle_2"
+PAPER_ASSETS_OUT="$TMP_DIR/paper_assets"
+PAPER_ASSETS_OUT_M15="$TMP_DIR/papers_m1_5_assets"
+
+test -f "$ROOT_DIR/docs/related_work_notes.md"
+test -f "$ROOT_DIR/docs/paper_claims_map.md"
+test -f "$ROOT_DIR/docs/paper_artifact_contract.md"
+test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
+test -f "$ROOT_DIR/docs/public_repo_security.md"
+test -f "$ROOT_DIR/docs/evaluation_plan.md"
+test -f "$ROOT_DIR/docs/sat_gallery.md"
+test -f "$ROOT_DIR/docs/reviewer_quickstart.md"
+test -f "$ROOT_DIR/paper/main.tex"
+test -f "$ROOT_DIR/paper/README.md"
+test -f "$ROOT_DIR/paper/sections/00_abstract.tex"
+test -f "$ROOT_DIR/paper/sections/01_intro.tex"
+test -f "$ROOT_DIR/paper/sections/02_problem_and_positioning.tex"
+test -f "$ROOT_DIR/paper/sections/03_system_design.tex"
+test -f "$ROOT_DIR/paper/sections/04_methods.tex"
+test -f "$ROOT_DIR/paper/sections/05_evaluation.tex"
+test -f "$ROOT_DIR/paper/sections/06_case_study_sen24.tex"
+test -f "$ROOT_DIR/paper/sections/07_related_work.tex"
+test -f "$ROOT_DIR/paper/sections/08_limitations_and_scope.tex"
+test -f "$ROOT_DIR/paper/sections/09_conclusion.tex"
+test -f "$ROOT_DIR/paper/sections/appendix_repro.tex"
+test -f "$ROOT_DIR/docs/paper_workspace_strategy.md"
+test -f "$ROOT_DIR/papers/README.md"
+test -f "$ROOT_DIR/papers/m1_5/README.md"
+test -f "$ROOT_DIR/papers/m1_5/CLAIM_BOUNDARY.md"
+test -f "$ROOT_DIR/papers/m1_5/REPRODUCIBILITY.md"
+test -f "$ROOT_DIR/papers/m1_5/main.tex"
+test -f "$ROOT_DIR/papers/m1_5/Makefile"
+test -f "$ROOT_DIR/papers/m1_5/sections/00_abstract.tex"
+test -f "$ROOT_DIR/papers/m1_5/sections/appendix_repro.tex"
+
+# doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
+grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C2\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C3\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C4\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C5\.' "$ROOT_DIR/docs/paper_claims_map.md"
+grep -q '^## C6\.' "$ROOT_DIR/docs/paper_claims_map.md"
+
+grep -Fq '## Artifact policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -Fq '## `atlas_schema_version` policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
+grep -Fq '## Solver metadata policy' "$ROOT_DIR/docs/reproducibility_appendix.md"
+
+grep -Fq '## Positioning (short)' "$ROOT_DIR/docs/related_work_notes.md"
+grep -Fq '## Comparison matrix' "$ROOT_DIR/docs/related_work_notes.md"
+grep -Fq '## What we do not claim' "$ROOT_DIR/docs/related_work_notes.md"
+
+grep -Fq '## AGENTS policy' "$ROOT_DIR/docs/public_repo_security.md"
+grep -Fq '## CI secret handling' "$ROOT_DIR/docs/public_repo_security.md"
+grep -Fq '## Least-privilege `GITHUB_TOKEN`' "$ROOT_DIR/docs/public_repo_security.md"
+
+grep -Fq '## Metrics' "$ROOT_DIR/docs/evaluation_plan.md"
+grep -Fq '## Configurations' "$ROOT_DIR/docs/evaluation_plan.md"
+grep -Fq '## Reproducibility' "$ROOT_DIR/docs/evaluation_plan.md"
+
+grep -Fq '## Motivation' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## Non-trivial heuristics' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## Reproduction commands' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## 10-minute path (tiny evidence bundle)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## 30-minute path (full 32-case atlas bundle)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## Claims mapping (C1-C6)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## What to verify' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq 'scripts/maxsat_baseline.py' "$ROOT_DIR/docs/reviewer_quickstart.md"
+
+grep -Fq '## Build' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Branch model' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Manuscript workspaces' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Build' "$ROOT_DIR/papers/m1_5/README.md"
+grep -Fq '## Paper-specific contract' "$ROOT_DIR/papers/m1_5/README.md"
+
+python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/maxsat_baseline.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/gen_paper_tables.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" --help >/dev/null
+
+# AGENTS public-safety gates
+if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
+  echo "AGENTS.md must be English-only (Japanese script detected)." >&2
+  exit 1
+fi
+if grep -nEi 'API_KEY=|BEGIN[[:space:]]+PRIVATE[[:space:]]+KEY|token=' "$ROOT_DIR/AGENTS.md"; then
+  echo "AGENTS.md contains secret-like patterns." >&2
+  exit 1
+fi
 
 python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
   --prune none \
-  --case-masks 0,1,31 \
+  --case-masks 0,2,31 \
   --emit-proof unsat-only \
   --outdir "$OUT_DIR"
 
 test -f "$OUT_DIR/atlas.json"
 
-for case_id in case_00000 case_10000 case_11111; do
+for case_id in case_00000 case_01000 case_11111; do
   test -f "$OUT_DIR/$case_id/sen24.cnf"
   test -f "$OUT_DIR/$case_id/sen24.manifest.json"
   test -f "$OUT_DIR/$case_id/solver.log"
   test -f "$OUT_DIR/$case_id/summary.json"
 done
+
+python3 - "$OUT_DIR/atlas.json" "$OUT_DIR/case_11111/summary.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+atlas = json.loads(Path(sys.argv[1]).read_text())
+schema_version = atlas.get("atlas_schema_version")
+if not isinstance(schema_version, int) or schema_version < 1:
+    raise SystemExit("atlas_schema_version missing or invalid")
+summary = json.loads(Path(sys.argv[2]).read_text())
+for obj_name, obj in [("atlas", atlas), ("summary", summary)]:
+    solver_info = obj.get("solver_info")
+    env_info = obj.get("environment_info")
+    if not isinstance(solver_info, dict):
+        raise SystemExit(f"{obj_name}: missing solver_info")
+    for k in ("solver_path", "solver_version_raw", "solver_version", "solver_sha256"):
+        if k not in solver_info:
+            raise SystemExit(f"{obj_name}: missing solver_info.{k}")
+    if not isinstance(env_info, dict):
+        raise SystemExit(f"{obj_name}: missing environment_info")
+    for k in ("python_version", "platform", "git_commit"):
+        if k not in env_info:
+            raise SystemExit(f"{obj_name}: missing environment_info.{k}")
+print("runtime_meta_ok")
+PY
 
 python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
   "$OUT_DIR/case_00000/sen24.cnf" \
@@ -32,8 +157,8 @@ python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
   --fail-on-tautology
 
 python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
-  "$OUT_DIR/case_10000/sen24.cnf" \
-  --manifest "$OUT_DIR/case_10000/sen24.manifest.json" \
+  "$OUT_DIR/case_01000/sen24.cnf" \
+  --manifest "$OUT_DIR/case_01000/sen24.manifest.json" \
   --strict-duplicates \
   --fail-on-tautology
 
@@ -112,6 +237,7 @@ python3 "$ROOT_DIR/scripts/run_atlas.py" \
   --jobs 1 \
   --prune none \
   --symmetry alts \
+  --symmetry-check \
   --case-masks 0,1,31 \
   --emit-proof never \
   --outdir "$SYM_OUT"
@@ -126,6 +252,20 @@ if atlas.get("symmetry_mode") != "alts":
     raise SystemExit("symmetry_mode is not alts")
 if int(atlas.get("equiv_classes_total", 0)) < 1:
     raise SystemExit("equiv_classes_total missing/invalid")
+symmetry_check = atlas.get("symmetry_check", {})
+if not isinstance(symmetry_check, dict):
+    raise SystemExit("missing symmetry_check block")
+if symmetry_check.get("enabled") is not True:
+    raise SystemExit("symmetry_check should be enabled")
+if "checked_k" not in symmetry_check or "mismatches" not in symmetry_check:
+    raise SystemExit("symmetry_check stats are incomplete")
+if "checked_cases" not in symmetry_check:
+    raise SystemExit("symmetry_check.checked_cases is missing")
+if int(symmetry_check.get("mismatches", -1)) != 0:
+    raise SystemExit("symmetry_check mismatches should be 0 in smoke run")
+checked_cases = atlas.get("checked_cases")
+if not isinstance(checked_cases, list):
+    raise SystemExit("atlas.checked_cases is missing")
 cases = atlas.get("cases", [])
 if not isinstance(cases, list) or not cases:
     raise SystemExit("missing cases in symmetry run")
@@ -165,6 +305,11 @@ if not pruned:
 for c in pruned:
     if c.get("status") in {"SAT", "UNSAT"} and not c.get("pruned_by"):
         raise SystemExit("inferred SAT/UNSAT case missing pruned_by metadata")
+    if c.get("status") in {"SAT", "UNSAT"}:
+        pb = c["pruned_by"]
+        for key in ("derived_status", "rule", "witness_case_id"):
+            if key not in pb:
+                raise SystemExit(f"missing pruned_by.{key} in inferred case {c.get('case_id')}")
 prune_stats = atlas.get("prune_stats", {})
 if int(prune_stats.get("solver_calls_avoided", 0)) <= 0:
     raise SystemExit("solver_calls_avoided should be positive in monotone prune run")
@@ -174,3 +319,393 @@ PY
 python3 "$ROOT_DIR/scripts/summarize_atlas.py" --outdir "$PRUNE_OUT"
 test -s "$PRUNE_OUT/atlas_summary.md"
 grep -q "Symmetry classes" "$PRUNE_OUT/atlas_summary.md"
+
+python3 "$ROOT_DIR/scripts/run_atlas.py" \
+  --jobs 1 \
+  --prune none \
+  --emit-proof never \
+  --outdir "$REPAIRS_OUT"
+
+python3 "$ROOT_DIR/scripts/enumerate_repairs.py" \
+  --outdir "$REPAIRS_OUT"
+
+python3 - "$REPAIRS_OUT/atlas.json" <<'PY'
+import itertools
+import json
+import re
+import sys
+from pathlib import Path
+
+atlas_path = Path(sys.argv[1])
+atlas = json.loads(atlas_path.read_text())
+cases = atlas.get("cases", [])
+if int(atlas.get("cases_total", -1)) != 32:
+    raise SystemExit("repairs atlas must include 32 solved cases")
+case_by_mask = {int(c["mask_int"]): c for c in cases}
+width = len(atlas.get("axiom_universe", []))
+if width != 5:
+    raise SystemExit("expected 5 axioms for sen24 repair smoke check")
+
+unsat_cases = [c for c in cases if c.get("status") == "UNSAT" and bool(c.get("solved", False))]
+if not unsat_cases:
+    raise SystemExit("expected solved UNSAT cases for repair enumeration")
+
+for c in unsat_cases:
+    repairs = c.get("mcs_all")
+    if not isinstance(repairs, list) or not repairs:
+        raise SystemExit(f"UNSAT case missing non-empty mcs_all: {c.get('case_id')}")
+
+sample = unsat_cases[0]
+repairs = sample["mcs_all"]
+for repair in repairs:
+    remove_mask = int(repair["remove_mask_int"])
+    sat_mask = int(sample["mask_int"]) & ~remove_mask
+    sat_case = case_by_mask.get(sat_mask)
+    if sat_case is None or sat_case.get("status") != "SAT":
+        raise SystemExit("mcs_all contains non-SAT repair target")
+    idxs = [i for i in range(width) if (remove_mask >> i) & 1]
+    for r in range(len(idxs)):
+        for sub in itertools.combinations(idxs, r):
+            sub_mask = 0
+            for i in sub:
+                sub_mask |= 1 << i
+            sub_case = case_by_mask[int(sample["mask_int"]) & ~sub_mask]
+            if sub_case.get("status") != "UNSAT":
+                raise SystemExit("mcs_all minimality check failed in smoke validation")
+
+atlas_text = atlas_path.read_text()
+if "/Users/" in atlas_text:
+    raise SystemExit("repair atlas output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", atlas_text):
+    raise SystemExit("repair atlas output leaks Windows absolute path")
+
+print("repairs_ok", len(unsat_cases), "sample_case", sample.get("case_id"))
+PY
+
+python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" \
+  --atlas-outdir "$REPAIRS_OUT" \
+  --outdir "$HASSE_OUT" \
+  --format png \
+  --include-pruned false \
+  --show status
+
+test -s "$HASSE_OUT/frontier_hasse.dot"
+test -s "$HASSE_OUT/frontier_hasse.png"
+
+python3 - "$HASSE_OUT/frontier_hasse.dot" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+dot_text = Path(sys.argv[1]).read_text()
+nodes = set(re.findall(r'"(case_[01]{5})"\s+\[', dot_text))
+if len(nodes) != 32:
+    raise SystemExit(f"hasse dot must contain 32 case nodes, got {len(nodes)}")
+if "/Users/" in dot_text:
+    raise SystemExit("hasse dot leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", dot_text):
+    raise SystemExit("hasse dot leaks Windows absolute path")
+print("hasse_ok", len(nodes))
+PY
+
+python3 "$ROOT_DIR/scripts/triangulate_repairs.py" \
+  --atlas-outdir "$REPAIRS_OUT" \
+  --outdir "$TRI_OUT" \
+  --backend bruteforce
+
+test -s "$TRI_OUT/repair_triangulation.json"
+test -s "$TRI_OUT/repair_triangulation.md"
+
+python3 - "$TRI_OUT/repair_triangulation.json" "$TRI_OUT/repair_triangulation.md" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+obj = json.loads(Path(sys.argv[1]).read_text())
+cases = obj.get("cases", [])
+if not isinstance(cases, list) or not cases:
+    raise SystemExit("triangulation report has no case entries")
+for case in cases:
+    compare = case.get("compare", {})
+    if compare.get("size_match") is not True:
+        raise SystemExit(f"triangulation size mismatch: {case.get('case_id')}")
+    if compare.get("set_match") is not True:
+        raise SystemExit(f"triangulation set mismatch: {case.get('case_id')}")
+
+json_text = Path(sys.argv[1]).read_text()
+md_text = Path(sys.argv[2]).read_text()
+if "/Users/" in json_text or "/Users/" in md_text:
+    raise SystemExit("triangulation output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", json_text) or re.search(r"[A-Za-z]:\\\\", md_text):
+    raise SystemExit("triangulation output leaks Windows absolute path")
+print("triangulation_ok", len(cases))
+PY
+
+python3 "$ROOT_DIR/scripts/eval_atlas.py" \
+  --outdir "$EVAL_OUT" \
+  --repeat 1 \
+  --configs none_none \
+  --jobs 1 \
+  --case-masks 0,1,31
+
+MPLBACKEND=Agg python3 "$ROOT_DIR/scripts/plot_eval.py" \
+  --eval-json "$EVAL_OUT/eval.json"
+
+test -s "$EVAL_OUT/eval.json"
+test -s "$EVAL_OUT/eval.csv"
+test -s "$EVAL_OUT/figures/runtime_boxplot.png"
+
+python3 - "$EVAL_OUT/eval.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+obj = json.loads(Path(sys.argv[1]).read_text())
+schema = obj.get("eval_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("eval_schema_version missing or invalid")
+
+repro = obj.get("reproducibility")
+if not isinstance(repro, dict):
+    raise SystemExit("missing reproducibility block")
+
+git = repro.get("git", {})
+py = repro.get("python", {})
+solver = repro.get("solver", {})
+if not isinstance(git, dict) or "commit" not in git:
+    raise SystemExit("missing reproducibility.git.commit")
+if not isinstance(py, dict) or "version" not in py:
+    raise SystemExit("missing reproducibility.python.version")
+if "platform" not in repro:
+    raise SystemExit("missing reproducibility.platform")
+if not isinstance(solver, dict):
+    raise SystemExit("missing reproducibility.solver")
+for k in ("version_raw", "version", "path", "sha256"):
+    if k not in solver:
+        raise SystemExit(f"missing reproducibility.solver.{k}")
+if "/Users/" in str(solver.get("path", "")):
+    raise SystemExit("reproducibility.solver.path must be sanitized")
+
+seeds = obj.get("seeds")
+if not isinstance(seeds, list) or not seeds:
+    raise SystemExit("missing seeds[]")
+if "seed_policy" not in obj:
+    raise SystemExit("missing seed_policy")
+print("eval_meta_ok")
+PY
+
+python3 "$ROOT_DIR/scripts/build_sat_gallery.py" \
+  --atlas-outdir "$REPAIRS_OUT" \
+  --top-k 2 \
+  --min-k 1
+
+test -s "$REPAIRS_OUT/gallery.json"
+test -s "$REPAIRS_OUT/gallery.md"
+
+python3 - "$REPAIRS_OUT/gallery.json" "$REPAIRS_OUT/gallery.md" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+gallery = json.loads(Path(sys.argv[1]).read_text())
+gallery_md = Path(sys.argv[2]).read_text()
+
+schema = gallery.get("gallery_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("gallery_schema_version missing or invalid")
+
+entries = gallery.get("entries", [])
+if not isinstance(entries, list) or len(entries) < 1:
+    raise SystemExit("gallery must contain at least one entry")
+
+for entry in entries:
+    if entry.get("model_validated") is not True:
+        raise SystemExit(f"gallery entry not validated: {entry.get('case_id')}")
+    if entry.get("non_trivial") is not True:
+        raise SystemExit(f"gallery entry failed non-trivial filter: {entry.get('case_id')}")
+    report = entry.get("nontriviality_report", {})
+    if report.get("passes_non_triviality") is not True:
+        raise SystemExit(f"gallery entry missing nontriviality report pass: {entry.get('case_id')}")
+    files = entry.get("files", {})
+    for _, path in files.items():
+        if path is None:
+            continue
+        if str(path).startswith("/"):
+            raise SystemExit("gallery file path must be relative")
+        if re.match(r"^[A-Za-z]:\\\\", str(path)):
+            raise SystemExit("gallery file path must not use Windows absolute prefix")
+
+rule_card = entries[0].get("files", {}).get("rule_card_md")
+if not rule_card:
+    raise SystemExit("rule_card_md missing from first gallery entry")
+rule_card_path = Path(sys.argv[1]).parent / rule_card
+if not rule_card_path.exists() or rule_card_path.stat().st_size == 0:
+    raise SystemExit("rule_card.md missing or empty")
+rule_card_text = rule_card_path.read_text()
+for anchor in ("# Rule Card:", "## Key metrics", "## Profile witnesses"):
+    if anchor not in rule_card_text:
+        raise SystemExit(f"rule_card.md missing anchor: {anchor}")
+
+gallery_text = json.dumps(gallery, sort_keys=True)
+if "/Users/" in gallery_text or "/Users/" in gallery_md or "/Users/" in rule_card_text:
+    raise SystemExit("gallery output leaks '/Users/' absolute path")
+if re.search(r"[A-Za-z]:\\\\", gallery_text) or re.search(r"[A-Za-z]:\\\\", gallery_md) or re.search(r"[A-Za-z]:\\\\", rule_card_text):
+    raise SystemExit("gallery output leaks Windows absolute path")
+
+print("gallery_ok", len(entries))
+PY
+
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" \
+  --mode tiny \
+  --outdir "$BUNDLE_OUT" \
+  --solver cadical \
+  --jobs 1 \
+  --symmetry none \
+  --prune none
+
+test -s "$BUNDLE_OUT/bundle.json"
+test -s "$BUNDLE_OUT/paper/figures/generated/frontier_matrix.png"
+test -s "$BUNDLE_OUT/paper/figures/generated/frontier_hasse.png"
+test -s "$BUNDLE_OUT/paper/tables/generated/repairs_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/gallery_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/triangulation_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/verification_stats_table.tex"
+test -s "$BUNDLE_OUT/atlas/maxsat_baseline.json"
+
+python3 - "$BUNDLE_OUT" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+bundle = json.loads((root / "bundle.json").read_text())
+schema = bundle.get("bundle_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("bundle_schema_version missing or invalid")
+
+artifacts = bundle.get("artifacts", {}).get("files", [])
+if not isinstance(artifacts, list) or not artifacts:
+    raise SystemExit("bundle artifacts list is missing/empty")
+for row in artifacts:
+    if not row.get("path") or not row.get("sha256"):
+        raise SystemExit("bundle artifact row missing path/sha256")
+
+gallery = json.loads((root / "atlas" / "gallery.json").read_text())
+entries = gallery.get("entries", [])
+if not isinstance(entries, list) or not entries:
+    raise SystemExit("bundle gallery must include at least one entry")
+if not any(bool(e.get("model_validated")) and bool(e.get("non_trivial")) for e in entries if isinstance(e, dict)):
+    raise SystemExit("bundle gallery has no validated non-trivial entries")
+
+maxsat = json.loads((root / "atlas" / "maxsat_baseline.json").read_text())
+if int(maxsat.get("schema_version", 0)) < 1:
+    raise SystemExit("maxsat_baseline schema_version missing or invalid")
+if int(maxsat.get("min_repair_size", 0)) < 1:
+    raise SystemExit("maxsat_baseline min_repair_size missing or invalid")
+if not isinstance(maxsat.get("one_repair_set"), list) or not maxsat.get("one_repair_set"):
+    raise SystemExit("maxsat_baseline one_repair_set missing or empty")
+
+rule_cards_md = sorted(root.glob("atlas/case_*/rule_card.md"))
+rule_cards_tex = sorted(root.glob("atlas/case_*/rule_card.tex"))
+if not rule_cards_md or not rule_cards_tex:
+    raise SystemExit("bundle is missing rule_card.md/.tex outputs")
+
+text_suffixes = {".json", ".md", ".tex", ".csv", ".dot"}
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in text_suffixes):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"bundle path leak '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"bundle path leak Windows absolute path in {path}")
+
+print("bundle_ok", len(artifacts))
+PY
+
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" \
+  --mode tiny \
+  --outdir "$BUNDLE_OUT_2" \
+  --solver cadical \
+  --jobs 1 \
+  --symmetry none \
+  --prune none
+
+python3 - "$BUNDLE_OUT" "$BUNDLE_OUT_2" <<'PY'
+import hashlib
+import sys
+from pathlib import Path
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+b1 = Path(sys.argv[1]) / "bundle.json"
+b2 = Path(sys.argv[2]) / "bundle.json"
+h1 = sha256(b1)
+h2 = sha256(b2)
+if h1 != h2:
+    raise SystemExit(f"determinism failed: {h1} != {h2}")
+print("bundle_deterministic_ok", h1)
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT"
+
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.dot"
+test -s "$PAPER_ASSETS_OUT/tables/generated/repairs_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/gallery_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/triangulation_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/verification_stats_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/selected_rule_card.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.tex"
+
+python3 - "$PAPER_ASSETS_OUT" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+text_suffixes = {".tex", ".json", ".md", ".dot"}
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in text_suffixes):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_ok")
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --paper-id m1_5 \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT_M15"
+
+test -s "$PAPER_ASSETS_OUT_M15/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT_M15/tables/generated/repairs_table.tex"
+
+python3 - "$PAPER_ASSETS_OUT_M15" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+if not (root / "figures" / "generated" / "frontier_matrix.png").exists():
+    raise SystemExit("missing M1.5 frontier matrix output")
+if not (root / "tables" / "generated" / "repairs_table.tex").exists():
+    raise SystemExit("missing M1.5 repairs table output")
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {".tex", ".dot", ".md", ".json"}):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"m1_5 paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"m1_5 paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_m15_ok")
+PY

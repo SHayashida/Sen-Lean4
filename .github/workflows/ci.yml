@@ -20,6 +20,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cadical
 
+      - name: Install Python plotting dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install matplotlib
+
       - name: Install Lean toolchain (elan)
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
@@ -33,3 +38,6 @@ jobs:
 
       - name: Phase2 atlas smoke
         run: ./scripts/ci_phase2_smoke.sh
+
+      - name: M2 bridge smoke
+        run: ./scripts/ci_m2_smoke.sh

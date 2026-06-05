@@ -5,6 +5,8 @@ import argparse
 import hashlib
 import itertools
 import json
+import platform as py_platform
+import re
 import shlex
 import shutil
 import subprocess
@@ -22,11 +24,12 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from gen_dimacs import run_generation  # noqa: E402
+from gen_dimacs import AXIOM_REGISTRY, run_generation  # noqa: E402
 
 
 SUPPORTED_AXIOMS = ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]
 ALT_VALUES = (0, 1, 2, 3)
+ATLAS_SCHEMA_VERSION = 1
 
 
 @dataclass(frozen=True)
@@ -46,6 +49,96 @@ def _sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def _resolve_solver_path(solver: str) -> str | None:
+    found = shutil.which(solver)
+    if found is not None:
+        return str(Path(found).resolve())
+    candidate = Path(solver)
+    if candidate.exists():
+        return str(candidate.resolve())
+    return None
+
+
+def _extract_first_line(text: str) -> str | None:
+    for raw in text.splitlines():
+        line = raw.strip()
+        if line:
+            return line
+    return None
+
+
+def _probe_solver_version_raw(solver: str) -> str:
+    for flag in ("--version", "-V", "-v"):
+        try:
+            proc = subprocess.run(
+                [solver, flag],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=5.0,
+            )
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            continue
+        line = _extract_first_line(f"{proc.stdout}\n{proc.stderr}")
+        if line is not None:
+            return line
+    return "unknown"
+
+
+def _normalize_solver_version(raw: str) -> str:
+    normalized = " ".join(raw.strip().split())
+    if not normalized or normalized.lower() == "unknown":
+        return "unknown"
+    match = re.search(r"\b\d+(?:\.\d+){1,3}\b", normalized)
+    if match is not None:
+        return match.group(0)
+    return "unknown"
+
+
+def _probe_git_commit() -> str:
+    try:
+        proc = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=SCRIPT_DIR.parent,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=5.0,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return "unknown"
+    if proc.returncode != 0:
+        return "unknown"
+    commit = proc.stdout.strip()
+    return commit if commit else "unknown"
+
+
+def _collect_runtime_metadata(solver: str) -> dict[str, object]:
+    solver_path = _resolve_solver_path(solver)
+    solver_sha256 = "unknown"
+    if solver_path is not None:
+        try:
+            solver_sha256 = _sha256_file(Path(solver_path))
+        except OSError:
+            solver_sha256 = "unknown"
+    solver_version_raw = _probe_solver_version_raw(solver)
+    solver_version = _normalize_solver_version(solver_version_raw)
+    return {
+        "solver_info": {
+            "solver_name": solver,
+            "solver_path": solver_path if solver_path is not None else "unknown",
+            "solver_version_raw": solver_version_raw if solver_version_raw else "unknown",
+            "solver_version": solver_version,
+            "solver_sha256": solver_sha256,
+        },
+        "environment_info": {
+            "python_version": sys.version.split()[0],
+            "platform": py_platform.platform(),
+            "git_commit": _probe_git_commit(),
+        },
+    }
+
+
 def _popcount(mask: int) -> int:
     return bin(mask).count("1")
 
@@ -60,6 +153,15 @@ def parse_axiom_list(raw: str) -> list[str]:
     if len(set(names)) != len(names):
         raise ValueError("Axiom universe contains duplicates.")
     return names
+
+
+def find_symmetry_unsafe_axioms(axiom_names: list[str]) -> list[str]:
+    unsafe: list[str] = []
+    for name in axiom_names:
+        axiom = AXIOM_REGISTRY[name]
+        if not bool(getattr(axiom, "SUPPORTS_SYMMETRY_ALTS", False)):
+            unsafe.append(name)
+    return unsafe
 
 
 def parse_case_masks(raw: str | None, total_bits: int) -> list[int] | None:
@@ -226,6 +328,7 @@ def run_case(
     solver_template: str | None,
     dry_run: bool,
     emit_proof_mode: str,
+    runtime_metadata: dict[str, object],
 ) -> dict[str, object]:
     case_dir = outdir / case.case_id
     case_dir.mkdir(parents=True, exist_ok=True)
@@ -439,6 +542,8 @@ def run_case(
             "category_counts": manifest["category_counts"],
             "minlib": manifest["minlib"],
         },
+        "solver_info": runtime_metadata["solver_info"],
+        "environment_info": runtime_metadata["environment_info"],
     }
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return summary
@@ -455,6 +560,7 @@ def _make_pruned_summary(
     solver: str,
     solver_template: str | None,
     emit_proof_mode: str,
+    runtime_metadata: dict[str, object],
 ) -> dict[str, object]:
     return {
         "case_id": case.case_id,
@@ -466,11 +572,11 @@ def _make_pruned_summary(
         "solved": False,
         "inferred": True,
         "pruned_by": {
+            "derived_status": status,
             "rule": rule,
-            "witness_case": witness_case_id,
+            "witness_case_id": witness_case_id,
             "witness_mask": witness_mask,
             "witness_bits": format(witness_mask, f"0{len(case.bitstring)}b"),
-            "witness_status": status,
         },
         "dry_run": dry_run,
         "solver": solver,
@@ -499,11 +605,14 @@ def _make_pruned_summary(
             "axioms_on": case.axioms_on,
             "inferred_by": {
                 "rule": rule,
-                "witness_case": witness_case_id,
+                "derived_status": status,
+                "witness_case_id": witness_case_id,
                 "witness_mask": witness_mask,
             },
         },
         "manifest": None,
+        "solver_info": runtime_metadata["solver_info"],
+        "environment_info": runtime_metadata["environment_info"],
     }
 
 
@@ -523,6 +632,95 @@ def _pick_unsat_subset(mask: int, known_unsat: dict[int, str]) -> tuple[int, str
     return witness, known_unsat[witness]
 
 
+def _validate_pruned_evidence(
+    cases: list[CaseSpec],
+    summaries: list[dict[str, object]],
+    *,
+    outdir: Path,
+) -> None:
+    summaries_by_id = {str(s["case_id"]): s for s in summaries}
+    summaries_by_mask = {int(s["mask_int"]): s for s in summaries}
+    for case in cases:
+        summary = summaries_by_mask[case.mask]
+        if bool(summary.get("solved", False)):
+            continue
+        status = str(summary.get("status", "UNKNOWN"))
+        if status not in {"SAT", "UNSAT"}:
+            continue
+        pruned_by = summary.get("pruned_by")
+        if not isinstance(pruned_by, dict):
+            raise RuntimeError(f"{case.case_id}: inferred SAT/UNSAT case must include pruned_by metadata")
+
+        derived_status = str(pruned_by.get("derived_status", ""))
+        if derived_status != status:
+            raise RuntimeError(f"{case.case_id}: pruned_by.derived_status={derived_status} != status={status}")
+
+        rule = str(pruned_by.get("rule", ""))
+        witness_case_id = str(pruned_by.get("witness_case_id", ""))
+        if not witness_case_id:
+            raise RuntimeError(f"{case.case_id}: pruned_by.witness_case_id is missing")
+        witness = summaries_by_id.get(witness_case_id)
+        if witness is None:
+            raise RuntimeError(f"{case.case_id}: witness case {witness_case_id} not found in atlas cases")
+        if not bool(witness.get("solved", False)):
+            raise RuntimeError(f"{case.case_id}: witness case {witness_case_id} must have solved=true")
+        witness_status = str(witness.get("status", "UNKNOWN"))
+        if witness_status != status:
+            raise RuntimeError(
+                f"{case.case_id}: witness status mismatch ({witness_status}) for inferred status {status}"
+            )
+
+        witness_mask = int(pruned_by.get("witness_mask", -1))
+        if witness_mask != int(witness.get("mask_int", -2)):
+            raise RuntimeError(
+                f"{case.case_id}: witness_mask ({witness_mask}) does not match witness case mask "
+                f"{witness.get('mask_int')}"
+            )
+        witness_dir = outdir / witness_case_id
+        witness_summary_path = witness_dir / "summary.json"
+        if not witness_summary_path.exists():
+            raise RuntimeError(
+                f"{case.case_id}: witness summary.json is missing at {witness_summary_path}"
+            )
+        try:
+            witness_summary_obj = json.loads(witness_summary_path.read_text(encoding="utf-8"))
+        except Exception as ex:  # pragma: no cover - defensive parse failure path
+            raise RuntimeError(
+                f"{case.case_id}: witness summary.json is unreadable ({witness_summary_path}): {ex}"
+            ) from ex
+        if str(witness_summary_obj.get("case_id", "")) != witness_case_id:
+            raise RuntimeError(
+                f"{case.case_id}: witness summary case_id mismatch in {witness_summary_path}"
+            )
+        if not bool(witness_summary_obj.get("solved", False)):
+            raise RuntimeError(
+                f"{case.case_id}: witness summary at {witness_summary_path} must have solved=true"
+            )
+        if str(witness_summary_obj.get("status", "UNKNOWN")) != status:
+            raise RuntimeError(
+                f"{case.case_id}: witness summary status mismatch in {witness_summary_path}"
+            )
+
+        if rule == "subset_of_sat":
+            if status != "SAT":
+                raise RuntimeError(f"{case.case_id}: subset_of_sat rule must derive SAT")
+            if (case.mask & witness_mask) != case.mask:
+                raise RuntimeError(
+                    f"{case.case_id}: subset_of_sat requires case mask ⊆ witness mask "
+                    f"(case={case.mask}, witness={witness_mask})"
+                )
+        elif rule == "superset_of_unsat":
+            if status != "UNSAT":
+                raise RuntimeError(f"{case.case_id}: superset_of_unsat rule must derive UNSAT")
+            if (witness_mask & case.mask) != witness_mask:
+                raise RuntimeError(
+                    f"{case.case_id}: superset_of_unsat requires witness mask ⊆ case mask "
+                    f"(case={case.mask}, witness={witness_mask})"
+                )
+        else:
+            raise RuntimeError(f"{case.case_id}: unknown pruning rule '{rule}'")
+
+
 def _verify_pruned_cases(
     *,
     cases: list[CaseSpec],
@@ -531,6 +729,7 @@ def _verify_pruned_cases(
     solver: str,
     solver_template: str | None,
     emit_proof_mode: str,
+    runtime_metadata: dict[str, object],
 ) -> dict[str, object]:
     pruned_cases = []
     for case in sorted(cases, key=lambda c: c.mask):
@@ -561,6 +760,7 @@ def _verify_pruned_cases(
             solver_template=solver_template,
             dry_run=False,
             emit_proof_mode=emit_proof_mode,
+            runtime_metadata=runtime_metadata,
         )
         observed = str(direct.get("status", "UNKNOWN"))
         if observed != expected:
@@ -590,6 +790,7 @@ def run_all_cases(
     solver_template: str | None,
     dry_run: bool,
     emit_proof_mode: str,
+    runtime_metadata: dict[str, object],
     jobs: int,
     prune: str,
     prune_check: bool,
@@ -604,6 +805,7 @@ def run_all_cases(
                     solver_template=solver_template,
                     dry_run=dry_run,
                     emit_proof_mode=emit_proof_mode,
+                    runtime_metadata=runtime_metadata,
                 )
                 for case in cases
             ]
@@ -619,6 +821,7 @@ def run_all_cases(
                         solver_template=solver_template,
                         dry_run=dry_run,
                         emit_proof_mode=emit_proof_mode,
+                        runtime_metadata=runtime_metadata,
                     ): case
                     for case in cases
                 }
@@ -644,6 +847,7 @@ def run_all_cases(
             "unsat_inferred": 0,
             "conflict_hits": 0,
         }
+        _validate_pruned_evidence(cases, summaries, outdir=outdir)
         return summaries, prune_stats, oracle_stats
 
     if prune != "monotone":
@@ -674,14 +878,14 @@ def run_all_cases(
                 status="SAT",
                 witness_mask=witness_mask,
                 witness_case_id=witness_case_id,
-                rule="sat_superset",
+                rule="subset_of_sat",
                 dry_run=dry_run,
                 solver=solver,
                 solver_template=solver_template,
                 emit_proof_mode=emit_proof_mode,
+                runtime_metadata=runtime_metadata,
             )
             results_by_mask[case.mask] = summary
-            known_sat[case.mask] = case.case_id
             pruned_sat += 1
             continue
 
@@ -692,14 +896,14 @@ def run_all_cases(
                 status="UNSAT",
                 witness_mask=witness_mask,
                 witness_case_id=witness_case_id,
-                rule="unsat_subset",
+                rule="superset_of_unsat",
                 dry_run=dry_run,
                 solver=solver,
                 solver_template=solver_template,
                 emit_proof_mode=emit_proof_mode,
+                runtime_metadata=runtime_metadata,
             )
             results_by_mask[case.mask] = summary
-            known_unsat[case.mask] = case.case_id
             pruned_unsat += 1
             continue
 
@@ -710,6 +914,7 @@ def run_all_cases(
             solver_template=solver_template,
             dry_run=dry_run,
             emit_proof_mode=emit_proof_mode,
+            runtime_metadata=runtime_metadata,
         )
         results_by_mask[case.mask] = summary
         if bool(summary.get("solved")):
@@ -729,9 +934,11 @@ def run_all_cases(
             solver=solver,
             solver_template=solver_template,
             emit_proof_mode=emit_proof_mode,
+            runtime_metadata=runtime_metadata,
         )
 
     summaries = [results_by_mask[case.mask] for case in cases]
+    _validate_pruned_evidence(cases, summaries, outdir=outdir)
     prune_total = pruned_sat + pruned_unsat
     prune_stats = {
         "mode": "monotone",
@@ -967,6 +1174,97 @@ def apply_symmetry_classes(
     return summaries, top_level
 
 
+def run_symmetry_check(
+    *,
+    enabled: bool,
+    symmetry_mode: str,
+    dry_run: bool,
+    cases_by_id: dict[str, CaseSpec],
+    summaries: list[dict[str, object]],
+    outdir: Path,
+    solver: str,
+    solver_template: str | None,
+    emit_proof_mode: str,
+    runtime_metadata: dict[str, object],
+) -> dict[str, object]:
+    if not enabled:
+        return {"enabled": False, "checked_k": 0, "mismatches": 0, "checked_cases": []}
+    if symmetry_mode != "alts":
+        return {
+            "enabled": False,
+            "checked_k": 0,
+            "mismatches": 0,
+            "checked_cases": [],
+            "skipped_reason": "symmetry_mode is not alts",
+        }
+    if dry_run:
+        return {
+            "enabled": False,
+            "checked_k": 0,
+            "mismatches": 0,
+            "checked_cases": [],
+            "skipped_reason": "dry_run=true",
+        }
+
+    summaries_by_id = {str(s["case_id"]): s for s in summaries}
+    class_members: dict[str, list[str]] = {}
+    for s in summaries:
+        class_id = str(s.get("equiv_class_id", ""))
+        if not class_id:
+            continue
+        class_members.setdefault(class_id, []).append(str(s["case_id"]))
+
+    check_dir = outdir / "_symmetry_check"
+    if check_dir.exists():
+        shutil.rmtree(check_dir)
+
+    checked_cases: list[str] = []
+    mismatches: list[dict[str, object]] = []
+    for class_id in sorted(class_members.keys()):
+        members = sorted(class_members[class_id])
+        if len(members) <= 1:
+            continue
+        representative = members[0]
+        rep_status = str(summaries_by_id[representative].get("status", "UNKNOWN"))
+        if rep_status not in {"SAT", "UNSAT"}:
+            continue
+        probe_case_id = members[1]
+        probe_spec = cases_by_id.get(probe_case_id)
+        if probe_spec is None:
+            continue
+        checked_cases.append(probe_case_id)
+        observed = run_case(
+            probe_spec,
+            outdir=check_dir,
+            solver=solver,
+            solver_template=solver_template,
+            dry_run=False,
+            emit_proof_mode=emit_proof_mode,
+            runtime_metadata=runtime_metadata,
+        )
+        observed_status = str(observed.get("status", "UNKNOWN"))
+        if observed_status != rep_status:
+            mismatches.append(
+                {
+                    "equiv_class_id": class_id,
+                    "representative_case": representative,
+                    "representative_status": rep_status,
+                    "sample_case": probe_case_id,
+                    "sample_status": observed_status,
+                }
+            )
+
+    shutil.rmtree(check_dir, ignore_errors=True)
+    if mismatches:
+        raise RuntimeError(f"symmetry check failed: {mismatches}")
+    return {
+        "enabled": True,
+        "checked_k": len(checked_cases),
+        "mismatches": 0,
+        "checked_cases": checked_cases,
+    }
+
+
 def default_outdir() -> Path:
     stamp = datetime.now().strftime("%Y%m%d")
     return Path("results") / stamp / "atlas_v1"
@@ -1001,6 +1299,16 @@ def main() -> None:
         default="none",
         help="Optional post-run equivalence grouping mode.",
     )
+    ap.add_argument(
+        "--symmetry-unsafe-ok",
+        action="store_true",
+        help="Allow symmetry=alts even if selected axioms are marked as non-invariant.",
+    )
+    ap.add_argument(
+        "--symmetry-check",
+        action="store_true",
+        help="Re-solve one non-representative case per class to sanity-check symmetry status invariance.",
+    )
     ap.add_argument("--prune-check", action="store_true", help="Verify a fixed sample of pruned cases by re-solving.")
     ap.add_argument("--dry-run", action="store_true", help="Generate CNF/manifest only.")
     ap.add_argument(
@@ -1028,11 +1336,20 @@ def main() -> None:
         print("warning: --jobs is ignored when --prune monotone; using sequential evaluation", file=sys.stderr)
 
     axiom_universe = parse_axiom_list(args.axiom_universe)
+    symmetry_unsafe_axioms = find_symmetry_unsafe_axioms(axiom_universe)
+    if args.symmetry == "alts" and symmetry_unsafe_axioms and not args.symmetry_unsafe_ok:
+        raise ValueError(
+            "symmetry=alts is unsafe for selected axioms: "
+            + ", ".join(symmetry_unsafe_axioms)
+            + " (use --symmetry-unsafe-ok to override)"
+        )
     case_masks = parse_case_masks(args.case_masks, len(axiom_universe))
     cases = make_cases(axiom_universe, case_masks)
+    cases_by_id = {case.case_id: case for case in cases}
 
     outdir = args.outdir
     outdir.mkdir(parents=True, exist_ok=True)
+    runtime_metadata = _collect_runtime_metadata(args.solver)
 
     summaries, prune_stats, oracle_stats = run_all_cases(
         cases,
@@ -1041,6 +1358,7 @@ def main() -> None:
         solver_template=args.solver_template,
         dry_run=args.dry_run,
         emit_proof_mode=args.emit_proof,
+        runtime_metadata=runtime_metadata,
         jobs=args.jobs,
         prune=args.prune,
         prune_check=args.prune_check,
@@ -1051,10 +1369,23 @@ def main() -> None:
         outdir=outdir,
         symmetry_mode=args.symmetry,
     )
+    symmetry_check = run_symmetry_check(
+        enabled=args.symmetry_check,
+        symmetry_mode=args.symmetry,
+        dry_run=args.dry_run,
+        cases_by_id=cases_by_id,
+        summaries=summaries,
+        outdir=outdir,
+        solver=args.solver,
+        solver_template=args.solver_template,
+        emit_proof_mode="never",
+        runtime_metadata=runtime_metadata,
+    )
 
     status_counts = Counter(str(s.get("status", "UNKNOWN")) for s in summaries)
     atlas: dict[str, object] = {
         "version": "atlas_v1",
+        "atlas_schema_version": ATLAS_SCHEMA_VERSION,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "n": 2,
         "m": 4,
@@ -1068,11 +1399,17 @@ def main() -> None:
         "prune": args.prune,
         "prune_check": args.prune_check,
         "symmetry_mode": args.symmetry,
+        "symmetry_unsafe_ok": args.symmetry_unsafe_ok,
+        "symmetry_unsafe_axioms": symmetry_unsafe_axioms,
+        "symmetry_check": symmetry_check,
+        "checked_cases": list(symmetry_check.get("checked_cases", [])),
         "outdir": str(outdir),
         "cases_total": len(cases),
         "status_counts": dict(status_counts),
         "prune_stats": prune_stats,
         "oracle_stats": oracle_stats,
+        "solver_info": runtime_metadata["solver_info"],
+        "environment_info": runtime_metadata["environment_info"],
         "cases": summaries,
     }
     atlas.update(symmetry_meta)

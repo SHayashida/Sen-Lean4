@@ -1,0 +1,90 @@
+\section{The Proof-Layer Lift and Its Witness-Layer Boundary}
+\label{sec:theorem}
+
+\subsection{The positive flagship}
+\label{sec:positive}
+
+\begin{theorem}[Sen impossibility lifts at the Proof layer]
+\label{thm:lift}
+For all natural numbers \(n,m\) with \(2 \leq n\) and \(4 \leq m\), for every social welfare function
+\(F : \mathtt{SWF}\ (\mathtt{Fin}\ n)\ (\mathtt{Fin}\ m)\),
+if \(\mathtt{UN}\ F\) and \(\mathtt{MINLIB}\ F\) hold, then \(\neg\, \mathtt{SocialAcyclic}\ F\).
+\end{theorem}
+
+\begin{remark}[Statement form in Lean]
+\label{rem:lean-form}
+In Lean the theorem is stated as
+\begin{quote}
+\code{theorem sen\_impossibility\_lifts \char`\{n m : \texttt{N}\char`\}\ (\_hn : 2 \leq n)\ (\_hm : 4 \leq m)\ (F : SWF (Fin n) (Fin m))\ (hUN : UN F)\ (hMINLIB : MINLIB F) : \char`\~SocialAcyclic F}
+\end{quote}
+The two hypotheses \(\mathtt{\_hn}\) and \(\mathtt{\_hm}\) are deliberately underscore-prefixed.
+\(\mathtt{\_hn}\) is not consumed: \(\mathtt{MINLIB}\) already supplies two distinct voters in \(\mathtt{Fin\ n}\), so \(\mathtt{Fin\ n}\) is automatically of cardinality at least two.
+\(\mathtt{\_hm}\) is not consumed either; the next remark explains why this is structural, not accidental.
+\end{remark}
+
+\begin{remark}[Why \(\mathtt{\_hm}\) is not consumed]
+\label{rem:hm-unused}
+\textbf{We do not claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).}
+The hypothesis \(\mathtt{\_hm}\) is not consumed because the overlap case analysis avoids requiring a universal four-point completion in \(\mathtt{Fin\ m}\).
+\(\mathtt{MINLIB}\) supplies two distinct voters \(i, j\) and two decisive alternative pairs \((x,y)\) and \((z,w)\) with \(x \neq y\) and \(z \neq w\), but \emph{does not} guarantee that \(\{x,y,z,w\}\) are four distinct alternatives.
+The proof case-splits on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\), and each case is settled by alternatives already supplied by \(\mathtt{MINLIB}\):
+\begin{itemize}[leftmargin=1.5em]
+\item \textbf{Two-overlap} (\(\{z,w\} \subseteq \{x,y\}\)): combined with \(z \neq w\), this forces \(\{z,w\} = \{x,y\}\) as ordered pairs (up to direction); \(\mathtt{Decisive.symm}\) gives both directions; the resulting two strict edges on the same pair yield an asymmetry contradiction at \(\mathtt{strictPart}\ (F\ p)\).
+\item \textbf{One-overlap}: exactly one of \(z,w\) coincides with one of \(x,y\); together with the third and the off-overlap fourth alternative, \(\mathtt{UN}\) and the two decisive pairs assemble a length-3 cycle in \(\mathtt{strictPart}\ (F\ p)\), contradicting \(\mathtt{SocialAcyclic}\ F\) via \(\mathtt{cycle3\_implies\_not\_acyclic}\).
+\item \textbf{Disjoint} (\(\{x,y\} \cap \{z,w\} = \emptyset\)): the four alternatives \(x,y,z,w\) are pairwise distinct and assemble a length-4 cycle in \(\mathtt{strictPart}\ (F\ p)\), contradicting \(\mathtt{SocialAcyclic}\ F\) via \(\mathtt{cycle4\_implies\_not\_acyclic}\).
+\end{itemize}
+In every case the cycle (or contradiction) is assembled from alternatives that \(\mathtt{MINLIB}\) already exposed, so no fresh alternative needs to be drawn from \(\mathtt{Fin\ m}\) using \(\mathtt{\_hm}\).
+The cardinality lemmas \(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\) remain in the lifting module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).
+The hypothesis \(\mathtt{\_hm}\) is retained in the statement only for symmetry with Sen's original formulation and to document the lift scope.
+\end{remark}
+
+\paragraph{Proof sketch.}
+The Lean proof is structured as five \texttt{private} sub-lemmas, one per overlap branch (the disjoint case is one branch; two one-overlap orientations are two branches; the two-overlap case is one branch; a fifth branch covers \(\mathtt{Decisive.symm}\) reorientation).
+Together with the helper \(\mathtt{liftProfile}\) (lifting the base-case two-voter profile onto the two distinct decisive voters of \(\mathtt{Fin\ n}\)) and the ranking-completion helpers \(\mathtt{rankingOfPrefix}\) and \(\mathtt{ranking4Prefix}\), the five sub-lemmas reconstruct the Sen24 base-case case-split polymorphically.
+The top-level theorem then dispatches to the appropriate sub-lemma based on the membership tests \(z \in \{x,y\}\) and \(w \in \{x,y\}\).
+The full proof is checked by the Lean~4 kernel.
+
+\begin{remark}[What this is, what this is not]
+\label{rem:lift-scope}
+Theorem~\ref{thm:lift} is a Lean Proof-layer statement.
+It says exactly that Sen's original semantic argument extends, polymorphically and at the kernel-checked level, to all finite cases with at least two voters and at least four alternatives.
+It does \emph{not} say that the sen24 CNF encoding extends to such cases; it does \emph{not} say that any short-cycle CNF approximation lifts; and it does \emph{not} say that any repair presentation extends canonically.
+These are separate questions, addressed in Section~\ref{sec:negative} and deferred to a companion paper (in preparation) respectively.
+\end{remark}
+
+\subsection{The scope wall between Proof layer and Witness/Audit layer}
+\label{sec:negative}
+
+The positive lift establishes proof-level transfer to full acyclicity.
+It does not establish witness-level transfer.
+The CNF Witness/Audit layer in this repository uses the short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) as a stand-in for full acyclicity.
+At the Sen24 base case \((n,m)=(2,4)\), the equivalence between \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) and full acyclicity on the social strict relation was audited exhaustively by \code{scripts/check\_acyclicity\_short\_cycles.py}.
+At larger cases that audited equivalence does not transfer automatically: \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) still permits length-5 cycles at \(m = 5\), as documented in \code{docs/no\_cycle\_interpretation\_note.md}.
+Accordingly, evidence using these levers should be interpreted only within the local-rationality family they induce, not as evidence about full acyclicity at the family scale.
+
+\begin{proposition}[Scope wall]
+\label{prop:scope-wall}
+The Lean Proof-layer theorem named \code{sen_impossibility_lifts} does not automatically upgrade the sen24 CNF atlas into a family-level CNF certificate for full \code{SocialAcyclic}.
+The CNF Witness/Audit layer at \(m \geq 5\) remains scoped to the audited short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\), whose equivalence to full acyclicity was audited only at \(m = 4\).
+A family-level CNF certificate for full acyclicity requires a stronger rationality encoding to be introduced and audited separately at the Witness/Audit layer.
+\end{proposition}
+
+\paragraph{Witness for the $m=5$ gap (prose).}
+The boundary in Proposition~\ref{prop:scope-wall} is exhibited concretely by an asymmetric directed $5$-cycle.
+Take five distinct alternatives $a_0,a_1,a_2,a_3,a_4 \in \mathtt{Fin\ 5}$ and let the social strict preference relation contain exactly the five oriented edges
+\(a_0 \succ a_1,\; a_1 \succ a_2,\; a_2 \succ a_3,\; a_3 \succ a_4,\; a_4 \succ a_0\),
+with no other strict edges (in particular, no chord and no reverse edge).
+This relation is asymmetric by construction, and direct inspection of every $3$-subset and every $4$-subset of $\{a_0,\dots,a_4\}$ shows that no length-3 cycle and no length-4 cycle is present, so it satisfies the short-cycle conjunction \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\).
+The relation is nonetheless not acyclic, since the length-5 oriented cycle on $a_0,a_1,a_2,a_3,a_4$ violates \(\mathtt{SocialAcyclic}\).
+Hence at \(m = 5\) the short-cycle conjunction does not entail full acyclicity, and a CNF artifact whose only rationality clauses are \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) cannot, by itself, certify full acyclicity at the family scale.
+This is a prose witness recorded in the manuscript; we do not formalise it as a Lean theorem here, in line with the audit-policy status of Proposition~\ref{prop:scope-wall}.
+
+\paragraph{Status.}
+Proposition~\ref{prop:scope-wall} is a guarantee-boundary statement and an audit-policy statement, not a Lean theorem.
+It is recorded in \code{docs/m2\_scope\_wall.md} and bound to the existing finite audit in \code{scripts/check\_acyclicity\_short\_cycles.py}.
+Promoting it to a Lean theorem would require formalising the short-cycle encoding as a Lean-side relation and proving the non-equivalence at \(m = 5\); we leave that to future work, in line with the precedent from the Explanation-Contract paper that finite-witness legitimisation is text-first when the formalisation cost is asymmetric to the content.
+
+\paragraph{Reading the boundary.}
+The boundary recorded here is between layers, not between theorem families.
+It is incorrect to read this paper as saying ``Sen's theorem holds in the local-rationality family but not in full acyclicity'': the kernel-checked positive lift already concludes at full \(\mathtt{SocialAcyclic}\) at the Proof layer.
+The point of the scope wall is that the \emph{CNF artifact} that backed the Sen24 evidence does not by itself become a CNF artifact for the larger case; a separately audited encoding contract is required at the Witness/Audit layer.

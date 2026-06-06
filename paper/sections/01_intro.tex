@@ -1,16 +1,38 @@
 \section{Introduction}
 
-Classical impossibility theorems explain why certain axiom sets cannot hold simultaneously, but engineering workflows also need the complementary question: \emph{which minimal lever changes restore feasibility}.
-This paper frames that question as an auditable systems problem.
+Solver-supported reasoning is becoming a practical tool for institutional design, impossibility exploration, and rule synthesis in computational social choice. But once a pipeline depends on an external solver, a familiar problem appears: when an output is implausible, one often cannot tell whether the fault lies in the semantic specification, the CNF encoding, the proof log, the reported witness, or the surrounding metadata. These failure modes are typically confounded under a single opaque verdict, namely that ``the solver said so.'' For a reviewer, implementer, or downstream user, this is not just a philosophical concern; it blocks debugging, narrows trust, and makes disagreement between semantic and artifact-level reasoning hard to localize. What is missing is diagnosability: a way to determine which layer is responsible when solver-supported results and mathematical expectations do not line up.
 
-Our central thesis is practical: a small, proof-carrying atlas can already provide publishable insight if it couples (i) strict reproducibility, (ii) explicit safety assumptions, and (iii) boundary explanation artifacts.
-We operationalize this thesis in sen24 with five claim blocks (C1--C5) mapped to concrete commands and artifacts in \texttt{docs/paper\_claims\_map.md}.
+This paper proposes such diagnosability through an auditable possibility atlas equipped with an explicit Proof/Audit/Witness split, while keeping the remaining end-to-end semantic encoding correctness as an explicit assumption boundary. In our setting, Proof means Lean-kernel checking of the committed semantic theorem and committed UNSAT references via LRAT replay; Audit means mechanical checking of DIMACS/manifest conformance, clause-family accounting, and recorded hashes; Witness means independent validation that a reported SAT model satisfies the concrete CNF instance it is claimed to solve. We develop this contract only for the narrow sen24 setting, used as a minimal complete worked example: a fixed finite case in which the trust boundary can be made explicit end to end without claiming broader theorem generality. The paper does not present a new social-choice theorem or a new SAT method. Its contribution is a reproducible diagnostic workflow that makes frontier results, failures, and supporting artifacts separable, inspectable, and auditable.
 
-Contributions are systems-oriented:
+What is new here is not SAT in social choice.
+The closest prior line is SAT-based computational social choice, including impossibility proving by Tang and Lin \citep{tanglin2009computer}, automated exploration and proof discovery in the Geist--Endriss line \citep{geist2011automated}, and later SAT-based synthesis work by Brandt and Geist \citep{brandtgeist2016strategyproof}.
+This paper does not claim a new social-choice theorem or a new SAT proof method.
+Its contribution is to package one fixed sen24 atlas workflow as an explicit auditable contract: what is proved in Lean, what is only audited against manifests and side conditions, what remains assumed, and which artifacts a reviewer can replay.
+
+At a higher level, the paper makes three concrete contributions:
 \begin{itemize}[leftmargin=*]
-  \item A Spec/Encode/Solve/Check architecture that keeps solver heuristics separate from trusted checking.
-  \item Frontier identification with MUS/MCS for UNSAT explanations.
-  \item Proof-carrying UNSAT workflow (CNF+LRAT+Lean).
-  \item SAT Gallery extraction with solver-independent witness validation.
-  \item Lightweight but strict reproducibility gates in CI.
+  \item We formalize a diagnosable trust contract separating Proof, Audit, and Witness obligations, while surfacing the remaining end-to-end encoding correctness as an explicit Assumption boundary.
+  \item We instantiate the contract for sen24, including Lean kernel checking for a committed UNSAT reference and witness-validated SAT rule artifacts.
+  \item We package replay commands, hashes, and artifacts as an auditable possibility atlas enabling detection of CNF drift, proof tampering, and witness misreporting.
 \end{itemize}
+
+The paper-level contribution ladder follows the official claims map exactly:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{C1}: for sen24, axiom-lever enumeration yields a reproducible SAT/UNSAT frontier;
+  \item \textbf{C2}: UNSAT boundary cases are explainable via one MUS and one small MCS candidate;
+  \item \textbf{C3}: a committed UNSAT reference can be attached as LRAT and checked in Lean;
+  \item \textbf{C4}: symmetry reduction and monotone pruning are guarded by explicit assumptions and runtime validators;
+  \item \textbf{C5}: relaxed SAT cases can be filtered into a deterministic, auditable gallery with explicit SAT witness validation;
+  \item \textbf{C6}: repair enumeration is checked against an independent optimum baseline by triangulation.
+\end{itemize}
+
+The stance of the paper is deliberately narrow.
+We work only at sen24, we treat auditability as the primary systems requirement, and we do not promote small-scope evidence into a claim about arbitrary $n,m$ or a fully mechanized encoding-correctness theorem for the Python generator.
+The goal is to show that a killable instance can still support a meaningful auditable atlas with committed proof-carrying UNSAT references and validated SAT witnesses when the trusted computing base and guarantee boundary are made explicit.
+
+Section~3 defines the trust model and the proof/audit/assumption split.
+Section~4 describes the sen24 encoding and the paper-facing artifact contract.
+Section~5 reports the claim-by-claim evidence accounting and re-verification status for this revision.
+Section~6 presents the sen24 case study, including frontier artifacts, one MUS plus one small MCS candidate, validated SAT rule cards, and the stronger C6 repair triangulation stage.
+Section~7 positions the paper against prior COMSOC-SAT and certificate-checking work.
+Section~8 closes with the scope limits that keep the paper honest.

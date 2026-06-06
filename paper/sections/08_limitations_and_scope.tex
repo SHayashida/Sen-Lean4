@@ -1,13 +1,20 @@
 \section{Limitations and Scope}
 
-This paper intentionally targets a killable instance (sen24).
-We do not claim direct scalability to arbitrary $n,m$.
+This paper intentionally targets a killable instance (sen24: two voters, four alternatives).
+We do not claim direct scalability to arbitrary $n,m$, and we do not claim an end-to-end mechanized encoding-correctness proof for the Python generator.
+
+The semantic scope is also fixed:
+\begin{itemize}[leftmargin=*]
+  \item the domain is sen24 only;
+  \item Universal Domain is represented by linear orders on four alternatives;
+  \item the \code{NO_CYCLE3}/\code{NO_CYCLE4} encoding is justified only through the sen24 finite Python check under asymmetry, not as a general replacement for \code{Acyclic} and not as a Lean proof of encoding correctness.
+\end{itemize}
 
 Safe acceleration features (monotone pruning and symmetry reduction) are only valid under explicit assumptions and runtime guards.
 These assumptions are specified in:
 \begin{itemize}[leftmargin=*]
-  \item \texttt{docs/assumptions\_monotone\_pruning.md}
-  \item \texttt{docs/safety\_symmetry\_reduction.md}
+  \item \code{docs/assumptions_monotone_pruning.md}
+  \item \code{docs/safety_symmetry_reduction.md}
 \end{itemize}
 
-Future work should expand scale while preserving proof-carrying checks and schema-level reproducibility contracts.
+Future work should expand scale only if the same proof/audit/assumption split remains explicit.

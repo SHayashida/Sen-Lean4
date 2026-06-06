@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage[numbers]{natbib}
+
+\DeclareRobustCommand{\code}[1]{\path{#1}}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{The Sen Liberal Paradox at Family Scale:\\
+A Kernel-Checked Proof-Layer Lift, Its Witness/Audit Boundary,\\
+and a Transfer Contract}
+\author{Shunya Hayashida\\
+Department of Liberal Arts, Faculty of Liberal Arts\\
+The Open University of Japan\\
+\href{mailto:1720067169@campus.ouj.ac.jp}{1720067169@campus.ouj.ac.jp}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{sections/00_abstract}
+\input{sections/01_intro}
+\input{sections/02_scope_and_shared_infrastructure}
+\input{sections/03_methods_and_artifacts}
+\input{sections/03b_contributions}
+\input{sections/04_results_plan}
+\input{sections/05_related_work_and_positioning}
+\input{sections/06_next_steps}
+
+\appendix
+\input{sections/appendix_repro}
+
+\bibliographystyle{plainnat}
+\bibliography{bib/references}
+
+\end{document}

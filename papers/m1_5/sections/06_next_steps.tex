@@ -1,0 +1,37 @@
+\section{Limitations, Open Questions \& Conclusion}
+\label{sec:conclusion}
+
+\paragraph{Base-case limitation.}
+The theorem is an existence result in the Sen24 base case only.
+It does not claim that raw repair explanation is non-canonical for every encoding comparison, every theorem family, or every finite impossibility witness.
+What is established is that the phenomenon already occurs in a tightly controlled setting where the comparison notion is as strong as we can make it: exact clause-multiset equivalence up to variable renaming.
+
+\paragraph{Local-rationality limitation.}
+All arguments in this paper remain inside the local-rationality setting induced by \code{no\_cycle3} and \code{no\_cycle4}.
+Those levers are local forbidden-pattern approximations, not full \code{SocialAcyclic}.
+Accordingly, the paper makes no full-acyclicity claim and no full Sen-family or Arrow-family generality claim.
+
+\paragraph{What remains open.}
+The main open problem is the repair-canonicalization layer itself.
+This paper distinguishes raw repair explanation from grouped repair explanation, but it does not characterize when grouped repair explanations are canonical.
+Future work may identify sufficient conditions on abstraction contracts under which grouped repair explanation becomes invariant.
+That is an open question, not a theorem claimed here.
+
+\paragraph{Repair geometry.}
+The next conceptual step is to study the geometry induced by abstraction contracts:
+which contracts preserve diagnosability, which collapse substantively different repairs, and which align with the social-choice semantics that an audit report wants to foreground.
+That direction should build on the present distinction rather than erase it.
+
+\paragraph{Conclusion.}
+The impossibility of a Paretian liberal has been known for over half a century \citep{sen1970}.
+What is new here is not the computational study of that boundary as such, but the identification of a further layer of non-canonicity once such boundaries are consumed through lever-structured encodings and turned into repair recommendations.
+Clause-multiset equivalence ($\equiv_{\mathsf{CM}}$) is a very strong comparison notion: two encodings that satisfy it are identical at the propositional level up to variable renaming.
+Yet even $\equiv_{\mathsf{CM}}$ does not force canonical raw repair explanation.
+The base-case witness studied here shows that clause-equivalent bundled and split encodings can agree on the existence of an impossibility boundary while disagreeing on the raw lever-level minimal repair family.
+
+The significance of the present result is not merely that bundled and split encodings yield different repair families.
+Even under $\equiv_{\mathsf{CM}}$, a bundled repair presentation can mask finer person-specific minimal repairs that become visible only at a more granular leverization.
+A trustworthy finite impossibility witness therefore does not, by itself, determine the granularity at which repairs should be reported.
+
+In audit-oriented institutional design---including eventual AI-assisted settings where a solver output is consumed as an actionable recommendation---leaving that granularity choice implicit creates a concrete risk: a reviewer or downstream system may overlook finer minimal repairs and instead recommend a coarser, over-aggregated repair as if it were the natural one.
+An abstraction contract is therefore not optional gloss but part of the reporting specification itself.

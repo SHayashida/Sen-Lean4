@@ -42,9 +42,9 @@ python3 scripts/run_atlas.py --outdir /tmp/atlas_c2 --jobs 4 --prune none && pyt
 
 ---
 
-## C3. UNSAT can be proof-carrying and kernel-checked
+## C3. A committed UNSAT reference can be proof-carrying and kernel-checked
 
-- **Claim**: UNSAT evidence can be attached as LRAT and checked in Lean.
+- **Claim**: A committed UNSAT reference can be attached as LRAT and checked in Lean.
 - **Evidence (fields/files)**:
   - committed reference: `Certificates/atlas/case_11111/{sen24.cnf,proof.lrat}`
   - Lean target: `SocialChoiceAtlas.Sen.Atlas.Case11111`

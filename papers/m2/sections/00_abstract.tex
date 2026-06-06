@@ -1,0 +1,11 @@
+\begin{abstract}
+Finite impossibility witnesses in social choice theory are increasingly delivered as proof-carrying artifacts: a kernel-checked Lean theorem at a base case, plus a CNF certificate audited at the same base case.
+When such a witness is generalised to a case family, ``the witness transferred'' is not one claim but two---a Proof-layer transfer of the semantic argument, and a Witness/Audit-layer transfer of the CNF encoding that backed the original certificate---and the two come apart.
+We demonstrate this layer split for Sen's Liberal Paradox by pairing a kernel-checked positive answer at the Lean Proof layer with an explicit scope wall against the CNF Witness/Audit layer.
+Concretely, we formalise and verify
+\(\mathtt{sen\_impossibility\_lifts}\):
+for any finite case with at least two voters and at least four alternatives, any social welfare function satisfying semantic unanimity (\(\mathtt{UN}\)) and minimal liberalism (\(\mathtt{MINLIB}\)) fails \(\mathtt{SocialAcyclic}\).
+The proof ports the Sen24 base-case case-split (two-overlap, one-overlap, disjoint) at the semantic axiom level; its overlap case analysis avoids any universal four-point completion in \(\mathtt{Fin\ m}\), so the hypothesis \(4 \leq m\) is not consumed.
+On the negative side, the Lean lift does not automatically upgrade the sen24 CNF certificate into a family-level one: the Witness/Audit layer certifies only the sen24-audited short-cycle encoding \(\mathtt{no\_cycle3 \wedge no\_cycle4}\), whose equivalence to full acyclicity was audited only at four alternatives, and for \(m \geq 5\) that equivalence does not transfer automatically.
+The contribution is therefore a Transfer Contract: proof-level transfer is kernel-checked and reaches full acyclicity, while witness-level transfer requires a separately audited encoding contract.
+\end{abstract}

@@ -47,5 +47,8 @@ python3 "$ROOT_DIR/scripts/check_sen24_cnf.py" \
   --strict-duplicates \
   --fail-on-tautology
 
+python3 "$ROOT_DIR/scripts/check_acyclicity_short_cycles.py" \
+  --json-out "$TMP_DIR/acyclicity_short_cycles.json"
+
 cd "$ROOT_DIR"
 lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF

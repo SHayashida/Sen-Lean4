@@ -1,13 +1,40 @@
 # SocialChoiceAtlas: Sen Base Case (Lean 4 + LRAT)
 
-This repository contains a formalized base case of Sen's impossibility theorem
+This repository contains a fixed sen24 case study of Sen's impossibility theorem
 for `n = 2` voters and `m = 4` alternatives, with:
 
-- a pure Lean proof (`Theorem.lean`), and
-- an independent SAT certificate pipeline (DIMACS CNF + LRAT) checked in Lean.
+- a Lean theorem development for the sen24 semantic statement (`Theorem.lean`), and
+- an independent SAT certificate pipeline (DIMACS CNF + LRAT) with committed reference artifacts checked in Lean.
 
-For the exact claim boundary ("what is guaranteed / not guaranteed"),
-see `ZENODO_CLAIMS.md`.
+For the exact public claim boundary, use:
+- `docs/paper_claims_map.md`
+- `paper/sections/appendix_repro.tex`
+
+These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
+
+## Preprint submission policy (jxiv)
+
+- Canonical repository URL: https://github.com/SHayashida/Sen-Lean4
+- Preprint PDFs are **not** pushed to this repository.
+- The repository tracks source and reproducibility assets (Lean/spec/scripts/docs), and each preprint submission should be tied to a specific commit hash or tag.
+
+Recommended practice for each submission:
+
+1. Build locally (`make -C paper pdf`).
+2. Record the commit hash used for the uploaded PDF.
+3. Upload only the PDF to jxiv; keep reproducibility sources in this repository.
+
+## Multi-paper workspace policy
+
+This repository uses one shared code/data trunk and separate in-repo manuscript workspaces.
+
+- `paper/` is the protected M1 manuscript workspace.
+- `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
+- Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.
+- Use short-lived branches for implementation work and manuscript edits.
+- Freeze submissions with tags and commit hashes rather than long-lived paper branches.
+
+For the repository-level policy, see `docs/paper_workspace_strategy.md` and `papers/README.md`.
 
 ## Zenodo-ready layout
 
@@ -72,7 +99,7 @@ lake build SocialChoiceAtlas.Sen.BaseCase24.SATSenCNF
 - Usage and artifact format: `docs/phase2_atlas.md`
 - CI smoke: `./scripts/ci_phase2_smoke.sh`
 - MUS/MCS enrichment: `scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1`
-- Week3 proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
+- Week3 committed proof-carrying Lean check: `lake build SocialChoiceAtlas.Sen.Atlas.Case11111`
 
 ## Safety assumptions
 
@@ -88,12 +115,14 @@ This file is git-ignored by default and can extend local workflow notes without 
 ## Paper/Docs map
 
 For paper-facing claim discipline and reproducibility narrative, use:
-`docs/related_work_notes.md` (positioning vs ATMS/MAXSAT/OMT/Constraint Hierarchies),
-`docs/paper_claims_map.md` (claim→evidence→commands), and
-`docs/reproducibility_appendix.md` (artifact policy, `atlas_schema_version`, solver metadata policy).
+`docs/paper_claims_map.md` and `paper/sections/appendix_repro.tex` as the official claim boundary,
+`docs/related_work_notes.md` for positioning,
+and `docs/reproducibility_appendix.md` for artifact policy, `atlas_schema_version`, and solver metadata policy.
 For evaluation harness metrics and figure-generation commands, see `docs/evaluation_plan.md`.
 For SAT-case extraction and witness validation, see `docs/sat_gallery.md`.
 For the LaTeX paper workspace and frontier figure workflow, see `paper/README.md`.
+For the multi-paper repository policy and the M1.5 scaffold, see `docs/paper_workspace_strategy.md`,
+`papers/README.md`, and `papers/m1_5/README.md`.
 
 ## References
 

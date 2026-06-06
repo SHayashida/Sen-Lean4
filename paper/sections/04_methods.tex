@@ -2,15 +2,24 @@
 
 \subsection{Atlas enumeration}
 We enumerate axiom subsets over a fixed universe and solve each case to obtain SAT/UNSAT status.
-Outputs include per-case CNF/manifest/summary and top-level \texttt{atlas.json}.
+Outputs include per-case CNF/manifest/summary and top-level \code{atlas.json}.
 
 \subsection{Boundary extraction}
 For UNSAT solved cases, we run a deletion-based MUS procedure and a small MCS search (single removals first, then bounded pairs).
-This provides minimal contradiction and repair evidence at low implementation risk.
+This is intentionally the narrow C2 claim: one MUS and one small MCS candidate are enough to explain the boundary case without claiming full repair enumeration.
+
+\subsection{Repair enumeration and triangulation}
+When we want the stronger C6 evidence, we run a separate post-processing stage with \code{scripts/enumerate_repairs.py} and \code{scripts/triangulate_repairs.py}.
+The paper keeps this distinct from C2 so that repair \emph{enumeration} is not confused with boundary \emph{explanation}.
 
 \subsection{Proof-carrying UNSAT policy}
 For canonical UNSAT references, we retain CNF+LRAT and verify in Lean.
 For atlas runs, proof metadata is recorded with hash-based linkage and replay commands.
+
+\subsection{sen24 acyclicity boundary}
+The CNF does not encode Lean's \code{Acyclic} predicate directly. Instead, for sen24 it forbids directed 3-cycles and 4-cycles.
+We therefore add one explicit finite check to the method: \code{scripts/check_acyclicity_short_cycles.py} exhaustively enumerates the four-alternative relation space and verifies that, under asymmetry, this short-cycle encoding is equivalent to acyclicity.
+This is a sen24-specific audited fact, not a scalability claim.
 
 \subsection{SAT Gallery with witness validation}
 SAT cases are filtered by lightweight non-trivial heuristics and ranked deterministically.

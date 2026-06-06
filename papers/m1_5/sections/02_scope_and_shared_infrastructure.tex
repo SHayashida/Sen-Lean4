@@ -1,0 +1,36 @@
+\section{Scope \& Setup}
+\label{sec:scope}
+
+The empirical claims in this paper are grounded in a single base-case artifact bundle recorded at
+\code{results/20260401/candidate\_b\_minlib\_granularity/}.
+No new solver experiments are conducted; all supporting data are drawn from existing artifacts.
+
+\paragraph{Base-case scope.}
+All theorem statements and empirical claims are restricted to the Sen24 base case \((n,m)=(2,4)\).
+The paper does not use neighboring-case evidence as part of the main theorem.
+Neighboring-case comparisons are discussed briefly only to motivate why the base-case encoding-sensitivity question is the right locus of study.
+
+\paragraph{Local-rationality scope.}
+The levers \code{no\_cycle3} and \code{no\_cycle4} are treated throughout as local forbidden-pattern approximations.
+They are not presented as full \code{SocialAcyclic}, and nothing in this paper should be read as a full-acyclicity or full-Sen-family claim.
+This scope restriction is part of the theorem statement's intended meaning, not merely a footnote.
+
+\paragraph{Lever notation.}
+We write \(\Lambda\) for a finite lever family and \(S \subseteq \Lambda\) for an active lever set.
+In the bundled witness family, the relevant levers are \code{asymm}, \code{un}, \code{minlib}, \code{no\_cycle3}, and \code{no\_cycle4}.
+In the split witness family, \code{minlib} is replaced by \code{decisive\_voter0} and \code{decisive\_voter1}.
+
+\paragraph{CNF notation.}
+For a lever-structured encoding map \(\varphi\), the symbol \(\varphi(S)\) denotes the CNF instance produced from the active lever set \(S\).
+We write \(\mathsf{SAT}\) and \(\mathsf{UNSAT}\) for the satisfiability status of that instance.
+When \(R \subseteq S\), the expression \(S \setminus R\) denotes removal of the levers in \(R\) before re-encoding.
+
+\paragraph{Repair notation.}
+The object of interest is not a clause-level MCS projection.
+It is a lever-level repair family associated with an encoded UNSAT instance.
+This paper calls that object the raw repair explanation.
+Grouped repair explanation is a separate presentation layer that is discussed only after the raw object has been fixed.
+
+\paragraph{Artifact infrastructure.}
+The paper uses an existing encoding and auditing infrastructure for artifact generation.
+The conceptual separation studied here---between finite witness legitimization and repair presentation canonicality---mirrors the organizational separation: the underlying witness infrastructure may be shared across encodings, while the repair presentation layer requires its own explicit contract.

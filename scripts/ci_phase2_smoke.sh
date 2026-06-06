@@ -12,13 +12,19 @@ REPAIRS_OUT="$TMP_DIR/atlas_repairs"
 HASSE_OUT="$TMP_DIR/hasse_frontier"
 TRI_OUT="$TMP_DIR/triangulation"
 EVAL_OUT="$TMP_DIR/eval_smoke"
+BUNDLE_OUT="$TMP_DIR/evidence_bundle"
+BUNDLE_OUT_2="$TMP_DIR/evidence_bundle_2"
+PAPER_ASSETS_OUT="$TMP_DIR/paper_assets"
+PAPER_ASSETS_OUT_M15="$TMP_DIR/papers_m1_5_assets"
 
 test -f "$ROOT_DIR/docs/related_work_notes.md"
 test -f "$ROOT_DIR/docs/paper_claims_map.md"
+test -f "$ROOT_DIR/docs/paper_artifact_contract.md"
 test -f "$ROOT_DIR/docs/reproducibility_appendix.md"
 test -f "$ROOT_DIR/docs/public_repo_security.md"
 test -f "$ROOT_DIR/docs/evaluation_plan.md"
 test -f "$ROOT_DIR/docs/sat_gallery.md"
+test -f "$ROOT_DIR/docs/reviewer_quickstart.md"
 test -f "$ROOT_DIR/paper/main.tex"
 test -f "$ROOT_DIR/paper/README.md"
 test -f "$ROOT_DIR/paper/sections/00_abstract.tex"
@@ -32,6 +38,15 @@ test -f "$ROOT_DIR/paper/sections/07_related_work.tex"
 test -f "$ROOT_DIR/paper/sections/08_limitations_and_scope.tex"
 test -f "$ROOT_DIR/paper/sections/09_conclusion.tex"
 test -f "$ROOT_DIR/paper/sections/appendix_repro.tex"
+test -f "$ROOT_DIR/docs/paper_workspace_strategy.md"
+test -f "$ROOT_DIR/papers/README.md"
+test -f "$ROOT_DIR/papers/m1_5/README.md"
+test -f "$ROOT_DIR/papers/m1_5/CLAIM_BOUNDARY.md"
+test -f "$ROOT_DIR/papers/m1_5/REPRODUCIBILITY.md"
+test -f "$ROOT_DIR/papers/m1_5/main.tex"
+test -f "$ROOT_DIR/papers/m1_5/Makefile"
+test -f "$ROOT_DIR/papers/m1_5/sections/00_abstract.tex"
+test -f "$ROOT_DIR/papers/m1_5/sections/appendix_repro.tex"
 
 # doc gate strategy: stable heading/label anchors (avoid brittle prose-phrase matching)
 grep -q '^## C1\.' "$ROOT_DIR/docs/paper_claims_map.md"
@@ -60,16 +75,28 @@ grep -Fq '## Reproducibility' "$ROOT_DIR/docs/evaluation_plan.md"
 grep -Fq '## Motivation' "$ROOT_DIR/docs/sat_gallery.md"
 grep -Fq '## Non-trivial heuristics' "$ROOT_DIR/docs/sat_gallery.md"
 grep -Fq '## Reproduction commands' "$ROOT_DIR/docs/sat_gallery.md"
+grep -Fq '## 10-minute path (tiny evidence bundle)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## 30-minute path (full 32-case atlas bundle)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## Claims mapping (C1-C6)' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq '## What to verify' "$ROOT_DIR/docs/reviewer_quickstart.md"
+grep -Fq 'scripts/maxsat_baseline.py' "$ROOT_DIR/docs/reviewer_quickstart.md"
 
 grep -Fq '## Build' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Reproduce figures' "$ROOT_DIR/paper/README.md"
 grep -Fq '## Public repo safety' "$ROOT_DIR/paper/README.md"
+grep -Fq '## Branch model' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Manuscript workspaces' "$ROOT_DIR/docs/paper_workspace_strategy.md"
+grep -Fq '## Build' "$ROOT_DIR/papers/m1_5/README.md"
+grep -Fq '## Paper-specific contract' "$ROOT_DIR/papers/m1_5/README.md"
 
 python3 "$ROOT_DIR/scripts/plot_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/plot_hasse_frontier.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
 python3 "$ROOT_DIR/scripts/triangulate_repairs.py" --help >/dev/null
-python3 "$ROOT_DIR/scripts/enumerate_repairs.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/maxsat_baseline.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/gen_paper_tables.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" --help >/dev/null
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" --help >/dev/null
 
 # AGENTS public-safety gates
 if grep -nE '[ぁ-んァ-ヶ一-龯]' "$ROOT_DIR/AGENTS.md"; then
@@ -528,4 +555,157 @@ if re.search(r"[A-Za-z]:\\\\", gallery_text) or re.search(r"[A-Za-z]:\\\\", gall
     raise SystemExit("gallery output leaks Windows absolute path")
 
 print("gallery_ok", len(entries))
+PY
+
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" \
+  --mode tiny \
+  --outdir "$BUNDLE_OUT" \
+  --solver cadical \
+  --jobs 1 \
+  --symmetry none \
+  --prune none
+
+test -s "$BUNDLE_OUT/bundle.json"
+test -s "$BUNDLE_OUT/paper/figures/generated/frontier_matrix.png"
+test -s "$BUNDLE_OUT/paper/figures/generated/frontier_hasse.png"
+test -s "$BUNDLE_OUT/paper/tables/generated/repairs_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/gallery_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/triangulation_table.tex"
+test -s "$BUNDLE_OUT/paper/tables/generated/verification_stats_table.tex"
+test -s "$BUNDLE_OUT/atlas/maxsat_baseline.json"
+
+python3 - "$BUNDLE_OUT" <<'PY'
+import json
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+bundle = json.loads((root / "bundle.json").read_text())
+schema = bundle.get("bundle_schema_version")
+if not isinstance(schema, int) or schema < 1:
+    raise SystemExit("bundle_schema_version missing or invalid")
+
+artifacts = bundle.get("artifacts", {}).get("files", [])
+if not isinstance(artifacts, list) or not artifacts:
+    raise SystemExit("bundle artifacts list is missing/empty")
+for row in artifacts:
+    if not row.get("path") or not row.get("sha256"):
+        raise SystemExit("bundle artifact row missing path/sha256")
+
+gallery = json.loads((root / "atlas" / "gallery.json").read_text())
+entries = gallery.get("entries", [])
+if not isinstance(entries, list) or not entries:
+    raise SystemExit("bundle gallery must include at least one entry")
+if not any(bool(e.get("model_validated")) and bool(e.get("non_trivial")) for e in entries if isinstance(e, dict)):
+    raise SystemExit("bundle gallery has no validated non-trivial entries")
+
+maxsat = json.loads((root / "atlas" / "maxsat_baseline.json").read_text())
+if int(maxsat.get("schema_version", 0)) < 1:
+    raise SystemExit("maxsat_baseline schema_version missing or invalid")
+if int(maxsat.get("min_repair_size", 0)) < 1:
+    raise SystemExit("maxsat_baseline min_repair_size missing or invalid")
+if not isinstance(maxsat.get("one_repair_set"), list) or not maxsat.get("one_repair_set"):
+    raise SystemExit("maxsat_baseline one_repair_set missing or empty")
+
+rule_cards_md = sorted(root.glob("atlas/case_*/rule_card.md"))
+rule_cards_tex = sorted(root.glob("atlas/case_*/rule_card.tex"))
+if not rule_cards_md or not rule_cards_tex:
+    raise SystemExit("bundle is missing rule_card.md/.tex outputs")
+
+text_suffixes = {".json", ".md", ".tex", ".csv", ".dot"}
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in text_suffixes):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"bundle path leak '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"bundle path leak Windows absolute path in {path}")
+
+print("bundle_ok", len(artifacts))
+PY
+
+python3 "$ROOT_DIR/scripts/build_evidence_bundle.py" \
+  --mode tiny \
+  --outdir "$BUNDLE_OUT_2" \
+  --solver cadical \
+  --jobs 1 \
+  --symmetry none \
+  --prune none
+
+python3 - "$BUNDLE_OUT" "$BUNDLE_OUT_2" <<'PY'
+import hashlib
+import sys
+from pathlib import Path
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+b1 = Path(sys.argv[1]) / "bundle.json"
+b2 = Path(sys.argv[2]) / "bundle.json"
+h1 = sha256(b1)
+h2 = sha256(b2)
+if h1 != h2:
+    raise SystemExit(f"determinism failed: {h1} != {h2}")
+print("bundle_deterministic_ok", h1)
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT"
+
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_matrix.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.png"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_boundary.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.dot"
+test -s "$PAPER_ASSETS_OUT/tables/generated/repairs_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/gallery_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/triangulation_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/verification_stats_table.tex"
+test -s "$PAPER_ASSETS_OUT/tables/generated/selected_rule_card.tex"
+test -s "$PAPER_ASSETS_OUT/figures/generated/frontier_hasse.tex"
+
+python3 - "$PAPER_ASSETS_OUT" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+text_suffixes = {".tex", ".json", ".md", ".dot"}
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in text_suffixes):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_ok")
+PY
+
+python3 "$ROOT_DIR/scripts/render_paper_assets.py" \
+  --paper-id m1_5 \
+  --mode tiny \
+  --atlas-outdir "$BUNDLE_OUT/atlas" \
+  --outdir "$PAPER_ASSETS_OUT_M15"
+
+test -s "$PAPER_ASSETS_OUT_M15/figures/generated/frontier_matrix.png"
+test -s "$PAPER_ASSETS_OUT_M15/tables/generated/repairs_table.tex"
+
+python3 - "$PAPER_ASSETS_OUT_M15" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+if not (root / "figures" / "generated" / "frontier_matrix.png").exists():
+    raise SystemExit("missing M1.5 frontier matrix output")
+if not (root / "tables" / "generated" / "repairs_table.tex").exists():
+    raise SystemExit("missing M1.5 repairs table output")
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {".tex", ".dot", ".md", ".json"}):
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if "/Users/" in text:
+        raise SystemExit(f"m1_5 paper asset output leaks '/Users/' in {path}")
+    if re.search(r"[A-Za-z]:\\\\", text):
+        raise SystemExit(f"m1_5 paper asset output leaks Windows absolute path in {path}")
+print("paper_assets_m15_ok")
 PY

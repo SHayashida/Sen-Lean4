@@ -84,7 +84,7 @@ python3 scripts/mus_mcs.py --outdir results/<YYYYMMDD>/atlas_v1
 
 This updates `atlas.json` in-place and writes per-case `mus.json` / `mcs.json`.
 
-## Week3: proof-carrying + explainable outputs
+## Week3: committed proof-carrying + explainable outputs
 
 Generate atlas cases with UNSAT proof emission:
 
@@ -95,7 +95,7 @@ python3 scripts/run_atlas.py \
   --emit-proof unsat-only
 ```
 
-Verify the committed proof-carrying atlas case in Lean:
+Verify the committed proof-carrying reference case in Lean:
 
 ```bash
 lake build SocialChoiceAtlas.Sen.Atlas.Case11111
@@ -103,7 +103,7 @@ lake build SocialChoiceAtlas.Sen.Atlas.Case11111
 
 Storage policy:
 
-- `Certificates/atlas/` is reserved for one fixed committed proof-carrying case (`case_11111`) to keep CI deterministic.
+- `Certificates/atlas/` is reserved for one fixed committed proof-carrying reference case (`case_11111`) to keep CI deterministic.
 - Other atlas proofs should be generated under `results/...` or `/tmp`, tracked by hash (`summary.json.manifest.cnf_sha256`, `summary.json.proof.sha256`) and reproduce command (`summary.json.reproduce.command`).
 
 Create a human-readable SAT rule sketch for one SAT case:

@@ -1,6 +1,12 @@
 \section{Conclusion}
 
-We provide a practical template for proof-carrying possibility atlases in computational social choice.
-The sen24 study shows that small-scope exploration can still produce publishable systems evidence when artifacts are auditable, assumptions are explicit, and SAT/UNSAT outcomes are both explainable.
+We provide a small-scope auditable possibility atlas for computational social choice.
+In sen24, the main result is not a new impossibility theorem but a reproducible map of which axiom combinations are feasible or infeasible, together with evidence at explicitly separated trust levels.
+The frontier itself is recorded as replayable artifacts, local UNSAT explanation remains limited to one MUS plus one small MCS candidate, relaxed SAT cases are turned into validated rule examples, and stronger repair reasoning appears separately through full enumeration plus triangulation.
 
-The immediate next step is controlled expansion of the atlas while preserving the same trust and reproducibility guarantees.
+The sen24 case study also suggests a methodological lesson.
+For this kind of automated impossibility search, frontier discovery, local explanation, SAT witness validation, stronger repair analysis, and kernel-checked proof replay should not be collapsed into a single undifferentiated notion of ``verification.''
+They support different claims and belong to different parts of the trust boundary.
+Proposition~\ref{prop:sen24-contract} makes that split explicit: committed UNSAT reference artifacts are kernel-checked from LRAT, SAT examples are witness-validated against CNF, and the remaining encoder boundary is exposed as an audit contract rather than hidden inside solver trust.
+
+Any later expansion of the atlas should preserve the same trust and reproducibility discipline.

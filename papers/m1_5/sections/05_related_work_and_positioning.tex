@@ -1,0 +1,40 @@
+\section{Related Work \& Positioning}
+\label{sec:related}
+
+\paragraph{Diagnosis, MUS/MCS, and minimal repair.}
+This paper is close in spirit to diagnosis-oriented work that studies minimal conflict sets and minimal repairs, as well as assumption-based maintenance systems \citep{dekleer1986atms}.
+It is also adjacent to the MUS/MCS workflow used in the present base-case study.
+But the claim here is narrower and different.
+We do not present a new MUS/MCS algorithm, and we do not claim a full characterization theorem for repairs.
+Instead, we use an existing finite artifact bundle to isolate a representational fact:
+even when the encoded boundary is stable, raw lever-level repair explanation can remain non-canonical.
+
+\paragraph{SAT-based computational social choice.}
+The result is not a novelty claim about using SAT in social choice.
+That line is already well established, including computer-aided impossibility proofs and automated theorem search \citep{tanglin2009computer,geist2011automated}, as well as SAT-based synthesis of social choice functions \citep{brandtgeist2016strategyproof}.
+Our point is orthogonal.
+The present base-case witness uses SAT-era infrastructure only as the means by which a finite, auditable comparison is produced.
+The paper's claim is about repair explanation canonicality under clause-equivalent encodings, not about SAT as a method.
+
+\paragraph{Formal verification and certified SAT checking.}
+The trust model behind the finite artifact bundle used in this paper rests on a kernel-checked proof assistant \citep{moura2021lean4} for the semantic side and on certified RAT/DRAT proof checking \citep{cruzfilipe2017lrat,wetzler2014drat} for the CNF witness side.
+Mechanized formalizations of social-choice theorems in proof assistants are an established line in their own right \citep{nipkow2009social}.
+This paper does not propose a new prover, a new clausal-proof format, or a new mechanized social-choice theorem.
+The point of recording this background here is that the abstraction-contract claim about non-canonical raw repair presentation is made \emph{on top of} an already-auditable finite witness, not as a substitute for kernel-checked or certificate-checked infrastructure.
+
+\paragraph{Transfer from finite witnesses.}
+The Geist--Endriss line provides a positive example of finite-to-family transfer under suitable syntactic discipline, while Grandi and Endriss identify settings where such transfer can fail \citep{geist2011automated,grandiendriss2013}.
+The present paper does not attempt to resolve that literature.
+It takes finite-witness legitimization as background and asks what remains open even after such legitimization succeeds in the base-case setting: specifically, whether the witness also determines a canonical repair presentation.
+
+\paragraph{Position relative to the proof--audit--witness separation program.}
+Recent work on trustworthy finite impossibility evidence has focused on separating proof objects, artifact audits, and semantic assumptions \citep{geist2011automated}.
+The present paper addresses the next layer: once such separation is achieved and a finite witness is made auditable, does it also determine how repairs should be presented?
+The answer given here is no.
+No representation-canonical raw repair presentation is delivered automatically by the finite witness alone; an additional abstraction contract is required.
+
+\paragraph{Constraint hierarchies and presentation contracts.}
+The abstraction-contract thesis is also distinct from weighted or prioritized constraint resolution in the style of constraint hierarchies \citep{borning1992constraint}.
+A grouping contract in this paper is not an optimization criterion and not a semantic ranking over axioms.
+It is a reporting rule for how raw lever-level repairs are aggregated into a human-facing explanation.
+That is precisely why it must be made explicit in an audit-oriented workflow.

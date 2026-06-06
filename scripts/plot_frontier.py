@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import argparse
-import base64
 import json
+import struct
+import zlib
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -54,10 +55,123 @@ def _matrix(values: list[int], cols: int = 8, fill: int = 0) -> list[list[int]]:
 
 
 def _write_placeholder_png(path: Path) -> None:
-    one_pixel_png = base64.b64decode(
-        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO3Zf90AAAAASUVORK5CYII="
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        crc = zlib.crc32(tag + data) & 0xFFFFFFFF
+        return struct.pack("!I", len(data)) + tag + data + struct.pack("!I", crc)
+
+    ihdr = struct.pack("!IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+    idat = zlib.compress(b"\x00\xff\xff\xff")
+    png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")
+    path.write_bytes(png)
+
+
+def _latex_escape(text: str) -> str:
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "_": r"\_",
+        "%": r"\%",
+        "&": r"\&",
+        "#": r"\#",
+        "{": r"\{",
+        "}": r"\}",
+    }
+    return "".join(replacements.get(ch, ch) for ch in text)
+
+
+def _load_sidecar_json(case_dir: Path, name: str) -> dict[str, Any] | None:
+    path = case_dir / name
+    if not path.exists():
+        return None
+    return _load_json(path)
+
+
+def _status_color(label: str) -> str:
+    return {
+        "SAT": "green!18",
+        "UNSAT": "red!18",
+        "PRUNED": "gray!22",
+        "UNKNOWN": "white",
+    }.get(label, "white")
+
+
+def _write_matrix_tex(cases: list[dict[str, Any]], outdir: Path) -> Path:
+    cols = 8
+    rows = _matrix(list(range(len(cases))), cols=cols, fill=-1)
+    path = outdir / "frontier_matrix.tex"
+    lines: list[str] = []
+    lines.append(r"\begingroup")
+    lines.append(r"\setlength{\tabcolsep}{2pt}")
+    lines.append(r"\renewcommand{\arraystretch}{1.1}")
+    lines.append(r"\centering")
+    lines.append(r"\scriptsize")
+    lines.append(r"\begin{tabular}{|" + "c|" * cols + "}")
+    lines.append(r"\hline")
+    for row in rows:
+        cells: list[str] = []
+        for idx in row:
+            if idx < 0:
+                cells.append(r"\cellcolor{white}\shortstack{}")
+                continue
+            case = cases[idx]
+            bits = _latex_escape(str(case.get("mask_bits", "")))
+            label = _status_label(case)
+            color = _status_color(label)
+            cells.append(
+                rf"\cellcolor{{{color}}}\shortstack{{\ttfamily {bits}\\{_latex_escape(label)}}}"
+            )
+        lines.append(" & ".join(cells) + r" \\")
+        lines.append(r"\hline")
+    lines.append(r"\end{tabular}")
+    lines.append(r"\par\medskip")
+    lines.append(
+        r"\scriptsize Legend: "
+        r"\colorbox{green!18}{\strut SAT}\ "
+        r"\colorbox{red!18}{\strut UNSAT}\ "
+        r"\colorbox{gray!22}{\strut PRUNED}\ "
+        r"\colorbox{white}{\strut UNKNOWN}"
     )
-    path.write_bytes(one_pixel_png)
+    lines.append(r"\endgroup")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def _write_boundary_tex(cases: list[dict[str, Any]], atlas_outdir: Path, outdir: Path) -> Path:
+    unsat_cases = [c for c in cases if _status_label(c) == "UNSAT"]
+    unsat_cases.sort(key=lambda c: int(c.get("mask_int", -1)))
+    path = outdir / "frontier_boundary.tex"
+    lines: list[str] = []
+    lines.append(r"\begingroup")
+    lines.append(r"\centering")
+    lines.append(r"\scriptsize")
+    lines.append(r"\renewcommand{\arraystretch}{1.15}")
+    lines.append(r"\begin{tabular}{llll}")
+    lines.append(r"\toprule")
+    lines.append(r"Case bits & Status & One MUS & Small MCS candidate \\")
+    lines.append(r"\midrule")
+    for case in unsat_cases:
+        case_id = str(case.get("case_id", ""))
+        bits = _latex_escape(str(case.get("mask_bits", "")))
+        mus = _load_sidecar_json(atlas_outdir / case_id, "mus.json")
+        mcs = _load_sidecar_json(atlas_outdir / case_id, "mcs.json")
+        mus_text = "artifact attached"
+        if mus:
+            mus_bits = _latex_escape(str(mus.get("mus_bits", "?")))
+            mus_size = mus.get("size", "?")
+            mus_text = rf"\texttt{{{mus_bits}}} (size {mus_size})"
+        mcs_text = "artifact attached"
+        if mcs:
+            removed = ",".join(str(x) for x in mcs.get("removed_axioms", [])) or "?"
+            sat_bits = _latex_escape(str(mcs.get("sat_bits", "?")))
+            size = mcs.get("size", "?")
+            mcs_text = rf"drop \texttt{{{_latex_escape(removed)}}} $\rightarrow$ \texttt{{{sat_bits}}} (size {size})"
+        lines.append(
+            rf"\texttt{{{bits}}} & UNSAT & {mus_text} & {mcs_text} \\"
+        )
+    lines.append(r"\bottomrule")
+    lines.append(r"\end{tabular}")
+    lines.append(r"\endgroup")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
 
 
 def _validate_atlas(atlas: dict[str, Any]) -> list[dict[str, Any]]:
@@ -87,6 +201,10 @@ def plot_frontier(atlas_path: Path, outdir: Path, fmt: str) -> tuple[Path, Path]
     outdir.mkdir(parents=True, exist_ok=True)
     matrix_path = outdir / f"frontier_matrix.{fmt}"
     boundary_path = outdir / f"frontier_boundary.{fmt}"
+    atlas_outdir = atlas_path.parent
+
+    _write_matrix_tex(cases, outdir)
+    _write_boundary_tex(cases, atlas_outdir, outdir)
 
     has_matplotlib = True
     try:

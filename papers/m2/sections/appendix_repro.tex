@@ -1,0 +1,67 @@
+\section{Reproducibility Note}
+\label{sec:repro}
+
+This manuscript is grounded in a kernel-checked Lean module and repository-local reproducibility artifacts rather than new solver experiments.
+The main evidence sources used in the text are:
+
+\begin{itemize}[leftmargin=1.5em]
+\item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the positive flagship theorem \(\mathtt{sen\_impossibility\_lifts}\) and its supporting helpers.
+\item \code{SocialChoiceAtlas.lean} --- the root import line that wires the lifting module into the default \(\mathtt{lake\ build}\).
+\item \code{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} --- the read-only source of the ported \(\mathtt{sen\_not\_acyclic\_01}\) case-split that the lift re-states polymorphically.
+\item \code{docs/m2\_scope\_wall.md} --- the scope wall.
+\item \code{docs/no\_cycle\_interpretation\_note.md} and \code{docs/axiom\_semantics\_scaling.md} --- the prior repository notes that establish why the short-cycle encoding does not transfer past \(m = 4\).
+\item \code{scripts/check\_acyclicity\_short\_cycles.py} --- the finite check that audits the short-cycle encoding at the base case.
+\end{itemize}
+
+\subsection{Zenodo archive}
+\label{sec:zenodo-archive}
+
+The submission snapshot is frozen as a Git tag, published as a GitHub release, and archived by Zenodo, which mints a citable DOI for the snapshot.
+
+\begin{quote}
+Archived manuscript snapshot: Zenodo DOI \url{https://doi.org/10.5281/zenodo.20468650} for tag \code{papers-m2-v1} at commit \code{4feef8941801b1957847bb2fd6a965b57f83b863}.
+\end{quote}
+
+The DOI line is the stable archive reference for this manuscript; the Git tag and commit are kept alongside it as the source-traceability anchor.
+
+\subsection{Build commands}
+\label{sec:build-commands}
+
+The narrow build command that exercises the positive flagship is:
+\begin{quote}
+\code{lake build SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift}
+\end{quote}
+
+The full default kernel build is:
+\begin{quote}
+\code{lake build}
+\end{quote}
+
+The manuscript itself builds with:
+\begin{quote}
+\code{make -C papers/m2 pdf}
+\end{quote}
+
+\subsection{Artifact binding}
+\label{sec:artifact-binding}
+
+\begingroup
+\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+Claim & Binding \\
+\midrule
+Theorem~\ref{thm:lift} (positive flagship) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (\(\mathtt{sen\_impossibility\_lifts}\)) \\
+Default kernel build & \code{SocialChoiceAtlas.lean} (root import) \\
+Remark~\ref{rem:lean-form} (Lean form, \(\mathtt{\_hm}\) unused) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (docstring and proof body) \\
+Remark~\ref{rem:hm-unused} (overlap case analysis) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (five \(\mathtt{sen\_lift\_case\_*}\) sub-lemmas) \\
+Proposition~\ref{prop:scope-wall} (scope wall) & \code{docs/m2\_scope\_wall.md} \\
+Short-cycle scaling note & \code{docs/no\_cycle\_interpretation\_note.md} \\
+Axiom-semantics scaling note & \code{docs/axiom\_semantics\_scaling.md} \\
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\paragraph{What is not part of this reproduction.}
+No new solver runs are part of this paper.
+The representation-canonicity question at family scale is deferred to a companion paper (in preparation); its reproduction record will be authored alongside that paper, not here.

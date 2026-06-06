@@ -53,7 +53,7 @@ We treat optimization tooling as a triangulation baseline, not as the primary cl
 - proof-carrying UNSAT references checked in Lean,
 - validated non-trivial SAT rule cards.
 
-So the relationship to MAXSAT/OMT is complementary: optimization provides a check on optimum size/value, while atlas + MUS/MCS + proof-carrying outputs provide richer causal and audit artifacts.
+So the relationship to MAXSAT/OMT is complementary: optimization provides a check on optimum size/value, while atlas + MUS/MCS + proof-carrying outputs provide richer causal and audit artifacts. The repository includes a tiny sanity baseline (`scripts/maxsat_baseline.py`) that computes one minimum repair size/set for a chosen solved UNSAT case, and we surface it in paper-facing triangulation tables.
 
 ## When not to use this framing
 

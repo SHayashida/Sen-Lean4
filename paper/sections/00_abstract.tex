@@ -1,6 +1,7 @@
 \begin{abstract}
-We present a proof-carrying, semantics-aware Possibility Atlas pipeline for computational social choice.
-The system treats axioms as engineering levers, enumerates SAT/UNSAT regions, extracts boundary explanations (MUS/MCS), and validates UNSAT evidence with LRAT plus Lean kernel checking.
-For SAT regions, we add a deterministic gallery extraction layer with solver-independent witness validation against CNF.
-Our scope is intentionally small (Sen base case: $n=2$, $m=4$), but the pipeline demonstrates reproducible artifact discipline, explicit safety assumptions for acceleration (monotone pruning and symmetry reduction), and paper-ready evaluation outputs.
+Solver-aided mechanism design and computational social choice increasingly risk collapsing into ``the solver said so'': when a result is surprising, it is often unclear whether the problem lies in the semantic specification, the encoding, the proof object, or the reported witness. This paper argues that the key first step is diagnosability. We make solver-supported impossibility exploration diagnosable by splitting obligations into Proof (Lean-kernel checking of the committed semantic theorem and committed UNSAT reference artifacts via LRAT replay), Audit (mechanical checks of CNF/manifest conformance and recorded metadata), and Witness (independent validation that a reported SAT model satisfies a concrete CNF instance).
+
+We demonstrate this idea on sen24, a fixed finite instance used here as a minimal complete worked example for making the trust boundary explicit. The result is an auditable possibility atlas: a reproducible record of which axiom combinations are SAT or UNSAT, together with boundary explanations, validated SAT examples, and a narrowly scoped proof-carrying UNSAT reference.
+
+The paper does not claim a new social-choice theorem or a new SAT proof method. Its contribution is a reproducible diagnostic workflow in which solver error, artifact drift, proof tampering, and witness misreporting become separately detectable and replayable, while the remaining end-to-end semantic encoding correctness is kept explicit as an assumption boundary rather than hidden inside solver trust.
 \end{abstract}

@@ -1,13 +1,17 @@
 # Candidate B: Option C Voter-Boundary Plan (M2.1)
 
-**Status:** Planning document only. This note does not authorize Option C
-implementation, pair-selector generation, or repair enumeration.
+**Status:** Step 0 feasibility implemented and measured. This note does not
+authorize repair enumeration or promotion of the exploratory encoder.
+
+**Result note:** See
+[docs/candidate_b_option_c_boundary_result.md](candidate_b_option_c_boundary_result.md)
+for the finalized `(3,4)` Step 0 evidence.
 
 ## 1. Purpose
 
-This note plans the M2.1 Option C boundary track for `(3,4)`. It defines the
-voter-dimension boundary question before any encoder, generator, or schema
-change is made.
+This note defines the M2.1 Option C boundary track for `(3,4)`. It was written
+before encoder changes and now records the resulting Step 0 feasibility
+classification.
 
 The plan exists to determine whether the M1.5 repair-presentation witness class
 can be extended from two voters to more than two voters while preserving
@@ -63,8 +67,8 @@ assuming that a satisfiability-equivalent pair-selector encoding is also ≡CM.
 
 ## 5. Step 0 Boundary Classification
 
-When Option C implementation is separately authorized, its Step 0 check for
-`(3,4)` must produce exactly one of the existing classifications:
+The Option C Step 0 check for `(3,4)` uses exactly one of the existing
+classifications:
 
 - `equiv_cm_persists`
 - `sat_equiv_only`
@@ -110,9 +114,9 @@ the representation class.
 The boundary claim must be based on the reviewed Step 0 evidence. It must not
 be inferred merely from the expectation that pair selectors add clauses.
 
-## 8. Implementation Constraints for Later
+## 8. Constraints on Further Implementation
 
-If Option C implementation is authorized in a later task:
+For any work after the current Step 0 implementation:
 
 - keep every prototype under `scripts/exploration/candidate_b/`;
 - do not promote anything to top-level `scripts/`;
@@ -126,8 +130,8 @@ If Option C implementation is authorized in a later task:
 - do not begin repair enumeration until the Step 0 classification and any
   weakening from ≡CM have been explicitly reviewed.
 
-This document does not authorize an Option C encoder, pair-selector generator,
-schema change, or repair enumeration.
+This document does not authorize further Option C encoder changes, a schema
+change, promotion, or repair enumeration.
 
 ## 9. Scope Caveat
 
@@ -137,3 +141,36 @@ The boundary track remains inside the local-rationality family:
 The Sen24 CNF witness is not a family-level CNF certificate. Option C planning
 does not alter M2, does not change any M2 theorem or paper claim, and does not
 extend the scope of the existing baseline certificates.
+
+## 10. Step 0 Feasibility Result
+
+The authorized exploratory implementation lives under
+`scripts/exploration/candidate_b/`:
+
+- `option_c_encoder.py`
+- `step0_equiv_check_option_c.py`
+
+The bundled side uses the repository's existing `pair_selectors_v1` generator.
+The split side uses one shared witness-pair selector bank and separate
+left/right decisive-selector banks. This is necessary for the split levers to
+represent their roles independently: at `(3,4)`, voter 1 can be the right member
+of pair `(0,1)` or the left member of pair `(1,2)`.
+
+The measured result is:
+
+- bundled status: `UNSAT`;
+- split status: `UNSAT`;
+- classification: `sat_equiv_only`;
+- bundled variables/clauses: `165,927 / 1,347,847`;
+- split variables/clauses: `165,939 / 1,513,735`;
+- structural delta: 12 variables and 165,888 binary implication clauses.
+
+The variable count, clause count, and clause-length histogram all differ.
+Because these are invariants under variable renaming, no bijection `ρ` can make
+the clause multisets equal. The Option C selector representation therefore
+crosses the ≡CM boundary at `(3,4)` while preserving UNSAT status.
+
+The local report is
+`/tmp/candidate_b_step0_option_c/step0_option_c_comparison.json`. It is a
+regenerable temporary output, not a tracked artifact. Repair enumeration was
+not run and remains unauthorized pending review of this Step 0 classification.

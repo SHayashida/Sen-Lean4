@@ -155,3 +155,28 @@ no `(3,4)`, and no top-level script promotion.
 For both cases, transporting the bundled family replaces `{minlib}` with
 `{decisive_voter0, decisive_voter1}`. That transported two-lever repair differs
 from the two split singleton repairs, so the repair families are unequal.
+
+## Option C — `(3,4)` voter-boundary Step 0
+
+Files:
+
+- `option_c_encoder.py` — exploratory pair-selector split with one shared
+  witness-pair selector bank and separate left/right decisive-selector banks.
+- `step0_equiv_check_option_c.py` — generates the real bundled
+  `pair_selectors_v1` package and the exploratory split package, solves both,
+  and applies the existing four-way Step 0 classification.
+
+Run:
+
+    python3 scripts/exploration/candidate_b/step0_equiv_check_option_c.py
+
+Outputs go to `/tmp/candidate_b_step0_option_c/`.
+
+The `(3,4)` result is `sat_equiv_only`: both packages are UNSAT, but ≡CM fails.
+Voter 1 can appear as either the left or right member of a candidate witness
+pair, so the split representation gives it distinct role-specific decisive
+series. Relative to bundled `minlib`, this adds 12 used variables and 165,888
+binary implication clauses. Variable cardinality, clause cardinality, and the
+clause-length multiset therefore rule out any renaming bijection ρ.
+
+This is Step 0 only. Repair enumeration has not run and remains unauthorized.

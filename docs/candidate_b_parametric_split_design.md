@@ -361,6 +361,17 @@ positive track if all of the following hold:
   compatible with the intended claim;
 - this design document is updated to reflect that classification.
 
+> **Feasibility status (exploratory).** An isolated legacy-style two-series
+> encoder (`scripts/exploration/candidate_b/option_d_encoder.py`, with
+> `step0_equiv_check_option_d.py`) now generates the Option D split package at
+> `(2,5)` without any pair-selector machinery (`uses_pair_selectors=false`), and
+> the Step 0 rerun returns `equiv_cm_persists` for both `(2,4)` (control) and
+> `(2,5)` via a verified identity ρ (UNSAT/UNSAT). The first two gate conditions
+> are therefore met by the exploratory path; **authorizing repair enumeration
+> still requires explicit review** of this feasibility result and of the
+> exploratory encoder, which has not yet been performed. `(3,4)` is untouched and
+> remains the Option C boundary track.
+
 **Option C boundary track.** Option C repair enumeration remains **unauthorized**
 unless all of the following hold:
 

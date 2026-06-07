@@ -70,8 +70,58 @@ about the transport map's scope, to be recorded — not force-fitted.
 
 ### What a future Step 0 needs
 
-A family-scale split encoding of the liberalism layer — i.e. a parametric
-analogue of `decisive_voter*` that is defined under `pair_selectors_v1` for
-`(2,5)` and `(3,4)`, with an explicit per-voter decisive-lever scheme — before
-≡CM persistence can be measured. Designing that encoding is itself part of the
-Step 0 review and is out of scope for this exploratory checker.
+A family-scale split encoding of the liberalism layer is required before ≡CM
+persistence can be measured beyond `(2,4)`. **Option D (below) supplies this for
+the `(2,m)` positive track using a legacy-style two-series split — deliberately
+NOT `pair_selectors_v1`.** The voter-dimension (`n > 2`, e.g. `(3,4)`) remains the
+Option C boundary track and is not implemented here.
+
+---
+
+## Option D — legacy-style `(2,m)` two-witness split (positive track)
+
+Files:
+
+- `option_d_encoder.py` — isolated encoder; generalizes the legacy Sen24
+  `selectors_v1` two-series MINLIB layout from `(2,4)` to `(2,m)`, with `n = 2`
+  fixed. Does **not** modify `encoding/schema.py`.
+- `step0_equiv_check_option_d.py` — Step 0 rerun that uses the Option D encoder
+  and reuses the base checker's ρ-construction and classification logic.
+
+Run:
+
+    python3 scripts/exploration/candidate_b/step0_equiv_check_option_d.py
+
+Default cases: `2:4` (control), `2:5` (Option D positive-track case). Outputs go
+to `/tmp/candidate_b_step0_option_d/`.
+
+### Option D vs Option C — the precise distinction
+
+- **Option D (this encoder) = legacy-style two-voter split, NO pair selector.**
+  The liberalism layer is exposed through two direct selector series analogous to
+  legacy `sel0` / `sel1`:
+  - `sel0(a,b)` ↦ voter-0 decisiveness (lever `decisive_voter0`),
+  - `sel1(a,b)` ↦ voter-1 decisiveness (lever `decisive_voter1`).
+
+  Bundled `minlib` emits both series; split emits `decisive_voter0` (sel0) and
+  `decisive_voter1` (sel1). The bundled `minlib` clause multiset equals the union
+  of the two split series over identical variables, so an **identity** ρ
+  witnesses ≡CM. There are **no** voter-pair selector variables and **no**
+  pair-selection clauses.
+- **Option C / parametric `pair_selectors_v1` = voter-pair selector machinery**
+  (`var_minlib_pair(i,j)` plus pair-selection clauses). That extra machinery is
+  what risks breaking ≡CM, so it is **not reused** for Option D. Even at `(2,5)`,
+  where `C(2,2)=1`, `pair_selectors_v1` would introduce selector clauses absent
+  from the legacy M1.5 split structure, which is precisely why Option D uses the
+  legacy-style series instead.
+
+### Option D Step 0 outcome
+
+| case | classification | note |
+| --- | --- | --- |
+| (2,4) | `equiv_cm_persists` | control; identity ρ verified, UNSAT/UNSAT; clause multiset byte-identical to the real generator |
+| (2,5) | `equiv_cm_persists` | positive track; identity ρ verified, UNSAT/UNSAT; `uses_pair_selectors=false` |
+
+The `(2,5)` result is for the `(2,m)` positive track **only**; it does **not**
+settle the Option C / voter-dimension boundary track (`n > 2`, e.g. `(3,4)`).
+Repair enumeration remains unauthorized.

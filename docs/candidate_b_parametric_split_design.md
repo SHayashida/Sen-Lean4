@@ -6,6 +6,7 @@
 **Status:** Design memo (doc-only; no encoder, generator, or repair enumeration).
 **Related:** [docs/candidate_b_encoding_sensitivity.md](candidate_b_encoding_sensitivity.md),
 [docs/candidate_b_minlib_granularity.md](candidate_b_minlib_granularity.md),
+[docs/candidate_b_option_d_positive_track.md](candidate_b_option_d_positive_track.md),
 [docs/m2_scope_wall.md](m2_scope_wall.md),
 [docs/no_cycle_interpretation_note.md](no_cycle_interpretation_note.md),
 [scripts/exploration/candidate_b/README.md](../scripts/exploration/candidate_b/README.md)

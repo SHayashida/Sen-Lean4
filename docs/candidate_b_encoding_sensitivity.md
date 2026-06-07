@@ -5,6 +5,7 @@
 **Branch intent:** `codex/m2.1-candidate-b`
 **Status:** Witness-class design memo (no generators or scripts yet).
 **Related:** [docs/candidate_b_minlib_granularity.md](candidate_b_minlib_granularity.md),
+[docs/candidate_b_option_d_positive_track.md](candidate_b_option_d_positive_track.md),
 [docs/m2_scope_wall.md](m2_scope_wall.md),
 [docs/no_cycle_interpretation_note.md](no_cycle_interpretation_note.md),
 [docs/axiom_semantics_scaling.md](axiom_semantics_scaling.md)

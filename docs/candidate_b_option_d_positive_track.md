@@ -1,5 +1,7 @@
 # Candidate B: Option D Positive-Track Result (M2.1)
 
+**M2.1 status:** See [docs/m2_1_status_summary.md](m2_1_status_summary.md) for the current two-sided summary.
+
 ## 1. Purpose
 
 This note records the M2.1 Option D positive-track result for the

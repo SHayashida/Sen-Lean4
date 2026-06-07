@@ -1,5 +1,7 @@
 # Candidate B: Option C Voter-Boundary Result (M2.1)
 
+**M2.1 status:** See [docs/m2_1_status_summary.md](m2_1_status_summary.md) for the current two-sided summary.
+
 ## 1. Purpose
 
 This note records the M2.1 Option C / `(3,4)` Step 0 voter-dimension boundary

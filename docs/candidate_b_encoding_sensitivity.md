@@ -212,6 +212,10 @@ review. The fixed two-lever split image may additionally be structurally
 insufficient where the voter count exceeds two (e.g. `(3,4)`), which is itself a
 finding about the transport map's scope rather than a checker fault.
 
+The candidate family-scale split encodings, and the feasibility-first policy that
+protects the ≡CM blade, are compared in
+[docs/candidate_b_parametric_split_design.md](candidate_b_parametric_split_design.md).
+
 ---
 
 ## Required new artifacts

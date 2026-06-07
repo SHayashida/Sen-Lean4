@@ -3,11 +3,13 @@
 
 **Milestone:** M2.1
 **Branch intent:** `codex/m2.1-candidate-b`
-**Status:** Design memo (doc-only; no encoder, generator, or repair enumeration).
+**Status:** Design memo with completed Option D and Option C Step 0 outcomes.
 **Related:** [docs/candidate_b_encoding_sensitivity.md](candidate_b_encoding_sensitivity.md),
 [docs/candidate_b_minlib_granularity.md](candidate_b_minlib_granularity.md),
 [docs/candidate_b_option_c_boundary_plan.md](candidate_b_option_c_boundary_plan.md),
+[docs/candidate_b_option_c_boundary_result.md](candidate_b_option_c_boundary_result.md),
 [docs/candidate_b_option_d_positive_track.md](candidate_b_option_d_positive_track.md),
+[docs/m2_1_status_summary.md](m2_1_status_summary.md),
 [docs/m2_scope_wall.md](m2_scope_wall.md),
 [docs/no_cycle_interpretation_note.md](no_cycle_interpretation_note.md),
 [scripts/exploration/candidate_b/README.md](../scripts/exploration/candidate_b/README.md)
@@ -368,11 +370,8 @@ positive track if all of the following hold:
 > `step0_equiv_check_option_d.py`) now generates the Option D split package at
 > `(2,5)` without any pair-selector machinery (`uses_pair_selectors=false`), and
 > the Step 0 rerun returns `equiv_cm_persists` for both `(2,4)` (control) and
-> `(2,5)` via a verified identity ρ (UNSAT/UNSAT). The first two gate conditions
-> are therefore met by the exploratory path; **authorizing repair enumeration
-> still requires explicit review** of this feasibility result and of the
-> exploratory encoder, which has not yet been performed. `(3,4)` is untouched and
-> remains the Option C boundary track.
+> `(2,5)` via a verified identity ρ (UNSAT/UNSAT). The reviewed Option D repair
+> enumeration subsequently classified both cases as `noncanonical_persists`.
 
 **Option C boundary track.** Option C repair enumeration remains **unauthorized**
 unless all of the following hold:
@@ -381,9 +380,13 @@ unless all of the following hold:
 - the Step 0 classification for `(3,4)` is reviewed;
 - any weakening from ≡CM to satisfiability-equivalence is explicitly approved.
 
+The exploratory Option C Step 0 result is `sat_equiv_only` at `(3,4)`:
+UNSAT/UNSAT status agrees, but selector machinery breaks ≡CM. No approval for
+the weaker repair comparison has been given.
+
 In every case, if ≡CM fails, the M2.1 claim is explicitly revised (per Section 6)
-**before** repair enumeration begins on that track. Neither track's gate is
-satisfied at the time of writing, so repair enumeration remains unauthorized.
+**before** repair enumeration begins on that track. Option D is complete; Option
+C repair enumeration remains unauthorized.
 
 ---
 

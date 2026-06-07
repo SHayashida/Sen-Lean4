@@ -3,15 +3,19 @@
 
 **Milestone:** M2.1
 **Branch intent:** `codex/m2.1-candidate-b`
-**Status:** Witness-class design memo (no generators or scripts yet).
+**Status:** Witness-class design memo; exploratory results are complete for the
+Option D positive track and Option C Step 0 boundary track.
 **Related:** [docs/candidate_b_minlib_granularity.md](candidate_b_minlib_granularity.md),
 [docs/candidate_b_option_d_positive_track.md](candidate_b_option_d_positive_track.md),
+[docs/candidate_b_option_c_boundary_result.md](candidate_b_option_c_boundary_result.md),
+[docs/m2_1_status_summary.md](m2_1_status_summary.md),
 [docs/m2_scope_wall.md](m2_scope_wall.md),
 [docs/no_cycle_interpretation_note.md](no_cycle_interpretation_note.md),
 [docs/axiom_semantics_scaling.md](axiom_semantics_scaling.md)
 
-This document defines the M2.1 witness class **before** any generator or script is
-added. It must be reviewed before prototypes are written.
+This document defines the M2.1 witness class that governed the exploratory
+implementation. The current two-sided outcome is summarized in
+[docs/m2_1_status_summary.md](m2_1_status_summary.md).
 
 ---
 
@@ -219,12 +223,11 @@ protects the ≡CM blade, are compared in
 
 ---
 
-## Required new artifacts
+## Required artifacts
 
-The M2.1 witness class requires the following new artifacts. None exist yet; this
-list scopes what the reviewed prototype is allowed to produce. The Step-0
-equivalence report comes first; the later artifacts are authorized only after
-Step 0 has been reviewed.
+The M2.1 witness class requires the following artifacts. The Option D artifacts
+and Option C Step 0 report are implemented as exploratory, regenerable outputs;
+Option C repair artifacts remain unauthorized.
 
 1. **Step-0 equivalence report.** The first required artifact. For each case
    `(2,5)` and `(3,4)` it records:

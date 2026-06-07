@@ -11,7 +11,7 @@ M2.1 asks whether the M1.5 repair-candidate representation non-canonicity
 transfers to family scale. The comparison distinguishes transfer along the
 alternative dimension from transfer along the voter dimension.
 
-## 3. Positive Side: Option D
+## 3. Positive Side: Option D / `(2,5)`
 
 Option D tests the two-voter alternative-expansion direction.
 
@@ -24,7 +24,7 @@ holding the two-voter witness structure fixed preserves the M1.5
 clause-multiset-equivalence (≡CM) shield and the associated
 repair-representation non-canonicity.
 
-## 4. Boundary Side: Option C
+## 4. Boundary Side: Option C / `(3,4)`
 
 Option C tests the voter-dimension direction at `(3,4)`.
 

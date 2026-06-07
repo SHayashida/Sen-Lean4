@@ -9,7 +9,7 @@ This note records the M2.1 Option D positive-track result for the
 clause-multiset-equivalence check and the subsequent raw lever-level repair
 enumeration.
 
-**Boundary track:** See [docs/candidate_b_option_c_boundary_plan.md](candidate_b_option_c_boundary_plan.md) for the pending Option C / `(3,4)` plan.
+**Boundary track:** See [docs/candidate_b_option_c_boundary_result.md](candidate_b_option_c_boundary_result.md) for the completed Option C / `(3,4)` Step 0 result.
 
 ## 2. Scope
 
@@ -97,14 +97,12 @@ The result is limited to the two-voter alternative-expansion family. It does not
 show that the same split representation or repair pattern transfers when the
 number of voters increases.
 
-## 7. Boundary Still Open
+## 7. Voter-Dimension Boundary
 
-Option C and `(3,4)` remain open as the voter-dimension boundary track. The
-Option D result does not settle whether a person-specific split representation
-can preserve ≡CM, or preserve the same repair behavior, when the voter number
-increases.
-
-No Option C encoder or repair enumeration is part of this result.
+Option C Step 0 at `(3,4)` classified the voter-dimension comparison as
+`sat_equiv_only`: status remains UNSAT/UNSAT, but role-specific selector
+machinery breaks ≡CM. This does not alter the Option D positive result, and no
+Option C repair enumeration has been run or authorized.
 
 ## 8. Artifact Pointers
 

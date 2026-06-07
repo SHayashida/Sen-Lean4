@@ -7,6 +7,8 @@ This note records the M2.1 Option D positive-track result for the
 clause-multiset-equivalence check and the subsequent raw lever-level repair
 enumeration.
 
+**Boundary track:** See [docs/candidate_b_option_c_boundary_plan.md](candidate_b_option_c_boundary_plan.md) for the pending Option C / `(3,4)` plan.
+
 ## 2. Scope
 
 The result covers:

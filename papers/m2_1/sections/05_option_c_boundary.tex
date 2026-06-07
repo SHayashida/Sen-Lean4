@@ -1,0 +1,99 @@
+\section{Voter-Dimension Boundary (Option C)}\label{sec:option-c}
+
+\subsection{Why the representation changes}
+
+At $(3,4)$, two liberalism witnesses must be represented among three voters.
+A direct reuse of the fixed voter-0/voter-1 split would hard-code a particular
+pair and would not model the intended witness choice.  Option C therefore uses
+a shared pair-selector bank and two exposed roles:
+\[
+  \pi(\mathtt{minlib}) =
+  \{\mathtt{selected\_decisive\_left},
+    \mathtt{selected\_decisive\_right}\}.
+\]
+The split levers share the selected witness pair but use separate decisive
+selector banks so that each role can be removed independently.
+
+The role distinction matters for the middle voter.  Voter 1 is the right member
+of pair $(0,1)$ and the left member of pair $(1,2)$.  A split representation
+that exposes left and right decisiveness separately must therefore retain two
+role-specific series for that voter.  The bundled parametric
+\texttt{minlib} encoding does not contain a one-to-one counterpart for all of
+this split role structure.
+
+\subsection{Step~0 measurements}
+
+The Option C checker generates the repository's bundled
+\texttt{pair\_selectors\_v1} package and the exploratory split package, then
+solves both and checks necessary invariants for a variable-renaming bijection.
+Table~\ref{tab:option-c} gives the measured result.
+
+\begin{table}[ht]
+\centering
+\caption{Option C Step~0 result at $(3,4)$.}\label{tab:option-c}
+\begin{tabular}{lrr}
+\toprule
+Measurement & Bundled & Split \\
+\midrule
+SAT status & UNSAT & UNSAT \\
+Variables & 165,927 & 165,939 \\
+Clauses & 1,347,847 & 1,513,735 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The split package adds 12 variables and 165,888 clauses.  The additional
+clauses are binary implications connecting the role-specific decisive
+selectors to their content.  The variable count, total clause count, and
+clause-length histogram differ.
+
+\subsection{Refuting clause-multiset equivalence}
+
+A variable renaming preserves the number of used variables, the number of
+clauses including multiplicity, and the multiset of clause lengths.  Since all
+three invariants differ, no bijection $\rho$ can turn the bundled clause
+multiset into the split clause multiset.  Thus:
+\[
+  F_B\not\CM F_S.
+\]
+At the same time, both packages receive UNSAT status.  The four-way Step~0 classifier
+therefore assigns
+\[
+  \mathtt{sat\_equiv\_only}.
+\]
+
+This classification is stronger than an inconclusive run: generation succeeds,
+both statuses are established, and a structural invariant refutes \CM.  It is
+weaker than the Option D control because status agreement does not remove
+encoding-strength explanations.
+
+\subsection{Gate consequence}
+
+No Option C repair enumeration is performed.  The Step~0 protocol explicitly
+requires a separate decision before a weaker, status-only repair comparison
+could begin.  Such a comparison would answer a different question: how repair
+families differ across satisfiability-equivalent but clause-distinct encodings.
+It could not inherit the M1.5 claim that clause structure has been controlled.
+
+Accordingly, the Option C evidence supports only the following boundary
+statement:
+\begin{quote}
+At $(3,4)$, voter-dimension expansion preserves UNSAT status in the compared
+bundled and pair-selector split packages, but the role-specific selector
+machinery prevents transfer of the M1.5 clause-multiset-equivalence shield.
+\end{quote}
+It does not support a claim that repair non-canonicity persists at $(3,4)$.
+
+\subsection{Why the negative side is informative}
+
+The \CM{} failure is not a regression in Option D and not a failure of the
+M2.1 program.  It identifies the point at which the witness representation must
+do more work.  Along the alternative axis, the two witness series remain fixed
+and can share the original clause basis.  Along the voter axis, the encoding
+must represent witness choice and role.  The resulting structural delta is
+therefore evidence about the boundary of the base-case witness class.
+
+This distinction also prevents a common overinterpretation.  UNSAT/UNSAT
+agreement alone does not imply that a repair explanation can be transported
+without qualification.  Status can be stable while the explanatory vocabulary
+and clause grouping change substantially.

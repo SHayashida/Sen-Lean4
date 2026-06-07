@@ -1,0 +1,100 @@
+\section{Discussion}\label{sec:discussion}
+
+\subsection{A two-sided transfer result}
+
+The combined result is sharper than either track alone.  Option D shows that
+the M1.5 witness is not confined to the exact $(2,4)$ instance: it survives the
+first alternative expansion while preserving the strongest structural control
+available in this study.  Option C shows why that result should not be
+generalized indiscriminately: increasing the voter dimension changes the
+representation problem and introduces clauses that have no bundled
+counterpart.
+
+The resulting claim is directional:
+\begin{itemize}
+  \item the repair-presentation witness transfers cleanly along the
+  two-voter alternative-expansion direction; and
+  \item it does not automatically transfer along the voter-dimension direction.
+\end{itemize}
+This is not a dichotomy between success and failure.  The positive result
+identifies a stable region, while the boundary result identifies the condition
+that ends the \CM-protected comparison.
+
+\subsection{What clause-multiset equivalence buys}
+
+Clause-multiset equivalence is intentionally stronger than status agreement.
+It creates a controlled comparison in which the same clauses are assigned to
+different lever interfaces.  When the raw repair families differ under that
+control, the difference is evidence about presentation granularity.
+
+The control does not make one repair vocabulary canonical.  It shows the
+opposite: the clause set alone does not select a unique human-facing repair
+explanation.  A downstream report must decide whether to expose
+person-specific levers, aggregate them under \texttt{minlib}, or present both
+levels.  That decision is an abstraction contract and should be versioned and
+audited like other parts of the pipeline.
+
+\subsection{Limitations}
+
+First, the evidence covers only $(2,5)$ and $(3,4)$ beyond the base case.  It is
+not a statement for arbitrary electorate or alternative sizes.
+Second, the rationality scope is local:
+\texttt{no\_cycle3}$\wedge$\texttt{no\_cycle4} is not full
+\texttt{SocialAcyclic}.  In particular, the $(2,5)$ result permits cycle lengths
+outside the encoded short-cycle families.
+
+Third, the Option D repair result is raw and lever-level.  It does not establish
+that every semantic repair abstraction must differ, only that the current
+bundled and split presentations differ before an explicit grouping policy is
+applied.  Fourth, Option C repair enumeration is absent by design.  The
+\texttt{sat\_equiv\_only} result leaves selector-strength explanations open, so
+the paper records the boundary without speculating about an unmeasured repair
+family.
+
+Finally, the family comparisons are exploratory artifacts, not additions to the
+baseline proof-carrying certificate set.  The Sen24 CNF remains a base-case
+certificate and must not be cited as a family-level CNF proof.
+
+\subsection{Implications for possibility atlases}
+
+An atlas that reports only SAT/UNSAT status can treat the two Option C packages
+as equivalent for a coarse boundary map.  An atlas that reports repairs cannot
+stop there.  It needs metadata about the representation under which each repair
+was computed and about the relation between compared encodings.
+
+A practical report should therefore include at least:
+\begin{enumerate}
+  \item the active lever vocabulary;
+  \item the repair-transport or grouping map;
+  \item SAT/UNSAT status;
+  \item the strongest verified structural relation, such as \CM;
+  \item whether repair enumeration was authorized under that relation; and
+  \item the scope caveat for the encoded rationality family.
+\end{enumerate}
+These fields prevent a status-equivalent boundary comparison from being
+silently upgraded into a representation-invariant repair claim.
+
+\subsection{Future decisions}
+
+The next research decision is not implicit in this scaffold.  One path is to
+freeze the two-sided M2.1 result and use it as the final claim boundary.
+Another is to authorize a separate Option C repair comparison explicitly under
+the weaker \texttt{sat\_equiv\_only} framing.  Such work would belong in an
+exploratory appendix and would require wording that does not inherit the
+Option D control.
+
+Other extensions could test additional $(2,m)$ cases or design a bundled
+encoding whose selector structure matches the Option C split closely enough
+for a new \CM{} question.  Either extension would be a new experiment.  It is
+not part of the evidence reported here.
+
+\subsection{Conclusion}
+
+Repair explanation is not a free corollary of impossibility transfer.  In the
+Sen atlas, the base-case non-canonicity witness survives from $(2,4)$ to $(2,5)$
+when the two-voter clause basis is preserved.  At $(3,4)$, UNSAT status still
+survives, but the pair-selection and role machinery crosses a structural
+boundary and breaks clause-multiset equivalence.  Treating these outcomes
+together yields a disciplined conclusion: transfer of status, transfer of
+clause structure, and transfer of repair presentation are separate engineering
+claims and should be checked separately.

@@ -1,0 +1,98 @@
+\section{Positive Transfer Along Alternatives (Option D)}\label{sec:option-d}
+
+\subsection{Encoding structure}
+
+Option D restricts the family to $(2,m)$.  Its exploratory encoder generalizes
+the legacy two-series layout from four to five alternatives while keeping the
+voter count fixed.  The variable basis contains direct series analogous to
+\texttt{sel0} and \texttt{sel1}.  Bundled \texttt{minlib} emits both series;
+the split package assigns one series to
+\texttt{decisive\_voter0} and the other to
+\texttt{decisive\_voter1}.
+
+No voter-pair selector variables, pair-selection clauses, or all-voter split
+are introduced.  Consequently, the bundled \texttt{minlib} clause multiset is
+literally the union of the two split decisive-lever multisets over the same
+variables.  The candidate renaming is therefore the identity:
+\[
+  \rho(v)=v.
+\]
+The checker nevertheless parses both clause multisets and re-verifies the map;
+the conclusion does not rest on equal counts alone.
+
+\subsection{Step~0 result}
+
+Table~\ref{tab:option-d-step0} records the base-case control and the transferred
+case.  Both packages are UNSAT in both cases, and the identity $\rho$ verifies
+\CM.
+
+\begin{table}[ht]
+\centering
+\caption{Option D clause-multiset comparison.  The final column decomposes the
+bundled \texttt{minlib} clause count into the two split series.}\label{tab:option-d-step0}
+\begin{tabular}{llll}
+\toprule
+Case & Classification & Status & Clause decomposition \\
+\midrule
+$(2,4)$ & \texttt{equiv\_cm\_persists} & UNSAT/UNSAT
+  & $13{,}826=6{,}913+6{,}913$ \\
+$(2,5)$ & \texttt{equiv\_cm\_persists} & UNSAT/UNSAT
+  & $576{,}002=288{,}001+288{,}001$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $(2,4)$ row controls the exploratory encoder against the known M1.5
+structure.  The $(2,5)$ row is the positive M2.1 transfer result.  It shows that
+increasing the alternative dimension does not force a change in the
+clause-multiset relation when the two-voter witness basis is held fixed.
+
+\subsection{Raw repair enumeration}
+
+After review of the Step~0 result, raw lever-level repair enumeration was
+authorized for Option D only.  The enumerator considers removal subsets of the
+active bundled and split lever packages, solves candidates in increasing
+cardinality order, and uses clause-removal monotonicity to avoid solving a
+superset once a SAT repair is known.  Inclusion minimality is checked against
+all strict subsets.
+
+The repair families are the same at $(2,4)$ and $(2,5)$:
+\begin{description}[style=nextline,leftmargin=2.2em]
+  \item[Bundled.]
+  $\lever{asymm},\ \lever{un},\ \lever{minlib},\
+    \lever{no\_cycle4}$.
+  \item[Split.]
+  $\lever{asymm},\ \lever{un},\
+    \lever{decisive\_voter0},\
+    \lever{decisive\_voter1},\
+    \lever{no\_cycle4}$.
+  \item[Transported bundled.]
+  $\lever{asymm},\ \lever{un},\
+    \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\},\
+    \lever{no\_cycle4}$.
+\end{description}
+
+The transported bundled family differs from the raw split family.  In
+particular, \lever{minlib} becomes the two-lever set
+\[
+  \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\},
+\]
+whereas the split representation contains each decisive lever as an independent
+singleton repair.  The classification is
+\texttt{noncanonical\_persists} for both cases.
+
+\subsection{Interpretation}
+
+The $(2,5)$ result preserves both parts of the M1.5 witness:
+\begin{enumerate}
+  \item the bundled and split packages are \CM{} under identity $\rho$; and
+  \item their raw repair presentations differ after transport by $\pi$.
+\end{enumerate}
+Because the underlying clauses are unchanged up to identity, the divergence is
+not attributable to extra split clauses or encoding strength.  It arises from
+how the same clause families are exposed as repair levers.
+
+This is a positive transfer along one axis, not a general family theorem.
+Keeping two voters is essential to the construction: there are exactly two
+fixed witness series, so no choice among voter pairs is required.  The result
+does not predict what happens when $n$ increases.

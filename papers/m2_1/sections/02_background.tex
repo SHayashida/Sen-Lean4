@@ -1,0 +1,95 @@
+\section{Background and Scope}\label{sec:background}
+
+\subsection{The local Sen atlas instance}
+
+The finite packages considered here use five named levers:
+\[
+  \{\mathtt{asymm},\mathtt{un},\mathtt{minlib},
+    \mathtt{no\_cycle3},\mathtt{no\_cycle4}\}.
+\]
+The first three represent asymmetry, unanimity, and a bundled
+minimal-liberalism condition.  The final two forbid directed social cycles of
+length three and four in the finite encoding.  Removing a lever removes the
+corresponding clause family.  A raw repair is an inclusion-minimal set of
+levers whose removal changes the active package from UNSAT to SAT\@.
+
+The conjunction of the two no-cycle levers is called the
+\emph{local-rationality family}.  It coincides with the relevant short-cycle
+control at the $(2,4)$ base case, but it must not be identified with full
+social acyclicity at family scale.  In particular, at $m=5$ it does not exclude
+length-five cycles.  Every result below is interpreted inside this fixed
+local-rationality family.
+
+\subsection{Three distinct transfer questions}
+
+The phrase ``the witness transfers'' can hide three different claims.
+\begin{description}[style=nextline,leftmargin=2.2em]
+  \item[Status transfer.]
+  Do the compared packages have the same satisfiability status?
+  \item[Clause-structure transfer.]
+  Are their clause multisets equal up to a verified bijection on variables?
+  \item[Repair-presentation transfer.]
+  After the levers are aligned by a transport map, do the inclusion-minimal
+  repair families agree?
+\end{description}
+Status agreement is weaker than clause-structure agreement.  Repair comparison
+is interpretable under either relation, but its claim strength differs.
+If the clause multisets coincide, logical-strength differences cannot explain a
+repair divergence.  If only status agrees, extra selector clauses or other
+encoding choices remain possible explanations.
+
+This paper reserves the semantic impossibility-lift question for M2.  The M2.1
+evidence does not modify the M2 theorem statements or their paper claims.
+Instead, it treats the transferred finite cases as the setting in which the
+repair representation is examined.
+
+\subsection{Bundled and split liberalism}
+
+The bundled representation exposes one lever, \texttt{minlib}.  At the
+two-voter base case, the split representation exposes two person-specific
+levers:
+\[
+  \mathtt{decisive\_voter0}
+  \quad\text{and}\quad
+  \mathtt{decisive\_voter1}.
+\]
+The repair-transport map $\pi$ aligns the two lever universes:
+\[
+\begin{aligned}
+  \pi(\mathtt{minlib})
+    &= \{\mathtt{decisive\_voter0},
+          \mathtt{decisive\_voter1}\},\\
+  \pi(x) &= \{x\}
+  \quad\text{for }x\in
+  \{\mathtt{asymm},\mathtt{un},
+    \mathtt{no\_cycle3},\mathtt{no\_cycle4}\}.
+\end{aligned}
+\]
+The map is a correspondence for comparing repair presentations.  It is not, by
+itself, a semantic equivalence claim between axiom formulas.
+
+For $n>2$, fixing voters 0 and 1 would no longer express the intended
+existential choice of two witnesses.  The Option C design therefore changes
+the split image to two roles,
+\texttt{selected\_decisive\_left} and
+\texttt{selected\_decisive\_right}, backed by a witness-pair selector bank.
+That design preserves the intended choice among voters, but it also creates the
+structural risk studied in Section~\ref{sec:option-c}.
+
+\subsection{Artifact and trust boundary}
+
+All M2.1 implementations remain exploratory and isolated under
+\code{scripts/exploration/candidate_b/}.  They write reports to temporary local
+directories.  They do not modify the production schema, production generators,
+Lean files, baseline CNF or LRAT certificates, or tracked result directories.
+The Option D scripts construct and compare the two-voter packages and enumerate
+their raw repair families.  The Option C scripts stop after the Step~0
+status-and-structure comparison.
+
+This separation is important for the trust claim.  The committed Sen24
+certificate establishes an audited base-case CNF fact; it is not a
+family-level CNF certificate.  Likewise, the exploratory family comparisons
+are evidence for the stated finite cases, not new kernel-checked theorem
+statements.  Certified SAT and proof-assistant infrastructure remain relevant
+to the broader atlas \citep{moura2021lean4,cruzfilipe2017lrat}, but the present
+paper does not enlarge their certified scope.

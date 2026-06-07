@@ -1,0 +1,73 @@
+\section{Introduction}\label{sec:intro}
+
+Finite SAT encodings are useful for locating sharp feasibility boundaries in
+social choice.  They can expose which combinations of axioms are inconsistent,
+which assumptions form a minimal conflict, and which removals restore
+satisfiability.  In an auditable possibility atlas, however, a solver result is
+only one layer of the evidence.  The semantic statement, the encoding, the
+solver status, the proof artifact, and the human-facing repair explanation have
+different invariance requirements.
+
+This paper studies one such requirement: whether a repair explanation remains
+stable after a finite impossibility witness is transferred to a neighboring
+case.  The motivating base case is the Sen liberal paradox with two voters and
+four alternatives \citep{sen1970}.  In the M1.5 study, a bundled
+\texttt{minlib} lever and a split presentation using
+\texttt{decisive\_voter0} and \texttt{decisive\_voter1} generated the same
+clause multiset under a verified variable renaming.  Nevertheless, their raw
+lever-level inclusion-minimal repairs differed.  The bundled presentation
+reported \lever{minlib}; the split presentation reported the two
+person-specific singleton repairs separately.  Clause-multiset equivalence
+ruled out a stronger-encoding explanation for that divergence.
+
+M2.1 asks whether this repair-presentation witness transfers to larger finite
+cases.  This is not the same question as whether the underlying impossibility
+status transfers.  The repository's M2 layer owns the semantic transfer claim;
+M2.1 operates one layer below it and asks what happens to the representation of
+repair candidates.  The distinction matters because status can remain UNSAT
+even when a split encoding introduces new selector structure, and because a
+repair divergence is strongest when the compared clause multisets are identical
+up to renaming.
+
+We examine the two nearest directions away from $(2,4)$:
+\begin{enumerate}
+  \item increase the number of alternatives while fixing the two-voter witness
+  structure, using $(2,5)$; and
+  \item increase the number of voters while retaining four alternatives, using
+  $(3,4)$.
+\end{enumerate}
+These directions require different split representations.  With two voters,
+the two decisive witnesses are fixed and no voter-pair choice is needed.  With
+three voters, the encoding must select which pair supplies the two witnesses,
+making role-sensitive selector machinery a central part of the comparison.
+
+\paragraph{Contributions.}
+The paper makes three narrow contributions.
+\begin{enumerate}
+  \item It states a family-scale witness discipline that separates status
+  agreement, clause-multiset equivalence, and repair-family comparison.
+  \item It records a positive transfer along the two-voter alternative
+  dimension: at $(2,5)$, clause-multiset equivalence persists under the identity
+  map and raw repair non-canonicity persists.
+  \item It records a voter-dimension boundary: at $(3,4)$, bundled and split
+  packages are both UNSAT, but role-specific selector machinery breaks
+  clause-multiset equivalence.  This case is classified
+  \texttt{sat\_equiv\_only}, and no repair enumeration is authorized from that
+  result.
+\end{enumerate}
+
+The result is intentionally modest.  We do not claim a theorem for arbitrary
+$n$ and $m$, a new SAT algorithm, or a new encoding of full social acyclicity.
+The evidence is restricted to the local clause families
+\texttt{no\_cycle3} and \texttt{no\_cycle4}.  At five alternatives these
+families do not exclude a length-five cycle.  The paper therefore reports a
+controlled finite transfer study, not a universal social-choice theorem.
+
+\paragraph{Roadmap.}
+Section~\ref{sec:background} separates the semantic, encoding, and repair
+layers.  Section~\ref{sec:witness} defines the comparison controls.
+Sections~\ref{sec:option-d} and~\ref{sec:option-c} report the positive and
+boundary tracks.  Section~\ref{sec:related} positions the result relative to
+computational social choice, diagnosis, and certified SAT\@.
+Section~\ref{sec:discussion} gives the combined interpretation and limitations.
+Appendix~\ref{sec:repro} records the repository-facing reproduction contract.

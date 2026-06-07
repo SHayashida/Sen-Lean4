@@ -1,0 +1,74 @@
+\section{Reproduction and Artifact Contract}\label{sec:repro}
+
+\subsection{Source-of-truth notes}
+
+The manuscript is derived from the following committed evidence notes:
+\begin{itemize}
+  \item \code{docs/candidate_b_encoding_sensitivity.md};
+  \item \code{docs/candidate_b_parametric_split_design.md};
+  \item \code{docs/candidate_b_option_d_positive_track.md};
+  \item \code{docs/candidate_b_option_c_boundary_plan.md};
+  \item \code{docs/candidate_b_option_c_boundary_result.md}; and
+  \item \code{docs/m2_1_status_summary.md}.
+\end{itemize}
+The status summary is the compact source for the two-sided interpretation.
+The Option D and Option C result notes are the sources for the numerical tables
+and authorization boundaries.
+
+\subsection{Exploratory scripts}
+
+The relevant implementations remain under
+\code{scripts/exploration/candidate_b/}:
+\begin{itemize}
+  \item \code{option_d_encoder.py};
+  \item \code{step0_equiv_check_option_d.py};
+  \item \code{enumerate_option_d_repairs.py};
+  \item \code{option_c_encoder.py}; and
+  \item \code{step0_equiv_check_option_c.py}.
+\end{itemize}
+They are not production generators and are not promoted to top-level
+\code{scripts/}.
+
+\subsection{Regeneration commands}
+
+From the repository root, the reviewed reports can be regenerated into
+temporary directories with:
+\begin{verbatim}
+python3 scripts/exploration/candidate_b/step0_equiv_check_option_d.py
+python3 scripts/exploration/candidate_b/enumerate_option_d_repairs.py
+python3 scripts/exploration/candidate_b/step0_equiv_check_option_c.py
+\end{verbatim}
+The defaults write below \code{/tmp}.  These reports are regenerable local
+outputs and are not tracked paper artifacts.  The third command performs Option
+C Step~0 only; it does not enumerate repairs.
+
+The manuscript itself builds with:
+\begin{verbatim}
+make -C papers/m2_1 pdf
+\end{verbatim}
+The resulting PDF is written to
+\code{papers/m2_1/build/main.pdf}.  The build directory is disposable and is
+not part of the evidence package.
+
+\subsection{Expected checks}
+
+The reviewed Option D report should classify both $(2,4)$ and $(2,5)$ as
+\texttt{equiv\_cm\_persists}.  The repair report should classify both as
+\texttt{noncanonical\_persists}.  The Option C report should show
+UNSAT/UNSAT at $(3,4)$, report 165,927 versus 165,939 variables and 1,347,847
+versus 1,513,735 clauses, and classify the comparison
+\texttt{sat\_equiv\_only}.
+
+\subsection{Protected scope}
+
+Reproducing or editing this manuscript does not authorize changes to:
+\begin{itemize}
+  \item Lean sources or M2 theorem statements;
+  \item M2 paper claims;
+  \item \code{encoding/schema.py} or production generators;
+  \item baseline CNF or LRAT certificates;
+  \item tracked \code{results/} artifacts; or
+  \item Option C repair enumeration.
+\end{itemize}
+The local-rationality and certificate caveats remain part of every
+interpretation of the reported data.

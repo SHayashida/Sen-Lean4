@@ -1,0 +1,57 @@
+\section{Related Work and Positioning}\label{sec:related}
+
+\paragraph{Computational social choice.}
+SAT and automated reasoning have long been used to discover and verify finite
+social-choice impossibilities and to synthesize voting rules
+\citep{tanglin2009computer,geist2011automated,brandtgeist2016strategyproof}.
+The present contribution is not a new use of SAT for social choice and does not
+claim a faster solver.  It studies a downstream explanatory question: after a
+finite impossibility comparison is available, which aspects of a raw repair
+presentation survive transfer to a neighboring case?
+
+\paragraph{Finite-to-family transfer.}
+Automated social-choice work has shown that finite instances can support wider
+theorems under suitable transfer arguments, while integrity-constraint lifting
+also illustrates that transfer conditions require care
+\citep{geist2011automated,grandiendriss2013}.  M2.1 deliberately separates that
+semantic question from the representation of repairs.  Even when impossibility
+status is already legitimized by another layer, neither clause-multiset
+equivalence nor repair-family equality follows automatically.
+
+\paragraph{Diagnosis, MUS/MCS, and assumption systems.}
+Minimal conflicts and minimal repairs are central to model-based diagnosis and
+assumption-based truth maintenance \citep{dekleer1986atms,reiter1987}.
+The Option D enumeration is adjacent to this tradition: lever removals are
+tested for satisfiability and filtered by inclusion minimality.  We do not
+propose a new MUS/MCS algorithm.  Our narrower point is that a minimal repair
+family depends on the exposed lever vocabulary.  A bundled lever and its
+fine-grained split can yield different raw singleton repairs even when their
+clauses coincide.
+
+\paragraph{Constraint hierarchies and optimization.}
+Constraint hierarchies resolve inconsistency through preferences among
+constraints \citep{borning1992constraint}; MaxSAT and related methods optimize
+over soft clauses or weighted violations \citep{li2009maxsat}.  The transport
+map $\pi$ in this study is neither a priority relation nor an objective
+function.  It is an audit contract aligning two repair vocabularies.  The
+question is representational equality of repair families, not the computation
+of one preferred optimum.
+
+\paragraph{Certified SAT and mechanized social choice.}
+Proof assistants and certified clausal proof formats reduce trust in solver
+internals \citep{moura2021lean4,cruzfilipe2017lrat,wetzler2014drat}.
+Mechanized social-choice results provide a complementary semantic trust layer
+\citep{nipkow2009social}.  The wider Sen atlas separates proof and artifact
+layers.  This paper does not add a new Lean theorem or a new certificate.
+Instead, it applies the same separation discipline to an explanatory layer:
+status, clause structure, and repair presentation are recorded as distinct
+claims with distinct evidence.
+
+\paragraph{Encoding sensitivity.}
+SAT encodings of one semantic problem can vary greatly in auxiliary variables,
+propagation behavior, and proof structure.  Such variation is often judged by
+solver performance.  Here it has a different role.  The Option C selector
+variables are semantically motivated by witness choice, but their presence
+breaks the exact clause-multiset control used by the base-case repair argument.
+The relevant sensitivity is therefore not merely runtime sensitivity; it is
+sensitivity of the admissible explanation claim to the encoding interface.

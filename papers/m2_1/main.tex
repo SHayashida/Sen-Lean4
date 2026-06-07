@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage[numbers]{natbib}
+
+\DeclareRobustCommand{\code}[1]{\path{#1}}
+\newcommand{\CM}{\ensuremath{\equiv_{\mathrm{CM}}}}
+\newcommand{\lever}[1]{\ensuremath{\{\mathtt{#1}\}}}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Repair Explanations After Transfer:\\
+Clause-Multiset Persistence and a Voter-Dimension Boundary\\
+in the Sen Atlas}
+\author{Shunya Hayashida\\
+Department of Liberal Arts, Faculty of Liberal Arts\\
+The Open University of Japan\\
+\href{mailto:1720067169@campus.ouj.ac.jp}{1720067169@campus.ouj.ac.jp}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{sections/00_abstract}
+\input{sections/01_intro}
+\input{sections/02_background}
+\input{sections/03_witness_class}
+\input{sections/04_option_d_positive}
+\input{sections/05_option_c_boundary}
+\input{sections/06_related_work}
+\input{sections/07_discussion}
+
+\appendix
+\input{sections/appendix_repro}
+
+\bibliographystyle{plainnat}
+\bibliography{bib/references}
+
+\end{document}

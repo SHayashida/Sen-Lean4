@@ -1,0 +1,99 @@
+\section{Witness Class and Comparison Protocol}\label{sec:witness}
+
+\subsection{Clause-multiset equivalence}
+
+Let $F$ and $G$ be CNF packages with variable sets $V_F$ and $V_G$.
+We write $F\CM G$ when there is a bijection
+$\rho:V_F\rightarrow V_G$ such that applying $\rho$ to every literal of every
+clause in $F$ yields exactly the clause multiset of $G$, including
+multiplicity.
+
+\begin{definition}[M2.1 comparison record]
+For a finite case $(n,m)$, an M2.1 comparison record consists of a bundled
+package $F_B$, a split package $F_S$, a repair-transport map $\pi$, the
+SAT/UNSAT status of both packages, a verified or refuted \CM{} check, and, when
+authorized, the raw inclusion-minimal repair families
+$\mathcal{R}_B$ and $\mathcal{R}_S$.
+\end{definition}
+
+Counts alone do not prove \CM.  Equal variable counts, clause counts, and
+clause-length histograms are only necessary conditions.  A positive
+classification requires construction and re-verification of $\rho$.  A
+negative classification can be established by a violated invariant: if the
+packages have different numbers of used variables or clauses, no variable
+bijection can make their clause multisets equal.
+
+\subsection{Step~0 classification}
+
+Before repair enumeration, each bundled/split pair receives exactly one
+classification:
+\begin{description}[style=nextline,leftmargin=2.2em]
+  \item[\texttt{equiv\_cm\_persists}.]
+  Status agrees and a variable-renaming bijection witnesses \CM.
+  \item[\texttt{sat\_equiv\_only}.]
+  SAT/UNSAT status agrees, but \CM{} is refuted.
+  \item[\texttt{status\_diverges}.]
+  The packages have different satisfiability statuses.
+  \item[\texttt{inconclusive}.]
+  Generation, solving, or structural comparison did not establish one of the
+  preceding outcomes.
+\end{description}
+
+The gate is asymmetric.  A reviewed
+\texttt{equiv\_cm\_persists} result can authorize the strong repair comparison
+because the M1.5 control is retained.  A \texttt{sat\_equiv\_only} result can
+still be scientifically useful, but it does not automatically authorize repair
+enumeration and cannot support a \CM-protected non-canonicity claim.
+
+\subsection{Repair-family comparison}
+
+For a package with active lever universe $L$, a set $R\subseteq L$ is a raw
+inclusion-minimal repair when removing all clause families named by $R$ yields
+SAT and no strict subset of $R$ does.  Let $\mathcal{R}_B$ and
+$\mathcal{R}_S$ denote the bundled and split repair families.
+The transport map extends pointwise:
+\[
+  \pi(R)=\bigcup_{\ell\in R}\pi(\ell),
+  \qquad
+  \pi(\mathcal{R}_B)=\{\pi(R):R\in\mathcal{R}_B\}.
+\]
+The repair presentation is non-canonical under the chosen lever refinement
+when
+\[
+  \pi(\mathcal{R}_B)\ne\mathcal{R}_S.
+\]
+This inequality is a statement about raw lever-level presentation.  It does not
+say that one encoding is semantically preferable, nor does it define a
+canonical grouping policy.  Rather, it shows that the human-facing repair
+vocabulary needs an explicit abstraction contract.
+
+\subsection{Two-track design}
+
+The design separates two axes that would otherwise be conflated:
+\begin{itemize}
+  \item \textbf{Option D, alternative expansion.}  Keep $n=2$, increase $m$,
+  preserve the legacy-style two selector series, and introduce no voter-pair
+  selector machinery.
+  \item \textbf{Option C, voter expansion.}  Increase $n$ to three, select a
+  witness pair, and expose the selected left and right decisive roles
+  separately.
+\end{itemize}
+The first track tests whether the base-case witness survives a change in the
+alternative dimension while keeping its structural basis.  The second tests
+whether that basis itself remains available once witness selection becomes
+nontrivial.
+
+\begin{proposition}[Interpretation discipline]
+An Option D repair-family divergence observed after a verified \CM{} check can
+be attributed to lever-presentation granularity within the compared packages.
+An Option C status agreement after \CM{} failure establishes an encoding
+boundary, but does not by itself establish repair-presentation
+non-canonicity.
+\end{proposition}
+\begin{proof}
+Under \CM, the packages have identical clauses up to a variable renaming, so
+additional logical strength cannot account for a difference caused by how those
+clauses are grouped into levers.  When \CM{} fails, unmatched clauses remain a
+possible cause of any later repair divergence.  Status agreement removes only
+the coarser possibility of a SAT/UNSAT disagreement.
+\end{proof}

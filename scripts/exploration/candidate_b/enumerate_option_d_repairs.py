@@ -6,7 +6,8 @@ Scope is deliberately narrow:
   * Option D's legacy-style two-series encoder only;
   * cases (2,4) and (2,5) only by default;
   * bundled minlib versus its two-lever split image;
-  * no Option C, pair selectors, all-voter split, or Lean integration.
+  * no Option C repair enumeration, pair selectors, all-voter split, or Lean
+    integration. Option C Step 0 for (3,4) is handled separately.
 
 Outputs are local exploratory reports under /tmp by default. This is not a
 general-purpose MCS framework.
@@ -450,8 +451,10 @@ def _summary_md(payload: dict[str, Any]) -> str:
             "π is a lever correspondence / repair-transport map, not a semantic "
             "equivalence claim.",
             "",
-            "Option C and (3,4) remain unimplemented. No top-level script promotion "
-            "is part of this experiment.",
+            "Option C Step 0 for (3,4) is handled separately and is classified "
+            "as sat_equiv_only. Option C repair enumeration is not authorized or "
+            "implemented in this script. No top-level script promotion is part "
+            "of this experiment.",
             "",
         ]
     )
@@ -530,8 +533,10 @@ def main() -> None:
             "equivalence claim."
         ),
         "local_rationality_scope": SCOPE_STATEMENT,
-        "option_c_status": "not implemented",
-        "n3_m4_status": "not implemented",
+        "option_c_repair_enumeration": (
+            "not_authorized_not_implemented_here"
+        ),
+        "n3_m4_step0_status": "handled_separately_sat_equiv_only",
         "top_level_scripts_promotion": False,
         "cases": case_reports,
     }
@@ -552,7 +557,11 @@ def main() -> None:
             f"bundled={case['bundled_raw_minimal_repairs']}; "
             f"split={case['split_raw_minimal_repairs']}"
         )
-    print("Option C / (3,4) remains unimplemented; no top-level promotion occurred.")
+    print(
+        "Option C Step 0 for (3,4) is handled separately as sat_equiv_only; "
+        "Option C repair enumeration is not authorized or implemented here; "
+        "no top-level promotion occurred."
+    )
 
 
 if __name__ == "__main__":

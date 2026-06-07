@@ -1,10 +1,8 @@
-# M2.1 Candidate-B exploration (Step 0)
+# M2.1 Candidate-B exploration
 
-Exploratory, **isolated** prototypes for M2.1 Step 0. Nothing here is promoted to
-top-level `scripts/`. Outputs are written to a temp/local path
-(default `/tmp/candidate_b_step0`), never into tracked `results/`.
-
-Step 0 only. **Repair enumeration is not authorized until Step 0 is reviewed.**
+Exploratory, **isolated** prototypes for M2.1 Candidate B. Nothing here is
+promoted to top-level `scripts/`. Outputs are written to temp/local paths, never
+into tracked `results/`.
 
 ## What Step 0 asks
 
@@ -124,4 +122,36 @@ to `/tmp/candidate_b_step0_option_d/`.
 
 The `(2,5)` result is for the `(2,m)` positive track **only**; it does **not**
 settle the Option C / voter-dimension boundary track (`n > 2`, e.g. `(3,4)`).
-Repair enumeration remains unauthorized.
+The reviewed `(2,4)` and `(2,5)` Option D positive-track cases are authorized
+for the narrow raw lever-level repair enumeration described below. Option C and
+`(3,4)` remain unauthorized and unimplemented.
+
+## Option D raw repair enumeration
+
+`enumerate_option_d_repairs.py` exhaustively considers removal subsets of the
+active bundled and split lever packages for `(2,4)` and `(2,5)`. It records raw
+lever-level inclusion-minimal repairs, transports bundled repairs through π,
+and compares the transported family with the split family.
+
+Run:
+
+    python3 scripts/exploration/candidate_b/enumerate_option_d_repairs.py
+
+Reports are written to `/tmp/candidate_b_option_d_repairs/` by default. The
+runner builds clause fragments once per lever and solves removal subsets in
+increasing cardinality order. Supersets of a known SAT repair are recorded as
+SAT by clause-removal monotonicity; all other subsets are sent to the solver.
+
+This remains Option D only: no pair selectors, no all-voter split, no Option C,
+no `(3,4)`, and no top-level script promotion.
+
+### Option D repair outcome
+
+| case | bundled raw minimal repairs | split raw minimal repairs | classification |
+| --- | --- | --- | --- |
+| `(2,4)` | `{asymm}`, `{un}`, `{minlib}`, `{no_cycle4}` | `{asymm}`, `{un}`, `{decisive_voter0}`, `{decisive_voter1}`, `{no_cycle4}` | `noncanonical_persists` |
+| `(2,5)` | `{asymm}`, `{un}`, `{minlib}`, `{no_cycle4}` | `{asymm}`, `{un}`, `{decisive_voter0}`, `{decisive_voter1}`, `{no_cycle4}` | `noncanonical_persists` |
+
+For both cases, transporting the bundled family replaces `{minlib}` with
+`{decisive_voter0, decisive_voter1}`. That transported two-lever repair differs
+from the two split singleton repairs, so the repair families are unequal.

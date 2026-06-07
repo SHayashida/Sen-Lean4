@@ -43,7 +43,7 @@ Three statements must be read together:
   family scale.** The missing object is a family-scale split liberalism encoding;
   this is a design gap, not a checker fault.
 - **Repair enumeration remains unauthorized.** No MCS or repair enumeration has
-  started, and none may start until the gates in Section 8 are satisfied.
+  started, and none may start until the gates in Section 9 are satisfied.
 
 ---
 
@@ -194,15 +194,22 @@ Option D is the most conservative path for preserving the M1.5 ≡CM blade.
 
 **Do not immediately adopt Option C.** The recommended decision rule is:
 
-- **Primary path — Option D.** Start with the `(2,m)`-restricted two-witness
-  split. If it can generate bundled/split packages for `(2,5)` and preserve, or
-  plausibly preserve, ≡CM, it best protects the M1.5 clause-multiset-equivalence
-  argument and yields the first strong M2.1 claim at `(2,5)`.
-- **Secondary path — Option C.** Investigate the pair-selector split only as a
-  feasibility branch for `n > 2`. Option C may become the correct design for
-  `(3,4)`, but only if its selector machinery does not destroy the intended
-  comparison, or if a weakened (satisfiability-equivalence) claim is explicitly
-  accepted.
+- **First strong positive claim — prioritize Option D.** Start with the
+  `(2,m)`-restricted two-witness split. If it can generate bundled/split packages
+  for `(2,5)` and preserve, or plausibly preserve, ≡CM, it best protects the M1.5
+  clause-multiset-equivalence argument and yields the first strong M2.1 claim at
+  `(2,5)`.
+- **Program-level boundary claim — keep Option C as an explicit boundary track.**
+  The pair-selector split is not merely a fallback; it is the instrument for the
+  voter-dimension question at `n > 2` (e.g. `(3,4)`). **Do not collapse Option C
+  into future work too early** — its outcome is itself a result (see the
+  two-sided target below).
+- **Do not let Option C block the Option D positive track.** The Option D claim
+  must be allowed to proceed on `(2,m)` even while Option C feasibility is still
+  open. The two are run independently.
+- **Treat the pair of outcomes as potentially complementary, not competing.** A
+  `(2,m)` ≡CM-persistence result and an `(n>2)` ≡CM-boundary result reinforce one
+  another rather than contradict.
 - **Deferred path — Option B.** The all-voter split should not be the default,
   because it risks turning M2.1 into an all-voter liberalism redesign rather than
   a repair-representation transfer study. (Option A is subsumed: it equals
@@ -210,7 +217,44 @@ Option D is the most conservative path for preserving the M1.5 ≡CM blade.
 
 ---
 
-## 5. Feasibility-first policy
+## 5. Two-sided M2.1 target
+
+M2.1 should **not** be framed as "Option D only." If M2.1 proved persistence only
+on `(2,m)` with the two voters fixed, the result could read as a weak extension of
+the M1.5 base case rather than a genuine family-scale transfer result. The
+stronger framing runs two tracks in parallel:
+
+- **Positive track — Option D / `(2,m)`.** Tests whether the M1.5
+  repair-candidate representation non-canonicity persists when the number of
+  alternatives increases but the two-voter witness structure is held fixed. This
+  is the conservative path most likely to preserve ≡CM, and it carries the first
+  strong positive M2.1 claim.
+- **Boundary track — Option C / voter dimension.** Tests whether extending the
+  split representation to `n > 2` requires selector variables/clauses or other
+  witness-selection machinery that breaks ≡CM. If ≡CM fails here, that failure is
+  **not merely an implementation problem**: it can become a negative result about
+  the boundary of the M1.5 witness class — the point past which
+  representation-level non-canonicity no longer transfers ≡CM-protected.
+
+### The tradeoff
+
+- **Option D protects the M1.5 ≡CM blade but may yield a narrower claim**, because
+  the voter structure is unchanged; it generalizes only the alternative dimension.
+- **Option C addresses the more substantive voter-dimension transfer question**,
+  but may destroy ≡CM through its selector clauses, weakening or invalidating the
+  strong M1.5-style argument on that side.
+- **The strongest M2.1 shape may therefore be a two-sided result:** `(2,m)`
+  persistence under ≡CM, plus a voter-dimension boundary where ≡CM no longer
+  persists.
+
+This mirrors the M2 structure, where the Proof layer lifts while the Witness/Audit
+layer does not auto-lift: at M2.1, representation non-canonicity may persist in the
+`(2,m)` direction while the voter-dimension generalization may expose a
+representation/selector boundary.
+
+---
+
+## 6. Feasibility-first policy
 
 **No option is adopted until a minimal feasibility check is performed.** The
 feasibility check must answer, for the candidate design and target case:
@@ -243,7 +287,7 @@ encoder and authorizes no repair enumeration.
 
 ---
 
-## 6. Transport maps
+## 7. Transport maps
 
 The transport maps below are stated as lever correspondences using set-valued
 images, deliberately avoiding logical symbols. **π is a lever correspondence /
@@ -274,22 +318,27 @@ liberalism lever `minlib` has a two-element split image.
 
 ---
 
-## 7. Step 0 rerun plan
+## 8. Step 0 rerun plan
 
 After a candidate split design is implemented, the Step 0 checker
 (`scripts/exploration/candidate_b/step0_equiv_check.py`) must be rerun and the
-classifications reviewed before any further step.
+classifications reviewed before any further step. The two tracks rerun on
+different cases.
 
-- **For Option D**, rerun on:
+- **Option D rerun (positive track):**
   - `(2,4)` — base-case control,
-  - `(2,5)` — first M2.1 target.
+  - `(2,5)` — first positive-track family case.
 
-  Do **not** require `(3,4)` for the first strong M2.1 claim.
+- **Option C feasibility rerun (boundary track):**
+  - `(3,4)` — the voter-dimension boundary case,
+  - optionally `(2,5)` as well, **only if the same pair-selector machinery is
+    used there** (so that Option C is exercised on a case Option D also covers).
 
-- **For Option C**, rerun on:
-  - `(2,4)` — base-case control,
-  - `(2,5)`,
-  - `(3,4)`.
+Clarifications:
+
+- `(3,4)` is **not required** for the first positive Option D claim.
+- But `(3,4)` **remains important** for the boundary-track claim, because it is the
+  case that probes whether voter-dimension transfer breaks ≡CM.
 
 The classifications remain the existing Step 0 vocabulary:
 
@@ -300,20 +349,54 @@ The classifications remain the existing Step 0 vocabulary:
 
 ---
 
-## 8. Gates before repair enumeration
+## 9. Gates before repair enumeration
 
-Repair enumeration remains **unauthorized** until all of the following hold:
+The two tracks are gated separately.
 
-- this design document is reviewed;
-- a candidate split design is selected;
-- split package generation succeeds for the selected target cases;
-- the Step 0 rerun has a reviewed classification;
-- if ≡CM fails, the M2.1 claim is explicitly revised (per Section 5) **before**
-  repair enumeration begins.
+**Option D positive track.** Repair enumeration may proceed on the Option D
+positive track if all of the following hold:
+
+- Option D split package generation succeeds for `(2,5)`;
+- Step 0 returns `equiv_cm_persists`, or another reviewed classification that is
+  compatible with the intended claim;
+- this design document is updated to reflect that classification.
+
+**Option C boundary track.** Option C repair enumeration remains **unauthorized**
+unless all of the following hold:
+
+- pair-selector feasibility is reviewed;
+- the Step 0 classification for `(3,4)` is reviewed;
+- any weakening from ≡CM to satisfiability-equivalence is explicitly approved.
+
+In every case, if ≡CM fails, the M2.1 claim is explicitly revised (per Section 6)
+**before** repair enumeration begins on that track. Neither track's gate is
+satisfied at the time of writing, so repair enumeration remains unauthorized.
 
 ---
 
-## 9. Scope discipline
+## 10. Possible result shapes
+
+The result shape is **read off from the mechanical Step 0 classifications** of
+`(2,5)` and `(3,4)`; it is not chosen in advance. The main shapes are:
+
+- **Strong two-sided result.** Option D shows `(2,m)` ≡CM persistence
+  (`equiv_cm_persists` at `(2,5)`), and Option C shows a voter-dimension ≡CM
+  boundary (`sat_equiv_only` or `status_diverges` at `(3,4)`). This is the
+  strongest shape: persistence plus a marked boundary of the M1.5 witness class.
+- **Strong positive result only.** Option D shows `(2,m)` ≡CM persistence, while
+  Option C remains infeasible or deferred (`inconclusive` at `(3,4)`). The
+  positive claim stands; the boundary question is left open.
+- **Boundary-only result.** Option D fails to preserve ≡CM, but the failure itself
+  shows that M1.5 repair-presentation non-canonicity does not automatically
+  transfer — a negative result about the boundary of the witness class.
+- **Weakened result.** Only satisfiability-equivalence persists
+  (`sat_equiv_only`), so M2.1 must weaken the flagship claim from
+  ≡CM-protected representation non-canonicity to satisfiability-equivalent
+  representation divergence.
+
+---
+
+## 11. Scope discipline
 
 - This work is **local-rationality only.**
 - `no_cycle3 ∧ no_cycle4` is **not** full `SocialAcyclic` at family scale.

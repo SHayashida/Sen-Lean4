@@ -189,6 +189,29 @@ If ≡CM fails (cases 2, 3, or 4 above), this witness-class document must be
 updated before repair enumeration begins, because the paper's flagship claim may
 need to be weakened.
 
+### Step 0 implementation constraint (recorded from the first prototype)
+
+The exploratory Step 0 checker lives at
+`scripts/exploration/candidate_b/step0_equiv_check.py` (see its README). Its
+first run records a generator-interface constraint that currently blocks
+family-scale ≡CM measurement:
+
+- the split levers `decisive_voter0` / `decisive_voter1` are encoded only in the
+  legacy `selectors_v1` MINLIB mode, which `encoding/schema.py` restricts to the
+  Sen24 base case `(2,4)`; outside `(2,4)` the parametric `pair_selectors_v1`
+  mode is used and the split levers are not defined;
+- consequently, at `(2,5)` and `(3,4)` the bundled package generates but the
+  transport-map split image cannot be generated, so both cases are classified
+  `inconclusive` (≡CM not evaluable), while the `(2,4)` base-case control
+  classifies `equiv_cm_persists` and validates the ρ-construction machinery.
+
+A family-scale parametric split encoding of the liberalism layer (a per-voter
+analogue of `decisive_voter*` valid under `pair_selectors_v1`) is therefore a
+prerequisite for measuring ≡CM persistence, and its design is part of the Step 0
+review. The fixed two-lever split image may additionally be structurally
+insufficient where the voter count exceeds two (e.g. `(3,4)`), which is itself a
+finding about the transport map's scope rather than a checker fault.
+
 ---
 
 ## Required new artifacts

@@ -1,0 +1,83 @@
+{
+  "alts": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "aux_var_range": null,
+  "category_counts": {
+    "asymm": 0,
+    "minlib": 0,
+    "no_cycle3": 13824,
+    "no_cycle4": 13824,
+    "un": 0
+  },
+  "cnf_sha256": "cf25127a73562967434c1a53755d21d3663536a5bc10bd8108f9b109bf7ffce7",
+  "encoding": "sen24",
+  "minlib": {
+    "mode": "disabled"
+  },
+  "n_p_vars": 6912,
+  "nclauses": 27648,
+  "npairs": 12,
+  "nprofiles": 576,
+  "nranks": 24,
+  "nvars": 6912,
+  "p_var_range": [
+    1,
+    6912
+  ],
+  "pair_order": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "profile_order": "p = r0*24 + r1 (r0 major)",
+  "ranking_order": "itertools.permutations(ALT,4) lex"
+}

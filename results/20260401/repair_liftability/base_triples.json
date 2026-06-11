@@ -1,0 +1,367 @@
+{
+  "axiom_family": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "case": "n2_m4",
+  "date": "20260401",
+  "experiment": "repair_liftability_step1",
+  "generated_at_utc": "2026-03-31T15:06:46.820628+00:00",
+  "n_alternatives": 4,
+  "n_voters": 2,
+  "schema_version": "1",
+  "scope_note": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "source_atlas": "results/jar_full_atlas/atlas.json",
+  "step": "Step 1: Fix all base-case repair triples",
+  "summary": {
+    "n_emitted_triples": 8,
+    "n_total_repairs": 8,
+    "n_unsat_base_packages": 2,
+    "per_package": [
+      {
+        "atlas_case_id": "case_11101",
+        "base_package": [
+          "asymm",
+          "un",
+          "minlib",
+          "no_cycle4"
+        ],
+        "base_package_key": "asymm+un+minlib+no_cycle4",
+        "n_repairs": 4,
+        "repaired_package_keys": [
+          "asymm+un+minlib",
+          "asymm+un+no_cycle4",
+          "asymm+minlib+no_cycle4",
+          "un+minlib+no_cycle4"
+        ]
+      },
+      {
+        "atlas_case_id": "case_11111",
+        "base_package": [
+          "asymm",
+          "un",
+          "minlib",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+        "n_repairs": 4,
+        "repaired_package_keys": [
+          "asymm+un+minlib+no_cycle3",
+          "asymm+un+no_cycle3+no_cycle4",
+          "asymm+minlib+no_cycle3+no_cycle4",
+          "un+minlib+no_cycle3+no_cycle4"
+        ]
+      }
+    ]
+  },
+  "triples": [
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "repaired_package_key": "asymm+un+minlib",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11101/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11101/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11101/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11101/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "repaired_package_key": "asymm+un+minlib+no_cycle3",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11111/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11111/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11111/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    },
+    {
+      "axiom_family": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "case": "n2_m4",
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Candidate A evidence is valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "source_mcs_artifact": "results/jar_full_atlas/atlas.json (enumerate_repairs full enumeration)",
+      "source_unsat_artifact": "results/jar_full_atlas/case_11111/summary.json",
+      "validation": {
+        "base_package_status": "UNSAT",
+        "base_package_status_source": "atlas",
+        "mcs_minimality_verified": true,
+        "repaired_package_status": "SAT",
+        "repaired_package_status_source": "atlas"
+      }
+    }
+  ]
+}

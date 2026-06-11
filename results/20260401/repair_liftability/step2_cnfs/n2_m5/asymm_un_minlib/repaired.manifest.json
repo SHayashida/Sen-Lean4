@@ -1,0 +1,155 @@
+{
+  "alts": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "aux_var_range": [
+    288001,
+    288041
+  ],
+  "axioms": [
+    "asymm",
+    "un",
+    "minlib"
+  ],
+  "category_counts": {
+    "asymm": 288000,
+    "minlib": 576003,
+    "no_cycle3": 0,
+    "no_cycle4": 0,
+    "un": 72000
+  },
+  "cnf_sha256": "0a66203ac6d9992e0e6049b3f2a0cdf45ec903d90be1c6c13ae6a926611f91e6",
+  "encoding": "finite_schema_v1",
+  "minlib": {
+    "decisive_selector_count": 40,
+    "decisive_var_range": [
+      288002,
+      288041
+    ],
+    "decisive_voters": [
+      0,
+      1
+    ],
+    "mode": "pair_selectors_v1",
+    "pair_selector_count": 1,
+    "pair_selector_order": [
+      [
+        0,
+        1
+      ]
+    ],
+    "pair_selector_var_range": [
+      288001,
+      288001
+    ]
+  },
+  "n_alts": 5,
+  "n_p_vars": 288000,
+  "n_voters": 2,
+  "nclauses": 936003,
+  "npairs": 20,
+  "nprofiles": 14400,
+  "nquads": 120,
+  "nranks": 120,
+  "ntriples": 60,
+  "nvars": 288041,
+  "p_var_range": [
+    1,
+    288000
+  ],
+  "pair_order": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      3
+    ]
+  ],
+  "profile_order": "itertools.product(range(nranks), repeat=2) lex",
+  "quad_order": "itertools.permutations(ALT,4) lex",
+  "ranking_order": "itertools.permutations(ALT,5) lex",
+  "schema_version": 1,
+  "triple_order": "itertools.permutations(ALT,3) lex",
+  "voters": [
+    0,
+    1
+  ]
+}

@@ -1,0 +1,2773 @@
+{
+  "axiom_universe": [
+    "asymm",
+    "un",
+    "decisive_voter0",
+    "decisive_voter1",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "cases": [
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [],
+      "case_id": "case_000000",
+      "duration_sec": 0.004330042000000089,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "5f95b9c960ee79989368ef5dda9cb51b3829203b2d8bdaf7323a44ded37c411e",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 0,
+        "nvars": 6912
+      },
+      "mask_bits": "000000",
+      "mask_int": 0,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm"
+      ],
+      "case_id": "case_100000",
+      "duration_sec": 0.006058957999999892,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "393edca492ce7c9e38019dbcf90e4d5aec16fdc4161fab581477b91e50fbe7c5",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 6912,
+        "nvars": 6912
+      },
+      "mask_bits": "100000",
+      "mask_int": 1,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un"
+      ],
+      "case_id": "case_010000",
+      "duration_sec": 0.006588832999999905,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "ad13df0e4cef186df0c7e37fa01f3174f03defecf7efaedeb48b08f9b2f33f03",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 1728,
+        "nvars": 6912
+      },
+      "mask_bits": "010000",
+      "mask_int": 2,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un"
+      ],
+      "case_id": "case_110000",
+      "duration_sec": 0.006309166999999949,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "8bc4b512a74860cf04610dfeccfbff2ca34a45a85d694fa16d3c4502cd851d32",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 8640,
+        "nvars": 6912
+      },
+      "mask_bits": "110000",
+      "mask_int": 3,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter0"
+      ],
+      "case_id": "case_001000",
+      "duration_sec": 0.006793957999999822,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "07c6a7b8726b3b6adb9b84dd754407be767a32b6b8e69aca07bea03e268a6f4a",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 6913,
+        "nvars": 6936
+      },
+      "mask_bits": "001000",
+      "mask_int": 4,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0"
+      ],
+      "case_id": "case_101000",
+      "duration_sec": 0.00765216599999996,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "0be5c06ef7ed6e8e762c8fddde2dc4026f88f6e92a4f7f85308d3f175ddb04f1",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 13825,
+        "nvars": 6936
+      },
+      "mask_bits": "101000",
+      "mask_int": 5,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0"
+      ],
+      "case_id": "case_011000",
+      "duration_sec": 0.00543537500000002,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "eacaba3c496084e478d13ff647ee94046014ee7f074d7e103f5cd305d5c52d5c",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 8641,
+        "nvars": 6936
+      },
+      "mask_bits": "011000",
+      "mask_int": 6,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0"
+      ],
+      "case_id": "case_111000",
+      "duration_sec": 0.007155916000000095,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "e6520ad10fec2d8f54d7e50504c2e01d89d160e82312088c468ecafcde3eaa08",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 15553,
+        "nvars": 6936
+      },
+      "mask_bits": "111000",
+      "mask_int": 7,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter1"
+      ],
+      "case_id": "case_000100",
+      "duration_sec": 0.005649457999999941,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "8599cc8a8b70420e5d96e4fb205a4b159bde1f7364665c4fe89f9e43f4557b57",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 6913,
+        "nvars": 6936
+      },
+      "mask_bits": "000100",
+      "mask_int": 8,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter1"
+      ],
+      "case_id": "case_100100",
+      "duration_sec": 0.0077788329999999295,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "e97c3e5a7963c6cebecebed32a3f3171f78923d35f88c6f507bb7e3e95f158cb",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 13825,
+        "nvars": 6936
+      },
+      "mask_bits": "100100",
+      "mask_int": 9,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter1"
+      ],
+      "case_id": "case_010100",
+      "duration_sec": 0.00570087500000005,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "487f319f38b3c18cfdc9d4543dd014ba228e5c0a4884e1829993e68db4bc545c",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 8641,
+        "nvars": 6936
+      },
+      "mask_bits": "010100",
+      "mask_int": 10,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter1"
+      ],
+      "case_id": "case_110100",
+      "duration_sec": 0.007434708000000123,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "a83af661b687da08a3d3b4d7aaec3bbed4da8cc51482207608c0e32889673fe8",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 15553,
+        "nvars": 6936
+      },
+      "mask_bits": "110100",
+      "mask_int": 11,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "case_id": "case_001100",
+      "duration_sec": 0.007251458999999905,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "329e99fa72129d6b67068a322dea72b9981d077e78db43b5e476ddc793aadd33",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 13826,
+        "nvars": 6936
+      },
+      "mask_bits": "001100",
+      "mask_int": 12,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "case_id": "case_101100",
+      "duration_sec": 0.00920862499999986,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "cb5954d6ee6a1e044c78369be8607d47558accc03f2f6b7737e6ba66cb10ac3d",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20738,
+        "nvars": 6936
+      },
+      "mask_bits": "101100",
+      "mask_int": 13,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "case_id": "case_011100",
+      "duration_sec": 0.007120000000000237,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "e527f3b6eaf9c6688bc47f13220316574018a5b53fd79438822e7113c1c85e88",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 15554,
+        "nvars": 6936
+      },
+      "mask_bits": "011100",
+      "mask_int": 14,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "case_id": "case_111100",
+      "duration_sec": 0.008248041999999955,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "d5e204028a961274fa86486e6c0b5a330679f32aec8adcceef65a917b70c2f12",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22466,
+        "nvars": 6936
+      },
+      "mask_bits": "111100",
+      "mask_int": 15,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "no_cycle3"
+      ],
+      "case_id": "case_000010",
+      "duration_sec": 0.008822042000000252,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "7a3863986e5c4209f63a100d798e95fc9f498f56e234cab2865d854d6b4d0e63",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 13824,
+        "nvars": 6912
+      },
+      "mask_bits": "000010",
+      "mask_int": 16,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "case_id": "case_100010",
+      "duration_sec": 0.010236915999999763,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "561a242a3d1ad74250c3b074c08f13eafde6f899b299906f2abb05a7dda50159",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 20736,
+        "nvars": 6912
+      },
+      "mask_bits": "100010",
+      "mask_int": 17,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle3"
+      ],
+      "case_id": "case_010010",
+      "duration_sec": 0.008598834000000277,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "e66684066de29407fa932421b3d77610c2bbbe7a950086756953d0952324a7b0",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 15552,
+        "nvars": 6912
+      },
+      "mask_bits": "010010",
+      "mask_int": 18,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "case_id": "case_110010",
+      "duration_sec": 0.01012070800000009,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "97d9954c5ffcc891bd7e5ac375eca41de26de697b117fbd31299b74d691e221f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 22464,
+        "nvars": 6912
+      },
+      "mask_bits": "110010",
+      "mask_int": 19,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "case_id": "case_001010",
+      "duration_sec": 0.009726458000000271,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "41ab4292237dc4b95a0feff4d3e36fc4fd89431ae7e6bb1750fe22e49612a7e3",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20737,
+        "nvars": 6936
+      },
+      "mask_bits": "001010",
+      "mask_int": 20,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "case_id": "case_101010",
+      "duration_sec": 0.01461800000000002,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "476e089e4660247978eb18cff18adc907bd0ce1798eef787281d0f7c09e61e5f",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27649,
+        "nvars": 6936
+      },
+      "mask_bits": "101010",
+      "mask_int": 21,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "case_id": "case_011010",
+      "duration_sec": 0.014799417000000314,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "ebad60fd1ddd0f9f36a6ceb73281d131438b63a819d1ec6172348e5cc35da114",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22465,
+        "nvars": 6936
+      },
+      "mask_bits": "011010",
+      "mask_int": 22,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "case_id": "case_111010",
+      "duration_sec": 0.01049787499999999,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "4449f4a47f11eb170a452312976674dc878b9ac804b3a3b0d99603a0170f6eb5",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29377,
+        "nvars": 6936
+      },
+      "mask_bits": "111010",
+      "mask_int": 23,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_000110",
+      "duration_sec": 0.015285999999999689,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "b238e0771daad76bd0a6b7b8ab8609e787fb46f5a6577cb254c726d2f5c66cf4",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20737,
+        "nvars": 6936
+      },
+      "mask_bits": "000110",
+      "mask_int": 24,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_100110",
+      "duration_sec": 0.012246291999999936,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "974a4eebf6da22377664d7dbea494571fd660d9f1f35d646cb2a4fbd4f0c3f71",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27649,
+        "nvars": 6936
+      },
+      "mask_bits": "100110",
+      "mask_int": 25,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_010110",
+      "duration_sec": 0.017753124999999592,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "4a50e9a82f833569d39fc332b53b5b809e9822b5032675ea10ac5c57c11ab08f",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22465,
+        "nvars": 6936
+      },
+      "mask_bits": "010110",
+      "mask_int": 26,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_110110",
+      "duration_sec": 0.010507624999999798,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "728763844f4a6f8d75799c3656070732225fe238f9b617e2a37fa77dad739ce8",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29377,
+        "nvars": 6936
+      },
+      "mask_bits": "110110",
+      "mask_int": 27,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_001110",
+      "duration_sec": 0.012475250000000049,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "2ac5bf3b73a38117f9b73eb1bf9ee71ac08b5dd16a0bfc2f400c4685940315a0",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27650,
+        "nvars": 6936
+      },
+      "mask_bits": "001110",
+      "mask_int": 28,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_101110",
+      "duration_sec": 0.016433957999999915,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "6430b571704f4815f3431d5b8d483c64412ca2c32e64b350fb5df39bc3381fad",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34562,
+        "nvars": 6936
+      },
+      "mask_bits": "101110",
+      "mask_int": 29,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_011110",
+      "duration_sec": 0.011072208999999944,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "60143a1d16cf692d4fcd58b36a7910209ac78749e5c4515f3dbad763a3afbc60",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29378,
+        "nvars": 6936
+      },
+      "mask_bits": "011110",
+      "mask_int": 30,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "case_id": "case_111110",
+      "duration_sec": 0.011402791999999717,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "6d8a6d85abc1cbdfea61c929a0f83465ea7c499fee255dab51d1dad1e38cafa2",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36290,
+        "nvars": 6936
+      },
+      "mask_bits": "111110",
+      "mask_int": 31,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "no_cycle4"
+      ],
+      "case_id": "case_000001",
+      "duration_sec": 0.009473625000000041,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "82f4feb26000acb718dc8cf37dcfba9b368b33382e2ff2059f0105360e94204f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 13824,
+        "nvars": 6912
+      },
+      "mask_bits": "000001",
+      "mask_int": 32,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "case_id": "case_100001",
+      "duration_sec": 0.010837041999999908,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "2a02556e31c4e7f83b91e668de0898530515f45eeee4ffd3f80ccafd32597354",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 20736,
+        "nvars": 6912
+      },
+      "mask_bits": "100001",
+      "mask_int": 33,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle4"
+      ],
+      "case_id": "case_010001",
+      "duration_sec": 0.009391207999999818,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "1abc72e08084fae398f646bbc2830132ebc67748fa1b16b8cb77e75341e757e6",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 15552,
+        "nvars": 6912
+      },
+      "mask_bits": "010001",
+      "mask_int": 34,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "case_id": "case_110001",
+      "duration_sec": 0.010422999999999849,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "d95db1ca3b9a22d812f2e4826d202376745bf8f0f2400fb084394278e8b9480f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 22464,
+        "nvars": 6912
+      },
+      "mask_bits": "110001",
+      "mask_int": 35,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "case_id": "case_001001",
+      "duration_sec": 0.010284958999999816,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "3c86cebfea7df0ab8fca31508e4eeefc40fefd6975171b6230ea89c38f5cc7e1",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20737,
+        "nvars": 6936
+      },
+      "mask_bits": "001001",
+      "mask_int": 36,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "case_id": "case_101001",
+      "duration_sec": 0.01175929199999981,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "360295ab5e8967453d317a106226717a7bf85ff405ec9e6bf900f06b60a1598e",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27649,
+        "nvars": 6936
+      },
+      "mask_bits": "101001",
+      "mask_int": 37,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "case_id": "case_011001",
+      "duration_sec": 0.014398874999999922,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "760dd59fefa436ea05d64b69aef543e168ca6f56d5b0731cf6bba1c44b3731a8",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22465,
+        "nvars": 6936
+      },
+      "mask_bits": "011001",
+      "mask_int": 38,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "case_id": "case_111001",
+      "duration_sec": 0.010796457999999731,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "6a0dbee583e787d12c54419f08df94e3c362f44817c3813092e6b096bf0ef99c",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29377,
+        "nvars": 6936
+      },
+      "mask_bits": "111001",
+      "mask_int": 39,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_000101",
+      "duration_sec": 0.012301958000000113,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "21ccbb1c8611d55ffcda09c1212dc35eb050e9b99712d84cf48bfb4a8f7bb5e5",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20737,
+        "nvars": 6936
+      },
+      "mask_bits": "000101",
+      "mask_int": 40,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_100101",
+      "duration_sec": 0.011919750000000118,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "e09254eab3ed11dcaee97c48b7c6e9cb3896bce7527bbf00a072d70c17ed035e",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27649,
+        "nvars": 6936
+      },
+      "mask_bits": "100101",
+      "mask_int": 41,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_010101",
+      "duration_sec": 0.010234790999999799,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "92840ba9e81ed4a1f466975114f2bc365d06752133d39219d17e6bd40530e5a9",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22465,
+        "nvars": 6936
+      },
+      "mask_bits": "010101",
+      "mask_int": 42,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_110101",
+      "duration_sec": 0.010465707999999907,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "48d7664014d23113277567644d4fb17065e02203e0dff0e5c57b1bcc5d5eed99",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29377,
+        "nvars": 6936
+      },
+      "mask_bits": "110101",
+      "mask_int": 43,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_001101",
+      "duration_sec": 0.011445790999999872,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "08d982d2078d5e86f670df370aaac9cf32f88d4dd1b7a602b24272129a0d4da5",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27650,
+        "nvars": 6936
+      },
+      "mask_bits": "001101",
+      "mask_int": 44,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_101101",
+      "duration_sec": 0.014729667000000113,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "f6611c21a0c21238e48cbec1e56faa544fe4e6f45cce95230cabb587fb50ec70",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34562,
+        "nvars": 6936
+      },
+      "mask_bits": "101101",
+      "mask_int": 45,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_011101",
+      "duration_sec": 0.011152209000000024,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "2a0ffd0c836ef0c452a9e1bc50642eaf576da6af5ca5343b7e41f42bd678d487",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29378,
+        "nvars": 6936
+      },
+      "mask_bits": "011101",
+      "mask_int": 46,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "case_id": "case_111101",
+      "duration_sec": 0.010969499999999854,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36290,
+        "nvars": 6936
+      },
+      "mask_bits": "111101",
+      "mask_int": 47,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "UNSAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_000011",
+      "duration_sec": 0.01174441599999998,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "cf25127a73562967434c1a53755d21d3663536a5bc10bd8108f9b109bf7ffce7",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 27648,
+        "nvars": 6912
+      },
+      "mask_bits": "000011",
+      "mask_int": 48,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_100011",
+      "duration_sec": 0.013773500000000105,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "8a362dce03d48a5a4e3b838030d3aa8b29c0a8a341b04ee0313a869014f42b16",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 34560,
+        "nvars": 6912
+      },
+      "mask_bits": "100011",
+      "mask_int": 49,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_010011",
+      "duration_sec": 0.011930916000000291,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "d68f31cf7b96dd6fd1a83d82d7084b96dc21204d995e64d0fe39539bd5c0c0dc",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 29376,
+        "nvars": 6912
+      },
+      "mask_bits": "010011",
+      "mask_int": 50,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_110011",
+      "duration_sec": 0.01175141600000007,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "43a21f54de06e13025e3b49ea407e1736ff66a203f4c8a47165ce52c37eeb55b",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 36288,
+        "nvars": 6912
+      },
+      "mask_bits": "110011",
+      "mask_int": 51,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_001011",
+      "duration_sec": 0.013566542000000403,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "5fd5e2157dec0d8bda70fb604ea2e799695e6c26e6f73fbddfbb06079903c2a0",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34561,
+        "nvars": 6936
+      },
+      "mask_bits": "001011",
+      "mask_int": 52,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_101011",
+      "duration_sec": 0.015757333000000706,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "b7ab852466829ea6995d543964f13a14e04ff92b6caac8f6c87f20d29d7950e8",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 41473,
+        "nvars": 6936
+      },
+      "mask_bits": "101011",
+      "mask_int": 53,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_011011",
+      "duration_sec": 0.01298399999999944,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "c97370d9b40402f0d39a0f0e7b55948140ab673d8e4fe9f0403922fb5a22a203",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36289,
+        "nvars": 6936
+      },
+      "mask_bits": "011011",
+      "mask_int": 54,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter1"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_111011",
+      "duration_sec": 0.013225374999999318,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "2175d01b6ab62b960d01414e689e47d82b8ea4034df73975b7add4d5ff5d50ca",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 43201,
+        "nvars": 6936
+      },
+      "mask_bits": "111011",
+      "mask_int": 55,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "decisive_voter0"
+      ],
+      "axioms_on": [
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_000111",
+      "duration_sec": 0.013374624999999973,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "d94abbba606714e565e75e3fa588900dc9516acb2d4240f5ed0534ab8d045e32",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34561,
+        "nvars": 6936
+      },
+      "mask_bits": "000111",
+      "mask_int": 56,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "decisive_voter0"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_100111",
+      "duration_sec": 0.01683166699999994,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "f18c186aba11107e768c2feb513f9d44ff33214d2fe8c3c964397da9ed5528c3",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 41473,
+        "nvars": 6936
+      },
+      "mask_bits": "100111",
+      "mask_int": 57,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "decisive_voter0"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_010111",
+      "duration_sec": 0.013383333000000164,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "4132d3d0d6b2edceafd3cd06f73482c30de14ec5b3e9b24abb84c8d06ca44f69",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36289,
+        "nvars": 6936
+      },
+      "mask_bits": "010111",
+      "mask_int": 58,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "decisive_voter0"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_110111",
+      "duration_sec": 0.01285658400000056,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "12235ab5999b52dd07bc8f4aff9a1b23d0edbeeebf0df6fb116fa786eb9578fa",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 43201,
+        "nvars": 6936
+      },
+      "mask_bits": "110111",
+      "mask_int": 59,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un"
+      ],
+      "axioms_on": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_001111",
+      "duration_sec": 0.014943666999999827,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "0ccf14a4ffb1a9b34389561e11bc549d7999263dc990091b2f3f8bbdda38c39f",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 41474,
+        "nvars": 6936
+      },
+      "mask_bits": "001111",
+      "mask_int": 60,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un"
+      ],
+      "axioms_on": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_101111",
+      "duration_sec": 0.016754708000000562,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "49bff77f358432a9204b47ef0bb958cc83e3d51ccef6606c12fe6b7b78a8d589",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 48386,
+        "nvars": 6936
+      },
+      "mask_bits": "101111",
+      "mask_int": 61,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm"
+      ],
+      "axioms_on": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_011111",
+      "duration_sec": 0.014483750000000128,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "fb32764542179399d68f01f88000ae1b96cc5f90c4d13022ab9ec558a37bb229",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 43202,
+        "nvars": 6936
+      },
+      "mask_bits": "011111",
+      "mask_int": 62,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_111111",
+      "duration_sec": 0.013705499999999482,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "decisive_voter0": 6913,
+          "decisive_voter1": 6913,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "f460b350296665ca6806fb2ea526d25593f940b2c59e1ba7d97187c96f712e6b",
+        "encoding": "finite_schema_v1",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 50114,
+        "nvars": 6936
+      },
+      "mask_bits": "111111",
+      "mask_int": 63,
+      "representation": "split",
+      "solved": true,
+      "solver": "cadical",
+      "status": "UNSAT"
+    }
+  ],
+  "cases_total": 64,
+  "experiment": "candidate_b_minlib_granularity",
+  "generated_at_utc": "2026-03-31T23:02:43.551326+00:00",
+  "n_alternatives": 4,
+  "n_voters": 2,
+  "representation": "split",
+  "scope_note": "This Candidate B experiment stays inside the restricted local-rationality family defined by no_cycle3 and no_cycle4. It is not evidence about full SocialAcyclic. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "status_counts": {
+    "SAT": 62,
+    "UNSAT": 2
+  }
+}

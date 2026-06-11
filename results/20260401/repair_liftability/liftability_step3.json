@@ -1,0 +1,1018 @@
+{
+  "aggregate_rows": [
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "repaired_package_key": "asymm+un+minlib",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "repaired_package_key": "asymm+un+minlib",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "repaired_package_key": "asymm+un+minlib+no_cycle3",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "repaired_package_key": "asymm+un+minlib+no_cycle3",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n2_m5",
+      "witness_removed_elements_for_failure": []
+    },
+    {
+      "all_element_checks_completed": true,
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "base_repair_size": 1,
+      "locally_minimal": true,
+      "notes": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "num_element_checks": 1,
+      "num_sat_checks": 0,
+      "num_unsat_checks": 1,
+      "repaired_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "repaired_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "source_case": "n2_m4",
+      "step2_sat_status": "SAT",
+      "target_case": "n3_m4",
+      "witness_removed_elements_for_failure": []
+    }
+  ],
+  "axiom_family": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "date": "20260401",
+  "element_rows": [
+    {
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "no_cycle4",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "no_cycle4",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "minlib",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "minlib",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "un",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "un",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "asymm",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "asymm",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "no_cycle4",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "no_cycle4"
+      ],
+      "base_mcs_key": "no_cycle4",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "no_cycle4",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "minlib",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "minlib"
+      ],
+      "base_mcs_key": "minlib",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "minlib",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "un",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "un"
+      ],
+      "base_mcs_key": "un",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "un",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n2_m5/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "asymm",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n2_m5",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    },
+    {
+      "base_mcs": [
+        "asymm"
+      ],
+      "base_mcs_key": "asymm",
+      "base_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "base_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "cnf_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.cnf",
+      "manifest_path": "results/20260401/repair_liftability/step3_cnfs/n3_m4/asymm_un_minlib_no_cycle3_no_cycle4/test.manifest.json",
+      "notes": "test_package = A \\ (R \\ {r}) = A \\ {}. UNSAT required for local minimality. no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+      "r_minus_removed": [],
+      "removed_element": "asymm",
+      "sat_status": "UNSAT",
+      "solver": "cadical",
+      "source_case": "n2_m4",
+      "target_case": "n3_m4",
+      "test_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "test_package_key": "asymm+un+minlib+no_cycle3+no_cycle4"
+    }
+  ],
+  "experiment": "repair_liftability_step3",
+  "generated_at_utc": "2026-03-31T15:46:30.763714+00:00",
+  "outcome": "A",
+  "outcome_summary": "All repairs remain locally minimal in both neighboring cases. Repair persistence AND local-minimality preservation confirmed. Candidate A is substantially weakened in the tested neighboring cases.",
+  "schema_version": "1",
+  "scope_note": "no_cycle3 and no_cycle4 are treated as local-rationality approximations, not full SocialAcyclic. Conclusions are valid only within that restricted local-rationality family. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "solver": "cadical",
+  "source_step2": "results/20260401/repair_liftability/liftability_step2.json",
+  "source_triples": "results/20260401/repair_liftability/base_triples.json",
+  "step": "Step 3: Local minimality checks",
+  "summary": {
+    "by_target": {
+      "n2_m5": {
+        "locally_minimal": 8,
+        "n_aggregate_rows": 8,
+        "not_locally_minimal": 0
+      },
+      "n3_m4": {
+        "locally_minimal": 8,
+        "n_aggregate_rows": 8,
+        "not_locally_minimal": 0
+      }
+    },
+    "n_aggregate_rows": 16,
+    "n_element_checks": 16,
+    "n_step2_rows_skipped_non_sat": 0,
+    "n_step2_sat_rows_consumed": 16
+  }
+}

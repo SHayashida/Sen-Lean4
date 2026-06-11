@@ -1,0 +1,41 @@
+{
+  "axioms_off": [
+    "asymm",
+    "un",
+    "minlib"
+  ],
+  "axioms_on": [
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "case_id": "case_00011",
+  "duration_sec": 0.013501792000000012,
+  "files": {
+    "cnf": "sen24.cnf",
+    "manifest": "sen24.manifest.json",
+    "solver_log": "solver.log",
+    "summary": "summary.json"
+  },
+  "manifest": {
+    "category_counts": {
+      "asymm": 0,
+      "minlib": 0,
+      "no_cycle3": 13824,
+      "no_cycle4": 13824,
+      "un": 0
+    },
+    "cnf_sha256": "cf25127a73562967434c1a53755d21d3663536a5bc10bd8108f9b109bf7ffce7",
+    "encoding": "sen24",
+    "minlib": {
+      "mode": "disabled"
+    },
+    "nclauses": 27648,
+    "nvars": 6912
+  },
+  "mask_bits": "00011",
+  "mask_int": 24,
+  "representation": "bundled",
+  "solved": true,
+  "solver": "cadical",
+  "status": "SAT"
+}

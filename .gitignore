@@ -17,7 +17,10 @@ venv/
 .python-version
 AGENTS.local.md
 AGENTS_PRIVATE.md
-results/
+results/**/*.cnf
+results/**/*.txt
+results/**/*.log
+results/**/.DS_Store
 zenodo_upload_pack/
 paper/build/
 paper_private/

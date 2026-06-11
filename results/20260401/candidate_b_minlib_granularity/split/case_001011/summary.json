@@ -1,0 +1,43 @@
+{
+  "axioms_off": [
+    "asymm",
+    "un",
+    "decisive_voter1"
+  ],
+  "axioms_on": [
+    "decisive_voter0",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "case_id": "case_001011",
+  "duration_sec": 0.013566542000000403,
+  "files": {
+    "cnf": "sen24.cnf",
+    "manifest": "sen24.manifest.json",
+    "solver_log": "solver.log",
+    "summary": "summary.json"
+  },
+  "manifest": {
+    "category_counts": {
+      "asymm": 0,
+      "decisive_voter0": 6913,
+      "minlib": 0,
+      "no_cycle3": 13824,
+      "no_cycle4": 13824,
+      "un": 0
+    },
+    "cnf_sha256": "5fd5e2157dec0d8bda70fb604ea2e799695e6c26e6f73fbddfbb06079903c2a0",
+    "encoding": "finite_schema_v1",
+    "minlib": {
+      "mode": "selectors_v1"
+    },
+    "nclauses": 34561,
+    "nvars": 6936
+  },
+  "mask_bits": "001011",
+  "mask_int": 52,
+  "representation": "split",
+  "solved": true,
+  "solver": "cadical",
+  "status": "SAT"
+}

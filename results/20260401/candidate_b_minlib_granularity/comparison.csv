@@ -1,0 +1,3 @@
+bundled_case_id,bundled_package_key,split_case_id,split_package_key,bundled_min_repairs,split_min_repairs,repair_explanation_changed,classification,evidence_levels
+case_11101,asymm+un+minlib+no_cycle4,case_111101,asymm+un+decisive_voter0+decisive_voter1+no_cycle4,no_cycle4;minlib;un;asymm,no_cycle4;decisive_voter1;decisive_voter0;un;asymm,yes,granularity-sensitive under logical equivalence,1;2;3;4
+case_11111,asymm+un+minlib+no_cycle3+no_cycle4,case_111111,asymm+un+decisive_voter0+decisive_voter1+no_cycle3+no_cycle4,no_cycle4;minlib;un;asymm,no_cycle4;decisive_voter1;decisive_voter0;un;asymm,yes,granularity-sensitive under logical equivalence,1;2;3;4

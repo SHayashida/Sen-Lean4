@@ -1,0 +1,1332 @@
+{
+  "axiom_universe": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "cases": [
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [],
+      "case_id": "case_00000",
+      "duration_sec": 0.008045416,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "5f95b9c960ee79989368ef5dda9cb51b3829203b2d8bdaf7323a44ded37c411e",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 0,
+        "nvars": 6912
+      },
+      "mask_bits": "00000",
+      "mask_int": 0,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm"
+      ],
+      "case_id": "case_10000",
+      "duration_sec": 0.006119040999999992,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "393edca492ce7c9e38019dbcf90e4d5aec16fdc4161fab581477b91e50fbe7c5",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 6912,
+        "nvars": 6912
+      },
+      "mask_bits": "10000",
+      "mask_int": 1,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un"
+      ],
+      "case_id": "case_01000",
+      "duration_sec": 0.004769957999999991,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "ad13df0e4cef186df0c7e37fa01f3174f03defecf7efaedeb48b08f9b2f33f03",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 1728,
+        "nvars": 6912
+      },
+      "mask_bits": "01000",
+      "mask_int": 2,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un"
+      ],
+      "case_id": "case_11000",
+      "duration_sec": 0.0066211250000000055,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "8bc4b512a74860cf04610dfeccfbff2ca34a45a85d694fa16d3c4502cd851d32",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 8640,
+        "nvars": 6912
+      },
+      "mask_bits": "11000",
+      "mask_int": 3,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "minlib"
+      ],
+      "case_id": "case_00100",
+      "duration_sec": 0.007475334,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "859935071a1fa4c88498f25389176e2b2c3a0f26c8b3c0008f6ce11882c5e5b1",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 13826,
+        "nvars": 6936
+      },
+      "mask_bits": "00100",
+      "mask_int": 4,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "minlib"
+      ],
+      "case_id": "case_10100",
+      "duration_sec": 0.00870025000000002,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "de07c9b9bba45b37c0bde74bb2464304291e64b67613ed980cc7f2f63a348025",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 20738,
+        "nvars": 6936
+      },
+      "mask_bits": "10100",
+      "mask_int": 5,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "minlib"
+      ],
+      "case_id": "case_01100",
+      "duration_sec": 0.006993292000000012,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "39865a99633bf4fe16bfff35238a219407ebf3990e9a2a342b53266330da5bb2",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 15554,
+        "nvars": 6936
+      },
+      "mask_bits": "01100",
+      "mask_int": 6,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "case_id": "case_11100",
+      "duration_sec": 0.008530083999999993,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "5081cc18a0a067128a007caa68a2ec12e39820838621ac4bdee308c70cee976a",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 22466,
+        "nvars": 6936
+      },
+      "mask_bits": "11100",
+      "mask_int": 7,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "no_cycle3"
+      ],
+      "case_id": "case_00010",
+      "duration_sec": 0.008019208,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "7a3863986e5c4209f63a100d798e95fc9f498f56e234cab2865d854d6b4d0e63",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 13824,
+        "nvars": 6912
+      },
+      "mask_bits": "00010",
+      "mask_int": 8,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "case_id": "case_10010",
+      "duration_sec": 0.009893458999999993,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "561a242a3d1ad74250c3b074c08f13eafde6f899b299906f2abb05a7dda50159",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 20736,
+        "nvars": 6912
+      },
+      "mask_bits": "10010",
+      "mask_int": 9,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle3"
+      ],
+      "case_id": "case_01010",
+      "duration_sec": 0.008425208999999989,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "e66684066de29407fa932421b3d77610c2bbbe7a950086756953d0952324a7b0",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 15552,
+        "nvars": 6912
+      },
+      "mask_bits": "01010",
+      "mask_int": 10,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "case_id": "case_11010",
+      "duration_sec": 0.009136958000000028,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "97d9954c5ffcc891bd7e5ac375eca41de26de697b117fbd31299b74d691e221f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 22464,
+        "nvars": 6912
+      },
+      "mask_bits": "11010",
+      "mask_int": 11,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "minlib",
+        "no_cycle3"
+      ],
+      "case_id": "case_00110",
+      "duration_sec": 0.011202749999999984,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "5b2ebf3c227199ffb049311cf27d71a7fc262ef338087ff2305e698d59abd8f8",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27650,
+        "nvars": 6936
+      },
+      "mask_bits": "00110",
+      "mask_int": 12,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "minlib",
+        "no_cycle3"
+      ],
+      "case_id": "case_10110",
+      "duration_sec": 0.01298525000000006,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 0
+        },
+        "cnf_sha256": "caab6fd80984a7266c10ba8a5262031d442eccbaa739fcbc5e613ba237c673ff",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34562,
+        "nvars": 6936
+      },
+      "mask_bits": "10110",
+      "mask_int": 13,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "case_id": "case_01110",
+      "duration_sec": 0.010584583999999952,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "3b2cf24bf98cd91e35aebb600fb5020521edf633e83f918745fecd6feb56ce7b",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29378,
+        "nvars": 6936
+      },
+      "mask_bits": "01110",
+      "mask_int": 14,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle4"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "case_id": "case_11110",
+      "duration_sec": 0.011228500000000086,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 0,
+          "un": 1728
+        },
+        "cnf_sha256": "226b627f4f62431ac41cd510d3863b53ce479d61c6a63ac17ca6164367916dbd",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36290,
+        "nvars": 6936
+      },
+      "mask_bits": "11110",
+      "mask_int": 15,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "no_cycle4"
+      ],
+      "case_id": "case_00001",
+      "duration_sec": 0.008316790999999935,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "82f4feb26000acb718dc8cf37dcfba9b368b33382e2ff2059f0105360e94204f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 13824,
+        "nvars": 6912
+      },
+      "mask_bits": "00001",
+      "mask_int": 16,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "case_id": "case_10001",
+      "duration_sec": 0.010226457999999994,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "2a02556e31c4e7f83b91e668de0898530515f45eeee4ffd3f80ccafd32597354",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 20736,
+        "nvars": 6912
+      },
+      "mask_bits": "10001",
+      "mask_int": 17,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "minlib",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle4"
+      ],
+      "case_id": "case_01001",
+      "duration_sec": 0.008776291000000103,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "1abc72e08084fae398f646bbc2830132ebc67748fa1b16b8cb77e75341e757e6",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 15552,
+        "nvars": 6912
+      },
+      "mask_bits": "01001",
+      "mask_int": 18,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "minlib",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "case_id": "case_11001",
+      "duration_sec": 0.009134708000000047,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "d95db1ca3b9a22d812f2e4826d202376745bf8f0f2400fb084394278e8b9480f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 22464,
+        "nvars": 6912
+      },
+      "mask_bits": "11001",
+      "mask_int": 19,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "case_id": "case_00101",
+      "duration_sec": 0.01136262499999996,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "44eb6669b11cb3c5b2fbc5cf318aa62d4007c6c353a5ac5f9cb78a94dd673dc0",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 27650,
+        "nvars": 6936
+      },
+      "mask_bits": "00101",
+      "mask_int": 20,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "case_id": "case_10101",
+      "duration_sec": 0.014910332999999998,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "8c9c08857e88857a9373a3ff22d912332d5b4a00d77686aa02839085484ef06b",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 34562,
+        "nvars": 6936
+      },
+      "mask_bits": "10101",
+      "mask_int": 21,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "case_id": "case_01101",
+      "duration_sec": 0.011155542000000018,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "3fd265a04a441d5f5aea760f4c7fca1987c9897c582175726fd726cf4e0282e7",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 29378,
+        "nvars": 6936
+      },
+      "mask_bits": "01101",
+      "mask_int": 22,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "no_cycle3"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "case_id": "case_11101",
+      "duration_sec": 0.012705124999999873,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 0,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 36290,
+        "nvars": 6936
+      },
+      "mask_bits": "11101",
+      "mask_int": 23,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "UNSAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "axioms_on": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_00011",
+      "duration_sec": 0.013501792000000012,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "cf25127a73562967434c1a53755d21d3663536a5bc10bd8108f9b109bf7ffce7",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 27648,
+        "nvars": 6912
+      },
+      "mask_bits": "00011",
+      "mask_int": 24,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un",
+        "minlib"
+      ],
+      "axioms_on": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_10011",
+      "duration_sec": 0.014527374999999898,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "8a362dce03d48a5a4e3b838030d3aa8b29c0a8a341b04ee0313a869014f42b16",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 34560,
+        "nvars": 6912
+      },
+      "mask_bits": "10011",
+      "mask_int": 25,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "minlib"
+      ],
+      "axioms_on": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_01011",
+      "duration_sec": 0.012171332999999951,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "d68f31cf7b96dd6fd1a83d82d7084b96dc21204d995e64d0fe39539bd5c0c0dc",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 29376,
+        "nvars": 6912
+      },
+      "mask_bits": "01011",
+      "mask_int": 26,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "minlib"
+      ],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_11011",
+      "duration_sec": 0.011512750000000072,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 0,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "43a21f54de06e13025e3b49ea407e1736ff66a203f4c8a47165ce52c37eeb55b",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "disabled"
+        },
+        "nclauses": 36288,
+        "nvars": 6912
+      },
+      "mask_bits": "11011",
+      "mask_int": 27,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm",
+        "un"
+      ],
+      "axioms_on": [
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_00111",
+      "duration_sec": 0.014965374999999836,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "bf41234af7da053051da9f4935a643b158c6a83532ad67e89132b0b5f9a2bf8b",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 41474,
+        "nvars": 6936
+      },
+      "mask_bits": "00111",
+      "mask_int": 28,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "un"
+      ],
+      "axioms_on": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_10111",
+      "duration_sec": 0.01933937500000016,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 0
+        },
+        "cnf_sha256": "23d763ec481438e8ca50761755ec7d77103c3bc2f3d52c538e3cc2a2ed422fc4",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 48386,
+        "nvars": 6936
+      },
+      "mask_bits": "10111",
+      "mask_int": 29,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [
+        "asymm"
+      ],
+      "axioms_on": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_01111",
+      "duration_sec": 0.016340750000000126,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 0,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "23bf28814fcaa14fb4ad6c5810c28e2ec4ddf38149c6536e4fb75efdb71b91d8",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 43202,
+        "nvars": 6936
+      },
+      "mask_bits": "01111",
+      "mask_int": 30,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "SAT"
+    },
+    {
+      "axioms_off": [],
+      "axioms_on": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "case_id": "case_11111",
+      "duration_sec": 0.013655417000000059,
+      "files": {
+        "cnf": "sen24.cnf",
+        "manifest": "sen24.manifest.json",
+        "solver_log": "solver.log",
+        "summary": "summary.json"
+      },
+      "manifest": {
+        "category_counts": {
+          "asymm": 6912,
+          "minlib": 13826,
+          "no_cycle3": 13824,
+          "no_cycle4": 13824,
+          "un": 1728
+        },
+        "cnf_sha256": "34f5da1bae5b9425125de8273b4c0a7b36116ab22ee4bd19a4b3cc544c00507f",
+        "encoding": "sen24",
+        "minlib": {
+          "mode": "selectors_v1"
+        },
+        "nclauses": 50114,
+        "nvars": 6936
+      },
+      "mask_bits": "11111",
+      "mask_int": 31,
+      "representation": "bundled",
+      "solved": true,
+      "solver": "cadical",
+      "status": "UNSAT"
+    }
+  ],
+  "cases_total": 32,
+  "experiment": "candidate_b_minlib_granularity",
+  "generated_at_utc": "2026-03-31T23:02:40.312445+00:00",
+  "n_alternatives": 4,
+  "n_voters": 2,
+  "representation": "bundled",
+  "scope_note": "This Candidate B experiment stays inside the restricted local-rationality family defined by no_cycle3 and no_cycle4. It is not evidence about full SocialAcyclic. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "status_counts": {
+    "SAT": 30,
+    "UNSAT": 2
+  }
+}

@@ -216,6 +216,31 @@ coverage makes it surjective. The induced powerset map is therefore bijective.
 **Lean formalizability.** Yes. Use finite-set cardinality-one lemmas and the
 bijection induced on finite powersets.
 
+### Lemma 2.5: Block-alignment closure under atomicity
+
+**Statement.** If `RepairAtomicity(E, C)` holds, then for every
+`R subseteq Lambda_I` there exists a unique `G subseteq I` such that:
+
+```text
+R = beta(G).
+```
+
+**Assumptions used.**
+
+- Lemma 2;
+- `R subseteq Lambda_I`.
+
+**Proof idea.** Lemma 2 gives a bijection between subsets of `I` and subsets of
+`Lambda_I`, so every arbitrary implementation-level deletion has a unique
+block-aligned preimage. This is the step ensuring that `RawRep(E)`, although
+defined over arbitrary implementation-level deletions, only queries
+block-aligned residuals under atomicity. Therefore block-aligned
+`ResidualFaithfulness(E, C)` covers all raw repair feasibility and minimality
+checks.
+
+**Lean formalizability.** Yes. Apply surjectivity and injectivity of the
+powerset bijection from Lemma 2.
+
 ### Lemma 3: Complement identity
 
 **Statement.** If `RepairAtomicity(E, C)` holds, then for every
@@ -254,6 +279,8 @@ implementation-level repair candidate.
 **Assumptions used.**
 
 - residual faithfulness at `T = I \ G`;
+- Lemma 2.5, ensuring all implementation deletions queried by `RawRep(E)` are
+  block-aligned under atomicity;
 - Lemma 3.
 
 **Proof idea.** Residual faithfulness gives equivalence with
@@ -275,6 +302,7 @@ G in ContractRep(C) iff beta(G) in RawRep(E).
 **Assumptions used.**
 
 - Lemma 2;
+- Lemma 2.5;
 - Lemma 4;
 - inclusion-minimal definitions of `ContractRep` and `RawRep`.
 
@@ -286,8 +314,10 @@ G' proper-subset G
 iff beta(G') proper-subset beta(G).
 ```
 
-Every strict subset of `beta(G)` is block-aligned under atomicity, so residual
-faithfulness covers every subset needed by raw minimality.
+Lemma 2.5 makes the coverage argument explicit: every strict subset of
+`beta(G)` is the unique image `beta(G')` of a strict contract subset `G'`.
+Residual faithfulness therefore covers every implementation residual queried
+by raw minimality.
 
 **Lean formalizability.** Yes. The proof is finite-set order isomorphism plus
 predicate rewriting.
@@ -335,11 +365,17 @@ GroupedRep_C(E) = ContractRep(C).
 - Lemma 6;
 - definitions of grouped and contract repair families.
 
-**Proof idea.** Lemma 5 identifies the raw repair family as the image of
-`ContractRep(C)` under `beta`. Lemma 6 maps every such raw repair back to its
-unique contract repair. Since `ContractRep(C)` is already
-inclusion-minimal, the final `Min_subseteq` operation removes nothing except
-possible duplicate presentations, of which atomicity permits none.
+**Proof idea.** Lemma 5 gives:
+
+```text
+RawRep(E) = {beta(G) | G in ContractRep(C)}.
+```
+
+Lemma 6 gives `group_E(beta(G)) = G`, so the pre-minimized grouped image is
+exactly `ContractRep(C)`. The family `ContractRep(C)` is an antichain: if two
+of its members were related by proper inclusion, the larger one would violate
+its own inclusion-minimality condition. Therefore `Min_subseteq` is the
+identity on this family.
 
 **Lean formalizability.** Yes. The main obligation is a small lemma showing
 that taking inclusion-minimal elements of an already minimal family returns
@@ -412,7 +448,20 @@ symmetrically.
 **Lean formalizability.** Yes. Define `h` as the composition of the two atomic
 bijections and lift it to finite sets.
 
-## 5. Where the Theorem Would Fail
+## 5. Atomicity Use by Lemma
+
+| Lemma | Uses atomicity? | Role |
+| --- | --- | --- |
+| L1 Active-domain well-formedness | No | Domain separation |
+| L2 Atomic beta bijection | Yes | Atomicity gives atom-lever bijection |
+| L2.5 Block-alignment closure | Yes | Faithfulness covers all RawRep queries |
+| L3 Complement identity | Mostly disjointness plus active coverage; atomicity via bijection form | Residual complements correspond |
+| L4 Feasibility transfer | Indirectly via L2.5/L3 | SAT equivalence |
+| L5 Minimality transfer | Yes | Proper-subset checks correspond |
+| L6 Grouping inverse | Yes | `group_E ∘ beta = id` |
+| L7 Single-realization report correctness | Yes | `Min_subseteq` becomes identity |
+
+## 6. Where the Theorem Would Fail
 
 - **Non-atomic block allows partial deletion.** An arbitrary raw repair need
   not be block-aligned, so residual faithfulness does not determine its status
@@ -426,7 +475,7 @@ bijections and lift it to finite sets.
   theorem would prove correctness for a policy different from the one used to
   produce reports.
 
-## 6. Relation to M1.5
+## 7. Relation to M1.5
 
 - **M1.5:** without an adequate reportability condition, raw repair reporting
   can fail even under `≡CM`.

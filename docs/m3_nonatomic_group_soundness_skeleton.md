@@ -289,6 +289,117 @@ chosen in Lemma B1. However, the theorem should keep the unrestricted
 `for every R subseteq Lambda_I` version. The unrestricted version is
 independent of computing `RawRep(E)` and is cleaner as an audit condition.
 
+## 6.5 Candidate converse under contract deletion-monotonicity
+
+Define contract deletion-monotonicity by:
+
+```text
+PsiDeletionMonotonicity(C) :iff
+  for all T' subseteq T subseteq I,
+    SAT(Psi(T)) implies SAT(Psi(T')).
+```
+
+Here `T` is the retained active-atom set. Thus, deleting more contract atoms
+weakens the reference problem.
+
+This condition is natural for standard conjunctive axiom-deletion contracts,
+where each atom contributes constraints and removing atoms removes constraints.
+It is not assumed for arbitrary reportability contracts unless stated.
+
+### Candidate Theorem M3-C: Grouped correctness implies group-soundness
+
+**To be verified.** If `PsiDeletionMonotonicity(C)` holds, then:
+
+```text
+GroupedRep_C(E) = ContractRep(C)
+implies
+GroupSoundness(E, C).
+```
+
+This direction does not require residual faithfulness.
+
+**Proof sketch.** Let `R subseteq Lambda_I` be feasible:
+
+```text
+SAT(phi_E(B, Lambda_I \ R)).
+```
+
+Choose an inclusion-minimal feasible `R0 subseteq R`. Then
+`R0 in RawRep(E)`. Since `R0 subseteq R`, touch-any grouping is monotone:
+
+```text
+group_E(R0) subseteq group_E(R).
+```
+
+Choose a minimal grouped-image element `M` with:
+
+```text
+M subseteq group_E(R0).
+```
+
+Then `M in GroupedRep_C(E)`. By the assumed equality:
+
+```text
+M in ContractRep(C).
+```
+
+Therefore:
+
+```text
+SAT(Psi(I \ M)).
+```
+
+Since `M subseteq group_E(R)`:
+
+```text
+I \ group_E(R) subseteq I \ M.
+```
+
+By `PsiDeletionMonotonicity(C)`:
+
+```text
+SAT(Psi(I \ group_E(R))).
+```
+
+This proves `GroupSoundness(E, C)`.
+
+The converse uses monotonicity of `Psi`, not deletion-monotonicity of `phi_E`.
+
+### Equivalence Corollary
+
+For residually faithful realizations over `Psi`-deletion-monotone contracts:
+
+```text
+GroupSoundness(E, C)
+iff
+GroupedRep_C(E) = ContractRep(C).
+```
+
+The forward direction is M3-B and uses residual faithfulness but not
+monotonicity. The reverse direction is candidate M3-C and uses
+`PsiDeletionMonotonicity(C)` but not residual faithfulness.
+
+`GroupSoundness` is not a definition of grouped invariance. It is a
+per-deletion soundness condition over arbitrary implementation residuals.
+M3-C would show that, for deletion-monotone reference contracts, this condition
+is exact: any realization whose grouped reports are correct must already be
+group-sound.
+
+A one-atom, two-lever realization with:
+
+```text
+I = {a}
+Lambda_I = {x, y}
+beta(a) = {x, y}
+RawRep(E) = {{x}, {y}}
+group_E({x}) = group_E({y}) = {a}
+GroupedRep_C(E) = {{a}}
+ContractRep(C) = {{a}}
+```
+
+shows that non-atomic but group-sound realizations can exist. This demonstrates
+that M3-B is not equivalent to M3-A.
+
 ## 7. Relation to M1.5
 
 - M1.5 shows raw repair non-canonicity under `≡CM`.
@@ -344,13 +455,9 @@ to determine whether `GroupSoundness` holds for all required
   grouped reports;
 - the theorem does not require deletion-monotonicity of `phi_E`.
 
-The strictness requirement is logically satisfiable. `GroupSoundness`
-constrains residual SAT implications, not block cardinalities. For example,
-consider one active atom `a` with a two-lever block `beta(a) = {x, y}`. Let the
-fully active contract and implementation residuals be UNSAT, and let every
-nonempty implementation deletion and the corresponding contract deletion be
-SAT. This realization is non-atomic, residually faithful, and group-sound.
-This is an abstract separation witness, not an experiment.
+The strictness requirement is witnessed abstractly by the one-atom,
+two-lever realization in Section 6.5. `GroupSoundness` constrains residual SAT
+implications, not block cardinalities.
 
 ### No-Go if
 

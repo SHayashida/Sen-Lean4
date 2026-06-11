@@ -159,7 +159,21 @@ All three repair objects are case-relative: `ContractRep(C)` and
 their active implementation interface `Lambda_I`. Inactive atoms and their
 levers are outside these domains.
 
-### 3.4 Contract-relative lever atomicity
+### 3.4 Grouped repair invariance
+
+For a reportability contract `C` and two realizations `E1` and `E2`,
+**grouped repair invariance** is the theorem-level predicate
+
+```text
+GroupedInvariance(C, E1, E2) :iff
+  GroupedRep_C(E1) = ContractRep(C) = GroupedRep_C(E2).
+```
+
+`GroupedInvariance` is a property to be proved about a contract and its
+realizations. It is not a component of `C`, `E`, `RawRep`, `group_E`, or
+`GroupedRep_C(E)`.
+
+### 3.5 Contract-relative lever atomicity
 
 A realization is **lever-atomic relative to `C`** when every reportable atom is
 implemented by exactly one repairable lever:
@@ -197,7 +211,7 @@ implementation-deletion-closed, residually faithful realizations of `C`. If
 both realizations are lever-atomic relative to `C`, then
 
 ```text
-GroupedRep_C(E1) = ContractRep(C) = GroupedRep_C(E2).
+GroupedInvariance(C, E1, E2).
 ```
 
 For each `i` and `a in I`, let `lambda_i(a)` denote the unique element of the

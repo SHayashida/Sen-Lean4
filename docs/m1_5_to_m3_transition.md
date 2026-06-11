@@ -166,6 +166,9 @@ Combining M3-B and candidate M3-C, for residually faithful realizations over
 `Psi`-deletion-monotone contracts, `GroupSoundness` characterizes grouped
 report correctness.
 
+The monotonicity assumption is not removable: a non-monotone counterexample
+in the M3-B/C skeleton exhibits grouped correctness without GroupSoundness.
+
 ## 8. Candidate B Instantiation
 
 Candidate B has now been audited as an artifact-defined instantiation of M3-B.
@@ -191,6 +194,12 @@ The artifact-only audit verified:
 5. the grouped reports map to bundled SAT residuals;
 6. `PsiDeletionMonotonicity` holds over the complete 16-row bundled lattice;
 7. no solver was run.
+
+Although `GroupSoundness` quantifies over arbitrary implementation deletions,
+under a deletion-monotone contract the audit-cost collapse lemma reduces its
+audit to the complete `RawRep` family. This is why the Candidate B
+instantiation could be checked by artifact reanalysis without a new solver
+run.
 
 The result is:
 
@@ -273,7 +282,7 @@ The progression is now explicit:
 
 - M1.5 established the reportability gap.
 - M3-A gives a simple syntactic sufficient condition.
-- M3-B gives a semantic non-atomic sufficient condition.
+- M3-B gives a group-soundness-based non-atomic sufficient condition.
 - M3-C gives a candidate exactness result under deletion-monotone reference
   contracts.
 - Candidate B demonstrates the theory on the same witness that exposed the
@@ -297,6 +306,9 @@ M1.5 shows why reportability cannot be assumed; M3 shows how reportability can b
 - It does not address Arrow transfer.
 - It does not introduce M4 governance delegation.
 - It does not add a six-layer taxonomy.
+
+The next prerequisite testbed is the Arrow transfer question, recorded
+separately in the M3 completion criteria.
 
 ## 13. Acceptance Criteria
 

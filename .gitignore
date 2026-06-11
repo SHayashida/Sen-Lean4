@@ -34,6 +34,7 @@ paper/main.synctex.gz
 paper/**/*.aux
 paper/**/*.bbl
 paper/**/*.blg
+paper/**/*.out
 paper/**/*.log
 paper/**/*.fls
 paper/**/*.fdb_latexmk
@@ -41,15 +42,14 @@ paper/**/*.synctex.gz
 papers/**/*.aux
 papers/**/*.bbl
 papers/**/*.blg
+papers/**/*.out
 papers/**/*.log
 papers/**/*.fls
 papers/**/*.fdb_latexmk
 papers/**/*.synctex.gz
+papers/**/main.pdf
 # Keep preprint PDFs out of git (upload PDFs to jxiv separately).
 paper/**/*preprint*.pdf
 paper/**/*submission*.pdf
 papers/**/*preprint*.pdf
 papers/**/*submission*.pdf
-# Uncomment if you want to keep generated PDFs out of git:
-# paper/**/*.pdf
-# papers/**/*.pdf

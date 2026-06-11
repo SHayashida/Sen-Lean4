@@ -86,6 +86,11 @@ deletions to the fixed contract report.
 
 ### Theorem M3-B: Non-atomic grouped report correctness under group-soundness
 
+The intended repair setting is the fully active UNSAT case. If the fully
+active reference and implementation residuals are already SAT, the repair
+families degenerate to the empty deletion case; this note focuses on the
+UNSAT repair setting.
+
 If `E` is implementation-deletion-closed, residually faithful, and group-sound
 relative to `C`, then:
 
@@ -299,11 +304,12 @@ PsiDeletionMonotonicity(C) :iff
     SAT(Psi(T)) implies SAT(Psi(T')).
 ```
 
-Here `T` is the retained active-atom set. Thus, deleting more contract atoms
-weakens the reference problem.
+Here `T` is the retained active-atom set. Smaller `T` means more contract atoms
+have been deleted. Thus, `PsiDeletionMonotonicity` says deleting more contract
+atoms cannot destroy satisfiability.
 
 This condition is natural for standard conjunctive axiom-deletion contracts,
-where each atom contributes constraints and removing atoms removes constraints.
+where each atom contributes constraints and deleting atoms removes constraints.
 It is not assumed for arbitrary reportability contracts unless stated.
 
 ### Candidate Theorem M3-C: Grouped correctness implies group-soundness
@@ -325,7 +331,9 @@ SAT(phi_E(B, Lambda_I \ R)).
 ```
 
 Choose an inclusion-minimal feasible `R0 subseteq R`. Then
-`R0 in RawRep(E)`. Since `R0 subseteq R`, touch-any grouping is monotone:
+`R0 in RawRep(E)`, because every strict subset of `R0` is also a subset of `R`
+and is infeasible by the choice of `R0`. Since `R0 subseteq R`, touch-any
+grouping is monotone:
 
 ```text
 group_E(R0) subseteq group_E(R).
@@ -381,8 +389,8 @@ monotonicity. The reverse direction is candidate M3-C and uses
 
 `GroupSoundness` is not a definition of grouped invariance. It is a
 per-deletion soundness condition over arbitrary implementation residuals.
-M3-C would show that, for deletion-monotone reference contracts, this condition
-is exact: any realization whose grouped reports are correct must already be
+M3-C says that, for deletion-monotone reference contracts, this condition is
+exact: any realization whose grouped reports are correct must already be
 group-sound.
 
 A one-atom, two-lever realization with:
@@ -399,6 +407,91 @@ ContractRep(C) = {{a}}
 
 shows that non-atomic but group-sound realizations can exist. This demonstrates
 that M3-B is not equivalent to M3-A.
+
+### Why contract deletion-monotonicity is substantive
+
+The monotonicity assumption is not cosmetic. Without it, grouped correctness
+need not imply unrestricted `GroupSoundness`.
+
+Consider the following schematic counterexample:
+
+```text
+I = {a, b}
+
+Psi({a, b}) = UNSAT
+Psi({b})    = SAT
+Psi({a})    = UNSAT
+Psi(empty)  = UNSAT
+
+beta(a) = {x1, x2}
+beta(b) = {y}
+
+RawRep(E) = {{x1}}
+group_E({x1}) = {a}
+GroupedRep_C(E) = {{a}} = ContractRep(C)
+```
+
+Suppose a larger feasible deletion `R = {x1, y}` also exists. Then:
+
+```text
+group_E(R) = {a, b}.
+```
+
+But:
+
+```text
+Psi(I \ {a, b}) = Psi(empty) = UNSAT,
+```
+
+so `GroupSoundness` fails even though grouped correctness holds. This shows
+that `PsiDeletionMonotonicity` is the bridge that extends soundness from
+minimal grouped reports to arbitrary feasible implementation deletions. This
+is a schematic counterexample, not an experiment.
+
+### Audit-cost collapse under Psi-deletion-monotonicity
+
+If `PsiDeletionMonotonicity(C)` holds, then it is enough to check
+`GroupSoundness` on raw minimal repairs:
+
+```text
+for every R in RawRep(E),
+  SAT(Psi(I \ group_E(R))).
+```
+
+This condition implies unrestricted `GroupSoundness`.
+
+**Proof idea.** Any feasible implementation deletion contains an
+inclusion-minimal feasible subdeletion `R0 in RawRep(E)`. Since
+`R0 subseteq R`, touch-any grouping gives:
+
+```text
+group_E(R0) subseteq group_E(R).
+```
+
+Raw-repair soundness gives:
+
+```text
+SAT(Psi(I \ group_E(R0))).
+```
+
+The retained set `I \ group_E(R)` is a subset of
+`I \ group_E(R0)`, so `PsiDeletionMonotonicity(C)` gives:
+
+```text
+SAT(Psi(I \ group_E(R))).
+```
+
+This is why a Candidate B audit may reduce to checking the grouped reports of
+the split-side raw repairs rather than all `2^|Lambda_I|` deletion subsets.
+
+### Implementation monotonicity note
+
+The converse uses monotonicity of `Psi`, not deletion-monotonicity of `phi_E`.
+However, in clause-family deletion encodings, if implementation deletion
+monotonicity and residual faithfulness both hold on block-aligned residuals,
+then `PsiDeletionMonotonicity` can often be inherited on the reference side.
+This inheritance should be recorded as a separate audit fact, not assumed
+silently.
 
 ## 7. Relation to M1.5
 
@@ -469,7 +562,9 @@ implications, not block cardinalities.
 
 ### Current theorem-feasibility verdict
 
-**Go.** The B1-B4 chain derives grouped correctness from single-realization
-`GroupSoundness` and residual faithfulness without assuming grouped equality,
-atomicity, or deletion-monotonicity. M3-B is therefore a viable weaker
-sufficient-condition theorem. Its higher semantic audit cost remains explicit.
+**Go.** M3-B gives a non-atomic sufficient condition for grouped report
+correctness. M3-C, under `PsiDeletionMonotonicity`, gives the candidate
+converse: grouped correctness implies `GroupSoundness`. Together, for
+residually faithful realizations over deletion-monotone reference contracts,
+`GroupSoundness` characterizes grouped report correctness. The monotonicity
+assumption is substantive and should be tracked explicitly.

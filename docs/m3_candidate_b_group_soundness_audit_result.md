@@ -261,7 +261,7 @@ from the direct artifact records.
 
 **GroupSoundness verdict: PASS.**
 
-## 8. Six-Condition Verdict
+## 8. Audit Verdict Checklist
 
 | Condition | Result | Evidence |
 | --- | --- | --- |

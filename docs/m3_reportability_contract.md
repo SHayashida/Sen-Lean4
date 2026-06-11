@@ -52,15 +52,17 @@ transport.
 A **reportability contract** is a tuple
 
 ```text
-C = (A, I, Psi, label)
+C = (A, I, Psi, label, report_policy)
 ```
 
 where:
 
-- `A` is a finite set of reportable atoms;
-- `I` is the active atom set for the case under study;
+- `A` is the finite universe of reportable atoms;
+- `I subseteq A` is the active atom set for the case under study;
 - `Psi(T)` is the reference residual problem for every `T subseteq I`;
-- `label(a)` is the stable human-facing identity of atom `a`.
+- `label(a)` is the stable human-facing identity of atom `a`;
+- `report_policy` fixes how implementation-level deletions are mapped to
+  contract atoms.
 
 The contract fixes what a report is allowed to say. Examples of reportable
 atoms are `unanimity`, `liberalism`, or a deliberately person-specific
@@ -69,14 +71,20 @@ comparison.
 
 The contract is deletion-closed at the case level: every `T subseteq I` has a
 defined residual problem `Psi(T)`. This ensures that minimal repair is evaluated
-over a fixed comparison domain.
+over a fixed comparison domain. Atoms in `A \ I` are inactive for the case and
+do not occur in its contract repairs, raw repairs, or grouped reports.
+
+This note fixes `report_policy` to the **touch-any** policy: an atom is reported
+when a repair deletes at least one lever in that atom's implementation block.
+The policy is explicit because it is part of the reporting specification, not
+an inference from the encoding.
 
 ### 3.2 Realization
 
 A **realization** of `C` is a tuple
 
 ```text
-E = (B, Lambda, beta, phi, evidence)
+E = (B, Lambda, beta, phi_E, evidence)
 ```
 
 where:
@@ -84,22 +92,30 @@ where:
 - `B` is fixed background structure that is not exposed as repairable;
 - `Lambda` is the finite set of repairable implementation levers;
 - `beta(a)` is a nonempty block of levers implementing reportable atom `a`;
-- the blocks `beta(a)` are pairwise disjoint and cover `Lambda`;
-- `phi(B, beta(T))` is the encoded residual instance for `T subseteq I`;
-- `evidence(T)` records the evidence and checker metadata for the claimed status
-  of that residual instance.
+- the blocks `beta(a)` are pairwise disjoint;
+- `Lambda_I = union_{a in I} beta(a)` is the active implementation interface;
+- `phi_E(B, U)` is the encoded residual instance for every
+  `U subseteq Lambda_I`;
+- `evidence(U)` records the evidence and checker metadata for the claimed status
+  of an implementation residual.
 
-Here `beta(T)` abbreviates the union of `beta(a)` over `a in T`.
+Here `beta(T) = union_{a in T} beta(a)` is the block-aligned implementation of
+the contract residual `T subseteq I`. A realization is
+**implementation-deletion-closed** when `phi_E(B, U)` is defined for every
+`U subseteq Lambda_I`, including sets that remove only part of a non-atomic
+block.
 
 A realization is **residually faithful** when, for every `T subseteq I`,
 
 ```text
-SAT(phi(B, beta(T))) iff SAT(Psi(T)).
+SAT(phi_E(B, beta(T))) iff SAT(Psi(T)).
 ```
 
-Residual faithfulness is stronger than agreement on the fully active instance.
-Minimality depends on proper subsets, so a theorem about minimal repairs must
-control every residual instance that can occur in the comparison.
+Residual faithfulness is required only on block-aligned residuals because those
+are the implementation images of contract residuals. It is stronger than
+agreement on the fully active instance: contract-level minimality depends on
+all active-atom subsets. The fully active implementation instance is
+`phi_E(B, Lambda_I) = phi_E(B, beta(I))`.
 
 ### 3.3 Raw and grouped repairs
 
@@ -107,14 +123,14 @@ For an UNSAT fully active realization, its raw minimal repair family is
 
 ```text
 RawRep(E) = {
-  R subseteq Lambda
-  | SAT(phi(B, Lambda \ R))
-  and every proper subset of R leaves the instance UNSAT
+  R subseteq Lambda_I
+  | SAT(phi_E(B, Lambda_I \ R))
+  and, for every R' proper-subset R,
+      UNSAT(phi_E(B, Lambda_I \ R'))
 }.
 ```
 
-The contract report of a raw repair records which contract atoms the repair
-touches:
+Under the contract's touch-any policy, the contract report of a raw repair is:
 
 ```text
 group_E(R) = {a in I | R intersects beta(a)}.
@@ -134,9 +150,14 @@ The reference minimal repair family defined directly by the contract is
 ContractRep(C) = {
   G subseteq I
   | SAT(Psi(I \ G))
-  and every proper subset of G leaves the reference problem UNSAT
+  and, for every G' proper-subset G, UNSAT(Psi(I \ G'))
 }.
 ```
+
+All three repair objects are case-relative: `ContractRep(C)` and
+`GroupedRep_C(E)` range over active atoms `I`, while `RawRep(E)` ranges over
+their active implementation interface `Lambda_I`. Inactive atoms and their
+levers are outside these domains.
 
 ### 3.4 Contract-relative lever atomicity
 
@@ -147,8 +168,9 @@ implemented by exactly one repairable lever:
 for every a in I, |beta(a)| = 1.
 ```
 
-Together with block coverage and disjointness, atomicity makes `beta` a
-bijection between active contract atoms and active repairable levers.
+Together with the definition of `Lambda_I` and block disjointness, atomicity
+makes `beta` a bijection between active contract atoms and active repairable
+levers.
 
 Atomicity is relative to the selected contract. A person-specific encoding may
 be atomic under a person-specific reporting contract and non-atomic under a
@@ -159,45 +181,77 @@ Fixed Tseitin variables, selector variables, and other non-repairable encoding
 machinery belong to `B`; they do not violate lever atomicity. The condition
 concerns only the interface through which repairs are permitted and reported.
 
+Under atomicity, the distinction between touch-any and reasonable
+intersection-versus-containment variants collapses: touching the singleton
+block is the same as deleting the whole block. The theorem therefore remains
+about atomic interfaces rather than a taxonomy of reporting policies.
+
 ## 4. Main Theorem Target
 
 ### Theorem: Atomic report invariance
 
-Let `C` be a reportability contract whose fully active reference problem
-`Psi(I)` is UNSAT. Let `E1` and `E2` be residually faithful realizations of `C`.
-If both realizations are lever-atomic relative to `C`, then
+Let `C = (A, I, Psi, label, report_policy)` be a deletion-closed reportability
+contract with `I subseteq A`, the touch-any reporting policy, and fully active
+reference problem `Psi(I)` UNSAT. Let `E1` and `E2` be
+implementation-deletion-closed, residually faithful realizations of `C`. If
+both realizations are lever-atomic relative to `C`, then
 
 ```text
 GroupedRep_C(E1) = ContractRep(C) = GroupedRep_C(E2).
 ```
 
-Moreover, the atomic bijection
+For each `i` and `a in I`, let `lambda_i(a)` denote the unique element of the
+singleton block `beta_i(a)`. Atomicity induces a bijection between the two
+active lever interfaces:
 
 ```text
-h = beta_2 o beta_1^{-1}
+h(lambda_1(a)) = lambda_2(a) for every a in I.
 ```
 
-transports the raw minimal repair family of `E1` exactly to the raw minimal
-repair family of `E2`.
+This atom-induced bijection transports the raw minimal repair family of `E1`
+exactly to the raw minimal repair family of `E2`. The raw transport conclusion
+depends on atomicity: only then does each active atom identify exactly one
+active lever on each side.
 
 ### Proof argument
 
-For each realization `Ei`, atomicity gives a bijection between subsets
-`G subseteq I` and lever subsets `beta_i(G)`.
+For each realization `Ei`, define
 
-Residual faithfulness then gives
+```text
+Lambda_i,I = union_{a in I} beta_i(a).
+```
+
+Atomicity and block disjointness give a bijection between `G subseteq I` and
+`beta_i(G) subseteq Lambda_i,I`. For any `G subseteq I`, residual faithfulness
+gives
 
 ```text
 SAT(Psi(I \ G))
-iff SAT(phi_i(B_i, Lambda_i \ beta_i(G))).
+iff SAT(phi_i(B_i, beta_i(I \ G))).
 ```
 
-Because the subset correspondence is bijective, proper subsets of `G`
-correspond exactly to proper subsets of `beta_i(G)`. Repair feasibility and
-inclusion-minimality are therefore preserved in both directions. Hence
-`beta_i` maps `ContractRep(C)` bijectively to `RawRep(Ei)`, and grouping maps
-that raw family back to `ContractRep(C)`. Applying the argument to `E1` and
-`E2` proves the stated equality and the transport result.
+Under atomicity and disjoint block coverage of the active interface,
+
+```text
+beta_i(I \ G) = Lambda_i,I \ beta_i(G).
+```
+
+Because the subset correspondence is bijective, proper subset inclusion is
+preserved in both directions. Repair feasibility and inclusion-minimality are
+therefore preserved. Hence `beta_i` maps `ContractRep(C)` bijectively to
+`RawRep(Ei)`, and touch-any grouping maps that raw family back to
+`ContractRep(C)`. Applying the argument to `E1` and `E2` proves grouped
+invariance; composing the two atom-lever bijections proves exact raw repair
+transport.
+
+### Why this is not circular
+
+`ContractRep(C)` is defined from the reference residual problems `Psi`, whereas
+`RawRep(E)` is computed from implementation residuals `phi_E`. Residual
+faithfulness is the bridge assumption on the truth/certificate axis, and
+atomicity is the interface condition on the repair/report axis. The theorem is
+therefore an interface-preservation result. It does not define grouped
+invariance by assuming that the two grouped repair families agree.
 
 ### What the theorem does not require
 
@@ -232,7 +286,15 @@ disagree about the status of some residual problem, the prerequisite on the
 truth/certificate axis has failed and the reportability theorem is
 inapplicable.
 
-## 6. Arrow as a Prerequisite Testbed
+## 6. Connection to M4
+
+M3 proves preservation of grouped repair reporting under atomic repair
+interfaces. M4 should analogously prove preservation of governance auditability
+under delegation when observability and evidence obligations are inherited.
+The structural bridge is the point: M3 concerns repair-report preservation,
+whereas M4 concerns auditability-under-delegation preservation.
+
+## 7. Arrow as a Prerequisite Testbed
 
 Arrow must be treated as a structurally different prerequisite testbed, not as
 a second example of the Sen experiment.
@@ -260,24 +322,27 @@ If the transfer prerequisite fails, the result is a reportability scope wall:
 finite grouped repairs may still be reported as finite-case facts, but they
 must not be presented as repairs for the unrestricted Arrow family.
 
-## 7. Engineering Obligations
+## 8. Engineering Obligations
 
 An M3 implementation should emit:
 
 - a contract manifest with stable atom identifiers, labels, scope, and the
-  active set `I`;
-- a realization manifest recording `B`, `Lambda`, every `beta(a)` block, and
-  whether the atomicity check passes;
-- residual-instance hashes and SAT/UNSAT status for every `T subseteq I`;
+  active set `I subseteq A`, plus the reporting policy;
+- a realization manifest recording `B`, `Lambda`, `Lambda_I`, every `beta(a)`
+  block, and whether deletion closure and the atomicity check pass;
+- implementation-residual hashes and SAT/UNSAT status for every queried
+  `U subseteq Lambda_I`;
+- block-aligned residual comparisons for every `T subseteq I`;
 - checker metadata for each claimed status;
 - raw repair families, grouped repair families, and `ContractRep(C)`;
 - a comparison report showing the theorem assumptions and equality checks;
 - explicit scope and transfer fields for any family-level interpretation.
 
-The auditor must reconstruct block coverage, disjointness, atomicity, residual
-status agreement, and repair minimality independently of the generator.
+The auditor must reconstruct active-interface coverage, block disjointness,
+atomicity, residual status agreement, and repair minimality independently of
+the generator.
 
-## 8. M3 Completion Criteria
+## 9. M3 Completion Criteria
 
 M3 is complete when:
 

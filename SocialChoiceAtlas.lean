@@ -14,5 +14,10 @@ import SocialChoiceAtlas.Sen.BaseCase24.Theorem
 -- This module has NO solver backend and is included in the default build
 -- on every PR (see docs/gates/m2/aim_signoff.md, Decision 3).
 import SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift
+import SocialChoiceAtlas.Reportability.Defs
+import SocialChoiceAtlas.Reportability.Atomic
+import SocialChoiceAtlas.Reportability.GroupSound
+import SocialChoiceAtlas.Reportability.Monotone
+import SocialChoiceAtlas.Reportability.Examples
 -- Optional (SAT/BVDecide/LRAT): this is large and solver-backed, so keep it out of default imports.
 -- import SocialChoiceAtlas.Sen.BaseCase24.SATSen

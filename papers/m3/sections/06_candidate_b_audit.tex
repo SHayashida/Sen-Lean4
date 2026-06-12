@@ -16,6 +16,18 @@ implementation refines the liberalism block as
 \]
 Candidate B is therefore non-atomic and falls under M3-B rather than M3-A.
 
+\paragraph{Audit provenance.}
+The M3 Candidate B audit is artifact-only; no new solver run is part of this
+paper audit.  The main audit record is
+\code{docs/m3_candidate_b_group_soundness_audit_result.md}, and the main
+structured comparison artifact is
+\code{results/20260401/candidate_b_minlib_granularity/comparison.json}.
+The fully active bundled case is
+\code{bundled/case_11101}, and the fully active split case is
+\code{split/case_111101}.  Throughout this instantiation,
+\code{no_cycle3} is fixed inactive.  The audit therefore establishes M3-B
+only inside the bundled artifact-defined contract declared above.
+
 \begin{figure}[t]
   \centering
   \fbox{\parbox{0.91\textwidth}{\centering
@@ -30,24 +42,43 @@ Candidate B is therefore non-atomic and falls under M3-B rather than M3-A.
   \label{fig:candidate-b}
 \end{figure}
 
-\paragraph{Audit facts.}
-The artifact-only audit records:
-\begin{itemize}
-  \item fully active bundled and split residuals are UNSAT;
-  \item all 16 block-aligned residual comparisons match with
-    \(\mathtt{no\_cycle3}\) off;
-  \item the complete split raw repair family consists of the five singleton
-    repairs
-    \(\{\mathtt{asymm}\}\),
-    \(\{\mathtt{un}\}\),
-    \(\{\mathtt{decisive\_voter0}\}\),
-    \(\{\mathtt{decisive\_voter1}\}\), and
-    \(\{\mathtt{no\_cycle4}\}\);
-  \item each grouped raw repair maps to a bundled SAT residual;
-  \item \(\PsiDeletionMonotonicity\) holds over the complete 16-row bundled
-    lattice; and
-  \item no new solver run was required for the audit.
-\end{itemize}
+\paragraph{Evidence sources.}
+\begin{description}[style=nextline,leftmargin=2.9cm]
+  \item[Fully active UNSAT.]
+    Bundled \code{case_11101} and split \code{case_111101}.
+  \item[Residual faithfulness.]
+    The 16 block-aligned rows in \code{comparison.json}, all filtered to
+    \code{no_cycle3=off}.
+  \item[RawRep completeness.]
+    The five split singleton repairs are
+    \[
+      \begin{gathered}
+      \{\mathtt{asymm}\},\ \{\mathtt{un}\},\
+      \{\mathtt{decisive\_voter0}\},\\
+      \{\mathtt{decisive\_voter1}\},\
+      \{\mathtt{no\_cycle4}\}.
+      \end{gathered}
+    \]
+    Fully active UNSAT and the singleton-dominance argument are recorded in
+    the audit result.
+  \item[GroupSoundness checks.]
+    All five grouped raw repairs map to bundled SAT residuals.
+  \item[\(\Psi\)-deletion monotonicity.]
+    The complete 16-row bundled lattice records the fully active residual
+    UNSAT and every proper residual SAT.
+  \item[No new solver run.]
+    The completed audit reuses the recorded Candidate B artifacts.
+\end{description}
+
+\paragraph{What would invalidate the instantiation.}
+Candidate B would no longer instantiate M3-B under this contract if either
+fully active residual were not UNSAT; any block-aligned comparison failed; the
+split raw-repair family were incomplete; a non-singleton or missing singleton
+changed the RawRep completeness claim; any grouped raw repair failed to map to
+a bundled SAT residual; \(\PsiDeletionMonotonicity\) failed on the bundled
+16-row lattice; \code{no_cycle3} were silently treated as active; or the
+artifact-defined contract were silently upgraded to semantic or Lean-level
+status.
 
 Given the complete artifact-level enumeration of the split raw repairs,
 Proposition~\ref{prop:audit-collapse} turns the grouped SAT checks into

@@ -1,79 +1,168 @@
 \section{Candidate B Audit Tables}
 \label{app:audit}
 
-This appendix reserves the detailed evidence tables for the full manuscript.
-The completed audit artifact remains the source of status values and case
-identifiers; raw JSON is not reproduced here.
+\paragraph{Provenance note.}
+The values below are copied from the completed audit record
+\code{docs/m3_candidate_b_group_soundness_audit_result.md} and the recorded
+artifacts under
+\code{results/20260401/candidate_b_minlib_granularity/}.  The primary
+structured source is \code{comparison.json}; the bundled and split
+\code{atlas.json} files and the cited case summaries provide direct
+cross-checks.  Raw JSON is not reproduced.  This appendix is evidence
+accounting, not a new experiment; a missing path or field would be marked
+explicitly rather than inferred.
 
 \subsection{Sixteen-case residual faithfulness table}
 
-\begin{longtable}{@{}p{0.27\textwidth}p{0.16\textwidth}p{0.18\textwidth}p{0.12\textwidth}p{0.12\textwidth}@{}}
+All rows below have \code{no_cycle3=off}.  Status pairs and case identifiers
+are direct mapped-case records in \code{comparison.json}.
+
+\scriptsize
+\begin{longtable}{@{}p{0.25\textwidth}p{0.14\textwidth}p{0.16\textwidth}p{0.13\textwidth}p{0.14\textwidth}@{}}
 \toprule
 Retained \(T\subseteq I\) & Bundled case & Split block case & Status match & Evidence \\
 \midrule
 \endhead
-\(\varnothing\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{un}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{un}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{un},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{un},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{un},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{un},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{asymm},\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(\{\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
-\(I\) & TODO & TODO & TODO & artifact row \\
+\(\varnothing\) &
+  \code{case_00000} & \code{case_000000} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm}\}\) &
+  \code{case_10000} & \code{case_100000} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{un}\}\) &
+  \code{case_01000} & \code{case_010000} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{minlib}\}\) &
+  \code{case_00100} & \code{case_001100} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{no\_cycle4}\}\) &
+  \code{case_00001} & \code{case_000001} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{un}\}\) &
+  \code{case_11000} & \code{case_110000} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{minlib}\}\) &
+  \code{case_10100} & \code{case_101100} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{no\_cycle4}\}\) &
+  \code{case_10001} & \code{case_100001} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{un},\mathtt{minlib}\}\) &
+  \code{case_01100} & \code{case_011100} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{un},\mathtt{no\_cycle4}\}\) &
+  \code{case_01001} & \code{case_010001} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{minlib},\mathtt{no\_cycle4}\}\) &
+  \code{case_00101} & \code{case_001101} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{un},\mathtt{minlib}\}\) &
+  \code{case_11100} & \code{case_111100} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{un},\mathtt{no\_cycle4}\}\) &
+  \code{case_11001} & \code{case_110001} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{asymm},\mathtt{minlib},\mathtt{no\_cycle4}\}\) &
+  \code{case_10101} & \code{case_101101} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(\{\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}\) &
+  \code{case_01101} & \code{case_011101} & SAT/SAT: PASS &
+  \code{comparison.json}, direct \\
+\(I\) &
+  \code{case_11101} & \code{case_111101} & UNSAT/UNSAT: PASS &
+  \code{comparison.json}, direct \\
 \bottomrule
 \end{longtable}
+\normalsize
 
 \subsection{Raw-repair singleton completeness}
 
-\begin{longtable}{@{}p{0.38\textwidth}p{0.15\textwidth}p{0.22\textwidth}p{0.12\textwidth}@{}}
+Each case summary directly records SAT, and each deletion is a member of
+\code{split_min_repairs} in \code{comparison.json}.
+
+\small
+\begin{longtable}{@{}p{0.24\textwidth}p{0.15\textwidth}p{0.09\textwidth}p{0.26\textwidth}p{0.08\textwidth}@{}}
 \toprule
-Split singleton deletion & Residual status & Evidence classification & Result \\
+Split singleton deletion & Split retained case & Residual status &
+Evidence classification & Result \\
 \midrule
 \endhead
-\(\{\mathtt{asymm}\}\) & SAT & enumeration record & TODO \\
-\(\{\mathtt{un}\}\) & SAT & enumeration record & TODO \\
-\(\{\mathtt{decisive\_voter0}\}\) & SAT & enumeration record & TODO \\
-\(\{\mathtt{decisive\_voter1}\}\) & SAT & enumeration record & TODO \\
-\(\{\mathtt{no\_cycle4}\}\) & SAT & enumeration record & TODO \\
+\(\{\mathtt{asymm}\}\) &
+  \code{case_011101} & SAT & direct (via enumeration record) & PASS \\
+\(\{\mathtt{un}\}\) &
+  \code{case_101101} & SAT & direct (via enumeration record) & PASS \\
+\(\{\mathtt{decisive\_voter0}\}\) &
+  \code{case_110101} & SAT & direct (via enumeration record) & PASS \\
+\(\{\mathtt{decisive\_voter1}\}\) &
+  \code{case_111001} & SAT & direct (via enumeration record) & PASS \\
+\(\{\mathtt{no\_cycle4}\}\) &
+  \code{case_111100} & SAT & direct (via enumeration record) & PASS \\
 \bottomrule
 \end{longtable}
+\normalsize
+
+The full active split residual is UNSAT and every listed singleton deletion is
+SAT; since every larger deletion contains a singleton deletion, singleton
+dominance establishes inclusion-minimal completeness at the artifact level.
 
 \subsection{Grouped repair checks}
 
-\begin{longtable}{@{}p{0.27\textwidth}p{0.19\textwidth}p{0.28\textwidth}p{0.12\textwidth}@{}}
+Bundled statuses are direct mapped-case records in \code{comparison.json} and
+are cross-checked by \code{bundled_min_repairs} in that artifact.
+
+\scriptsize
+\begin{longtable}{@{}p{0.21\textwidth}p{0.15\textwidth}p{0.30\textwidth}p{0.09\textwidth}p{0.07\textwidth}@{}}
 \toprule
-Split raw repair & Grouped report & Bundled retained residual & Result \\
+Split raw repair & Grouped report & Bundled retained residual / case &
+Bundled status & Result \\
 \midrule
 \endhead
-\(\{\mathtt{asymm}\}\) & \(\{\mathtt{asymm}\}\) & \(I\setminus\{\mathtt{asymm}\}\) & TODO \\
-\(\{\mathtt{un}\}\) & \(\{\mathtt{un}\}\) & \(I\setminus\{\mathtt{un}\}\) & TODO \\
-\(\{\mathtt{decisive\_voter0}\}\) & \(\{\mathtt{minlib}\}\) & \(I\setminus\{\mathtt{minlib}\}\) & TODO \\
-\(\{\mathtt{decisive\_voter1}\}\) & \(\{\mathtt{minlib}\}\) & \(I\setminus\{\mathtt{minlib}\}\) & TODO \\
-\(\{\mathtt{no\_cycle4}\}\) & \(\{\mathtt{no\_cycle4}\}\) & \(I\setminus\{\mathtt{no\_cycle4}\}\) & TODO \\
+\(\{\mathtt{asymm}\}\) &
+  \(\{\mathtt{asymm}\}\) &
+  \(\{\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}\);
+  \code{case_01101} & SAT & PASS \\
+\(\{\mathtt{un}\}\) &
+  \(\{\mathtt{un}\}\) &
+  \(\{\mathtt{asymm},\mathtt{minlib},\mathtt{no\_cycle4}\}\);
+  \code{case_10101} & SAT & PASS \\
+\(\{\mathtt{decisive\_voter0}\}\) &
+  \(\{\mathtt{minlib}\}\) &
+  \(\{\mathtt{asymm},\mathtt{un},\mathtt{no\_cycle4}\}\);
+  \code{case_11001} & SAT & PASS \\
+\(\{\mathtt{decisive\_voter1}\}\) &
+  \(\{\mathtt{minlib}\}\) &
+  \(\{\mathtt{asymm},\mathtt{un},\mathtt{no\_cycle4}\}\);
+  \code{case_11001} & SAT & PASS \\
+\(\{\mathtt{no\_cycle4}\}\) &
+  \(\{\mathtt{no\_cycle4}\}\) &
+  \(\{\mathtt{asymm},\mathtt{un},\mathtt{minlib}\}\);
+  \code{case_11100} & SAT & PASS \\
 \bottomrule
 \end{longtable}
+\normalsize
 
 \subsection{Audit verdict checklist}
 
-\begin{longtable}{@{}p{0.66\textwidth}p{0.13\textwidth}p{0.13\textwidth}@{}}
+\small
+\begin{longtable}{@{}p{0.52\textwidth}p{0.08\textwidth}p{0.25\textwidth}@{}}
 \toprule
 Condition & Result & Evidence \\
 \midrule
 \endhead
-Fully active bundled and split residuals are UNSAT & TODO & artifact \\
-Implementation-deletion closure is recorded & TODO & artifact \\
-Complete five-singleton raw-repair family is established & TODO & artifact \\
-Grouped reports map to bundled SAT residuals & TODO & artifact \\
-Sixteen block-aligned comparisons match with \(\mathtt{no\_cycle3}\) off & TODO & artifact \\
-\(\PsiDeletionMonotonicity\) is justified & TODO & artifact \\
-No new solver run was required & TODO & audit record \\
+Fully active bundled and split residuals are UNSAT &
+  PASS & Audit result Section 3; \code{comparison.json}; both fully active case summaries \\
+Implementation-deletion closure is recorded &
+  PASS & Audit result Section 3.5; split \code{atlas.json} records all 64 cases \\
+Complete five-singleton raw-repair family is established &
+  PASS & Audit result Section 6; \code{split_min_repairs}; five split case summaries \\
+Grouped reports map to bundled SAT residuals &
+  PASS & Audit result Section 7; five mapped rows in \code{comparison.json} \\
+Sixteen block-aligned comparisons match with \(\mathtt{no\_cycle3}\) off &
+  PASS & Audit result Section 4; 16 direct mapped rows in \code{comparison.json} \\
+\(\PsiDeletionMonotonicity\) is justified &
+  PASS & Audit result Section 5; inference from the complete 16-row bundled lattice \\
+No new solver run was required &
+  PASS & Audit result Sections 1 and 8; artifact-only inspection \\
 \bottomrule
 \end{longtable}
+\normalsize

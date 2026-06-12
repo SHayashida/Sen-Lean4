@@ -1,0 +1,74 @@
+\section{Candidate B: Artifact-Backed Instantiation}
+\label{sec:candidate-b}
+
+This section instantiates M3-B using existing artifacts; it is not a Lean
+formalization of those artifacts.  The bundled artifact-defined contract is
+\[
+  I =
+  \{\mathtt{asymm},\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}.
+\]
+The \(\mathtt{no\_cycle3}\) lever is inactive in this contract scope.  The split
+implementation refines the liberalism block as
+\[
+  \beta(\mathtt{minlib})
+  =
+  \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\}.
+\]
+Candidate B is therefore non-atomic and falls under M3-B rather than M3-A.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.91\textwidth}{\centering
+    \textbf{Figure placeholder: Candidate B grouping}\\[0.5em]
+    Bundled: \(\{\mathtt{minlib}\}\)\\[0.3em]
+    Split: \(\{\mathtt{decisive\_voter0}\}\),
+    \(\{\mathtt{decisive\_voter1}\}\)\\[0.3em]
+    Both split singleton repairs
+    \(\longrightarrow \{\mathtt{minlib}\}\) under touch-any grouping}}
+  \caption{Raw split repairs remain distinct while their contract report is
+  shared.}
+  \label{fig:candidate-b}
+\end{figure}
+
+\paragraph{Audit facts.}
+The artifact-only audit records:
+\begin{itemize}
+  \item fully active bundled and split residuals are UNSAT;
+  \item all 16 block-aligned residual comparisons match with
+    \(\mathtt{no\_cycle3}\) off;
+  \item the complete split raw repair family consists of the five singleton
+    repairs
+    \(\{\mathtt{asymm}\}\),
+    \(\{\mathtt{un}\}\),
+    \(\{\mathtt{decisive\_voter0}\}\),
+    \(\{\mathtt{decisive\_voter1}\}\), and
+    \(\{\mathtt{no\_cycle4}\}\);
+  \item each grouped raw repair maps to a bundled SAT residual;
+  \item \(\PsiDeletionMonotonicity\) holds over the complete 16-row bundled
+    lattice; and
+  \item no new solver run was required for the audit.
+\end{itemize}
+
+Given the complete artifact-level enumeration of the split raw repairs,
+Proposition~\ref{prop:audit-collapse} turns the grouped SAT checks into
+unrestricted \(\GroupSoundness\).  Residual faithfulness is supplied by the 16
+block-aligned status comparisons.  Therefore:
+
+\begin{proposition}[Candidate B instantiation]
+Candidate B instantiates M3-B under the bundled-level artifact-defined
+contract.
+\end{proposition}
+
+The grouped family is
+\[
+  \bigl\{
+  \{\mathtt{asymm}\},
+  \{\mathtt{un}\},
+  \{\mathtt{minlib}\},
+  \{\mathtt{no\_cycle4}\}
+  \bigr\}.
+\]
+
+Candidate B is raw-noncanonical and contract-canonical at the same time.
+This does not upgrade the artifact-defined contract to a semantic or
+Lean-level contract.  That upgrade is a separate truth/certificate obligation.

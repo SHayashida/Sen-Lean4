@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage[numbers]{natbib}
+
+\DeclareRobustCommand{\code}[1]{\path{#1}}
+\newcommand{\SatPsi}{\mathsf{Sat}_{\Psi}}
+\newcommand{\SatPhi}{\mathsf{Sat}_{\Phi}}
+\newcommand{\RawRepair}{\mathsf{RawRepair}}
+\newcommand{\ContractRepair}{\mathsf{ContractRepair}}
+\newcommand{\GroupedRepair}{\mathsf{GroupedRepair}}
+\newcommand{\GroupSoundness}{\mathsf{GroupSoundness}}
+\newcommand{\ResidualFaithfulness}{\mathsf{ResidualFaithfulness}}
+\newcommand{\RepairAtomicity}{\mathsf{RepairAtomicity}}
+\newcommand{\PsiDeletionMonotonicity}{\mathsf{PsiDeletionMonotonicity}}
+\newcommand{\betaSet}{\mathsf{betaSet}}
+\newcommand{\groupTouchAny}{\mathsf{groupTouchAny}}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Reportability Contracts for Repair Explanations\\
+in Finite Social Choice\\[0.4em]
+\large From Raw Non-Canonicity to Grouped Canonicity}
+\author{Shunya Hayashida\\
+Department of Liberal Arts, Faculty of Liberal Arts\\
+The Open University of Japan\\
+\href{mailto:1720067169@campus.ouj.ac.jp}{1720067169@campus.ouj.ac.jp}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Abstract to be written last after theorem statements and Candidate B scope are stable.
+\end{abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_contracts}
+\input{sections/03_atomic}
+\input{sections/04_group_soundness}
+\input{sections/05_monotone_exactness}
+\input{sections/06_candidate_b_audit}
+\input{sections/07_related_work}
+\input{sections/08_scope_arrow}
+\input{sections/09_discussion}
+
+\appendix
+\input{appendix/appendix_a_lean_statements}
+\input{appendix/appendix_b_audit_tables}
+\input{appendix/appendix_c_arrow_scope}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

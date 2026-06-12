@@ -1,0 +1,44 @@
+\section{Non-Atomic Group Soundness}
+\label{sec:group-soundness}
+
+M3-B permits non-atomic blocks and therefore permits partial-block deletions.
+The replacement for syntactic block alignment is a semantic reporting
+condition: every feasible implementation deletion must remain feasible in the
+reference contract after touch-any grouping.
+
+\begin{theorem}[M3-B: non-atomic grouped correctness]
+\label{thm:m3b}
+Assume active blocks are pairwise disjoint.  If
+\(\ResidualFaithfulness\) and \(\GroupSoundness\) hold, then for every grouped
+deletion \(G\),
+\[
+  \GroupedRepair(G)
+  \quad\Longleftrightarrow\quad
+  \ContractRepair(G).
+\]
+\end{theorem}
+
+The statement is pointwise predicate equivalence, not an unqualified function
+equality.  The Lean declaration is \code{m3b_grouped_correctness}.
+
+\paragraph{Proof route.}
+A contract repair supplies a feasible block deletion.  Finite descent chooses
+a raw minimal subdeletion without assuming deletion monotonicity of
+\(\SatPhi\).  Group soundness makes the grouped deletion contract-feasible,
+and contract minimality forces equality with the starting contract repair.
+Conversely, every grouped raw report contains a contract-minimal repair; the
+outer inclusion-minimality step removes nonminimal grouped images.
+
+\begin{corollary}[Two realizations]
+If two realizations of the same reference contract are residually faithful and
+group-sound, their grouped repair predicates are pointwise equivalent through
+the common contract repair predicate.
+\end{corollary}
+
+This corollary is implemented as \code{m3b_two_realization}.  M3-B establishes
+grouped correctness, not raw transport.
+
+\paragraph{Candidate B qualification.}
+The Candidate B use of M3-B relies on complete artifact-level raw-repair
+enumeration and grouped-image verification; the Lean theorem proves the
+abstract sufficient condition, not the artifact enumeration.

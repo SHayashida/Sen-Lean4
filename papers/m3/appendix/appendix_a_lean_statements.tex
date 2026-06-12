@@ -1,0 +1,112 @@
+\section{Compiled Lean Theorem Statements}
+\label{app:lean}
+
+The following signatures are copied from the compiled modules under
+\code{SocialChoiceAtlas/Reportability/}.  Namespace qualification and proof
+bodies are omitted; hypotheses and conclusions are unchanged.
+
+\subsection{\code{m3a_grouped_correctness}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem m3a_grouped_correctness
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hDisjoint : BlocksDisjoint I beta)
+    (hAtomic : RepairAtomicity I beta)
+    (hFaith : ResidualFaithfulness I beta SatPsi SatPhi) :
+    ∀ G, GroupedRepair I beta SatPhi G ↔ ContractRepair I SatPsi G
+\end{Verbatim}
+
+\subsection{\code{m3a_raw_transport}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem m3a_raw_transport
+    {Lever₁ Lever₂ : Type*}
+    [DecidableEq Lever₁] [DecidableEq Lever₂]
+    {I G : Finset Atom}
+    {beta₁ : Atom → Finset Lever₁} {beta₂ : Atom → Finset Lever₂}
+    {SatPsi : Finset Atom → Prop}
+    {SatPhi₁ : Finset Lever₁ → Prop} {SatPhi₂ : Finset Lever₂ → Prop}
+    (hDisjoint₁ : BlocksDisjoint I beta₁)
+    (hDisjoint₂ : BlocksDisjoint I beta₂)
+    (hAtomic₁ : RepairAtomicity I beta₁)
+    (hAtomic₂ : RepairAtomicity I beta₂)
+    (hFaith₁ : ResidualFaithfulness I beta₁ SatPsi SatPhi₁)
+    (hFaith₂ : ResidualFaithfulness I beta₂ SatPsi SatPhi₂)
+    (hG : G ⊆ I) :
+    RawRepair I beta₁ SatPhi₁ (betaSet beta₁ G) ↔
+      RawRepair I beta₂ SatPhi₂ (betaSet beta₂ G)
+\end{Verbatim}
+
+\subsection{\code{m3b_grouped_correctness}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem m3b_grouped_correctness
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hDisjoint : BlocksDisjoint I beta)
+    (hFaith : ResidualFaithfulness I beta SatPsi SatPhi)
+    (hSound : GroupSoundness I beta SatPsi SatPhi) :
+    ∀ G, GroupedRepair I beta SatPhi G ↔ ContractRepair I SatPsi G
+\end{Verbatim}
+
+\subsection{\code{m3b_two_realization}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem m3b_two_realization
+    {Lever₁ Lever₂ : Type*}
+    [DecidableEq Lever₁] [DecidableEq Lever₂]
+    {I : Finset Atom}
+    {beta₁ : Atom → Finset Lever₁} {beta₂ : Atom → Finset Lever₂}
+    {SatPsi : Finset Atom → Prop}
+    {SatPhi₁ : Finset Lever₁ → Prop} {SatPhi₂ : Finset Lever₂ → Prop}
+    (hDisjoint₁ : BlocksDisjoint I beta₁)
+    (hDisjoint₂ : BlocksDisjoint I beta₂)
+    (hFaith₁ : ResidualFaithfulness I beta₁ SatPsi SatPhi₁)
+    (hFaith₂ : ResidualFaithfulness I beta₂ SatPsi SatPhi₂)
+    (hSound₁ : GroupSoundness I beta₁ SatPsi SatPhi₁)
+    (hSound₂ : GroupSoundness I beta₂ SatPsi SatPhi₂) :
+    ∀ G, GroupedRepair I beta₁ SatPhi₁ G ↔
+      GroupedRepair I beta₂ SatPhi₂ G
+\end{Verbatim}
+
+\subsection{\code{m3c_converse}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem m3c_converse
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hMono : PsiDeletionMonotonicity I SatPsi)
+    (hCorrect :
+      ∀ G, GroupedRepair I beta SatPhi G ↔ ContractRepair I SatPsi G) :
+    GroupSoundness I beta SatPsi SatPhi
+\end{Verbatim}
+
+\subsection{\code{groupSoundness_iff}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem groupSoundness_iff
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hDisjoint : BlocksDisjoint I beta)
+    (hFaith : ResidualFaithfulness I beta SatPsi SatPhi)
+    (hMono : PsiDeletionMonotonicity I SatPsi) :
+    GroupSoundness I beta SatPsi SatPhi ↔
+      ∀ G, GroupedRepair I beta SatPhi G ↔ ContractRepair I SatPsi G
+\end{Verbatim}
+
+\subsection{\code{audit_cost_collapse}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem audit_cost_collapse
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hMono : PsiDeletionMonotonicity I SatPsi)
+    (hRaw : ∀ R, RawRepair I beta SatPhi R →
+      SatPsi (I \ groupTouchAny I beta R)) :
+    GroupSoundness I beta SatPsi SatPhi
+\end{Verbatim}
+
+\subsection{\code{atomicity_implies_groupSoundness}}
+\begin{Verbatim}[fontsize=\scriptsize]
+theorem atomicity_implies_groupSoundness
+    {I : Finset Atom} {beta : Atom → Finset Lever}
+    {SatPsi : Finset Atom → Prop} {SatPhi : Finset Lever → Prop}
+    (hDisjoint : BlocksDisjoint I beta)
+    (hAtomic : RepairAtomicity I beta)
+    (hFaith : ResidualFaithfulness I beta SatPsi SatPhi) :
+    GroupSoundness I beta SatPsi SatPhi
+\end{Verbatim}

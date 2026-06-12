@@ -118,7 +118,9 @@ M3-B grouped correctness: residual faithfulness and group soundness suffice for
 pointwise equality between grouped implementation repairs and contract repairs.
 
 This theorem is the abstract result used by the artifact-backed Candidate B
-interpretation; the audit itself is deliberately not formalized here.
+interpretation.  The Candidate B use depends on the artifact audit establishing
+the complete raw-repair family and grouped image; this Lean theorem does not
+formalize the artifact enumeration itself.
 -/
 theorem m3b_grouped_correctness
     {I : Finset Atom} {beta : Atom → Finset Lever}

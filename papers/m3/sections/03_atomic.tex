@@ -1,0 +1,51 @@
+\section{Atomic Interfaces}
+\label{sec:atomic}
+
+Atomicity gives the simplest sufficient condition for reportability.  If each
+active contract atom has exactly one active lever, then every subset of the
+active lever interface is block-aligned.  Pairwise block disjointness yields
+the complement identity, and residual faithfulness transfers feasibility and
+minimality between the implementation and contract domains.
+
+\begin{theorem}[M3-A: atomic grouped correctness]
+\label{thm:m3a}
+Assume active blocks are pairwise disjoint.  If \(\RepairAtomicity\) and
+\(\ResidualFaithfulness\) hold, then for every contract deletion \(G\),
+\[
+  \GroupedRepair(G)
+  \quad\Longleftrightarrow\quad
+  \ContractRepair(G).
+\]
+\end{theorem}
+
+The Lean declaration is \code{m3a_grouped_correctness}.  The proof factors
+through block-alignment closure, complement correspondence, feasibility
+transfer, minimality transfer, and the identity
+\(\groupTouchAny(\betaSet(G))=G\).
+
+\begin{corollary}[Atom-indexed raw transport]
+\label{cor:m3a-raw}
+For two atomic, residually faithful realizations of the same contract, and for
+every \(G\subseteq I\), the block deletion induced by \(G\) is a raw repair in
+the first realization if and only if the block deletion induced by \(G\) is a
+raw repair in the second.
+\end{corollary}
+
+This is the Lean theorem \code{m3a_raw_transport}.  It is atom-indexed rather
+than an arbitrary lever-bijection theorem.
+
+\paragraph{Limit.}
+Atomicity is sufficient, not necessary.  M3-A does not apply to Candidate B
+because
+\[
+  \beta(\mathtt{minlib})
+  =
+  \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\}
+\]
+is non-atomic.  Raw transport is an M3-A result only and must not be attributed
+to M3-B.
+
+\paragraph{Dependency record.}
+Appendix~\ref{app:lean} includes the exact theorem signatures.  The longer
+atomicity-use dependency table will be placed with the proof details in the
+technical appendix during full drafting.

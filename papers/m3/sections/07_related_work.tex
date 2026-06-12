@@ -1,0 +1,46 @@
+\section{Related Work and Positioning}
+\label{sec:related}
+
+\paragraph{Model-based diagnosis and ATMS.}
+Assumption-based truth maintenance and model-based diagnosis provide the
+background vocabulary for conflicts, assumptions, and repairs
+\citep{dekleer1986atms,reiter1987}.  Constraint hierarchies address conflict
+resolution under prioritized constraints \citep{borning1992constraint}.  M3
+instead asks when a low-level repair may be reported at a declared higher-level
+contract interface.
+
+\paragraph{MUS/MCS and repair enumeration.}
+Minimal conflict and correction-set techniques, together with MaxSAT-style
+repair search, establish that explanation families depend on the chosen
+constraint representation \citep{li2009maxsat}.  We therefore do not claim
+novelty for the observation that MUS or repair sets change under encoding
+granularity.  The relevant M3 question is which explicit contract conditions
+make a grouped report sound and invariant despite that sensitivity.
+
+\paragraph{High-level versus low-level explanations.}
+The distinction between implementation levers and reportable contract atoms is
+an abstraction problem.  M3 makes the abstraction map and its proof obligations
+first-class: touch-any grouping alone is not enough; residual faithfulness and
+either atomicity or group soundness must justify the report.
+
+\paragraph{SAT-based computational social choice.}
+Computer-aided impossibility proofs and SAT-based rule search provide the
+computational social-choice context
+\citep{tanglin2009computer,geist2011automated,brandtgeist2016strategyproof}.
+Finite-model transfer limits and theorem-specific transfer questions remain
+separate from reportability \citep{grandiendriss2013}.
+
+\paragraph{Formal verification of social choice.}
+Mechanized social-choice theorems in HOL provide an important proof-layer
+precedent \citep{nipkow2009social}.  The present project uses Lean 4
+\citep{moura2021lean4} and proof-carrying SAT infrastructure informed by
+certified clausal proof checking \citep{cruzfilipe2017lrat,wetzler2014drat}.
+The M3 Lean modules are deliberately abstract finite-set theorems rather than
+CNF or solver formalizations.
+
+\paragraph{The M1/M1.5/M2 program.}
+M1 supplied the auditable finite atlas; M1.5 isolated raw repair
+non-canonicity; M2 separated proof-layer transfer from witness/audit transfer.
+M3 adds explicit reportability contracts, non-atomic \(\GroupSoundness\),
+exactness under monotone contracts, and artifact-backed recovery of grouped
+canonicity on the same witness that exposed raw non-canonicity.

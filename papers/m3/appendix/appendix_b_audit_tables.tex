@@ -1,0 +1,79 @@
+\section{Candidate B Audit Tables}
+\label{app:audit}
+
+This appendix reserves the detailed evidence tables for the full manuscript.
+The completed audit artifact remains the source of status values and case
+identifiers; raw JSON is not reproduced here.
+
+\subsection{Sixteen-case residual faithfulness table}
+
+\begin{longtable}{@{}p{0.27\textwidth}p{0.16\textwidth}p{0.18\textwidth}p{0.12\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Retained \(T\subseteq I\) & Bundled case & Split block case & Status match & Evidence \\
+\midrule
+\endhead
+\(\varnothing\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{un}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{un}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{un},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{un},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{un},\mathtt{minlib}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{un},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{asymm},\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(\{\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}\) & TODO & TODO & TODO & artifact row \\
+\(I\) & TODO & TODO & TODO & artifact row \\
+\bottomrule
+\end{longtable}
+
+\subsection{Raw-repair singleton completeness}
+
+\begin{longtable}{@{}p{0.38\textwidth}p{0.15\textwidth}p{0.22\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Split singleton deletion & Residual status & Evidence classification & Result \\
+\midrule
+\endhead
+\(\{\mathtt{asymm}\}\) & SAT & enumeration record & TODO \\
+\(\{\mathtt{un}\}\) & SAT & enumeration record & TODO \\
+\(\{\mathtt{decisive\_voter0}\}\) & SAT & enumeration record & TODO \\
+\(\{\mathtt{decisive\_voter1}\}\) & SAT & enumeration record & TODO \\
+\(\{\mathtt{no\_cycle4}\}\) & SAT & enumeration record & TODO \\
+\bottomrule
+\end{longtable}
+
+\subsection{Grouped repair checks}
+
+\begin{longtable}{@{}p{0.27\textwidth}p{0.19\textwidth}p{0.28\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Split raw repair & Grouped report & Bundled retained residual & Result \\
+\midrule
+\endhead
+\(\{\mathtt{asymm}\}\) & \(\{\mathtt{asymm}\}\) & \(I\setminus\{\mathtt{asymm}\}\) & TODO \\
+\(\{\mathtt{un}\}\) & \(\{\mathtt{un}\}\) & \(I\setminus\{\mathtt{un}\}\) & TODO \\
+\(\{\mathtt{decisive\_voter0}\}\) & \(\{\mathtt{minlib}\}\) & \(I\setminus\{\mathtt{minlib}\}\) & TODO \\
+\(\{\mathtt{decisive\_voter1}\}\) & \(\{\mathtt{minlib}\}\) & \(I\setminus\{\mathtt{minlib}\}\) & TODO \\
+\(\{\mathtt{no\_cycle4}\}\) & \(\{\mathtt{no\_cycle4}\}\) & \(I\setminus\{\mathtt{no\_cycle4}\}\) & TODO \\
+\bottomrule
+\end{longtable}
+
+\subsection{Audit verdict checklist}
+
+\begin{longtable}{@{}p{0.66\textwidth}p{0.13\textwidth}p{0.13\textwidth}@{}}
+\toprule
+Condition & Result & Evidence \\
+\midrule
+\endhead
+Fully active bundled and split residuals are UNSAT & TODO & artifact \\
+Implementation-deletion closure is recorded & TODO & artifact \\
+Complete five-singleton raw-repair family is established & TODO & artifact \\
+Grouped reports map to bundled SAT residuals & TODO & artifact \\
+Sixteen block-aligned comparisons match with \(\mathtt{no\_cycle3}\) off & TODO & artifact \\
+\(\PsiDeletionMonotonicity\) is justified & TODO & artifact \\
+No new solver run was required & TODO & audit record \\
+\bottomrule
+\end{longtable}

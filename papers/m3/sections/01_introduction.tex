@@ -1,0 +1,82 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\paragraph{Motivation.}
+M1 established an auditable finite-atlas workflow that separates Proof, Audit,
+Witness, and Assumption obligations.  M1.5 then showed that this evidence
+discipline does not by itself determine a canonical repair explanation:
+clause-multiset-equivalent bundled and split realizations can expose different
+inclusion-minimal raw lever deletions.  M3 asks the positive follow-up question:
+under what declared interface and soundness conditions can repair reports
+nevertheless be canonical at a contract level?
+
+\paragraph{Thesis.}
+A valid impossibility certificate does not by itself determine how repairs may
+be reported. Repair reportability is a contract-relative property. Under
+explicit interface and soundness conditions, grouped repair reports can be
+canonical even when raw implementation repairs are not.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.91\textwidth}{\centering
+    \textbf{Figure placeholder: M1.5 to M3 spine}\\[0.5em]
+    M1.5 raw non-canonicity
+    $\longrightarrow$ M3-A / M3-B / M3-C
+    $\longrightarrow$ Candidate B grouped canonicity}}
+  \caption{The paper spine separates the negative raw-level result from the
+  positive contract-level theory.}
+  \label{fig:spine}
+\end{figure}
+
+\paragraph{Contribution boundary.}
+The contribution is not the observation that encoding granularity can change
+MUS, MCS, or repair enumeration; related effects belong to the established
+diagnosis and explanation literature.  The contribution is a contract-relative
+theory of reportability:
+\begin{enumerate}[label=(\roman*)]
+  \item M3-A, an atomic syntactic sufficient condition;
+  \item M3-B, a non-atomic sufficient condition based on group soundness;
+  \item M3-C, an exactness result under deletion-monotone reference contracts;
+  \item a Lean-checked abstract finite-set theorem core; and
+  \item an artifact-backed Candidate B instantiation of M3-B.
+\end{enumerate}
+
+M3-B recovers report-level canonicity on Candidate B only after the
+reportability contract is made explicit and \(\GroupSoundness\) is verified.
+It does not erase M1.5, make raw repairs canonical, or make M3-A applicable to
+the non-atomic Candidate B realization.
+
+\paragraph{Claim discipline.}
+Table~\ref{tab:claim-discipline} records the qualifications that govern the
+manuscript.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{0.32\textwidth}p{0.08\textwidth}X@{}}
+\toprule
+Claim & Allowed? & Required qualification \\
+\midrule
+M1.5 shows raw repair non-canonicity & yes & Candidate B / declared artifact scope \\
+M3-A recovers Candidate B & no & M3-A does not apply to non-atomic split \code{minlib} \\
+M3-B recovers report-level canonicity on Candidate B & yes & only under artifact-defined contract and verified \(\GroupSoundness\) \\
+Candidate B raw repairs become canonical & no & raw non-canonicity remains \\
+\(\GroupSoundness\) characterizes grouped correctness & yes & only for residually faithful realizations over \(\Psi\)-deletion-monotone contracts \\
+Atomicity is necessary & no & M3-A is a sufficient condition only \\
+Raw transport holds under M3-B & no & raw transport is an M3-A result only \\
+M3 results extend to family scale & no & Candidate B is artifact-defined / base-scope unless separately lifted \\
+Arrow provides a second M3 example & no & Arrow is a prerequisite testbed unless per-residual transfer is established \\
+Artifact-defined contract equals semantic/Lean contract & no & semantic/formal upgrading is a separate truth/certificate obligation \\
+Encoding-granularity sensitivity of repairs is new by itself & no & M3's novelty is contract-relative reportability and exactness conditions \\
+\bottomrule
+\end{tabularx}
+\caption{Claim discipline for the M3 paper.}
+\label{tab:claim-discipline}
+\end{table}
+
+\paragraph{Paper organization.}
+Section~\ref{sec:contracts} defines contracts and repair predicates.
+Sections~\ref{sec:atomic}--\ref{sec:monotone} state M3-A, M3-B, and M3-C.
+Section~\ref{sec:candidate-b} records the artifact-backed instantiation.
+Sections~\ref{sec:related}--\ref{sec:discussion} position and delimit the result.
+Exact Lean signatures and audit-table placeholders appear in the appendices.

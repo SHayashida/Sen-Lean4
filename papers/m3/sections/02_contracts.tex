@@ -1,0 +1,110 @@
+\section{Contracts, Realizations, and Repair Reports}
+\label{sec:contracts}
+
+\paragraph{Finite interfaces.}
+Let \(A\) be a type of contract atoms and \(L\) a type of implementation
+levers, both with decidable equality.  The active contract interface is an
+explicit finite set \(I \subseteq A\).  An implementation block map
+\(\beta : A \to \mathcal{P}_{\mathrm{fin}}(L)\) assigns each atom a finite set
+of levers.  The active lever interface is
+\[
+  \Lambda_I := \bigcup_{a \in I} \beta(a).
+\]
+The active blocks are assumed pairwise disjoint in the theorem statements that
+compare block-aligned and grouped repairs.  Nonemptiness is used where a
+grouping inverse is required.
+
+\paragraph{Retained-set predicates.}
+The reference and implementation residuals are represented abstractly by
+\[
+  \SatPsi : \mathcal{P}_{\mathrm{fin}}(A) \to \mathsf{Prop},
+  \qquad
+  \SatPhi : \mathcal{P}_{\mathrm{fin}}(L) \to \mathsf{Prop}.
+\]
+\(\SatPsi(T)\) means that the contract residual retaining \(T\) is feasible;
+\(\SatPhi(K)\) has the analogous implementation meaning.  All definitions use
+the retained-set convention.  A deletion is expressed by a complement inside
+\(I\) or \(\Lambda_I\), never by a second deletion-based satisfiability
+predicate.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.91\textwidth}{\centering
+    \textbf{Figure placeholder: two-axis framework}\\[0.5em]
+    Truth / certificate axis: reference residual
+    \(\leftrightarrow\) implementation residual\\[0.4em]
+    Repair / report axis: raw lever deletion
+    \(\longrightarrow\) grouped contract deletion}}
+  \caption{Residual legitimacy and repair reportability are distinct axes.}
+  \label{fig:two-axis}
+\end{figure}
+
+\begin{definition}[Inclusion-minimality]
+For a predicate \(P\) on finite sets,
+\[
+  \mathsf{InclusionMinimal}(P,X)
+  \quad\Longleftrightarrow\quad
+  P(X) \ \land\
+  \forall Y,\ P(Y) \to Y \subseteq X \to X \subseteq Y.
+\]
+\end{definition}
+
+\begin{definition}[Raw repair]
+A lever deletion \(R\) is raw-feasible when
+\[
+  R \subseteq \Lambda_I
+  \quad\text{and}\quad
+  \SatPhi(\Lambda_I \setminus R).
+\]
+\(\RawRepair(R)\) holds when \(R\) is inclusion-minimal among raw-feasible
+deletions.
+\end{definition}
+
+\begin{definition}[Touch-any grouping]
+The reported atoms touched by a lever deletion are
+\[
+  \groupTouchAny(R)
+  :=
+  \{a \in I \mid (R \cap \beta(a)) \neq \varnothing\}.
+\]
+\end{definition}
+
+\begin{definition}[Contract and grouped repairs]
+A contract deletion \(G\) is contract-feasible when
+\[
+  G \subseteq I
+  \quad\text{and}\quad
+  \SatPsi(I \setminus G).
+\]
+\(\ContractRepair(G)\) is its inclusion-minimal form.  A set \(G\) is in the
+raw grouped image when some \(\RawRepair(R)\) satisfies
+\(\groupTouchAny(R)=G\).  Finally, \(\GroupedRepair(G)\) is an
+inclusion-minimal element of that grouped image.
+\end{definition}
+
+\begin{definition}[Contract conditions]
+The Lean development uses the following conditions.
+\begin{align*}
+\ResidualFaithfulness
+&:\Longleftrightarrow
+  \forall T \subseteq I,\
+  \SatPhi\!\left(\bigcup_{a\in T}\beta(a)\right)
+  \leftrightarrow \SatPsi(T),\\
+\RepairAtomicity
+&:\Longleftrightarrow
+  \forall a\in I,\ |\beta(a)|=1,\\
+\GroupSoundness
+&:\Longleftrightarrow
+  \forall R\subseteq\Lambda_I,\
+  \SatPhi(\Lambda_I\setminus R)
+  \to \SatPsi(I\setminus\groupTouchAny(R)),\\
+\PsiDeletionMonotonicity
+&:\Longleftrightarrow
+  \forall T'\subseteq T\subseteq I,\
+  \SatPsi(T)\to\SatPsi(T').
+\end{align*}
+\end{definition}
+
+These definitions do not assign CNF or solver semantics to \(\SatPsi\) or
+\(\SatPhi\).  Such semantics belong to an application-side truth/certificate
+contract.

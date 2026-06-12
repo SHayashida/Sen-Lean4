@@ -1,0 +1,73 @@
+\section{Exactness under Monotone Contracts}
+\label{sec:monotone}
+
+\(\PsiDeletionMonotonicity\) says that deleting more contract atoms cannot
+destroy reference feasibility.  This is natural for standard conjunctive
+axiom-deletion contracts, where deleting an atom removes constraints, but it is
+not assumed for arbitrary reportability contracts.
+
+\begin{theorem}[M3-C: monotone converse]
+\label{thm:m3c}
+If \(\PsiDeletionMonotonicity\) holds and grouped correctness holds pointwise,
+\[
+  \forall G,\quad
+  \GroupedRepair(G)\leftrightarrow\ContractRepair(G),
+\]
+then \(\GroupSoundness\) holds.
+\end{theorem}
+
+The Lean declaration \code{m3c_converse} does not assume residual faithfulness.
+It descends from a raw repair's grouped image to a minimal grouped report, uses
+grouped correctness to obtain a contract repair, and then applies reference
+deletion monotonicity.
+
+\begin{corollary}[Exactness]
+\label{cor:exactness}
+For a residually faithful realization with pairwise disjoint active blocks over
+a \(\Psi\)-deletion-monotone contract,
+\[
+  \GroupSoundness
+  \quad\Longleftrightarrow\quad
+  \forall G,\
+  \GroupedRepair(G)\leftrightarrow\ContractRepair(G).
+\]
+\end{corollary}
+
+This is \code{groupSoundness_iff}.  Residual faithfulness is used in the M3-B
+forward direction, not in the M3-C converse.
+
+\begin{proposition}[Audit-cost collapse]
+\label{prop:audit-collapse}
+Under \(\PsiDeletionMonotonicity\), if every raw minimal repair \(R\) satisfies
+\[
+  \SatPsi(I\setminus\groupTouchAny(R)),
+\]
+then unrestricted \(\GroupSoundness\) holds.
+\end{proposition}
+
+The Lean declaration is \code{audit_cost_collapse}.  Its finite descent does
+not assume deletion monotonicity of \(\SatPhi\).
+
+The monotonicity assumption is not removable.  The compiled finite example in
+\code{Examples.lean} has pointwise grouped correctness but fails both
+\(\GroupSoundness\) and \(\PsiDeletionMonotonicity\).
+
+\paragraph{Comparison.}
+Table~\ref{tab:theorem-comparison} separates the roles of the three theorem
+components.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{0.07\textwidth}p{0.20\textwidth}p{0.20\textwidth}p{0.27\textwidth}p{0.08\textwidth}X@{}}
+\toprule
+Component & Interface / soundness condition & Other assumptions & Conclusion & Raw transport? & Lean status \\
+\midrule
+M3-A & \(\RepairAtomicity\) & block disjointness; \(\ResidualFaithfulness\) & pointwise grouped correctness & yes, atom-indexed & checked \\
+M3-B & \(\GroupSoundness\) & block disjointness; \(\ResidualFaithfulness\) & pointwise grouped correctness; two-realization corollary & no & checked \\
+M3-C & pointwise grouped correctness & \(\PsiDeletionMonotonicity\) & \(\GroupSoundness\) & no & checked \\
+\bottomrule
+\end{tabularx}
+\caption{M3-A, M3-B, and M3-C have different logical roles.}
+\label{tab:theorem-comparison}
+\end{table}

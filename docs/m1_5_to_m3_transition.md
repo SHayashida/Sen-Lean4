@@ -109,7 +109,7 @@ beta(minlib) = {decisive_voter0, decisive_voter1}.
 
 Therefore M3-A is not the right theorem for Candidate B. Candidate B instantiates M3-B, not M3-A.
 
-The artifact audit treats the bundled residual lattice as the reference contract and checks residual faithfulness against the split realization. It establishes that the five split singleton raw repairs group to contract deletions whose bundled residuals are SAT. Under reference deletion monotonicity, `audit_cost_collapse` captures the abstract argument that these complete raw-repair checks suffice for unrestricted `GroupSoundness`.
+The artifact audit treats the bundled residual lattice as the reference contract and checks residual faithfulness against the split realization. Given the artifact-level enumeration of all split raw repairs, the audit checks that each grouped raw repair has a SAT bundled residual. Under reference deletion monotonicity, `audit_cost_collapse` captures the abstract argument that checking all raw repairs suffices for unrestricted `GroupSoundness`.
 
 The resulting grouped family is:
 

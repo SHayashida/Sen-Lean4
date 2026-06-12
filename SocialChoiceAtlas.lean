@@ -1,5 +1,5 @@
 -- SocialChoiceAtlas: A Lean 4 library for computational social choice theory
--- Focus: Sen's "Impossibility of a Paretian Liberal"
+-- Focus: Sen finite atlases, lifting contracts, and reportability abstractions.
 
 import SocialChoiceAtlas.Core.Basics
 import SocialChoiceAtlas.Core.Ranking

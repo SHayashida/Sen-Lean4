@@ -21,13 +21,38 @@ deletion \(G\),
 The statement is pointwise predicate equivalence, not an unqualified function
 equality.  The Lean declaration is \code{m3b_grouped_correctness}.
 
-\paragraph{Proof route.}
-A contract repair supplies a feasible block deletion.  Finite descent chooses
-a raw minimal subdeletion without assuming deletion monotonicity of
-\(\SatPhi\).  Group soundness makes the grouped deletion contract-feasible,
-and contract minimality forces equality with the starting contract repair.
-Conversely, every grouped raw report contains a contract-minimal repair; the
-outer inclusion-minimality step removes nonminimal grouped images.
+\paragraph{B1: contract repairs occur in the grouped raw image.}
+Let \(G\) be a contract repair.  Residual faithfulness and the block-complement
+identity make \(\betaSet(G)\) a feasible implementation deletion.  Finite
+descent then chooses a raw minimal subdeletion
+\(R_0\subseteq\betaSet(G)\) from this already feasible deletion.  This descent
+uses finiteness only and does not assume deletion-monotonicity of \(\SatPhi\).
+Disjointness implies
+\(\groupTouchAny(R_0)\subseteq G\); group soundness makes that grouped deletion
+contract-feasible; and contract minimality forces
+\(\groupTouchAny(R_0)=G\).  Hence \(G\) occurs in the grouped raw image.
+
+\paragraph{B2: grouped raw reports are contract-feasible.}
+For a raw repair \(R\), raw feasibility supplies
+\(\SatPhi(\Lambda_I\setminus R)\).  Applying \(\GroupSoundness\) gives
+\(\SatPsi(I\setminus\groupTouchAny(R))\), while the filtering definition of
+touch-any grouping ensures \(\groupTouchAny(R)\subseteq I\).  Thus every
+grouped raw report is a contract-feasible deletion.
+
+\paragraph{B3: grouped raw reports contain contract repairs.}
+Given a member \(G\) of the grouped raw image, B2 makes \(G\)
+contract-feasible.  A second finite descent, now inside \(G\), selects a
+contract-minimal feasible subset \(G_0\subseteq G\).  Therefore every grouped
+raw report contains at least one contract repair, even when the originating
+raw repair deletes only part of an implementation block.
+
+\paragraph{B4: minimizing the grouped image gives exactly contract repairs.}
+B1 places every contract repair in the grouped raw image.  B3 places a
+contract repair below every member of that image.  Inclusion-minimality on
+both sides then gives
+\(\GroupedRepair(G)\leftrightarrow\ContractRepair(G)\) pointwise.  M3-B thus
+permits partial-block deletion, but requires it to remain sound after
+grouping.  Its conclusion is grouped correctness only, not raw transport.
 
 \begin{corollary}[Two realizations]
 If two realizations of the same reference contract are residually faithful and

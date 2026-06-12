@@ -110,3 +110,54 @@ theorem atomicity_implies_groupSoundness
     (hFaith : ResidualFaithfulness I beta SatPsi SatPhi) :
     GroupSoundness I beta SatPsi SatPhi
 \end{Verbatim}
+
+\subsection{Lean Correspondence Map}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}Xl@{}}
+\toprule
+Paper theorem or lemma role & Lean declaration \\
+\midrule
+M3-A complement identity & \code{betaSet_sdiff} \\
+M3-A block alignment & \code{exists_unique_atom_set_of_lever_subset} \\
+M3-A feasibility transfer & \code{residual_feasibility_iff} \\
+M3-A minimality transfer & \code{rawRepair_betaSet_iff_contractRepair} \\
+M3-A grouping identity & \code{groupTouchAny_betaSet} \\
+M3-A grouped correctness & \code{m3a_grouped_correctness} \\
+M3-A raw transport & \code{m3a_raw_transport} \\
+M3-B B1 & \code{contractRepair_isRawGroup} \\
+M3-B B2 & \code{rawRepair_group_contractFeasible} \\
+M3-B B3 & \code{isRawGroup_contains_contractRepair} \\
+M3-B B4 & \code{groupedRepair_iff_contractRepair} \\
+M3-B theorem & \code{m3b_grouped_correctness} \\
+M3-C converse & \code{m3c_converse} \\
+M3-C exactness & \code{groupSoundness_iff} \\
+Audit-cost collapse & \code{audit_cost_collapse} \\
+Hierarchy lemma & \code{atomicity_implies_groupSoundness} \\
+\bottomrule
+\end{tabularx}
+\caption{Correspondence between manuscript roles and compiled Lean declarations.}
+\label{tab:lean-correspondence}
+\end{table}
+
+\subsection{Atomicity Dependency Note}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.28\textwidth}p{0.18\textwidth}X@{}}
+\toprule
+Step & Uses atomicity? & Dependency role \\
+\midrule
+Complement identity & No & Pairwise block disjointness and active-domain coverage identify the residual complement. \\
+Grouping identity for block images & No & Pairwise disjointness and nonempty active blocks give \(\groupTouchAny(\betaSet(G))=G\). \\
+Arbitrary deletion block alignment & Yes & Singleton active blocks make every \(R\subseteq\Lambda_I\) the image of a unique active atom set. \\
+Raw transport & Yes, on both realizations & Each realization must transport arbitrary raw repairs through its atom-indexed block map. \\
+M3-B replacement & No atomicity & \(\GroupSoundness\) replaces syntactic block alignment by requiring feasible partial-block deletions to remain sound after grouping. \\
+\bottomrule
+\end{tabularx}
+\caption{The role of atomicity in M3-A and its replacement in M3-B.}
+\label{tab:atomicity-dependency}
+\end{table}

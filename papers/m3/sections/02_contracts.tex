@@ -10,6 +10,12 @@ of levers.  The active lever interface is
 \[
   \Lambda_I := \bigcup_{a \in I} \beta(a).
 \]
+For any finite atom set \(T\), write
+\[
+  \betaSet(T) := \bigcup_{a \in T}\beta(a),
+  \qquad\text{so that}\qquad
+  \Lambda_I=\betaSet(I).
+\]
 The active blocks are assumed pairwise disjoint in the theorem statements that
 compare block-aligned and grouped repairs.  Nonemptiness is used where a
 grouping inverse is required.
@@ -26,6 +32,14 @@ The reference and implementation residuals are represented abstractly by
 the retained-set convention.  A deletion is expressed by a complement inside
 \(I\) or \(\Lambda_I\), never by a second deletion-based satisfiability
 predicate.
+
+\(\SatPsi\) and \(\SatPhi\) are abstract feasibility predicates, not CNF
+predicates.  Retained sets are the primitive objects: deleting \(G\) from the
+contract interface is represented by \(\SatPsi(I\setminus G)\), while deleting
+\(R\) from the implementation interface is represented by
+\(\SatPhi(\Lambda_I\setminus R)\).  Keeping complements inside their declared
+active domains avoids mixing deletion sets with the retained residuals on
+which feasibility is evaluated.
 
 \begin{figure}[t]
   \centering
@@ -104,6 +118,27 @@ The Lean development uses the following conditions.
   \SatPsi(T)\to\SatPsi(T').
 \end{align*}
 \end{definition}
+
+\paragraph{Paper-to-Lean correspondence.}
+The core objects above map directly to the declarations in
+\code{Defs.lean}:
+\begin{description}
+  \item[\(\betaSet\)] \code{betaSet};
+  \item[\(\Lambda_I\)] \code{LambdaI};
+  \item[raw feasible deletion] \code{RawFeasible};
+  \item[raw repair] \code{RawRepair};
+  \item[touch-any grouping] \code{groupTouchAny};
+  \item[contract feasible deletion] \code{ContractFeasible};
+  \item[contract repair] \code{ContractRepair};
+  \item[grouped repair] \code{GroupedRepair};
+  \item[residual faithfulness] \code{ResidualFaithfulness};
+  \item[repair atomicity] \code{RepairAtomicity};
+  \item[group soundness] \code{GroupSoundness}; and
+  \item[\(\Psi\)-deletion monotonicity] \code{PsiDeletionMonotonicity}.
+\end{description}
+This displayed list is a declaration map rather than an additional
+main-text table.  Appendix~\ref{app:lean} gives the corresponding theorem and
+lemma map.
 
 These definitions do not assign CNF or solver semantics to \(\SatPsi\) or
 \(\SatPhi\).  Such semantics belong to an application-side truth/certificate

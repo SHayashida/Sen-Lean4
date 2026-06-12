@@ -17,9 +17,21 @@ then \(\GroupSoundness\) holds.
 \end{theorem}
 
 The Lean declaration \code{m3c_converse} does not assume residual faithfulness.
-It descends from a raw repair's grouped image to a minimal grouped report, uses
-grouped correctness to obtain a contract repair, and then applies reference
-deletion monotonicity.
+To prove the converse, begin with an arbitrary feasible implementation
+deletion and descend to a raw minimal subdeletion.  Its touch-any image belongs
+to the grouped raw image, so finite descent inside that image produces a
+minimal grouped report below it.  Pointwise grouped correctness identifies
+this report as a contract repair.  Since the contract repair's grouped
+deletion is contained in the original grouped deletion, the retained residual
+for the original deletion contains no more contract atoms; reference
+deletion-monotonicity transfers feasibility to it and establishes
+\(\GroupSoundness\).
+
+Residual faithfulness is absent because this direction never compares a
+block-aligned implementation residual with a reference residual.  It starts
+from the assumed grouped-correctness predicate, extracts a contract repair,
+and uses only \(\PsiDeletionMonotonicity\) to reach the required reference
+feasibility statement.
 
 \begin{corollary}[Exactness]
 \label{cor:exactness}
@@ -34,7 +46,14 @@ a \(\Psi\)-deletion-monotone contract,
 \end{corollary}
 
 This is \code{groupSoundness_iff}.  Residual faithfulness is used in the M3-B
-forward direction, not in the M3-C converse.
+forward direction: group soundness plus residual faithfulness yields grouped
+correctness.  The reverse direction is M3-C: grouped correctness plus
+\(\PsiDeletionMonotonicity\) yields group soundness without residual
+faithfulness.  The equivalence is therefore scoped to residually faithful
+realizations over deletion-monotone reference contracts, not arbitrary
+reportability contracts.  Standard conjunctive axiom-deletion contracts
+provide the motivating intuition because removing an atom removes
+constraints; the theorem itself uses the stated monotonicity predicate.
 
 \begin{proposition}[Audit-cost collapse]
 \label{prop:audit-collapse}
@@ -46,11 +65,19 @@ then unrestricted \(\GroupSoundness\) holds.
 \end{proposition}
 
 The Lean declaration is \code{audit_cost_collapse}.  Its finite descent does
-not assume deletion monotonicity of \(\SatPhi\).
+not assume deletion monotonicity of \(\SatPhi\).  From an arbitrary feasible
+deletion \(R\), it selects a raw repair \(R_0\subseteq R\).  Touch-any grouping
+is monotone, so
+\(\groupTouchAny(R_0)\subseteq\groupTouchAny(R)\).  The assumed reference
+check for \(R_0\), followed by \(\PsiDeletionMonotonicity\), therefore proves
+the grouped reference residual feasible for \(R\).  Checking all raw minimal
+repairs is sufficient for unrestricted group soundness precisely because the
+finite descent and grouped monotonicity cover every feasible deletion.
 
 The monotonicity assumption is not removable.  The compiled finite example in
 \code{Examples.lean} has pointwise grouped correctness but fails both
-\(\GroupSoundness\) and \(\PsiDeletionMonotonicity\).
+\(\GroupSoundness\) and \(\PsiDeletionMonotonicity\).  Thus grouped correctness
+alone does not imply group soundness in a non-monotone reference contract.
 
 \paragraph{Comparison.}
 Table~\ref{tab:theorem-comparison} separates the roles of the three theorem

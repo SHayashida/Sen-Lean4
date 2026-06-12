@@ -19,9 +19,57 @@ Assume active blocks are pairwise disjoint.  If \(\RepairAtomicity\) and
 \end{theorem}
 
 The Lean declaration is \code{m3a_grouped_correctness}.  The proof factors
-through block-alignment closure, complement correspondence, feasibility
-transfer, minimality transfer, and the identity
-\(\groupTouchAny(\betaSet(G))=G\).
+through the following finite-set steps.
+
+\paragraph{Complement identity.}
+For \(G\subseteq I\), pairwise disjointness gives
+\[
+  \betaSet(I\setminus G)
+  =
+  \Lambda_I\setminus\betaSet(G).
+\]
+This identity does not use atomicity.  It records that retaining the blocks
+outside \(G\) is the same as removing the block image of \(G\) from the active
+lever interface.
+
+\paragraph{Atomic block alignment.}
+Under atomicity, every \(R\subseteq\Lambda_I\) is
+\(\betaSet(G)\) for a unique \(G\subseteq I\).  Existence follows because each
+active lever belongs to a singleton active block; uniqueness uses the
+atom-indexed block map together with disjointness and the nonemptiness supplied
+by atomicity.  This is the step at which atomicity is essential: it ensures
+that arbitrary implementation deletions, not merely chosen block deletions,
+are block-aligned.
+
+\paragraph{Feasibility transfer.}
+The complement identity rewrites an implementation residual after deleting
+\(\betaSet(G)\) as the retained block residual
+\(\betaSet(I\setminus G)\).  Residual faithfulness then yields
+\[
+  \SatPhi(\Lambda_I\setminus\betaSet(G))
+  \quad\Longleftrightarrow\quad
+  \SatPsi(I\setminus G).
+\]
+Thus block-aligned raw feasibility and contract feasibility agree.
+
+\paragraph{Minimality transfer.}
+The same correspondence transfers inclusion-minimality.  A smaller contract
+deletion maps to a smaller block deletion, and atomic block alignment sends
+every raw-feasible subdeletion back to an active atom set.  Consequently,
+\(\RawRepair(\betaSet(G))\) holds exactly when
+\(\ContractRepair(G)\) holds.
+
+\paragraph{Grouping and pointwise correctness.}
+For every \(G\subseteq I\),
+\[
+  \groupTouchAny(\betaSet(G))=G.
+\]
+This grouping identity uses disjointness and nonempty blocks only; it does not
+use atomicity.  Atomicity has already ensured that every raw repair has the
+form \(\betaSet(G)\).  The raw-repair correspondence and grouping identity
+therefore identify the occurring grouped image with the contract-repair
+family, whose inclusion-minimal elements are unchanged.  This proves the
+pointwise equivalence in Theorem~\ref{thm:m3a}.
 
 \begin{corollary}[Atom-indexed raw transport]
 \label{cor:m3a-raw}
@@ -46,6 +94,6 @@ is non-atomic.  Raw transport is an M3-A result only and must not be attributed
 to M3-B.
 
 \paragraph{Dependency record.}
-Appendix~\ref{app:lean} includes the exact theorem signatures.  The longer
-atomicity-use dependency table will be placed with the proof details in the
-technical appendix during full drafting.
+Appendix~\ref{app:lean} includes the exact theorem signatures, the
+paper-to-Lean correspondence map, and a compact record of where atomicity is
+and is not used.

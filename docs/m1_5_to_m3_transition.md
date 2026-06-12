@@ -1,326 +1,139 @@
-# M1.5 to M3 Transition
+# M1.5 to M3 Transition: From Abstraction-Contract Gap to Lean-Backed Reportability
 
-## 1. One-Line Spine
+## 1. One-sentence spine
 
-M1.5 shows that raw repair explanations need not be canonical even under
-clause-multiset equivalence. M3 shows that report-level repair canonicity is a
-contract-relative property: it is guaranteed by suitable interface and
-soundness conditions, and Candidate B demonstrates this distinction on the same
-witness.
+M1 builds an auditable finite atlas; M1.5 shows that even a trusted and clause-equivalent witness does not determine canonical raw repair explanations; M3 theoremizes the repair-reporting component of the abstraction-contract thesis as a reportability contract.
 
-The dissertation-level structure is:
+## 2. Corrected three-layer interpretation
 
-```text
-M1.5 -> M3-A / M3-B / M3-C
-     -> Candidate B artifact-backed instantiation.
-```
+The simple reading that M1 occupies only Layer 1 is too narrow. The dissertation spine is better understood through three related layers.
 
-## 2. What M1.5 Established
+### Layer 1: Evidence / truth boundary
 
-M1.5 is a negative result about raw repair reportability. It shows that
-`equiv_CM`, or clause-multiset equivalence, is insufficient to make raw
-lever-level repair explanations canonical.
+M1 primarily establishes the evidence contract: Proof / Audit / Witness / Assumption. Its central achievement is an auditable finite impossibility atlas whose claims can be traced to explicit specifications, generated artifacts, independent checks, and proof infrastructure.
 
-Candidate B supplies the relevant witness:
+### Layer 2: Raw repair geometry
 
-- the bundled side represents `minlib` as one repair atom;
-- the split side refines it into `decisive_voter0` and
-  `decisive_voter1`;
-- the raw minimal repairs differ across the bundled and split
-  implementations.
+M1 already crosses into repair geometry by recording the atlas frontier, MUS/MCS structure, and repair triangulation. M1.5 then isolates a sharper result: raw implementation-level repair explanations need not be canonical even when the compared witnesses remain trusted and clause-multiset equivalent.
 
-Therefore, a valid impossibility certificate or clause-equivalent encoding
-does not automatically determine a canonical raw repair presentation.
+### Layer 3: Reportability
 
-M1.5 exposes a reportability gap: proof/certificate equivalence does not by
-itself fix the level at which repairs may be reported.
+M3 asks when implementation-level raw repairs may be grouped and reported as canonical contract-level repairs. It supplies explicit conditions for this passage rather than treating implementation lever names as an automatically valid reporting vocabulary.
 
-This transition takes the M1.5 result as established. It does not reprove RENI
-and makes no claim beyond the declared Candidate B artifact scope.
+M1 crosses into Layer 2 as an atlas and repair-geometry artifact, but it does not yet theoremize repair reportability.
 
-## 3. Failure Mechanism Extracted from M1.5
+## 3. Abstraction contract thesis and why M3 does not formalize all of it at once
 
-Raw repair operates over implementation levers. Reported repair operates over
-contract atoms. These are different domains.
+M1.5 introduces the abstraction-contract thesis. The thesis says that finite witness validity does not by itself determine the abstraction level at which repairs should be compared or reported. A correct certificate may establish the status of a finite residual while leaving open which implementation distinctions should survive into an explanation.
 
-When one contract atom is refined into multiple independently removable
-implementation levers, deleting only part of the block can become a raw
-minimal repair. Such a deletion is not directly expressible at the original
-bundled atom level unless a reportability contract specifies how
-implementation deletions are grouped.
+The full abstraction-contract thesis is broader than M3. It includes evidence legitimacy, semantic interpretation, implementation representation, repair reporting, and future obligations that connect finite results to larger families. Those components need not share one formal interface or one proof method.
 
-partial-block deletion escapes the block-aligned contract interface unless a reporting contract closes the gap.
+M3 therefore does not attempt to formalize the entire thesis. It formalizes the repair-reporting component because that is exactly the component exposed by the M1.5 raw non-canonicity witness. The Lean core abstracts away from CNF, SAT solving, proof logs, and the Candidate B artifact audit; it reasons over finite atom and lever sets with abstract retained-residual predicates.
 
-This mechanism explains why raw repair non-canonicity can coexist with
-propositional equivalence or exact clause-multiset equivalence. Equivalence of
-the encoded constraints does not itself identify the reporting domain or the
-map from implementation repairs to that domain.
+M3 is not a retreat from the abstraction-contract thesis; it is the first theoremization of one of its components.
 
-## 4. What M3 Adds
+## 4. Two operational contracts in M1–M3
 
-M3 develops a positive, contract-relative theory. It assumes an explicit
-reportability contract rather than treating the implementation lever set as
-the reporting vocabulary by default.
+### Evidence contract
 
-M3 separates two axes:
+M1's evidence contract specifies what is proved, audited, witnessed, and left assumed. It governs the truth boundary of the finite atlas and prevents an artifact, solver result, or proof-layer statement from being used beyond its recorded support.
 
-- the **truth/certificate axis**, which asks whether implementation residuals
-  correctly represent and certify the reference residual problems;
-- the **repair/report axis**, which asks when implementation-level deletions
-  may be reported as contract-level repairs.
+### Reportability contract
 
-Residual faithfulness connects block-aligned implementation residuals to the
-contract reference residuals. Grouped reporting is not automatic; it must be
-justified by theorem conditions. `GroupedInvariance` is a theorem-level
-property, not part of the definition of the contract, realization, raw repair
-family, or grouping map.
+M3's reportability contract specifies when raw implementation repairs may be soundly reported as grouped repairs over declared contract atoms. Its core objects separate implementation levers, contract atoms, retained-residual feasibility, the grouping map, and inclusion-minimal repair predicates.
 
-M3 does not say that raw repairs become canonical. It says that, under explicit
-contract conditions, grouped repair reports can be canonical even when raw
-repairs are not.
+In M1–M3, the abstraction-contract thesis is operationalized through two contracts: the evidence contract and the reportability contract. Future work may add semantic, Lean-level, and finite-to-general bridge contracts.
 
-## 5. M3-A: Atomicity as the Syntactic Sufficient Condition
+These two contracts operationalize the parts used so far; they do not exhaust or redefine the broader abstraction-contract thesis.
 
-M3-A states:
+## 5. M1.5 gap
 
-```text
-RepairAtomicity + ResidualFaithfulness => GroupedInvariance.
-```
+Candidate B exposes the raw repair gap through two clause-equivalent representations of the same finite witness:
 
-Atomicity gives each active contract atom exactly one active implementation
-lever. Consequently, every implementation-level deletion is block-aligned,
-and block-aligned residual faithfulness covers all feasibility and minimality
-queries made by the raw repair definition.
+- the bundled representation has one implementation lever, `minlib`;
+- the split representation replaces it with `decisive_voter0` and `decisive_voter1`;
+- the bundled raw repair `{minlib}` transports to the two-lever set `{decisive_voter0, decisive_voter1}`;
+- the split representation also has the finer singleton raw repairs `{decisive_voter0}` and `{decisive_voter1}`;
+- therefore the bundled, transported, and split raw repair families do not coincide.
 
-M3-A also gives exact raw repair transport under the atom-induced bijection
-between two atomic realizations. It is syntactic and immediately auditable:
-check whether every active `beta(a)` has cardinality one.
+The mismatch arises because raw repairs are inclusion-minimal deletions over implementation levers. Refining one bundled lever into independently removable components changes that implementation-level deletion geometry even when the encoded clause multiset remains controlled.
 
-This theorem does not apply to the M1.5 split realization under the bundled
-`minlib` contract, because:
+This does not invalidate the witness. It shows that witness validity and raw repair reportability are different obligations.
 
-```text
-beta(minlib) = {decisive_voter0, decisive_voter1}
-```
+Raw non-canonicity is not erased by M3.
 
-is non-atomic. M3-A alone must therefore not be described as establishing
-contract-level canonicity for Candidate B.
+## 6. M3 Lean core
 
-## 6. M3-B: Group-Soundness as the Non-Atomic Sufficient Condition
+The new modules under `SocialChoiceAtlas/Reportability/` implement the reportability theory at a pure finite-set level. `SatPsi` and `SatPhi` are abstract feasibility predicates over retained atom and lever sets. `RawRepair`, `ContractRepair`, and `GroupedRepair` use explicit inclusion-minimality, while `groupTouchAny` supplies the contract-level reporting map.
 
-M3-B allows non-atomic implementations. It requires:
+The paper roles correspond to Lean declarations as follows:
 
-```text
-GroupSoundness(E, C).
-```
+| Paper role | Lean declaration |
+| --- | --- |
+| M3-A atomic sufficient condition | `m3a_grouped_correctness` |
+| M3-A raw transport | `m3a_raw_transport` |
+| M3-B non-atomic sufficient condition | `m3b_grouped_correctness` |
+| M3-B two-realization corollary | `m3b_two_realization` |
+| M3-C monotone converse | `m3c_converse` |
+| M3-B/C exactness under monotone contracts | `groupSoundness_iff` |
+| audit-cost collapse | `audit_cost_collapse` |
+| hierarchy: atomicity implies soundness | `atomicity_implies_groupSoundness` |
 
-This condition says that every feasible arbitrary implementation deletion,
-once grouped to contract atoms, must be feasible in the reference contract.
-Together with residual faithfulness, it gives:
+### M3-A: atomic interface
 
-```text
-GroupedRep_C(E) = ContractRep(C).
-```
+M3-A uses `RepairAtomicity` and residual faithfulness. Atomicity prevents partial-block deletion syntactically: every active atom has one lever, so arbitrary implementation deletions remain atom-aligned. `m3a_grouped_correctness` proves pointwise agreement between grouped and contract repairs, and `m3a_raw_transport` proves atom-indexed raw repair transport between two atomic realizations of the same contract.
 
-For two realizations of the same contract, applying M3-B separately yields
-grouped invariance through the shared `ContractRep(C)`. M3-B gives grouped
-invariance only; it does not give exact raw repair transport.
+### M3-B: non-atomic group soundness
 
-M3-B directly answers the objection that atomicity merely forbids the M1.5
-pathology:
+M3-B permits multi-lever blocks. Instead of forbidding partial-block deletion, it requires `GroupSoundness`: every feasible implementation deletion must remain feasible after touch-any grouping at the contract level. With residual faithfulness, `m3b_grouped_correctness` proves pointwise grouped correctness, and `m3b_two_realization` obtains grouped invariance through the shared contract repair predicate. It does not claim raw repair transport.
 
-> M3-A prevents partial-block escape syntactically.  
-> M3-B permits partial-block deletion, but requires it to remain sound after
-> grouping.
+### M3-C: monotone exactness
 
-## 7. M3-C: Exactness Under Deletion-Monotone Contracts
+M3-C proves the converse under `PsiDeletionMonotonicity`. If grouped correctness already holds, `m3c_converse` derives `GroupSoundness` without assuming residual faithfulness. The theorem `groupSoundness_iff` combines this converse with M3-B: for residually faithful realizations over deletion-monotone reference contracts, report soundness exactly characterizes grouped repair correctness.
 
-M3-C is a candidate converse and theorem skeleton. Its scope is defined by:
+The hierarchy theorem `atomicity_implies_groupSoundness` shows that atomicity is a syntactic sufficient condition for report soundness, not the conceptual core. The kernel-checked examples reinforce both boundaries: group soundness can hold without atomicity, and grouped correctness can hold without group soundness when reference deletion monotonicity fails.
 
-```text
-PsiDeletionMonotonicity(C).
-```
+## 7. Fully active UNSAT note
 
-This says that deleting more contract atoms cannot destroy satisfiability. It
-is natural for standard conjunctive axiom-deletion contracts, where deleting
-atoms removes constraints. It is not assumed for arbitrary reportability
-contracts.
+The Lean core is stated for the general minimal-deletion predicate and may include the degenerate case where the fully active residual is already SAT. In the M3 impossibility-repair application, fully active UNSAT is a separate application-side assumption ensuring that the repair family has the intended interpretation.
 
-Under `PsiDeletionMonotonicity`, grouped correctness implies
-`GroupSoundness`. This reverse direction does not require residual
-faithfulness.
+This separation is deliberate. The transport and reportability proofs do not mathematically require top-level UNSAT, while an impossibility-repair narrative normally does. The application must therefore record fully active UNSAT without adding it as an unnecessary hypothesis to the abstract Lean theorems.
 
-The two directions are asymmetric:
+## 8. Candidate B as M3-B instantiation
 
-```text
-Forward direction:
-  GroupSoundness + ResidualFaithfulness
-  => Grouped correctness.
-
-Reverse direction:
-  Grouped correctness + PsiDeletionMonotonicity
-  => GroupSoundness.
-```
-
-Combining M3-B and candidate M3-C, for residually faithful realizations over
-`Psi`-deletion-monotone contracts, `GroupSoundness` characterizes grouped
-report correctness.
-
-The monotonicity assumption is not removable: a non-monotone counterexample
-in the M3-B/C skeleton exhibits grouped correctness without GroupSoundness.
-
-## 8. Candidate B Instantiation
-
-Candidate B has now been audited as an artifact-defined instantiation of M3-B.
-
-The bundled-level artifact-defined contract is:
-
-```text
-I = {asymm, un, minlib, no_cycle4}.
-```
-
-`no_cycle3` is inactive in this contract scope. The split realization uses:
+Candidate B is non-atomic under the bundled reportability contract because:
 
 ```text
 beta(minlib) = {decisive_voter0, decisive_voter1}.
 ```
 
-The artifact-only audit verified:
+Therefore M3-A is not the right theorem for Candidate B. Candidate B instantiates M3-B, not M3-A.
 
-1. the fully active bundled and split residuals are UNSAT;
-2. implementation-deletion-closure over the declared split interface;
-3. all 16 block-aligned residual comparisons match;
-4. split `RawRep` is exactly the five singleton repairs;
-5. the grouped reports map to bundled SAT residuals;
-6. `PsiDeletionMonotonicity` holds over the complete 16-row bundled lattice;
-7. no solver was run.
+The artifact audit treats the bundled residual lattice as the reference contract and checks residual faithfulness against the split realization. It establishes that the five split singleton raw repairs group to contract deletions whose bundled residuals are SAT. Under reference deletion monotonicity, `audit_cost_collapse` captures the abstract argument that these complete raw-repair checks suffice for unrestricted `GroupSoundness`.
 
-Although `GroupSoundness` quantifies over arbitrary implementation deletions,
-under a deletion-monotone contract the audit-cost collapse lemma reduces its
-audit to the complete `RawRep` family. This is why the Candidate B
-instantiation could be checked by artifact reanalysis without a new solver
-run.
-
-The result is:
-
-> Candidate B instantiates M3-B under the bundled-level artifact-defined
-> contract.
-
-The grouped repair family is:
+The resulting grouped family is:
 
 ```text
-{
-  {asymm},
-  {un},
-  {minlib},
-  {no_cycle4}
-}
+{asymm}, {un}, {minlib}, {no_cycle4}
 ```
 
-The two levels must be stated separately.
+The same witness is raw-noncanonical and grouped-canonical: raw repairs differ across bundled and split realizations, but the grouped reports coincide under the artifact-defined reportability contract.
 
-**Raw level:** Candidate B remains non-canonical across bundled and split
-implementations.
+This conclusion combines two different forms of support. The Lean modules prove the general M3-B and audit-collapse implications; the existing Candidate B artifacts discharge their finite application-side premises. The Lean examples are boundary witnesses for the abstract theory, not a formalization of Candidate B.
 
-**Grouped contract level:** Under the bundled-level artifact-defined contract,
-verified residual faithfulness, verified `GroupSoundness`, and touch-any
-grouping, the grouped repair report is canonical.
+## 9. Scope discipline
 
-## 9. Correct Use of “Recovery”
+- M3 does not prove that raw repairs are canonical.
+- M3 does not erase or weaken M1.5.
+- M3 does not claim semantic validity beyond the chosen contract.
+- Candidate B uses an artifact-defined reportability contract. It must not be silently identified with a full semantic or Lean-level social-choice contract.
+- Sen24 `minlib` is a fixed finite local-decisiveness lever, not a complete theory of liberal rights.
+- The Sen24 setting fixes two voters, four alternatives, strict linear orders, a fixed rights assignment, and local no-cycle rationality artifacts.
+- The `no_cycle3` and `no_cycle4` artifacts must retain their declared local-rationality interpretation rather than being silently generalized.
+- Generalization to Arrow, Borda-style repairs, or broader theorem families requires a new atlas and may require a finite-to-general bridge theorem.
 
-The term “recovery” is legitimate only in the contract-level sense established
-by the Candidate B audit.
+The reportability contract answers how repairs may be grouped once its reference residuals are accepted. It does not independently establish that those residuals have the intended full semantic meaning or that a finite result transfers to another theorem family.
 
-Allowed wording:
+## 10. Final dissertation-spine paragraph
 
-> M3-B recovers report-level canonicity on the same witness, after the
-> reportability contract is made explicit and GroupSoundness is verified.
-
-Forbidden wording:
-
-> M3 erases the M1.5 non-canonicity.  
-> M3 makes the raw repairs canonical.  
-> M3 shows that the bundled and split raw repairs are the same.
-
-The precise formulation is:
-
-> Candidate B is raw-noncanonical and contract-canonical at the same time.
-
-M1.5 is not weakened or invalidated. M3 refines M1.5 by separating raw
-implementation-level repairs from contract-level reported repairs. The same
-witness now plays both roles:
-
-- negative at the raw level;
-- positive at the grouped contract level.
-
-## 10. Artifact-Defined Contract Scope
-
-The Candidate B instantiation uses an artifact-defined bundled contract `C_b`,
-where `Psi_b(T)` is represented by the bundled residual recorded in the
-Candidate B artifacts.
-
-This is enough for the M3-B audit result inside the declared artifact scope.
-It must not be silently identified with a fully semantic or Lean-level
-reference contract.
-
-The distinction is:
-
-- **Artifact-defined contract:** reference residuals are the bundled residuals
-  recorded in artifacts.
-- **Semantic contract:** reference residuals are independently justified as
-  the intended social-choice problems.
-- **Lean/formal contract:** reference residuals are tied to formal definitions
-  and theorems.
-
-Upgrading the artifact-defined contract to a semantic or Lean-level contract
-is a separate faithfulness obligation. It belongs to the broader M1/M2
-truth/certificate axis and must not be assumed in this transition document.
-
-## 11. Dissertation-Level Role
-
-The progression is now explicit:
-
-- M1.5 established the reportability gap.
-- M3-A gives a simple syntactic sufficient condition.
-- M3-B gives a group-soundness-based non-atomic sufficient condition.
-- M3-C gives a candidate exactness result under deletion-monotone reference
-  contracts.
-- Candidate B demonstrates the theory on the same witness that exposed the
-  gap.
-
-Auditable social-choice evidence therefore requires:
-
-1. correct certificates;
-2. explicit reportability contracts;
-3. conditions showing when implementation-level repairs may be reported as
-   contract-level repairs.
-
-M1.5 shows why reportability cannot be assumed; M3 shows how reportability can be earned.
-
-## 12. What This Document Does Not Do
-
-- It does not reprove RENI.
-- It does not formalize M3-A, M3-B, or M3-C in Lean.
-- It does not extend Candidate B beyond the declared artifact-defined scope.
-- It does not claim full semantic validity of the bundled contract.
-- It does not address Arrow transfer.
-- It does not introduce M4 governance delegation.
-- It does not add a six-layer taxonomy.
-
-The next prerequisite testbed is the Arrow transfer question, recorded
-separately in the M3 completion criteria.
-
-## 13. Acceptance Criteria
-
-- Exactly one file is created:
-  `docs/m1_5_to_m3_transition.md`.
-- No code is changed.
-- No solver is run.
-- No new experiment is performed.
-- The document uses the structure:
-  `M1.5 -> M3-A / M3-B / M3-C -> Candidate B artifact-backed instantiation`.
-- “Recovery” appears only in the explicitly qualified contract-level section.
-- Raw non-canonicity remains distinct from grouped contract-level canonicity.
-- The artifact-defined contract remains distinct from semantic and Lean-level
-  contracts.
-- No application implementation or six-layer taxonomy is introduced.
+M1 makes finite impossibility evidence auditable. M1.5 shows that auditable evidence does not determine raw repair presentation. M3 proves when repair presentation can nevertheless be earned at the grouped contract level. This is the transition from an auditable atlas to a reportability theory.

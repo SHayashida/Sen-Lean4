@@ -2,19 +2,30 @@
 \label{sec:introduction}
 
 \paragraph{Motivation.}
-M1 established an auditable finite-atlas workflow that separates Proof, Audit,
-Witness, and Assumption obligations.  M1.5 then showed that this evidence
-discipline does not by itself determine a canonical repair explanation:
-clause-multiset-equivalent bundled and split realizations can expose different
-inclusion-minimal raw lever deletions.  M3 asks the positive follow-up question:
-under what declared interface and soundness conditions can repair reports
-nevertheless be canonical at a contract level?
+Computer-aided impossibility results can be made auditable: a finite atlas can
+record the residual cases that were generated, solved, and checked.  Such
+evidence is about truth and certificates.  A repair recommendation is a
+different object.  It says which assumptions, axioms, or implementation levers
+should be removed to restore feasibility, and it therefore depends on the
+interface at which the deletion is named.
+
+This distinction matters even when the impossibility evidence is trusted.
+M1 established an auditable finite-atlas workflow separating Proof, Audit,
+Witness, and Assumption obligations.  M1.5 then showed that clause-multiset
+equivalence is not enough to make raw lever-level repairs canonical:
+bundled and split realizations can expose different inclusion-minimal raw
+deletions.  M3 asks the positive follow-up question: when may those raw
+implementation repairs nevertheless be reported canonically at a declared
+contract interface?
 
 \paragraph{Thesis.}
-A valid impossibility certificate does not by itself determine how repairs may
-be reported. Repair reportability is a contract-relative property. Under
-explicit interface and soundness conditions, grouped repair reports can be
-canonical even when raw implementation repairs are not.
+A valid impossibility certificate does not determine a valid repair report.
+Reportability is contract-relative: the paper must say which contract atoms
+are reportable, how implementation levers map to those atoms, and why grouped
+reports preserve the reference residual semantics.  M3 gives sufficient
+conditions, and under a monotone reference contract an exactness condition, for
+when \(\GroupedRepair\) coincides pointwise with \(\ContractRepair\).
+Candidate B supplies the motivating artifact-defined instantiation.
 
 \begin{figure}[t]
   \centering
@@ -28,17 +39,19 @@ canonical even when raw implementation repairs are not.
   \label{fig:spine}
 \end{figure}
 
-\paragraph{Contribution boundary.}
-The contribution is not the observation that encoding granularity can change
-MUS, MCS, or repair enumeration; related effects belong to the established
-diagnosis and explanation literature.  The contribution is a contract-relative
-theory of reportability:
+\paragraph{Contributions and boundary.}
+The paper does not claim novelty for the broad phenomenon that MUS, MCS, or
+repair families can vary with representation.  That sensitivity is part of the
+background diagnosis and repair-enumeration landscape.  The positive
+contribution is to specify when such low-level variation may be soundly
+reported through a higher-level contract interface:
 \begin{enumerate}[label=(\roman*)]
+  \item explicit reportability contracts;
   \item M3-A, an atomic syntactic sufficient condition;
-  \item M3-B, a non-atomic sufficient condition based on group soundness;
-  \item M3-C, an exactness result under deletion-monotone reference contracts;
+  \item M3-B, a non-atomic \(\GroupSoundness\) condition;
+  \item M3-C, exactness under deletion-monotone reference contracts;
   \item a Lean-checked abstract finite-set theorem core; and
-  \item an artifact-backed Candidate B instantiation of M3-B.
+  \item a Candidate B artifact-backed instantiation of M3-B.
 \end{enumerate}
 
 M3-B recovers report-level canonicity on Candidate B only after the
@@ -79,4 +92,4 @@ Section~\ref{sec:contracts} defines contracts and repair predicates.
 Sections~\ref{sec:atomic}--\ref{sec:monotone} state M3-A, M3-B, and M3-C.
 Section~\ref{sec:candidate-b} records the artifact-backed instantiation.
 Sections~\ref{sec:related}--\ref{sec:discussion} position and delimit the result.
-Exact Lean signatures and audit-table placeholders appear in the appendices.
+Exact Lean signatures and artifact audit tables appear in the appendices.

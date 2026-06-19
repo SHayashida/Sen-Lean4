@@ -2,34 +2,49 @@
 \label{sec:discussion}
 
 \paragraph{Two simultaneous conclusions.}
-Candidate B remains negative at the raw level and positive at the grouped
-contract level.  The split implementation exposes finer singleton deletions
-than the bundled implementation, so raw repair non-canonicity remains.  Once
-the artifact-defined reportability contract, residual faithfulness, and group
-soundness are fixed, the grouped report agrees with the bundled contract repair
-family.
+Candidate B has two meanings at once.  At the raw implementation level it
+remains a negative witness: the split realization exposes singleton
+\(\RawRepair\) deletions for \(\mathtt{decisive\_voter0}\) and
+\(\mathtt{decisive\_voter1}\), while the bundled realization reports the
+coarser \(\mathtt{minlib}\) lever.  M3 does not make those raw families equal.
+At the grouped artifact-defined contract level, the same witness is positive:
+under the verified contract, \(\ResidualFaithfulness\), \(\GroupSoundness\),
+and touch-any grouping, the grouped split report coincides with the bundled
+contract repair family.
 
 \paragraph{Contract scope.}
 An artifact-defined contract takes recorded bundled residuals as the reference
 predicate.  A semantic contract would independently justify those residuals as
 the intended social-choice problems; a Lean-level contract would tie that
 meaning to formal definitions and theorems.  M3 proves reportability relative
-to the chosen predicate and does not silently perform either upgrade.
+to the chosen predicate.  It does not silently turn artifact evidence into a
+semantic social-choice contract, and it does not turn the Candidate B audit into
+a Lean-level formalization.  Those upgrades are separate truth/certificate
+obligations.
 
 \paragraph{Why reportability must be earned.}
 Implementation labels are not automatically explanation categories.
 Atomicity earns reportability syntactically; group soundness earns it for
-non-atomic interfaces; deletion monotonicity shows when group soundness is also
-necessary for grouped correctness.  The finite examples in the Lean core show
-that these distinctions are substantive.
+non-atomic interfaces by requiring feasible partial-block deletions to remain
+feasible after grouping; deletion monotonicity explains when that soundness
+condition becomes necessary for grouped correctness.  The retained-set
+convention keeps these obligations explicit: feasibility is always evaluated on
+the residual that remains after deletion, not on the deletion label itself.
+The finite examples in the Lean core show that these distinctions are
+substantive, not merely terminological.
 
 \paragraph{Program boundary.}
 The paper fits a larger program moving from auditable finite atlases toward
 broader social-choice claims.  It contributes the repair/report component, not
 a family-scale bridge theorem.  New theorem families require their own
 reference residuals, evidence packages, and transfer arguments before M3 can
-consume them.
+consume them.  In particular, Arrow remains a truth/certificate prerequisite
+testbed: its residual lattice would need its own transfer legitimacy before any
+repair/report comparison could be claimed.
 
-\paragraph{Conclusion placeholder.}
-M1.5 shows why reportability cannot be assumed; M3 shows how reportability can
-be earned.
+\paragraph{Conclusion.}
+The paper separates two questions that are often conflated.  One question is
+whether an impossibility residual is validly certified.  Another is whether a
+repair to an implementation residual may be reported as a repair to a declared
+contract atom.  M1.5 shows why reportability cannot be assumed; M3 gives
+finite-set conditions under which it can be earned.

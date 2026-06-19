@@ -54,7 +54,25 @@ The Open University of Japan\\
 \maketitle
 
 \begin{abstract}
-Abstract to be written last after theorem statements and Candidate B scope are stable.
+Auditable finite-atlas impossibility evidence can show that a residual problem
+is infeasible, but it does not by itself determine how repairs should be
+reported.  In finite social-choice encodings, raw implementation-level repairs
+may be representation-sensitive: clause-equivalent bundled and split
+realizations can have different inclusion-minimal lever deletions.  This paper
+introduces reportability contracts, a finite-set interface for separating raw
+repairs from grouped contract-level reports.  M3-A gives a syntactic sufficient
+condition: atomic implementation blocks plus residual faithfulness make grouped
+reports coincide with contract repairs and support atom-indexed raw transport.
+M3-B covers non-atomic interfaces by replacing atomicity with
+\(\GroupSoundness\), requiring every feasible implementation deletion to remain
+feasible after grouping.  M3-C shows exactness in deletion-monotone reference
+contracts, where grouped correctness characterizes \(\GroupSoundness\) under
+residual faithfulness.  The theorem core is mechanized in Lean as abstract
+finite-set theorems, independent of CNF solving.  The Candidate B audit gives
+an artifact-backed, artifact-defined instantiation: the witness remains
+raw-noncanonical, while grouped canonicity is justified only relative to the
+recorded bundled contract, without upgrading the artifact to semantic or
+Lean-level validity.
 \end{abstract}
 
 \input{sections/01_introduction}

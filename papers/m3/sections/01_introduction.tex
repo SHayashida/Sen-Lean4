@@ -55,7 +55,8 @@ reported through a higher-level contract interface:
 \end{enumerate}
 
 M3-B recovers report-level canonicity on Candidate B only after the
-reportability contract is made explicit and \(\GroupSoundness\) is verified.
+reportability contract is made explicit and both \(\ResidualFaithfulness\) and
+\(\GroupSoundness\) are verified.
 It does not erase M1.5, make raw repairs canonical, or make M3-A applicable to
 the non-atomic Candidate B realization.
 
@@ -72,7 +73,7 @@ Claim & Allowed? & Required qualification \\
 \midrule
 M1.5 shows raw repair non-canonicity & yes & Candidate B / declared artifact scope \\
 M3-A recovers Candidate B & no & M3-A does not apply to non-atomic split \code{minlib} \\
-M3-B recovers report-level canonicity on Candidate B & yes & only under artifact-defined contract and verified \(\GroupSoundness\) \\
+M3-B recovers report-level canonicity on Candidate B & yes & only under artifact-defined contract and verified \(\ResidualFaithfulness\) plus \(\GroupSoundness\) \\
 Candidate B raw repairs become canonical & no & raw non-canonicity remains \\
 \(\GroupSoundness\) characterizes grouped correctness & yes & only for residually faithful realizations over \(\Psi\)-deletion-monotone contracts \\
 Atomicity is necessary & no & M3-A is a sufficient condition only \\

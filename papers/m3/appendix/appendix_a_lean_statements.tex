@@ -12,6 +12,20 @@ closed without \code{sorry}.  The formalization is intentionally abstract: it
 proves finite-set reportability theorems and does not formalize CNF generation,
 solver execution, or the Candidate B artifact enumeration.
 
+\subsection{Core definition: \code{PsiDeletionMonotonicity}}
+\begin{Verbatim}[fontsize=\scriptsize]
+def PsiDeletionMonotonicity (I : Finset Atom)
+    (SatPsi : Finset Atom → Prop) : Prop :=
+  ∀ T' T, T' ⊆ T → T ⊆ I → SatPsi T → SatPsi T'
+\end{Verbatim}
+
+This is the retained-set convention.  The premise \(T' \subseteq T\) means
+that the residual retaining \(T'\) deletes at least as many contract atoms as
+the residual retaining \(T\).  The hypothesis \(T \subseteq I\), together with
+\(T' \subseteq T\), implies \(T' \subseteq I\); this is why the Lean definition
+only needs the explicit \(T \subseteq I\) premise.  This matches Definition~5
+in the main text.
+
 \subsection{\code{m3a_grouped_correctness}}
 \begin{Verbatim}[fontsize=\scriptsize]
 theorem m3a_grouped_correctness

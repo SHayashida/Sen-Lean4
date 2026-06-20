@@ -143,6 +143,13 @@ The Lean development uses the following conditions.
 \end{align*}
 \end{definition}
 
+In the displayed notation \(\forall T'\subseteq T\subseteq I\), the intended
+meaning is \(T'\subseteq T\) and \(T\subseteq I\), so \(T'\subseteq I\) follows
+by transitivity.  This matches the Lean definition shown in
+Appendix~\ref{app:lean}.  The monotonicity direction is from larger retained
+sets to smaller retained sets: deleting more contract atoms cannot destroy
+reference feasibility.
+
 \paragraph{Paper-to-Lean correspondence.}
 The core objects above map directly to the declarations in
 \code{Defs.lean}:

@@ -50,6 +50,7 @@ papers/**/*.log
 papers/**/*.fls
 papers/**/*.fdb_latexmk
 papers/**/*.synctex.gz
+*.pdf
 papers/**/main.pdf
 # Keep preprint PDFs out of git (upload PDFs to jxiv separately).
 paper/**/*preprint*.pdf

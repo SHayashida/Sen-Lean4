@@ -29,11 +29,33 @@ Candidate B supplies the motivating artifact-defined instantiation.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox{0.91\textwidth}{\centering
-    \textbf{Figure placeholder: M1.5 to M3 spine}\\[0.5em]
-    M1.5 raw non-canonicity
-    $\longrightarrow$ M3-A / M3-B / M3-C
-    $\longrightarrow$ Candidate B grouped canonicity}}
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+      >=Stealth,
+      stage/.style={draw, rounded corners, align=center, minimum width=2.8cm,
+        minimum height=1.15cm, font=\small},
+      rawstage/.style={stage, fill=red!8, draw=red!60!black},
+      theorystage/.style={stage, fill=blue!7, draw=blue!55!black},
+      auditstage/.style={stage, fill=green!8, draw=green!45!black},
+      arrow/.style={->, thick}
+    ]
+    \node[rawstage] (m15) {M1.5\\Raw repair\\non-canonicity};
+    \node[theorystage, right=0.9cm of m15] (m3a) {M3-A\\Atomic sufficient\\condition};
+    \node[theorystage, right=0.9cm of m3a] (m3b) {M3-B\\Non-atomic\\\(\GroupSoundness\)};
+    \node[theorystage, right=0.9cm of m3b] (m3c) {M3-C\\Monotone\\exactness};
+    \node[auditstage, right=0.9cm of m3c] (cb) {Candidate B\\Raw-noncanonical\\contract-canonical};
+
+    \draw[arrow] (m15) -- (m3a);
+    \draw[arrow] (m3a) -- (m3b);
+    \draw[arrow] (m3b) -- (m3c);
+    \draw[arrow] (m3c) -- (cb);
+
+    \node[font=\scriptsize, text=red!60!black, above=0.35cm of m15]
+      {negative raw-level result};
+    \node[draw=blue!45!black, dashed, rounded corners,
+      fit=(m3a)(m3b)(m3c), inner xsep=0.18cm, inner ysep=0.35cm,
+      label={[font=\scriptsize, text=blue!55!black]above:positive contract-level theory}] {};
+  \end{tikzpicture}}
   \caption{The paper spine separates the negative raw-level result from the
   positive contract-level theory.}
   \label{fig:spine}
@@ -49,10 +71,17 @@ reported through a higher-level contract interface:
   \item explicit reportability contracts;
   \item M3-A, an atomic syntactic sufficient condition;
   \item M3-B, a non-atomic \(\GroupSoundness\) condition;
-  \item M3-C, exactness under deletion-monotone reference contracts;
+  \item M3-C, a characterization result: over deletion-monotone reference
+    contracts, \(\GroupSoundness\) is equivalent to pointwise grouped
+    correctness for residually faithful realizations;
+  \item a kernel-checked finite counterexample showing that the monotonicity
+    assumption in M3-C is necessary;
   \item a Lean-checked abstract finite-set theorem core; and
   \item a Candidate B artifact-backed instantiation of M3-B.
 \end{enumerate}
+
+The theorem core is not only stated in Lean syntax; the listed declarations
+are closed in the compiled Lean development.
 
 M3-B recovers report-level canonicity on Candidate B only after the
 reportability contract is made explicit and both \(\ResidualFaithfulness\) and

@@ -6,6 +6,15 @@ destroy reference feasibility.  This is natural for standard conjunctive
 axiom-deletion contracts, where deleting an atom removes constraints, but it is
 not assumed for arbitrary reportability contracts.
 
+M3-C is the point at which the paper moves from sufficient conditions to a
+boundary theorem.  M3-A and M3-B give sufficient routes to grouped correctness:
+atomicity is the syntactic route, and \(\GroupSoundness\) is the non-atomic
+route.  M3-C gives the converse in the monotone regime.  Together with M3-B,
+it characterizes \(\GroupSoundness\) as exactly the condition needed for
+grouped correctness under \(\ResidualFaithfulness\) and
+\(\PsiDeletionMonotonicity\).  The finite counterexample in
+\code{Examples.lean} shows that monotonicity is not removable.
+
 \begin{theorem}[M3-C: monotone converse]
 \label{thm:m3c}
 If \(\PsiDeletionMonotonicity\) holds and grouped correctness holds pointwise,
@@ -22,10 +31,11 @@ deletion and descend to a raw minimal subdeletion.  Its touch-any image belongs
 to the grouped raw image, so finite descent inside that image produces a
 minimal grouped report below it.  Pointwise grouped correctness identifies
 this report as a contract repair.  Since the contract repair's grouped
-deletion is contained in the original grouped deletion, the retained residual
-for the original deletion contains no more contract atoms; reference
-deletion-monotonicity transfers feasibility to it and establishes
-\(\GroupSoundness\).
+deletion is contained in the original grouped deletion, the original grouped
+deletion removes at least the atoms removed by the minimal grouped report.  The
+original retained set is therefore a subset of the retained set already known
+feasible, so \(\PsiDeletionMonotonicity\) transfers feasibility downward and
+establishes \(\GroupSoundness\).
 
 Residual faithfulness is absent because this direction never compares a
 block-aligned implementation residual with a reference residual.  It starts

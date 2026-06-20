@@ -43,12 +43,36 @@ which feasibility is evaluated.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox{0.91\textwidth}{\centering
-    \textbf{Figure placeholder: two-axis framework}\\[0.5em]
-    Truth / certificate axis: reference residual
-    \(\leftrightarrow\) implementation residual\\[0.4em]
-    Repair / report axis: raw lever deletion
-    \(\longrightarrow\) grouped contract deletion}}
+  \resizebox{0.94\textwidth}{!}{%
+  \begin{tikzpicture}[
+      >=Stealth,
+      box/.style={draw, rounded corners, align=center, minimum width=3.6cm,
+        minimum height=1.05cm, font=\small},
+      ref/.style={box, fill=blue!7, draw=blue!55!black},
+      impl/.style={box, fill=orange!9, draw=orange!70!black},
+      report/.style={box, fill=green!8, draw=green!45!black},
+      arrow/.style={->, thick}
+    ]
+    \node[impl] (implres) {\(\SatPhi(\betaSet(T))\)\\implementation residual};
+    \node[ref, right=2.4cm of implres] (refres) {\(\SatPsi(T)\)\\reference residual};
+    \node[impl, below=1.55cm of implres] (raw) {raw lever deletion\\\(R\subseteq\Lambda_I\)};
+    \node[report, right=2.4cm of raw] (group) {grouped contract deletion\\\(\groupTouchAny(R)\)};
+
+    \draw[<->, thick, blue!65!black] (implres) -- node[above, font=\scriptsize]
+      {\(\ResidualFaithfulness\)} (refres);
+    \draw[arrow, green!55!black] (raw) -- node[above, font=\scriptsize]
+      {touch-any grouping} (group);
+    \draw[arrow, green!55!black] (group) -- node[right, font=\scriptsize, align=center]
+      {\(\GroupSoundness\):\\\(\SatPsi(I\setminus\groupTouchAny(R))\)}
+      (refres);
+
+    \node[draw=blue!50!black, dashed, rounded corners,
+      fit=(implres)(refres), inner xsep=0.25cm, inner ysep=0.28cm,
+      label={[font=\scriptsize, text=blue!55!black]above:truth / certificate alignment}] {};
+    \node[draw=green!45!black, dashed, rounded corners,
+      fit=(raw)(group), inner xsep=0.25cm, inner ysep=0.28cm,
+      label={[font=\scriptsize, text=green!45!black]below:repair / report soundness}] {};
+  \end{tikzpicture}}
   \caption{Residual legitimacy and repair reportability are distinct axes.}
   \label{fig:two-axis}
 \end{figure}

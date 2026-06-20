@@ -9,7 +9,11 @@ resolution under prioritized constraints \citep{borning1992constraint}.
 M3 uses this repair vocabulary but studies a different obligation: when an
 implementation-level deletion may be reported at a declared contract interface.
 The contract is not merely a display convention.  It specifies the reportable
-atoms and the residual semantics that the grouped report must preserve.
+atoms and the residual semantics that the grouped report must preserve.  M3
+differs from diagnosis-style grouping in treating the grouping interface as a
+residual-semantics preservation obligation: a raw deletion may be reported as a
+contract deletion only when residual faithfulness and the relevant interface
+condition, atomicity or \(\GroupSoundness\), justify that report.
 
 \paragraph{MUS/MCS and repair enumeration.}
 Minimal conflict and correction-set techniques, together with MaxSAT-style
@@ -20,7 +24,10 @@ granularity.  M3 treats that sensitivity as the reason a reportability
 condition is needed.  Its contribution is the finite-set theory connecting
 \(\ResidualFaithfulness\), \(\RepairAtomicity\), \(\GroupSoundness\), and
 \(\PsiDeletionMonotonicity\) to pointwise equality of grouped and contract
-repair predicates.
+repair predicates, together with the exactness boundary showing when
+\(\GroupSoundness\) is characterized by grouped correctness.  This is a
+contract-relative reportability theorem, not a priority claim over all
+abstraction or refinement treatments of explanations.
 
 \paragraph{High-level versus low-level explanations.}
 The distinction between implementation levers and reportable contract atoms is

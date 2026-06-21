@@ -10,10 +10,13 @@ asymm, un, decisive_voter0, decisive_voter1, no_cycle3, no_cycle4
 
 contains an UNSAT residual `q` for which exactly one voter-specific liberalism repair is inclusion-minimal.
 
-The coarse grouping used for the liberalism fiber is:
+The scope of `Q` is restricted to natural lever-subset residuals only: every residual is obtained by choosing a subset of the split lever universe above, with no additional residual constraints injected.
+
+The coarse grouping `gamma` used for the liberalism fiber is:
 
 ```text
-decisive_voter0, decisive_voter1 -> minlib
+gamma(decisive_voter0) = minlib
+gamma(decisive_voter1) = minlib
 ```
 
 For an UNSAT residual `q`, this note writes `RawRep(q)` for the inclusion-minimal lever removals `R` such that `q \ R` is SAT, and computes:
@@ -43,6 +46,13 @@ Run metadata:
 - Split status counts: `SAT = 62`, `UNSAT = 2`.
 - Repair enumeration method: `axiom_level_full_enumeration_v1`.
 - Processed UNSAT cases: `2`.
+
+Verification conditions:
+
+- Fresh scratch solve.
+- Solver: `cadical`.
+- Full inclusion-minimal repair enumeration.
+- `git diff --check` passed.
 - Protected certificate artifacts were not modified.
 
 All one-sided split cases, where exactly one of `decisive_voter0` and `decisive_voter1` is present, were SAT in this run. Thus the UNSAT list below is the same whether the natural class is read as all 64 split subsets or as the coarse-natural image where the two decisive levers are both present or both absent.
@@ -50,6 +60,11 @@ All one-sided split cases, where exactly one of `decisive_voter0` and `decisive_
 ## Results
 
 Bitstrings are in the split-universe order shown above.
+
+All solved UNSAT residual case ids:
+
+- `case_111101`
+- `case_111111`
 
 | q | Active levers | RawRep(q) | mu(q, minlib) |
 |---|---|---|---:|
@@ -72,3 +87,7 @@ mu(q, minlib) in {0, 2} for all UNSAT q
 ```
 
 In this Sen24 split precheck, the two UNSAT residuals both have `mu(q, minlib) = 2`: the singleton repairs `{decisive_voter0}` and `{decisive_voter1}` appear together, never exactly one at a time.
+
+## Limitation
+
+This is a precheck over natural lever-subset residuals only. It is not a claim about arbitrary residual constraints. In particular, the observed absence of `mu(q, minlib) = 1` does not rule out constructing an artificial or externally constrained residual outside this lever-subset class where exactly one voter-specific liberalism repair is minimal.

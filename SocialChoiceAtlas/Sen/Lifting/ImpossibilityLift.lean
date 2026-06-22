@@ -11,31 +11,27 @@ import SocialChoiceAtlas.Core.Profile
 import SocialChoiceAtlas.Axioms.Pareto
 import SocialChoiceAtlas.Axioms.Liberalism
 import SocialChoiceAtlas.Axioms.Rationality
+import SocialChoiceAtlas.Sen.ObstructionBridge
 
 /-!
-# Sen's Impossibility — Lift from Base Case `(Fin 2, Fin 4)` to `(Fin n, Fin m)`
+# Sen's Impossibility — Compatibility Lift for `(Fin n, Fin m)`
 
 This module is the M2 Transfer-Contract deliverable in the Lean Proof layer.
-The target theorem `sen_impossibility_lifts` (Stage 2) generalises
-`SocialChoiceAtlas.Sen.BaseCase24.sen_impossibility_basecase` from the
-finite case `(Voter := Fin 2, Alt := Fin 4)` to any finite case with
-`2 ≤ n` voters and `4 ≤ m` alternatives, by direct semantic construction
-on the strict social preference relation.
+The target theorem `sen_impossibility_lifts` retains the historical public
+statement over `(Fin n, Fin m)` with hypotheses `_hn : 2 ≤ n` and
+`_hm : 4 ≤ m`, but Stage 3 now derives it as a compatibility corollary of
+`SocialChoiceAtlas.Sen.sen_impossibility_from_obstruction_basis`.
 
-This file is the **Stage 2** deliverable: it contains the module shell,
-imports, the namespace, the completion lemma `exists_not_mem_of_card_lt`,
-the ranking-completion helpers (`rankingOfPrefix`, `ranking4Prefix`), the
-two-voter profile lift (`liftProfile`), the polymorphic port of
-`sen_not_acyclic_01` as five `private` sub-lemmas (`sen_lift_case_*`), and
-the main theorem `sen_impossibility_lifts` (see L545).
+The generic bridge theorem does not require these explicit size hypotheses:
+two distinct voters and the decisive alternative pairs are supplied by
+`MINLIB`, and the O2/O3/O4 support cardinalities are proved in
+`SocialChoiceAtlas.Sen.ObstructionSoundness`. Keeping `_hn` and `_hm` here is
+an API-compatibility choice for downstream code and for alignment with the
+former M2 statement. It is not a claim that `UN ∧ MINLIB` implies `4 ≤ m`.
 
-The proof is stronger than the staged prompt anticipated: the cycle
-construction is supplied entirely by the alternatives that `MINLIB` already
-exposes (with `Decisive.symm` to resolve overlap orientation), so the
-`4 ≤ Fintype.card (Fin m)` completion lemma is kept as infrastructure but
-is not consumed by the final theorem; the hypotheses `_hn : 2 ≤ n` and
-`_hm : 4 ≤ m` are therefore underscore-prefixed (kept for statement
-symmetry with Sen's original formulation, and to document the lift scope).
+The legacy ranking/profile helpers and private `sen_lift_case_*` lemmas are
+left in this module as historical proof infrastructure. They are no longer
+the proof dependency of the public theorem; cleanup can be reviewed separately.
 
 The companion plan is `docs/gates/m2/impossibility_lift_stage1_plan.md`.
 The scope wall (Proof layer vs. CNF Witness/Audit layer) is documented in
@@ -560,32 +556,6 @@ theorem sen_impossibility_lifts
     (F : SWF (Fin n) (Fin m))
     (hUN : UN F) (hMINLIB : MINLIB F) :
     ¬ SocialAcyclic F := by
-  classical
-  rcases hMINLIB with ⟨i, j, hij, x, y, z, w, hxy, hzw, hdec_i, hdec_j⟩
-  by_cases hz : z ∈ ({x, y} : Finset (Fin m))
-  · by_cases hw : w ∈ ({x, y} : Finset (Fin m))
-    · -- Two-overlap: {z, w} ⊆ {x, y}, combined with z ≠ w gives the equality.
-      have hz' : z = x ∨ z = y := by simpa using hz
-      have hw' : w = x ∨ w = y := by simpa using hw
-      have hzw_eq : (z = x ∧ w = y) ∨ (z = y ∧ w = x) := by
-        rcases hz' with hzx | hzy
-        · rcases hw' with hwx | hwy
-          · exact absurd (hzx.trans hwx.symm) hzw
-          · exact Or.inl ⟨hzx, hwy⟩
-        · rcases hw' with hwx | hwy
-          · exact Or.inr ⟨hzy, hwx⟩
-          · exact absurd (hzy.trans hwy.symm) hzw
-      exact sen_lift_case_two_overlap F hij hxy hzw hdec_i hdec_j hzw_eq
-    · -- One-overlap, z ∈ {x,y}, w ∉ {x,y}.
-      exact sen_lift_case_one_overlap_z_in F hUN hij hxy hzw hdec_i hdec_j hz hw
-  · by_cases hw : w ∈ ({x, y} : Finset (Fin m))
-    · -- One-overlap, w ∈ {x,y}, z ∉ {x,y}.
-      exact sen_lift_case_one_overlap_w_in F hUN hij hxy hzw hdec_i hdec_j hw hz
-    · -- Disjoint case.
-      have hzx : z ≠ x := by intro h; apply hz; simp [h]
-      have hzy : z ≠ y := by intro h; apply hz; simp [h]
-      have hwx : w ≠ x := by intro h; apply hw; simp [h]
-      have hwy : w ≠ y := by intro h; apply hw; simp [h]
-      exact sen_lift_case_disjoint F hUN hij hxy hzw hdec_i hdec_j hzx hzy hwx hwy
+  exact SocialChoiceAtlas.Sen.sen_impossibility_from_obstruction_basis F hUN hMINLIB
 
 end SocialChoiceAtlas.Sen.Lifting

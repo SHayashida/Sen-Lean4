@@ -41,7 +41,9 @@ def _runtime_boxplot(config_order: list[str], grouped: dict[str, list[dict[str, 
 
     data = [[float(m.get("wall_time_sec", 0.0)) for m in grouped.get(cfg, [])] for cfg in config_order]
     fig, ax = plt.subplots(figsize=(9, 4.5))
-    ax.boxplot(data, labels=config_order)
+    ax.boxplot(data)
+    ax.set_xticks(range(1, len(config_order) + 1))
+    ax.set_xticklabels(config_order)
     ax.set_title("Runtime by config")
     ax.set_xlabel("config_id")
     ax.set_ylabel("wall_time_sec")

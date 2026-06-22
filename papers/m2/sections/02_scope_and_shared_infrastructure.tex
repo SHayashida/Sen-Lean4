@@ -8,22 +8,23 @@ The \emph{CNF Witness/Audit layer} establishes finite-case satisfiability or uns
 The main positive deliverable belongs to the Proof layer; the main negative deliverable concerns the wall between the two layers.
 
 \paragraph{Family scope.}
-The positive theorem ranges over all finite cases \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\) with \(2 \leq n\) and \(4 \leq m\).
-It does not claim a result for infinite-domain social choice; it does not claim a result for Arrow's theorem; and it does not claim a result that bypasses \(\mathtt{UN}\) or \(\mathtt{MINLIB}\).
-The phrase ``Sen's impossibility lifts'' in this paper always means the semantic, finite-case lift in the sense above.
+The generic bridge theorem ranges over an arbitrary voter type and a finite decidable alternative type under the repository's ranking interface.
+The legacy theorem \(\mathtt{sen\_impossibility\_lifts}\) remains available for all finite cases \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\) with \(2 \leq n\) and \(4 \leq m\), as a compatibility corollary.
+This does not claim a new result for arbitrary social-choice models outside the repository definitions; it does not claim a result for Arrow's theorem; and it does not claim a result that bypasses \(\mathtt{UN}\) or \(\mathtt{MINLIB}\).
+The phrase ``finite semantic obstruction bridge'' in this paper always means the semantic Proof-layer theorem in the sense above.
 
 \paragraph{Lever scope.}
 The CNF Witness/Audit layer in this repository uses an explicit lever schema in which rationality is approximated by the local short-cycle levers \(\mathtt{no\_cycle3}\) and \(\mathtt{no\_cycle4}\).
 At the base case \((n,m)=(2,4)\), \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) is equivalent to full acyclicity on the social strict preference, and that equivalence is audited exhaustively by \code{scripts/check\_acyclicity\_short\_cycles.py}.
 At larger cases the audited equivalence does not transfer automatically; the existing interpretation notes record that \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) still permits length-5 cycles at \(m=5\).
-The negative-side scope wall is exactly the statement that the Proof-layer lift does not by itself extend this audited equivalence.
+The negative-side scope wall is exactly the statement that the Proof-layer bridge does not by itself extend this audited equivalence.
 
 \paragraph{What is in this paper, what is not.}
 The paper contains
-(i) the polymorphic Lean signatures used by the lift theorem,
-(ii) the kernel-checked statement and proof sketch of \(\mathtt{sen\_impossibility\_lifts}\),
+(i) the polymorphic Lean signatures used by the obstruction bridge,
+(ii) the kernel-checked theorem ladder from witness extraction to \(\neg\,\mathtt{SocialAcyclic}\),
 (iii) the Proof-vs-Witness/Audit scope wall, and
-(iv) the artifact binding for both deliverables.
+(iv) the artifact binding for the bridge, compatibility corollary, and scope wall.
 The paper does \emph{not} contain
 (i) new solver experiments,
 (ii) any modification of the sibling Evidence-Contract or Explanation-Contract manuscripts,

@@ -3,29 +3,32 @@
 
 \paragraph{Scope limitation.}
 The positive flagship is a Lean Proof-layer theorem at the semantic axiom level.
-It does not claim a result outside the finite \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\) family with \(2 \leq n\) and \(4 \leq m\); it does not claim a result for SWFs that fail \(\mathtt{UN}\) or \(\mathtt{MINLIB}\); and it does not claim a result that bypasses the polymorphic axiom definitions used at the base case.
-The negative-side scope wall is a guarantee-boundary statement and an audit-policy statement; it is not (yet) a Lean theorem.
+Its generic theorem uses an arbitrary voter type and a finite decidable alternative type under the repository's ranking interface.
+This is a formal statement about the repository definitions; it is not a new social-choice theorem about every possible model of electorates, and it does not bypass the semantic definitions of \(\mathtt{UN}\), \(\mathtt{MINLIB}\), and \(\mathtt{SocialAcyclic}\).
+The negative-side scope wall is a guarantee-boundary statement and an audit-policy statement; it is not a Lean theorem.
 
-\paragraph{What \(\mathtt{\_hm}\) does not say.}
-The hypothesis \(\mathtt{\_hm : 4 \leq m}\) is present in the theorem statement for symmetry with Sen's original formulation and to document the lift scope.
-It is not consumed by the proof: the overlap case analysis avoids requiring a universal four-point completion in \(\mathtt{Fin\ m}\), since the two-overlap case yields an asymmetry contradiction, the one-overlap case yields a 3-cycle, and the disjoint case yields a 4-cycle, each assembled from alternatives already supplied by \(\mathtt{MINLIB}\).
+\paragraph{What the legacy size hypotheses do not say.}
+The generic obstruction theorem has no explicit lower-bound hypotheses.
+The legacy theorem \(\mathtt{sen\_impossibility\_lifts}\) retains \(\mathtt{\_hn : 2 \leq n}\) and \(\mathtt{\_hm : 4 \leq m}\) only for compatibility with the former \((\mathtt{Fin}\ n,\mathtt{Fin}\ m)\) statement.
 We do not claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).
-The cardinality lemmas \(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\) remain in the lifting module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).
+The relevant mathematical support is supplied by the extracted obstruction witness: O2 has support cardinality \(2\), O3 has support cardinality \(3\), and O4 has support cardinality \(4\).
 
 \paragraph{Forward pointer to the representation-canonicity question.}
-This paper deliberately limits itself to the positive Proof-layer lift (Section~\ref{sec:positive}) and the scope wall (Section~\ref{sec:negative}).
+This paper deliberately limits itself to the positive Proof-layer bridge (Section~\ref{sec:positive}) and the scope wall (Section~\ref{sec:negative}).
 A separate representation-canonicity question---whether the \emph{representation} under which lever-level repairs are reported (bundled vs.\ split, clause-equivalent re-encodings) transfers canonically at family scale, i.e.\ carrying the Explanation-Contract non-canonicity phenomenon to family scale---is real and methodologically required for the four-contract program, but it requires fixing the witness class and the generator interface before exploration scripts proliferate, and it does not block the present results.
 We therefore treat it as a companion paper (in preparation); its reproduction record will be authored alongside that paper, not here.
 
 \paragraph{What remains open.}
-Two follow-ups are recorded explicitly.
-First, promoting Proposition~\ref{prop:scope-wall} to a Lean theorem would require formalising the short-cycle encoding as a Lean-side relation and proving non-equivalence with full \(\mathtt{SocialAcyclic}\) at \(m = 5\); we leave this to future work.
-Second, the companion representation-canonicity paper will introduce a parametric witness-class interface and re-examine whether the Explanation-Contract non-canonicity phenomenon recurs across family-scale clause-equivalent re-encodings; this paper makes no prediction here.
+Three follow-ups are recorded explicitly.
+First, legacy helper cleanup in \(\mathtt{ImpossibilityLift.lean}\) can be reviewed separately now that the public theorem is a compatibility corollary.
+Second, promoting Proposition~\ref{prop:scope-wall} to a Lean theorem would require formalising the short-cycle encoding as a Lean-side relation and proving non-equivalence with full \(\mathtt{SocialAcyclic}\) at \(m = 5\); we leave that to future work.
+Third, the companion representation-canonicity paper will introduce a parametric witness-class interface and re-examine whether the Explanation-Contract non-canonicity phenomenon recurs across family-scale clause-equivalent re-encodings; this paper makes no prediction here.
 Beyond these, we point onward to later work on repair geometry and institutional design.
 
 \paragraph{Conclusion.}
 The contribution of this paper is a Transfer Contract for a finite social-choice impossibility witness, made along the layer-level boundary between the Lean Proof layer and the CNF Witness/Audit layer.
-At the Proof layer, Sen's impossibility lifts unconditionally at the kernel-checked level to all finite cases with at least two voters and at least four alternatives, by direct polymorphic port of the base-case case-split; the hypothesis \(\mathtt{\_hm : 4 \leq m}\) is not consumed by the proof.
-At the Witness/Audit layer, the lift does not automatically upgrade the sen24 CNF atlas into a family-level CNF certificate; the short-cycle encoding remains audited only at the base case, and a stronger family-level rationality encoding would have to be introduced and audited separately.
+At the Proof layer, \(\mathtt{UN}\) and \(\mathtt{MINLIB}\) expose one of the exhaustive O2/O3/O4 semantic obstruction shapes, with exact support cardinalities \(2,3,4\); these yield a strict conflict, 3-cycle, or 4-cycle and therefore refute \(\mathtt{SocialAcyclic}\).
+The legacy \((\mathtt{Fin}\ n,\mathtt{Fin}\ m)\) lift is retained as a compatibility corollary.
+At the Witness/Audit layer, the bridge does not automatically upgrade the Sen24 CNF atlas, LRAT proof, short-cycle audit, or repair family into family-level artifacts.
 The methodological point is that ``the finite witness transferred'' is not a single statement: in an auditable-abstraction program, it is at least two statements, one per layer.
-This paper makes the positive Proof-layer statement kernel-checked and the negative Witness/Audit-layer statement explicit, and defers the further representation-canonicity question to the companion paper.
+This paper makes the positive Proof-layer bridge kernel-checked and the negative Witness/Audit-layer statement explicit, and defers the further representation-canonicity question to the companion paper.

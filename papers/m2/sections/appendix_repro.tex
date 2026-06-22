@@ -1,13 +1,17 @@
 \section{Reproducibility Note}
 \label{sec:repro}
 
-This manuscript is grounded in a kernel-checked Lean module and repository-local reproducibility artifacts rather than new solver experiments.
+This manuscript is grounded in kernel-checked Lean modules and repository-local reproducibility artifacts rather than new solver experiments.
 The main evidence sources used in the text are:
 
 \begin{itemize}[leftmargin=1.5em]
-\item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the positive flagship theorem \(\mathtt{sen\_impossibility\_lifts}\) and its supporting helpers.
-\item \code{SocialChoiceAtlas.lean} --- the root import line that wires the lifting module into the default \(\mathtt{lake\ build}\).
-\item \code{SocialChoiceAtlas/Sen/BaseCase24/Theorem.lean} --- the read-only source of the ported \(\mathtt{sen\_not\_acyclic\_01}\) case-split that the lift re-states polymorphically.
+\item \code{SocialChoiceAtlas/Sen/ObstructionBasis.lean} --- witness extraction and O2/O3/O4 classification.
+\item \code{SocialChoiceAtlas/Sen/ObstructionProfiles.lean} --- generic prefix rankings and ambient two-ranking profiles.
+\item \code{SocialChoiceAtlas/Sen/ObstructionSoundness.lean} --- exact support cardinalities, shape soundness, and outcome refutation.
+\item \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} --- the generic bridge theorems \(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) and \(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\).
+\item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the legacy compatibility corollary \(\mathtt{sen\_impossibility\_lifts}\).
+\item \code{SocialChoiceAtlas.lean} --- the root import lines that wire the bridge and compatibility theorem into the default \(\mathtt{lake\ build}\).
+\item \code{scripts/ci\_m2\_smoke.sh} --- the M2 smoke gate for bridge imports, theorem anchors, and placeholder scans.
 \item \code{docs/m2\_scope\_wall.md} --- the scope wall.
 \item \code{docs/no\_cycle\_interpretation\_note.md} and \code{docs/axiom\_semantics\_scaling.md} --- the prior repository notes that establish why the short-cycle encoding does not transfer past \(m = 4\).
 \item \code{scripts/check\_acyclicity\_short\_cycles.py} --- the finite check that audits the short-cycle encoding at the base case.
@@ -19,17 +23,37 @@ The main evidence sources used in the text are:
 The submission snapshot is frozen as a Git tag, published as a GitHub release, and archived by Zenodo, which mints a citable DOI for the snapshot.
 
 \begin{quote}
-Archived manuscript snapshot: Zenodo DOI \url{https://doi.org/10.5281/zenodo.20468650} for tag \code{papers-m2-v1} at commit \code{4feef8941801b1957847bb2fd6a965b57f83b863}.
+Archived obstruction-bridge snapshot:
+Zenodo version DOI
+\url{https://doi.org/10.5281/zenodo.20796920}
+for tag
+\code{papers-m2-v2-obstruction-bridge}
+at commit
+\code{d7e5fd1ac94ab18330951b5d9741585dddc5b43a}.
+The Zenodo record belongs to concept DOI
+\url{https://doi.org/10.5281/zenodo.20468649}.
 \end{quote}
 
-The DOI line is the stable archive reference for this manuscript; the Git tag and commit are kept alongside it as the source-traceability anchor.
+The version DOI, Git tag, and exact commit jointly identify the archived
+Stage~3 source snapshot. The DOI reference in this appendix was recorded after
+the release was published and therefore does not move or alter the archived
+tag. The prior DOI \url{https://doi.org/10.5281/zenodo.20468650} identifies the
+superseded pre-bridge \code{papers-m2-v1} snapshot.
 
 \subsection{Build commands}
 \label{sec:build-commands}
 
-The narrow build command that exercises the positive flagship is:
+The narrow build commands that exercise the bridge and compatibility theorem are:
 \begin{quote}
-\code{lake build SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift}
+\code{lake env lean SocialChoiceAtlas/Sen/ObstructionBridge.lean}
+\end{quote}
+\begin{quote}
+\code{lake env lean SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean}
+\end{quote}
+
+The M2 smoke gate is:
+\begin{quote}
+\code{./scripts/ci\_m2\_smoke.sh}
 \end{quote}
 
 The full default kernel build is:
@@ -51,10 +75,14 @@ The manuscript itself builds with:
 \toprule
 Claim & Binding \\
 \midrule
-Theorem~\ref{thm:lift} (positive flagship) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (\(\mathtt{sen\_impossibility\_lifts}\)) \\
-Default kernel build & \code{SocialChoiceAtlas.lean} (root import) \\
-Remark~\ref{rem:lean-form} (Lean form, \(\mathtt{\_hm}\) unused) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (docstring and proof body) \\
-Remark~\ref{rem:hm-unused} (overlap case analysis) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (five \(\mathtt{sen\_lift\_case\_*}\) sub-lemmas) \\
+Witness extraction and classification & \code{SocialChoiceAtlas/Sen/ObstructionBasis.lean} \\
+Generic profile construction & \code{SocialChoiceAtlas/Sen/ObstructionProfiles.lean} \\
+Shape soundness and exact cardinalities & \code{SocialChoiceAtlas/Sen/ObstructionSoundness.lean} \\
+Theorem~\ref{thm:bridge} (generic outcome bridge) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\)) \\
+Theorem~\ref{thm:generic-impossibility} (generic impossibility) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\)) \\
+Corollary~\ref{thm:lift} (legacy compatibility theorem) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (\(\mathtt{sen\_impossibility\_lifts}\)) \\
+Default kernel build & \code{SocialChoiceAtlas.lean} (root imports) \\
+M2 smoke gate & \code{scripts/ci\_m2\_smoke.sh} \\
 Proposition~\ref{prop:scope-wall} (scope wall) & \code{docs/m2\_scope\_wall.md} \\
 Short-cycle scaling note & \code{docs/no\_cycle\_interpretation\_note.md} \\
 Axiom-semantics scaling note & \code{docs/axiom\_semantics\_scaling.md} \\
@@ -64,4 +92,5 @@ Axiom-semantics scaling note & \code{docs/axiom\_semantics\_scaling.md} \\
 
 \paragraph{What is not part of this reproduction.}
 No new solver runs are part of this paper.
+No new CNF, LRAT, atlas, or repair artifacts are generated for M2.
 The representation-canonicity question at family scale is deferred to a companion paper (in preparation); its reproduction record will be authored alongside that paper, not here.

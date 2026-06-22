@@ -1,61 +1,88 @@
-\section{The Proof-Layer Lift and Its Witness-Layer Boundary}
+\section{The Proof-Layer Bridge and Its Witness-Layer Boundary}
 \label{sec:theorem}
 
 \subsection{The positive flagship}
 \label{sec:positive}
 
-\begin{theorem}[Sen impossibility lifts at the Proof layer]
+\begin{theorem}[Generic obstruction bridge]
+\label{thm:bridge}
+For any voter type \(\mathtt{Voter}\), any finite decidable alternative type \(\mathtt{Alt}\), and every
+\(F : \mathtt{SWF}\ \mathtt{Voter}\ \mathtt{Alt}\),
+if \(\mathtt{UN}\ F\) and \(\mathtt{MINLIB}\ F\) hold, then \(\mathtt{SenOutcomeObstruction}\ F\).
+\end{theorem}
+
+\begin{theorem}[Generic impossibility from the obstruction basis]
+\label{thm:generic-impossibility}
+Under the same assumptions, \(\neg\,\mathtt{SocialAcyclic}\ F\).
+\end{theorem}
+
+\begin{corollary}[Legacy finite lift]
 \label{thm:lift}
 For all natural numbers \(n,m\) with \(2 \leq n\) and \(4 \leq m\), for every social welfare function
 \(F : \mathtt{SWF}\ (\mathtt{Fin}\ n)\ (\mathtt{Fin}\ m)\),
 if \(\mathtt{UN}\ F\) and \(\mathtt{MINLIB}\ F\) hold, then \(\neg\, \mathtt{SocialAcyclic}\ F\).
-\end{theorem}
+\end{corollary}
 
 \begin{remark}[Statement form in Lean]
 \label{rem:lean-form}
-In Lean the theorem is stated as
-\begin{quote}
-\code{theorem sen\_impossibility\_lifts \char`\{n m : \texttt{N}\char`\}\ (\_hn : 2 \leq n)\ (\_hm : 4 \leq m)\ (F : SWF (Fin n) (Fin m))\ (hUN : UN F)\ (hMINLIB : MINLIB F) : \char`\~SocialAcyclic F}
-\end{quote}
-The two hypotheses \(\mathtt{\_hn}\) and \(\mathtt{\_hm}\) are deliberately underscore-prefixed.
-\(\mathtt{\_hn}\) is not consumed: \(\mathtt{MINLIB}\) already supplies two distinct voters in \(\mathtt{Fin\ n}\), so \(\mathtt{Fin\ n}\) is automatically of cardinality at least two.
-\(\mathtt{\_hm}\) is not consumed either; the next remark explains why this is structural, not accidental.
+Theorem~\ref{thm:bridge} is the Lean theorem
+\(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) at
+\(\mathtt{SocialChoiceAtlas/Sen/ObstructionBridge.lean}\).
+Theorem~\ref{thm:generic-impossibility} is
+\(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\) in the same module.
+Corollary~\ref{thm:lift} is the existing theorem
+\(\mathtt{sen\_impossibility\_lifts}\) at
+\(\mathtt{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean}\).
+The corollary keeps the public theorem name and statement shape for downstream compatibility, but its proof body is now the specialization of the generic theorem.
 \end{remark}
 
-\begin{remark}[Why \(\mathtt{\_hm}\) is not consumed]
+\begin{remark}[The legacy \(\mathtt{\_hn}\) and \(\mathtt{\_hm}\) hypotheses]
 \label{rem:hm-unused}
-\textbf{We do not claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).}
-The hypothesis \(\mathtt{\_hm}\) is not consumed because the overlap case analysis avoids requiring a universal four-point completion in \(\mathtt{Fin\ m}\).
-\(\mathtt{MINLIB}\) supplies two distinct voters \(i, j\) and two decisive alternative pairs \((x,y)\) and \((z,w)\) with \(x \neq y\) and \(z \neq w\), but \emph{does not} guarantee that \(\{x,y,z,w\}\) are four distinct alternatives.
-The proof case-splits on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\), and each case is settled by alternatives already supplied by \(\mathtt{MINLIB}\):
-\begin{itemize}[leftmargin=1.5em]
-\item \textbf{Two-overlap} (\(\{z,w\} \subseteq \{x,y\}\)): combined with \(z \neq w\), this forces \(\{z,w\} = \{x,y\}\) as ordered pairs (up to direction); \(\mathtt{Decisive.symm}\) gives both directions; the resulting two strict edges on the same pair yield an asymmetry contradiction at \(\mathtt{strictPart}\ (F\ p)\).
-\item \textbf{One-overlap}: exactly one of \(z,w\) coincides with one of \(x,y\); together with the third and the off-overlap fourth alternative, \(\mathtt{UN}\) and the two decisive pairs assemble a length-3 cycle in \(\mathtt{strictPart}\ (F\ p)\), contradicting \(\mathtt{SocialAcyclic}\ F\) via \(\mathtt{cycle3\_implies\_not\_acyclic}\).
-\item \textbf{Disjoint} (\(\{x,y\} \cap \{z,w\} = \emptyset\)): the four alternatives \(x,y,z,w\) are pairwise distinct and assemble a length-4 cycle in \(\mathtt{strictPart}\ (F\ p)\), contradicting \(\mathtt{SocialAcyclic}\ F\) via \(\mathtt{cycle4\_implies\_not\_acyclic}\).
-\end{itemize}
-In every case the cycle (or contradiction) is assembled from alternatives that \(\mathtt{MINLIB}\) already exposed, so no fresh alternative needs to be drawn from \(\mathtt{Fin\ m}\) using \(\mathtt{\_hm}\).
-The cardinality lemmas \(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\) remain in the lifting module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).
-The hypothesis \(\mathtt{\_hm}\) is retained in the statement only for symmetry with Sen's original formulation and to document the lift scope.
+The generic obstruction theorem has no explicit voter- or alternative-cardinality lower-bound hypotheses.
+The legacy theorem retains \(\mathtt{\_hn : 2 \leq n}\) and \(\mathtt{\_hm : 4 \leq m}\) solely for backward-compatible alignment with the former statement.
+This is not a claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).
+\(\mathtt{MINLIB}\) supplies two distinct rights holders and two decisive alternative pairs, while the O2/O3/O4 classification determines whether the distinguished alternative support has cardinality \(2\), \(3\), or \(4\).
 \end{remark}
 
-\paragraph{Proof sketch.}
-The Lean proof is structured as five \texttt{private} sub-lemmas, one per overlap branch (the disjoint case is one branch; two one-overlap orientations are two branches; the two-overlap case is one branch; a fifth branch covers \(\mathtt{Decisive.symm}\) reorientation).
-Together with the helper \(\mathtt{liftProfile}\) (lifting the base-case two-voter profile onto the two distinct decisive voters of \(\mathtt{Fin\ n}\)) and the ranking-completion helpers \(\mathtt{rankingOfPrefix}\) and \(\mathtt{ranking4Prefix}\), the five sub-lemmas reconstruct the Sen24 base-case case-split polymorphically.
-The top-level theorem then dispatches to the appropriate sub-lemma based on the membership tests \(z \in \{x,y\}\) and \(w \in \{x,y\}\).
-The full proof is checked by the Lean~4 kernel.
+\paragraph{Theorem ladder.}
+The bridge is factored through public objects rather than hidden case analysis:
+
+\begingroup
+\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+Step & Mathematical role & Lean binding \\
+\midrule
+T1 & Witness extraction from \(\mathtt{MINLIB}\) & \(\mathtt{exists\_senRightsWitness}\), \(\mathtt{exists\_classified\_senRightsWitness}\) in \code{ObstructionBasis.lean} \\
+T2 & Exhaustive O2/O3/O4 overlap classification & \(\mathtt{classify\_raw\_overlap}\), \(\mathtt{ClassifiedSenRightsWitness.kind}\) in \code{ObstructionBasis.lean} \\
+T3 & Exact support cardinality & \(\mathtt{ClassifiedSenRightsWitness.support\_card\_eq\_kind}\) in \code{ObstructionSoundness.lean} \\
+T4 & Shape soundness & \(\mathtt{outcome\_of\_twoOverlap}\), \(\mathtt{outcome\_of\_zOnly}\), \(\mathtt{outcome\_of\_wOnly}\), \(\mathtt{outcome\_of\_disjoint}\) in \code{ObstructionSoundness.lean} \\
+T5 & Outcome refutation & \(\mathtt{SenOutcomeObstruction.refutes\_socialAcyclic}\) in \code{ObstructionSoundness.lean} \\
+T6 & Obstruction bridge & \(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) in \code{ObstructionBridge.lean} \\
+T7 & Generic impossibility & \(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\) in \code{ObstructionBridge.lean} \\
+T8 & Legacy lift corollary & \(\mathtt{sen\_impossibility\_lifts}\) in \code{ImpossibilityLift.lean} \\
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\paragraph{Shape reading.}
+O2 means the two decisive pairs use the same two alternatives, up to orientation; it yields a strict conflict on that pair.
+O3 means exactly one endpoint overlaps; it yields a 3-cycle.
+O4 means the two decisive pair supports are disjoint; it yields a 4-cycle.
+These are semantic profile constructions over the ambient voter type, not literal restricted SWFs.
 
 \begin{remark}[What this is, what this is not]
 \label{rem:lift-scope}
-Theorem~\ref{thm:lift} is a Lean Proof-layer statement.
-It says exactly that Sen's original semantic argument extends, polymorphically and at the kernel-checked level, to all finite cases with at least two voters and at least four alternatives.
-It does \emph{not} say that the sen24 CNF encoding extends to such cases; it does \emph{not} say that any short-cycle CNF approximation lifts; and it does \emph{not} say that any repair presentation extends canonically.
-These are separate questions, addressed in Section~\ref{sec:negative} and deferred to a companion paper (in preparation) respectively.
+Theorems~\ref{thm:bridge} and~\ref{thm:generic-impossibility} are Lean Proof-layer statements.
+They say that Sen's semantic contradiction factors through a complete finite family of bounded obstruction shapes.
+They do \emph{not} say that the Sen24 CNF encoding extends to such cases; they do \emph{not} say that any short-cycle CNF approximation lifts; and they do \emph{not} say that any repair presentation extends canonically.
+These are separate questions, addressed in Section~\ref{sec:negative} and deferred to a companion paper respectively.
 \end{remark}
 
 \subsection{The scope wall between Proof layer and Witness/Audit layer}
 \label{sec:negative}
 
-The positive lift establishes proof-level transfer to full acyclicity.
+The positive bridge establishes proof-level transfer to full acyclicity.
 It does not establish witness-level transfer.
 The CNF Witness/Audit layer in this repository uses the short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) as a stand-in for full acyclicity.
 At the Sen24 base case \((n,m)=(2,4)\), the equivalence between \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\) and full acyclicity on the social strict relation was audited exhaustively by \code{scripts/check\_acyclicity\_short\_cycles.py}.
@@ -64,7 +91,7 @@ Accordingly, evidence using these levers should be interpreted only within the l
 
 \begin{proposition}[Scope wall]
 \label{prop:scope-wall}
-The Lean Proof-layer theorem named \code{sen_impossibility_lifts} does not automatically upgrade the sen24 CNF atlas into a family-level CNF certificate for full \code{SocialAcyclic}.
+The Lean Proof-layer bridge does not automatically upgrade the Sen24 CNF atlas into a family-level CNF certificate for full \code{SocialAcyclic}.
 The CNF Witness/Audit layer at \(m \geq 5\) remains scoped to the audited short-cycle encoding \(\mathtt{no\_cycle3} \wedge \mathtt{no\_cycle4}\), whose equivalence to full acyclicity was audited only at \(m = 4\).
 A family-level CNF certificate for full acyclicity requires a stronger rationality encoding to be introduced and audited separately at the Witness/Audit layer.
 \end{proposition}
@@ -86,5 +113,5 @@ Promoting it to a Lean theorem would require formalising the short-cycle encodin
 
 \paragraph{Reading the boundary.}
 The boundary recorded here is between layers, not between theorem families.
-It is incorrect to read this paper as saying ``Sen's theorem holds in the local-rationality family but not in full acyclicity'': the kernel-checked positive lift already concludes at full \(\mathtt{SocialAcyclic}\) at the Proof layer.
+It is incorrect to read this paper as saying ``Sen's theorem holds in the local-rationality family but not in full acyclicity'': the kernel-checked positive bridge already concludes at full \(\mathtt{SocialAcyclic}\) at the Proof layer.
 The point of the scope wall is that the \emph{CNF artifact} that backed the Sen24 evidence does not by itself become a CNF artifact for the larger case; a separately audited encoding contract is required at the Witness/Audit layer.

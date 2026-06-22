@@ -34,6 +34,20 @@ make -C papers/m2 pdf
 
 Output PDF and auxiliary files are written under `papers/m2/build/`.
 
+## Archived Release
+
+The archived Stage 3 M2 release is:
+
+- GitHub release:
+  `https://github.com/SHayashida/Sen-Lean4/releases/tag/papers-m2-v2-obstruction-bridge`
+- Repository tag: `papers-m2-v2-obstruction-bridge`
+- Exact commit: `d7e5fd1ac94ab18330951b5d9741585dddc5b43a`
+- Zenodo DOI (this version): `https://doi.org/10.5281/zenodo.20796920`
+- Zenodo concept DOI: `https://doi.org/10.5281/zenodo.20468649`
+
+This README update records the DOI after publication and is not part of the
+tagged archive. The release tag remains fixed at the exact commit listed above.
+
 ## Paper-specific Contract
 
 - Claim boundary: `papers/m2/CLAIM_BOUNDARY.md`

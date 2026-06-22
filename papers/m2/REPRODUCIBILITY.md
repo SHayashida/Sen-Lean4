@@ -11,6 +11,25 @@ This note records the repository policy for reproducing the M2 manuscript
 - Paper submissions should be frozen with tags rather than long-lived paper
   branches.
 
+## Current Archived Release
+
+- Repository tag: `papers-m2-v2-obstruction-bridge`
+- Exact commit: `d7e5fd1ac94ab18330951b5d9741585dddc5b43a`
+- GitHub release:
+  `https://github.com/SHayashida/Sen-Lean4/releases/tag/papers-m2-v2-obstruction-bridge`
+- Zenodo DOI (this version): `https://doi.org/10.5281/zenodo.20796920`
+- Zenodo concept DOI: `https://doi.org/10.5281/zenodo.20468649`
+- Release manifest:
+  `https://github.com/SHayashida/Sen-Lean4/releases/download/papers-m2-v2-obstruction-bridge/RELEASE_MANIFEST.json`
+
+The GitHub release carries the PDF, release manifest, checksums, source archive,
+Git bundle, and reproducibility bundle. The Zenodo record archives the tagged
+GitHub source snapshot under the same concept DOI as `papers-m2-v1`.
+
+This post-release documentation commit is outside the archived tag. Reproduce
+the release from tag `papers-m2-v2-obstruction-bridge`, not from this later
+documentation commit.
+
 ## Artifact Policy
 
 - The generic semantic obstruction bridge lives at
@@ -56,6 +75,29 @@ lake build
 # Build the manuscript.
 make -C papers/m2 pdf
 ```
+
+## Release Asset Verification
+
+Fetch the release checksums from GitHub:
+
+```bash
+curl -L -O https://github.com/SHayashida/Sen-Lean4/releases/download/papers-m2-v2-obstruction-bridge/SHA256SUMS.txt
+```
+
+After downloading the release assets into the same directory, verify them with:
+
+```bash
+shasum -a 256 -c SHA256SUMS.txt
+```
+
+The offline Git bundle can be restored with:
+
+```bash
+git clone Sen-Lean4-papers-m2-v2-obstruction-bridge.bundle restored-Sen-Lean4
+```
+
+Then check out the archived tag in the restored repository before reproducing
+the formal and manuscript commands.
 
 ## Artifact Binding
 

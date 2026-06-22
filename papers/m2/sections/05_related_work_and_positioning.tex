@@ -4,21 +4,22 @@
 \paragraph{SAT-based finite witnesses in social choice.}
 The line of work using SAT and automated reasoning to certify finite social-choice impossibility instances goes back at least to \citet{tanglin2009computer} and is developed further by \citet{geist2011automated} and \citet{brandtgeist2016strategyproof}.
 This paper belongs to the same lineage on the artifact side: the base-case CNF witness used by the Evidence-Contract paper sits inside that tradition.
-Our contribution is orthogonal: it is not a new SAT-based existence result, but a kernel-checked Lean Proof-layer lift that does \emph{not} use a SAT certificate to extend the base case.
-It also makes an explicit witness-layer scope wall against the assumption that a base-case CNF certificate is a family-level CNF certificate.
+Our contribution is orthogonal: it is not a new SAT-based existence result, and it does not use a SAT certificate to prove the general semantic theorem.
+It makes an explicit witness-layer scope wall against the assumption that a base-case CNF certificate is a family-level CNF certificate.
 The framing we adopt is comparative rather than corrective: \citet{tanglin2009computer} and \citet{geist2011automated} already establish, in different settings, that base-case SAT-based finite-witness evidence carries real scope conditions and per-instance interpretive caveats, and \citet{brandtgeist2016strategyproof} similarly fixes a base case before drawing conclusions.
-What is new here, to our reading, is not the observation that such scope conditions exist, but their packaging as an explicit Proof-vs-Witness/Audit transfer contract: a layer-level statement, recorded alongside the artifact, that the Proof-layer lift is kernel-checked while the CNF Witness/Audit layer remains scoped to a separately audited encoding contract.
+What this paper adds inside this repository is the packaging of the distinction as a Proof-vs-Witness/Audit transfer contract: a layer-level statement, recorded alongside the artifact, that the Proof-layer bridge is kernel-checked while the CNF Witness/Audit layer remains scoped to a separately audited encoding contract.
 
 \paragraph{Formal verification and certified SAT checking.}
 The trust model used by the Evidence-Contract paper for the base case, and inherited here for the Proof layer, rests on Lean~4 \citep{moura2021lean4} for kernel-checked semantic proofs and on certified RAT/DRAT checking \citep{cruzfilipe2017lrat,wetzler2014drat} for the CNF witness side.
 Mechanized formalizations of social-choice theorems in proof assistants are themselves an established line \citep{nipkow2009social}.
-The present paper does not propose a new prover, a new clausal-proof format, or a new general mechanized social-choice theorem.
-Its contribution relative to that background is a kernel-checked Lean polymorphic lift of the Sen base case to the family, deliberately scoped so that the certified-checking infrastructure remains a witness-layer concern and is not re-claimed at the family scale.
+The present paper does not propose a new prover, a new clausal-proof format, or a new social-choice impossibility theorem.
+Its contribution relative to that background is the kernel-checked factorization of Sen's argument through a complete finite family of bounded semantic obstruction shapes, together with an explicit boundary between semantic transfer and artifact transfer.
 
-\paragraph{Lifting in computational social choice.}
+\paragraph{Lifting and obstruction structure.}
 The lifting question---whether an axiomatic structure verified on small instances extends to larger instances---has a developed literature in judgment aggregation and binary aggregation, including \citet{grandiendriss2013}.
-Our positive flagship is a particular polymorphic instance of this question for Sen's liberal paradox, delivered at the kernel-checked Lean level rather than via a separate transfer theorem.
-The methodological point inherited from this literature, and made sharper here, is that the lift question is per-axiom and per-property; our contribution is to show that for Sen's liberal paradox a polymorphic semantic proof suffices, and to make the corresponding witness-layer non-lift explicit as a scope wall.
+Our positive flagship is a particular Lean formalization of this question for Sen's liberal paradox.
+The methodological point inherited from this literature, and made sharper here, is that the lift question is per-axiom and per-property.
+Here the semantic proof factors through three bounded shapes O2/O3/O4; the CNF Witness/Audit artifact does not thereby become a family-level artifact.
 
 \paragraph{Assumption-based diagnosis and MUS/MCS.}
 The non-canonicity of repair presentation studied in the Explanation-Contract paper is close in spirit to assumption-based and diagnosis-oriented work, including \citet{dekleer1986atms}.
@@ -29,12 +30,13 @@ The reason for the deferral is methodological, not technical: a family-scale rep
 \paragraph{Position relative to the Evidence- and Explanation-Contract papers.}
 The Evidence-Contract paper established that the Sen24 base case is diagnosable as Proof / Audit / Witness.
 The Explanation-Contract paper established that raw repair presentation is not canonical under clause-multiset equivalence at the base case.
-This paper, the Transfer Contract, establishes that the Proof layer lifts unconditionally to all finite cases satisfying the same semantic axioms, while the Witness/Audit layer does not lift automatically.
+This paper, the Transfer Contract, establishes that the Proof layer factors through a finite semantic obstruction basis, while the Witness/Audit layer does not lift automatically.
 The four-contract program intentionally keeps these contracts separated: the Evidence Contract is about diagnosability of the base case, the Explanation Contract is about presentation-canonicity at the base case, and the Transfer Contract is about layer-level transfer to the family.
-The present paper thereby closes the chain that begins with the kernel-checked base case of the Evidence Contract: every claim that the Sen24 evidence transfers must now route through a separate Witness/Audit audit, even though the Proof-layer transfer is itself kernel-checked.
+Every claim that the Sen24 artifact transfers must now route through a separate Witness/Audit audit, even though the semantic Proof-layer bridge is itself kernel-checked.
 
 \paragraph{What this paper is \emph{not}.}
 The paper does not propose a new SAT or MUS/MCS algorithm.
 It does not claim a speed result or a hardness flagship.
-It does not claim that the polymorphic Lean lift here is novel as social-choice mathematics: the underlying argument is Sen's, and the case-split structure is the one already used at the base case in this repository.
-The novelty is in the auditable-abstraction layer: a kernel-checked Lean lift that reaches full \(\mathtt{SocialAcyclic}\), paired with an explicit scope wall to the CNF Witness/Audit layer.
+It does not claim that Sen's impossibility theorem is new social-choice mathematics.
+It does not claim that the O2/O3/O4 family is minimal, unique, or irredundant.
+The novelty claimed here is limited to the kernel-checked factorization of the theorem through a complete finite family of bounded semantic obstruction shapes, paired with an explicit scope wall to the CNF Witness/Audit layer.

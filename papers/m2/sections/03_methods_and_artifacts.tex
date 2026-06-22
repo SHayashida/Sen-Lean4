@@ -1,13 +1,13 @@
 \section{Definitions and Lean Signatures}
 \label{sec:definitions}
 
-The lift theorem is stated and proved against polymorphic Lean signatures already present in the repository at the time of writing.
-No axiom is redefined for the lift; the lift is a polymorphic re-instantiation of the base-case proof at \((\mathtt{Fin}\ n, \mathtt{Fin}\ m)\).
+The bridge theorem is stated and proved against polymorphic Lean signatures already present in the repository at the time of writing.
+No axiom is redefined for M2; the new contribution is a public obstruction interface that factors Sen's argument through bounded semantic witnesses.
 The relevant signatures, summarised here for paper-reading purposes, live in the modules listed in Appendix~\ref{sec:repro}.
 
 \begin{definition}[Social welfare function]
 \label{def:swf}
-A \emph{social welfare function} on a finite voter set \(\mathtt{Voter}\) and a finite alternative set \(\mathtt{Alt}\) is a map
+A \emph{social welfare function} on a voter type \(\mathtt{Voter}\) and a finite alternative type \(\mathtt{Alt}\) is a map
 \(F : \mathtt{Profile\ Voter\ Alt} \to (\mathtt{Alt} \to \mathtt{Alt} \to \mathtt{Prop})\),
 i.e.\ a function from preference profiles to a binary social relation on alternatives.
 In Lean this is the type abbreviation \(\mathtt{SWF\ Voter\ Alt}\).
@@ -33,19 +33,47 @@ A voter \(i\) is \emph{decisive} on an ordered pair \((x,y)\) if for every profi
 \textbf{Important:} \(\mathtt{MINLIB}\) does \emph{not} guarantee that \(\{x,y,z,w\}\) are four distinct alternatives; the two decisive pairs may overlap.
 \end{definition}
 
+\begin{definition}[Semantic obstruction witness]
+\label{def:obstruction-witness}
+The structure \(\mathtt{SenRightsWitness}\) packages exactly the semantic data extracted from \(\mathtt{MINLIB}\): two distinct rights holders, two decisive ordered pairs, and the distinguished alternative support \(\{x,y,z,w\}\).
+The classified structure \(\mathtt{ClassifiedSenRightsWitness}\) adds the raw overlap branch and induces one of the canonical kinds O2, O3, or O4.
+\end{definition}
+
+\begin{definition}[Outcome obstruction]
+\label{def:outcome-obstruction}
+\(\mathtt{SenOutcomeObstruction}\ F\) is the semantic outcome object produced by the bridge.
+It has three constructors: a strict conflict on one ordered pair, a 3-cycle at a profile, or a 4-cycle at a profile.
+The theorem \(\mathtt{SenOutcomeObstruction.refutes\_socialAcyclic}\) maps any such obstruction to \(\neg\,\mathtt{SocialAcyclic}\ F\).
+\end{definition}
+
 \begin{definition}[Acyclicity and \(\mathtt{SocialAcyclic}\)]
 \label{def:acyclic}
 A binary relation \(S\) on a finite set is \emph{acyclic} when no element has \(\mathtt{Relation.TransGen}\ S\) back to itself.
 The predicate \(\mathtt{SocialAcyclic}\ F\) holds when for every profile \(p\), the strict social preference \(\mathtt{strictPart}\ (F\ p)\) is acyclic.
-The base-case helper lemmas \(\mathtt{cycle3\_implies\_not\_acyclic}\) and \(\mathtt{cycle4\_implies\_not\_acyclic}\) are polymorphic and are reused unchanged at the lift.
+The helper lemmas \(\mathtt{cycle3\_implies\_not\_acyclic}\) and \(\mathtt{cycle4\_implies\_not\_acyclic}\) are polymorphic and are reused by the obstruction soundness layer.
 \end{definition}
 
-\paragraph{What is reused, not redefined.}
-All four definitions above are polymorphic in \(\mathtt{Voter}\) and \(\mathtt{Alt}\); the Sen24 base case is one instantiation (\(\mathtt{Voter := Fin\ 2}\), \(\mathtt{Alt := Fin\ 4}\)) of the same definitions used at the lift (\(\mathtt{Voter := Fin\ n}\), \(\mathtt{Alt := Fin\ m}\)).
-The lift therefore does not contribute new axioms or new social-choice content; it contributes a polymorphic instance of an existing argument, witnessed by a kernel-checked Lean module.
+\paragraph{The generic bridge signatures.}
+The Stage 3 bridge exposes two public theorem names:
+\begin{quote}
+\code{theorem sen\_outcome\_obstruction\_of\_UN\_MINLIB \char`\{Voter : Type u\char`\}\ \char`\{Alt : Type v\char`\}\ [DecidableEq Alt]\ [Fintype Alt]\ (F : SWF Voter Alt)\ (hUN : UN F)\ (hMINLIB : MINLIB F) : SenOutcomeObstruction F}
+\end{quote}
+\begin{quote}
+\code{theorem sen\_impossibility\_from\_obstruction\_basis \char`\{Voter : Type u\char`\}\ \char`\{Alt : Type v\char`\}\ [DecidableEq Alt]\ [Fintype Alt]\ (F : SWF Voter Alt)\ (hUN : UN F)\ (hMINLIB : MINLIB F) : \char`\~SocialAcyclic F}
+\end{quote}
+There is no \(\mathtt{Fintype\ Voter}\), no \(\mathtt{DecidableEq\ Voter}\), and no explicit lower-bound hypothesis in these signatures.
 
-\paragraph{Named non-obstacle.}
-The obvious initial worry was that the four-point cycle pattern at the lift would require a separate completion lemma to manufacture missing alternatives in \(\mathtt{Fin\ m}\) from \(\mathtt{\_hm : 4 \leq m}\).
-The final proof avoids this entirely by case-splitting on the overlap structure of \(\{x,y\}\) and \(\{z,w\}\); the alternatives needed to assemble the cycle are exactly those supplied by \(\mathtt{MINLIB}\) (with \(\mathtt{Decisive.symm}\) to fix orientation).
-The hypothesis \(\mathtt{\_hm}\) is therefore retained in the statement only for symmetry with Sen's original formulation and to document the lift scope; it is not consumed by the proof.
-The corresponding cardinality lemmas (\(\mathtt{exists\_not\_mem\_of\_card\_lt}\) and \(\mathtt{four\_le\_card\_fin}\)) remain in the module as honest infrastructure documenting an avoided proof risk; they are not used by \(\mathtt{sen\_impossibility\_lifts}\).
+\paragraph{The legacy compatibility signature.}
+The historical theorem remains available as:
+\begin{quote}
+\code{theorem sen\_impossibility\_lifts \char`\{n m : \texttt{N}\char`\}\ (\_hn : 2 \leq n)\ (\_hm : 4 \leq m)\ (F : SWF (Fin n) (Fin m))\ (hUN : UN F)\ (hMINLIB : MINLIB F) : \char`\~SocialAcyclic F}
+\end{quote}
+Its proof body now specializes \(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\).
+The hypotheses \(\mathtt{\_hn}\) and \(\mathtt{\_hm}\) are retained solely for backward-compatible alignment with the former statement.
+We do not claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).
+
+\paragraph{Ambient profiles, not literal subinstances.}
+The constructed profiles use two distinguished rights holders and at most two ranking types in the ambient voter type.
+Unanimity edges still quantify over all voters in that ambient type.
+Thus the safe statement is that the contradiction is supported by two distinguished rights holders, at most four distinguished alternatives, and profiles using at most two ranking types.
+We do not claim that every general instance contains a literal two-voter Sen24 subinstance.

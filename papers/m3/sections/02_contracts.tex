@@ -55,14 +55,14 @@ which feasibility is evaluated.
     ]
     \node[impl] (implres) {\(\SatPhi(\betaSet(T))\)\\implementation residual};
     \node[ref, right=2.4cm of implres] (refres) {\(\SatPsi(T)\)\\reference residual};
-    \node[impl, below=1.55cm of implres] (raw) {raw lever deletion\\\(R\subseteq\Lambda_I\)};
+    \node[impl, below=2.1cm of implres] (raw) {raw lever deletion\\\(R\subseteq\Lambda_I\)};
     \node[report, right=2.4cm of raw] (group) {grouped contract deletion\\\(\groupTouchAny(R)\)};
 
     \draw[<->, thick, blue!65!black] (implres) -- node[above, font=\scriptsize]
       {\(\ResidualFaithfulness\)} (refres);
     \draw[arrow, green!55!black] (raw) -- node[above, font=\scriptsize]
       {touch-any grouping} (group);
-    \draw[arrow, green!55!black] (group) -- node[right, font=\scriptsize, align=center]
+    \draw[arrow, green!55!black] (group) -- node[left, font=\scriptsize, align=center]
       {\(\GroupSoundness\):\\\(\SatPsi(I\setminus\groupTouchAny(R))\)}
       (refres);
 

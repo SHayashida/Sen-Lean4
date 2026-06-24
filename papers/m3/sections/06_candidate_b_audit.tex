@@ -44,15 +44,15 @@ only inside the bundled artifact-defined contract declared above.
       arrow/.style={->, thick}
     ]
     \node[atom] (minlib) {bundled atom\\\(\mathtt{minlib}\)};
-    \node[lever, below left=1.15cm and 0.45cm of minlib] (dv0)
+    \node[lever, below left=0.85cm and 0.45cm of minlib] (dv0)
       {split lever\\\(\mathtt{decisive\_voter0}\)};
-    \node[lever, below right=1.15cm and 0.45cm of minlib] (dv1)
+    \node[lever, below right=0.85cm and 0.45cm of minlib] (dv1)
       {split lever\\\(\mathtt{decisive\_voter1}\)};
-    \node[raw, below=1.1cm of dv0] (r0)
+    \node[raw, below=0.85cm of dv0] (r0)
       {raw repair\\\(\{\mathtt{decisive\_voter0}\}\)};
-    \node[raw, below=1.1cm of dv1] (r1)
+    \node[raw, below=0.85cm of dv1] (r1)
       {raw repair\\\(\{\mathtt{decisive\_voter1}\}\)};
-    \node[report, below=2.55cm of minlib] (grp)
+    \node[report, below=4.0cm of minlib] (grp)
       {grouped report\\\(\{\mathtt{minlib}\}\)};
 
     \draw[arrow, orange!70!black] (minlib) -- node[left, font=\scriptsize]

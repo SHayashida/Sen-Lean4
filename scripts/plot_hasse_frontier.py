@@ -159,9 +159,12 @@ def _write_boundary_hasse_tex(cases: list[dict[str, Any]], outdir: Path) -> Path
     lines: list[str] = []
     lines.append(r"\begingroup")
     lines.append(r"\centering")
-    lines.append(r"\begin{tikzpicture}[x=1.65cm,y=1.25cm]")
+    lines.append(r"\begin{tikzpicture}[x=2.2cm,y=1.8cm,>=stealth]")
     lines.append(
-        r"\tikzstyle{frontiernode}=[draw, rounded corners=2pt, minimum width=1.7cm, minimum height=0.8cm, align=center, font=\scriptsize]"
+        r"\tikzstyle{satnode}=[draw, rounded corners=4pt, minimum width=1.9cm, minimum height=0.9cm, align=center, font=\footnotesize, fill=green!18]"
+    )
+    lines.append(
+        r"\tikzstyle{unsatnode}=[draw, rounded corners=4pt, minimum width=1.9cm, minimum height=0.9cm, align=center, font=\footnotesize, fill=red!18, line width=0.8pt]"
     )
 
     positions: dict[str, tuple[float, float]] = {}
@@ -176,8 +179,14 @@ def _write_boundary_hasse_tex(cases: list[dict[str, Any]], outdir: Path) -> Path
             bits = _latex_escape(str(case.get("mask_bits", "")))
             status = _latex_escape(_status_for_label(case))
             fill = _status_fill(case)
+            if fill == "red!18":
+                style = "unsatnode"
+            elif fill == "green!18":
+                style = "satnode"
+            else:
+                style = f"satnode, fill={fill}"
             lines.append(
-                rf'\node[frontiernode, fill={fill}] ({case_id}) at ({x:.2f},{y:.2f}) {{\texttt{{{bits}}}\\{status}}};'
+                rf'\node[{style}] ({case_id}) at ({x:.2f},{y:.2f}) {{\texttt{{{bits}}}\\{status}}};'
             )
 
     selected_masks_sorted = sorted(selected_masks)
@@ -186,12 +195,12 @@ def _write_boundary_hasse_tex(cases: list[dict[str, Any]], outdir: Path) -> Path
             if _is_cover(mask_a, mask_b, selected_masks_sorted):
                 src = str(case_by_mask[mask_a]["case_id"])
                 dst = str(case_by_mask[mask_b]["case_id"])
-                lines.append(rf"\draw[->, thin] ({src}) -- ({dst});")
+                lines.append(rf"\draw[->,thin] ({src}) -- ({dst});")
 
     lines.append(r"\end{tikzpicture}")
     lines.append(r"\par\medskip")
     lines.append(
-        r"\scriptsize Boundary slice: unsatisfiable cases and their immediate solved predecessors in the subset poset."
+        r"\scriptsize Legend: \colorbox{green!18}{\strut SAT}\ \colorbox{red!18}{\strut UNSAT}"
     )
     lines.append(r"\endgroup")
 

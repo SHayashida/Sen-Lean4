@@ -26,13 +26,13 @@ if \(\mathtt{UN}\ F\) and \(\mathtt{MINLIB}\ F\) hold, then \(\neg\, \mathtt{Soc
 \begin{remark}[Statement form in Lean]
 \label{rem:lean-form}
 Theorem~\ref{thm:bridge} is the Lean theorem
-\(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) at
-\(\mathtt{SocialChoiceAtlas/Sen/ObstructionBridge.lean}\).
+\texttt{sen\_outcome\_}\allowbreak\texttt{obstruction\_of\_UN\_MINLIB} at
+\code{SocialChoiceAtlas/Sen/ObstructionBridge.lean}.
 Theorem~\ref{thm:generic-impossibility} is
-\(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\) in the same module.
+\texttt{sen\_impossibility\_}\allowbreak\texttt{from\_obstruction\_basis} in the same module.
 Corollary~\ref{thm:lift} is the existing theorem
-\(\mathtt{sen\_impossibility\_lifts}\) at
-\(\mathtt{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean}\).
+\texttt{sen\_impossibility\_lifts} at
+\code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean}.
 The corollary keeps the public theorem name and statement shape for downstream compatibility, but its proof body is now the specialization of the generic theorem.
 \end{remark}
 
@@ -53,14 +53,14 @@ The bridge is factored through public objects rather than hidden case analysis:
 \toprule
 Step & Mathematical role & Lean binding \\
 \midrule
-T1 & Witness extraction from \(\mathtt{MINLIB}\) & \(\mathtt{exists\_senRightsWitness}\), \(\mathtt{exists\_classified\_senRightsWitness}\) in \code{ObstructionBasis.lean} \\
-T2 & Exhaustive O2/O3/O4 overlap classification & \(\mathtt{classify\_raw\_overlap}\), \(\mathtt{ClassifiedSenRightsWitness.kind}\) in \code{ObstructionBasis.lean} \\
-T3 & Exact support cardinality & \(\mathtt{ClassifiedSenRightsWitness.support\_card\_eq\_kind}\) in \code{ObstructionSoundness.lean} \\
-T4 & Shape soundness & \(\mathtt{outcome\_of\_twoOverlap}\), \(\mathtt{outcome\_of\_zOnly}\), \(\mathtt{outcome\_of\_wOnly}\), \(\mathtt{outcome\_of\_disjoint}\) in \code{ObstructionSoundness.lean} \\
-T5 & Outcome refutation & \(\mathtt{SenOutcomeObstruction.refutes\_socialAcyclic}\) in \code{ObstructionSoundness.lean} \\
-T6 & Obstruction bridge & \(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) in \code{ObstructionBridge.lean} \\
-T7 & Generic impossibility & \(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\) in \code{ObstructionBridge.lean} \\
-T8 & Legacy lift corollary & \(\mathtt{sen\_impossibility\_lifts}\) in \code{ImpossibilityLift.lean} \\
+T1 & Witness extraction from \(\mathtt{MINLIB}\) & \texttt{exists\_senRightsWitness}, \texttt{exists\_classified\_}\allowbreak\texttt{senRightsWitness} in \code{ObstructionBasis.lean} \\
+T2 & Exhaustive O2/O3/O4 overlap classification & \texttt{classify\_raw\_overlap}, \texttt{ClassifiedSenRightsWitness.kind} in \code{ObstructionBasis.lean} \\
+T3 & Exact support cardinality & \texttt{ClassifiedSenRightsWitness.}\allowbreak\texttt{support\_card\_eq\_kind} in \code{ObstructionSoundness.lean} \\
+T4 & Shape soundness & \texttt{outcome\_of\_twoOverlap}, \texttt{outcome\_of\_zOnly}, \texttt{outcome\_of\_wOnly}, \texttt{outcome\_of\_disjoint} in \code{ObstructionSoundness.lean} \\
+T5 & Outcome refutation & \texttt{SenOutcomeObstruction.}\allowbreak\texttt{refutes\_socialAcyclic} in \code{ObstructionSoundness.lean} \\
+T6 & Obstruction bridge & \texttt{sen\_outcome\_obstruction\_}\allowbreak\texttt{of\_UN\_MINLIB} in \code{ObstructionBridge.lean} \\
+T7 & Generic impossibility & \texttt{sen\_impossibility\_}\allowbreak\texttt{from\_obstruction\_basis} in \code{ObstructionBridge.lean} \\
+T8 & Legacy lift corollary & \texttt{sen\_impossibility\_lifts} in \code{ImpossibilityLift.lean} \\
 \bottomrule
 \end{tabularx}
 \endgroup

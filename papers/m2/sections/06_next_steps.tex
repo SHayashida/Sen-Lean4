@@ -8,10 +8,12 @@ This is a formal statement about the repository definitions; it is not a new soc
 The negative-side scope wall is a guarantee-boundary statement and an audit-policy statement; it is not a Lean theorem.
 
 \paragraph{What the legacy size hypotheses do not say.}
+\begin{sloppypar}
 The generic obstruction theorem has no explicit lower-bound hypotheses.
-The legacy theorem \(\mathtt{sen\_impossibility\_lifts}\) retains \(\mathtt{\_hn : 2 \leq n}\) and \(\mathtt{\_hm : 4 \leq m}\) only for compatibility with the former \((\mathtt{Fin}\ n,\mathtt{Fin}\ m)\) statement.
+The legacy theorem \texttt{sen\_impossibility\_lifts} retains \(\mathtt{\_hn}\) and \(\mathtt{\_hm}\) only for compatibility with the former \((\mathtt{Fin}\ n,\mathtt{Fin}\ m)\) statement.
 We do not claim that \(\mathtt{UN \wedge MINLIB}\) implies \(\mathtt{4 \leq m}\).
 The relevant mathematical support is supplied by the extracted obstruction witness: O2 has support cardinality \(2\), O3 has support cardinality \(3\), and O4 has support cardinality \(4\).
+\end{sloppypar}
 
 \paragraph{Forward pointer to the representation-canonicity question.}
 This paper deliberately limits itself to the positive Proof-layer bridge (Section~\ref{sec:positive}) and the scope wall (Section~\ref{sec:negative}).

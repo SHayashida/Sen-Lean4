@@ -8,7 +8,7 @@ The main evidence sources used in the text are:
 \item \code{SocialChoiceAtlas/Sen/ObstructionBasis.lean} --- witness extraction and O2/O3/O4 classification.
 \item \code{SocialChoiceAtlas/Sen/ObstructionProfiles.lean} --- generic prefix rankings and ambient two-ranking profiles.
 \item \code{SocialChoiceAtlas/Sen/ObstructionSoundness.lean} --- exact support cardinalities, shape soundness, and outcome refutation.
-\item \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} --- the generic bridge theorems \(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\) and \(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\).
+\item {\sloppy\code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} --- the generic bridge theorems \texttt{sen\_outcome\_obstruction\_of\_UN\_MINLIB} and \texttt{sen\_impossibility\_from\_obstruction\_basis}.\par}
 \item \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} --- the legacy compatibility corollary \(\mathtt{sen\_impossibility\_lifts}\).
 \item \code{SocialChoiceAtlas.lean} --- the root import lines that wire the bridge and compatibility theorem into the default \(\mathtt{lake\ build}\).
 \item \code{scripts/ci\_m2\_smoke.sh} --- the M2 smoke gate for bridge imports, theorem anchors, and placeholder scans.
@@ -78,9 +78,9 @@ Claim & Binding \\
 Witness extraction and classification & \code{SocialChoiceAtlas/Sen/ObstructionBasis.lean} \\
 Generic profile construction & \code{SocialChoiceAtlas/Sen/ObstructionProfiles.lean} \\
 Shape soundness and exact cardinalities & \code{SocialChoiceAtlas/Sen/ObstructionSoundness.lean} \\
-Theorem~\ref{thm:bridge} (generic outcome bridge) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\(\mathtt{sen\_outcome\_obstruction\_of\_UN\_MINLIB}\)) \\
-Theorem~\ref{thm:generic-impossibility} (generic impossibility) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\(\mathtt{sen\_impossibility\_from\_obstruction\_basis}\)) \\
-Corollary~\ref{thm:lift} (legacy compatibility theorem) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (\(\mathtt{sen\_impossibility\_lifts}\)) \\
+Theorem~\ref{thm:bridge} (generic outcome bridge) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\texttt{sen\_outcome\_obstruction\_}\allowbreak\texttt{of\_UN\_MINLIB}) \\
+Theorem~\ref{thm:generic-impossibility} (generic impossibility) & \code{SocialChoiceAtlas/Sen/ObstructionBridge.lean} (\texttt{sen\_impossibility\_}\allowbreak\texttt{from\_obstruction\_basis}) \\
+Corollary~\ref{thm:lift} (legacy compatibility theorem) & \code{SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean} (\texttt{sen\_impossibility\_lifts}) \\
 Default kernel build & \code{SocialChoiceAtlas.lean} (root imports) \\
 M2 smoke gate & \code{scripts/ci\_m2\_smoke.sh} \\
 Proposition~\ref{prop:scope-wall} (scope wall) & \code{docs/m2\_scope\_wall.md} \\

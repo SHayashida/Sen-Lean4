@@ -1,0 +1,73 @@
+\section{Related Work and Positioning}
+\label{sec:related}
+
+\paragraph{Model-based diagnosis and ATMS.}
+Assumption-based truth maintenance and model-based diagnosis provide the
+background vocabulary for conflicts, assumptions, and repairs
+\citep{dekleer1986atms,reiter1987}.  Constraint hierarchies address conflict
+resolution under prioritized constraints \citep{borning1992constraint}.
+M3 uses this repair vocabulary but studies a different obligation: when an
+implementation-level deletion may be reported at a declared contract interface.
+The contract is not merely a display convention.  It specifies the reportable
+atoms and the residual semantics that the grouped report must preserve.  M3
+differs from diagnosis-style grouping in treating the grouping interface as a
+residual-semantics preservation obligation: a raw deletion may be reported as a
+contract deletion only when residual faithfulness and the relevant interface
+condition, atomicity or \(\GroupSoundness\), justify that report.
+
+\paragraph{MUS/MCS and repair enumeration.}
+Minimal conflict and correction-set techniques, together with MaxSAT-style
+repair search, establish that explanation families depend on the chosen
+constraint representation \citep{li2009maxsat}.  We therefore do not claim
+novelty for the observation that MUS or repair sets change under encoding
+granularity.  M3 treats that sensitivity as the reason a reportability
+condition is needed.  Its contribution is the finite-set theory connecting
+\(\ResidualFaithfulness\), \(\RepairAtomicity\), \(\GroupSoundness\), and
+\(\PsiDeletionMonotonicity\) to pointwise equality of grouped and contract
+repair predicates, together with the exactness boundary showing when
+\(\GroupSoundness\) is characterized by grouped correctness.  This is a
+contract-relative reportability theorem, not a priority claim over all
+abstraction or refinement treatments of explanations.
+
+\paragraph{High-level versus low-level explanations.}
+The distinction between implementation levers and reportable contract atoms is
+an abstraction and interface problem with proof obligations.  A low-level
+label can be useful for implementation, while still being the wrong unit of
+reporting.  M3 makes the abstraction map explicit through \(\beta\) and
+\(\groupTouchAny\), then requires either atomicity or \(\GroupSoundness\), plus
+\(\ResidualFaithfulness\), before a grouped report is treated as canonical at
+the contract level.
+
+\paragraph{SAT-based computational social choice.}
+Computer-aided impossibility proofs and SAT-based rule search provide the
+computational social-choice context
+\citep{tanglin2009computer,geist2011automated,brandtgeist2016strategyproof}.
+Those works motivate finite encodings, solver-backed evidence, and the need to
+separate finite artifacts from broader theorem claims.  M3 is not a new
+impossibility proof and does not supply finite-to-general transfer.  It starts
+after a reference residual has been declared and asks when repairs to an
+implementation residual may be reported against that reference.  The Arrow
+discussion in this paper is therefore a scope boundary, not a second M3
+instantiation; transfer limitations and theorem-specific transfer questions
+remain separate obligations \citep{grandiendriss2013}.
+
+\paragraph{Formal verification of social choice.}
+Mechanized social-choice theorems in HOL provide an important proof-layer
+precedent \citep{nipkow2009social}.  The present project uses Lean 4
+\citep{moura2021lean4} and proof-carrying SAT infrastructure informed by
+certified clausal proof checking \citep{cruzfilipe2017lrat,wetzler2014drat}.
+The M3 Lean modules mechanize abstract finite-set reportability theorems.  They
+do not formalize CNF generation, SAT solving, or the Candidate B artifact
+enumeration.  That separation is deliberate: the paper combines a
+kernel-checked theorem core with an artifact-backed instantiation, without
+claiming an artifact-to-Lean bridge in this pass.
+
+\paragraph{The M1/M1.5/M2 program.}
+The internal arc is as follows.  M1 supplied an auditable finite atlas for a
+small social-choice impossibility setting.  M1.5 used Candidate B to isolate a
+raw repair non-canonicity gap: a trusted witness does not fix the level at
+which repairs should be reported.  M2 separated proof-layer transfer from
+witness/audit-layer transfer.  M3 adds the repair/report layer: explicit
+reportability contracts, non-atomic \(\GroupSoundness\), exactness under
+monotone contracts, and a contract-level grouped canonicity result on the same
+artifact-defined witness that exposed the raw-level gap.

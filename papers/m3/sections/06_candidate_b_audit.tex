@@ -1,0 +1,152 @@
+\section{Candidate B: Artifact-Backed Instantiation}
+\label{sec:candidate-b}
+
+This section instantiates M3-B using existing artifacts; it is not a Lean
+formalization of those artifacts.  The bundled artifact-defined contract is
+\[
+  I =
+  \{\mathtt{asymm},\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}.
+\]
+The \(\mathtt{no\_cycle3}\) lever is inactive in this contract scope.  The split
+implementation refines the liberalism block as
+\[
+  \beta(\mathtt{minlib})
+  =
+  \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\}.
+\]
+Candidate B is therefore non-atomic and falls under M3-B rather than M3-A.
+
+\paragraph{Audit provenance.}
+The M3 Candidate B audit is artifact-only; no new solver run is part of this
+paper audit.  The main audit record is
+\code{docs/m3_candidate_b_group_soundness_audit_result.md}, and the main
+structured comparison artifact is
+\code{results/20260401/candidate_b_minlib_granularity/comparison.json}.
+The fully active bundled case is
+\code{bundled/case_11101}, and the fully active split case is
+\code{split/case_111101}.  Throughout this instantiation,
+\code{no_cycle3} is fixed inactive.  The audit therefore establishes M3-B
+only inside the bundled artifact-defined contract declared above.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.96\textwidth}{!}{%
+  \begin{tikzpicture}[
+      >=Stealth,
+      atom/.style={draw, rounded corners, align=center, minimum width=2.7cm,
+        minimum height=0.95cm, fill=blue!7, draw=blue!55!black, font=\small},
+      lever/.style={draw, rounded corners, align=center, minimum width=3.1cm,
+        minimum height=0.95cm, fill=orange!9, draw=orange!70!black, font=\small},
+      raw/.style={draw, rounded corners, align=center, minimum width=3.1cm,
+        minimum height=0.95cm, fill=red!7, draw=red!60!black, font=\small},
+      report/.style={draw, rounded corners, align=center, minimum width=2.7cm,
+        minimum height=0.95cm, fill=green!8, draw=green!45!black, font=\small},
+      arrow/.style={->, thick}
+    ]
+    \node[atom] (minlib) {bundled atom\\\(\mathtt{minlib}\)};
+    \node[lever, below left=1.15cm and 0.45cm of minlib] (dv0)
+      {split lever\\\(\mathtt{decisive\_voter0}\)};
+    \node[lever, below right=1.15cm and 0.45cm of minlib] (dv1)
+      {split lever\\\(\mathtt{decisive\_voter1}\)};
+    \node[raw, below=1.1cm of dv0] (r0)
+      {raw repair\\\(\{\mathtt{decisive\_voter0}\}\)};
+    \node[raw, below=1.1cm of dv1] (r1)
+      {raw repair\\\(\{\mathtt{decisive\_voter1}\}\)};
+    \node[report, below=2.55cm of minlib] (grp)
+      {grouped report\\\(\{\mathtt{minlib}\}\)};
+
+    \draw[arrow, orange!70!black] (minlib) -- node[left, font=\scriptsize]
+      {\(\beta\)} (dv0);
+    \draw[arrow, orange!70!black] (minlib) -- node[right, font=\scriptsize]
+      {\(\beta\)} (dv1);
+    \draw[arrow, red!60!black] (dv0) -- (r0);
+    \draw[arrow, red!60!black] (dv1) -- (r1);
+    \draw[arrow, green!55!black] (r0) -- node[left, font=\scriptsize]
+      {\(\groupTouchAny\)} (grp);
+    \draw[arrow, green!55!black] (r1) -- node[right, font=\scriptsize]
+      {\(\groupTouchAny\)} (grp);
+
+    \node[atom, left=1.45cm of grp] (aligned)
+      {\(\{\mathtt{asymm}\}\), \(\{\mathtt{un}\}\),\\
+       \(\{\mathtt{no\_cycle4}\}\)\\singleton-aligned};
+    \node[font=\scriptsize, align=center, below=0.12cm of aligned]
+      {reported unchanged};
+  \end{tikzpicture}}
+  \caption{Raw split repairs remain distinct while their contract report is
+  shared.}
+  \label{fig:candidate-b}
+\end{figure}
+
+\paragraph{Evidence sources.}
+\begin{description}[style=nextline,leftmargin=2.9cm]
+  \item[Fully active UNSAT.]
+    Bundled \code{case_11101} and split \code{case_111101}.
+  \item[Residual faithfulness.]
+    The 16 block-aligned rows in \code{comparison.json}, all filtered to
+    \code{no_cycle3=off}.
+  \item[RawRep completeness.]
+    The five split singleton repairs are
+    \[
+      \begin{gathered}
+      \{\mathtt{asymm}\},\ \{\mathtt{un}\},\
+      \{\mathtt{decisive\_voter0}\},\\
+      \{\mathtt{decisive\_voter1}\},\
+      \{\mathtt{no\_cycle4}\}.
+      \end{gathered}
+    \]
+    Fully active UNSAT and the singleton-dominance argument are recorded in
+    the audit result.
+  \item[GroupSoundness checks.]
+    All five grouped raw repairs map to bundled SAT residuals.
+  \item[\(\Psi\)-deletion monotonicity.]
+    The complete 16-row bundled lattice records the fully active residual
+    UNSAT and every proper residual SAT.
+  \item[No new solver run.]
+    The completed audit reuses the recorded Candidate B artifacts.
+\end{description}
+
+\paragraph{What would invalidate the instantiation.}
+Candidate B would no longer instantiate M3-B under this contract if either
+fully active residual were not UNSAT; any block-aligned comparison failed; the
+split raw-repair family were incomplete; a non-singleton or missing singleton
+changed the RawRep completeness claim; any grouped raw repair failed to map to
+a bundled SAT residual; \(\PsiDeletionMonotonicity\) failed on the bundled
+16-row lattice; \code{no_cycle3} were silently treated as active; or the
+artifact-defined contract were silently upgraded to semantic or Lean-level
+status.
+
+\paragraph{Why the artifact-defined instantiation is non-circular.}
+The bundled residual predicate defines the artifact-level reference contract,
+but the M3-B instantiation is not automatic from that definition.  The
+nontrivial checked fact is that the split raw-repair family, after touch-any
+grouping and minimization, coincides with the bundled contract repair family.
+This requires three verified ingredients: residual faithfulness across all 16
+block-aligned residuals; complete split \(\RawRepair\) enumeration; and
+\(\GroupSoundness\) via audit-cost collapse over the bundled monotone lattice.
+The Candidate B result is therefore a structural agreement between raw
+implementation repairs and grouped contract reports, not a circular restatement
+of the bundled contract.  The agreement is triangulated both by the abstract
+M3-B theorem and by the direct artifact tables in Appendix~\ref{app:audit}.
+
+Given the complete artifact-level enumeration of the split raw repairs,
+Proposition~\ref{prop:audit-collapse} turns the grouped SAT checks into
+unrestricted \(\GroupSoundness\).  Residual faithfulness is supplied by the 16
+block-aligned status comparisons.  Therefore:
+
+\paragraph{Result (Candidate B instantiation).}
+Candidate B instantiates M3-B under the bundled-level artifact-defined
+contract.
+
+The grouped family is
+\[
+  \bigl\{
+  \{\mathtt{asymm}\},
+  \{\mathtt{un}\},
+  \{\mathtt{minlib}\},
+  \{\mathtt{no\_cycle4}\}
+  \bigr\}.
+\]
+
+Candidate B is raw-noncanonical and contract-canonical at the same time.
+This does not upgrade the artifact-defined contract to a semantic or
+Lean-level contract.  That upgrade is a separate truth/certificate obligation.

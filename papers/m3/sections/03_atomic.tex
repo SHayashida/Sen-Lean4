@@ -1,0 +1,103 @@
+\section{Atomic Interfaces}
+\label{sec:atomic}
+
+Atomicity gives the simplest sufficient condition for reportability.  If each
+active contract atom has exactly one active lever, then every subset of the
+active lever interface is block-aligned.  Pairwise block disjointness yields
+the complement identity, and residual faithfulness transfers feasibility and
+minimality between the implementation and contract domains.
+
+\begin{theorem}[M3-A: atomic grouped correctness]
+\label{thm:m3a}
+Assume active blocks are pairwise disjoint.  If \(\RepairAtomicity\) and
+\(\ResidualFaithfulness\) hold, then for every contract deletion \(G\),
+\[
+  \GroupedRepair(G)
+  \quad\Longleftrightarrow\quad
+  \ContractRepair(G).
+\]
+\end{theorem}
+
+The Lean declaration is \code{m3a_grouped_correctness}.  The proof factors
+through the following finite-set steps.
+
+\paragraph{Complement identity.}
+For \(G\subseteq I\), pairwise disjointness gives
+\[
+  \betaSet(I\setminus G)
+  =
+  \Lambda_I\setminus\betaSet(G).
+\]
+This identity does not use atomicity.  It records that retaining the blocks
+outside \(G\) is the same as removing the block image of \(G\) from the active
+lever interface.
+
+\paragraph{Atomic block alignment.}
+Under atomicity, every \(R\subseteq\Lambda_I\) is
+\(\betaSet(G)\) for a unique \(G\subseteq I\).  Existence follows because each
+active lever belongs to a singleton active block; uniqueness uses the
+atom-indexed block map together with disjointness and the nonemptiness supplied
+by atomicity.  This is the step at which atomicity is essential: it ensures
+that arbitrary implementation deletions, not merely chosen block deletions,
+are block-aligned.
+
+\paragraph{Feasibility transfer.}
+The complement identity rewrites an implementation residual after deleting
+\(\betaSet(G)\) as the retained block residual
+\(\betaSet(I\setminus G)\).  Residual faithfulness then yields
+\[
+  \SatPhi(\Lambda_I\setminus\betaSet(G))
+  \quad\Longleftrightarrow\quad
+  \SatPsi(I\setminus G).
+\]
+Thus block-aligned raw feasibility and contract feasibility agree.
+
+\paragraph{Minimality transfer.}
+The same correspondence transfers inclusion-minimality.  A smaller contract
+deletion maps to a smaller block deletion, and atomic block alignment sends
+every raw-feasible subdeletion back to an active atom set.  Consequently,
+\(\RawRepair(\betaSet(G))\) holds exactly when
+\(\ContractRepair(G)\) holds.
+
+\paragraph{Grouping and pointwise correctness.}
+For every \(G\subseteq I\),
+\[
+  \groupTouchAny(\betaSet(G))=G.
+\]
+This grouping identity uses disjointness and nonempty blocks only; it does not
+use atomicity.  Atomicity has already ensured that every raw repair has the
+form \(\betaSet(G)\).  The raw-repair correspondence and grouping identity
+therefore identify the occurring grouped image with the contract-repair
+family, whose inclusion-minimal elements are unchanged.  This proves the
+pointwise equivalence in Theorem~\ref{thm:m3a}.
+
+\begin{corollary}[Atom-indexed raw transport]
+\label{cor:m3a-raw}
+For two atomic, residually faithful realizations of the same contract, and for
+every \(G\subseteq I\), the block deletion induced by \(G\) is a raw repair in
+the first realization if and only if the block deletion induced by \(G\) is a
+raw repair in the second.
+\end{corollary}
+
+This is the Lean theorem \code{m3a_raw_transport}.  It is atom-indexed rather
+than an arbitrary lever-bijection theorem.
+The transport result uses residual faithfulness on both realizations to
+identify each block deletion \(\betaSet(G)\) with the common contract repair
+predicate \(\ContractRepair(G)\); atomicity alone supplies block alignment,
+not the shared reference comparison.
+
+\paragraph{Limit.}
+Atomicity is sufficient, not necessary.  M3-A does not apply to Candidate B
+because
+\[
+  \beta(\mathtt{minlib})
+  =
+  \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\}
+\]
+is non-atomic.  Raw transport is an M3-A result only and must not be attributed
+to M3-B.
+
+\paragraph{Dependency record.}
+Appendix~\ref{app:lean} includes the exact theorem signatures, the
+paper-to-Lean correspondence map, and a compact record of where atomicity is
+and is not used.

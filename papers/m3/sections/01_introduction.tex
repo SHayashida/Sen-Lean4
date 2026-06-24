@@ -1,0 +1,125 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\paragraph{Motivation.}
+Computer-aided impossibility results can be made auditable: a finite atlas can
+record the residual cases that were generated, solved, and checked.  Such
+evidence is about truth and certificates.  A repair recommendation is a
+different object.  It says which assumptions, axioms, or implementation levers
+should be removed to restore feasibility, and it therefore depends on the
+interface at which the deletion is named.
+
+This distinction matters even when the impossibility evidence is trusted.
+M1 established an auditable finite-atlas workflow separating Proof, Audit,
+Witness, and Assumption obligations.  M1.5 then showed that clause-multiset
+equivalence is not enough to make raw lever-level repairs canonical:
+bundled and split realizations can expose different inclusion-minimal raw
+deletions.  M3 asks the positive follow-up question: when may those raw
+implementation repairs nevertheless be reported canonically at a declared
+contract interface?
+
+\paragraph{Thesis.}
+A valid impossibility certificate does not determine a valid repair report.
+Reportability is contract-relative: the paper must say which contract atoms
+are reportable, how implementation levers map to those atoms, and why grouped
+reports preserve the reference residual semantics.  M3 gives sufficient
+conditions, and under a monotone reference contract an exactness condition, for
+when \(\GroupedRepair\) coincides pointwise with \(\ContractRepair\).
+Candidate B supplies the motivating artifact-defined instantiation.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+      >=Stealth,
+      stage/.style={draw, rounded corners, align=center, minimum width=2.8cm,
+        minimum height=1.15cm, font=\small},
+      rawstage/.style={stage, fill=red!8, draw=red!60!black},
+      theorystage/.style={stage, fill=blue!7, draw=blue!55!black},
+      auditstage/.style={stage, fill=green!8, draw=green!45!black},
+      arrow/.style={->, thick}
+    ]
+    \node[rawstage] (m15) {M1.5\\Raw repair\\non-canonicity};
+    \node[theorystage, right=0.9cm of m15] (m3a) {M3-A\\Atomic sufficient\\condition};
+    \node[theorystage, right=0.9cm of m3a] (m3b) {M3-B\\Non-atomic\\\(\GroupSoundness\)};
+    \node[theorystage, right=0.9cm of m3b] (m3c) {M3-C\\Monotone\\exactness};
+    \node[auditstage, right=0.9cm of m3c] (cb) {Candidate B\\Raw-noncanonical\\contract-canonical};
+
+    \draw[arrow] (m15) -- (m3a);
+    \draw[arrow] (m3a) -- (m3b);
+    \draw[arrow] (m3b) -- (m3c);
+    \draw[arrow] (m3c) -- (cb);
+
+    \node[font=\scriptsize, text=red!60!black, above=0.35cm of m15]
+      {negative raw-level result};
+    \node[draw=blue!45!black, dashed, rounded corners,
+      fit=(m3a)(m3b)(m3c), inner xsep=0.18cm, inner ysep=0.35cm,
+      label={[font=\scriptsize, text=blue!55!black]above:positive contract-level theory}] {};
+  \end{tikzpicture}}
+  \caption{The paper spine separates the negative raw-level result from the
+  positive contract-level theory.}
+  \label{fig:spine}
+\end{figure}
+
+\paragraph{Contributions and boundary.}
+The paper does not claim novelty for the broad phenomenon that MUS, MCS, or
+repair families can vary with representation.  That sensitivity is part of the
+background diagnosis and repair-enumeration landscape.  The positive
+contribution is to specify when such low-level variation may be soundly
+reported through a higher-level contract interface:
+\begin{enumerate}[label=(\roman*)]
+  \item explicit reportability contracts;
+  \item M3-A, an atomic syntactic sufficient condition;
+  \item M3-B, a non-atomic \(\GroupSoundness\) condition;
+  \item M3-C, a characterization result: over deletion-monotone reference
+    contracts, \(\GroupSoundness\) is equivalent to pointwise grouped
+    correctness for residually faithful realizations;
+  \item a kernel-checked finite counterexample showing that the monotonicity
+    assumption in M3-C is necessary;
+  \item a Lean-checked abstract finite-set theorem core; and
+  \item a Candidate B artifact-backed instantiation of M3-B.
+\end{enumerate}
+
+The theorem core is not only stated in Lean syntax; the listed declarations
+are closed in the compiled Lean development.
+
+M3-B recovers report-level canonicity on Candidate B only after the
+reportability contract is made explicit and both \(\ResidualFaithfulness\) and
+\(\GroupSoundness\) are verified.
+It does not erase M1.5, make raw repairs canonical, or make M3-A applicable to
+the non-atomic Candidate B realization.
+
+\paragraph{Claim discipline.}
+Table~\ref{tab:claim-discipline} records the qualifications that govern the
+manuscript.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{0.32\textwidth}p{0.08\textwidth}X@{}}
+\toprule
+Claim & Allowed? & Required qualification \\
+\midrule
+M1.5 shows raw repair non-canonicity & yes & Candidate B / declared artifact scope \\
+M3-A recovers Candidate B & no & M3-A does not apply to non-atomic split \code{minlib} \\
+M3-B recovers report-level canonicity on Candidate B & yes & only under artifact-defined contract and verified \(\ResidualFaithfulness\) plus \(\GroupSoundness\) \\
+Candidate B raw repairs become canonical & no & raw non-canonicity remains \\
+\(\GroupSoundness\) characterizes grouped correctness & yes & only for residually faithful realizations over \(\Psi\)-deletion-monotone contracts \\
+Atomicity is necessary & no & M3-A is a sufficient condition only \\
+Raw transport holds under M3-B & no & raw transport is an M3-A result only \\
+M3 results extend to family scale & no & Candidate B is artifact-defined / base-scope unless separately lifted \\
+Arrow provides a second M3 example & no & Arrow is a prerequisite testbed unless per-residual transfer is established \\
+Artifact-defined contract equals semantic/Lean contract & no & semantic/formal upgrading is a separate truth/certificate obligation \\
+Encoding-granularity sensitivity of repairs is new by itself & no & M3's novelty is contract-relative reportability and exactness conditions \\
+\bottomrule
+\end{tabularx}
+\caption{Claim discipline for the M3 paper.}
+\label{tab:claim-discipline}
+\end{table}
+
+\paragraph{Paper organization.}
+Section~\ref{sec:contracts} defines contracts and repair predicates.
+Sections~\ref{sec:atomic}--\ref{sec:monotone} state M3-A, M3-B, and M3-C.
+Section~\ref{sec:candidate-b} records the artifact-backed instantiation.
+Sections~\ref{sec:related}--\ref{sec:discussion} position and delimit the result.
+Exact Lean signatures and artifact audit tables appear in the appendices.

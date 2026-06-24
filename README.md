@@ -12,6 +12,26 @@ For the exact public claim boundary, use:
 
 These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
 
+## Research program status
+
+For the current canonical research-program map, see
+`docs/research_program_current.md`.
+
+Sen24 is the audited finite base case. The current generic Sen result is a
+semantic obstruction bridge: `UN + MINLIB` yields a bounded O2/O3/O4
+obstruction family and hence the generic semantic impossibility theorem. The
+CNF, LRAT, atlas, and repair artifacts remain base-case scoped unless a
+separate bridge is established.
+
+| Module | Current role |
+|---|---|
+| M1 | Finite evidence diagnosability for Sen24. |
+| M1.5 | Raw repair non-canonicity under bundled/split liberalism encodings. |
+| M2 | Finite semantic obstruction basis and generic Sen theorem. |
+| M2.1 | Dimension-sensitive representation boundary. |
+| M3 | Grouped repair reportability. |
+| M4 | Institutional warrant, currently design-stage only. |
+
 ## Preprint submission policy (jxiv)
 
 - Canonical repository URL: https://github.com/SHayashida/Sen-Lean4

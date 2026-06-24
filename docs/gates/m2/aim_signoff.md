@@ -1,3 +1,5 @@
+> Historical design note. This document records an earlier direct-lifting / schema-generalization plan. The current canonical research-program status is maintained in `docs/research_program_current.md`. In particular, M2 now establishes a semantic obstruction bridge, while CNF/LRAT/atlas/repair transfer remains outside the claim boundary.
+
 # M2 Aim Sign-off
 
 ## Bridge Theorems / Transfer Contract — construction-readiness record

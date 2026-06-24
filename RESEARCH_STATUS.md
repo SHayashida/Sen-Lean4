@@ -1,3 +1,5 @@
+> Status snapshot. The current canonical research-program status is maintained in `docs/research_program_current.md`.
+
 # Research Status
 
 - Current branch: `codex/candidate-b-minlib-granularity`

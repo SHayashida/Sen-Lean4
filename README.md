@@ -1,16 +1,63 @@
-# SocialChoiceAtlas: Sen Base Case (Lean 4 + LRAT)
+# SocialChoiceAtlas: Auditable Social Choice from Finite Evidence to Semantic Bridges
 
-This repository contains a fixed sen24 case study of Sen's impossibility theorem
-for `n = 2` voters and `m = 4` alternatives, with:
+This repository began with the fixed Sen24 finite case for Sen's impossibility
+theorem and now contains a staged research program. M1 provides audited finite
+evidence; M1.5 studies representation-sensitive raw repairs; M2 provides the
+canonical semantic obstruction bridge; later reportability and warrant layers
+remain separately scoped.
+
+The original Sen24 case study covers `n = 2` voters and `m = 4` alternatives,
+with:
 
 - a Lean theorem development for the sen24 semantic statement (`Theorem.lean`), and
 - an independent SAT certificate pipeline (DIMACS CNF + LRAT) with committed reference artifacts checked in Lean.
 
-For the exact public claim boundary, use:
+For the exact M1 / Sen24 public claim boundary, use:
 - `docs/paper_claims_map.md`
 - `paper/sections/appendix_repro.tex`
 
 These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
+
+## Current program status
+
+- Dissertation scope: `docs/doctoral_scope_lock.md`
+- Current research-program status: `docs/research_program_current.md`
+- Concise operational status: `RESEARCH_STATUS.md`
+
+| Layer | Canonical status |
+|---|---|
+| M1 | Canonical finite Sen24 evidence |
+| M1.5 | Raw repair non-canonicity result |
+| M2 | Canonical semantic obstruction bridge; tagged and DOI archived |
+| M2.1 | Companion boundary evidence; paper integration pending |
+| M3 | Remote development result; not yet canonical on `main` |
+| M4 | Not started |
+
+## Current canonical M2 result
+
+M2 establishes that semantic `UN + MINLIB` yields one of the complete O2/O3/O4
+semantic obstruction family. The obstruction refutes `SocialAcyclic`, and the
+legacy `(Fin n, Fin m)` theorem is retained as a compatibility corollary.
+
+The CNF, LRAT, atlas, and repair artifacts remain Sen24-scoped. M2 does not
+claim family-level CNF, LRAT, atlas, repair, or MCS transfer.
+
+M2 references:
+
+- `papers/m2/CLAIM_BOUNDARY.md`
+- `papers/m2/REPRODUCIBILITY.md`
+- `papers/m2/ZENODO.md`
+- `docs/m2_scope_wall.md`
+
+M2 reproduction commands:
+
+```bash
+lake env lean SocialChoiceAtlas/Sen/ObstructionBridge.lean
+lake env lean SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean
+./scripts/ci_m2_smoke.sh
+lake build
+make -C papers/m2 pdf
+```
 
 ## Preprint submission policy (jxiv)
 
@@ -30,6 +77,7 @@ This repository uses one shared code/data trunk and separate in-repo manuscript 
 
 - `paper/` is the protected M1 manuscript workspace.
 - `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
+- `papers/m2/` is the M2 semantic obstruction-bridge manuscript workspace.
 - Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.
 - Use short-lived branches for implementation work and manuscript edits.
 - Freeze submissions with tags and commit hashes rather than long-lived paper branches.

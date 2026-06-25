@@ -4,8 +4,9 @@
 
 - As of: 2026-06-24
 - Repository: SHayashida/Sen-Lean4
-- Scope: Sen liberal paradox only
-- Cross-theorem generality: not claimed
+- Primary application scope: Sen liberal paradox
+- Abstract theorem scope: finite-set reportability interfaces
+- Cross-theorem social-choice generality: not claimed
 - Arrow: deferred beyond the current dissertation program
 
 ## Current North-Star Claim
@@ -27,14 +28,20 @@ The current program is organized around five typed stages:
 4. Grouped Repair Report
 5. Institutional Action
 
-The four transitions are:
+The four transition boundaries are:
 
-| Transition | Required contract |
-|---|---|
-| Finite evidence -> general semantics | Semantic obstruction bridge / encoding boundary |
-| Semantics -> repair | Repair semantics and representation choice |
-| Raw repair -> grouped report | Reportability contract |
-| Report -> action | Warrant / authority contract |
+| Boundary | Current status | Required justification / contract |
+|---|---|---|
+| Finite artifact evidence <-> general semantics | A common bounded semantic-obstruction vocabulary is established; artifact-driven transfer is not established. | Encoding correctness and an artifact-to-semantics bridge. |
+| General semantic impossibility -> raw repair | Non-entailment / representation dependence is established; no general positive repair transport theorem is claimed. | Repair semantics, editable-lever choice, and representation contract. |
+| Raw repair -> grouped report | Abstract reportability theorems are established; Candidate B has an artifact-defined instantiation. | `ResidualFaithfulness` and `RepairAtomicity` or `GroupSoundness`, with stated monotonicity conditions for exactness. |
+| Grouped report -> institutional action | Open / M4 design stage. | Warrant, authority, delegation, scope, abstention, and appeal conditions. |
+
+For M2, "bridge established" must always be qualified by layer. M2 is not an
+artifact-driven theorem from the Sen24 CNF, LRAT, or atlas. The generic theorem
+is proved semantically through the O2/O3/O4 obstruction family. Sen24 and the
+generic theorem share bounded semantic obstruction shapes, but the Sen24
+artifact is not a formal premise of the generic theorem.
 
 The program treats the following as explicit non-implications:
 
@@ -105,14 +112,23 @@ The M2 scope wall is:
 
 Current status:
 
-- Alternative expansion preserves the comparison shield under the fixed witness
-  basis.
-- Voter expansion preserves UNSAT status but can break clause-multiset
-  equivalence.
-- This is a boundary result, not a full repair-transfer theorem.
+- In the tested neighboring case `(2,5)`, alternative expansion preserves
+  clause-multiset equivalence under the fixed two-voter witness basis and
+  preserves raw repair divergence.
+- In the tested neighboring case `(3,4)`, the compared bundled and
+  pair-selector split packages are both UNSAT, but clause-multiset equivalence
+  fails because voter-pair selection and role-specific selector machinery add
+  unmatched structure.
+- No repair enumeration was authorized for the `(3,4)` `sat_equiv_only`
+  comparison.
+- No theorem for arbitrary alternative expansion, arbitrary voter expansion, or
+  arbitrary `(n,m)` is claimed.
+- M2.1 is a two-case directional boundary result, not a full repair-transfer
+  theorem.
 
-M2.1 explains where the M1.5 representation witness transfers cleanly and where
-the clause-multiset control stops.
+M2.1 explains, for the tested `(2,5)` and `(3,4)` neighboring cases, where the
+M1.5 representation witness transfers cleanly and where the clause-multiset
+control stops.
 
 ### M3 - Grouped Reportability
 
@@ -129,6 +145,22 @@ Current status:
 
 M3 studies when raw repair information may be grouped into a report without
 misrepresenting the underlying repair semantics.
+
+Guarantee boundary:
+
+- The abstract finite-set reportability theorem core is kernel-checked in
+  Lean.
+- The theorem core is independent of CNF solving.
+- Candidate B is an artifact-backed, artifact-defined instantiation.
+- Candidate B is not thereby upgraded to a semantic social-choice contract, a
+  Lean-level encoding-correctness theorem, or a family-scale reportability
+  theorem.
+- Raw repair non-canonicity remains true; M3 recovers grouped correctness only
+  relative to an explicit contract satisfying the relevant conditions.
+- M3-A does not apply to the non-atomic Candidate B liberalism block.
+- Candidate B is recovered through the M3-B / `GroupSoundness` route.
+- The M3-C characterization is conditional on the stated deletion-monotonicity
+  and residual-faithfulness regime.
 
 ### M4 - Institutional Warrant
 

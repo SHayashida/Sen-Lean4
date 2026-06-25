@@ -1,3 +1,5 @@
+> Historical design note. This was an earlier Candidate A repair-liftability protocol. Candidate A was subsequently weakened/closed and the program pivoted to Candidate B representation sensitivity. The current outcomes are recorded through M1.5 and M2.1. Do not use this file as a current experiment plan. The current canonical map is `docs/research_program_current.md`.
+
 # Experiment Protocol v0.1
 ## Repair Liftability Test — Sen-type family
 

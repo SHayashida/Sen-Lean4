@@ -7,9 +7,10 @@ positive track and the Option C voter-dimension boundary track.
 
 ## 2. Core Question
 
-M2.1 asks whether the M1.5 repair-candidate representation non-canonicity
-transfers to family scale. The comparison distinguishes transfer along the
-alternative dimension from transfer along the voter dimension.
+M2.1 tests whether the M1.5 repair-candidate representation non-canonicity
+persists in two neighboring cases. The comparison distinguishes the tested
+two-voter alternative-expansion case `(2,5)` from the tested voter-dimension
+case `(3,4)`.
 
 ## 3. Positive Side: Option D / `(2,5)`
 
@@ -42,12 +43,13 @@ clauses.
 
 ## 5. Current Conclusion
 
-The M1.5 witness class transfers cleanly along the two-voter
-alternative-expansion direction. It does not automatically transfer along the
-voter-dimension direction.
+In the tested `(2,5)` case, the M1.5 witness class transfers cleanly along the
+two-voter alternative-expansion direction. In the tested `(3,4)` case, it does
+not automatically transfer along the voter-dimension direction.
 
 This is a two-sided M2.1 result, not a failure: Option D identifies where the
-strong witness transfers, while Option C identifies where the
+strong witness transfers in the tested `(2,5)` setting, while Option C
+identifies where, in the tested `(3,4)` setting, the
 clause-multiset-equivalence control stops.
 
 ## 6. Scope Caveat

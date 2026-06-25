@@ -103,8 +103,9 @@ None of these rules authorizes repair enumeration through this planning note.
 Failure of ≡CM at `(3,4)` is not necessarily a failure of M2.1. It may be a
 valid negative boundary result:
 
-> M1.5's witness class transfers cleanly along the alternative dimension but
-> does not automatically transfer along the voter dimension.
+> In the tested `(2,5)` case, M1.5's witness class transfers cleanly along the
+> two-voter alternative-expansion track; in the tested `(3,4)` case, it does
+> not automatically transfer along the voter-dimension track.
 
 This framing would complement, rather than weaken, the completed Option D
 positive track. Option D establishes persistence under fixed two-voter witness

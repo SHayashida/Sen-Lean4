@@ -1,12 +1,15 @@
-# SocialChoiceAtlas: Sen Base Case (Lean 4 + LRAT)
+# SocialChoiceAtlas: Auditable Social Choice Evidence and Contracts
 
-This repository contains a fixed sen24 case study of Sen's impossibility theorem
-for `n = 2` voters and `m = 4` alternatives, with:
+This repository began with the fixed Sen24 base case and now hosts a
+multi-paper research program on auditable finite evidence, semantic obstruction
+bridges, repair non-canonicity, and grouped reportability. The original Sen24
+case study covers Sen's impossibility theorem for `n = 2` voters and `m = 4`
+alternatives, with:
 
 - a Lean theorem development for the sen24 semantic statement (`Theorem.lean`), and
 - an independent SAT certificate pipeline (DIMACS CNF + LRAT) with committed reference artifacts checked in Lean.
 
-For the exact public claim boundary, use:
+For the exact M1 / Sen24 atlas claim boundary, use:
 - `docs/paper_claims_map.md`
 - `paper/sections/appendix_repro.tex`
 
@@ -15,7 +18,7 @@ These are the official source of truth for what is proved, audited, witness-vali
 ## Research program status
 
 For the current canonical research-program map, see
-`docs/research_program_current.md`.
+[docs/research_program_current.md](docs/research_program_current.md).
 
 Sen24 is the audited finite base case. The current generic Sen result is a
 semantic obstruction bridge: `UN + MINLIB` yields a bounded O2/O3/O4
@@ -28,8 +31,8 @@ separate bridge is established.
 | M1 | Finite evidence diagnosability for Sen24. |
 | M1.5 | Raw repair non-canonicity under bundled/split liberalism encodings. |
 | M2 | Finite semantic obstruction basis and generic Sen theorem. |
-| M2.1 | Dimension-sensitive representation boundary. |
-| M3 | Grouped repair reportability. |
+| M2.1 | Tested `(2,5)` positive track and `(3,4)` representation boundary. |
+| M3 | Lean-checked abstract grouped-reportability theory with an artifact-defined Candidate B instantiation. |
 | M4 | Institutional warrant, currently design-stage only. |
 
 ## Preprint submission policy (jxiv)

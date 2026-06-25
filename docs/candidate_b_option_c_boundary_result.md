@@ -83,10 +83,10 @@ Option D result: selector or encoding-strength explanations would not have been
 ruled out.
 
 This is a voter-dimension representation boundary, not an Option D regression.
-It is not a failure of M2.1. The evidence supports the narrower statement that
-the M1.5 witness class transfers cleanly along the two-voter
-alternative-expansion track but does not automatically transfer along the
-voter-dimension track.
+It is not a failure of M2.1. The evidence supports the narrower statement that,
+in the tested `(2,5)` case, the M1.5 witness class transfers cleanly along the
+two-voter alternative-expansion track, while in the tested `(3,4)` case it does
+not automatically transfer along the voter-dimension track.
 
 ## 7. Gate Consequence
 

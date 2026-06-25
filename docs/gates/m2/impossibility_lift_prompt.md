@@ -1,3 +1,5 @@
+> Historical implementation prompt. This staged prompt records the earlier M2 direct-lift construction path. The completed M2 architecture now factors the theorem through the public O2/O3/O4 semantic obstruction basis; `sen_impossibility_lifts` is retained as a compatibility corollary. Current status is in `docs/research_program_current.md` and `docs/m2_obstruction_basis_stage3_result.md`.
+
 # M2 Impossibility-Lift Prompt (staged)
 
 AI instruction sheet for proving the M2 positive bridge theorem `sen_impossibility_lifts`

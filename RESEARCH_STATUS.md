@@ -1,4 +1,4 @@
-> Status snapshot. The current canonical research-program status is maintained in `docs/research_program_current.md`.
+> Archived status snapshot from the Candidate B / M1.5 stage. Do not use this file as a current project-status source. The canonical current status is `docs/research_program_current.md`. All branch names, next actions, and open questions below are historical.
 
 # Research Status
 

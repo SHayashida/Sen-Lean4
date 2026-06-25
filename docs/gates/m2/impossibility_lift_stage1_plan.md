@@ -1,3 +1,5 @@
+> Historical design note. This is the historical M2 Stage 1 implementation plan. The completed M2 architecture now factors the theorem through the public O2/O3/O4 semantic obstruction basis. `sen_impossibility_lifts` is retained as a compatibility corollary. The Sen24 base theorem or artifact is not a formal dependency of the generic obstruction theorem. Current status is in `docs/research_program_current.md` and `docs/m2_obstruction_basis_stage3_result.md`.
+
 # M2 Stage 1 — Impossibility Lift Plan
 
 **Module to create:** `SocialChoiceAtlas/Sen/Lifting/ImpossibilityLift.lean`  

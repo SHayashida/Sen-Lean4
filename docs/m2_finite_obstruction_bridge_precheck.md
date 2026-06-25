@@ -1,3 +1,5 @@
+> Pre-implementation assessment. The recommended obstruction-basis architecture was subsequently implemented and completed. See `docs/m2_obstruction_basis_stage3_result.md` and `docs/research_program_current.md` for the current result and claim boundary.
+
 # M2 Finite-Obstruction Bridge Precheck
 
 ## 1. Executive Verdict

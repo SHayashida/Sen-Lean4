@@ -15,5 +15,13 @@ import SocialChoiceAtlas.Sen.BaseCase24.Theorem
 -- default build on every PR (see docs/gates/m2/aim_signoff.md, Decision 3).
 import SocialChoiceAtlas.Sen.ObstructionBridge
 import SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift
+-- M3 finite-set reportability core: abstract repair/report interfaces,
+-- sufficient conditions, exactness under reference monotonicity, and checked
+-- boundary examples. Candidate B artifacts are not formalized by these imports.
+import SocialChoiceAtlas.Reportability.Defs
+import SocialChoiceAtlas.Reportability.Atomic
+import SocialChoiceAtlas.Reportability.GroupSound
+import SocialChoiceAtlas.Reportability.Monotone
+import SocialChoiceAtlas.Reportability.Examples
 -- Optional (SAT/BVDecide/LRAT): this is large and solver-backed, so keep it out of default imports.
 -- import SocialChoiceAtlas.Sen.BaseCase24.SATSen

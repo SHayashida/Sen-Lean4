@@ -2,9 +2,10 @@
 
 This repository began with the fixed Sen24 finite case for Sen's impossibility
 theorem and now contains a staged research program. M1 provides audited finite
-evidence; M1.5 studies representation-sensitive raw repairs; M2 provides the
-canonical semantic obstruction bridge; later reportability and warrant layers
-remain separately scoped.
+evidence; M1.5 establishes representation-sensitive raw repair
+non-canonicity; M2 provides the canonical semantic obstruction bridge; M3
+provides the canonical finite-set reportability theorem core; M4 remains future
+institutional warrant-contract work.
 
 The original Sen24 case study covers `n = 2` voters and `m = 4` alternatives,
 with:
@@ -13,10 +14,12 @@ with:
 - an independent SAT certificate pipeline (DIMACS CNF + LRAT) with committed reference artifacts checked in Lean.
 
 For the exact M1 / Sen24 public claim boundary, use:
+
 - `docs/paper_claims_map.md`
 - `paper/sections/appendix_repro.tex`
 
-These are the official source of truth for what is proved, audited, witness-validated, assumed, and re-verified.
+These are the official source of truth for what is proved, audited,
+witness-validated, assumed, and re-verified.
 
 ## Current program status
 
@@ -27,11 +30,52 @@ These are the official source of truth for what is proved, audited, witness-vali
 | Layer | Canonical status |
 |---|---|
 | M1 | Canonical finite Sen24 evidence |
-| M1.5 | Raw repair non-canonicity result |
-| M2 | Canonical semantic obstruction bridge; tagged and DOI archived |
+| M1.5 | Raw repair non-canonicity result; publication packaging pending |
+| M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO` |
 | M2.1 | Companion boundary evidence; paper integration pending |
-| M3 | Remote development result; not yet canonical on `main` |
-| M4 | Not started |
+| M3 | Abstract M3-A/B/C theorem core canonical on `main`; Candidate B evidence not yet canonical |
+| M4 | Future main theoretical track; no theorem or code exists yet |
+
+## Current canonical M3 result
+
+M3 is an abstract finite-set theory of contract-relative repair reporting. It
+does not formalize CNF generation, SAT solving, or artifact enumeration.
+
+The canonical M3 result consists of:
+
+- M3-A: repair atomicity plus residual faithfulness is a sufficient condition
+  for grouped correctness, and gives atom-indexed raw transport under atomic
+  realizations;
+- M3-B: GroupSoundness plus residual faithfulness is a sufficient condition
+  for grouped correctness without atomicity;
+- M3-C: under reference deletion monotonicity, grouped correctness implies
+  GroupSoundness, yielding the stated exactness corollary under the Lean
+  assumptions;
+- boundary examples showing that atomicity is not necessary and monotonicity
+  cannot simply be omitted.
+
+These Lean modules do not formalize Candidate B artifacts and do not prove any social-choice contract atom semantically valid.
+
+Canonical M3 files:
+
+- `SocialChoiceAtlas/Reportability/Defs.lean`
+- `SocialChoiceAtlas/Reportability/Atomic.lean`
+- `SocialChoiceAtlas/Reportability/GroupSound.lean`
+- `SocialChoiceAtlas/Reportability/Monotone.lean`
+- `SocialChoiceAtlas/Reportability/Examples.lean`
+- `docs/m3_canonical_integration_precheck.md`
+
+Focused M3 validation commands:
+
+```bash
+./scripts/ci_m3_smoke.sh
+lake env lean SocialChoiceAtlas/Reportability/Examples.lean
+lake build
+```
+
+Candidate B remains an artifact-defined application whose off-main evidence has
+been reconstructed but still requires a curated canonical package and
+validator, or an immutable release binding.
 
 ## Current canonical M2 result
 
@@ -91,6 +135,7 @@ SocialChoiceAtlas/
 ├── SocialChoiceAtlas/
 │   ├── Core/
 │   ├── Axioms/
+│   ├── Reportability/
 │   └── Sen/BaseCase24/
 │       ├── Spec.lean
 │       ├── Theorem.lean

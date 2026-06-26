@@ -12,28 +12,36 @@ Current paper workspaces on `main`:
 
 Current publication-unit status:
 
-| Workspace | Status |
+| Workspace | Publication-unit status |
 |---|---|
 | `paper/` | M1 / Sen24 finite-evidence unit. |
-| `papers/m1_5/` | M1.5 workspace; publication packaging pending review with M3. |
-| `papers/m2/` | M2 standalone submission unit; tagged and DOI archived, pending one-time reviewer audit. |
+| `papers/m1_5/` | M1.5 workspace; possible integrated publication with M3 remains undecided. |
+| `papers/m2/` | M2 standalone unit; archived and reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
 
-M2.1 and M3 paper packaging are not canonical paper workspaces on `main` in this
-branch. M3 theorem-core work currently lives on the remote development branch
-`origin/codex/m3-lean-reportability`; it requires a separate integration
-precheck before becoming canonical.
+## M3 theorem core and paper status
+
+The M3 abstract Lean theorem core is canonical in the shared code trunk under
+`SocialChoiceAtlas/Reportability/`. This canonical code status does not imply a
+canonical M3 manuscript workspace.
+
+There is no canonical `papers/m3/` workspace on `main`. Current M3 prose
+documents need freshness revision before any manuscript packaging decision.
+Candidate B evidence is not canonical; it still requires a curated evidence
+package plus validator, or an immutable release binding. M1.5+M3 publication
+packaging remains under decision.
+
+Any future M3 submission needs its own workspace, claim boundary, exact tag, and
+archival record.
 
 ## Non-canonical or pending workspaces
 
 - M2.1 evidence is partly canonical through PR #9, but its manuscript workspace
   is not currently a canonical `main` workspace.
-- M3 theorem and planning materials exist on a remote development branch and
-  require a selective integration PR.
+- Candidate B evidence packaging is pending and must not be treated as canonical
+  paper evidence yet.
 - M4 has no paper workspace yet.
-
-M2.1 and M3 materials exist in non-canonical development history and require
-dedicated reviewed integration before they are treated as main-branch paper
-workspaces.
+- Stale M3 planning documents in development history are not a canonical paper
+  workspace.
 
 Operating rules:
 

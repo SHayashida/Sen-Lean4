@@ -4,7 +4,8 @@
 
 - Repository: `SHayashida/Sen-Lean4`
 - Canonical branch: `main`
-- Canonical main commit at this update: `9162b44b6db11601a4d751e1b869faa4f741381d`
+- Scientific baseline commit for this update:
+  `be4132ba3b6f8168b75644e0928d7b2609048049`
 - Program status date: 2026-06-26
 - Dissertation scope: `docs/doctoral_scope_lock.md`
 
@@ -23,11 +24,15 @@ institutional action are not interchangeable.
 | Milestone | Scientific result | Canonical remote state | Next action |
 |---|---|---|---|
 | M1 | Audited finite Sen24 evidence; Proof/Audit/Witness/Assumption separation | Canonical on `main` | Preserve claim boundary |
-| M1.5 | Raw repair non-canonicity under controlled representation comparison | Manuscript and evidence present in repository history | Publication-unit review with M3 |
-| M2 | Generic O2/O3/O4 semantic obstruction bridge and general Sen theorem | Canonical on `main`; tagged and DOI archived | One-time reviewer audit |
-| M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts merged through PR #9; manuscript scaffold not canonical on `main` | Defer clean paper integration |
-| M3 | M3-A/B/C finite-set reportability theory and Candidate B audit | Remote development branch only; not canonical on `main` | Clean integration precheck |
-| M4 | Institutional warrant / delegated warrant preservation | No canonical remote implementation | Begin only after M2 audit and M3 integration |
+| M1.5 | Raw repair non-canonicity under controlled representation comparison | Result and manuscript workspace present | Publication-unit design with M3 |
+| M2 | Generic O2/O3/O4 semantic obstruction bridge and general Sen theorem | Canonical, tagged, DOI archived; reviewer audit complete | Required major manuscript revision before submission |
+| M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts partly canonical through PR #9; manuscript not canonical | Defer separate paper integration |
+| M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16 | Refresh docs; package Candidate B evidence separately |
+| Candidate B | Artifact-defined M3-B instantiation | Reconstructed off-main; not canonical on `main` | Curated evidence package and validator or release binding |
+| M4 | Institutional warrant / Delegated Warrant Preservation | No theorem or code exists yet; M2/M3 theorem dependencies cleared | Begin warrant-contract design |
+
+Candidate B is an application/status row under M3, not a sixth dissertation
+milestone.
 
 M1.5 and M3 publication packaging is not final.
 
@@ -68,67 +73,137 @@ source snapshot. The tag must not be moved.
 M2 derives the general theorem from a finite semantic obstruction
 classification, not from the Sen24 CNF as a formal premise.
 
-## 5. M3 remote status
+## 5. M2 reviewer-audit status
 
-- Remote branch: `origin/codex/m3-lean-reportability`
-- Current remote branch head SHA:
-  `1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`
-- Merge base with `origin/main`:
-  `73c891fa3edd96148238570f16453c484fccf283`
-- M3 Lean modules present on the branch:
-  - `SocialChoiceAtlas/Reportability/Defs.lean`
-  - `SocialChoiceAtlas/Reportability/Atomic.lean`
-  - `SocialChoiceAtlas/Reportability/GroupSound.lean`
-  - `SocialChoiceAtlas/Reportability/Monotone.lean`
-  - `SocialChoiceAtlas/Reportability/Examples.lean`
-- Candidate B audit status:
-  `docs/m3_candidate_b_group_soundness_audit_result.md` exists on the remote
-  development branch.
-- Canonical integration status: not canonical on `main`.
+The one-time M2 reviewer audit was merged through PR #14.
 
-The M3 mathematical and Lean theorem core exists on a remote development
-branch, but it is not a canonical `main` result until a dedicated integration
-PR has reviewed its code, documentation, evidence bindings, and stale planning
-state.
+| Audit component | Verdict |
+|---|---|
+| Literature novelty audit | `MODERATE` |
+| Adversarial review | `PASS WITH MAJOR REVISION` |
+| Submission-unit decision | `CONDITIONAL GO` |
 
-Do not describe the entire M3 branch as ready to merge wholesale. The branch
-mixes M3 code/docs with other material and therefore requires a selective
-integration precheck.
+Standalone M2 remains the primary submission unit, but only after the required
+major manuscript revision. The audit identifies Social Choice and Welfare as
+the primary venue. Journal of Automated Reasoning remains a fallback only if the
+paper is reframed more strongly around formal methods.
 
-## 6. Publication-unit status
+No new theorem or experiment is required for the minimum viable M2 submission.
+The manuscript revision remains separate from the main research track.
 
-- M2 is currently treated as a standalone submission unit subject to a one-time
-  novelty/adversarial/submission review.
-- M1.5 and M3 may form an integrated publication unit.
-- That publication decision is not locked by this document.
-- M2.1 remains a separate companion/boundary-paper candidate.
+Audit documents:
+
+- `docs/m2_literature_novelty_audit.md`
+- `docs/m2_adversarial_review.md`
+- `docs/m2_submission_unit_decision.md`
+
+## 6. M3 canonical theorem-core status
+
+The abstract M3 finite-set reportability theorem core is canonical on `main`.
+
+Provenance:
+
+- integration precheck PR #15 merge commit:
+  `7781d293ec785e38d6d434b10d1d9d87e29f70ae`;
+- theorem-core PR #16 merge commit:
+  `be4132ba3b6f8168b75644e0928d7b2609048049`;
+- audited source branch:
+  `origin/codex/m3-lean-reportability`;
+- audited source SHA:
+  `1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`;
+- integration strategy:
+  clean file extraction plus patch-only root imports.
+
+Canonical modules:
+
+- `SocialChoiceAtlas/Reportability/Defs.lean`
+- `SocialChoiceAtlas/Reportability/Atomic.lean`
+- `SocialChoiceAtlas/Reportability/GroupSound.lean`
+- `SocialChoiceAtlas/Reportability/Monotone.lean`
+- `SocialChoiceAtlas/Reportability/Examples.lean`
+
+Focused gate:
+
+- `scripts/ci_m3_smoke.sh`
+
+The expected standard axiom set for the main M3 declarations is:
+
+```text
+[propext, Classical.choice, Quot.sound]
+```
+
+The integration precheck and focused smoke gate found no unexpected custom
+axioms. The M3 Lean modules do not formalize Candidate B artifacts.
+
+| Layer | Canonical result |
+|---|---|
+| M3-A | Atomicity plus residual faithfulness yields grouped correctness; raw transport is available under atomic realizations |
+| M3-B | GroupSoundness plus residual faithfulness yields grouped correctness without atomicity |
+| M3-C | Under reference deletion monotonicity, grouped correctness implies GroupSoundness |
+| Exactness | `groupSoundness_iff` under its Lean assumptions |
+| Hierarchy | Atomicity implies GroupSoundness under the M3-A assumptions |
+| Boundary examples | Atomicity is not necessary; monotonicity cannot simply be removed |
+
+The core is abstract and contract-relative. It does not establish semantic
+validity of social-choice contract atoms.
+
+## 7. Candidate B application status
+
+The integration precheck in `docs/m3_canonical_integration_precheck.md`
+independently reconstructed the Candidate B artifact audit:
+
+- the 16 block-aligned residual comparisons were reconstructed;
+- the fully active bundled and split cases are UNSAT;
+- the 15 proper bundled residuals are SAT;
+- five split singleton repairs are SAT;
+- the grouped family is `{asymm}`, `{un}`, `{minlib}`, `{no_cycle4}`.
+
+This evidence remains off-main. No dedicated canonical validator exists yet.
+Candidate B is not canonical until evidence binding is completed through either:
+
+- a curated evidence package plus canonical validator; or
+- immutable release binding.
+
+Candidate B is artifact-defined. Its artifact evidence remains outside the M3
+Lean theorem core, and it does not establish semantic or Lean-level validity of
+the contract atoms.
+
+## 8. Publication-unit status
+
+- M2 standalone publication decision is `CONDITIONAL GO`; required major
+  manuscript revision remains before submission.
+- M1.5 and M3 may form an integrated paper.
+- No final M1.5+M3 publication unit has been locked.
+- No canonical `papers/m3/` workspace exists.
+- M2.1 remains separate and deferred.
 - Publication packaging does not alter the dissertation spine.
 
-## 7. Active next actions
+## 9. Active next actions
 
-1. M2 literature novelty audit.
-2. M2 adversarial manuscript review.
-3. M2 submission-unit decision.
-4. M3 canonical integration precheck.
-5. Clean M3 theorem-core integration into `main`.
-6. Begin M4 warrant-contract skeleton.
-7. Develop M1.5+M3 integrated manuscript in parallel.
-8. Defer M2.1 publication integration and maintenance cleanup.
+1. Begin M4 warrant-contract design centered on Delegated Warrant Preservation.
+2. Revise and integrate current M3 documentation.
+3. Create the Candidate B curated evidence package and validator, or bind an
+   immutable release.
+4. Complete the required M2 manuscript revision before submission.
+5. Decide and develop the M1.5+M3 publication unit.
+6. Defer M2.1 paper integration and maintenance cleanup.
 
-The first five items are required before M4 becomes the main implementation
-track.
+M4 is now the main theoretical research track. Items 2-6 are parallel or
+publication-governance tracks and do not block initial M4 contract design.
 
-## 8. Non-blocking backlog
+## 10. Non-blocking backlog
 
+- M3 linter-warning cleanup, only in a separately audited code task.
+- Stale M3 skeleton retention/archival policy.
+- Candidate B release packaging.
+- M2 manuscript major revision.
+- M2.1 publication packaging.
 - Legacy M2 helper cleanup.
-- macOS Unicode-range grep portability.
+- macOS portability maintenance.
 - Optional full-asset Zenodo enrichment.
 - Historical branch cleanup only after archival review.
-- M2.1 publication packaging.
 
-None blocks the M2 reviewer audit.
-
-## 9. Source-of-truth hierarchy
+## 11. Source-of-truth hierarchy
 
 1. Paper-specific claim-boundary files govern individual paper claims.
 2. `docs/doctoral_scope_lock.md` governs dissertation scope.

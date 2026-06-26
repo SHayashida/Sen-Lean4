@@ -65,6 +65,16 @@ reportability contracts.  Standard conjunctive axiom-deletion contracts
 provide the motivating intuition because removing an atom removes
 constraints; the theorem itself uses the stated monotonicity predicate.
 
+Candidate B's complete bundled residual lattice gives a concrete finite
+instance of this monotone regime.  The audit records all 16 bundled residual
+statuses over
+\(\{\mathtt{asymm},\mathtt{un},\mathtt{minlib},\mathtt{no\_cycle4}\}\), with
+\(\mathtt{no\_cycle3}\) inactive, and checks the deletion-monotone pattern
+directly.  This does not make monotonicity intrinsic to Sen24, and it does not
+make M3-C a Sen-specific theorem.  The point is narrower: the Sen24 artifact
+supplies a complete finite lattice in which the exactness theorem's hypothesis
+can be audited.
+
 \begin{proposition}[Audit-cost collapse]
 \label{prop:audit-collapse}
 Under \(\PsiDeletionMonotonicity\), if every raw minimal repair \(R\) satisfies

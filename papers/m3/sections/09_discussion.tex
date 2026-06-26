@@ -10,7 +10,8 @@ coarser \(\mathtt{minlib}\) lever.  M3 does not make those raw families equal.
 At the grouped artifact-defined contract level, the same witness is positive:
 under the verified contract, \(\ResidualFaithfulness\), \(\GroupSoundness\),
 and touch-any grouping, the grouped split report coincides with the bundled
-contract repair family.
+contract repair family.  This is a statement about the level at which repairs
+may be reported, not about which repair should be chosen.
 
 \paragraph{Contract scope.}
 An artifact-defined contract takes recorded bundled residuals as the reference
@@ -31,7 +32,21 @@ condition becomes necessary for grouped correctness.  The retained-set
 convention keeps these obligations explicit: feasibility is always evaluated on
 the residual that remains after deletion, not on the deletion label itself.
 The finite examples in the Lean core show that these distinctions are
-substantive, not merely terminological.
+substantive, not merely terminological.  \(\ResidualFaithfulness\) and
+\(\GroupSoundness\) are the explicit, auditable price of contract-relative
+reporting correctness.  When those obligations are unavailable, M3 does not
+prove the coarse report false; it shows that the report has not earned the
+contract-relative guarantee established in this paper.
+
+\paragraph{Interpretive boundary.}
+M3 does not show that minimal liberalism should be relaxed.  It characterizes
+when two distinct person-indexed implementation repairs may be reported under
+the common contract atom \(\mathtt{minlib}\) without altering the
+contract-level minimal-repair family.  In richer institutional
+interpretations, person-indexed raw repairs may correspond to substantively
+different interventions.  M3 does not decide whether those differences should
+be exposed or suppressed; it characterizes only when a declared grouping is
+report-correct.
 
 \paragraph{Program boundary.}
 The paper fits a larger program moving from auditable finite atlases toward
@@ -46,5 +61,8 @@ repair/report comparison could be claimed.
 The paper separates two questions that are often conflated.  One question is
 whether an impossibility residual is validly certified.  Another is whether a
 repair to an implementation residual may be reported as a repair to a declared
-contract atom.  M1.5 shows why reportability cannot be assumed; M3 gives
-finite-set conditions under which it can be earned.
+contract atom.  M3 does not choose or rank repairs.  It identifies the
+auditable obligations required to compress distinct implementation repairs into
+a common contract-level report without changing the declared contract repair
+family.  M1.5 shows why reportability cannot be assumed; M3 gives finite-set
+conditions under which it can be earned.

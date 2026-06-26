@@ -15,6 +15,14 @@ implementation refines the liberalism block as
   \{\mathtt{decisive\_voter0},\mathtt{decisive\_voter1}\}.
 \]
 Candidate B is therefore non-atomic and falls under M3-B rather than M3-A.
+It is a structurally economical separating witness for the two reportability
+routes: \(\mathtt{minlib}\) is the only non-atomic active block, while
+\(\mathtt{asymm}\), \(\mathtt{un}\), and \(\mathtt{no\_cycle4}\) are
+singleton-aligned.  Candidate B therefore isolates the precise point at which
+the atomicity route is unavailable and the non-atomic \(\GroupSoundness\)
+route is required.  This says only that Candidate B does not satisfy the
+\(\RepairAtomicity\) hypothesis; it does not say that the conclusion of M3-A
+is false there.
 
 \paragraph{Audit provenance.}
 The M3 Candidate B audit is artifact-only; no new solver run is part of this
@@ -133,6 +141,16 @@ Proposition~\ref{prop:audit-collapse} turns the grouped SAT checks into
 unrestricted \(\GroupSoundness\).  Residual faithfulness is supplied by the 16
 block-aligned status comparisons.  Therefore:
 
+The split encoding exposes two distinct person-indexed singleton repairs,
+\[
+  \{\mathtt{decisive\_voter0}\}
+  \quad\text{and}\quad
+  \{\mathtt{decisive\_voter1}\}.
+\]
+Under the declared artifact-defined bundled contract, touch-any grouping maps
+both to \(\{\mathtt{minlib}\}\).  M3-B establishes that the resulting grouped
+repair predicate coincides pointwise with the contract repair predicate.
+
 \paragraph{Result (Candidate B instantiation).}
 Candidate B instantiates M3-B under the bundled-level artifact-defined
 contract.
@@ -147,6 +165,9 @@ The grouped family is
   \bigr\}.
 \]
 
-Candidate B is raw-noncanonical and contract-canonical at the same time.
-This does not upgrade the artifact-defined contract to a semantic or
-Lean-level contract.  That upgrade is a separate truth/certificate obligation.
+Thus \(\{\mathtt{minlib}\}\) is a report-correct grouped label under this
+contract.  It is neither the unique nor the normatively preferred repair, and
+the result does not upgrade the artifact-defined contract to a semantic or
+Lean-level contract.  Candidate B remains raw-noncanonical and is
+grouped-canonical relative to the artifact-defined contract.  Semantic or
+Lean-level upgrading is a separate truth/certificate obligation.

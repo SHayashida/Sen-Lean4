@@ -14,14 +14,16 @@ axiom names themselves are the theoretical and normative units of discussion.
 
 Auditable finite-atlas evidence can certify the truth/certificate side of the
 story: which residual cases were generated, solved, and checked.  It does not
-automatically justify the level at which repairs are reported.  M1 established
-an auditable finite-atlas workflow separating Proof, Audit, Witness, and
-Assumption obligations.  M1.5 then showed the negative repair-reporting fact:
+automatically justify the level at which repairs are reported.  Earlier
+work~\citep{hayashida2026atlas} established an auditable finite-atlas workflow
+separating Proof, Audit, Witness, and Assumption obligations.  A companion
+study~\citep{hayashida2026repair} then showed the negative repair-reporting
+fact:
 even clause-multiset equivalence does not force the raw repair family to be
 canonical.  Truth/certificate validity does not determine repair-reporting
 granularity.
 
-M3 asks the positive follow-up question:
+This paper asks the positive follow-up question:
 \begin{quote}
 \emph{When may a representation-sensitive implementation repair be reported at
 a declared axiom-level contract interface?}
@@ -34,8 +36,8 @@ claim about which repair should be selected.
 A valid impossibility certificate does not determine a valid repair report.
 Reportability is contract-relative: the paper must say which contract atoms
 are reportable, how implementation levers map to those atoms, and why grouped
-reports preserve the reference residual semantics.  M3 does not determine
-which repair should be chosen.  It characterizes when distinct
+reports preserve the reference residual semantics.  It does not determine
+which repair should be chosen.  This paper characterizes when distinct
 implementation-level repairs may be reported at a common axiom-level contract
 interface without changing the declared contract repair family.
 Candidate B supplies the motivating artifact-defined instantiation.
@@ -52,7 +54,7 @@ Candidate B supplies the motivating artifact-defined instantiation.
       auditstage/.style={stage, fill=green!8, draw=green!45!black},
       arrow/.style={->, thick}
     ]
-    \node[rawstage] (m15) {M1.5\\Raw repair\\non-canonicity};
+    \node[rawstage] (m15) {Prior work\\raw-repair\\non-canonicity};
     \node[theorystage, right=0.9cm of m15] (m3a) {M3-A\\Atomic sufficient\\condition};
     \node[theorystage, right=0.9cm of m3a] (m3b) {M3-B\\Non-atomic\\\(\GroupSoundness\)};
     \node[theorystage, right=0.9cm of m3b] (m3c) {M3-C\\Monotone\\exactness};
@@ -70,7 +72,8 @@ Candidate B supplies the motivating artifact-defined instantiation.
       label={[font=\scriptsize, text=blue!55!black]above:positive contract-level theory}] {};
   \end{tikzpicture}}
   \caption{The paper spine separates the negative raw-level result from the
-  positive contract-level theory.}
+  positive contract-level theory.  The prior raw-level result
+  is~\citep{hayashida2026repair}.}
   \label{fig:spine}
 \end{figure}
 
@@ -99,8 +102,9 @@ are closed in the compiled Lean development.
 M3-B establishes grouped report correctness on Candidate B only after the
 reportability contract is made explicit and both \(\ResidualFaithfulness\) and
 \(\GroupSoundness\) are verified.
-It does not erase M1.5, make raw repairs canonical, or make M3-A applicable to
-the non-atomic Candidate B realization.
+It does not erase the prior non-canonicity result~\citep{hayashida2026repair},
+make raw repairs canonical, or make M3-A applicable to the non-atomic
+Candidate B realization.
 
 Concretely, the split encoding exposes two distinct person-indexed singleton
 repairs,
@@ -123,21 +127,21 @@ manuscript.
 \toprule
 Claim & Allowed? & Required qualification \\
 \midrule
-M1.5 shows raw repair non-canonicity & yes & Candidate B / declared artifact scope \\
+Prior work~\citep{hayashida2026repair} shows raw repair non-canonicity & yes & Candidate B / declared artifact scope \\
 M3-A recovers Candidate B & no & M3-A does not apply to non-atomic split \code{minlib} \\
 M3-B establishes grouped report correctness on Candidate B & yes & only under artifact-defined contract and verified \(\ResidualFaithfulness\) plus \(\GroupSoundness\) \\
 Candidate B raw repairs become canonical & no & raw non-canonicity remains \\
-\(\mathtt{minlib}\) is the unique or preferred repair & no & M3 characterizes report correctness, not repair selection or ranking \\
+\(\mathtt{minlib}\) is the unique or preferred repair & no & this paper characterizes report correctness, not repair selection or ranking \\
 \(\GroupSoundness\) characterizes grouped correctness & yes & only for residually faithful realizations over \(\Psi\)-deletion-monotone contracts \\
 Atomicity is necessary & no & M3-A is a sufficient condition only \\
 Raw transport holds under M3-B & no & raw transport is an M3-A result only \\
-M3 results extend to family scale & no & Candidate B is artifact-defined / base-scope unless separately lifted \\
-Arrow provides a second M3 example & no & Arrow is a prerequisite testbed unless per-residual transfer is established \\
+Our results extend to family scale & no & Candidate B is artifact-defined / base-scope unless separately lifted \\
+Arrow provides a second worked example & no & Arrow is a prerequisite testbed unless per-residual transfer is established \\
 Artifact-defined contract equals semantic/Lean contract & no & semantic/formal upgrading is a separate truth/certificate obligation \\
-Encoding-granularity sensitivity of repairs is new by itself & no & M3's novelty is contract-relative reportability and exactness conditions \\
+Encoding-granularity sensitivity of repairs is new by itself & no & the novelty of this paper is contract-relative reportability and exactness conditions \\
 \bottomrule
 \end{tabularx}
-\caption{Claim discipline for the M3 paper.}
+\caption{Claim discipline for this paper.}
 \label{tab:claim-discipline}
 \end{table}
 

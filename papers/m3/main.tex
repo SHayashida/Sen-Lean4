@@ -3,7 +3,11 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{fontspec}
 \setmainfont{Latin Modern Roman}
-\setmonofont{DejaVu Sans Mono}
+% Scale the monospace face so its lowercase height matches the main font.
+% DejaVu Sans Mono has a large x-height and otherwise prints a size too big
+% next to Latin Modern Roman, which made identifiers such as \mathtt{UN},
+% \mathtt{MINLIB}, and \mathtt{minlib} look oversized in body text.
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 \usepackage{microtype}
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}

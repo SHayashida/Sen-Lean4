@@ -25,7 +25,7 @@ route is required.  This says only that Candidate B does not satisfy the
 is false there.
 
 \paragraph{Audit provenance.}
-The M3 Candidate B audit is artifact-only; no new solver run is part of this
+The Candidate B audit in this paper is artifact-only; no new solver run is part of this
 paper audit.  The main audit record is
 \code{docs/m3_candidate_b_group_soundness_audit_result.md}, and the main
 structured comparison artifact is
@@ -38,50 +38,43 @@ only inside the bundled artifact-defined contract declared above.
 
 \begin{figure}[t]
   \centering
-  \resizebox{0.96\textwidth}{!}{%
   \begin{tikzpicture}[
       >=Stealth,
-      atom/.style={draw, rounded corners, align=center, minimum width=2.7cm,
-        minimum height=0.95cm, fill=blue!7, draw=blue!55!black, font=\small},
-      lever/.style={draw, rounded corners, align=center, minimum width=3.1cm,
-        minimum height=0.95cm, fill=orange!9, draw=orange!70!black, font=\small},
-      raw/.style={draw, rounded corners, align=center, minimum width=3.1cm,
-        minimum height=0.95cm, fill=red!7, draw=red!60!black, font=\small},
-      report/.style={draw, rounded corners, align=center, minimum width=2.7cm,
-        minimum height=0.95cm, fill=green!8, draw=green!45!black, font=\small},
-      arrow/.style={->, thick}
+      node distance=0pt,
+      box/.style={draw, rounded corners, align=center, minimum width=3.1cm,
+        minimum height=0.95cm, inner sep=4pt, font=\small},
+      atom/.style={box, fill=blue!7, draw=blue!55!black},
+      lever/.style={box, fill=orange!9, draw=orange!70!black},
+      raw/.style={box, fill=red!7, draw=red!60!black},
+      report/.style={box, fill=green!8, draw=green!45!black},
+      note/.style={draw, dashed, rounded corners, align=center,
+        fill=black!2, draw=black!45, inner sep=6pt, font=\footnotesize},
+      arrow/.style={->, thick},
+      elbl/.style={font=\scriptsize, fill=white, inner sep=1.5pt}
     ]
-    \node[atom] (minlib) {bundled atom\\\(\mathtt{minlib}\)};
-    \node[lever, below left=1.15cm and 0.45cm of minlib] (dv0)
-      {split lever\\\(\mathtt{decisive\_voter0}\)};
-    \node[lever, below right=1.15cm and 0.45cm of minlib] (dv1)
-      {split lever\\\(\mathtt{decisive\_voter1}\)};
-    \node[raw, below=1.1cm of dv0] (r0)
-      {raw repair\\\(\{\mathtt{decisive\_voter0}\}\)};
-    \node[raw, below=1.1cm of dv1] (r1)
-      {raw repair\\\(\{\mathtt{decisive\_voter1}\}\)};
-    \node[report, below=2.55cm of minlib] (grp)
-      {grouped report\\\(\{\mathtt{minlib}\}\)};
+    \node[atom]   (minlib) at (0,0)      {bundled atom\\\(\mathtt{minlib}\)};
+    \node[lever]  (dv0) at (-2.85,-2.0)  {split lever\\\(\mathtt{decisive\_voter0}\)};
+    \node[lever]  (dv1) at ( 2.85,-2.0)  {split lever\\\(\mathtt{decisive\_voter1}\)};
+    \node[raw]    (r0)  at (-2.85,-4.0)  {raw repair\\\(\{\mathtt{decisive\_voter0}\}\)};
+    \node[raw]    (r1)  at ( 2.85,-4.0)  {raw repair\\\(\{\mathtt{decisive\_voter1}\}\)};
+    \node[report] (grp) at (0,-6.0)      {grouped report\\\(\{\mathtt{minlib}\}\)};
 
-    \draw[arrow, orange!70!black] (minlib) -- node[left, font=\scriptsize]
-      {\(\beta\)} (dv0);
-    \draw[arrow, orange!70!black] (minlib) -- node[right, font=\scriptsize]
-      {\(\beta\)} (dv1);
+    \draw[arrow, orange!70!black] (minlib) -- node[elbl] {\(\beta\)} (dv0);
+    \draw[arrow, orange!70!black] (minlib) -- node[elbl] {\(\beta\)} (dv1);
     \draw[arrow, red!60!black] (dv0) -- (r0);
     \draw[arrow, red!60!black] (dv1) -- (r1);
-    \draw[arrow, green!55!black] (r0) -- node[left, font=\scriptsize]
-      {\(\groupTouchAny\)} (grp);
-    \draw[arrow, green!55!black] (r1) -- node[right, font=\scriptsize]
-      {\(\groupTouchAny\)} (grp);
+    \draw[arrow, green!55!black] (r0) -- node[elbl, pos=0.46] {\(\groupTouchAny\)} (grp);
+    \draw[arrow, green!55!black] (r1) -- node[elbl, pos=0.46] {\(\groupTouchAny\)} (grp);
 
-    \node[atom, left=1.45cm of grp] (aligned)
-      {\(\{\mathtt{asymm}\}\), \(\{\mathtt{un}\}\),\\
-       \(\{\mathtt{no\_cycle4}\}\)\\singleton-aligned};
-    \node[font=\scriptsize, align=center, below=0.12cm of aligned]
-      {reported unchanged};
-  \end{tikzpicture}}
+    \node[note, below=0.85cm of grp]
+      {Other contract atoms (singleton-aligned, reported unchanged):
+       \(\{\mathtt{asymm}\}\),\, \(\{\mathtt{un}\}\),\, \(\{\mathtt{no\_cycle4}\}\)};
+  \end{tikzpicture}
   \caption{Raw split repairs remain distinct while their contract report is
-  shared.}
+  shared.  The two person-indexed singleton repairs are grouped by
+  \(\groupTouchAny\) onto the single bundled report \(\{\mathtt{minlib}\}\);
+  the remaining contract atoms stay singleton-aligned and are reported
+  unchanged.}
   \label{fig:candidate-b}
 \end{figure}
 

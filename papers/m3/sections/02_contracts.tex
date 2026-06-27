@@ -58,11 +58,12 @@ which feasibility is evaluated.
     \node[impl, below=1.55cm of implres] (raw) {raw lever deletion\\\(R\subseteq\Lambda_I\)};
     \node[report, right=2.4cm of raw] (group) {grouped contract deletion\\\(\groupTouchAny(R)\)};
 
-    \draw[<->, thick, blue!65!black] (implres) -- node[above, font=\scriptsize]
-      {\(\ResidualFaithfulness\)} (refres);
-    \draw[arrow, green!55!black] (raw) -- node[above, font=\scriptsize]
-      {touch-any grouping} (group);
-    \draw[arrow, green!55!black] (group) -- node[right, font=\scriptsize, align=center]
+    \draw[<->, thick, blue!65!black] (implres) -- node[above, font=\scriptsize,
+      fill=white, inner sep=1.5pt] {\(\ResidualFaithfulness\)} (refres);
+    \draw[arrow, green!55!black] (raw) -- node[above, font=\scriptsize,
+      fill=white, inner sep=1.5pt] {touch-any grouping} (group);
+    \draw[arrow, green!55!black] (group) -- node[right, font=\scriptsize,
+      align=center, fill=white, inner sep=1.5pt]
       {\(\GroupSoundness\):\\\(\SatPsi(I\setminus\groupTouchAny(R))\)}
       (refres);
 

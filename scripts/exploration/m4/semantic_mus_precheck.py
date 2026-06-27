@@ -433,17 +433,27 @@ def shape_signature(
         "minimal_rights_only_hitting_set_family": [list(edge) for edge in provisional_mu_family],
         "mus_hypergraph_degree_sequence": [[atom, degree] for atom, degree in hypergraph_degree_sequence(mus, rights_atoms)],
         "voter_swap_stabilizer_profile": {
-            "full_stabilizer": swap_row["full_stabilizer"] if swap_row is not None else "computed after swap pass",
-            "proper_stabilizer": swap_row["proper_stabilizer"] if swap_row is not None else "computed after swap pass",
+            "stabilizer_subgroup": swap_row["stabilizer_subgroup"] if swap_row is not None else "computed after swap pass",
+            "nonidentity_stabilizer_elements": (
+                swap_row["nonidentity_stabilizer_elements"] if swap_row is not None else "computed after swap pass"
+            ),
         },
-        "repair_orbit_size_profile": {
-            "orbit_size": swap_row["orbit_size"] if swap_row is not None else "computed after swap pass",
+        "witness_configuration_orbit_size_profile": {
+            "witness_configuration_orbit_size": (
+                swap_row["witness_configuration_orbit_size"] if swap_row is not None else "computed after swap pass"
+            ),
         },
     }
 
 
 def structural_signature_key(signature: dict[str, object]) -> str:
-    """Key excluding aggregate counts, voter-swap stabilizer, and orbit size."""
+    """Key for the scientific shape verdict.
+
+    The key excludes aggregate counts and the witness-configuration
+    stabilizer/orbit diagnostics. Phase 1 has not defined repair objects,
+    repair stabilizers, repair orbits, report fibers, or report-fiber
+    multiplicity.
+    """
     structural = {
         "mus_cardinality_multiset": signature["mus_cardinality_multiset"],
         "mcs_cardinality_multiset": signature["mcs_cardinality_multiset"],
@@ -579,10 +589,10 @@ def evaluate_voter_swap(results: dict[tuple[str, str], dict[str, object]]) -> tu
         mcs_pass = family_key(swapped_mcs) == family_key(other_mcs)
         if not (mus_pass and mcs_pass):
             all_pass = False
-        orbit_size = 1 if swapped_cfg == cfg else 2
-        stabilizer = ["id"]
+        witness_configuration_orbit_size = 1 if swapped_cfg == cfg else 2
+        stabilizer_subgroup = ["id"]
         if swapped_cfg == cfg and mus_pass and mcs_pass:
-            stabilizer.append("tau")
+            stabilizer_subgroup.append("tau")
         rows.append(
             {
                 "target_case": target_case,
@@ -590,9 +600,9 @@ def evaluate_voter_swap(results: dict[tuple[str, str], dict[str, object]]) -> tu
                 "tau_config_id": swapped_cfg,
                 "mus_equivariant": mus_pass,
                 "mcs_equivariant": mcs_pass,
-                "full_stabilizer": stabilizer,
-                "proper_stabilizer": [g for g in stabilizer if g != "id"],
-                "orbit_size": orbit_size,
+                "stabilizer_subgroup": stabilizer_subgroup,
+                "nonidentity_stabilizer_elements": [g for g in stabilizer_subgroup if g != "id"],
+                "witness_configuration_orbit_size": witness_configuration_orbit_size,
             }
         )
     return all_pass, rows
@@ -754,7 +764,7 @@ def decide_gate(
     stable = bool(shape_comparison["all_representative_signatures_stable"])
     shape_difference = bool(shape_comparison["all_targets_have_shape_structural_difference"])
     if alt_pass and stable and shape_difference:
-        return "STRONG GO", [
+        return "STRONG GO TO PHASE 2 REPAIR-ORBIT ANALYSIS", [
             "selector-free semantic multiplicity, duality, equivariance, within-shape stability, and cross-shape structural dependence all passed"
         ]
     if not stable:

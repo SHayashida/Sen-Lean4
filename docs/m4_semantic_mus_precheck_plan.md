@@ -14,8 +14,8 @@ right(voter, unordered_alt_pair)
 ```
 
 If it survives and is equivariant under voter swap, the result supports further
-M4 design around semantic repair-orbit structure. If it does not, the project
-returns to the warrant-contract track without changing M4 scope.
+M4 design around semantic MUS/MCS obstruction-shape structure. If it does not,
+the project returns to the warrant-contract track without changing M4 scope.
 
 ## 2. Target Residuals
 
@@ -142,8 +142,8 @@ ShapeSignature(W) :=
     rights participation multiset,
     minimal rights-only hitting-set family,
     MUS hypergraph degree sequence,
-    voter-swap stabilizer profile,
-    repair-orbit size profile
+    voter-swap stabilizer-subgroup profile of W,
+    witness-configuration orbit-size profile under voter swap
   )
 ```
 
@@ -151,6 +151,13 @@ The Phase 1 run does not fully define the formal report-fiber multiplicity
 `mu`. Where the result table records `mu`, it must label it as provisional
 voter-indexed semantic repair multiplicity and must not conflate it with a
 future report-fiber invariant.
+
+The final two components are diagnostics for the fixed witness configuration
+`W`, not for semantic repair objects. Cross-shape `STRONG GO` is primarily
+grounded in MUS/MCS structural invariants. Configuration stabilizer and
+configuration orbit size are auxiliary symmetry diagnostics. Phase 2 must define
+repair objects, repair actions, repair stabilizer subgroups, repair orbits,
+report fibers, and report-fiber multiplicity separately.
 
 O2/O3/O4 have different numbers of witness configurations. Therefore aggregate
 MUS or repair totals are reference values only. They are not evidence for
@@ -182,11 +189,12 @@ MCS(tau(W)) = tau(MCS(W))
 
 After computing the families, report:
 
-- full stabilizer;
-- proper stabilizer;
-- orbit size `1` or `2`.
+- stabilizer subgroup;
+- nonidentity stabilizer elements;
+- witness-configuration orbit size `1` or `2`.
 
-Do not confuse a nontrivial stabilizer with a nontrivial orbit.
+Do not confuse a nontrivial stabilizer subgroup with a nontrivial
+witness-configuration orbit.
 
 ## 10. Gate Criteria
 
@@ -224,9 +232,10 @@ following holds:
   to support a finite classification.
 
 In this case, the two-voter result is not enough to approve an
-orbit-identifiability flagship. The next authorized work is only a design for a
-three-voter semantic `S_3` extension precheck. Warrant theorem work, Lean
-formalization, and paper-claim promotion remain prohibited.
+orbit-identifiability flagship. The next authorized work is only a separate
+two-voter repair-orbit and report-fiber precheck design. Warrant theorem work,
+Lean formalization, paper-claim promotion, and three-voter extension remain
+prohibited.
 
 ### NO-GO
 
@@ -242,7 +251,8 @@ Any of the following is sufficient:
 - semantic multiplicity is explained entirely by duplicated rights blocks and
   has no connection to obstruction shape;
 - no meaningful structural invariant exists for shape comparison, and no
-  theory hypothesis can be formed for a three-voter precheck.
+  theory hypothesis can be formed for a Phase 2 repair-orbit/report-fiber
+  precheck.
 
 ### Interpretation Discipline
 
@@ -256,6 +266,16 @@ Any of the following is sufficient:
   symmetry.
 - Both same-shape stability and cross-shape structural difference are required
   for STRONG GO.
+
+Authorized sequence:
+
+```text
+Phase 1: Semantic MUS/MCS obstruction-shape gate
+Phase 2: Two-voter repair-orbit and report-fiber gate
+Phase 3: Three-voter S3 extension, only after Phase 2 GO
+Phase 4: Dedicated M4 scope decision
+Phase 5: Warrant envelope and delegated-warrant work
+```
 
 ## 11. Execution and Outputs
 

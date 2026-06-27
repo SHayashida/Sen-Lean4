@@ -18,16 +18,25 @@
 5. Final gate verdict:
 
 ```text
-STRONG GO
+STRONG GO TO PHASE 2 REPAIR-ORBIT ANALYSIS
 ```
 
 6. Next authorized action:
-   create a separate M4 scope-decision document deciding whether semantic MUS
-   orbit structure should enter the M4 warrant-contract design.
+   run a separate two-voter Obstruction-Indexed Repair-Orbit and Report-Fiber
+   Precheck.
 
 This is a pre-M4 mathematical gate result. It is not an M4 theorem
 implementation, not a Lean formalization, and not a change to the current M4
 scope.
+
+The formal verdict means:
+
+> Selector-free semantic MUS/MCS geometry is stable within O2/O3/O4 classes
+> and structurally differs across obstruction shapes, justifying a separate
+> two-voter repair-orbit and report-fiber precheck.
+
+It does not mean that repair orbits, repair stabilizers, report fibers, orbit
+identifiability, M4 scope changes, or warrant theorems have been established.
 
 ## 2. Semantic Atom Definitions
 
@@ -71,8 +80,8 @@ ShapeSignature(W) :=
     rights participation multiset,
     minimal rights-only hitting-set family,
     MUS hypergraph degree sequence,
-    voter-swap stabilizer profile,
-    repair-orbit size profile
+    voter-swap stabilizer-subgroup profile of W,
+    witness-configuration orbit-size profile under voter swap
   )
 ```
 
@@ -80,6 +89,12 @@ The Phase 1 run does not fully define formal report-fiber multiplicity `mu`.
 Where the tables below mention `mu`, they report only provisional
 voter-indexed semantic repair multiplicity. This is kept distinct from a future
 formal report-fiber `mu`.
+
+The final two components are about the fixed witness configuration `W`, not
+about semantic repair objects. Phase 1 computes the orbit of the fixed witness
+configuration under the two-element voter-swap group. It does not compute
+stabilizers or orbits of semantic repairs. Repair-orbit and report-fiber
+analysis are deferred to Phase 2.
 
 O2/O3/O4 have different numbers of witness configurations. Aggregate MUS/MCS
 totals are therefore reference values only and are not used as evidence for
@@ -208,8 +223,8 @@ Here `R0` abbreviates `right(voter0,P)` and `R1` abbreviates
 | Rights-core intersection | `[R0,R1]` | `[R0,R1]` | `[R0,R1]` |
 | Minimal rights-only hitting-set family | `[[R0],[R1]]` | `[[R0],[R1]]` | `[[R0],[R1]]` |
 | MUS hypergraph degree sequence | `[(R0,1),(R1,1),(asymm,1)]` | `[(R0,1),(R1,1),(no_cycle4,1),(un,1)]` | `[(R0,1),(R1,1),(no_cycle4,1),(un,1)]` |
-| Voter-swap stabilizer profile | full `{id,tau}`; proper `{tau}` | full `{id}`; proper empty | full `{id}`; proper empty |
-| Repair-orbit size profile | 1 | 2 | 2 |
+| Voter-swap stabilizer-subgroup profile of `W` | subgroup `{id,tau}`; nonidentity `{tau}` | subgroup `{id}`; nonidentity empty | subgroup `{id}`; nonidentity empty |
+| Witness-configuration orbit size under voter swap | 1 | 2 | 2 |
 
 Within-shape stability:
 
@@ -248,8 +263,8 @@ Canonical representatives:
 | Rights-core intersection | `[R0,R1]` | `[R0,R1]` | `[R0,R1]` |
 | Minimal rights-only hitting-set family | `[[R0],[R1]]` | `[[R0],[R1]]` | `[[R0],[R1]]` |
 | MUS hypergraph degree sequence | `[(R0,1),(R1,1),(asymm,1)]` | `[(no_cycle3,1),(no_cycle4,1),(R0,2),(R1,2),(un,2)]` | `[(R0,1),(R1,1),(no_cycle4,1),(un,1)]` |
-| Voter-swap stabilizer profile | full `{id,tau}`; proper `{tau}` | full `{id}`; proper empty | full `{id}`; proper empty |
-| Repair-orbit size profile | 1 | 2 | 2 |
+| Voter-swap stabilizer-subgroup profile of `W` | subgroup `{id,tau}`; nonidentity `{tau}` | subgroup `{id}`; nonidentity empty | subgroup `{id}`; nonidentity empty |
+| Witness-configuration orbit size under voter swap | 1 | 2 | 2 |
 
 Within-shape stability:
 
@@ -320,14 +335,14 @@ Result:
 | MUS voter-swap equivariance | `true` for all 72 configuration-result rows |
 | MCS voter-swap equivariance | `true` for all 72 configuration-result rows |
 
-Stabilizer/orbit distinction:
+Stabilizer/witness-configuration orbit distinction:
 
-| Configuration type | Full stabilizer | Proper stabilizer | Orbit size |
+| Configuration type | Stabilizer subgroup | Nonidentity stabilizer elements | Witness-configuration orbit size |
 | --- | --- | --- | --- |
 | O2 with `P = Q` | `{id, tau}` | `{tau}` | 1 |
 | O3/O4 with `P != Q` | `{id}` | empty | 2 |
 
-Voter-swap equivariance alone would only show that the construction respects
+The `{tau}` entry is not called a stabilizer; it is the set of nonidentity stabilizer elements. Voter-swap equivariance alone would only show that the construction respects
 voter symmetry. It is not by itself evidence of O2/O3/O4 shape dependence.
 
 ## 12. Selector-Contamination Exclusion
@@ -349,7 +364,7 @@ legacy selector clauses.
 
 ## 13. Strengthened Gate Evaluation
 
-| STRONG GO criterion | Result |
+| STRONG GO TO PHASE 2 criterion | Result |
 | --- | --- |
 | Selector-free fixed-witness theory preserves semantic repair multiplicity | `PASS` |
 | Complete MUS/MCS duality holds | `PASS` |
@@ -362,7 +377,7 @@ legacy selector clauses.
 Final gate verdict:
 
 ```text
-STRONG GO
+STRONG GO TO PHASE 2 REPAIR-ORBIT ANALYSIS
 ```
 
 Interpretation:
@@ -376,18 +391,47 @@ Interpretation:
 - A `mu` difference alone would not justify STRONG GO unless it were a
   normalized representative-level difference.
 - Same-shape stability and cross-shape structural difference are both present.
+- STRONG GO here does not depend on witness-configuration orbit size alone,
+  voter-swap equivariance alone, aggregate configuration counts, selector
+  naming, or any purported repair-orbit calculation.
 
 ## 14. Next Action
 
-Create a separate M4 scope-decision document deciding whether and how semantic
-MUS orbit structure should enter the M4 warrant-contract design.
+The next authorized action is:
 
-Do not begin orbit-fiber analysis, three-voter work, warrant semantics, Lean
-formalization, or paper-claim promotion as a consequence of this result alone.
+```text
+A separate two-voter Obstruction-Indexed Repair-Orbit and Report-Fiber Precheck.
+```
 
-If the project instead treats the result as WEAK GO / CONDITIONAL GO after
-review, the only next authorized work is a design for a three-voter semantic
-`S_3` extension precheck.
+That Phase 2 task must define and compute:
+
+- repair object, preferably `(W, R)` where `W` is the fixed witness
+  configuration and `R` is a semantic MCS;
+- natural group action, initially a reviewed action derived from voter and
+  alternative relabeling;
+- grouped-report map `q`;
+- report fibers `q^{-1}(p)`;
+- formal report-fiber multiplicity `mu(p)`;
+- stabilizer subgroup of each repair object;
+- orbit of each repair object;
+- orbit partition of each report fiber;
+- whether a fiber is a single orbit, a stable union of orbits, or unrelated to
+  the orbit decomposition;
+- O2/O3/O4 dependence of the orbit/fiber decomposition.
+
+No M4 scope change is authorized by Phase 1 alone. No warrant-contract
+implementation is authorized yet. No three-voter extension is authorized yet.
+No Lean formalization is authorized yet.
+
+The correct order is:
+
+```text
+Phase 1: Semantic MUS/MCS obstruction-shape gate
+Phase 2: Two-voter repair-orbit and report-fiber gate
+Phase 3: Three-voter S3 extension, only after Phase 2 GO
+Phase 4: Dedicated M4 scope decision
+Phase 5: Warrant envelope and delegated-warrant work
+```
 
 ## 15. Explicit Non-Claims
 

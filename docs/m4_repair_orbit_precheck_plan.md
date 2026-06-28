@@ -242,7 +242,10 @@ The tracked result document reports:
 
 ## 10. Verdict Criteria
 
-### STRONG GO TO PHASE 3 DESIGN
+### STRONG GO TO OBSTRUCTION-INDEXED ORBIT-CLASSIFICATION DESIGN
+
+Renamed after review to avoid confusion with the separate possible three-voter
+S3 extension phase.
 
 All must hold:
 

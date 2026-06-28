@@ -60,8 +60,13 @@ mu(target_case, shape, report) =
 7. Final verdict:
 
 ```text
-STRONG GO TO PHASE 3 DESIGN
+STRONG GO TO OBSTRUCTION-INDEXED ORBIT-CLASSIFICATION DESIGN
 ```
+
+The phrase "Phase 3" is avoided here because the project also uses Phase 3
+for a possible future three-voter S3 extension. This verdict authorizes only a
+theoretical design document for obstruction-indexed repair-orbit
+classification, not a three-voter run.
 
 8. Next authorized action:
 
@@ -70,8 +75,10 @@ Write a theoretical design document for Obstruction-Indexed Repair-Orbit
 Classification before any theorem implementation.
 ```
 
-No Lean formalization, no 3-voter run, no warrant-contract work, and no paper
-claim promotion are authorized by this Phase 2 result.
+No three-voter run is authorized by this verdict. No Lean formalization is
+authorized by this verdict. No M4 scope change is authorized by this verdict.
+No warrant-contract implementation is authorized by this verdict. No
+paper-claim promotion is authorized by this verdict.
 
 ## 2. Provenance and Phase 1 Validation
 
@@ -247,7 +254,142 @@ The result is stronger than a bare voter-swap duplication: alternative
 relabeling participates in all orbit computations, and O2/O3/O4 differ in
 orbit sizes, stabilizer sizes, and report labels.
 
-## 9. Validation
+## 9. Shape-Blind Diagnostic: Why Obstruction Indexing Is Necessary
+
+This diagnostic was computed read-only from:
+
+```text
+/tmp/sen_m4_repair_orbit/repair_orbit_precheck_results.json
+```
+
+No scripts were changed, no solver was rerun, and no Lean command was run.
+
+Summary counts:
+
+| Item | Count |
+| --- | ---: |
+| Shape-indexed fibers | 16 |
+| Repair orbits | 16 |
+| Shape-blind fibers keyed by `(target_case, q(R))` | 9 |
+| Shape-blind fibers containing multiple repair orbits | 5 / 9 |
+
+| Shape-blind key | Blind `mu` | Repair orbits | Collapsed shape-indexed fibers |
+| --- | ---: | ---: | --- |
+| `case_11101`, `{asymm}` | 6 | 1 | O2 `{asymm}` -> `orbit_000` |
+| `case_11101`, `{minlib}` | 72 | 3 | O2 `{minlib}` -> `orbit_001`; O3 `{minlib}` -> `orbit_004`; O4 `{minlib}` -> `orbit_007` |
+| `case_11101`, `{un}` | 30 | 2 | O3 `{un}` -> `orbit_002`; O4 `{un}` -> `orbit_005` |
+| `case_11101`, `{no_cycle4}` | 30 | 2 | O3 `{no_cycle4}` -> `orbit_003`; O4 `{no_cycle4}` -> `orbit_006` |
+| `case_11111`, `{asymm}` | 6 | 1 | O2 `{asymm}` -> `orbit_008` |
+| `case_11111`, `{minlib}` | 72 | 3 | O2 `{minlib}` -> `orbit_009`; O3 `{minlib}` -> `orbit_011`; O4 `{minlib}` -> `orbit_015` |
+| `case_11111`, `{un}` | 30 | 2 | O3 `{un}` -> `orbit_010`; O4 `{un}` -> `orbit_013` |
+| `case_11111`, `{no_cycle3, no_cycle4}` | 24 | 1 | O3 `{no_cycle3, no_cycle4}` -> `orbit_012` |
+| `case_11111`, `{no_cycle4}` | 6 | 1 | O4 `{no_cycle4}` -> `orbit_014` |
+
+Since `9 < 16`, shape-blind grouped reports collapse distinct repair orbits.
+Therefore grouped report alone does not provide orbit-level identifiability.
+Obstruction shape is necessary information for orbit-level identifiability in
+this Phase 2 diagnostic.
+
+The Phase 2 exactness result is obstruction-indexed:
+
+```text
+(target_case, Shape(W), q(R))
+```
+
+It is not shape-blind:
+
+```text
+(target_case, q(R))
+```
+
+Thus the correct theorem candidate is Obstruction-Indexed Repair-Orbit
+Classification, not shape-blind Repair-Orbit Classification.
+
+## 10. Report-Shape Support Collapse Diagnostic
+
+This diagnostic was also computed read-only from:
+
+```text
+/tmp/sen_m4_repair_orbit/repair_orbit_precheck_results.json
+```
+
+No scripts were changed, no solver was rerun, and no Lean command was run.
+
+| target_case | report `rho` | shape_support | support count | blind orbit count | equality? | blind_mu | indexed_mu_by_shape | collapse class |
+| --- | --- | --- | ---: | ---: | --- | ---: | --- | --- |
+| `case_11101` | `{asymm}` | `{O2}` | 1 | 1 | true | 6 | `O2:6` | no collapse |
+| `case_11101` | `{un}` | `{O3,O4}` | 2 | 2 | true | 30 | `O3:24, O4:6` | intermediate collapse |
+| `case_11101` | `{minlib}` | `{O2,O3,O4}` | 3 | 3 | true | 72 | `O2:12, O3:48, O4:12` | maximal Sen24 two-voter shape collapse |
+| `case_11101` | `{no_cycle4}` | `{O3,O4}` | 2 | 2 | true | 30 | `O3:24, O4:6` | intermediate collapse |
+| `case_11111` | `{asymm}` | `{O2}` | 1 | 1 | true | 6 | `O2:6` | no collapse |
+| `case_11111` | `{un}` | `{O3,O4}` | 2 | 2 | true | 30 | `O3:24, O4:6` | intermediate collapse |
+| `case_11111` | `{minlib}` | `{O2,O3,O4}` | 3 | 3 | true | 72 | `O2:12, O3:48, O4:12` | maximal Sen24 two-voter shape collapse |
+| `case_11111` | `{no_cycle3,no_cycle4}` | `{O3}` | 1 | 1 | true | 24 | `O3:24` | no collapse |
+| `case_11111` | `{no_cycle4}` | `{O4}` | 1 | 1 | true | 6 | `O4:6` | no collapse |
+
+The following equality held for all 9 shape-blind reports:
+
+```text
+blind_orbit_count(rho) = shape_support_count(rho)
+```
+
+This equality is not claimed as a pure orbit-stabilizer arithmetic fact. It
+follows from two ingredients:
+
+1. Phase 2 obstruction-indexed orbit-fiber exactness.
+2. The nonuniform obstruction-shape support pattern of grouped report labels.
+
+The substantive signal is the support pattern, not the bare equality alone. In
+particular, `minlib` spans O2/O3/O4 and causes maximal collapse, while `asymm`
+is O2-only and causes no collapse. The composite report
+`{no_cycle3,no_cycle4}` follows the same support law: it is O3-only in
+`case_11111` and causes no collapse.
+
+The term `minlib` here is a grouped report label for rights-atom deletions, not
+a primitive semantic atom. The phrase "atom-dependent hierarchy" should
+therefore be understood as a report-label / grouped-repair hierarchy.
+
+## 11. Bounded Phase 2 Claims
+
+Phase 2 established:
+
+```text
+For the two-voter Sen24 fixed-witness semantic repair objects,
+relative to target_case and obstruction shape,
+each grouped-report fiber is exactly one repair orbit under
+S2_voters x S4_alternatives.
+```
+
+Phase 2 additionally established via the shape-blind diagnostic:
+
+```text
+If obstruction shape is removed from the report context while target_case is
+retained, the number of grouped-report fibers drops from 16 to 9, and 5 of 9
+shape-blind fibers contain multiple repair orbits. Therefore obstruction
+shape is necessary for orbit-level identifiability in this finite precheck.
+```
+
+Phase 2 additionally established via the support-collapse diagnostic:
+
+```text
+For every shape-blind grouped report rho in the finite precheck, the number of
+repair orbits in BlindFiber(target_case, rho) equals the number of obstruction
+shapes on which rho has nonempty indexed support.
+```
+
+Phase 2 did not establish:
+
+- shape-blind grouped report identifiability;
+- 3-voter S3 result;
+- general social-choice result;
+- Lean theorem;
+- M4 final theorem;
+- warrant semantics;
+- Delegated Warrant Preservation;
+- paper-ready theorem claim;
+- semantic-to-CNF correctness theorem.
+
+## 12. Validation
 
 Commands run:
 
@@ -283,13 +425,17 @@ report_fiber_count = 16
 repair_orbit_count = 16
 well_definedness = true
 q_invariance = true
-verdict = STRONG GO TO PHASE 3 DESIGN
+verdict = STRONG GO TO OBSTRUCTION-INDEXED ORBIT-CLASSIFICATION DESIGN
 ```
 
-## 10. Scope and Non-Claims
+The verdict label was renamed after review to avoid confusion with a separate
+possible three-voter S3 extension phase.
 
-Only the Phase 2 plan, result, exploratory script, and focused test file are
-changed by this task.
+## 13. Scope and Non-Claims
+
+Only the Phase 2 plan, result, design document, exploratory script, and focused
+test file are changed across the Phase 2 branch. This follow-up design task
+changes only documentation.
 
 This Phase 2 result does not claim:
 

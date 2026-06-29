@@ -338,3 +338,27 @@ semantic-only bridge described here. This document does not authorize Lean
 implementation, Python changes, solver reruns, checker reruns, 3-voter work,
 warrant-contract implementation, paper-claim promotion, or Level C artifact
 correctness work.
+
+## Lean Implementation Follow-up
+
+The Level B semantic bridge has been implemented in:
+
+`SocialChoiceAtlas/Sen/RightAtomBridge.lean`
+
+Implemented:
+
+- `RightAtomSemantics`;
+- `rightAtomSemantics_symm`;
+- `rightAtomSemantics_iff_swap`;
+- optional Level B+ `twoRightAtoms_imply_MINLIB`.
+
+Scope remains Level B only:
+
+- no Python `_right_clauses` correctness;
+- no `FiniteSchema` correctness;
+- no SAT assignment semantics;
+- no semantic-to-CNF correctness;
+- no full `MINLIB` equivalence;
+- no Mask-Shape Collapse Law proof.
+
+See `docs/m4_right_atom_decisive_bridge_lean_result.md`.

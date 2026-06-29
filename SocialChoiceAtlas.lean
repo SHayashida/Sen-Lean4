@@ -14,6 +14,9 @@ import SocialChoiceAtlas.Sen.BaseCase24.Theorem
 -- compatibility corollary. This has NO solver backend and is included in the
 -- default build on every PR (see docs/gates/m2/aim_signoff.md, Decision 3).
 import SocialChoiceAtlas.Sen.ObstructionBridge
+-- M4 Level B right-atom semantic bridge: a semantic-only wrapper and
+-- orientation lemma connecting the M4 right atom target to Decisive.
+import SocialChoiceAtlas.Sen.RightAtomBridge
 import SocialChoiceAtlas.Sen.Lifting.ImpossibilityLift
 -- M3 finite-set reportability core: abstract repair/report interfaces,
 -- sufficient conditions, exactness under reference monotonicity, and checked

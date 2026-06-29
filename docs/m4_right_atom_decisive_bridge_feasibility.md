@@ -294,3 +294,19 @@ A follow-up design note specifies the intended Level B Lean semantic bridge:
 - optional fixed-two-rights sufficiency lemma for `MINLIB`.
 
 See `docs/m4_right_atom_decisive_bridge_design.md`.
+
+## Level B Implementation Follow-up
+
+A small Level B Lean semantic bridge has been implemented.
+
+This upgrades the bridge status from:
+
+- Level A documentation bridge only
+
+to:
+
+- Level B semantic target implemented.
+
+Level C full artifact bridge remains future work.
+
+See `docs/m4_right_atom_decisive_bridge_lean_result.md`.

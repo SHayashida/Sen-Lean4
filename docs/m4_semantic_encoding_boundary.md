@@ -241,3 +241,19 @@ The design remains semantic-only and does not claim Python clause correctness
 or semantic-to-CNF correctness.
 
 See `docs/m4_right_atom_decisive_bridge_design.md`.
+
+## 17. Level B Implementation Follow-up
+
+The central M4 right-atom semantic target is now Lean-backed by a small Level B
+bridge.
+
+This does not prove:
+
+- Python clause correctness;
+- CNF artifact correctness;
+- semantic-to-CNF correctness;
+- full selector-free encoding equivalence to `MINLIB`.
+
+Level C remains future work.
+
+See `docs/m4_right_atom_decisive_bridge_lean_result.md`.

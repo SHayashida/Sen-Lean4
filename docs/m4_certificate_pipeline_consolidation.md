@@ -214,3 +214,10 @@ Certificate 2 as the complete finite-data certificate for the 48-cell
 phase diagram. No checker implementation, solver rerun, Lean theorem work,
 3-voter work, warrant-contract implementation, or paper-claim promotion is
 authorized by this document.
+
+## Finite-Data Closure
+
+After Certificate 2 checker PASS, the consolidated finite-data pipeline is
+closed.
+Certificate 2 is the final finite-data certificate for the M4 mask-shape phase
+diagram unless a later scope decision reopens the domain.

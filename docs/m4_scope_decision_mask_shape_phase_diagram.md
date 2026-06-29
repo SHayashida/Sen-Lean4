@@ -217,3 +217,8 @@ detached from the full phase diagram.
 Because the phase-diagram certificate includes both orbit-fiber exactness and
 shape-blind support truncation, the old Certificate 3/4 stages are absorbed
 into Certificate 2 as subchecks.
+
+## Closure Status
+
+The finite-data side is closed by Certificate 2 checker PASS.
+The theorem candidate remains finite-audit-supported, not Lean-proved.

@@ -252,3 +252,13 @@ its output artifacts.
 No Lean theorem, solver rerun, 3-voter work, warrant-contract implementation,
 paper-claim promotion, or production-encoding change is authorized by this
 result document.
+
+## Closure Follow-up
+
+The Certificate 2 checker closes the finite-data side of M4.
+See `docs/m4_finite_data_closure_note.md`.
+
+Remaining later phases are separated into:
+
+- Track X: audit-completion mainline;
+- Track Y: optional structural-theorem future work.

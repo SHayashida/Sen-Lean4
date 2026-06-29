@@ -231,3 +231,9 @@ A paper-facing claim scaffold has been added to fix M4's presentation as an
 auditable formal-methods methodology contribution.
 
 See `docs/m4_paper_claim_scaffold.md`.
+
+## Short Paper Outline Follow-up
+
+A short paper outline has been added for M4's paper-facing presentation.
+
+See `docs/m4_short_paper_outline.md`.

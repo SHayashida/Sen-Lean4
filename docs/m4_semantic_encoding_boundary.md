@@ -267,3 +267,10 @@ A paper-facing claim scaffold separates:
 - remaining Level C semantic-to-CNF obligations.
 
 See `docs/m4_paper_claim_scaffold.md`.
+
+## 19. Short Paper Outline Follow-up
+
+A short paper outline now places the semantic boundary before the finite-data
+certificate and preserves Level C as future work.
+
+See `docs/m4_short_paper_outline.md`.

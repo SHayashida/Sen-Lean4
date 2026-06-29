@@ -441,3 +441,10 @@ that uses this scaffold as its claim boundary. This document does not
 authorize paper manuscript edits, Lean work, Python/CNF correctness proof,
 solver reruns, checker reruns, 3-voter work, family-scale theorem work, or
 warrant-contract implementation.
+
+## Short Paper Outline Follow-up
+
+A short paper outline has been added to translate this claim scaffold into a
+paper-facing structure.
+
+See `docs/m4_short_paper_outline.md`.

@@ -91,6 +91,20 @@ Non-circularity discipline: `ResidualClass` is defined by residual
 masks/schemas only. It must not be defined by `ShapeSupport_T`, `q`-fibers,
 orbit decomposition, or Report-Shape Support Collapse Law.
 
+The full 64 split universe is an upstream representation-level artifact and is
+not identical to the M4 `ResidualClass`.
+
+The M4 `ResidualClass` is bundled-minlib-aligned:
+
+- `minlib` is a `T`-level schema;
+- `W` ranges internally;
+- `decisive_voter0`-only and `decisive_voter1`-only split rows are not ambient
+  residual theories `T`.
+
+One-sided split rows must not be excluded by appeal to Theorem C. They are
+outside M4 `ResidualClass` only if the bundled `minlib` schema definition fails
+to instantiate them as valid ambient residual theories.
+
 Thus the observed `case_11101` and `case_11111` diagnostics are instances of
 the ambient theorem schema over the currently covered finite residual
 theories. They become finite-universal statements only after the checker
@@ -259,6 +273,11 @@ The substantive structure is the nonuniform support pattern:
 This design does not claim this is a general law of social choice. It does not
 claim 3-voter behavior, Arrow or Gibbard-Satterthwaite analogues, an existing
 Lean theorem, or a paper-ready theorem.
+
+The observed maximal collapse of `minlib` should be connected to the
+two-person structure of Sen liberalism only as a precheck-supported
+interpretation. It is not yet a separate theorem that all coverage exclusions
+and collapse patterns derive from a single schema-level source.
 
 ## 8. Relationship to M2
 

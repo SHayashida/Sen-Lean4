@@ -137,7 +137,111 @@ orbit-fiber exactness, or support-collapse behavior.
 Then the definition is invalid and must be rewritten before any checker or
 theorem work.
 
-## 6. Immediate Next Audit Questions
+## 6. Full Split Universe vs M4 ResidualClass
+
+The full split universe is a representation-level upstream artifact. It has
+six independent levers:
+
+```text
+asymm
+un
+decisive_voter0
+decisive_voter1
+no_cycle3
+no_cycle4
+```
+
+Therefore the full 64 split residual universe includes one-sided masks where
+exactly one of `decisive_voter0` or `decisive_voter1` is active.
+
+Examples of one-sided split residuals include:
+
+- `case_110101` / `case_111001`, depending on retained/deleted convention;
+- rows where `decisive_voter0` and `decisive_voter1` do not have the same
+  active/inactive status.
+
+These are valid split-representation residuals in the full 64 split universe.
+
+The full 64 split universe is not the M4 ambient `ResidualClass`.
+
+## 7. Bundled-Minlib-Aligned M4 ResidualClass
+
+The M4 `ResidualClass` is not the full independent 64-bit split universe.
+
+For M4, `T` is a residual schema determined by active residual levers/axiom
+masks at the bundled-minlib semantic level.
+
+In particular:
+
+- `minlib` is a `T`-level bundled schema;
+- `W` is internal to `T`;
+- when `minlib` is active, `W` instantiates a two-person rights package;
+- the instantiated selector-free semantic rights atoms are generated inside
+  `T` after `W` is chosen.
+
+Distinction:
+
+```text
+Full split universe:
+  decisive_voter0 and decisive_voter1 are independent representation-level
+  split levers.
+
+M4 bundled-minlib semantic ResidualClass:
+  minlib is a bundled T-level schema.
+  It does not create one ambient T for decisive_voter0 alone and another
+  ambient T for decisive_voter1 alone.
+  It creates internal W-instances of a two-person rights schema.
+```
+
+## 8. One-Sided Split Residuals Are Not M4 Ambient Theories
+
+One-sided split residuals such as `decisive_voter0`-only or
+`decisive_voter1`-only rows are valid artifacts of the full split
+representation universe.
+
+They are not ambient residual theories `T` in the M4 bundled-minlib semantic
+`ResidualClass`.
+
+They are excluded from M4 `ResidualClass` not because they would violate or
+satisfy Theorem C, but because they do not correspond to a valid bundled
+`minlib` schema instantiation.
+
+This exclusion must be justified by the prior definition of bundled `minlib`,
+not by any observed orbit-fiber exactness, shape support, or Report-Shape
+Support Collapse Law.
+
+Therefore:
+
+```text
+valid reason: bundled minlib schema requires the two-person liberalism package;
+invalid reason: one-sided rows are excluded because Theorem C would fail or
+                because shape support would be unstable.
+```
+
+## 9. Structural Interpretation: Two-Person Liberalism as Common Source
+
+The same Sen liberalism structure appears on two sides of the design:
+
+1. Coverage side:
+   bundled `minlib` is a two-person schema, so one-sided split rows are not
+   ambient M4 residual theories.
+2. Repair-geometry side:
+   `minlib` has support across O2/O3/O4 and produces maximal shape-blind
+   collapse in the Phase 2 diagnostic.
+
+This suggests a common structural source:
+
+```text
+the two-person nature of Sen liberalism drives both the bundled-minlib
+coverage boundary and the observed minlib collapse behavior.
+```
+
+This is a structural interpretation, not yet an additional theorem. The
+coverage exclusion is certified by the `minlib` schema definition. The collapse
+behavior is certified by Phase 2 diagnostics. A later checker may test whether
+both are derived from the same schema-level datum.
+
+## 10. Immediate Next Audit Questions
 
 1. What is the exact mask/lever vocabulary of the earlier 64-residual
    enumeration?
@@ -153,8 +257,17 @@ theorem work.
    relevant UNSAT/relevant class?
 8. Is a fresh semantic coverage enumeration required, or can the earlier
    enumeration be bridged?
+9. Are one-sided split residuals present in the full split universe?
+10. Are one-sided split residuals ever instantiated as ambient M4 residual
+    theories `T`?
+11. Is their exclusion justified solely by bundled `minlib` schema definition?
+12. Does the bundled `minlib` schema require a two-person witness package?
+13. Can the checker derive both:
+    (a) one-sided exclusion, and
+    (b) `minlib` O2/O3/O4 support,
+    from the same schema-level `minlib` datum?
 
-## 7. Current Judgment
+## 11. Current Judgment
 
 Current judgment:
 

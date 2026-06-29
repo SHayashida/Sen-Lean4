@@ -53,7 +53,12 @@ Required checker outputs:
 - `mask_to_named_case_mapping`;
 - `minlib_schema_level`: `T`-level or `W`-level;
 - `semantic_instantiation_bridge_status`;
-- `circularity_check_passed`.
+- `circularity_check_passed`;
+- `full_split_universe_is_upstream_artifact`: true/false;
+- `one_sided_split_rows_present`: true/false;
+- `one_sided_rows_are_m4_ambient_theories`: true/false;
+- `one_sided_exclusion_basis`;
+- `bundled_minlib_schema_requires_two_person_witness`: true/false.
 
 Do not assume that raw/lever residual coverage automatically certifies
 selector-free fixed-witness semantic residual coverage. The checker design
@@ -76,6 +81,12 @@ Failure modes:
   bridge.
 - `minlib` is inconsistently treated as a `T`-level schema in one artifact and
   as `W`-level identity in another.
+- Treating the full 64 split universe as identical to M4 `ResidualClass`.
+- Excluding one-sided split rows because Theorem C would fail.
+- Failing to distinguish bundled-minlib-aligned sublattice from full split
+  universe.
+- Treating `decisive_voter0`-only or `decisive_voter1`-only rows as ambient M4
+  theories without an explicit theorem-scope decision.
 
 ## 3. Certificate 2: Ambient Orbit-Fiber Exactness
 

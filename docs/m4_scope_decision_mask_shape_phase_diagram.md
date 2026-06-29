@@ -211,3 +211,9 @@ Certificate 2 should certify the complete 48-cell phase diagram:
 
 This keeps the Mask-Shape Collapse Law from being merely an UNSAT-cell theorem
 detached from the full phase diagram.
+
+## Pipeline Consequence
+
+Because the phase-diagram certificate includes both orbit-fiber exactness and
+shape-blind support truncation, the old Certificate 3/4 stages are absorbed
+into Certificate 2 as subchecks.

@@ -135,6 +135,12 @@ UNSAT cells carry repair-orbit exactness and support truncation; SAT cells are
 repair-empty. The analysis unit is `Cell(T,s)`, but `T` remains a bundled
 residual mask/schema.
 
+Pipeline consolidation note:
+the theorem candidate is supported by a consolidated finite-data pipeline.
+Certificate 1 establishes the cell phase diagram; Certificate 2 certifies
+SAT-cell emptiness and UNSAT-cell repair geometry, including the former
+Certificate 3/4 support-truncation obligations.
+
 ## 4. Core Objects
 
 The candidate theorem language should be built from the following finite

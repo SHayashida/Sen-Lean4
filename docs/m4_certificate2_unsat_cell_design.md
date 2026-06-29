@@ -418,3 +418,15 @@ phase-diagram certificate.
 No checker implementation, solver rerun, Lean theorem work, 3-voter work,
 warrant-contract implementation, or paper-claim promotion is authorized by
 this document.
+
+## 18. Pipeline Consolidation
+
+Certificate 2 absorbs the old Certificate 3 and Certificate 4 obligations as
+internal subchecks:
+
+- shape-blind collapse;
+- report-shape support truncation.
+
+After this redesign, Certificate 2 is the final finite-data certificate for
+the M4 mask-shape phase diagram, unless a later scope decision creates a new
+obligation.

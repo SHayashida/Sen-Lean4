@@ -205,40 +205,25 @@ and SAT cells carry repair-empty completeness.
 It must not redefine `T` as `(T,s)`. The cell coordinate remains an analysis
 stratum inside the bundled mask/schema.
 
-## 5. Certificate 3: Shape-Blind Collapse
+## 5. Absorbed Certificate 3/4 Obligations
 
-For each `T in ResidualClass` over its UNSAT cells, verify:
+Old Certificate 3/4 obligations are absorbed into Certificate 2.
+They remain as named subchecks but are no longer independent downstream
+certificate stages.
 
-- shape-blind fibers `BlindFiber_T(rho)`;
-- number of repair orbits inside each `BlindFiber_T(rho)`;
-- whether any `BlindFiber_T(rho)` contains multiple orbits;
-- aggregate count of indexed fibers, shape-blind fibers, and repair orbits
-  over the covered class.
-
-For the earlier ALL_W_UNSAT-only Phase 2 diagnostic:
+Old Certificate 3, Shape-Blind Collapse, becomes the Certificate 2 subcheck
+over UNSAT support:
 
 ```text
-indexed fibers = 16
-repair orbits = 16
-shape-blind fibers = 9
-multi-orbit shape-blind fibers = 5
+BlindFiber_UNSAT(T,rho)
+shape_blind_fiber_count
+blind_orbit_count
+shape_support_count
+support_truncation_law_holds
 ```
 
-For the mask-shape audit over all UNSAT cells:
-
-```text
-cell report fibers = 46
-repair orbits = 46
-shape-blind fibers = 33
-```
-
-This certificate is the finite-data counterpart of Candidate Theorem B.
-
-## 6. Certificate 4: Report-Shape Support Collapse Law
-
-For each `T in ResidualClass` and each shape-blind grouped report `rho` over
-the UNSAT support of `T`,
-verify:
+Old Certificate 4, Report-Shape Support Collapse Law, becomes the Certificate
+2 support-truncation subcheck:
 
 ```text
 #Orbits_T(BlindFiber_UNSAT_T(rho))
@@ -246,46 +231,38 @@ verify:
 |ShapeSupport_UNSAT_T(rho)|.
 ```
 
-Also report:
-
-- `shape_support_T(rho)`;
-- support count;
-- blind orbit count;
-- `blind_mu`;
-- `indexed_mu_by_shape`;
-- collapse class.
-
-The checker should distinguish:
+The checker should still distinguish:
 
 - no collapse;
 - intermediate collapse;
 - maximal Sen24 two-voter shape collapse.
 
-This certificate is the finite-data counterpart of Candidate Theorem C.
+The support pattern remains a separate certified datum. The checker should not
+treat the support law as pure orbit-stabilizer arithmetic.
 
-## 7. Certificate Dependency Graph
+## 6. Consolidated Certificate Dependency Graph
 
 ```text
-Bundled-mask coverage and cell status phase diagram
-  -> defines the finite quantification domain T in ResidualClass
+Certificate 1:
+  bundled-mask coverage and cell-status phase diagram
 
-Mask-shape collapse law audit over UNSAT cells
-  -> confirms MIXED masks are support-truncated, not repair-geometry failures
+Certificate 1b:
+  exploratory mask-shape collapse audit
 
-UNSAT-cell orbit-fiber exactness
-  -> makes indexed fibers equal repair orbits
-
-Shape-blind collapse
-  -> shows that removing Shape(W) collapses repair orbits
-
-Report-shape support collapse law
-  -> derives collapse count from support pattern, using exactness plus support data
+Certificate 2:
+  complete phase-diagram certificate
+    - SAT-cell RepairEmpty
+    - UNSAT-cell orbit-fiber exactness
+    - orbit-stabilizer
+    - shape-blind support truncation
+    - non-circularity
 ```
 
-The checker should not treat Theorem C as pure orbit-stabilizer arithmetic.
-The support pattern is a separate certified datum.
+There is no independent Certificate 3 or Certificate 4 implementation stage
+after this consolidation unless a later scope decision reintroduces them for a
+different purpose.
 
-## 8. Output Artifacts
+## 7. Output Artifacts
 
 A future checker should emit the following artifacts:
 
@@ -304,7 +281,7 @@ m4_checker_summary.json
 
 These artifacts are not created by this design document. This is design-only.
 
-## 9. Non-Claims
+## 8. Non-Claims
 
 This checker design does not claim:
 
@@ -318,7 +295,7 @@ This checker design does not claim:
 - warrant-contract semantics;
 - paper-ready theorem.
 
-## 10. Next Authorized Action
+## 9. Next Authorized Action
 
 After this checker/certificate design is reviewed, the next authorized action
 is one of:

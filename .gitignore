@@ -21,6 +21,8 @@ results/
 zenodo_upload_pack/
 paper/build/
 paper_private/
+# Local-only advisor briefing notes; do not publish to the public Sen24 repo.
+docs/private/m4_advisor_one_pager.md
 papers/**/build/
 paper/main.aux
 paper/main.bbl

@@ -281,3 +281,7 @@ The next implementation-level task is not full checker implementation. It is a
 coverage bridge audit deciding whether the earlier 64-residual enumeration can
 certify `ResidualClass` coverage for the selector-free fixed-witness semantic
 universe.
+
+See `docs/m4_residual_class_coverage_bridge_audit.md` for the audit of full
+split universe vs bundled-minlib `ResidualClass`, one-sided split rows, and
+finite-auditability interpretation.

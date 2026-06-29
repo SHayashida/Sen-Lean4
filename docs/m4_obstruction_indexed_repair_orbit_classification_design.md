@@ -91,6 +91,12 @@ Non-circularity discipline: `ResidualClass` is defined by residual
 masks/schemas only. It must not be defined by `ShapeSupport_T`, `q`-fibers,
 orbit decomposition, or Report-Shape Support Collapse Law.
 
+The finite-universal reading of Theorem A/B/C depends on a coverage bridge
+that separates the full split representation universe from the
+bundled-minlib-aligned M4 `ResidualClass`. One-sided split rows are upstream
+representation artifacts; they are outside M4 scope only by bundled `minlib`
+schema definition, never by appeal to Theorem C.
+
 The full 64 split universe is an upstream representation-level artifact and is
 not identical to the M4 `ResidualClass`.
 

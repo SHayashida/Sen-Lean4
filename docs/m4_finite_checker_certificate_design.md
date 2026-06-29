@@ -39,9 +39,22 @@ Inputs:
 - provenance connecting this class to earlier residual enumeration artifacts,
   if applicable.
 
+The checker/certificate pipeline must verify that:
+
+- full 64 split universe is treated as an upstream representation artifact;
+- bundled-minlib-aligned `ResidualClass` is the M4 ambient theorem scope;
+- one-sided split rows are not ambient M4 theories unless an explicit
+  theorem-scope decision says otherwise;
+- their exclusion is derived from bundled `minlib` schema mapping, not from
+  Theorem C.
+
 Required checker outputs:
 
 - `residual_mask_vocabulary`;
+- `full_split_universe_vocabulary`;
+- `bundled_universe_vocabulary`;
+- `block_aligned_sublattice_definition`;
+- `block_alignment_provenance_status`;
 - `covered_residual_count`;
 - `covered_residual_ids`;
 - `excluded_residual_count`;
@@ -57,8 +70,10 @@ Required checker outputs:
 - `full_split_universe_is_upstream_artifact`: true/false;
 - `one_sided_split_rows_present`: true/false;
 - `one_sided_rows_are_m4_ambient_theories`: true/false;
+- `one_sided_rows_m4_scope_status`;
 - `one_sided_exclusion_basis`;
-- `bundled_minlib_schema_requires_two_person_witness`: true/false.
+- `bundled_minlib_schema_requires_two_person_witness`: true/false;
+- `finite_auditability_verdict`.
 
 Do not assume that raw/lever residual coverage automatically certifies
 selector-free fixed-witness semantic residual coverage. The checker design

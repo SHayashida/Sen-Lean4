@@ -116,6 +116,13 @@ the ambient theorem schema over the currently covered finite residual
 theories. They become finite-universal statements only after the checker
 validates the `ResidualClass` coverage certificate.
 
+Certificate 1 now has an exploratory result document at
+`docs/m4_residual_class_coverage_certificate_result.md`. The result is
+`CONDITIONAL_PASS`: `case_11101` and `case_11111` are exactly the
+`ALL_W_UNSAT` masks, but the full 32-mask semantic enumeration contains
+`MIXED` residual theories, so theorem scope must be resolved before
+Certificate 2 or Lean theorem work.
+
 ## 4. Core Objects
 
 The candidate theorem language should be built from the following finite

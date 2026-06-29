@@ -430,3 +430,21 @@ CONDITIONAL PASS:
 The pass is conditional only because a future semantic-level coverage
 certificate is still required to close finite-universal coverage for the M4
 `ResidualClass`.
+
+## Certificate 1 Follow-Up
+
+See `docs/m4_residual_class_coverage_certificate_result.md` for the Certificate
+1 semantic coverage result over all 32 bundled masks.
+
+The Certificate 1 result closes the raw enumeration gap only conditionally:
+
+- all 32 bundled masks were enumerated;
+- no `UNKNOWN` occurred;
+- the only `ALL_W_UNSAT` masks are `case_11101` and `case_11111`;
+- no minlib-inactive mask is `ALL_W_UNSAT`;
+- 9 masks are `MIXED`, so the Certificate 1 verdict remains
+  `CONDITIONAL_PASS` rather than `PASS`.
+
+Thus this audit's conditional pass is not upgraded to a full pass. The next
+scope decision is how M4 theorem statements should treat `MIXED` residual
+theories.

@@ -75,6 +75,11 @@ Required checker outputs:
 - `bundled_minlib_schema_requires_two_person_witness`: true/false;
 - `finite_auditability_verdict`.
 
+See `docs/m4_residual_class_coverage_certificate_result.md` for the
+Certificate 1 coverage result over the bundled-minlib-aligned
+`ResidualClass`. The current result is `CONDITIONAL_PASS`, not `PASS`, because
+the full 32-mask semantic enumeration contains `MIXED` masks.
+
 Do not assume that raw/lever residual coverage automatically certifies
 selector-free fixed-witness semantic residual coverage. The checker design
 must either reuse the earlier coverage artifact with an explicit bridge, or

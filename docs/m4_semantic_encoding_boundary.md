@@ -257,3 +257,13 @@ This does not prove:
 Level C remains future work.
 
 See `docs/m4_right_atom_decisive_bridge_lean_result.md`.
+
+## 18. Paper Claim Scaffold Follow-up
+
+A paper-facing claim scaffold separates:
+
+- internal finite-data certification;
+- Level B Lean-backed semantic target;
+- remaining Level C semantic-to-CNF obligations.
+
+See `docs/m4_paper_claim_scaffold.md`.

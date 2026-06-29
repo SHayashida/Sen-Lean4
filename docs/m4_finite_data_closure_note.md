@@ -224,3 +224,10 @@ Lean semantic bridge for the central `right_atom` / `Decisive` alignment,
 while keeping full semantic-to-CNF correctness as future work.
 
 See `docs/m4_right_atom_decisive_bridge_feasibility.md`.
+
+## Paper Claim Scaffold Follow-up
+
+A paper-facing claim scaffold has been added to fix M4's presentation as an
+auditable formal-methods methodology contribution.
+
+See `docs/m4_paper_claim_scaffold.md`.

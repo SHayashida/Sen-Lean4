@@ -36,3 +36,10 @@ Non-claims:
 - no general Sen theorem;
 - no family-scale theorem;
 - no Mask-Shape Collapse Law proof.
+
+## Paper Claim Scaffold Follow-up
+
+The paper-facing scaffold records the Level B Lean bridge as a crossed
+semantic bridge, while preserving Level C artifact correctness as future work.
+
+See `docs/m4_paper_claim_scaffold.md`.

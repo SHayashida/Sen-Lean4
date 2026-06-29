@@ -215,3 +215,12 @@ The correspondence between M4 `right(voter,pair)` atoms and Lean `Decisive` is
 auditable and structurally aligned, but not yet a Lean-proved bridge theorem.
 
 See `docs/m4_semantic_encoding_boundary.md`.
+
+## 15. Right-Atom Bridge Feasibility
+
+The finite-data closure remains valid under the declared selector-free
+semantic encoding. A follow-up feasibility note identifies a possible minimal
+Lean semantic bridge for the central `right_atom` / `Decisive` alignment,
+while keeping full semantic-to-CNF correctness as future work.
+
+See `docs/m4_right_atom_decisive_bridge_feasibility.md`.

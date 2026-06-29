@@ -219,3 +219,16 @@ After review, Track X may use this boundary as front-loaded claim language for
 the M4 finite-data result. No Lean theorem, encoding-correctness theorem,
 solver rerun, checker rerun, 3-voter run, warrant-contract implementation, or
 paper-claim promotion is authorized by this document.
+
+## 15. Bridge Feasibility Follow-up
+
+A follow-up feasibility note evaluates the possible bridge between M4
+`right_atom` semantics and Lean `Decisive`.
+
+Current status:
+
+- Level A documentation bridge: achieved;
+- Level B Lean semantic predicate bridge: feasible next target;
+- Level C full artifact bridge: not yet ready.
+
+See `docs/m4_right_atom_decisive_bridge_feasibility.md`.

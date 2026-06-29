@@ -250,3 +250,11 @@ The immediate design question is whether `ResidualClass` for Theorem A/B/C
 should quantify only over the two `ALL_W_UNSAT` ambient theories or whether a
 separate semantic relevance criterion must be certified for excluding `MIXED`
 masks.
+
+## 14. Follow-up
+
+The MIXED masks motivated a mask-shape collapse audit.
+See `docs/m4_mask_shape_collapse_law_audit_result.md`.
+
+This follow-up does not upgrade the Certificate 1 verdict. Certificate 1
+remains `CONDITIONAL_PASS` under its registered aggregate-status criteria.

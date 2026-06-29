@@ -22,13 +22,13 @@ separates:
 This avoids proving a theorem that is either over-indexed or based on only two
 unqualified observations.
 
-## 2. Certificate 1: ResidualClass Coverage
+## 2. Certificate 1: Bundled-Mask Coverage and Cell Status Phase Diagram
 
 Goal:
 
 Verify that the ambient residual theories covered by the theorem are exactly
-the intended finite Sen24 two-voter selector-free fixed-witness UNSAT residual
-class.
+the intended finite Sen24 two-voter selector-free fixed-witness residual
+class, and compute the cell status phase diagram for minlib-active masks.
 
 Inputs:
 
@@ -108,9 +108,60 @@ Failure modes:
 - Treating `decisive_voter0`-only or `decisive_voter1`-only rows as ambient M4
   theories without an explicit theorem-scope decision.
 
-## 3. Certificate 2: Ambient Orbit-Fiber Exactness
+## 3. Certificate 1b: Mask-Shape Collapse Law Audit Over UNSAT Cells
 
-For each `T in ResidualClass`, verify:
+Certificate 1b is the finite audit recorded in
+`docs/m4_mask_shape_collapse_law_audit_result.md`.
+
+Goal:
+
+Verify that repair geometry over `MIXED` residuals is support-truncated rather
+than irregular, by checking every UNSAT analysis cell:
+
+```text
+Cell(T,s) := { W inside T | Shape(W)=s }
+```
+
+The certificate must preserve:
+
+- `T` is bundled residual mask/schema identity;
+- `s` is an analysis coordinate, not part of `T`;
+- repair objects are built only for UNSAT witness instances in `ALL_UNSAT`
+  cells;
+- SAT cells contribute no repair objects;
+- `ResidualClass` is not defined by the collapse law.
+
+Certificate 1b checks:
+
+- cell statuses `ALL_UNSAT`, `ALL_SAT`, `MIXED_WITHIN_SHAPE`, `UNKNOWN`;
+- repair object scope;
+- group action well-definedness;
+- `q`-invariance;
+- cell-indexed orbit-fiber exactness;
+- absence of partial orbit fragments;
+- orbit-stabilizer;
+- shape-blind support truncation law.
+
+The current audit result is `PASS`:
+
+```text
+UNSAT cells = 18
+UNSAT witness instances = 216
+repair objects = 816
+repair orbits = 46
+cell report fibers = 46
+shape-blind fibers = 33
+```
+
+Certificate 1b does not complete Certificate 2 and does not promote a Lean
+theorem.
+
+## 4. Certificate 2: UNSAT-Cell Orbit-Fiber Exactness
+
+If Certificate 1b passes, Certificate 2 should be formalized over UNSAT
+analysis cells rather than only ALL_W_UNSAT masks.
+
+For each UNSAT cell `(T,s)` with `Cell(T,s)` equal to `ALL_UNSAT`, verify:
 
 - repair object universe `RepairObject_T`;
 - group `G = S2 x S4`;
@@ -125,9 +176,12 @@ For each `T in ResidualClass`, verify:
 
 This certificate is the finite-data counterpart of Candidate Theorem A.
 
-## 4. Certificate 3: Shape-Blind Collapse
+It must not redefine `T` as `(T,s)`. The cell coordinate remains an analysis
+stratum inside the bundled mask/schema.
 
-For each `T in ResidualClass`, verify:
+## 5. Certificate 3: Shape-Blind Collapse
+
+For each `T in ResidualClass` over its UNSAT cells, verify:
 
 - shape-blind fibers `BlindFiber_T(rho)`;
 - number of repair orbits inside each `BlindFiber_T(rho)`;
@@ -135,7 +189,7 @@ For each `T in ResidualClass`, verify:
 - aggregate count of indexed fibers, shape-blind fibers, and repair orbits
   over the covered class.
 
-For the current Phase 2 diagnostic:
+For the earlier ALL_W_UNSAT-only Phase 2 diagnostic:
 
 ```text
 indexed fibers = 16
@@ -144,17 +198,26 @@ shape-blind fibers = 9
 multi-orbit shape-blind fibers = 5
 ```
 
+For the mask-shape audit over all UNSAT cells:
+
+```text
+cell report fibers = 46
+repair orbits = 46
+shape-blind fibers = 33
+```
+
 This certificate is the finite-data counterpart of Candidate Theorem B.
 
-## 5. Certificate 4: Report-Shape Support Collapse Law
+## 6. Certificate 4: Report-Shape Support Collapse Law
 
-For each `T in ResidualClass` and each shape-blind grouped report `rho`,
+For each `T in ResidualClass` and each shape-blind grouped report `rho` over
+the UNSAT support of `T`,
 verify:
 
 ```text
-#Orbits_T(BlindFiber_T(rho))
+#Orbits_T(BlindFiber_UNSAT_T(rho))
 =
-|ShapeSupport_T(rho)|.
+|ShapeSupport_UNSAT_T(rho)|.
 ```
 
 Also report:
@@ -174,13 +237,16 @@ The checker should distinguish:
 
 This certificate is the finite-data counterpart of Candidate Theorem C.
 
-## 6. Certificate Dependency Graph
+## 7. Certificate Dependency Graph
 
 ```text
-ResidualClass coverage
+Bundled-mask coverage and cell status phase diagram
   -> defines the finite quantification domain T in ResidualClass
 
-Orbit-fiber exactness
+Mask-shape collapse law audit over UNSAT cells
+  -> confirms MIXED masks are support-truncated, not repair-geometry failures
+
+UNSAT-cell orbit-fiber exactness
   -> makes indexed fibers equal repair orbits
 
 Shape-blind collapse
@@ -193,7 +259,7 @@ Report-shape support collapse law
 The checker should not treat Theorem C as pure orbit-stabilizer arithmetic.
 The support pattern is a separate certified datum.
 
-## 7. Output Artifacts
+## 8. Output Artifacts
 
 A future checker should emit the following artifacts:
 
@@ -210,7 +276,7 @@ m4_checker_summary.json
 
 These artifacts are not created by this design document. This is design-only.
 
-## 8. Non-Claims
+## 9. Non-Claims
 
 This checker design does not claim:
 
@@ -224,7 +290,7 @@ This checker design does not claim:
 - warrant-contract semantics;
 - paper-ready theorem.
 
-## 9. Next Authorized Action
+## 10. Next Authorized Action
 
 After this checker/certificate design is reviewed, the next authorized action
 is one of:

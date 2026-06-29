@@ -123,6 +123,12 @@ Certificate 1 now has an exploratory result document at
 `MIXED` residual theories, so theorem scope must be resolved before
 Certificate 2 or Lean theorem work.
 
+Scope update after the mask-shape audit:
+the natural theorem candidate is no longer only an ALL_W_UNSAT mask-level law.
+The candidate is a Mask-Shape Collapse Law over UNSAT analysis cells `(T,s)`,
+while preserving `T` as mask/schema identity. The cell coordinate is computed
+from internal witness geometry; it is not a new ambient residual theory.
+
 ## 4. Core Objects
 
 The candidate theorem language should be built from the following finite

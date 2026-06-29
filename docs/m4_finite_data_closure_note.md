@@ -207,3 +207,11 @@ The next authorized action is review of this finite-data closure note.
 After review, Track X should proceed as the audit-completion mainline unless a
 new scope decision changes the M4 finite-data domain. Track Y remains optional
 future work and is not required to preserve finite-data closure.
+
+## 14. Semantic Encoding Boundary
+
+The finite-data closure is under the declared selector-free semantic encoding.
+The correspondence between M4 `right(voter,pair)` atoms and Lean `Decisive` is
+auditable and structurally aligned, but not yet a Lean-proved bridge theorem.
+
+See `docs/m4_semantic_encoding_boundary.md`.

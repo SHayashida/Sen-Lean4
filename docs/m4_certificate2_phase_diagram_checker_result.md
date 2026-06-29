@@ -262,3 +262,11 @@ Remaining later phases are separated into:
 
 - Track X: audit-completion mainline;
 - Track Y: optional structural-theorem future work.
+
+## Semantic Boundary Follow-up
+
+The Certificate 2 result is a finite-data certificate over the declared
+selector-free semantic encoding.
+It does not prove semantic encoding correctness.
+
+See `docs/m4_semantic_encoding_boundary.md`.

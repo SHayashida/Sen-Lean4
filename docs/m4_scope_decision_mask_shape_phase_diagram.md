@@ -222,3 +222,10 @@ into Certificate 2 as subchecks.
 
 The finite-data side is closed by Certificate 2 checker PASS.
 The theorem candidate remains finite-audit-supported, not Lean-proved.
+
+## Semantic Boundary
+
+The Mask-Shape Collapse Law candidate is finite-audit-supported under the
+declared selector-free semantic encoding.
+Its correspondence to Lean `Decisive` / `MINLIB` is currently an auditable
+assumption, not a Lean-proved bridge theorem.

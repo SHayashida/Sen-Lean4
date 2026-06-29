@@ -232,3 +232,12 @@ Current status:
 - Level C full artifact bridge: not yet ready.
 
 See `docs/m4_right_atom_decisive_bridge_feasibility.md`.
+
+## 16. Level B Bridge Design Follow-up
+
+A Level B design note specifies a minimal Lean semantic bridge for the central
+right atom.
+The design remains semantic-only and does not claim Python clause correctness
+or semantic-to-CNF correctness.
+
+See `docs/m4_right_atom_decisive_bridge_design.md`.

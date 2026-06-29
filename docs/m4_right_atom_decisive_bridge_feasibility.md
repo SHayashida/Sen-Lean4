@@ -284,3 +284,13 @@ If approved later, the next implementation should target only the Level B
 Lean semantic predicate bridge. No Lean theorem, encoding-correctness theorem,
 solver rerun, checker rerun, 3-voter work, warrant-contract implementation,
 or paper-claim promotion is authorized by this document.
+
+## Design Follow-up
+
+A follow-up design note specifies the intended Level B Lean semantic bridge:
+
+- `RightAtomSemantics` with distinct-endpoint discipline;
+- orientation lemma using `Decisive.symm`;
+- optional fixed-two-rights sufficiency lemma for `MINLIB`.
+
+See `docs/m4_right_atom_decisive_bridge_design.md`.

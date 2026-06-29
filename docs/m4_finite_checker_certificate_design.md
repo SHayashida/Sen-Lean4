@@ -41,18 +41,41 @@ Inputs:
 
 Required checker outputs:
 
+- `residual_mask_vocabulary`;
 - `covered_residual_count`;
 - `covered_residual_ids`;
 - `excluded_residual_count`;
 - exclusion criterion;
 - whether earlier 64-residual enumeration is sufficient for this semantic
   universe;
-- if not sufficient, a required semantic-level residual enumeration task.
+- if not sufficient, a required semantic-level residual enumeration task;
+- `witness_is_internal_parameter`: true/false;
+- `mask_to_named_case_mapping`;
+- `minlib_schema_level`: `T`-level or `W`-level;
+- `semantic_instantiation_bridge_status`;
+- `circularity_check_passed`.
 
 Do not assume that raw/lever residual coverage automatically certifies
 selector-free fixed-witness semantic residual coverage. The checker design
 must either reuse the earlier coverage artifact with an explicit bridge, or
 require a fresh semantic coverage certificate.
+
+The checker must first validate the individuation discipline:
+
+- `T` is a residual lever/axiom mask.
+- `W` is not part of `T`.
+- `W` ranges internally inside `T`.
+- `Shape(W)`, `q(R)`, and `ShapeSupport_T(rho)` are computed outputs, not
+  class-defining predicates.
+
+Failure modes:
+
+- `W` is treated as part of residual identity.
+- `ResidualClass` is defined by report/shape/orbit behavior.
+- Earlier residual enumeration uses a different mask vocabulary with no
+  bridge.
+- `minlib` is inconsistently treated as a `T`-level schema in one artifact and
+  as `W`-level identity in another.
 
 ## 3. Certificate 2: Ambient Orbit-Fiber Exactness
 

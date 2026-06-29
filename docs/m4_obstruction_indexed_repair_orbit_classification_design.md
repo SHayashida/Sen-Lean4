@@ -63,6 +63,14 @@ fixed-witness UNSAT residual theories relevant to the Phase 2 semantic repair
 universe.
 ```
 
+ResidualClass elements are individuated by residual lever/axiom masks, not by
+witness configurations. `W` is internal to `T`. The symbol `T` denotes a
+residual schema. It is fixed before `W` ranges over fixed-witness
+configurations.
+
+Therefore, `ShapeSupport_T(rho)` is meaningful: it records which obstruction
+shapes appear inside a fixed residual schema `T` as `W` varies.
+
 To justify quantifying over `T in ResidualClass`, a finite coverage
 certificate is required. The checker must verify that the ambient residual
 theories covered by the theorem are exactly the intended finite UNSAT residual
@@ -78,6 +86,10 @@ UNSAT cases, but the design must distinguish:
 If the earlier 64-residual enumeration is not already a certificate for the
 Phase 2 semantic universe, the finite checker must include a separate coverage
 certificate for the semantic residual class.
+
+Non-circularity discipline: `ResidualClass` is defined by residual
+masks/schemas only. It must not be defined by `ShapeSupport_T`, `q`-fibers,
+orbit decomposition, or Report-Shape Support Collapse Law.
 
 Thus the observed `case_11101` and `case_11111` diagnostics are instances of
 the ambient theorem schema over the currently covered finite residual
@@ -322,11 +334,17 @@ This design does not claim:
    named finite instances plus a shared schema?
 5. Should the finite checker, rather than Lean, own the coverage and orbit
    enumeration proof obligations?
-6. Should `Shape(W)` be part of the report, or part of the surrounding
+6. Has the residual-mask vocabulary in the earlier 64-residual enumeration
+   been matched to the Phase 2 residual schema vocabulary?
+7. Does any artifact treat `W` as part of `T`, contrary to the intended option
+   (a)?
+8. What bridge evidence shows that semantic fixed-witness instantiation
+   creates internal `W`-instances rather than new ambient residual theories?
+9. Should `Shape(W)` be part of the report, or part of the surrounding
    obstruction contract?
-7. Should `G` be full `S2 x S4`, or a subgroup preserving additional semantic
+10. Should `G` be full `S2 x S4`, or a subgroup preserving additional semantic
    structure?
-8. How should this theorem feed into a later action-envelope/warrant layer
+11. How should this theorem feed into a later action-envelope/warrant layer
    without smuggling in authority assumptions?
 
 ## 14. Next Authorized Action After This Design

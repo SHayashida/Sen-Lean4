@@ -290,6 +290,11 @@ Summary:
 The next authorized action is a design review of the mask-shape phase diagram
 scope decision.
 
-If accepted, Certificate 2 should be redesigned as an UNSAT-cell certificate
-over analysis cells `(T,s)` while preserving `T` as bundled mask/schema
-identity. This audit does not itself complete Certificate 2.
+If accepted, Certificate 2 should be redesigned as a complete phase-diagram
+certificate over analysis cells `(T,s)` while preserving `T` as bundled
+mask/schema identity. This audit does not itself complete Certificate 2.
+
+## 13. Follow-up
+
+Certificate 2 design should include SAT-cell repair-empty checks so that the
+full 48-cell phase diagram is certified, not only the 18 UNSAT cells.

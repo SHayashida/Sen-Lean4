@@ -129,6 +129,12 @@ The candidate is a Mask-Shape Collapse Law over UNSAT analysis cells `(T,s)`,
 while preserving `T` as mask/schema identity. The cell coordinate is computed
 from internal witness geometry; it is not a new ambient residual theory.
 
+Certificate 2 scope update:
+the M4 theorem candidate is now best understood as a phase-diagram law.
+UNSAT cells carry repair-orbit exactness and support truncation; SAT cells are
+repair-empty. The analysis unit is `Cell(T,s)`, but `T` remains a bundled
+residual mask/schema.
+
 ## 4. Core Objects
 
 The candidate theorem language should be built from the following finite

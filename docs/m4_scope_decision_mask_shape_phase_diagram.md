@@ -103,13 +103,13 @@ support truncation law = PASS
 
 ## 5. Consequence for Certificate 2
 
-Certificate 2 should be redesigned as a mask-shape cell certificate, not as an
-ALL_W_UNSAT-only certificate.
+Certificate 2 should be redesigned as a complete mask-shape phase-diagram
+certificate, not as an ALL_W_UNSAT-only certificate.
 
-Certificate 2 should quantify over UNSAT cells:
+Certificate 2 should cover all minlib-active cells:
 
 ```text
-(T,s) such that Cell(T,s) is ALL_UNSAT.
+16 minlib-active bundled masks x 3 obstruction shapes = 48 cells.
 ```
 
 It must not redefine `T` as `(T,s)`.
@@ -124,6 +124,12 @@ Certificate 2 should verify, for each UNSAT cell:
 - absence of partial orbit fragments;
 - orbit-stabilizer;
 - shape-blind support truncation over the UNSAT support of each mask.
+
+Certificate 2 should also verify, for each SAT cell:
+
+- repair object universe is empty;
+- no repair object is created for any SAT witness instance;
+- `RepairEmpty(T,s)` holds as a phase-diagram completeness condition.
 
 ## 6. Non-Circularity Guard
 
@@ -190,7 +196,18 @@ This decision does not claim:
 
 The next authorized action is to review this scope decision.
 
-If accepted, implement Certificate 2 as a finite data certificate over UNSAT
-analysis cells `(T,s)`, while preserving `T` as bundled mask/schema identity.
-Do not implement Lean theorem promotion until the finite certificate design is
-approved.
+If accepted, implement Certificate 2 as a finite data certificate over the
+complete 48-cell phase diagram, while preserving `T` as bundled mask/schema
+identity. Do not implement Lean theorem promotion until the finite certificate
+design is approved.
+
+## Certificate 2 Design Update
+
+Certificate 2 should certify the complete 48-cell phase diagram:
+
+- UNSAT cells: repair geometry and collapse law.
+- SAT cells: repair-empty condition.
+- MIXED_WITHIN_SHAPE or UNKNOWN cells: failure or conditional status.
+
+This keeps the Mask-Shape Collapse Law from being merely an UNSAT-cell theorem
+detached from the full phase diagram.

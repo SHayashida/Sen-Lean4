@@ -156,10 +156,24 @@ shape-blind fibers = 33
 Certificate 1b does not complete Certificate 2 and does not promote a Lean
 theorem.
 
-## 4. Certificate 2: UNSAT-Cell Orbit-Fiber Exactness
+## 4. Certificate 2: Complete Cell Phase-Diagram Certificate
 
-If Certificate 1b passes, Certificate 2 should be formalized over UNSAT
-analysis cells rather than only ALL_W_UNSAT masks.
+If Certificate 1b passes, Certificate 2 should be formalized over the complete
+mask-shape phase diagram rather than only ALL_W_UNSAT masks or only UNSAT
+repair-object cells. It should certify UNSAT cells by orbit-fiber exactness and
+SAT cells as repair-empty.
+
+The certificate domain is the complete cell phase diagram, not only the
+nonempty repair-object universe:
+
+```text
+16 minlib-active bundled masks x 3 obstruction shapes = 48 cells.
+```
+
+Certificate 2 must include both:
+
+1. UNSAT-cell orbit-fiber exactness.
+2. SAT-cell repair-empty verification.
 
 For each UNSAT cell `(T,s)` with `Cell(T,s)` equal to `ALL_UNSAT`, verify:
 
@@ -174,7 +188,19 @@ For each UNSAT cell `(T,s)` with `Cell(T,s)` equal to `ALL_UNSAT`, verify:
 - no partial orbit fragments;
 - orbit-stabilizer equation holds for every repair object.
 
-This certificate is the finite-data counterpart of Candidate Theorem A.
+For each SAT cell `(T,s)` with `Cell(T,s)` equal to `ALL_SAT`, verify:
+
+- `RepairEmpty(T,s)`;
+- no repair object is created for any witness in the cell;
+- the cell is empty because its fixed-witness theories are SAT, not because it
+  would violate orbit-fiber exactness.
+
+For any `MIXED_WITHIN_SHAPE` or `UNKNOWN` cell, Certificate 2 must fail or
+become conditional according to the registered checker policy.
+
+This certificate is the finite-data counterpart of the phase-diagram theorem
+candidate: UNSAT cells carry Candidate Theorem A-style orbit-fiber exactness,
+and SAT cells carry repair-empty completeness.
 
 It must not redefine `T` as `(T,s)`. The cell coordinate remains an analysis
 stratum inside the bundled mask/schema.
@@ -265,6 +291,8 @@ A future checker should emit the following artifacts:
 
 ```text
 m4_residual_class_coverage.json
+m4_certificate2_cell_statuses.json
+m4_certificate2_repair_empty_cells.json
 m4_repair_objects.json
 m4_group_action.json
 m4_indexed_fibers.json

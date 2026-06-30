@@ -1,16 +1,122 @@
 \section{Discussion}
 
-This section will discuss what the M4 scaffold contributes to auditable
-abstraction contracts. The central point is that an artifact can support one
-kind of claim while leaving another kind of correctness obligation open.
+\subsection{What M4 Establishes}
 
-TODO: Explain how finite certificates, declared encodings, semantic targets,
-and future correctness obligations can be reported as separate layers.
+M4 establishes a claim-boundary audit for a finite social-choice artifact. Its
+technical case is deliberately narrow: the Sen24 setting under the declared
+M4 encoding. Within that boundary, the paper reports a finite audit of the
+repair and reporting structure, including the 48-cell paper-facing
+certificate, the SAT-side \code{RepairEmpty} classification, the UNSAT-side
+orbit/fiber exactness checks, and the support-truncation discipline for
+shape-blind reports. These are finite-data claims under a declared artifact
+interface.
 
-TODO: Discuss how this discipline may matter for formal artifacts used in
-collective decision-making or AI-assisted governance workflows, without making
-AI governance the core proof claim of the paper.
+The methodological contribution is the separation of layers. M4 does not make
+every layer of the artifact formally verified. It makes the boundary between
+layers explicit. The finite audit is one layer; the declared encoding that
+defines the audited interface is another; the partial Lean-backed semantic
+target for the central right condition is a third; the Python/CNF and
+semantic-to-CNF correctness bridges remain future Level C obligations. The
+paper's central claim is that these distinctions should be visible in the
+report itself rather than hidden behind a single word such as ``verified'' or
+``certified.''
 
-Safe claim-boundary note: discussion may describe possible applications, but
-must not turn the finite Sen24 case study into a claim about institutional
-authority, full governance correctness, or automatic action selection.
+\subsection{Why Claim Boundaries Matter}
+
+The opening problem of the paper is over-reporting. A formal artifact can be
+internally correct for the task it actually performed while still being used
+to support a stronger claim than the evidence licenses. A finite audit can be
+mistaken for a general theorem. A declared encoding can be mistaken for a
+proved semantic equivalence. A partial Lean bridge can be mistaken for Python
+or CNF correctness. A repair or reporting label can be treated as earned even
+when no contract has justified grouping raw repairs into that report.
+
+M4 addresses that risk by making the reportable claim explicit at each layer.
+The finite certificate answers finite questions about the declared Sen24
+artifact. It does not answer every semantic or implementation question around
+that artifact. The Lean bridge answers a limited semantic question about the
+central right-condition target. It does not certify the generated clauses. The
+claim-boundary audit is therefore not a decorative qualification added after
+the technical work; it is part of the technical interpretation of the work.
+
+\subsection{The Role Of The Declared Encoding}
+
+The declared encoding is not a weakness in the argument. It is part of the
+audit discipline. A finite artifact needs an interface: a vocabulary of masks,
+right-condition witnesses, obstruction shapes, cells, repair objects, and
+grouped reports. By declaring that interface rather than silently treating it
+as already proved equivalent to the full Lean semantics, M4 makes its claims
+conditional, checkable, and bounded.
+
+This matters especially for finite audits. Complete enumeration inside an
+interface is powerful only when the interface is named. Without that
+declaration, a reader could confuse exhaustive coverage of the finite table
+with exhaustive coverage of all relevant semantic interpretations. M4 avoids
+that move. It says what was audited, records what the audit supports, and
+leaves the stronger correspondence between the artifact interface and the
+Lean/Python/CNF layers as a separate future correctness obligation.
+
+\subsection{The Role Of The Lean Bridge}
+
+The Lean bridge gives the paper a semantic anchor without turning it into an
+end-to-end verification result. The central definition,
+\code{RightAtomSemantics}, packages endpoint distinctness with Lean
+\code{Decisive}. The bridge also records orientation invariance for the
+unordered-pair use of the artifact-level right condition. Finally,
+\code{twoRightAtoms_imply_MINLIB} proves the sufficient direction from two
+fixed right conditions with distinct voters to Lean \code{MINLIB}.
+
+Those are important facts, but their scope is limited. They say that the
+central right-condition target used by the paper has a Lean-level semantic
+meaning and that the fixed two-right package is sufficient for Lean
+\code{MINLIB}. They do not prove full selector-free equivalence to
+\code{MINLIB}. They do not prove \code{\_right\_clauses} correctness, Python
+encoder correctness, SAT/CNF artifact correctness, or semantic-to-CNF
+correctness. The bridge therefore supports semantic discipline without
+collapsing Level B semantic anchoring into Level C artifact correctness.
+
+\subsection{Relation To M1--M3}
+
+M4 also synthesizes lessons from the earlier layers without re-claiming them
+as new results. M1 made finite evidence diagnosable by separating proof,
+audit, witness, and assumption obligations. M1.5 showed that valid finite
+impossibility evidence does not determine a canonical raw repair
+presentation. M2 placed the general Sen theorem in the semantic bridge layer;
+that theorem is background here, not a new M4 result. M3 gave conditions under
+which grouped repair reports can be justified relative to a contract.
+
+M4 combines these lessons in the declared Sen24 setting. It treats the finite
+artifact as evidence, not as an all-purpose theorem; it treats repair
+presentation as something that needs reporting discipline; it leaves the
+general theorem in the M2 layer; and it uses the language of reportability to
+ask what the artifact is entitled to say.
+
+\subsection{Downstream Relevance}
+
+The relevance extends beyond this small social-choice case, but only as a
+methodological lesson. Formal decision-support artifacts and automated
+explanation and repair systems increasingly produce claims such as
+``inconsistent,'' ``impossible,'' ``explainable,'' or ``repairable.'' In
+AI-mediated governance or downstream recommendation pipelines, such labels may
+influence how people understand a failed rule, a rejected policy, or a
+proposed relaxation. The next question is what claim the evidence actually
+licenses.
+
+M4 does not solve AI governance, prove alignment properties, or provide a
+general framework for all automated systems. Its contribution is narrower: it
+shows, in a finite and auditable setting, how to separate the artifact's
+internal evidence from the semantic and implementation assumptions needed for
+stronger public claims. That separation is relevant wherever an automated
+system reports not only that a computation succeeded, but also what the result
+means for explanation, repair, or downstream action.
+
+\subsection{Closing Synthesis}
+
+The contribution is therefore not complete verification, but disciplined
+reportability. M4 shows how a finite artifact can report only within the
+evidence boundary that the paper makes explicit: finite audit under a declared
+encoding, a partial Lean-backed semantic target, and future correctness
+obligations kept separate. That is the abstraction contract offered here. It
+does not replace the missing Level C bridges; it identifies them precisely
+enough that the finite report can be read without overclaiming what has been
+proved.

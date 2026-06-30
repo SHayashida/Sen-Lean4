@@ -8,9 +8,9 @@ Auditable Claim Boundaries for Finite Social-Choice Artifacts: A Sen24 Case Stud
 
 ## Status
 
-This workspace is not submission-ready. `main.tex` and the files under
-`sections/` form the current preprint draft, with the claim-boundary discipline
-kept explicit while the manuscript is revised.
+This workspace is release-candidate ready for v0.1 preprint review, subject to
+the checks recorded in `papers/m4/RELEASE_CHECKLIST.md`. It remains a preprint
+workspace rather than a venue-submission manuscript.
 
 ## Source Of Truth
 
@@ -44,7 +44,7 @@ lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen_m4_l
 ```
 
 Add a `Makefile` and archival record only when the preprint workspace moves
-beyond draft status.
+beyond v0.1 release-candidate review.
 
 Do not commit generated PDFs or auxiliary LaTeX outputs unless a later
 repository policy or paper-release decision explicitly requires them.

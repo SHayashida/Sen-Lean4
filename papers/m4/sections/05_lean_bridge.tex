@@ -7,8 +7,8 @@ right-condition used in the finite audit should have a clear semantic target.
 For this reason M4 includes a small Lean bridge. The bridge is a partial
 semantic anchor, not an artifact-correctness result.
 
-The Lean-backed target is implemented in
-\code{SocialChoiceAtlas/Sen/RightAtomBridge.lean}. Its central definition is:
+The Lean-backed target is implemented in the repository file
+\code{RightAtomBridge.lean}. Its central definition is:
 
 \[
 \texttt{RightAtomSemantics}\ F\ i\ x\ y :=
@@ -51,7 +51,7 @@ Gives the central right condition a Lean-level meaning \\
 Orientation invariance &
 Lean-backed &
 Ordered presentation of the two alternatives does not alter the target \\
-\code{twoRightAtoms_imply_MINLIB} &
+Two fixed right atoms &
 Sufficient direction &
 Connects two fixed right conditions with distinct voters to Lean
 \code{MINLIB} \\

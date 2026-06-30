@@ -14,7 +14,7 @@ PDF text directly, not only the TeX source.
 ## 2. Main claim as understood by a reviewer
 
 M4 is a claim-boundary audit for finite social-choice artifacts. Under a
-declared Sen24 encoding, it presents a complete finite audit, a partial
+declared M4/Sen24 encoding, it presents a complete finite audit, a partial
 Lean-backed semantic target, and explicit future correctness obligations.
 
 The paper's strongest safe claim is not that Sen's theorem is newly proved, not
@@ -42,7 +42,7 @@ semantic and implementation bridges are separated into named layers.
 
 ## 4. Major risks
 
-1. The phrase "complete finite audit" is safe only while it stays attached to
+1. Finite-audit completeness language is safe only while it stays attached to
    "under the declared M4/Sen24 encoding." Any later shortening to "complete
    audit" would overstate the result.
 2. Related Work appears after Discussion and before Limitations. This order is
@@ -62,8 +62,8 @@ semantic and implementation bridges are separated into named layers.
 No direct overclaim was found in the inspected source or extracted PDF text.
 The dangerous terms occur, but mostly in scoped or negative contexts.
 
-- `complete`: used as "complete finite audit" or "audit completely"; safe when
-  tied to the declared Sen24 interface.
+- `complete`: used in finite-audit language; safe when tied to the declared
+  Sen24 interface.
 - `proof`, `theorem`, `Lean`: safe. The draft distinguishes Lean-backed
   semantic facts from Python/CNF and artifact-level correctness.
 - `certificate`, `certified`, `verified`: mostly safe, though the paper should
@@ -151,8 +151,8 @@ No PDF, aux, bbl, blg, log, or other build output should be committed.
 3. Decide whether Related Work should stay after Discussion or move earlier.
    The current order is acceptable for v0.1, but the decision should be
    intentional before public release.
-4. Preserve the qualifier "under the declared M4/Sen24 encoding" around every
-   use of "complete finite audit."
+4. Preserve the qualifier "under the declared M4/Sen24 encoding" around
+   finite-audit completeness language.
 
 ## 10. Optional improvements after v0.1
 

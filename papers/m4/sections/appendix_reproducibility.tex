@@ -5,18 +5,23 @@ This appendix binds the M4 preprint draft to repository-local sources and
 documented evidence. It does not introduce a new solver run, a new generated
 artifact, or a new proof of encoding correctness.
 
-\subsection{Repository And Commit Binding}
+\subsection{Repository And Release Binding}
 
-The repository is \code{SHayashida/Sen-Lean4}. This draft was prepared after
-commit:
+The repository is \code{SHayashida/Sen-Lean4}. The v0.1 release-candidate
+source should be cited by the release tag or repository commit that contains
+this appendix and the M4 release checklist.
+
+The manuscript line that became this release candidate was originally prepared
+after commit:
 
 \begin{quote}
-\code{8e060ff docs(m4): align preprint claim-boundary draft}.
+\texttt{8e060ff}, the draft-start commit for the claim-boundary manuscript
+line.
 \end{quote}
 
-If this manuscript is later released or archived, the release should bind the
-paper to the final release or tag commit, not necessarily to \code{8e060ff}.
-The commit above records the starting point for this reproducibility layer.
+That commit is historical provenance only. A public release or archive should
+bind the paper to the final release or tag commit, not to the draft-start
+commit above.
 
 \subsection{Main Source Files}
 
@@ -24,13 +29,13 @@ The M4 manuscript sources are:
 
 \begin{itemize}[leftmargin=*]
 \item \code{papers/m4/main.tex};
-\item \code{papers/m4/CLAIM\_BOUNDARY.md};
+\item \code{papers/m4/CLAIM_BOUNDARY.md};
 \item \code{papers/m4/README.md};
 \item \code{papers/m4/sections/*.tex};
 \item \code{papers/m4/refs.bib}.
 \end{itemize}
 
-\code{papers/m4/CLAIM\_BOUNDARY.md} is the claim-boundary source of truth for
+\code{papers/m4/CLAIM_BOUNDARY.md} is the claim-boundary source of truth for
 the preprint. The manuscript prose should not broaden those claims.
 The related-work and reproducibility additions in this draft are bibliographic
 and documentary. They do not change the finite-audit evidence, the declared
@@ -48,9 +53,9 @@ The confirmed Lean-backed items are:
 
 \begin{itemize}[leftmargin=*]
 \item \code{RightAtomSemantics};
-\item \code{rightAtomSemantics\_symm};
-\item \code{rightAtomSemantics\_iff\_swap};
-\item \code{twoRightAtoms\_imply\_MINLIB}.
+\item \code{rightAtomSemantics_symm};
+\item \code{rightAtomSemantics_iff_swap};
+\item \code{twoRightAtoms_imply_MINLIB}.
 \end{itemize}
 
 These items provide a Level B semantic target for the central right condition.
@@ -63,11 +68,11 @@ The finite-audit claims in Section~\ref{sec:finite-audit} are grounded in the
 following repository documents:
 
 \begin{itemize}[leftmargin=*]
-\item \code{docs/m4\_semantic\_encoding\_boundary.md};
-\item \code{docs/m4\_scope\_decision\_mask\_shape\_phase\_diagram.md};
-\item \code{docs/m4\_mask\_shape\_collapse\_law\_audit\_result.md};
-\item \code{docs/m4\_certificate2\_phase\_diagram\_checker\_result.md};
-\item \code{docs/m4\_finite\_data\_closure\_note.md}.
+\item \code{docs/m4_semantic_encoding_boundary.md};
+\item \code{docs/m4_scope_decision_mask_shape_phase_diagram.md};
+\item \code{docs/m4_mask_shape_collapse_law_audit_result.md};
+\item \code{docs/m4_certificate2_phase_diagram_checker_result.md};
+\item \code{docs/m4_finite_data_closure_note.md}.
 \end{itemize}
 
 Together these documents record the declared encoding boundary, the
@@ -85,28 +90,53 @@ The lightweight manuscript build used for this draft is run from
 \code{papers/m4/}:
 
 \begin{quote}
-\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\small
+\begin{verbatim}
+lualatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=/tmp/sen_m4_latex_build main.tex
+\end{verbatim}
 \end{quote}
 
 With bibliography resolution, the draft uses:
 
 \begin{quote}
-\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\small
+\begin{verbatim}
+lualatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=/tmp/sen_m4_latex_build main.tex
+\end{verbatim}
 \end{quote}
 \begin{quote}
-\code{cd /tmp/sen\_m4\_latex\_build}
+\small
+\begin{verbatim}
+cd /tmp/sen_m4_latex_build
+\end{verbatim}
 \end{quote}
 \begin{quote}
-\code{BIBINPUTS=/path/to/Sen-Lean4/papers/m4: bibtex main}
+\small
+\begin{verbatim}
+BIBINPUTS=/path/to/Sen-Lean4/papers/m4: bibtex main
+\end{verbatim}
 \end{quote}
 \begin{quote}
-\code{cd /path/to/Sen-Lean4/papers/m4}
+\small
+\begin{verbatim}
+cd /path/to/Sen-Lean4/papers/m4
+\end{verbatim}
 \end{quote}
 \begin{quote}
-\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\small
+\begin{verbatim}
+lualatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=/tmp/sen_m4_latex_build main.tex
+\end{verbatim}
 \end{quote}
 \begin{quote}
-\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\small
+\begin{verbatim}
+lualatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=/tmp/sen_m4_latex_build main.tex
+\end{verbatim}
 \end{quote}
 
 No M4-specific \code{make} target is currently defined.

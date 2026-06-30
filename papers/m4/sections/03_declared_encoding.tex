@@ -1,20 +1,72 @@
 \section{Declared Encoding And Scope}
 
-This section will define the role of the declared M4 encoding as the object of
-study. The finite audit is conditional on that declared encoding. The paper may
-use the encoding to organize the Sen24 repair and reporting structure, but it
-must not silently treat encoding correctness as already proved.
+\subsection*{Why Declare An Encoding?}
 
-TODO: Introduce the declared Sen24 scope, the residual mask organization, the
-fixed right-condition vocabulary, and the obstruction-shape coordinate only
-after the reader-facing motivation has been established.
+A finite audit needs a fixed interface. M4 therefore declares the finite
+encoding under which its repair and reporting structure is audited. This
+declaration is not a proof that the implementation is semantically correct.
+It is a way to make the trust boundary visible: readers can separate claims
+that are internal to the finite artifact interface from stronger claims about
+Python code, generated clauses, or Lean-level social-choice semantics.
 
-TODO: State that Level C remains future work. This includes a representation
-map between Lean profiles and finite schema profiles, a mapping from Lean
-strict preference predicates to generator variables, SAT assignment semantics,
-right-clause correctness, and generated-CNF artifact correctness.
+In this paper, ``under the declared encoding'' means that the claim is made
+inside that artifact interface. It does not mean that the interface has already
+been proved equivalent to the Lean definitions or to every generated CNF
+artifact. That stronger correspondence is an encoding-correctness obligation
+and remains future Level C work.
 
-Safe claim-boundary note: claims in this section should use wording such as
-``under the declared M4 encoding'' and ``within the declared Sen24 scope.'' Do
-not write that semantic-to-CNF correctness or Python encoder correctness has
-been proved.
+\subsection*{Active Scope}
+
+The active scope is the Sen24 finite case: two voters and four alternatives.
+Within that scope, M4 uses the declared selector-free semantic encoding
+documented by the project. The encoding provides the paper-facing artifact
+interface for repair and reporting. It uses bundled residual masks over the
+active assumptions, fixed right-condition witnesses for the liberal-rights
+component, and obstruction shapes computed from witness-pair overlap.
+
+The declared interface also distinguishes SAT and UNSAT cells. Section~4 will
+state the resulting 48-cell finite audit, but this section only fixes the
+interface on which that audit depends. The point is to keep the later
+certificate statement conditional on the declared encoding rather than to
+silently promote it into a semantic equivalence theorem.
+
+\subsection*{Coordinates Of The Audit}
+
+The finite audit uses three main coordinates. A bundled mask records the
+retained or active assumption interface for a residual case. An obstruction
+shape records the structural form of the witness configuration. A cell is a
+finite combination of a bundled mask and an obstruction shape under the
+declared encoding.
+
+If described as a phase diagram, the phrase means a table of these finite
+cases and their audited statuses. It does not mean a general structural
+theorem. In the same way, the mask-shape collapse pattern discussed by the
+project should be read here as the observed and certified finite collapse
+pattern under the declared encoding, not as a structural proof of why the
+pattern must hold.
+
+\subsection*{What The Declaration Licenses}
+
+The declaration licenses finite-data statements inside the declared M4
+interface. It supports status classification of enumerated cells,
+repair/reporting claims conditional on that interface, paper-facing
+certificate statements about the finite cases, and comparisons between mask
+behavior and shape behavior within the declared Sen24 scope.
+
+These statements are useful precisely because their scope is explicit. They
+can be audited as finite artifact claims without pretending that every
+semantic and implementation bridge has already been crossed.
+
+\subsection*{What Remains Outside The Declaration}
+
+This section does not establish Python encoder correctness,
+\code{\_right\_clauses} correctness, SAT assignment semantics as Lean social
+welfare functions, CNF artifact correctness, semantic-to-CNF correctness, full
+selector-free equivalence to Lean \code{MINLIB}, or any family-scale lift.
+Those items are outside what the declaration itself licenses. Sections~6
+and~8 give the full claim-boundary and limitation lists.
+
+Section~4 therefore uses this declared interface to present the finite audit.
+It should be read as a certificate-style statement inside the declared M4
+artifact interface, not as an independent expansion of the paper's claim
+boundary.

@@ -1,24 +1,102 @@
 \section{Finite Audit}
+\label{sec:finite-audit}
 
-This section will present the finite audit as a paper-facing certificate under
-the declared M4 encoding. It should remain a finite-data audit section, not a
-structural theorem section, unless a separate proof artifact is later added.
+The declared encoding fixed above turns the M4 evidence object into a finite
+audit. The audit is not a theorem about all
+social choice settings, and it is not a proof that any Python or CNF artifact
+faithfully implements the intended semantics. It is a complete finite-data
+check of the declared Sen24 interface: bundled residual masks, fixed-witness
+right atoms, and obstruction shapes.
 
-TODO: Add the bundled-mask by obstruction-shape organization.
+The basic audit unit is a cell
+\[
+  \mathrm{Cell}(T,s),
+\]
+where \(T\) is a bundled residual mask and \(s\) is one of the obstruction
+shapes \(O2\), \(O3\), or \(O4\). The distinction matters. The mask \(T\)
+is the residual schema being audited; the shape \(s\) is an analysis coordinate
+computed from the fixed witness package. Thus the audit does not redefine a
+residual theory as a mask--shape pair. It stratifies each mask by the shape of
+its internal fixed-witness instances and then checks the resulting finite
+table.
 
-TODO: State the 48-cell audit and its certified cell counts.
+Only minlib-active masks enter this phase diagram, because fixed-witness
+right atoms are generated only after the bundled minlib schema is active.
+There are 16 such bundled masks and three obstruction shapes, yielding
+48 cells. The Certificate~2 checker covers all 48 cells under the declared
+encoding. Its summary is shown in Table~\ref{tab:m4-finite-audit}.
 
-TODO: Describe SAT-cell repair classification cautiously, including
-\code{RepairEmpty} only as an audited finite-data property.
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Audited item & Result & Interpretation \\
+\midrule
+Cell coverage
+  & 16 minlib-active masks \(\times\) 3 shapes \(=48\) cells
+  & The phase diagram is exhaustive for the declared mask--shape interface. \\
+Cell status
+  & 18 \texttt{ALL\_UNSAT}, 30 \texttt{ALL\_SAT}, no mixed or unknown cells
+  & Each audited cell has a uniform status over its fixed-witness instances. \\
+SAT cells
+  & Active \texttt{RepairEmpty} for all 30 SAT cells
+  & SAT cells are checked as satisfiable fixed-witness theories with no repair-object target. \\
+UNSAT cells
+  & 816 repair objects, 46 repair orbits, 46 cell report fibers
+  & Each nonempty cell-indexed grouped-report fiber is exactly one complete repair orbit. \\
+Shape-blind reports
+  & 33 shape-blind fibers, support truncation checked
+  & Shape-blind reporting ranges only over the UNSAT shape support of a mask/report pair. \\
+Non-circularity
+  & Passed
+  & The residual class is not defined by repair behavior, orbit behavior, or shape support. \\
+\bottomrule
+\end{tabularx}
+\caption{Certificate~2 finite audit under the declared M4 encoding.}
+\label{tab:m4-finite-audit}
+\end{table}
 
-TODO: Describe UNSAT-cell orbit/fiber exactness as a finite audit result over
-the declared artifacts.
+The SAT side is part of the certificate, not merely an absence of generated
+rows. For every \texttt{ALL\_SAT} cell, the checker verifies that the
+fixed-witness theories in the cell are satisfiable and that no repair object is
+created for them. In this paper's terminology, those cells satisfy
+\texttt{RepairEmpty}: there is no UNSAT repair target in the cell, and the
+empty deletion is not counted as a repair.
 
-TODO: Describe support truncation for shape-blind reports.
+The UNSAT side carries the repair-geometry claim. For each
+\texttt{ALL\_UNSAT} cell, repair objects are indexed by the residual mask,
+the fixed witness package, and the semantic repair. The group
+\[
+  S_2 \times S_4
+\]
+acts by voter swap and alternative relabeling. The audit checks that this
+action is well-defined on repair objects, that the grouped-report map is
+invariant under the action, and that the orbit-stabilizer equation holds for
+each repair object. Most importantly for reporting, every nonempty
+cell-indexed grouped-report fiber is exactly one complete repair orbit. Thus,
+within an UNSAT cell, the grouped report identifies a full orbit of repairs
+rather than a partial fragment or an accidental union of unrelated orbits.
 
-TODO: State that there is no mixedness within mask by shape cells in the
-audited domain.
+The mask-only view leaves some bundled masks with both SAT and UNSAT witness
+instances. The mask--shape audit explains this mixedness without making shape
+part of the ambient theory identity. Once the witness instances are stratified
+by \(O2\), \(O3\), and \(O4\), no cell is internally mixed: there are no
+\texttt{MIXED\_WITHIN\_SHAPE} cells and no \texttt{UNKNOWN} cells. When a
+report is later viewed without its shape coordinate, the certificate applies a
+support-truncation law. Shape-blind fibers are evaluated only over the UNSAT
+shape support of the corresponding mask/report pair; SAT shapes contribute no
+repair objects. The checker records 33 such shape-blind fibers and verifies
+that the orbit count in each blind fiber is exactly the size of its UNSAT shape
+support.
 
-Safe claim-boundary note: use phrases such as ``certified under the declared
-encoding,'' ``finite audit,'' and ``paper-facing certificate.'' Do not call the
-Mask-Shape Collapse Law a structural theorem in this preprint scaffold.
+These facts license the finite-data statement used by the rest of the paper:
+under the declared selector-free Sen24 encoding, the M4 artifacts provide a
+complete bundled-mask by obstruction-shape phase diagram, with SAT cells
+classified as \texttt{RepairEmpty}, UNSAT cells satisfying orbit/fiber
+exactness, shape-blind reports governed by support truncation, and no mixed or
+unknown cells. They do not license stronger claims. In particular, this
+section does not prove Python \texttt{\_right\_clauses} correctness, CNF
+artifact correctness, semantic-to-CNF correctness, full equivalence to Lean
+\texttt{MINLIB}, a structural Mask--Shape Collapse Law, or a family-scale
+theorem of Sen.

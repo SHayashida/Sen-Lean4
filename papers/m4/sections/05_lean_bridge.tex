@@ -1,28 +1,78 @@
 \section{Lean-Backed Semantic Target}
 
-This section will present the Level B bridge implemented in
-\code{SocialChoiceAtlas/Sen/RightAtomBridge.lean}. The bridge is semantic-only:
-it backs the central M4 right-condition target, but it does not prove Python
-clause correctness, CNF correctness, or artifact-level semantic-to-CNF
-correctness.
+The finite audit in M4 is carried out under a declared finite encoding. That
+encoding is the object audited by the certificate claims in this paper. Still,
+one central concept should not float entirely at the artifact level: the
+right-condition used in the finite audit should have a clear semantic target.
+For this reason M4 includes a small Lean bridge. The bridge is a partial
+semantic anchor, not an artifact-correctness result.
 
-The bridge defines:
+The Lean-backed target is implemented in
+\code{SocialChoiceAtlas/Sen/RightAtomBridge.lean}. Its central definition is:
 
 \[
 \texttt{RightAtomSemantics}\ F\ i\ x\ y :=
 x \ne y \land \texttt{Decisive}\ F\ i\ x\ y.
 \]
 
-The inspected Lean file confirms orientation invariance through
-\code{rightAtomSemantics_symm} and \code{rightAtomSemantics_iff_swap}, using
-the relevant \code{Decisive.symm} result. It also confirms the sufficient
-direction \code{twoRightAtoms_imply_MINLIB}: two fixed right conditions for
-distinct voters imply Lean \code{MINLIB}.
+In prose, \code{RightAtomSemantics} says that the two alternatives are
+distinct and that a fixed voter \(i\) is decisive over the ordered pair
+\((x,y)\). The semantic content is therefore expressed through the existing
+Lean predicate \code{Decisive}, with endpoint distinctness included explicitly.
+This gives the central right condition a Lean-level meaning while preserving
+the declared-encoding boundary used by the finite audit.
 
-TODO: Explain why this is enough to name a Lean-backed semantic target for the
-central condition, but not enough to prove full selector-free equivalence to
-\code{MINLIB}.
+The bridge also records orientation invariance. The M4 artifact-level right
+condition is used with an unordered pair of alternatives, while Lean
+\code{Decisive} is stated for an ordered presentation. The Lean theorems
+\code{rightAtomSemantics_symm} and \code{rightAtomSemantics_iff_swap} record
+that reversing the ordered presentation of the two alternatives does not
+change the underlying semantic target. This relies on the corresponding
+symmetry of \code{Decisive}. It is a semantic statement about the target, not a
+proof that any particular Python clause block is correct.
 
-Safe claim-boundary note: say ``Lean-backed semantic target'' and ``sufficient
-Lean bridge.'' Do not say that the Python clauses, CNF artifacts, or full
-encoding have been proved correct.
+The file also proves the sufficient direction from two fixed right conditions
+to minimal liberalism. The theorem \code{twoRightAtoms_imply_MINLIB} states
+that if two distinct voters satisfy \code{RightAtomSemantics} for their
+respective pairs, then Lean \code{MINLIB} follows. This is useful because the
+M4 finite audit works with fixed right-condition witnesses. The Lean bridge
+shows that such a fixed two-right package is sufficient for the existing Lean
+notion of \code{MINLIB}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.30\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Lean-backed item & Status & What it licenses \\
+\midrule
+\code{RightAtomSemantics} &
+Defined semantic target &
+Gives the central right condition a Lean-level meaning \\
+Orientation invariance &
+Lean-backed &
+Ordered presentation of the two alternatives does not alter the target \\
+\code{twoRightAtoms_imply_MINLIB} &
+Sufficient direction &
+Connects two fixed right conditions with distinct voters to Lean
+\code{MINLIB} \\
+Python/CNF correspondence &
+Not proved &
+Future Level C obligation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+This bridge matters for claim-boundary discipline. It prevents the finite
+audit from being presented as a purely syntactic artifact report, because the
+central right condition is tied to a Lean semantic predicate. At the same time,
+it preserves the boundary between semantic anchoring and artifact correctness.
+The finite audit remains a finite audit under the declared encoding; the Lean
+bridge identifies a semantic target and proves limited semantic facts about
+that target.
+
+This bridge is intentionally limited. It does not prove Python
+\code{\_right\_clauses} correctness, SAT/CNF artifact correctness,
+semantic-to-CNF correctness, full selector-free equivalence to Lean
+\code{MINLIB}, that the finite certificate is semantically correct as a whole,
+or any family-scale lift. Those remain future Level C obligations or outside
+M4 scope.

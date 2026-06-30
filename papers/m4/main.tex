@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{xurl}
 \usepackage{enumitem}
+\usepackage[numbers]{natbib}
 
 \DeclareRobustCommand{\code}[1]{\path{#1}}
 \setlength{\emergencystretch}{2em}
@@ -49,6 +50,13 @@ end-to-end verification result or a new general theorem of Sen.
 \input{sections/05_lean_bridge}
 \input{sections/06_boundaries}
 \input{sections/07_discussion}
+\input{sections/09_related_work}
 \input{sections/08_limitations}
+
+\appendix
+\input{sections/appendix_reproducibility}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
 
 \end{document}

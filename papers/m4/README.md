@@ -29,9 +29,22 @@ In particular, the paper must not claim:
 ## Build Policy
 
 The LaTeX files are written to be syntactically reasonable, but this workspace
-does not yet define a paper-specific build target. Add a `Makefile`,
-reproducibility note, bibliography, and archival record only when the preprint
-workspace moves beyond draft status.
+does not yet define a paper-specific build target. A minimal bibliography and
+reproducibility appendix are included for review.
+
+Current lightweight build sequence from `papers/m4/`:
+
+```text
+lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen_m4_latex_build main.tex
+cd /tmp/sen_m4_latex_build
+BIBINPUTS=/path/to/Sen-Lean4/papers/m4: bibtex main
+cd /path/to/Sen-Lean4/papers/m4
+lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen_m4_latex_build main.tex
+lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen_m4_latex_build main.tex
+```
+
+Add a `Makefile` and archival record only when the preprint workspace moves
+beyond draft status.
 
 Do not commit generated PDFs or auxiliary LaTeX outputs unless a later
 repository policy or paper-release decision explicitly requires them.

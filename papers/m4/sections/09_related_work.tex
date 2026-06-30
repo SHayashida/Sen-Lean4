@@ -1,0 +1,83 @@
+\section{Related Work And Positioning}
+
+\subsection*{SAT-Based Computational Social Choice}
+
+M4 uses a finite social-choice artifact in a tradition where SAT and automated
+reasoning have been used to analyze impossibility and existence questions.
+Computer-aided proofs of Arrow-style impossibility results, automated search
+for impossibility theorems, and SAT-based synthesis or search for social
+choice functions are well established \citep{tanglin2009computer,
+geist2011automated,brandtgeist2016strategyproof}. Sen's liberal paradox is
+the motivating social-choice setting for the present artifact
+\citep{sen1970}. M4 is complementary to this line rather than a replacement
+for it. It is not a new SAT search result, a speed result, or a new general
+impossibility theorem. The finite Sen24 case is used here because it is small
+enough to audit completely while still exposing the gap between an
+impossibility report and a justified repair/reporting claim.
+
+This difference in emphasis matters. Much SAT-based social-choice work asks
+whether a rule exists, whether an impossibility can be found, or whether a
+small instance can illuminate a larger theorem. M4 assumes that finite
+artifacts can already be useful and asks a later reporting question: once the
+artifact reports inconsistency or repairability, which public claim is
+licensed by the evidence actually recorded?
+
+\subsection*{Certified SAT And Formal Verification}
+
+The paper is also adjacent to certified SAT checking and proof-assistant work.
+Lean~4 provides the proof-assistant setting for the semantic target used here
+\citep{moura2021lean4}, while RAT/DRAT/LRAT-style checking belongs to the
+broader ecosystem of proof-carrying SAT artifacts \citep{cruzfilipe2017lrat,
+wetzler2014drat}. Mechanized social-choice formalization is an established
+line of work in its own right \citep{nipkow2009social}. M4 draws on that
+background by connecting its central right-condition target to a small
+Lean-backed semantic definition. The claim remains limited: the Lean bridge
+supports \code{RightAtomSemantics}, orientation invariance, and a sufficient
+direction from two fixed right conditions to \code{MINLIB}. It does not prove
+Python/CNF artifact correctness, semantic-to-CNF correctness, or full
+selector-free equivalence to Lean \code{MINLIB}.
+
+This places the paper between two stronger endpoints. It is more than an
+uninterpreted finite table, because one central semantic target is tied to
+Lean. It is less than an end-to-end certified artifact, because the generated
+clauses and finite assignments are not proved equivalent to Lean social-choice
+semantics. The point of the comparison is to make that middle position
+explicit rather than to blur it.
+
+\subsection*{Diagnosis, MUS/MCS, And Repair Explanation}
+
+Repair and explanation questions connect M4 to diagnosis-oriented work such as
+assumption-based truth maintenance and model-based diagnosis
+\citep{dekleer1986atms,reiter1987diagnosis}. They also connect to modern
+optimization and repair tooling, including MaxSAT-oriented views of minimal
+relaxation \citep{bacchus2021maxsat}. M4 does not contribute a new diagnosis,
+MUS/MCS, MaxSAT, or repair algorithm. Its concern is downstream of such
+procedures: once an artifact has recorded conflicts, repairs, or grouped
+reports, what exactly is the artifact entitled to say? The finite audit in
+Section~\ref{sec:finite-audit} checks repair-empty SAT cells, UNSAT
+orbit/fiber exactness, and support truncation for shape-blind reports under a
+declared encoding. The methodological question is not how to find a repair
+faster, but how to avoid over-reporting what the repair evidence licenses.
+
+\subsection*{Abstraction, Reportability, And Claim Boundaries}
+
+M4 is closest to work on explicit abstraction and reporting contracts.
+Constraint hierarchies, for example, make tradeoffs among constraints explicit
+rather than hiding them inside a single feasibility statement
+\citep{borning1992constraint}. M4 uses a different but related discipline: it
+separates finite audit evidence, declared semantic assumptions, a partial
+Lean-backed semantic target, and future correctness obligations. Within the
+Sen-Lean4 lineage, M1 made finite evidence diagnosable, M1.5 showed that raw
+repair presentation need not be canonical, M2 established the semantic bridge
+and general Sen theorem, and M3 supplied reportability conditions for grouped
+repair reports. M4 does not re-prove those layers. It uses them to frame a
+claim-boundary audit for the declared finite encoding.
+
+The contribution is therefore methodological and scope-disciplined. M4 does
+not solve AI governance or provide a general theory of automated decision
+support. It gives a small, auditable example of how a formal artifact can say:
+these finite claims are certified under the declared encoding; this semantic
+target is Lean-backed; these stronger Python/CNF and semantic-to-CNF bridges
+remain future correctness obligations.
+That separation is the main novelty claimed here, not a new theorem of social
+choice, a new SAT engine, or a new repair calculus.

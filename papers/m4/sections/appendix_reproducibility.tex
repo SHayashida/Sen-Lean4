@@ -1,0 +1,126 @@
+\section{Reproducibility And Artifact Binding}
+\label{sec:reproducibility}
+
+This appendix binds the M4 preprint draft to repository-local sources and
+documented evidence. It does not introduce a new solver run, a new generated
+artifact, or a new proof of encoding correctness.
+
+\subsection{Repository And Commit Binding}
+
+The repository is \code{SHayashida/Sen-Lean4}. This draft was prepared after
+commit:
+
+\begin{quote}
+\code{8e060ff docs(m4): align preprint claim-boundary draft}.
+\end{quote}
+
+If this manuscript is later released or archived, the release should bind the
+paper to the final release or tag commit, not necessarily to \code{8e060ff}.
+The commit above records the starting point for this reproducibility layer.
+
+\subsection{Main Source Files}
+
+The M4 manuscript sources are:
+
+\begin{itemize}[leftmargin=*]
+\item \code{papers/m4/main.tex};
+\item \code{papers/m4/CLAIM\_BOUNDARY.md};
+\item \code{papers/m4/README.md};
+\item \code{papers/m4/sections/*.tex};
+\item \code{papers/m4/refs.bib}.
+\end{itemize}
+
+\code{papers/m4/CLAIM\_BOUNDARY.md} is the claim-boundary source of truth for
+the preprint. The manuscript prose should not broaden those claims.
+The related-work and reproducibility additions in this draft are bibliographic
+and documentary. They do not change the finite-audit evidence, the declared
+encoding, or the Lean source files.
+
+\subsection{Lean Bridge Source}
+
+The Lean-backed semantic target discussed in Section~5 is implemented in:
+
+\begin{quote}
+\code{SocialChoiceAtlas/Sen/RightAtomBridge.lean}.
+\end{quote}
+
+The confirmed Lean-backed items are:
+
+\begin{itemize}[leftmargin=*]
+\item \code{RightAtomSemantics};
+\item \code{rightAtomSemantics\_symm};
+\item \code{rightAtomSemantics\_iff\_swap};
+\item \code{twoRightAtoms\_imply\_MINLIB}.
+\end{itemize}
+
+These items provide a Level B semantic target for the central right condition.
+They do not prove Python/CNF artifact correctness or semantic-to-CNF
+correctness.
+
+\subsection{Finite-Audit Source Documents}
+
+The finite-audit claims in Section~\ref{sec:finite-audit} are grounded in the
+following repository documents:
+
+\begin{itemize}[leftmargin=*]
+\item \code{docs/m4\_semantic\_encoding\_boundary.md};
+\item \code{docs/m4\_scope\_decision\_mask\_shape\_phase\_diagram.md};
+\item \code{docs/m4\_mask\_shape\_collapse\_law\_audit\_result.md};
+\item \code{docs/m4\_certificate2\_phase\_diagram\_checker\_result.md};
+\item \code{docs/m4\_finite\_data\_closure\_note.md}.
+\end{itemize}
+
+Together these documents record the declared encoding boundary, the
+mask--shape analysis unit, the 48-cell phase-diagram audit, SAT-cell
+\code{RepairEmpty}, UNSAT-cell orbit/fiber exactness, shape-blind support
+truncation, and the explicit non-claims around Lean theorem status,
+semantic-to-CNF correctness, and family-scale generalization.
+The appendix cites these documents as manuscript evidence bindings. It does
+not claim that their temporary output paths are release artifacts, and it does
+not require those temporary directories to be regenerated for this draft.
+
+\subsection{Build Command}
+
+The lightweight manuscript build used for this draft is run from
+\code{papers/m4/}:
+
+\begin{quote}
+\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\end{quote}
+
+With bibliography resolution, the draft uses:
+
+\begin{quote}
+\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\end{quote}
+\begin{quote}
+\code{cd /tmp/sen\_m4\_latex\_build}
+\end{quote}
+\begin{quote}
+\code{BIBINPUTS=/path/to/Sen-Lean4/papers/m4: bibtex main}
+\end{quote}
+\begin{quote}
+\code{cd /path/to/Sen-Lean4/papers/m4}
+\end{quote}
+\begin{quote}
+\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\end{quote}
+\begin{quote}
+\code{lualatex -interaction=nonstopmode -halt-on-error -output-directory=/tmp/sen\_m4\_latex\_build main.tex}
+\end{quote}
+
+No M4-specific \code{make} target is currently defined.
+The generated PDF, auxiliary files, bibliography files, and logs produced by
+these commands are build outputs. They should not be committed unless a later
+paper-release policy explicitly says otherwise.
+
+\subsection{What Is Not Reproduced Here}
+
+No new solver run is part of this preprint draft. No CNF or LRAT artifacts are
+regenerated here. No Level C semantic-to-CNF correctness proof is provided.
+The appendix binds the manuscript to documented evidence and source files; it
+does not claim to regenerate the finite-audit pipeline or to verify generated
+artifacts end to end. In particular, this appendix should not be read as a
+claim that Python clause generation, SAT assignment semantics, or CNF artifact
+correctness has been proved. Those remain future correctness obligations under
+the paper's Level C terminology.

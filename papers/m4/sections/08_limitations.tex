@@ -1,7 +1,11 @@
 \section{Limitations And Future Work}
 
-This section will collect limitations and future work as first-class parts of
-the paper rather than as buried caveats.
+This paper is deliberately not an end-to-end verification result. That is a
+scope choice, not a hidden deficiency. The purpose of M4 is to make the
+evidence boundary explicit for a finite social-choice artifact: which claims
+are certified under the declared encoding, which semantic target is
+Lean-backed, and which stronger correctness obligations remain outside the
+paper.
 
 M4 does not prove:
 
@@ -10,19 +14,47 @@ M4 does not prove:
 \item \code{\_right\_clauses} correctness;
 \item \code{FiniteSchema} profile correctness;
 \item SAT assignment semantics as Lean social welfare functions;
-\item semantic-to-CNF correctness;
+\item full semantic-to-CNF correctness;
 \item CNF artifact correctness;
 \item full selector-free encoding equivalence to Lean \code{MINLIB};
 \item a structural proof of the Mask-Shape Collapse Law;
-\item the general Sen theorem as a new M4 result;
-\item family-scale CNF, LRAT, atlas, or repair lifts.
+\item a new general Sen theorem;
+\item family-scale CNF/LRAT/atlas/repair lifts.
 \end{itemize}
 
-The general Sen theorem is an M2 semantic-bridge result, not an M4 result. M4
-uses that line as background while focusing on claim boundaries for the
-declared finite artifact.
+The general Sen theorem belongs to the M2 semantic bridge and is not a new M4
+claim. M4 uses that established project context as background while keeping
+its own claim narrower: a finite audit under the declared M4 encoding, a
+Lean-backed semantic target for the central right condition, and explicit
+future correctness obligations.
 
-TODO: Group future work into Level C artifact correctness, structural
-explanation of the finite audit regularities, and possible family-scale
-extensions. Keep these as future assurance obligations rather than hidden
-deficiencies.
+\subsection*{Future Level C Obligations}
+
+The future artifact-correctness layer is Level C. It should be treated as a
+set of future assurance obligations, not as an implicit premise of the present
+paper. Completing Level C would require:
+
+\begin{itemize}[leftmargin=*]
+\item a representation map between Lean profiles and finite schema profiles;
+\item a mapping between Lean strict preference predicates and generator
+  variables;
+\item SAT assignment semantics;
+\item a proof that Python right clauses encode the Lean right-condition
+  semantics;
+\item artifact-level correctness for generated CNF.
+\end{itemize}
+
+These obligations would strengthen the project from a claim-boundary audit
+over a declared encoding into an artifact-level semantic correctness result.
+They are not claimed here.
+
+\subsection*{Future Research Directions}
+
+Future work separates into three tracks. The first is Level C artifact
+correctness: connecting the Python and CNF artifact layers to the Lean-backed
+semantic target. The second is structural explanation: proving, rather than
+only finitely auditing, why the observed collapse pattern holds in the Sen24
+case. The third is broader application: testing whether the same
+claim-boundary discipline helps other social-choice artifacts or future
+AI-mediated governance artifacts. That broader track is downstream relevance,
+not a claim that M4 solves AI governance or proves alignment properties.

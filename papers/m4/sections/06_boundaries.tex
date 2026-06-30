@@ -1,36 +1,69 @@
 \section{Claim Boundaries}
 
-This section should be based directly on \code{papers/m4/CLAIM_BOUNDARY.md}.
-Its role is to make the allowed and forbidden claims visible before the paper
-states technical results in detail.
+M4 treats formal artifacts as evidence-bearing objects. The question is not
+only whether an artifact is internally correct, but also which repair or
+reporting claims the artifact licenses. A finite certificate can justify a
+specific report under a declared encoding without also proving every semantic
+or implementation bridge that a stronger statement would require. This section
+therefore states the boundary between claims made in M4 and claims reserved for
+future work.
+
+The boundary has three evidence layers. The first is the finite-data audit
+layer: under the declared M4 Sen24 encoding, the paper reports the audited
+repair and reporting structure of the finite case. The second is the
+Lean-backed semantic target layer: the central right-condition target is tied
+to a Lean predicate and to a sufficient direction into \code{MINLIB}. The third
+is the future artifact-correctness layer: Python clause generation, generated
+CNF artifacts, and full semantic-to-CNF correctness remain future assurance
+obligations. These layers must not be collapsed into one claim.
 
 \begin{center}
-\begin{tabularx}{\linewidth}{@{}p{0.35\linewidth}p{0.30\linewidth}X@{}}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
-Bridge & Status & M4 wording \\
+Bridge & Status in M4 & Safe wording \\
 \midrule
-Right-condition semantic target to Lean semantic predicate &
-Crossed at Level B for the declared predicate definition &
-Lean-backed semantic target \\
-Two fixed right conditions to Lean \code{MINLIB} &
-Crossed in the sufficient direction by \code{twoRightAtoms_imply_MINLIB} &
-Sufficient Lean bridge \\
-Python right clauses to Lean right-condition semantics &
+Finite audit under declared M4 encoding &
+Claimed under declared encoding &
+Finite audit / paper-facing certificate under the declared Sen24 scope \\
+Central right-condition semantic target \(\leftrightarrow\) Lean semantic
+predicate &
+Lean-backed &
+Lean-backed semantic target, stated as \code{RightAtomSemantics} \\
+Orientation invariance for the right-condition target &
+Lean-backed &
+Orientation invariance through \code{rightAtomSemantics_symm} and
+\code{rightAtomSemantics_iff_swap} \\
+Two fixed right conditions \(\Rightarrow\) Lean \code{MINLIB} &
+Sufficient direction only &
+Sufficient Lean bridge via \code{twoRightAtoms_imply_MINLIB} \\
+Python \code{\_right\_clauses} \(\leftrightarrow\) Lean right-condition
+semantics &
 Not crossed &
 Future Level C obligation \\
-CNF artifacts to Lean semantics &
+CNF artifacts \(\leftrightarrow\) Lean semantics &
 Not crossed &
 Future Level C obligation \\
 Full selector-free encoding equivalence &
 Not crossed &
 Not claimed \\
+Family-scale CNF/LRAT/atlas/repair lift &
+Not claimed &
+Outside M4 scope \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-TODO: Add a prose version of the two-bridge distinction, with Level B as the
-semantic target bridge and Level C as future artifact correctness.
+The table uses ``Lean-backed'' only for facts confirmed by the inspected Lean
+bridge: \code{RightAtomSemantics}, orientation invariance, and the sufficient
+direction from two fixed right conditions for distinct voters to
+\code{MINLIB}. It does not say that the finite audit has been proved
+semantically correct by Lean, and it does not say that the Python or CNF layers
+have been connected to the Lean semantics.
 
-Safe claim-boundary note: this section should remain the manuscript's guard
-against claim drift. Any stronger wording must first be added to and justified
-in \code{CLAIM_BOUNDARY.md}.
+The general Sen theorem belongs to the M2 semantic bridge and is not a new M4
+claim. M4 may rely on that project context to explain why Sen24 is an
+interesting case, but the present paper does not re-prove the general theorem
+or newly claim it as an M4 result.
+
+M4 is therefore a claim-boundary audit, not an end-to-end verification result.

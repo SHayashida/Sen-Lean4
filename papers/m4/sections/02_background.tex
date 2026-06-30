@@ -1,20 +1,91 @@
 \section{Background And Running Lineage}
 
-This section will situate M4 in the existing Sen24 artifact line without
-turning the scaffold into a full literature review or a new theorem statement.
-The purpose is to explain which earlier milestones supply background and which
-claims remain outside M4.
+\subsection{Finite Social-Choice Artifacts}
 
-M1 separates proof, audit, witness, and assumptions in the finite Sen24
-evidence layer. M1.5 shows that valid impossibility evidence does not determine
-a canonical raw repair report. M2 contains the semantic obstruction bridge and
-the general Sen theorem; those results are background, not new M4 claims. M3
-gives sufficient conditions for grouped repair reporting. M4 focuses on claim
-boundaries for the declared finite artifact.
+M4 works with finite social-choice artifacts rather than unrestricted
+social-choice theory. A finite artifact may record that a requirement set is
+unsatisfiable, that a relaxed requirement set is satisfiable, that a particular
+witness caused the conflict, or that a proposed deletion repairs it. Those are
+useful statements, but they are not all the same kind of statement. An
+impossibility result, a satisfiability result, a witness report, and a repair
+presentation each depend on different pieces of evidence.
 
-TODO: Add concise citations to the relevant repository artifacts and paper
-workspaces once the bibliography policy for this preprint is set.
+The background question for this paper is therefore not only whether a finite
+artifact was checked. It is what the artifact is entitled to report. A repair
+claim may require more than an UNSAT certificate; a grouped reporting claim may
+require more than a list of raw repairs; a semantic claim may require more than
+a successful finite enumeration. M4 treats these as trust-boundary questions.
+It asks which reporting claims are licensed under a declared encoding and
+which stronger claims must remain future correctness obligations.
 
-Safe claim-boundary note: this section must not imply that M4 reproves M2,
-lifts CNF or LRAT artifacts to a family theorem, or establishes a new general
-social-choice result.
+\subsection{The Sen24 Setting}
+
+The running case is Sen24: two voters and four alternatives. It is deliberately
+small. The point of using such a small case is not that the finite instance
+settles social choice in general, but that its relevant finite structure can
+be audited completely. In this setting, the artifact can enumerate the finite
+status table, distinguish SAT and UNSAT behavior, and inspect repair/reporting
+structure without relying on sampling.
+
+Sen24 is used here as a small complete audit case, not as a substitute for the
+general Sen theorem. It is rich enough to contain nontrivial impossibility and
+repair behavior, but controlled enough that the claim boundary can be stated
+precisely. This makes it a useful case study for asking what a formal
+social-choice artifact may report once its finite evidence, semantic
+assumptions, and implementation assumptions are separated.
+
+\subsection{The M1--M3 Lineage}
+
+M1 supplies the finite-artifact discipline for the base Sen24 atlas. It
+separates Proof, Audit, Witness, and Assumption obligations, so that a checked
+artifact is not treated as a single undifferentiated source of authority. That
+separation is inherited here as background discipline.
+
+M1.5 shows that valid finite impossibility evidence does not determine a
+canonical raw repair presentation. Even when an impossibility result is
+accepted, there can be multiple legitimate ways to present repairs. This is
+why M4 treats repair presentation as a reporting claim that must be audited
+rather than assumed.
+
+M2 contains the semantic bridge and the general Sen theorem. That result is
+project background, not a new M4 claim. M4 does not re-prove M2, and it does
+not use the finite Sen24 artifact as a replacement for the general theorem.
+
+M3 gives reportability conditions under which grouped repair reports can be
+justified relative to a declared contract. Its role here is conceptual: it
+explains why grouped reports need their own contract conditions. M4 remains a
+finite claim-boundary audit under a declared encoding, not a wholesale
+reconstruction of the M3 theorem core.
+
+\subsection{The Remaining M4 Question}
+
+The remaining question is:
+
+\begin{quote}
+Given a declared finite encoding and a repair/reporting interface, what
+exactly may the artifact report, and where must the report stop?
+\end{quote}
+
+M4 answers this question by separating four layers. First, Section~3 declares
+the finite encoding boundary for the Sen24 artifact. Second, Section~4 gives
+the finite 48-cell audit under that declared boundary. Third, Section~5 ties
+the central right-condition target to a partial Lean-backed semantic target.
+Fourth, Sections~6 and~8 state the future correctness obligations that are not
+crossed here, including Python/CNF and semantic-to-CNF bridges.
+
+This organization is meant to prevent a common over-reporting error. A finite
+certificate can support a precise finite reporting claim without also proving
+that the Python generator, every generated clause, and the Lean semantic
+notions have all been connected by an end-to-end correctness theorem. M4 keeps
+those layers visible.
+
+\subsection{Background Boundary}
+
+This paper uses the prior Sen-Lean4 program only to position the M4
+claim-boundary audit. It does not claim a new general Sen theorem; that belongs
+to M2. It does not prove semantic-to-CNF correctness, Python encoder
+correctness, generated-clause correctness, or CNF artifact correctness. Its
+claim is narrower: under the declared encoding, the finite Sen24 artifact is
+audited for what repair and reporting statements it may make, while the
+remaining implementation and semantic-correctness bridges are recorded as
+future correctness obligations.

@@ -1,55 +1,87 @@
 \section{Introduction}
 
-When a computer reports that no decision rule can meet every requirement we
-gave it, the practical question is larger than whether the run was performed
-correctly. We need to know which requirement is responsible, which change would
-repair the conflict, which parts of that answer are backed by the recorded
-evidence, and which parts depend on modeling choices outside the check. This
-paper studies that problem in a small but complete social-choice example: it
-enumerates the possible repairs, checks the recorded evidence, connects one
-central condition to a small formal proof, and separates those supported
-results from stronger correctness claims. It does not claim to solve social
-choice in general or to prove that every layer of the computer encoding is
-correct.
+When a computer shows that no decision rule can meet all the requirements we
+asked for, the next question is not simply whether the computation was
+correct. We also need to know what the result allows us to say. Which
+requirement is responsible for the conflict? Which change would actually
+repair it? Which parts of the answer are backed by the recorded evidence, and
+which parts depend on modeling choices made before the check was run? This
+paper studies that question in a small social-choice case and argues that a
+formal artifact should report only the claims that its evidence supports.
 
-Repair and reporting claims can exceed what an artifact supports when the
-evidence layer, the modeling layer, and the prose interpretation are collapsed
-into one statement. A finite certificate may justify an internal report under a
-declared encoding without also proving that every generated clause, every
-profile representation, or every assignment semantics has been connected to a
-separate formal theory.
+This matters because formal artifacts increasingly sit between technical
+evidence and downstream decisions. In formal social choice, they may report
+that a collection of requirements is impossible or that a proposed repair is
+available. In software verification, they may separate a real inconsistency
+from a modeling artifact. In AI-mediated governance workflows, they may help
+explain why a rule, policy, or constraint set failed. In all of these settings,
+the problem is not only whether an internal check succeeded. The further
+question is what public or scientific claim that check licenses. A correct
+artifact can still be over-reported if its certificate, encoding assumptions,
+and prose interpretation are treated as though they were the same object.
 
-The running case is Sen24: a two-voter, four-alternative social-choice setting
-used here as a small complete artifact. The purpose of the case is not to
-re-prove the general theorem of Sen. The purpose is to make the reportable
-claim boundary visible in a setting where the finite evidence can be audited
-completely.
+The running example is Sen24, a deliberately small instance from social choice
+theory with two voters and four alternatives. The case is small enough for the
+relevant finite evidence to be audited completely, but rich enough to expose
+the gap between an impossibility result and a justified repair report. It
+contains multiple requirements, multiple possible repairs, and nontrivial ways
+to group those repairs for explanation. M4 uses this case because it is a
+controlled setting in which the evidence boundary can be made explicit. It
+does not claim to solve social choice in general, and it does not present the
+finite case as a substitute for a general theorem.
 
-The paper's contribution has two layers. At the methodology level, it argues
-that formal impossibility artifacts should be audited for the repair and
-reporting claims they are entitled to make, not only for local correctness of a
-run. At the technical M4 level, under the declared M4 encoding, it records the
-finite audit, identifies a Lean-backed semantic target for the central
-condition, and leaves artifact-level semantic-to-CNF correctness as a future
-correctness obligation.
+The main contribution is methodological. M4 develops a claim-boundary audit for
+finite social-choice artifacts: it separates finite evidence, declared semantic
+assumptions, partial formal proof, and future correctness obligations. The
+point is not merely to record that an artifact was checked. The point is to say
+which repair and reporting claims are certified under the declared scope,
+which semantic targets are backed by formal definitions, and which stronger
+correctness claims remain outside the present paper.
 
-This paper does not claim Python encoder correctness, generated CNF artifact
-correctness, full semantic-to-CNF correctness, a new general Sen theorem, full
-selector-free encoding equivalence to \code{MINLIB}, or a structural proof of
-the Mask-Shape Collapse Law. It is not an end-to-end verification result.
+The technical instantiation is the declared M4 Sen24 encoding. Under that
+encoding, the finite audit is organized by bundled masks and obstruction
+shapes. It records the 48-cell audit, distinguishes SAT-side repair
+classification from UNSAT-side orbit/fiber exactness, and includes support
+truncation for shape-blind reporting. These are paper-facing certificate
+claims under the declared encoding, not general structural theorems. The paper
+also uses a partial Lean-backed semantic target for the central right
+condition, \code{RightAtomSemantics}, which packages endpoint distinctness
+with Lean \code{Decisive}. The implemented bridge supports orientation
+invariance and the sufficient direction from two fixed right conditions with
+distinct voters to Lean \code{MINLIB}. It does not prove that the Python or
+generated artifact layers encode that target.
 
-The scaffolded contributions are:
+This paper is deliberately not an end-to-end verification result. M4 does not
+prove Python encoder correctness, CNF artifact correctness, full
+semantic-to-CNF correctness, full selector-free equivalence to Lean
+\code{MINLIB}, a new general Sen theorem, or family-scale CNF/LRAT/atlas/repair
+lifts. The general Sen theorem belongs to the M2 semantic bridge and is not a
+new M4 claim. The M4 claim is narrower and more explicit: under the declared
+finite encoding, the paper audits which repair and reporting statements are
+licensed, while marking the remaining artifact-correctness bridges as future
+correctness obligations.
+
+The contributions are:
 
 \begin{itemize}[leftmargin=*]
-\item a plain-language claim-boundary framing for finite social-choice
-  artifacts;
-\item a finite audit statement under the declared M4 encoding;
-\item a Lean-backed semantic target for the central right condition;
-\item an explicit separation between certified finite claims and future
-  correctness obligations;
-\item a reusable outline for safe abstract and introduction wording that avoids
-  overclaiming beyond the evidence.
+\item a claim-boundary framing for finite social-choice artifacts, focused on
+  what repair and reporting claims the evidence licenses;
+\item a complete finite audit under the declared M4 Sen24 encoding, stated as
+  a paper-facing certificate rather than as an unrestricted theorem;
+\item a paper-facing organization of the repair and reporting structure that
+  separates the finite evidence layer from semantic assumptions;
+\item a Lean-backed semantic target for the central right condition, including
+  the sufficient bridge to \code{MINLIB} for two fixed conditions with distinct
+  voters;
+\item an explicit separation of crossed bridges from future correctness
+  obligations, including the uncrossed Python/CNF and artifact-level semantic
+  bridges.
 \end{itemize}
 
-TODO: Replace this scaffold with a full introduction only after the claim
-boundary is reviewed.
+Section~2 situates the case in the M1--M4 artifact line and identifies which
+earlier results are background rather than M4 contributions. Section~3 states
+the declared encoding and scope. Section~4 presents the finite audit as a
+paper-facing certificate. Section~5 describes the Lean-backed semantic target
+and its limits. Section~6 collects the explicit claim boundaries and bridge
+statuses. Section~7 discusses the broader value of auditable abstraction
+contracts. Section~8 records limitations and future correctness obligations.

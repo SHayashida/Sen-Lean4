@@ -1,6 +1,6 @@
 # M4 Preprint Workspace
 
-This directory is a scaffold-level workspace for the M4 preprint:
+This directory contains the working draft of the M4 preprint:
 
 ```text
 Auditable Claim Boundaries for Finite Social-Choice Artifacts: A Sen24 Case Study
@@ -9,9 +9,8 @@ Auditable Claim Boundaries for Finite Social-Choice Artifacts: A Sen24 Case Stud
 ## Status
 
 This workspace is not submission-ready. `main.tex` and the files under
-`sections/` are a structured paper scaffold only. They are intended to preserve
-the plain-language motivation and claim-boundary discipline before any full
-manuscript drafting begins.
+`sections/` form the current preprint draft, with the claim-boundary discipline
+kept explicit while the manuscript is revised.
 
 ## Source Of Truth
 
@@ -29,10 +28,10 @@ In particular, the paper must not claim:
 
 ## Build Policy
 
-The LaTeX files are written to be syntactically reasonable, but this scaffold
+The LaTeX files are written to be syntactically reasonable, but this workspace
 does not yet define a paper-specific build target. Add a `Makefile`,
 reproducibility note, bibliography, and archival record only when the preprint
-workspace moves beyond scaffold status.
+workspace moves beyond draft status.
 
 Do not commit generated PDFs or auxiliary LaTeX outputs unless a later
 repository policy or paper-release decision explicitly requires them.

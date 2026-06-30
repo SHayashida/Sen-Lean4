@@ -1,12 +1,12 @@
 \section{Finite Audit}
 \label{sec:finite-audit}
 
-The declared encoding fixed above turns the M4 evidence object into a finite
-audit. The audit is not a theorem about all
-social choice settings, and it is not a proof that any Python or CNF artifact
-faithfully implements the intended semantics. It is a complete finite-data
-check of the declared Sen24 interface: bundled residual masks, fixed-witness
-right atoms, and obstruction shapes.
+The declared interface fixed in the previous section turns the M4 evidence
+object into a finite audit. The audit is not a theorem about all social choice
+settings, and it is not a proof that any Python or CNF artifact faithfully
+implements the intended semantics. It is a complete finite-data check of the
+declared Sen24 interface: bundled residual masks, fixed-witness right atoms,
+and obstruction shapes.
 
 The basic audit unit is a cell
 \[
@@ -96,7 +96,6 @@ complete bundled-mask by obstruction-shape phase diagram, with SAT cells
 classified as \texttt{RepairEmpty}, UNSAT cells satisfying orbit/fiber
 exactness, shape-blind reports governed by support truncation, and no mixed or
 unknown cells. They do not license stronger claims. In particular, this
-section does not prove Python \texttt{\_right\_clauses} correctness, CNF
-artifact correctness, semantic-to-CNF correctness, full equivalence to Lean
-\texttt{MINLIB}, a structural Mask--Shape Collapse Law, or a family-scale
-theorem of Sen.
+section does not establish Python/CNF artifact correctness, semantic-to-CNF
+correctness, full equivalence to Lean \texttt{MINLIB}, a structural
+Mask--Shape Collapse Law, or any general or family-scale Sen result.

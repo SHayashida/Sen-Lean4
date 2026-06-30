@@ -1,0 +1,55 @@
+\section{Introduction}
+
+When a computer reports that no decision rule can meet every requirement we
+gave it, the practical question is larger than whether the run was performed
+correctly. We need to know which requirement is responsible, which change would
+repair the conflict, which parts of that answer are backed by the recorded
+evidence, and which parts depend on modeling choices outside the check. This
+paper studies that problem in a small but complete social-choice example: it
+enumerates the possible repairs, checks the recorded evidence, connects one
+central condition to a small formal proof, and separates those supported
+results from stronger correctness claims. It does not claim to solve social
+choice in general or to prove that every layer of the computer encoding is
+correct.
+
+Repair and reporting claims can exceed what an artifact supports when the
+evidence layer, the modeling layer, and the prose interpretation are collapsed
+into one statement. A finite certificate may justify an internal report under a
+declared encoding without also proving that every generated clause, every
+profile representation, or every assignment semantics has been connected to a
+separate formal theory.
+
+The running case is Sen24: a two-voter, four-alternative social-choice setting
+used here as a small complete artifact. The purpose of the case is not to
+re-prove the general theorem of Sen. The purpose is to make the reportable
+claim boundary visible in a setting where the finite evidence can be audited
+completely.
+
+The paper's contribution has two layers. At the methodology level, it argues
+that formal impossibility artifacts should be audited for the repair and
+reporting claims they are entitled to make, not only for local correctness of a
+run. At the technical M4 level, under the declared M4 encoding, it records the
+finite audit, identifies a Lean-backed semantic target for the central
+condition, and leaves artifact-level semantic-to-CNF correctness as a future
+correctness obligation.
+
+This paper does not claim Python encoder correctness, generated CNF artifact
+correctness, full semantic-to-CNF correctness, a new general Sen theorem, full
+selector-free encoding equivalence to \code{MINLIB}, or a structural proof of
+the Mask-Shape Collapse Law. It is not an end-to-end verification result.
+
+The scaffolded contributions are:
+
+\begin{itemize}[leftmargin=*]
+\item a plain-language claim-boundary framing for finite social-choice
+  artifacts;
+\item a finite audit statement under the declared M4 encoding;
+\item a Lean-backed semantic target for the central right condition;
+\item an explicit separation between certified finite claims and future
+  correctness obligations;
+\item a reusable outline for safe abstract and introduction wording that avoids
+  overclaiming beyond the evidence.
+\end{itemize}
+
+TODO: Replace this scaffold with a full introduction only after the claim
+boundary is reviewed.

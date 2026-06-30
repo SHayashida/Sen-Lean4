@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+
+\DeclareRobustCommand{\code}[1]{\path{#1}}
+\setlength{\emergencystretch}{2em}
+
+\title{Auditable Claim Boundaries for Finite Social-Choice Artifacts:\\
+A Sen24 Case Study}
+\author{Shunya Hayashida}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Formal artifacts can certify that a decision rule is impossible, inconsistent,
+or repairable. But they do not automatically determine which repair or
+reporting claim is licensed by the evidence. This preprint studies that issue
+in the finite Sen24 setting, treating a small social-choice artifact as a case
+study in disciplined claim reporting. Under the declared M4 encoding, it
+records a finite audit of the repair and reporting structure, including the
+cell classification, repair classification, and grouped-report checks
+documented in the M4 claim boundary. It also identifies one central semantic
+condition and connects it to a Lean-backed target, with a sufficient bridge
+from two fixed conditions to \code{MINLIB}. The paper deliberately separates
+those supported statements from future artifact-correctness obligations,
+including Python encoder correctness, generated-clause correctness, CNF
+artifact correctness, and full semantic-to-CNF correctness. Its contribution is
+a claim-boundary methodology for finite social-choice artifacts, not an
+end-to-end verification result or a new general theorem of Sen.
+\end{abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_declared_encoding}
+\input{sections/04_finite_audit}
+\input{sections/05_lean_bridge}
+\input{sections/06_boundaries}
+\input{sections/07_discussion}
+\input{sections/08_limitations}
+
+\end{document}

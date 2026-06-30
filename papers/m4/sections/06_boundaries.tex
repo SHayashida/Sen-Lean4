@@ -1,0 +1,36 @@
+\section{Claim Boundaries}
+
+This section should be based directly on \code{papers/m4/CLAIM_BOUNDARY.md}.
+Its role is to make the allowed and forbidden claims visible before the paper
+states technical results in detail.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}p{0.35\linewidth}p{0.30\linewidth}X@{}}
+\toprule
+Bridge & Status & M4 wording \\
+\midrule
+Right-condition semantic target to Lean semantic predicate &
+Crossed at Level B for the declared predicate definition &
+Lean-backed semantic target \\
+Two fixed right conditions to Lean \code{MINLIB} &
+Crossed in the sufficient direction by \code{twoRightAtoms_imply_MINLIB} &
+Sufficient Lean bridge \\
+Python right clauses to Lean right-condition semantics &
+Not crossed &
+Future Level C obligation \\
+CNF artifacts to Lean semantics &
+Not crossed &
+Future Level C obligation \\
+Full selector-free encoding equivalence &
+Not crossed &
+Not claimed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+TODO: Add a prose version of the two-bridge distinction, with Level B as the
+semantic target bridge and Level C as future artifact correctness.
+
+Safe claim-boundary note: this section should remain the manuscript's guard
+against claim drift. Any stronger wording must first be added to and justified
+in \code{CLAIM_BOUNDARY.md}.

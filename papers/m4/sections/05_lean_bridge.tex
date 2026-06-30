@@ -1,0 +1,28 @@
+\section{Lean-Backed Semantic Target}
+
+This section will present the Level B bridge implemented in
+\code{SocialChoiceAtlas/Sen/RightAtomBridge.lean}. The bridge is semantic-only:
+it backs the central M4 right-condition target, but it does not prove Python
+clause correctness, CNF correctness, or artifact-level semantic-to-CNF
+correctness.
+
+The bridge defines:
+
+\[
+\texttt{RightAtomSemantics}\ F\ i\ x\ y :=
+x \ne y \land \texttt{Decisive}\ F\ i\ x\ y.
+\]
+
+The inspected Lean file confirms orientation invariance through
+\code{rightAtomSemantics_symm} and \code{rightAtomSemantics_iff_swap}, using
+the relevant \code{Decisive.symm} result. It also confirms the sufficient
+direction \code{twoRightAtoms_imply_MINLIB}: two fixed right conditions for
+distinct voters imply Lean \code{MINLIB}.
+
+TODO: Explain why this is enough to name a Lean-backed semantic target for the
+central condition, but not enough to prove full selector-free equivalence to
+\code{MINLIB}.
+
+Safe claim-boundary note: say ``Lean-backed semantic target'' and ``sufficient
+Lean bridge.'' Do not say that the Python clauses, CNF artifacts, or full
+encoding have been proved correct.

@@ -1,0 +1,50 @@
+M4 finite-audit replay environment
+commit=632cbe2d45a2cf122e063c463427815624687c40
+working_directory=/Users/linda/Documents/Sen-Lean4
+
++ python --version || true
+pyenv: python: command not found
+
+The `python' command exists in these Python versions:
+  3.10.13
+  3.12.5
+
+Note: See 'pyenv help global' for tips on allowing both
+      python2 and python3 to be found.
+
++ python3 --version || true
+Python 3.9.6
+
++ pip freeze | sed -n '1,120p' || true
+pyenv: pip: command not found
+
+The `pip' command exists in these Python versions:
+  3.10.13
+  3.12.5
+
+Note: See 'pyenv help global' for tips on allowing both
+      python2 and python3 to be found.
+
++ which python || true
+/Users/linda/.pyenv/shims/python
+
++ which python3 || true
+/Users/linda/.pyenv/shims/python3
+
++ which z3 || true
+z3 not found
+
++ z3 --version || true
+zsh:25: command not found: z3
+
++ which cadical || true
+/opt/homebrew/bin/cadical
+
++ cadical --version || true
+3.0.0
+
++ which kissat || true
+kissat not found
+
++ kissat --version || true
+zsh:37: command not found: kissat

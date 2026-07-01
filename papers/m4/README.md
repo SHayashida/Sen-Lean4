@@ -8,10 +8,11 @@ Auditable Claim Boundaries for Finite Social-Choice Artifacts: A Sen24 Case Stud
 
 ## Status
 
-This workspace is in v0.1 release-candidate hardening. Current readiness and
-release risks are recorded in `papers/m4/RELEASE_CHECKLIST.md`, with
-reproducibility evidence summarized in `papers/m4/reproducibility_v0_1.md`.
-It remains a preprint workspace rather than a venue-submission manuscript.
+This workspace is ready for v0.1 release-candidate tagging under the declared
+M4/Sen24 claim boundary. Current readiness and release risks are recorded in
+`papers/m4/RELEASE_CHECKLIST.md`, with reproducibility evidence summarized in
+`papers/m4/reproducibility_v0_1.md`. It remains a preprint workspace rather
+than a venue-submission manuscript.
 
 ## Source Of Truth
 

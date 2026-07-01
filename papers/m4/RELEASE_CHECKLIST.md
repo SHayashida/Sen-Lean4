@@ -2,8 +2,8 @@
 
 ## 1. Current status
 
-Status: not yet ready for a v0.1 release-candidate tag without an explicit
-decision on the finite-audit checker command exposure risk.
+Status: ready for v0.1 release-candidate tagging under the declared M4/Sen24
+claim boundary.
 
 This checklist resolves the required fixes recorded in
 `papers/m4/review_v0_1.md`. It does not implement optional post-v0.1
@@ -71,12 +71,26 @@ lake env lean SocialChoiceAtlas/Sen/RightAtomBridge.lean
 
 Result: passed with exit status `0` and no stdout/stderr.
 
-Finite-audit checker command exposure check: documented command not found in
-the inspected M4 result documents. The relevant scripts exist under
-`scripts/exploration/m4/`, but no release-bound shell command was exposed in
-the result docs inspected in this pass. No finite-audit checker rerun was
-performed and no `papers/m4/repro/m4_finite_audit_checker.log` was created.
-This remains a release-risk item for external reproducibility.
+Finite-audit checker replay: resolved.
+
+No single release-bound command was documented in the M4 result docs, but the
+existing scripts and expected artifacts supported a safe Case B replay wrapper:
+
+```text
+papers/m4/repro/run_m4_finite_audit_replay.sh
+```
+
+The replay ran to exit status `0` and reproduced the documented headline
+values: 48 total cells, 18 `ALL_UNSAT` cells, 30 `ALL_SAT` cells, no
+`MIXED_WITHIN_SHAPE` or `UNKNOWN` cells, 816 repair objects, 46 repair orbits,
+46 cell report fibers, 33 shape-blind fibers, active `RepairEmpty`, orbit/fiber
+exactness, support truncation, and Certificate 2 verdict `PASS`.
+
+Replay artifacts:
+
+- `papers/m4/repro/m4_finite_audit_environment.log`;
+- `papers/m4/repro/m4_finite_audit_checker.log`;
+- `papers/m4/repro/m4_finite_audit_replay_summary.md`.
 
 ## 6. Build and citation checks
 
@@ -109,6 +123,10 @@ The appendix names:
 - the finite-audit evidence documents cited by the manuscript;
 - the release-candidate reproducibility evidence note;
 - the Lean bridge compilation log;
+- the finite-audit replay wrapper;
+- the finite-audit checker replay log;
+- the finite-audit replay environment log;
+- the finite-audit replay summary;
 - the SHA-256 evidence manifest;
 - the build convention;
 - the non-reproduced artifacts and future Level C obligations.
@@ -118,15 +136,13 @@ build output is intended to be committed.
 
 ## 8. Remaining blockers / release risks
 
-Finite-audit checker command exposure remains unresolved. Before tagging a
-public v0.1 release candidate, either add a documented release-bound command or
-wrapper for the finite-audit checker pipeline, or explicitly accept that v0.1
-relies on recorded finite-data result documents rather than a one-command
-external checker rerun recipe.
+None known for v0.1 release-candidate tagging under the declared M4/Sen24 claim
+boundary.
 
-The M4 v0.1 preprint workspace remains within the declared M4/Sen24 claim
-boundary, but this reproducibility risk should be resolved or explicitly
-accepted before release-candidate tagging.
+The finite-audit checker-command exposure risk is resolved by the Case B replay
+wrapper and logs. This does not close Level C artifact correctness, checker
+formalization in Lean, semantic-to-CNF correctness, or family-scale
+generalization.
 
 ## 9. Optional post-v0.1 improvements
 

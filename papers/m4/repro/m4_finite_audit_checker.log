@@ -1,0 +1,158 @@
+M4 finite-audit checker replay log
+command=papers/m4/repro/run_m4_finite_audit_replay.sh
+commit=632cbe2d45a2cf122e063c463427815624687c40
+working_directory=/Users/linda/Documents/Sen-Lean4
+
+M4 finite-audit replay
+repository_root=/Users/linda/Documents/Sen-Lean4
+working_directory=/Users/linda/Documents/Sen-Lean4
+commit=632cbe2d45a2cf122e063c463427815624687c40
+out_root=/tmp/sen_m4_repro
+solver=cadical
+timeout=10.0
+
++ python3 scripts/exploration/m4/residual_class_coverage_certificate.py --solver cadical --timeout 10.0 --out /tmp/sen_m4_repro/residual_class_coverage_certificate
+{
+  "aggregate_status_counts": {
+    "ALL_W_SAT": 21,
+    "ALL_W_UNSAT": 2,
+    "MIXED": 9,
+    "UNKNOWN": 0
+  },
+  "all_w_unsat_case_ids": [
+    "case_11101",
+    "case_11111"
+  ],
+  "certificate_verdict": "CONDITIONAL_PASS",
+  "core_formula_verdict": {
+    "checked_case_count": 32,
+    "mismatching_case_ids": [],
+    "mixed_case_ids": [
+      "case_01101",
+      "case_01110",
+      "case_01111",
+      "case_10100",
+      "case_10101",
+      "case_10110",
+      "case_10111",
+      "case_11100",
+      "case_11110"
+    ],
+    "unknown_case_ids": [],
+    "verdict": "CONDITIONAL"
+  },
+  "mixed_case_ids": [
+    "case_01101",
+    "case_01110",
+    "case_01111",
+    "case_10100",
+    "case_10101",
+    "case_10110",
+    "case_10111",
+    "case_11100",
+    "case_11110"
+  ],
+  "out_dir": "/tmp/sen_m4_repro/residual_class_coverage_certificate",
+  "total_masks": 32,
+  "total_witness_rows": 592,
+  "unknown_case_ids": []
+}
+
++ python3 scripts/exploration/m4/mask_shape_collapse_law_audit.py --certificate-dir /tmp/sen_m4_repro/residual_class_coverage_certificate --solver cadical --timeout 10.0 --out /tmp/sen_m4_repro/mask_shape_collapse_law_audit
+{
+  "cell_orbit_fiber_exactness_verdict": "PASS",
+  "cell_report_fiber_count": 46,
+  "cell_status_counts": {
+    "ALL_SAT": 30,
+    "ALL_UNSAT": 18,
+    "MIXED_WITHIN_SHAPE": 0,
+    "UNKNOWN": 0
+  },
+  "certificate_verdict": "PASS",
+  "expected_scratch_totals": {
+    "all_w_unsat_repair_object_count": 276,
+    "all_w_unsat_repair_orbit_count": 16,
+    "combined_repair_object_count": 816,
+    "combined_repair_orbit_count": 46,
+    "mixed_only_cell_report_fiber_count": 30,
+    "mixed_only_repair_object_count": 540,
+    "mixed_only_repair_orbit_count": 30,
+    "mixed_only_shape_blind_fiber_count": 24,
+    "mixed_only_unsat_witness_row_count": 144
+  },
+  "expected_scratch_totals_match": true,
+  "input_certificate_dir": "/tmp/sen_m4_repro/residual_class_coverage_certificate",
+  "irregular_cell_count": 0,
+  "non_circularity_verdict": "PASS",
+  "observed_scratch_totals": {
+    "all_w_unsat_repair_object_count": 276,
+    "all_w_unsat_repair_orbit_count": 16,
+    "combined_repair_object_count": 816,
+    "combined_repair_orbit_count": 46,
+    "mixed_only_cell_report_fiber_count": 30,
+    "mixed_only_repair_object_count": 540,
+    "mixed_only_repair_orbit_count": 30,
+    "mixed_only_shape_blind_fiber_count": 24,
+    "mixed_only_unsat_witness_row_count": 144
+  },
+  "orbit_stabilizer_verdict": "PASS",
+  "q_invariance_verdict": "PASS",
+  "repair_object_count": 816,
+  "repair_object_scope_verdict": "PASS",
+  "repair_orbit_count": 46,
+  "shape_blind_fiber_count": 33,
+  "support_truncation_law_verdict": "PASS",
+  "total_masks": 32,
+  "unknown_cell_count": 0,
+  "unsat_cell_count": 18,
+  "unsat_witness_instance_count": 216,
+  "well_definedness_verdict": "PASS"
+}
+
++ python3 scripts/exploration/m4/certificate2_phase_diagram_checker.py --certificate1-dir /tmp/sen_m4_repro/residual_class_coverage_certificate --mask-shape-dir /tmp/sen_m4_repro/mask_shape_collapse_law_audit --out /tmp/sen_m4_repro/certificate2_phase_diagram_checker
+{
+  "certificate2_verdict": "PASS",
+  "certificate2_verdict_reason": "all Certificate 2 phase-diagram checks passed",
+  "hard_checks": {
+    "certificate3_4_absorption": "PASS",
+    "non_circularity": "PASS",
+    "orbit_fiber_exactness": "PASS",
+    "phase_diagram_coverage": "PASS",
+    "repair_empty": "PASS",
+    "support_truncation": "PASS",
+    "unsat_cell_exactness_scope": "PASS"
+  }
+}
+
+machine_readable_output_hashes:
+50a2c3dd783707b9c1795c26b77c6663c14ca4f20d420e2803e451a56b2e6d8f  /tmp/sen_m4_repro/residual_class_coverage_certificate/coverage_summary.json
+653a2193996cdd4337b6836816b862330088304b08d57478341813eb832450c2  /tmp/sen_m4_repro/residual_class_coverage_certificate/residual_class_coverage_certificate.json
+ed05c308fe81cda08700a19d73487f2692780dcdda621e8b957f2abd2f2f985b  /tmp/sen_m4_repro/mask_shape_collapse_law_audit/mask_shape_collapse_summary.json
+c0ddccaa2f828ec7b113d83cde7dae64897253462162b3425ec327943205fa4b  /tmp/sen_m4_repro/mask_shape_collapse_law_audit/mask_shape_collapse_certificate.json
+e56550fe19cf96a8640977af25a1190b494f39569fca3f794d51cdc9498dfba1  /tmp/sen_m4_repro/certificate2_phase_diagram_checker/m4_certificate2_summary.json
+e366a6606bea79166d9bdfdb97f3f7d7568d3fc0cb73229f5111e57b9b555efc  /tmp/sen_m4_repro/certificate2_phase_diagram_checker/m4_certificate2_certificate.json
+
+certificate2_summary_json:
+{
+  "all_sat_cells": 30,
+  "all_unsat_cells": 18,
+  "cell_report_fiber_count": 46,
+  "certificate2_verdict": "PASS",
+  "certificate2_verdict_reason": "all Certificate 2 phase-diagram checks passed",
+  "certificate3_absorbed": true,
+  "certificate4_absorbed": true,
+  "mixed_within_shape_cells": 0,
+  "non_circularity_verdict": "PASS",
+  "orbit_fiber_exactness_verdict": "PASS",
+  "orbit_stabilizer_verdict": "PASS",
+  "repair_empty_cell_count": 30,
+  "repair_empty_verdict": "PASS",
+  "repair_object_count": 816,
+  "repair_orbit_count": 46,
+  "shape_blind_fiber_count": 33,
+  "support_truncation_verdict": "PASS",
+  "total_cells": 48,
+  "unknown_cells": 0
+}
+
+exit_status=0

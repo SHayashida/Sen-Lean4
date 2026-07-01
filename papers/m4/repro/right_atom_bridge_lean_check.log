@@ -1,0 +1,16 @@
+M4 v0.1 Lean bridge compilation check
+
+Command:
+lake env lean SocialChoiceAtlas/Sen/RightAtomBridge.lean
+
+Date/time:
+2026-07-01T21:41:17+0900
+
+Repository commit:
+e393e5615410f56390a166421060611d0e16267a
+
+Exit status:
+0
+
+Output:
+No stdout or stderr was emitted on successful Lean compilation.

@@ -1,4 +1,5 @@
 \section{Limitations And Future Work}
+\label{sec:limitations}
 
 This paper is deliberately not an end-to-end verification result. That is a
 scope choice, not a hidden deficiency. The purpose of M4 is to make the
@@ -41,12 +42,19 @@ paper. Completing Level C would require:
 \item SAT assignment semantics;
 \item a proof that Python right clauses encode the Lean right-condition
   semantics;
-\item artifact-level correctness for generated CNF.
+\item artifact-level correctness for generated CNF;
+\item a Lean reconstruction or independent formalization of the finite-audit
+  checker obligations.
 \end{itemize}
 
 These obligations would strengthen the project from a claim-boundary audit
 over a declared encoding into an artifact-level semantic correctness result.
 They are not claimed here.
+
+The finite audit currently relies on documented checker artifacts and recorded
+finite-data evidence. The checker itself is not yet formalized in Lean. A Lean
+reconstruction of the checker would be a stronger future assurance step; this
+is a future Level C / checker-hardening obligation, not a current M4 claim.
 
 \subsection*{Future Research Directions}
 

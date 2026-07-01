@@ -69,11 +69,11 @@ fixed right conditions with distinct voters to Lean \code{MINLIB}.
 Those are important facts, but their scope is limited. They say that the
 central right-condition target used by the paper has a Lean-level semantic
 meaning and that the fixed two-right package is sufficient for Lean
-\code{MINLIB}. They do not prove full selector-free equivalence to
-\code{MINLIB}. They do not prove \code{_right_clauses} correctness, Python
-encoder correctness, SAT/CNF artifact correctness, or semantic-to-CNF
-correctness. The bridge therefore supports semantic discipline without
-collapsing Level B semantic anchoring into Level C artifact correctness.
+\code{MINLIB}. They do not turn the Python/CNF artifacts or the finite
+certificate as a whole into Lean-verified artifacts; Section~\ref{sec:limitations}
+records the full non-claim list. The bridge therefore supports semantic
+discipline without collapsing Level B semantic anchoring into Level C artifact
+correctness.
 
 \subsection{Relation To M1--M3}
 

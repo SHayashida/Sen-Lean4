@@ -2,7 +2,8 @@
 
 ## 1. Current status
 
-Status: ready for v0.1 release-candidate review.
+Status: not yet ready for a v0.1 release-candidate tag without an explicit
+decision on the finite-audit checker command exposure risk.
 
 This checklist resolves the required fixes recorded in
 `papers/m4/review_v0_1.md`. It does not implement optional post-v0.1
@@ -30,9 +31,9 @@ The review listed four required fixes before preprint release:
 | Related Work order | resolved | Related Work intentionally remains after Discussion and before Limitations. In this draft, the section functions as positioning after the paper has established its claim-boundary methodology; moving it earlier is not release-blocking for v0.1. |
 | Declared-encoding qualifier around finite-audit completeness language | resolved | Broad "complete" wording in the abstract, introduction, background, related work, and review note was tightened to keep the finite-audit claim tied to the declared M4/Sen24 encoding or declared interface. |
 
-No required fix remains unresolved. No required fix required new evidence,
-new Lean work, new scripts, regenerated artifacts, or finite-audit evidence
-changes.
+No required fix from the earlier v0.1 review remains unresolved. No required
+fix required new evidence, new Lean work, new scripts, regenerated artifacts,
+or finite-audit evidence changes.
 
 ## 4. Claim-boundary checks
 
@@ -54,7 +55,30 @@ The manuscript still does not claim:
 `papers/m4/CLAIM_BOUNDARY.md` was inspected and not modified. The release
 edits stay within the existing claim boundary.
 
-## 5. Build and citation checks
+## 5. Reproducibility hardening checks
+
+Additional release-candidate reproducibility evidence added in this pass:
+
+- `papers/m4/reproducibility_v0_1.md`;
+- `papers/m4/repro/right_atom_bridge_lean_check.log`;
+- `papers/m4/repro/m4_v0_1_hashes.sha256`.
+
+Lean bridge compilation check:
+
+```text
+lake env lean SocialChoiceAtlas/Sen/RightAtomBridge.lean
+```
+
+Result: passed with exit status `0` and no stdout/stderr.
+
+Finite-audit checker command exposure check: documented command not found in
+the inspected M4 result documents. The relevant scripts exist under
+`scripts/exploration/m4/`, but no release-bound shell command was exposed in
+the result docs inspected in this pass. No finite-audit checker rerun was
+performed and no `papers/m4/repro/m4_finite_audit_checker.log` was created.
+This remains a release-risk item for external reproducibility.
+
+## 6. Build and citation checks
 
 Validation commands for this pass:
 
@@ -74,7 +98,7 @@ The final log scan found no unresolved citations, no undefined references, no
 rerun warnings, and no serious LaTeX errors. The only warning observed was the
 existing LuaLaTeX notice that `inputenc` is ignored with UTF-8 based engines.
 
-## 6. Artifact-binding checks
+## 7. Artifact-binding checks
 
 The appendix names:
 
@@ -83,26 +107,33 @@ The appendix names:
 - the M4 manuscript source files;
 - the Lean bridge source file;
 - the finite-audit evidence documents cited by the manuscript;
+- the release-candidate reproducibility evidence note;
+- the Lean bridge compilation log;
+- the SHA-256 evidence manifest;
 - the build convention;
 - the non-reproduced artifacts and future Level C obligations.
 
 No generated PDF, auxiliary file, `.bbl`, `.blg`, log, rendered PNG, or other
 build output is intended to be committed.
 
-## 7. Remaining blockers
+## 8. Remaining blockers / release risks
 
-None.
+Finite-audit checker command exposure remains unresolved. Before tagging a
+public v0.1 release candidate, either add a documented release-bound command or
+wrapper for the finite-audit checker pipeline, or explicitly accept that v0.1
+relies on recorded finite-data result documents rather than a one-command
+external checker rerun recipe.
 
-The M4 v0.1 preprint workspace is ready for release-candidate review under the
-declared M4/Sen24 claim boundary.
+The M4 v0.1 preprint workspace remains within the declared M4/Sen24 claim
+boundary, but this reproducibility risk should be resolved or explicitly
+accepted before release-candidate tagging.
 
-## 8. Optional post-v0.1 improvements
+## 9. Optional post-v0.1 improvements
 
 These items remain optional and were not implemented in this pass:
 
 - Add a small M4 build target or documented wrapper that hides the BibTeX
   temporary-directory convention.
-- Add artifact hashes or a release manifest once the paper is archived.
 - Compress repeated non-claim lists if a submission venue imposes a tight page
   limit.
 - Add one figure or appendix table showing the 48-cell phase diagram if the

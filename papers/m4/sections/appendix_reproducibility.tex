@@ -84,6 +84,36 @@ The appendix cites these documents as manuscript evidence bindings. It does
 not claim that their temporary output paths are release artifacts, and it does
 not require those temporary directories to be regenerated for this draft.
 
+\subsection{Release-candidate reproducibility evidence}
+
+The v0.1 release-candidate evidence note is:
+
+\begin{quote}
+\code{papers/m4/reproducibility_v0_1.md}.
+\end{quote}
+
+It records the repository state inspected for the release-candidate pass, the
+pre-pass commit, the Lean bridge compilation check, the finite-audit checker
+command search, and the remaining release risk around checker command
+exposure. The Lean bridge check log is:
+
+\begin{quote}
+\code{papers/m4/repro/right_atom_bridge_lean_check.log}.
+\end{quote}
+
+No finite-audit checker log is cited here because the inspected result
+documents did not expose a safe documented command for rerunning the 48-cell
+checker in this pass. The SHA-256 manifest for the Lean bridge source,
+finite-audit evidence documents, and intentional small reproduction log is:
+
+\begin{quote}
+\code{papers/m4/repro/m4_v0_1_hashes.sha256}.
+\end{quote}
+
+These logs and hashes expose release-candidate reproducibility evidence. They
+do not prove Level C semantic-to-CNF correctness, Python checker correctness,
+or formal correctness of the finite-audit checker.
+
 \subsection{Build Command}
 
 The lightweight manuscript build used for this draft is run from

@@ -9,6 +9,7 @@ Current paper workspaces on `main`:
 - `paper/`: M1 finite Sen24 evidence and auditability manuscript workspace.
 - `papers/m1_5/`: M1.5 raw repair non-canonicity manuscript workspace.
 - `papers/m2/`: M2 finite semantic obstruction-bridge manuscript workspace.
+- `papers/m4/`: M4 auditable claim-boundary preprint workspace (Sen24 case study).
 
 Current publication-unit status:
 
@@ -17,6 +18,7 @@ Current publication-unit status:
 | `paper/` | M1 / Sen24 finite-evidence unit. |
 | `papers/m1_5/` | M1.5 workspace; possible integrated publication with M3 remains undecided. |
 | `papers/m2/` | M2 standalone unit; archived and reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
+| `papers/m4/` | M4 claim-boundary preprint unit; v0.1 release-candidate ready (no remaining blockers in `papers/m4/RELEASE_CHECKLIST.md`), still a preprint workspace rather than a frozen venue submission. |
 
 ## M3 theorem core and paper status
 
@@ -39,7 +41,9 @@ archival record.
   is not currently a canonical `main` workspace.
 - Candidate B evidence packaging is pending and must not be treated as canonical
   paper evidence yet.
-- M4 has no paper workspace yet.
+- M4 now has a `papers/m4/` v0.1 release-candidate preprint workspace, but no
+  frozen M4 submission tag or archival record exists yet; it is not yet a frozen
+  submission unit.
 - Stale M3 planning documents in development history are not a canonical paper
   workspace.
 
@@ -61,8 +65,8 @@ Suggested tag names:
 
 - `m1-submission-v1`
 - `papers-m2-v2-obstruction-bridge`
-- future M1.5 or M3 tags should be chosen only when those submission units are
-  actually frozen.
+- future M1.5, M3, or M4 tags should be chosen only when those submission units
+  are actually frozen.
 
 Hierarchy note:
 

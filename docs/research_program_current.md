@@ -6,7 +6,7 @@
 - Canonical branch: `main`
 - Scientific baseline commit for this update:
   `be4132ba3b6f8168b75644e0928d7b2609048049`
-- Program status date: 2026-06-26
+- Program status date: 2026-07-02
 - Dissertation scope: `docs/doctoral_scope_lock.md`
 
 ## 1. Program thesis
@@ -29,14 +29,26 @@ institutional action are not interchangeable.
 | M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts partly canonical through PR #9; manuscript not canonical | Defer separate paper integration |
 | M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16 | Refresh docs; package Candidate B evidence separately |
 | Candidate B | Artifact-defined M3-B instantiation | Reconstructed off-main; not canonical on `main` | Curated evidence package and validator or release binding |
-| M4 | Institutional warrant / Delegated Warrant Preservation | No theorem or code exists yet; M2/M3 theorem dependencies cleared | Begin warrant-contract design |
+| M4 | M4/Sen24 claim-boundary preprint workspace; institutional warrant theorem remains future work | Local v0.1 RC workspace exists under `papers/m4/`; not a public release | External claim-boundary review without broadening claims |
 
 Candidate B is an application/status row under M3, not a sixth dissertation
 milestone.
 
 M1.5 and M3 publication packaging is not final.
 
-## 3. M2 canonical archival identity
+## 3. M4 local RC workspace status
+
+`papers/m4/` is a local v0.1 release-candidate preprint workspace for a
+claim-boundary audit under the declared M4/Sen24 encoding. It records
+finite-audit replay evidence and a Lean right-atom bridge check.
+
+This workspace is not an arXiv, Zenodo, jxiv, GitHub Release, or pushed-tag
+public release. It does not claim Level C semantic-to-CNF correctness,
+Python/CNF correctness, checker formalization in Lean, a fully Lean-verified
+finite certificate, a new general Sen theorem, family-scale lift, or an AI
+governance/alignment solution.
+
+## 4. M2 canonical archival identity
 
 ```text
 Tag:
@@ -59,7 +71,7 @@ Zenodo preserves the tagged source snapshot. The GitHub Release preserves the
 extended release assets. Post-release DOI documentation is outside the tagged
 source snapshot. The tag must not be moved.
 
-## 4. Current bridge status
+## 5. Current bridge status
 
 | Bridge object | Current status |
 |---|---|
@@ -73,7 +85,7 @@ source snapshot. The tag must not be moved.
 M2 derives the general theorem from a finite semantic obstruction
 classification, not from the Sen24 CNF as a formal premise.
 
-## 5. M2 reviewer-audit status
+## 6. Prior M2 audit notes
 
 The one-time M2 reviewer audit was merged through PR #14.
 
@@ -97,7 +109,7 @@ Audit documents:
 - `docs/m2_adversarial_review.md`
 - `docs/m2_submission_unit_decision.md`
 
-## 6. M3 canonical theorem-core status
+## 7. M3 canonical theorem-core status
 
 The abstract M3 finite-set reportability theorem core is canonical on `main`.
 
@@ -147,7 +159,7 @@ axioms. The M3 Lean modules do not formalize Candidate B artifacts.
 The core is abstract and contract-relative. It does not establish semantic
 validity of social-choice contract atoms.
 
-## 7. Candidate B application status
+## 8. Candidate B application status
 
 The integration precheck in `docs/m3_canonical_integration_precheck.md`
 independently reconstructed the Candidate B artifact audit:
@@ -168,19 +180,22 @@ Candidate B is artifact-defined. Its artifact evidence remains outside the M3
 Lean theorem core, and it does not establish semantic or Lean-level validity of
 the contract atoms.
 
-## 8. Publication-unit status
+## 9. Publication-unit status
 
 - M2 standalone publication decision is `CONDITIONAL GO`; required major
   manuscript revision remains before submission.
 - M1.5 and M3 may form an integrated paper.
 - No final M1.5+M3 publication unit has been locked.
 - No canonical `papers/m3/` workspace exists.
+- `papers/m4/` is a local RC preprint workspace for claim-boundary review, not
+  a public release.
 - M2.1 remains separate and deferred.
 - Publication packaging does not alter the dissertation spine.
 
-## 9. Active next actions
+## 10. Active next actions
 
-1. Begin M4 warrant-contract design centered on Delegated Warrant Preservation.
+1. Use the M4/Sen24 local RC workspace for claim-boundary review while keeping
+   public-release and Level C obligations explicit.
 2. Revise and integrate current M3 documentation.
 3. Create the Candidate B curated evidence package and validator, or bind an
    immutable release.
@@ -188,10 +203,10 @@ the contract atoms.
 5. Decide and develop the M1.5+M3 publication unit.
 6. Defer M2.1 paper integration and maintenance cleanup.
 
-M4 is now the main theoretical research track. Items 2-6 are parallel or
-publication-governance tracks and do not block initial M4 contract design.
+The future institutional-warrant M4 theorem remains a separate theoretical
+track. Items 2-6 are parallel or publication-governance tracks.
 
-## 10. Non-blocking backlog
+## 11. Non-blocking backlog
 
 - M3 linter-warning cleanup, only in a separately audited code task.
 - Stale M3 skeleton retention/archival policy.
@@ -203,7 +218,7 @@ publication-governance tracks and do not block initial M4 contract design.
 - Optional full-asset Zenodo enrichment.
 - Historical branch cleanup only after archival review.
 
-## 11. Source-of-truth hierarchy
+## 12. Source-of-truth hierarchy
 
 1. Paper-specific claim-boundary files govern individual paper claims.
 2. `docs/doctoral_scope_lock.md` governs dissertation scope.

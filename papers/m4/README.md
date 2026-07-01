@@ -8,11 +8,16 @@ Auditable Claim Boundaries for Finite Social-Choice Artifacts: A Sen24 Case Stud
 
 ## Status
 
-This workspace is ready for v0.1 release-candidate tagging under the declared
-M4/Sen24 claim boundary. Current readiness and release risks are recorded in
+This workspace is a local v0.1 release-candidate preprint workspace under the
+declared M4/Sen24 claim boundary. The local RC tag is described in
+`papers/m4/RELEASE_CANDIDATE.md`; readiness and release risks are recorded in
 `papers/m4/RELEASE_CHECKLIST.md`, with reproducibility evidence summarized in
-`papers/m4/reproducibility_v0_1.md`. It remains a preprint workspace rather
-than a venue-submission manuscript.
+`papers/m4/reproducibility_v0_1.md`. It is not an arXiv, Zenodo, jxiv, GitHub
+Release, or pushed-tag public release.
+
+The workspace records finite-audit replay evidence and a Lean right-atom
+bridge check. Level C semantic-to-CNF correctness, Python/CNF correctness, and
+checker formalization remain future work.
 
 ## Source Of Truth
 

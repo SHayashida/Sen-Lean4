@@ -18,7 +18,7 @@ Current publication-unit status:
 | `paper/` | M1 / Sen24 finite-evidence unit. |
 | `papers/m1_5/` | M1.5 workspace; possible integrated publication with M3 remains undecided. |
 | `papers/m2/` | M2 standalone unit; archived and reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
-| `papers/m4/` | M4 claim-boundary preprint unit; v0.1 draft reproducibility hardening and finite-audit replay evidence are recorded. |
+| `papers/m4/` | Local M4/Sen24 claim-boundary RC preprint workspace; finite-audit replay evidence and Lean right-atom bridge check are recorded. |
 
 ## M3 theorem core and paper status
 
@@ -42,8 +42,11 @@ archival record.
 - Candidate B evidence packaging is pending and must not be treated as canonical
   paper evidence yet.
 - M4 now has a `papers/m4/` v0.1 draft preprint workspace. The Lean
-  right-atom bridge check and finite-audit replay wrapper are recorded; RC
-  readiness is governed by `papers/m4/RELEASE_CHECKLIST.md`.
+  right-atom bridge check and finite-audit replay wrapper are recorded. This is
+  a local release-candidate workspace, not a public release; Level C
+  semantic-to-CNF correctness, Python/CNF correctness, and checker
+  formalization remain future work. RC readiness is governed by
+  `papers/m4/RELEASE_CHECKLIST.md`.
 - Stale M3 planning documents in development history are not a canonical paper
   workspace.
 

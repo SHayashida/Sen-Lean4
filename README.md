@@ -4,8 +4,11 @@ This repository began with the fixed Sen24 finite case for Sen's impossibility
 theorem and now contains a staged research program. M1 provides audited finite
 evidence; M1.5 establishes representation-sensitive raw repair
 non-canonicity; M2 provides the canonical semantic obstruction bridge; M3
-provides the canonical finite-set reportability theorem core; M4 remains future
-institutional warrant-contract work.
+provides the canonical finite-set reportability theorem core; `papers/m4/`
+now records a local M4/Sen24 v0.1 release-candidate preprint workspace for
+claim-boundary audit. This M4 workspace is not a public release, and it does
+not complete Level C semantic-to-CNF correctness, Python/CNF correctness, or
+checker formalization.
 
 The original Sen24 case study covers `n = 2` voters and `m = 4` alternatives,
 with:
@@ -34,7 +37,12 @@ witness-validated, assumed, and re-verified.
 | M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO` |
 | M2.1 | Companion boundary evidence; paper integration pending |
 | M3 | Abstract M3-A/B/C theorem core canonical on `main`; Candidate B evidence not yet canonical |
-| M4 | Future main theoretical track; no theorem or code exists yet |
+| M4 | Local M4/Sen24 claim-boundary RC preprint workspace; Level C and checker formalization remain future work |
+
+For first-time readers of the M4 workspace, start with
+`papers/m4/PUBLIC_READER_NOTE.md`, then use `papers/m4/CLAIM_BOUNDARY.md`,
+`papers/m4/RELEASE_CANDIDATE.md`, and `papers/m4/RELEASE_CHECKLIST.md` for
+the exact local RC status and non-claims.
 
 ## Current canonical M3 result
 
@@ -122,6 +130,8 @@ This repository uses one shared code/data trunk and separate in-repo manuscript 
 - `paper/` is the protected M1 manuscript workspace.
 - `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
 - `papers/m2/` is the M2 semantic obstruction-bridge manuscript workspace.
+- `papers/m4/` is a local M4/Sen24 claim-boundary release-candidate preprint
+  workspace, not a public release.
 - Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.
 - Use short-lived branches for implementation work and manuscript edits.
 - Freeze submissions with tags and commit hashes rather than long-lived paper branches.

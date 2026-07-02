@@ -31,9 +31,10 @@
 - CNF/LRAT/atlas/repair family bridges are not claimed.
 - O2/O3/O4 completeness does not imply minimality or uniqueness.
 - The M3 core is abstract and contract-relative.
-- M3 residual faithfulness is established only as a sufficient condition; its
-  necessity via a not-faithful grouped-correctness failure witness and Sen24
-  grounding remain future work.
+- M3 residual faithfulness is established only as a sufficient condition in
+  Lean. A Sen24 `n = 2`, `m = 4` residual-collapse precheck now gives
+  shape-blind grouped-beta evidence for not-faithfulness; Lean formalization and
+  a grouped-correctness failure witness remain future work.
 - Candidate B remains outside the M3 Lean core and is not a result about
   semantic contract validity.
 - Fully active UNSAT remains an application-side assumption for impossibility

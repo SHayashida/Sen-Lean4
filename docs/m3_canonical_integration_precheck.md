@@ -297,13 +297,14 @@ No unexpected custom axiom was found.
 | T10 M3-C converse | PASS | `m3c_converse` uses only grouped correctness and `PsiDeletionMonotonicity`; `ResidualFaithfulness` is absent. |
 | T11 Monotonicity necessity | PASS | `Examples.NonMonotone` proves grouped correctness, failed `GroupSoundness`, and failed `PsiDeletionMonotonicity`. |
 | T12 Atomicity non-necessity | PASS | `Examples.NonAtomic` proves failed `RepairAtomicity`, `ResidualFaithfulness`, and `GroupSoundness`. |
-| T16 Faithfulness necessity | OPEN | No witness is currently present: the precheck has not exhibited a not-faithful case where grouped correctness fails, and no Sen24 grounding is claimed. |
+| T16 Faithfulness necessity | WITNESS | Sen24 `n = 2`, `m = 4` has a residual-collapse witness for the shape-blind grouped beta: `case_10100 = {asymm, minlib}` is `UNSAT` for O2 wiring `right(voter0,{0,1}), right(voter1,{0,1})` and `SAT` for O3 wiring `right(voter0,{0,1}), right(voter1,{0,2})`. See `docs/m3_sen24_faithfulness_necessity_check.md`. This establishes not-faithfulness in the residual-status sense; Lean formalization and grouped-correctness failure remain future work. |
 | T13 Implementation monotonicity | PASS | No theorem assumes deletion monotonicity of `SatPhi`. |
 | T14 Candidate B separation | PASS | Lean modules and examples state that Candidate B artifacts are not formalized. |
 | T15 Claim boundary | PASS | The theorem core proves reportability relative to abstract predicates, not semantic validity of social-choice atoms. |
 
-No blocking theorem-core issue was found. T16 records an explicit future-work
-boundary, not a completed necessity theorem.
+No blocking theorem-core issue was found. T16 now records a Sen24
+residual-collapse witness for not-faithfulness in the residual-status sense,
+not a completed Lean necessity theorem.
 
 ## 10. Synthetic integration against current main
 

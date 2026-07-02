@@ -62,9 +62,10 @@ The canonical M3 result consists of:
 - boundary examples showing that atomicity is not necessary and monotonicity
   cannot simply be omitted.
 
-Residual faithfulness is established only as a sufficient condition; its
-necessity, namely a not-faithful witness where grouped correctness fails, and
-Sen24 grounding remain future work.
+Residual faithfulness is established only as a sufficient condition in Lean. A
+Sen24 `n = 2`, `m = 4` precheck found a residual-collapse witness for the
+shape-blind grouped beta; Lean formalization and a grouped-correctness failure
+witness remain future work.
 
 These Lean modules do not formalize Candidate B artifacts and do not prove any social-choice contract atom semantically valid.
 
@@ -76,6 +77,10 @@ Canonical M3 files:
 - `SocialChoiceAtlas/Reportability/Monotone.lean`
 - `SocialChoiceAtlas/Reportability/Examples.lean`
 - `docs/m3_canonical_integration_precheck.md`
+
+Related Sen24 residual-collapse precheck:
+
+- `docs/m3_sen24_faithfulness_necessity_check.md`
 
 Focused M3 validation commands:
 

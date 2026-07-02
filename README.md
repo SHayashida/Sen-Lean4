@@ -62,6 +62,10 @@ The canonical M3 result consists of:
 - boundary examples showing that atomicity is not necessary and monotonicity
   cannot simply be omitted.
 
+Residual faithfulness is established only as a sufficient condition; its
+necessity, namely a not-faithful witness where grouped correctness fails, and
+Sen24 grounding remain future work.
+
 These Lean modules do not formalize Candidate B artifacts and do not prove any social-choice contract atom semantically valid.
 
 Canonical M3 files:

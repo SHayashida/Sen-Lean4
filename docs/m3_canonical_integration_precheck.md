@@ -281,7 +281,7 @@ Axiom audit:
 
 No unexpected custom axiom was found.
 
-## 9. Adversarial theorem-core audit T1-T15
+## 9. Adversarial theorem-core audit T1-T16
 
 | Attack | Result | Finding |
 | --- | --- | --- |
@@ -297,11 +297,13 @@ No unexpected custom axiom was found.
 | T10 M3-C converse | PASS | `m3c_converse` uses only grouped correctness and `PsiDeletionMonotonicity`; `ResidualFaithfulness` is absent. |
 | T11 Monotonicity necessity | PASS | `Examples.NonMonotone` proves grouped correctness, failed `GroupSoundness`, and failed `PsiDeletionMonotonicity`. |
 | T12 Atomicity non-necessity | PASS | `Examples.NonAtomic` proves failed `RepairAtomicity`, `ResidualFaithfulness`, and `GroupSoundness`. |
+| T16 Faithfulness necessity | OPEN | No witness is currently present: the precheck has not exhibited a not-faithful case where grouped correctness fails, and no Sen24 grounding is claimed. |
 | T13 Implementation monotonicity | PASS | No theorem assumes deletion monotonicity of `SatPhi`. |
 | T14 Candidate B separation | PASS | Lean modules and examples state that Candidate B artifacts are not formalized. |
 | T15 Claim boundary | PASS | The theorem core proves reportability relative to abstract predicates, not semantic validity of social-choice atoms. |
 
-No blocking theorem-core issue was found.
+No blocking theorem-core issue was found. T16 records an explicit future-work
+boundary, not a completed necessity theorem.
 
 ## 10. Synthetic integration against current main
 

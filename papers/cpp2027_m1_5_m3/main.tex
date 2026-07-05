@@ -1,0 +1,704 @@
+\documentclass[sigplan,10pt,review,anonymous]{acmart}
+\settopmatter{printfolios=true,printccs=false,printacmref=false}
+\setcopyright{none}
+\acmConference[CPP '27]{Certified Programs and Proofs}{January 11--12, 2027}{Mexico City, Mexico}
+\acmYear{2027}
+
+\usepackage{enumitem}
+\usepackage{booktabs}
+\theoremstyle{acmdefinition}
+\newtheorem{remark}{Remark}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\CM}{\equiv_{\mathsf{CM}}}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\SatPsi}{{\mathsf{Sat}_\Psi}}
+\newcommand{\SatPhi}{{\mathsf{Sat}_\Phi}}
+\newcommand{\Rep}{\mathsf{Rep}}
+\newcommand{\UNSAT}{\mathsf{UNSAT}}
+\newcommand{\SAT}{\mathsf{SAT}}
+\newcommand{\ML}{\mathsf{ML}}
+\newcommand{\modsym}[1]{\mathsf{#1}}
+
+\begin{document}
+
+\title{Certified Impossibility Witnesses Do Not Determine Repair Reports:
+A Lean-Verified Characterization of Contract-Relative Reportability}
+
+\author{Anonymous Author(s)}
+\affiliation{\institution{Anonymous Institution}\country{}}
+
+\begin{abstract}
+Formal impossibility and infeasibility results are increasingly consumed
+downstream as \emph{repair reports}: given a certified unsatisfiable core of
+assumptions, an audit pipeline reports which minimal sets of assumptions could
+be withdrawn to restore consistency. Proof certificates make the
+unsatisfiability claim independently checkable, but the repair report also
+depends on how assumptions are partitioned into deletable units---a choice the
+certificate does not record. We show that this dependence is essential. First,
+a no-go theorem: there exist two module-structured CNF encodings of the same
+impossibility instance---the base case of Sen's Paretian-liberal impossibility
+(two individuals, four alternatives)---whose
+clause multisets are \emph{equal under the identity variable map}, yet whose
+implementation-level minimal-repair families disagree under the natural module
+correspondence. Second, a characterization: moving the reporting axis to a
+declared \emph{abstraction contract}, we prove that grouped repair reports
+coincide with contract-level repairs precisely when the realization is
+\emph{group sound}, for deletion-monotone reference contracts; as a corollary,
+any two group-sound, residually faithful realizations of one contract induce
+pointwise identical grouped reports. The characterization and its boundary
+counterexamples are mechanized in Lean~4 over Mathlib with no \code{sorry};
+the SAT witness is re-verifiable by a single command against a SHA-256-bound
+artifact. Together the results delimit what an impossibility certificate does
+and does not license an auditor to report.
+\end{abstract}
+
+\keywords{proof assistants, Lean, SAT, unsatisfiable cores, minimal correction
+sets, social choice theory, certified audit, abstraction}
+
+\maketitle
+
+%=====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+A growing class of verification pipelines ends not with a theorem but with a
+recommendation. A set of design assumptions, policy axioms, or specification
+fragments is encoded as constraints; a solver finds the combination
+infeasible; a proof certificate (for propositional encodings, typically
+DRAT/LRAT~\cite{WetzlerHeuleHunt2014,CruzFilipe2017}) makes the
+infeasibility independently checkable; and the pipeline then reports
+\emph{which assumptions could be withdrawn} to restore feasibility---an
+inclusion-minimal correction set, in the vocabulary of the diagnosis and
+MUS/MCS literature~\cite{Reiter1987,LiffitonSakallah2008}. In regulated or
+adversarial settings the report is the deliverable: it tells a policy maker
+which axiom to relax, an engineer which requirement to renegotiate, an auditor
+which claim survives.
+
+This paper asks a question one level up from certificate checking:
+\begin{quote}
+\emph{Given a certified impossibility witness, is the repair report
+determined?}
+\end{quote}
+The certificate pins down \emph{that} the encoded assumption set is
+inconsistent. The repair report additionally depends on the partition of the
+encoding into deletable units---which clauses belong to which assumption. That
+partition is an engineering choice, and nothing in the certificate records it.
+
+\subparagraph*{Contributions.} We give a two-sided answer.
+
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{A no-go theorem (Section~\ref{sec:nogo}).} We exhibit two
+module-structured CNF encodings of the Sen instance~\cite{Sen1970} whose
+clause multisets are equal
+\emph{under the identity variable map}: the very same $36{,}290$ clauses over
+the very same $6{,}936$ variables, partitioned differently into modules. Both
+are $\UNSAT$. Yet the two implementation-level minimal-repair families
+disagree under the natural module correspondence
+(Theorem~\ref{thm:nogo}). Since identity-map clause-multiset equality is the
+strongest representation equivalence short of syntactic file identity, no
+notion of logical equivalence of the encodings can, by itself, make raw repair
+reports canonical.
+
+\item \textbf{A characterization (Sections~\ref{sec:contracts}
+and~\ref{sec:char}).} We then move the reporting axis. An \emph{abstraction
+contract} declares the atoms an audience is entitled to hear about and how
+each atom is realized by constraint modules. Reports are made at the contract
+level by grouping an implementation repair through the touched-atom map. Our
+main theorems show that grouped reports coincide with contract-level repairs
+whenever the realization is \emph{group sound} (Theorem~\ref{thm:suff}); that
+for deletion-monotone reference contracts group soundness is also
+\emph{necessary}, yielding an exact characterization
+(Theorems~\ref{thm:conv} and~\ref{thm:iff}); and that any two group-sound,
+residually faithful realizations of one contract produce pointwise identical
+grouped reports (Corollary~\ref{cor:tworeal})---restoring, at the contract
+level, exactly the invariance that Theorem~\ref{thm:nogo} refutes at the raw
+level. Kernel-checked counterexamples show the hypotheses are not removable
+(Section~\ref{sec:cex}).
+
+\item \textbf{Mechanization and artifact (Section~\ref{sec:design}).} The
+contract theory, the characterization, and the boundary counterexamples are
+formalized in Lean~4 over Mathlib; the development contains no \code{sorry}
+or \code{admit}. The SAT witness for Theorem~\ref{thm:nogo} is bound to the
+supplementary archive by SHA-256 manifests and is re-verified end to end
+(regeneration, hashing, clause-multiset comparison, solving, and exhaustive
+repair enumeration) by one command.
+\end{enumerate}
+
+\subparagraph*{Claim boundary.} We are explicit throughout about three
+distinct evidence layers. \emph{Kernel-checked}: all statements in
+Sections~\ref{sec:contracts}--\ref{sec:cex} are Lean theorems
+(Appendix~\ref{app:lean} gives the correspondence).
+\emph{Solver- and artifact-audited}: the witness claims C1--C5 of
+Section~\ref{sec:nogo} are checked by the archived re-verification script;
+they rely on a deterministic generator, SHA-256 binding, and a SAT solver, not
+on the Lean kernel. \emph{Interpretive}: reading the two encodings of
+Section~\ref{sec:instance} as realizations of one declared contract
+(Section~\ref{sec:back}) is a modeling judgment; in particular, the group
+soundness of the concrete instance is audited at the artifact level and is
+deliberately \emph{not} formalized. Keeping these layers separate is, we
+argue, itself part of the contribution: it is precisely the discipline the
+paper's subject matter recommends.
+
+%=====================================================================
+\section{One Impossibility Instance, Two Encodings}
+\label{sec:instance}
+
+The Sen instance is the finite base case of Sen's
+Paretian-liberal impossibility~\cite{Sen1970}. The theorem shows that no social decision procedure can
+simultaneously satisfy unrestricted domain, weak Pareto, minimal liberalism
+(two individuals each decisive on at least one pair of alternatives), and
+acyclicity of strict social preference. We work with two individuals, four
+alternatives, and---in place of full acyclicity---a
+\emph{restricted local-rationality family} consisting of prohibitions of
+short strict cycles; the witness below activates the 4-cycle prohibition
+$\mathsf{C}_4$. Nothing in this paper claims anything about full acyclicity;
+the restriction is inherited from the artifact and stated here once.
+
+The instance is compiled to CNF by a deterministic generator. Primary
+variables encode the strict social preference on each ordered pair of
+alternatives at each preference profile ($6{,}912$ variables); $24$ auxiliary
+selector variables support the minimal-liberalism and decisiveness modules;
+the full instance has
+$36{,}290$ clauses over $6{,}936$ variables. Each clause is tagged with the
+\emph{constraint module} that emitted it. The active commitments of the
+witness are
+\[
+S \;=\; \{\modsym{A},\ \modsym{U},\ \mathsf{Lib},\ \mathsf{C}_4\},
+\]
+with $\modsym{A}$ asymmetry, $\modsym{U}$ unanimity (weak Pareto), and
+$\mathsf{Lib}$ realized as below.
+
+The two encodings differ in exactly one reporting decision:
+\begin{description}[leftmargin=1.4em]
+\item[Bundled.] The bundled minimal-liberalism module $\ML$ contributes
+$13{,}826$ clauses.
+\item[Split.] The per-individual decisiveness modules
+$D_0, D_1$, contributing $6{,}913$ clauses each.
+\end{description}
+
+\begin{definition}[Clause-multiset equivalence]
+\label{def:cm}
+Two CNF instances are \emph{clause-multiset equivalent under the identity
+variable map}, written $F \CM F'$, if the multisets of their clauses---each
+clause normalized as the sorted tuple of its literals---are equal.
+\end{definition}
+
+The bundled and split witness instances are $\CM$-equivalent in this
+identity-map sense: they consist of literally the same clauses, differently
+attributed. Both are $\UNSAT$. The generator is deterministic, so both facts
+are re-checkable from source; the archived manifests record the CNF hashes
+(claim C1 of Appendix~\ref{app:artifact}), and the archived comparison table
+extends the equivalence to all $32$ mapped module subsets, not only the
+witness.
+
+Reference deletion over module subsets is monotone here: feasibility of a
+retained assumption set means propositional satisfiability of its clauses,
+and deleting further modules removes clauses, preserving satisfiability. This
+observation instantiates the monotonicity hypothesis of
+Theorem~\ref{thm:conv} for the present instance.
+
+%=====================================================================
+\section{The No-Go: Raw Repair Reports Are Not Canonical}
+\label{sec:nogo}
+
+Fix a finite set $\Lam$ of constraint modules, a family
+$\mathcal{S} \subseteq 2^{\Lam}$ of admissible active sets, and an encoding
+map $\varphi$ sending each $S \in \mathcal{S}$ to a CNF instance in which
+every clause is attributed to a unique module of $S$. For $S$ with
+$\varphi(S)$ unsatisfiable, a set $R \subseteq S$ is a \emph{raw minimal
+repair} if deleting the clauses of $R$ restores satisfiability and no proper
+subset of $R$ does; write $\Rep^{\mathrm{raw}}_{\Lam}(\varphi(S))$ for the
+family of raw minimal repairs. This is the classical minimal correction set
+notion~\cite{Reiter1987,LiffitonSakallah2008}, computed at module rather
+than clause granularity.
+
+A \emph{module correspondence} between two encodings is a map
+$\pi : \Lam_b \to 2^{\Lam_s}$ assigning to each bundled module the set of
+split modules that jointly reproduce its clauses; $\pi$ acts on repair
+families elementwise by unions, written $\pi_*$.
+
+\begin{theorem}[Non-canonicity of raw repair reports under $\CM$]
+\label{thm:nogo}
+There exist module-structured encodings
+$(\Lam_b, \mathcal{S}_b, \varphi_b)$ and
+$(\Lam_s, \mathcal{S}_s, \varphi_s)$, active sets
+$S_b \in \mathcal{S}_b$, $S_s \in \mathcal{S}_s$, and a module correspondence
+$\pi$ with:
+\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
+\item $\varphi_b(S_b) \CM \varphi_s(S_s)$ under the identity variable map;
+\item both $\varphi_b(S_b)$ and $\varphi_s(S_s)$ are $\UNSAT$;
+\item $\pi_*\!\bigl(\Rep^{\mathrm{raw}}_{\Lam_b}(\varphi_b(S_b))\bigr)
+      \neq \Rep^{\mathrm{raw}}_{\Lam_s}(\varphi_s(S_s))$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof (witness; machine-re-verified)]
+Take the bundled and split encodings of Section~\ref{sec:instance} with
+$S_b = \{\modsym{A}, \modsym{U}, \ML, \mathsf{C}_4\}$ and
+$S_s = \{\modsym{A}, \modsym{U}, D_0, D_1, \mathsf{C}_4\}$, and let $\pi$ map
+$\ML \mapsto \{D_0, D_1\}$ and every other module to its singleton.
+
+\emph{Step 1 (equivalence and status).} Both instances regenerate
+deterministically to the archived SHA-256 values; their normalized clause
+multisets are equal (claim C1), and both are $\UNSAT$ (claim C2). This gives
+(1) and (2).
+
+\emph{Step 2 (bundled family).} The full bundled instance is infeasible, and
+deleting any single module of $S_b$ restores satisfiability; hence the raw
+minimal-repair family is exactly the four singletons
+$\{\modsym{A}\}, \{\modsym{U}\}, \{\ML\}, \{\mathsf{C}_4\}$ (claim C3;
+singletons over an infeasible full set are minimal if and only if feasible).
+
+\emph{Step 3 (split family).} Likewise all five singleton deletions on the
+split side restore satisfiability, so the split family is the five singletons
+$\{\modsym{A}\}, \{\modsym{U}\}, \{D_0\}, \{D_1\}, \{\mathsf{C}_4\}$
+(claim C4).
+
+\emph{Step 4 (transport failure).} Transporting the bundled family sends
+$\{\ML\}$ to $\{D_0, D_1\}$, which is feasible on the split side but not
+inclusion-minimal, since $\{D_0\}$ already is; and the split singletons
+$\{D_0\}, \{D_1\}$ have no preimage. Hence (3) (claim C5).
+\end{proof}
+
+\begin{remark}[Strength of the equivalence]
+Condition (1) is stronger than any semantic notion of encoding equivalence:
+the instances are the \emph{same multiset of clauses}. Any result of the form
+``repair reports are invariant under logical equivalence of encodings''
+is therefore refuted a fortiori. What varies between the encodings is only
+the attribution of clauses to modules---exactly the data a proof certificate
+does not carry.
+\end{remark}
+
+\begin{remark}[What fails and what does not]
+Nothing is wrong with the certificate: unsatisfiability, and even the
+certified refutation, is shared. The failure is confined to the report layer.
+The theorem thus separates two guarantees that pipelines routinely conflate:
+\emph{witness correctness} and \emph{report canonicity}.
+\end{remark}
+
+\begin{remark}[Choice of instance]
+The Sen instance is small enough to enumerate exhaustively yet is a live
+example of the target use case: an impossibility theorem consumed as advice
+about which axiom to withdraw. The bundling choice is not contrived---whether
+``minimal liberalism'' is one commitment or one commitment per individual is
+a genuine modeling ambiguity in the source theorem.
+\end{remark}
+
+%=====================================================================
+\section{Abstraction Contracts and Reportability}
+\label{sec:contracts}
+
+The no-go does not say repair reporting is hopeless; it says the reporting
+unit must be declared rather than inherited from the encoding. This section
+sets up that declaration. All definitions below are stated exactly as in the
+Lean development (Appendix~\ref{app:lean}); throughout, $A$ is a type of
+\emph{contract atoms} and $L$ a type of \emph{constraint modules}, both with
+decidable equality, and all quantification is bounded by explicit finite
+sets.
+
+\begin{definition}[Contract and realization]
+\label{def:contract}
+A \emph{reference contract} on an active atom set $I \subseteq A$ (a finite
+set) is a feasibility predicate $\SatPsi$ on finite sets of atoms, read on
+\emph{retained} sets: deleting $G \subseteq I$ leaves the residual
+$I \setminus G$, which is feasible when $\SatPsi(I \setminus G)$. A
+\emph{realization} of the contract is a pair $(\beta, \SatPhi)$ of a block
+map $\beta : A \to \mathcal{P}_{\mathrm{fin}}(L)$ and an implementation
+feasibility predicate $\SatPhi$ on finite sets of modules. The \emph{active
+interface} is $\Lam(I) = \bigcup_{a \in I} \beta(a)$.
+\end{definition}
+
+\begin{definition}[Repairs at both levels]
+\label{def:repairs}
+For a finite-set predicate $P$, a set $X$ is \emph{inclusion-minimal} for $P$
+if $P(X)$ and every $Y \subseteq X$ with $P(Y)$ satisfies $X \subseteq Y$.
+A set $R$ of modules is \emph{raw-feasible} if $R \subseteq \Lam(I)$ and
+$\SatPhi(\Lam(I) \setminus R)$; a \emph{raw repair} is an inclusion-minimal
+raw-feasible set. Dually, $G$ is \emph{contract-feasible} if $G \subseteq I$
+and $\SatPsi(I \setminus G)$, and a \emph{contract repair} is an
+inclusion-minimal contract-feasible set.
+\end{definition}
+
+\begin{definition}[Grouping and grouped reports]
+\label{def:grouping}
+The \emph{touched-atom map} sends a module set $R$ to
+$\tau(R) = \{a \in I \mid R \cap \beta(a) \neq \emptyset\}$. An atom set $G$
+is a \emph{raw group} if $G = \tau(R)$ for some raw repair $R$; a
+\emph{grouped repair} is an inclusion-minimal raw group. The grouped repairs
+are what a contract-level audience is shown.
+\end{definition}
+
+\begin{definition}[Structural hypotheses]
+\label{def:hyps}
+The realization has \emph{disjoint blocks} if distinct active atoms have
+disjoint blocks; it is \emph{atomic} if every active atom's block is a
+singleton. It is \emph{residually faithful} if for every $T \subseteq I$,
+$\SatPhi(\bigcup_{a\in T}\beta(a)) \iff \SatPsi(T)$: implementation and
+reference agree on block-aligned residuals. It is \emph{group sound} if for
+every $R \subseteq \Lam(I)$ with $\SatPhi(\Lam(I) \setminus R)$ we have
+$\SatPsi(I \setminus \tau(R))$: every feasible implementation deletion
+remains feasible after grouping. Finally, the reference contract is
+\emph{deletion monotone} if $\SatPsi$ is downward closed on subsets of $I$:
+retaining fewer atoms cannot destroy feasibility.
+\end{definition}
+
+Group soundness is the load-bearing notion. Residual faithfulness only
+constrains $\SatPhi$ on the block-aligned sets $\bigcup_{a \in T} \beta(a)$;
+a feasible deletion $R$ may cut \emph{strictly into} a block, leaving a
+residual that is not block-aligned, and group soundness is exactly the promise
+that such partial cuts never certify feasibility that the contract residual
+lacks. The witness of Section~\ref{sec:nogo} fails at precisely this point:
+deleting $D_0$ alone cuts into the minimal-liberalism block.
+
+%=====================================================================
+\section{The Characterization}
+\label{sec:char}
+
+Throughout this section fix $I$, $\beta$, $\SatPsi$, $\SatPhi$ as above. All
+theorems are kernel-checked; proof sketches below follow the Lean proofs.
+
+\subsection{Sufficiency}
+
+\begin{theorem}[Atomic coincidence]
+\label{thm:atomic}
+If the realization has disjoint blocks, is atomic, and is residually
+faithful, then for every $G$: $G$ is a grouped repair iff $G$ is a contract
+repair. Moreover raw repairs transport: for $G \subseteq I$ and any two such
+realizations $(\beta_1,\SatPhi_1)$, $(\beta_2,\SatPhi_2)$, the block image
+$\bigcup_{a\in G}\beta_1(a)$ is a raw repair for the first iff
+$\bigcup_{a\in G}\beta_2(a)$ is for the second.
+\end{theorem}
+
+In the atomic case grouping is a bijective relabeling, so nothing can go
+wrong---this is the (rarely stated) folklore assumption under which raw
+reports are silently treated as canonical. The substance begins when blocks
+are genuinely plural.
+
+\begin{theorem}[Sufficiency of group soundness]
+\label{thm:suff}
+If the realization has disjoint blocks, is residually faithful, and is group
+sound, then for every $G$: $G$ is a grouped repair iff $G$ is a contract
+repair.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+For one direction, a raw repair $R$ yields, by group soundness, a
+contract-feasible $\tau(R)$; minimality of grouped repairs then descends to
+contract minimality using disjointness to compare deletions blockwise. For
+the converse, a contract repair $G$ is realized by deleting its full block
+image $\bigcup_{a \in G}\beta(a)$, which is raw-feasible by faithfulness;
+extracting an inclusion-minimal raw repair inside it and regrouping recovers
+$G$, again by disjointness and minimality.
+\end{proof}
+
+\begin{corollary}[Two-realization invariance]
+\label{cor:tworeal}
+Let $(\beta_1, \SatPhi_1)$ and $(\beta_2, \SatPhi_2)$ be realizations of the
+same reference contract, over possibly different module types, each with
+disjoint blocks, residually faithful, and group sound. Then for every $G$:
+$G$ is a grouped repair of the first iff it is a grouped repair of the
+second.
+\end{corollary}
+
+\begin{proof}
+Both grouped-repair predicates are equivalent to the shared contract-repair
+predicate by Theorem~\ref{thm:suff}.
+\end{proof}
+
+Corollary~\ref{cor:tworeal} is the exact repair, at the contract level, of
+the invariance that Theorem~\ref{thm:nogo} refutes at the raw level---and its
+statement quantifies over two \emph{different} module types, which is why the
+formalization keeps realizations as explicit parameters rather than fixing a
+global universe (Section~\ref{sec:design}).
+
+\subsection{Necessity and the characterization}
+
+Sufficiency alone would leave group soundness as one workable condition among
+many. The converse shows it is the right one.
+
+\begin{theorem}[Necessity under deletion-monotone references]
+\label{thm:conv}
+If the reference contract is deletion monotone and grouped repairs coincide
+with contract repairs (for every $G$), then the realization is group sound.
+Residual faithfulness is not assumed.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Let $R$ be a feasible implementation deletion; we must show
+$\SatPsi(I \setminus \tau(R))$. Shrink $R$ to an inclusion-minimal raw repair
+$R_0 \subseteq R$ by finite descent; then $\tau(R_0)$ is a raw group, above
+some grouped repair $G_0$. By hypothesis $G_0$ is a contract repair, so
+$\SatPsi(I \setminus G_0)$; monotonicity of $\SatPsi$ on retained sets
+transports feasibility from the residual of $G_0$ down to that of
+$\tau(R) \supseteq \tau(R_0) \supseteq G_0$.
+\end{proof}
+
+\begin{theorem}[Characterization]
+\label{thm:iff}
+For a realization with disjoint blocks and residual faithfulness over a
+deletion-monotone reference contract: the realization is group sound iff
+grouped repairs coincide with contract repairs for every $G$.
+\end{theorem}
+
+\begin{lemma}[Hierarchy]
+\label{lem:hier}
+Under disjoint blocks and residual faithfulness, atomicity implies group
+soundness. The converse fails (Example~\ref{ex:nonatomic}); thus
+Theorem~\ref{thm:atomic} is a strict special case of Theorem~\ref{thm:suff}.
+\end{lemma}
+
+\subsection{Boundary counterexamples}
+\label{sec:cex}
+
+Both counterexamples are finite truth-table instances over \code{Fin} types,
+kernel-checked by \code{decide}-style case analysis; neither involves CNF or
+a solver.
+
+\begin{example}[Group soundness without atomicity]
+\label{ex:nonatomic}
+One atom, two modules: $I = \{a\}$, $\beta(a) = \{x_0, x_1\}$,
+$\SatPsi(T) \iff T = \emptyset$, and $\SatPhi(L) \iff L \neq \{x_0,x_1\}$.
+The block has two elements, so atomicity fails; but every feasible deletion
+touches $a$, so grouping lands on the feasible contract residual
+$\emptyset$, and group soundness holds. Grouped and contract repairs both
+consist of exactly $\{a\}$.
+\end{example}
+
+\begin{example}[Monotonicity is not removable in Theorem~\ref{thm:conv}]
+\label{ex:nonmono}
+With a non-monotone $\SatPsi$ (feasible at the retained set $\{b\}$ but
+infeasible at the retained set $\emptyset$), grouped and contract repairs can
+coincide while a feasible implementation deletion grouping onto a larger atom
+set breaks $\SatPsi$; group soundness fails. Hence the monotonicity
+hypothesis of Theorem~\ref{thm:conv} cannot be dropped.
+\end{example}
+
+The examples close the two natural gaps: group soundness sits strictly
+between atomicity and mere correctness of grouped reports, and the necessity
+direction genuinely uses the shape of the reference contract, not just the
+combinatorics of grouping.
+
+%=====================================================================
+\section{The Instance, Read Through the Contract}
+\label{sec:back}
+
+Return to Section~\ref{sec:instance}. Declare the contract with active atoms
+$I = \{\modsym{A}, \modsym{U}, \mathsf{Lib}, \mathsf{C}_4\}$, where
+$\mathsf{Lib}$ is the minimal-liberalism commitment, and $\SatPsi(T)$ =
+satisfiability of the clauses of the modules realizing $T$. The bundled
+encoding realizes $\mathsf{Lib}$ by the bundled minimal-liberalism module
+$\ML$; the split encoding realizes it by the per-individual decisiveness
+modules $\{D_0, D_1\}$. Both realizations have disjoint blocks, and reference
+deletion is monotone (Section~\ref{sec:instance}).
+
+At the raw level the two reports disagree (Theorem~\ref{thm:nogo}). At the
+contract level, grouping the split-side raw repairs through $\tau$ collapses
+$\{D_0\}$ and $\{D_1\}$ to $\{\mathsf{Lib}\}$, and the grouped families of
+the two realizations coincide with the four contract singletons
+$\{\modsym{A}\}, \{\modsym{U}\}, \{\mathsf{Lib}\}, \{\mathsf{C}_4\}$---the
+behavior Corollary~\ref{cor:tworeal} predicts for group-sound realizations.
+
+\emph{Claim boundary, restated precisely.} The coincidence of the two
+concrete grouped families is read off the archived repair tables and the
+re-verification script (claims C3--C5): it is solver- and artifact-audited
+evidence. The group soundness of these particular realizations is likewise an
+artifact-level audit over the archived case atlases, \emph{not} a Lean
+theorem; the Lean development supplies the general implications, and the
+docstrings of the development state this division explicitly. We regard the
+division as a feature: the general theory is exactly the part that deserves
+kernel checking, while instance audits are the part a pipeline must
+re-execute per deployment anyway.
+
+%=====================================================================
+\section{Formalization Design}
+\label{sec:design}
+
+The Lean development (about 1{,}000 lines across five modules over
+Mathlib~\cite{mathlib2020}) was shaped by three requirements: hypotheses must
+be auditable, statements must support two simultaneous realizations, and the
+theory must not commit to any solver backend. We record the resulting
+decisions, the alternatives we rejected, and friction encountered.
+
+\subparagraph*{Finite sets, no global finiteness.} Atoms and modules are
+arbitrary types with decidable equality; every quantifier is bounded by an
+explicit \code{Finset}. We rejected the alternative of \code{Fintype}
+universes: it shortens some proofs but buries the finiteness used by each
+lemma inside instances, whereas bounded quantification keeps every theorem's
+data visible in its statement---a property we prize in a paper about making
+assumptions explicit. The cost is occasional manual bookkeeping
+(e.g., an explicit lemma that a module subset of a disjoint, atomic interface
+determines a unique atom set) that instance search would otherwise hide.
+
+\subparagraph*{Feasibility as abstract predicates.} $\SatPsi$ and $\SatPhi$
+are bare predicates on finite sets, with deletion written on retained sets
+($\SatPhi(\Lam(I)\setminus R)$). This decouples the theory from CNF: the same
+statements govern any monotone or non-monotone notion of feasibility, and the
+non-monotone counterexample of Example~\ref{ex:nonmono} is expressible at
+all only because monotonicity is a hypothesis, not a structure field.
+
+\subparagraph*{Explicit arguments over type classes.} Realizations are passed
+as explicit arguments rather than bundled instances. The payoff is
+Corollary~\ref{cor:tworeal} and the transport half of
+Theorem~\ref{thm:atomic}, whose statements each mention \emph{two} module
+types $L_1, L_2$ with separate block maps and feasibility predicates;
+class-based bundling would force awkward instance juggling to state them.
+
+\subparagraph*{Minimality in implication form.} Inclusion-minimality is
+defined with its antisymmetry clause in implication form (every feasible
+subset contains the set), which composes smoothly with congruence and
+idempotence lemmas for minimality of predicates---the two lemmas that carry
+the equivalence proofs of Theorems~\ref{thm:atomic} and~\ref{thm:suff}.
+
+\subparagraph*{Counterexamples by decidable evaluation.} The boundary
+examples fix \code{Fin}-typed universes, provide local \code{Fintype}
+instances for their power sets, and discharge goals by decidable evaluation.
+Keeping them inside the same abstraction (rather than as prose) means the
+necessity claims of Section~\ref{sec:cex} are theorems, not remarks.
+
+\subparagraph*{Mathlib experience.} The development sits on a small, stable
+surface of \code{Finset} (unions over \code{biUnion}, \code{filter},
+set-difference lemmas). Proof automation was deliberately light; the two
+places where automation fell short were blockwise decompositions under
+disjointness, which needed hand-stated auxiliary lemmas, and rewriting under
+binders in minimality predicates. We found the explicit-\code{Finset} style
+verbose but predictable; we would make the same choice again.
+
+\subparagraph*{Continuous checking.} The development builds in CI on every
+change; absence of \code{sorry}/\code{admit} is checked mechanically and can
+be re-confirmed from the archive in one command
+(Appendix~\ref{app:artifact}).
+
+%=====================================================================
+\section{Related Work}
+\label{sec:related}
+
+\subparagraph*{Formalized social choice.} Nipkow formalized Arrow's theorem
+and the Gibbard--Satterthwaite theorem in Isabelle/HOL~\cite{Nipkow2009};
+Gammie's Archive of Formal Proofs entries cover further social choice
+results~\cite{GammieAFP}. Computer-aided (SAT-based, not kernel-checked)
+proofs of impossibility theorems begin with Tang and
+Lin~\cite{TangLin2009} and were developed extensively by Geist, Brandt, and
+collaborators~\cite{GeistEndriss2011,BrandtGeist2016}. All of these certify
+\emph{theorems}; our subject is the meta-theory of the \emph{reports}
+derived from such theorems, which to our knowledge has not been formalized.
+
+\subparagraph*{Diagnosis, MUS/MCS.} Minimal correction sets and their duality
+with minimal unsatisfiable subsets originate in model-based
+diagnosis~\cite{Reiter1987} and are a mature algorithmic
+area~\cite{LiffitonSakallah2008,MarquesSilva2013}. Group-oriented variants
+(group-MUS) attribute clauses to named groups, exactly the granularity
+mechanism whose report-level consequences we study; the non-canonicity of
+Theorem~\ref{thm:nogo} can be read as a statement about group-MCS families
+under regrouping, and the characterization as identifying when regrouped
+reports are contract-stable.
+
+\subparagraph*{Certificates and certified checkers.} DRAT and LRAT proof
+formats~\cite{WetzlerHeuleHunt2014,CruzFilipe2017} and verified checkers
+such as \code{cake\_lpr}~\cite{TanHeuleMyreen2021} make unsatisfiability
+independently checkable. Our results are complementary: they concern the
+data such certificates do not carry.
+
+\subparagraph*{Abstraction in verification.} Declaring the vocabulary of an
+explanation separately from the implementation echoes abstraction-refinement
+in model checking~\cite{Clarke2003CEGAR} and recent work on formal
+abstraction-based explanations; our contribution is an exact
+(iff) condition, mechanized, for when abstraction-level repair reporting is
+faithful.
+
+%=====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+An impossibility certificate licenses the claim that a set of assumptions is
+jointly untenable. It does not, by itself, license any particular story about
+which assumptions to withdraw: Theorem~\ref{thm:nogo} shows the story can
+change while the certificate---and even the clause multiset---stays fixed.
+The constructive counterpart is a discipline, not a fix: declare the contract,
+audit group soundness, and report at the contract level, where
+Theorem~\ref{thm:iff} says the audit is exactly what canonical reporting
+requires and Corollary~\ref{cor:tworeal} says the report no longer depends on
+the realization. Limitations mark the roadmap: the concrete witness lives in
+the Sen instance and a restricted rationality family; the instance-level audit
+is not formalized; and the transfer of repair families across instance
+\emph{sizes} (rather than across encodings of one instance) is a separate
+question outside this paper's scope.
+
+\subparagraph*{Use of AI assistants.} AI assistants were used for drafting
+and coding assistance. The selection of theorems, the design decisions of
+Section~\ref{sec:design}, the claim-boundary discipline, and the validation
+of all artifacts are the authors', who take full responsibility for the
+content.
+
+\subparagraph*{Data availability.} The supplementary archive contains the
+full Lean development, the deterministic generator, the archived witness
+artifacts with SHA-256 manifests, and a one-command re-verification script;
+see Appendix~\ref{app:artifact}.
+
+%=====================================================================
+\appendix
+
+\section{Lean--Paper Correspondence}
+\label{app:lean}
+
+\begin{table}[h]
+\caption{Paper statements and Lean identifiers
+(\code{SocialChoiceAtlas/Reportability/}).}
+\label{tab:lean}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Paper & Lean identifier & File \\
+\midrule
+Def.~\ref{def:contract}--\ref{def:hyps} & \code{Defs} module & \code{Defs.lean} \\
+Thm.~\ref{thm:atomic} & \code{m3a\_grouped\_correctness} & \code{Atomic.lean} \\
+\quad(transport) & \code{m3a\_raw\_transport} & \code{Atomic.lean} \\
+Thm.~\ref{thm:suff} & \code{m3b\_grouped\_correctness} & \code{GroupSound.lean} \\
+Cor.~\ref{cor:tworeal} & \code{m3b\_two\_realization} & \code{GroupSound.lean} \\
+Thm.~\ref{thm:conv} & \code{m3c\_converse} & \code{Monotone.lean} \\
+Thm.~\ref{thm:iff} & \code{groupSoundness\_iff} & \code{Monotone.lean} \\
+Lem.~\ref{lem:hier} & \code{atomicity\_implies\_}& \code{Monotone.lean} \\
+ & \quad\code{groupSoundness} & \\
+Ex.~\ref{ex:nonatomic} & \code{Examples.NonAtomic} & \code{Examples.lean} \\
+Ex.~\ref{ex:nonmono} & \code{Examples.NonMonotone} & \code{Examples.lean} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Naming note: identifiers retain internal milestone prefixes
+(\code{m3a}/\code{m3b}/\code{m3c}); they carry no meaning beyond the order of
+development and are kept verbatim to preserve archive integrity.
+
+\section{Artifact Claims and Re-Verification}
+\label{app:artifact}
+
+The supplementary archive is integrity-checked by
+\code{sha256sum -c MANIFEST.sha256}. The witness claims are re-verified by
+\code{python3 tools/check\_cm\_witness.py} (from the archive's
+\code{witness/} directory; C1 needs only the Python standard library, C2--C5
+additionally a SAT solver via \code{python-sat}):
+
+\begin{description}[leftmargin=1.4em]
+\item[C1] Both witness instances regenerate deterministically (SHA-256 equal
+to the archived manifests; $6{,}936$ variables, $36{,}290$ clauses each) and
+are clause-multiset equivalent under the identity variable map.
+\item[C2] Both instances are $\UNSAT$ (re-solved with CaDiCaL).
+\item[C3] Bundled raw minimal-repair family
+$= \{\{\modsym{A}\},\{\modsym{U}\},\{\ML\},\{\mathsf{C}_4\}\}$.
+\item[C4] Split raw minimal-repair family
+$= \{\{\modsym{A}\},\{\modsym{U}\},\{D_0\},\{D_1\},\{\mathsf{C}_4\}\}$.
+\item[C5] The transported bundled family differs from the split family;
+$\{D_0, D_1\}$ is transported but not inclusion-minimal on the split side.
+\end{description}
+
+Because the full instances are infeasible (C2), a singleton module deletion
+is inclusion-minimal iff it restores satisfiability; C3--C4 check all
+singleton deletions exhaustively, and C5 is re-derived from C1--C4 at the set
+level. The archive additionally contains the full $32$-case bundled and
+$64$-case split atlases and the mapped case-by-case comparison table
+extending C1 to all mapped module subsets.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

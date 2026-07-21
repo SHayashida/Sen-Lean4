@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "axiom_audit_result": {"enum": ["PASS", "PENDING", "FAIL"]},
+    "candidate_b_formalized_in_lean": {"const": false},
+    "claim": {"type": "string"},
+    "expected_axioms": {"const": ["Classical.choice", "Quot.sound", "propext"]},
+    "focused_smoke_gate": {"const": "scripts/ci_m3_smoke.sh"},
+    "focused_smoke_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "lean_files": {"type": "object"},
+    "lean_toolchain": {"type": "string"},
+    "not_claimed": {"type": "array"},
+    "schema_version": {"const": "m3-candidate-b-theorem-binding-v1"},
+    "source_commit": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "theorem_core_smoke": {"enum": ["PASS", "PENDING", "FAIL"]},
+    "theorems": {"type": "array"}
+  },
+  "required": [
+    "schema_version",
+    "claim",
+    "source_commit",
+    "lean_toolchain",
+    "lean_files",
+    "theorems",
+    "focused_smoke_gate",
+    "focused_smoke_sha256",
+    "expected_axioms",
+    "theorem_core_smoke",
+    "axiom_audit_result",
+    "candidate_b_formalized_in_lean",
+    "not_claimed"
+  ],
+  "type": "object"
+}

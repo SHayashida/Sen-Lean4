@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "block_map": {
+      "additionalProperties": false,
+      "properties": {
+        "asymm": {"const": ["asymm"]},
+        "minlib": {"const": ["decisive_voter0", "decisive_voter1"]},
+        "no_cycle4": {"const": ["no_cycle4"]},
+        "un": {"const": ["un"]}
+      },
+      "required": ["asymm", "un", "minlib", "no_cycle4"],
+      "type": "object"
+    },
+    "claim": {
+      "const": "Candidate B is an artifact-defined M3-B instantiation under the declared bundled contract."
+    },
+    "evidence_mode": {"const": "artifact-recomputed"},
+    "grouping": {"const": "touch-any"},
+    "implementation_levers": {
+      "const": ["asymm", "un", "decisive_voter0", "decisive_voter1", "no_cycle4"]
+    },
+    "implementation_predicate": {"const": "split-residual-status"},
+    "reference_predicate": {"const": "bundled-residual-status"},
+    "release_candidate_identity": {"const": "m3-candidate-b-evidence-v1-rc1"},
+    "schema_version": {"const": "m3-candidate-b-contract-v1"},
+    "scope": {
+      "additionalProperties": false,
+      "properties": {
+        "active_contract_atoms": {"const": ["asymm", "un", "minlib", "no_cycle4"]},
+        "claim_level": {"const": "artifact-defined"},
+        "inactive_atoms": {"const": ["no_cycle3"]},
+        "m": {"const": 4},
+        "n": {"const": 2}
+      },
+      "required": ["n", "m", "active_contract_atoms", "inactive_atoms", "claim_level"],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scope",
+    "implementation_levers",
+    "block_map",
+    "grouping",
+    "reference_predicate",
+    "implementation_predicate",
+    "claim",
+    "evidence_mode",
+    "release_candidate_identity"
+  ],
+  "title": "Candidate B declared contract",
+  "type": "object"
+}

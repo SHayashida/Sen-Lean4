@@ -1,0 +1,36 @@
+{
+  "application_filter": {
+    "no_cycle3": 0
+  },
+  "bit_value_semantics": "one-means-retained-active",
+  "bundled": {
+    "application_rows": 16,
+    "bit_order": [
+      "asymm",
+      "un",
+      "minlib",
+      "no_cycle3",
+      "no_cycle4"
+    ],
+    "case_prefix": "case_",
+    "expected_atlas_rows": 32,
+    "mask_integer_encoding": "little-endian-bit-index-sum",
+    "representation": "bundled"
+  },
+  "schema_version": "m3-candidate-b-case-schema-v1",
+  "split": {
+    "application_rows": 32,
+    "bit_order": [
+      "asymm",
+      "un",
+      "decisive_voter0",
+      "decisive_voter1",
+      "no_cycle3",
+      "no_cycle4"
+    ],
+    "case_prefix": "case_",
+    "expected_atlas_rows": 64,
+    "mask_integer_encoding": "little-endian-bit-index-sum",
+    "representation": "split"
+  }
+}

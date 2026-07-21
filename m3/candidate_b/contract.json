@@ -1,0 +1,45 @@
+{
+  "block_map": {
+    "asymm": [
+      "asymm"
+    ],
+    "minlib": [
+      "decisive_voter0",
+      "decisive_voter1"
+    ],
+    "no_cycle4": [
+      "no_cycle4"
+    ],
+    "un": [
+      "un"
+    ]
+  },
+  "claim": "Candidate B is an artifact-defined M3-B instantiation under the declared bundled contract.",
+  "evidence_mode": "artifact-recomputed",
+  "grouping": "touch-any",
+  "implementation_levers": [
+    "asymm",
+    "un",
+    "decisive_voter0",
+    "decisive_voter1",
+    "no_cycle4"
+  ],
+  "implementation_predicate": "split-residual-status",
+  "reference_predicate": "bundled-residual-status",
+  "release_candidate_identity": "m3-candidate-b-evidence-v1-rc1",
+  "schema_version": "m3-candidate-b-contract-v1",
+  "scope": {
+    "active_contract_atoms": [
+      "asymm",
+      "un",
+      "minlib",
+      "no_cycle4"
+    ],
+    "claim_level": "artifact-defined",
+    "inactive_atoms": [
+      "no_cycle3"
+    ],
+    "m": 4,
+    "n": 2
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "application_filter": {
+      "additionalProperties": false,
+      "properties": {"no_cycle3": {"const": 0}},
+      "required": ["no_cycle3"],
+      "type": "object"
+    },
+    "bit_value_semantics": {"const": "one-means-retained-active"},
+    "bundled": {"$ref": "#/$defs/bundled"},
+    "schema_version": {"const": "m3-candidate-b-case-schema-v1"},
+    "split": {"$ref": "#/$defs/split"}
+  },
+  "required": ["schema_version", "bit_value_semantics", "application_filter", "bundled", "split"],
+  "type": "object",
+  "$defs": {
+    "bundled": {
+      "additionalProperties": false,
+      "properties": {
+        "application_rows": {"const": 16},
+        "bit_order": {"const": ["asymm", "un", "minlib", "no_cycle3", "no_cycle4"]},
+        "case_prefix": {"const": "case_"},
+        "expected_atlas_rows": {"const": 32},
+        "mask_integer_encoding": {"const": "little-endian-bit-index-sum"},
+        "representation": {"const": "bundled"}
+      },
+      "required": ["representation", "bit_order", "case_prefix", "expected_atlas_rows", "application_rows", "mask_integer_encoding"],
+      "type": "object"
+    },
+    "split": {
+      "additionalProperties": false,
+      "properties": {
+        "application_rows": {"const": 32},
+        "bit_order": {"const": ["asymm", "un", "decisive_voter0", "decisive_voter1", "no_cycle3", "no_cycle4"]},
+        "case_prefix": {"const": "case_"},
+        "expected_atlas_rows": {"const": 64},
+        "mask_integer_encoding": {"const": "little-endian-bit-index-sum"},
+        "representation": {"const": "split"}
+      },
+      "required": ["representation", "bit_order", "case_prefix", "expected_atlas_rows", "application_rows", "mask_integer_encoding"],
+      "type": "object"
+    }
+  }
+}

@@ -581,12 +581,12 @@ def validate_package(
             "split_status": sstatus,
             "match": match,
         })
-    require(len(mapped_application_rows) == 16, "residual_faithfulness", "comparison application row count changed")
-    require(residual_mismatches == 0, "residual_faithfulness", "bundled/split status mismatch")
     full_bundled = bundled_rows[case_id(frozenset(CONTRACT_ATOMS), BUNDLED_BITS)]["status"]
     full_split = split_rows[case_id(frozenset(IMPLEMENTATION_LEVERS), SPLIT_BITS)]["status"]
     require(full_bundled == "UNSAT", "fully_active_bundled", "fully active bundled row is not UNSAT")
     require(full_split == "UNSAT", "fully_active_split", "fully active split row is not UNSAT")
+    require(len(mapped_application_rows) == 16, "residual_faithfulness", "comparison application row count changed")
+    require(residual_mismatches == 0, "residual_faithfulness", "bundled/split status mismatch")
     require(all(row["bundled_status"] == "SAT" and row["split_status"] == "SAT" for row in residual_rows if len(row["retained_contract_atoms"]) < 4), "residual_faithfulness", "a proper block-aligned residual is not SAT/SAT")
 
     contract_feasible: Dict[FrozenSet[str], bool] = {}

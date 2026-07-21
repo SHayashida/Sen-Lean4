@@ -32,7 +32,8 @@ Prerequisites are Python 3.9 or later using only the standard library and Lean
 used Python 3.9.6; CI uses Python 3.11. Exact environment fields are recorded
 in `environment.json`.
 
-From the repository root:
+From the repository root, the default self-contained mode uses only tracked
+files from the clean checkout:
 
 ```bash
 ./scripts/ci_m3_candidate_b.sh
@@ -49,10 +50,23 @@ To rebuild the curated evidence from its exact historical Git source object:
 python3 m3/candidate_b/build_package.py
 ```
 
-That stricter builder requires the recorded off-main source commit to be
-present locally. Ordinary package replay does not require that historical Git
-object because each copied file is independently SHA-256- and Git-blob-bound
-in `source_artifacts.json` and closed by `MANIFEST.sha256`.
+The default package builder is also self-contained:
+
+```bash
+python3 m3/candidate_b/build_package.py --source-mode curated
+```
+
+The optional provenance audit re-extracts the same whitelist from its recorded
+historical Git object:
+
+```bash
+python3 m3/candidate_b/build_package.py --source-mode historical
+```
+
+Historical mode requires the recorded off-main source commit to be present
+locally. Curated mode does not require that Git object because each copied file
+is independently SHA-256- and Git-blob-bound in `source_artifacts.json` and
+closed by `MANIFEST.sha256`.
 
 The exact evidence source commit is
 `1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`. The exact theorem-core source

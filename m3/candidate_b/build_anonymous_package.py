@@ -35,6 +35,9 @@ def sanitize(value: Any) -> Any:
         if "duration_sec" in result:
             result["duration_sec"] = 0.0
         return result
+    if isinstance(value, str):
+        for commit in PUBLIC_COMMITS:
+            value = value.replace(commit, WITHHELD)
     return value
 
 
@@ -115,6 +118,12 @@ def build(repo: Path, output: Path) -> str:
             "CLAIM_BOUNDARY.md", "LICENSE_STATUS.md",
         ):
             shutil.copy2(str(public / name), str(package / name))
+        write_json(
+            package / "REDISTRIBUTION_INVENTORY.json",
+            sanitize(json.loads(
+                (public / "REDISTRIBUTION_INVENTORY.json").read_text(encoding="utf-8")
+            )),
+        )
         shutil.copy2(str(public / "ANONYMOUS_README.md"), str(root / "README.md"))
         shutil.copy2(
             str(public / "verify_anonymous_manifest.py"),

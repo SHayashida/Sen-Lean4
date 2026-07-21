@@ -8,6 +8,9 @@ A Lean-Verified Characterization of Contract-Relative Reportability**
 ## Source Status
 
 - Draft version: v1
+- Workspace status: canonical on `main` through PR #19
+- Publication status: integrated working draft; not represented as accepted or
+  submission-ready
 - Format: ACM acmart SIGPLAN review / anonymous
 - Main source: `main.tex`
 - Bibliography: `refs.bib`

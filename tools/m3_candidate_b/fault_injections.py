@@ -238,4 +238,3 @@ def run_fault_suite(package_root: Path, repo_root: Path) -> List[Mapping[str, An
                 "result": "PASS" if passed else "FAIL",
             })
     return results
-

@@ -1,2 +1,1 @@
 """Candidate B validator tests."""
-

@@ -30,7 +30,9 @@ canonical under representation change?
 Prerequisites are Python 3.9 or later using only the standard library and Lean
 `leanprover/lean4:v4.15.0` for the focused theorem-core gate. The local freeze
 used Python 3.9.6; CI uses Python 3.11. Exact environment fields are recorded
-in `environment.json`.
+in `environment.json`. A new clone must run the repository's standard Lean
+bootstrap (`lake exe cache get` and `lake build`) before the focused smoke gate.
+The curated artifact rebuild itself uses only the Python standard library.
 
 From the repository root, the default self-contained mode uses only tracked
 files from the clean checkout:
@@ -44,7 +46,7 @@ split application rows, checks all 15 fault injections, and runs the focused
 M3 Lean smoke/axiom audit. The full repository build remains available as
 `lake build`.
 
-To rebuild the curated evidence from its exact historical Git source object:
+To rebuild the curated evidence from the tracked evidence snapshot:
 
 ```bash
 python3 m3/candidate_b/build_package.py

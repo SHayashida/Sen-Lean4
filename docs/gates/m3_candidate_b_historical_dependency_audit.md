@@ -62,6 +62,15 @@ python3 m3/candidate_b/verify_manifest.py
 It must not use a local repository URL, alternate object database, manual
 `.git/objects` copy, source-tree path, or local-only branch.
 
+This gate was executed from a normal HTTPS clone of the remote Candidate B
+branch. The clone did not contain
+`1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`. The curated builder and manifest
+verification passed before any Lean dependency setup. After the standard Lean
+bootstrap (`lake exe cache get` followed by `lake build`), the complete
+`ci_m3_candidate_b.sh` gate passed. The focused smoke gate relies on repository
+`.olean` files produced by that standard bootstrap; this is a Lean build
+prerequisite, not a historical-source-object dependency.
+
 ## 5. Historical tag decision
 
 No historical source tag was created. A proposed
@@ -70,12 +79,14 @@ not authorized while `LICENSE_GATE=BLOCKED`. The curated snapshot preserves
 the required evidence and provenance hashes without making that tag necessary
 for ordinary reproduction.
 
-## 6. Verdict pending remote clean-clone execution
+## 6. Verdict
 
 ```text
-CURATED_MODE=IMPLEMENTED
+CURATED_MODE=PASS
 HISTORICAL_MODE=RETAINED_FOR_PROVENANCE
 SCIENTIFIC_OUTPUT_EQUIVALENCE=PASS
-HISTORICAL_OBJECT_DEPENDENCY=PENDING_REMOTE_CLEAN_CLONE
+REMOTE_CLEAN_CLONE=PASS
+HISTORICAL_OBJECT_CONFIRMED_ABSENT=PASS
+HISTORICAL_OBJECT_DEPENDENCY=ELIMINATED
 HISTORICAL_SOURCE_TAG=NOT CREATED
 ```

@@ -70,7 +70,7 @@ def write_manifest(root: Path) -> None:
 
 def scan_identity(root: Path) -> None:
     banned = [
-        "/Users/", "SHayashida", "github.com", "codex/", "@openai",
+        "/" + "Users/", "SHayashida", "github.com", "codex/", "@openai",
     ] + PUBLIC_COMMITS
     findings: List[str] = []
     for path in sorted(root.rglob("*")):

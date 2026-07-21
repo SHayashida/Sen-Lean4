@@ -4,11 +4,12 @@ This repository began with the fixed Sen24 finite case for Sen's impossibility
 theorem and now contains a staged research program. M1 provides audited finite
 evidence; M1.5 establishes representation-sensitive raw repair
 non-canonicity; M2 provides the canonical semantic obstruction bridge; M3
-provides the canonical finite-set reportability theorem core; `papers/m4/`
-now records a local M4/Sen24 v0.1 release-candidate preprint workspace for
-claim-boundary audit. This M4 workspace is not a public release, and it does
-not complete Level C semantic-to-CNF correctness, Python/CNF correctness, or
-checker formalization.
+provides the canonical finite-set reportability theorem core; and
+`papers/cpp2027_m1_5_m3/` is the canonical workspace for the integrated M1.5+M3
+CPP 2027 working draft. The draft is not represented as accepted or
+submission-ready. M4 remains a future institutional-warrant track;
+`papers/m4/` records a repository-local Sen24 claim-boundary RC, not a
+completed M4 theorem or public release.
 
 The original Sen24 case study covers `n = 2` voters and `m = 4` alternatives,
 with:
@@ -26,23 +27,26 @@ witness-validated, assumed, and re-verified.
 
 ## Current program status
 
-- Dissertation scope: `docs/doctoral_scope_lock.md`
+- Doctoral-scope candidate and scope-control record (not an enrollment claim):
+  `docs/doctoral_scope_lock.md`
 - Current research-program status: `docs/research_program_current.md`
 - Concise operational status: `RESEARCH_STATUS.md`
 
 | Layer | Canonical status |
 |---|---|
 | M1 | Canonical finite Sen24 evidence |
-| M1.5 | Raw repair non-canonicity result; publication packaging pending |
-| M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO` |
+| M1.5 | Raw repair non-canonicity result; concrete witness claims bound on `main`; integrated CPP 2027 working draft |
+| M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO`; major revision required before submission |
 | M2.1 | Companion boundary evidence; paper integration pending |
-| M3 | Abstract M3-A/B/C theorem core canonical on `main`; Candidate B evidence not yet canonical |
-| M4 | Local M4/Sen24 claim-boundary RC preprint workspace; Level C and checker formalization remain future work |
+| M3 | Abstract M3-A/B/C theorem core canonical on `main`; integrated CPP 2027 working draft |
+| Candidate B | Canonical artifact-defined M3-B application evidence package and independent validator under `m3/candidate_b/`; not Lean-verified or semantically validated |
+| Dafny pilot | Public minimum-example workflow validation; not a general validation of M3 or evidence of prevalence |
+| M4 | Future institutional-warrant track; repository-local Sen24 claim-boundary RC is not the immediate publication track |
 
 For first-time readers of the M4 workspace, start with
 `papers/m4/PUBLIC_READER_NOTE.md`, then use `papers/m4/CLAIM_BOUNDARY.md`,
 `papers/m4/RELEASE_CANDIDATE.md`, and `papers/m4/RELEASE_CHECKLIST.md` for
-the exact local RC status and non-claims.
+the exact repository-local RC status and non-claims.
 
 ## Current canonical M3 result
 
@@ -81,9 +85,21 @@ lake env lean SocialChoiceAtlas/Reportability/Examples.lean
 lake build
 ```
 
-Candidate B remains an artifact-defined application whose off-main evidence has
-been reconstructed but still requires a curated canonical package and
-validator, or an immutable release binding.
+The canonical M1.5 claim boundary and deterministic checker bind the concrete
+C1-C5 witness claims used by the integrated draft. The separate
+`m3/candidate_b/` freeze now binds the full finite M3-B application evidence,
+recomputes all repair and grouped-report families, checks GroupSoundness over
+all 32 implementation deletions, and provides a deterministic anonymous
+archive builder. Candidate B remains artifact-defined: the Lean core does not
+formalize it or establish semantic validity of its contract atoms.
+
+The companion Dafny repository contains one hand-constructed formal-model
+repair pilot with distinct caller-contract, callee-contract, and implementation
+repairs. It tests workflow questions about fixed repair scopes, candidate users,
+and technical-verification versus specification-decision reports. It does not
+establish real-workflow prevalence, multi-case generality, or general M3
+validity. The XAI companion is deferred or parallel; this repository makes no
+claim about a public XAI artifact.
 
 ## Current canonical M2 result
 
@@ -130,7 +146,9 @@ This repository uses one shared code/data trunk and separate in-repo manuscript 
 - `paper/` is the protected M1 manuscript workspace.
 - `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
 - `papers/m2/` is the M2 semantic obstruction-bridge manuscript workspace.
-- `papers/m4/` is a local M4/Sen24 claim-boundary release-candidate preprint
+- `papers/cpp2027_m1_5_m3/` is the canonical integrated M1.5+M3 CPP 2027
+  working-draft workspace.
+- `papers/m4/` is a repository-local M4/Sen24 claim-boundary release-candidate preprint
   workspace, not a public release.
 - Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.
 - Use short-lived branches for implementation work and manuscript edits.

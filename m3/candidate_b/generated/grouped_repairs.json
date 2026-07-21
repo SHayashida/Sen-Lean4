@@ -1,0 +1,74 @@
+{
+  "grouped_image": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "grouped_repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "raw_to_grouped": [
+    {
+      "grouped_report": [
+        "asymm"
+      ],
+      "raw_repair": [
+        "asymm"
+      ]
+    },
+    {
+      "grouped_report": [
+        "minlib"
+      ],
+      "raw_repair": [
+        "decisive_voter0"
+      ]
+    },
+    {
+      "grouped_report": [
+        "minlib"
+      ],
+      "raw_repair": [
+        "decisive_voter1"
+      ]
+    },
+    {
+      "grouped_report": [
+        "no_cycle4"
+      ],
+      "raw_repair": [
+        "no_cycle4"
+      ]
+    },
+    {
+      "grouped_report": [
+        "un"
+      ],
+      "raw_repair": [
+        "un"
+      ]
+    }
+  ],
+  "result": "PASS",
+  "schema_version": "m3-candidate-b-grouped-repairs-v1"
+}

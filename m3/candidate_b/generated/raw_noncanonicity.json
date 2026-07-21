@@ -1,0 +1,38 @@
+{
+  "families_equal": false,
+  "raw_repair_canonicity": "FAIL",
+  "result": "PASS",
+  "schema_version": "m3-candidate-b-raw-noncanonicity-v1",
+  "split_raw_family": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "decisive_voter0"
+    ],
+    [
+      "decisive_voter1"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "transported_bundled_family": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "no_cycle4"
+    ],
+    [
+      "decisive_voter0",
+      "decisive_voter1"
+    ]
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "claim": "Candidate B is an artifact-defined M3-B instantiation under the declared bundled contract.",
+  "contract_repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "evidence_mode": "artifact-recomputed",
+  "fully_active_bundled_unsat": true,
+  "fully_active_split_unsat": true,
+  "group_soundness": {
+    "implementation_deletions_checked": 32,
+    "result": "PASS",
+    "violations": 0
+  },
+  "grouped_repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "guarantee_ceiling": [
+    "artifact-defined contract only",
+    "no semantic contract validity claim",
+    "no encoder correctness claim",
+    "no solver correctness claim",
+    "no family-scale claim"
+  ],
+  "lean_binding": {
+    "axiom_audit": "PASS",
+    "candidate_b_formalized_in_lean": false,
+    "theorem_core_smoke": "PASS"
+  },
+  "overall": "PASS",
+  "pointwise_grouped_correctness": {
+    "mismatches": 0,
+    "points_checked": 16,
+    "result": "PASS"
+  },
+  "proof_replay": "NOT AVAILABLE IN CURATED PACKAGE",
+  "psi_deletion_monotonicity": {
+    "comparable_pairs_checked": 81,
+    "result": "PASS",
+    "violations": 0
+  },
+  "raw_noncanonicity": {
+    "result": "PASS"
+  },
+  "raw_repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "decisive_voter0"
+    ],
+    [
+      "decisive_voter1"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "residual_faithfulness": {
+    "mismatches": 0,
+    "result": "PASS",
+    "rows_expected": 16,
+    "rows_observed": 16
+  },
+  "schema_version": "m3-candidate-b-audit-v1",
+  "scope": "artifact-defined",
+  "solver_replay": "NOT RUN"
+}

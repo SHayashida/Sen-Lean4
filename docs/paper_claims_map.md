@@ -126,3 +126,34 @@ python3 scripts/run_atlas.py --outdir /tmp/atlas_c6 --jobs 4 --prune none && pyt
 ## Scope note
 
 All claims are intentionally scoped to sen24 and the current axiom universe. They are not claims of general `n,m` scaling.
+
+---
+
+## C7. Candidate B has artifact-defined grouped correctness under its declared bundled contract
+
+- **Claim**: Candidate B is an artifact-defined M3-B instantiation under the
+  declared bundled contract. Raw repair canonicity fails, while grouped
+  contract-level correctness passes over the complete declared finite
+  lattices.
+- **Evidence (fields/files)**:
+  - contract and case semantics: `m3/candidate_b/contract.json`,
+    `m3/candidate_b/case_schema.json`
+  - exact source binding: `m3/candidate_b/source_artifacts.json`
+  - independent outputs: `m3/candidate_b/generated/`
+  - guarantee ceiling: `m3/candidate_b/CLAIM_BOUNDARY.md`
+- **Canonical command**:
+
+```bash
+./scripts/ci_m3_candidate_b.sh
+```
+
+- **Artifacts to inspect**:
+  - `m3/candidate_b/generated/audit_result.json`
+  - `m3/candidate_b/generated/residual_faithfulness.json`
+  - `m3/candidate_b/generated/group_soundness_full.json`
+  - `m3/candidate_b/generated/grouped_correctness_pointwise.json`
+  - `m3/candidate_b/MANIFEST.sha256`
+
+This claim is artifact-defined. It does not establish Candidate B in Lean,
+semantic validity of the contract atoms, encoder or solver correctness,
+normative optimality of grouping, or family-scale transfer.

@@ -1,0 +1,73 @@
+{
+  "direct_exhaustive": {
+    "deletions_checked": 32,
+    "result": "PASS",
+    "violations": 0
+  },
+  "psi_deletion_monotonicity": "PASS",
+  "raw_minimal_only": {
+    "repairs_checked": 5,
+    "result": "PASS",
+    "rows": [
+      {
+        "bundled_case_id": "case_01101",
+        "bundled_status": "SAT",
+        "grouped_contract_deletion": [
+          "asymm"
+        ],
+        "raw_repair": [
+          "asymm"
+        ],
+        "result": "PASS"
+      },
+      {
+        "bundled_case_id": "case_11001",
+        "bundled_status": "SAT",
+        "grouped_contract_deletion": [
+          "minlib"
+        ],
+        "raw_repair": [
+          "decisive_voter0"
+        ],
+        "result": "PASS"
+      },
+      {
+        "bundled_case_id": "case_11001",
+        "bundled_status": "SAT",
+        "grouped_contract_deletion": [
+          "minlib"
+        ],
+        "raw_repair": [
+          "decisive_voter1"
+        ],
+        "result": "PASS"
+      },
+      {
+        "bundled_case_id": "case_11100",
+        "bundled_status": "SAT",
+        "grouped_contract_deletion": [
+          "no_cycle4"
+        ],
+        "raw_repair": [
+          "no_cycle4"
+        ],
+        "result": "PASS"
+      },
+      {
+        "bundled_case_id": "case_10101",
+        "bundled_status": "SAT",
+        "grouped_contract_deletion": [
+          "un"
+        ],
+        "raw_repair": [
+          "un"
+        ],
+        "result": "PASS"
+      }
+    ],
+    "violations": 0
+  },
+  "result": "PASS",
+  "schema_version": "m3-candidate-b-group-soundness-triangulation-v1",
+  "verdicts_agree": true
+}

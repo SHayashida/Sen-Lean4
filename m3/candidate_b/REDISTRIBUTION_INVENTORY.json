@@ -1,0 +1,155 @@
+{
+  "artifact_scope": "Candidate B canonical package and generated anonymous review archive",
+  "author_approval_status": "NOT PROVIDED",
+  "entries": [
+    {
+      "action_required": "Copyright holder must select and approve explicit terms before GitHub Release redistribution.",
+      "category": "A_AUTHOR_CREATED_SOURCE",
+      "evidence_source": "Repository history and branch-local implementation; no repository license file.",
+      "github_release_redistribution_status": "BLOCKED",
+      "included_in_anonymous_package": true,
+      "included_in_canonical_package": true,
+      "license": "UNRESOLVED",
+      "origin": "Candidate B freeze implementation in this repository",
+      "owner": "AUTHOR_CONFIRMATION_REQUIRED",
+      "paths": [
+        "m3/candidate_b/*.py",
+        "m3/candidate_b/schemas/*.json",
+        "tools/m3_candidate_b/**",
+        "scripts/ci_m3_candidate_b.sh"
+      ],
+      "status": "AUTHOR_CONFIRMATION_REQUIRED"
+    },
+    {
+      "action_required": "Copyright holder must approve documentation and metadata redistribution terms.",
+      "category": "A_AUTHOR_CREATED_SOURCE",
+      "evidence_source": "Repository history; no document license or repository license file.",
+      "github_release_redistribution_status": "BLOCKED",
+      "included_in_anonymous_package": true,
+      "included_in_canonical_package": true,
+      "license": "UNRESOLVED",
+      "origin": "Candidate B freeze documentation and metadata in this repository",
+      "owner": "AUTHOR_CONFIRMATION_REQUIRED",
+      "paths": [
+        "m3/candidate_b/*.md",
+        "m3/candidate_b/contract.json",
+        "m3/candidate_b/case_schema.json",
+        "m3/candidate_b/environment.json",
+        "m3/candidate_b/source_artifacts.json",
+        "m3/candidate_b/theorem_binding.json",
+        "m3/candidate_b/MANIFEST.sha256",
+        "docs/gates/m3_candidate_b_*.md"
+      ],
+      "status": "AUTHOR_CONFIRMATION_REQUIRED"
+    },
+    {
+      "action_required": "Confirm authorship and select explicit research-output/data terms before Release redistribution.",
+      "category": "B_AUTHOR_CREATED_RESEARCH_OUTPUT",
+      "evidence_source": "Exact source paths, Git blob IDs, and SHA-256 values in source_artifacts.json; source commit 1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689.",
+      "github_release_redistribution_status": "BLOCKED",
+      "included_in_anonymous_package": true,
+      "included_in_canonical_package": true,
+      "license": "UNRESOLVED",
+      "origin": "Repository-generated Candidate B comparison, atlases, summaries, and manifests copied from exact historical Git objects",
+      "owner": "AUTHOR_CONFIRMATION_REQUIRED",
+      "paths": [
+        "m3/candidate_b/evidence/**"
+      ],
+      "status": "AUTHOR_CONFIRMATION_REQUIRED"
+    },
+    {
+      "action_required": "Confirm authorship and select explicit research-output/data terms before Release redistribution.",
+      "category": "B_AUTHOR_CREATED_RESEARCH_OUTPUT",
+      "evidence_source": "Deterministic outputs of tools/m3_candidate_b/validate_candidate_b.py and the fault-injection suite.",
+      "github_release_redistribution_status": "BLOCKED",
+      "included_in_anonymous_package": true,
+      "included_in_canonical_package": true,
+      "license": "UNRESOLVED",
+      "origin": "Generated Candidate B audit tables and reports",
+      "owner": "AUTHOR_CONFIRMATION_REQUIRED",
+      "paths": [
+        "m3/candidate_b/generated/**"
+      ],
+      "status": "AUTHOR_CONFIRMATION_REQUIRED"
+    },
+    {
+      "action_required": "Do not bundle in a GitHub Release; dependencies remain external and governed by their own licenses.",
+      "category": "C_THIRD_PARTY_EXECUTABLE_OR_SOURCE",
+      "evidence_source": "Lean imports and lake-manifest dependency resolution; no vendored dependency is copied into the Candidate B package.",
+      "github_release_redistribution_status": "EXCLUDE_FROM_RELEASE",
+      "included_in_anonymous_package": false,
+      "included_in_canonical_package": false,
+      "license": "SEE UPSTREAM DEPENDENCIES",
+      "origin": "Lean, mathlib, Python runtime, and optional external solver tooling",
+      "owner": "THIRD_PARTY",
+      "paths": [
+        ".lake/packages/**",
+        "external executables"
+      ],
+      "status": "EXCLUDE_FROM_RELEASE"
+    },
+    {
+      "action_required": "No action for Candidate B Release because these files are not included.",
+      "category": "D_THIRD_PARTY_TEMPLATE_OR_PUBLICATION_FILE",
+      "evidence_source": "Candidate B public and anonymous package whitelists.",
+      "github_release_redistribution_status": "EXCLUDE_FROM_RELEASE",
+      "included_in_anonymous_package": false,
+      "included_in_canonical_package": false,
+      "license": "NOT APPLICABLE TO PACKAGE",
+      "origin": "LaTeX classes, bibliography styles, fonts, logos, and publication templates",
+      "owner": "THIRD_PARTY_OR_UNRESOLVED",
+      "paths": [
+        "papers/**",
+        "paper/**"
+      ],
+      "status": "EXCLUDE_FROM_RELEASE"
+    },
+    {
+      "action_required": "No action for current package; a future solver/proof replay release requires a separate provenance and redistribution audit.",
+      "category": "E_GENERATED_PROOF_OR_CERTIFICATE",
+      "evidence_source": "Candidate B whitelist inspection: no DIMACS, LRAT, proof log, model, or solver binary is included.",
+      "github_release_redistribution_status": "EXCLUDE_FROM_RELEASE",
+      "included_in_anonymous_package": false,
+      "included_in_canonical_package": false,
+      "license": "NOT ASSESSED",
+      "origin": "Potential CNF, LRAT, model, and solver-log artifacts",
+      "owner": "UNRESOLVED",
+      "paths": [
+        "Certificates/**",
+        "solver outputs"
+      ],
+      "status": "EXCLUDE_FROM_RELEASE"
+    },
+    {
+      "action_required": "Obtain an explicit license decision or exclude Lean source copies from any distributed archive.",
+      "category": "F_UNCLEAR_PROVENANCE",
+      "evidence_source": "The four Reportability files have no file-level license header. Other repository Lean files refer to an Apache-2.0 LICENSE file, but that file is absent.",
+      "github_release_redistribution_status": "BLOCKED",
+      "included_in_anonymous_package": true,
+      "included_in_canonical_package": false,
+      "license": "UNRESOLVED",
+      "origin": "M3 theorem-core Lean source copied into the generated anonymous archive",
+      "owner": "AUTHOR_CONFIRMATION_REQUIRED",
+      "paths": [
+        "SocialChoiceAtlas/Reportability/Defs.lean",
+        "SocialChoiceAtlas/Reportability/GroupSound.lean",
+        "SocialChoiceAtlas/Reportability/Monotone.lean",
+        "SocialChoiceAtlas/Reportability/Examples.lean",
+        "scripts/ci_m3_smoke.sh",
+        "lean-toolchain"
+      ],
+      "status": "AUTHOR_CONFIRMATION_REQUIRED"
+    }
+  ],
+  "legal_advice": false,
+  "license_files_found": [],
+  "license_gate": "BLOCKED",
+  "notes": [
+    "Public repository visibility is not a license grant.",
+    "Existing file headers that refer to a missing LICENSE file do not resolve repository-wide terms.",
+    "No license was selected or added by this audit.",
+    "No Candidate B GitHub Release asset is authorized by this inventory."
+  ],
+  "package_file_count_before_inventory": 136,
+  "schema_version": "m3-candidate-b-redistribution-inventory-v1"
+}

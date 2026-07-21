@@ -1,0 +1,48 @@
+{
+  "axiom_audit_result": "PASS",
+  "candidate_b_formalized_in_lean": false,
+  "claim": "Candidate B is an artifact-defined M3-B instantiation under the declared bundled contract.",
+  "expected_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "focused_smoke_gate": "scripts/ci_m3_smoke.sh",
+  "focused_smoke_sha256": "d8683e1cdae374e0149421823f1f5e248b59fb11f6c2eefa65db8b6a203b1e8c",
+  "lean_files": {
+    "SocialChoiceAtlas/Reportability/Defs.lean": {
+      "content_sha256": "9f776f7da057c1ae8e3f1394119b52ae55902567185823f6fa10ede89fab1e8a",
+      "git_blob_sha": "03053943a8f2429c79340734a23b0b0609058e9b"
+    },
+    "SocialChoiceAtlas/Reportability/Examples.lean": {
+      "content_sha256": "27e3decfe1b7100124b4bad8acc4a61128614b86c47e14aa8e513c8d92747fac",
+      "git_blob_sha": "14ce4b823795056f9cb91814acf83fb1b4fedcbe"
+    },
+    "SocialChoiceAtlas/Reportability/GroupSound.lean": {
+      "content_sha256": "fdf0251a3f44e5c1e9cc2b7d4ee580fb500f9370adad29b4f5be07a947f85b5b",
+      "git_blob_sha": "2ef41b003d63088bc762a493c6ed1590d2996293"
+    },
+    "SocialChoiceAtlas/Reportability/Monotone.lean": {
+      "content_sha256": "4614e5b747d278196d73be882a535c3d53a4e53c2266f12dbdf4fde7ccb89641",
+      "git_blob_sha": "37958d0c63c835365a8dda94ec615f7e5ff719f4"
+    }
+  },
+  "lean_toolchain": "leanprover/lean4:v4.15.0",
+  "not_claimed": [
+    "Candidate B is formalized in Lean",
+    "artifact semantics are proved in Lean",
+    "CNF generation is proved correct",
+    "solver results are proved correct",
+    "the declared atoms are normatively canonical"
+  ],
+  "schema_version": "m3-candidate-b-theorem-binding-v1",
+  "source_commit": "e33805d0ff0a64f12e450ba7aaa150729901d7d2",
+  "theorem_core_smoke": "PASS",
+  "theorems": [
+    "m3b_grouped_correctness",
+    "m3b_two_realization",
+    "m3c_converse",
+    "groupSoundness_iff",
+    "audit_cost_collapse"
+  ]
+}

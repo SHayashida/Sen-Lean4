@@ -1,0 +1,771 @@
+{
+  "feasible_split_residuals": 31,
+  "implementation_deletions_checked": 32,
+  "result": "PASS",
+  "rows": [
+    {
+      "bundled_case_id": "case_11101",
+      "bundled_status": "UNSAT",
+      "grouped_contract_deletion": [],
+      "implementation_deletion": [],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_111101",
+      "split_status": "UNSAT"
+    },
+    {
+      "bundled_case_id": "case_01101",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm"
+      ],
+      "implementation_deletion": [
+        "asymm"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_011101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10101",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un"
+      ],
+      "implementation_deletion": [
+        "un"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_101101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00101",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_001101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "decisive_voter0"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_110101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter0"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_010101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter0"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_100101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter0"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_000101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_111001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_011001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_101001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_001001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_110001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "un",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_010001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_100001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00001",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "no_cycle4"
+      ],
+      "retained_implementation": [
+        "no_cycle4"
+      ],
+      "split_case_id": "case_000001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11100",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_111100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01100",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un",
+        "minlib"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_011100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10100",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "un",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "minlib"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_101100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00100",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "minlib"
+      ],
+      "retained_implementation": [
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_001100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_110100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_010100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_100100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [],
+      "retained_implementation": [
+        "decisive_voter1"
+      ],
+      "split_case_id": "case_000100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un",
+        "decisive_voter0"
+      ],
+      "split_case_id": "case_111000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un"
+      ],
+      "retained_implementation": [
+        "un",
+        "decisive_voter0"
+      ],
+      "split_case_id": "case_011000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "decisive_voter0"
+      ],
+      "split_case_id": "case_101000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [],
+      "retained_implementation": [
+        "decisive_voter0"
+      ],
+      "split_case_id": "case_001000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm",
+        "un"
+      ],
+      "retained_implementation": [
+        "asymm",
+        "un"
+      ],
+      "split_case_id": "case_110000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "un"
+      ],
+      "retained_implementation": [
+        "un"
+      ],
+      "split_case_id": "case_010000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [
+        "asymm"
+      ],
+      "retained_implementation": [
+        "asymm"
+      ],
+      "split_case_id": "case_100000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00000",
+      "bundled_status": "SAT",
+      "grouped_contract_deletion": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "implementation_deletion": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "implication_result": "PASS",
+      "retained_contract": [],
+      "retained_implementation": [],
+      "split_case_id": "case_000000",
+      "split_status": "SAT"
+    }
+  ],
+  "schema_version": "m3-candidate-b-group-soundness-full-v1",
+  "violations": 0
+}

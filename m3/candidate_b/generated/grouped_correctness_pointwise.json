@@ -1,0 +1,167 @@
+{
+  "artifact_defined_grouped_correctness": "PASS",
+  "mismatches": 0,
+  "points_checked": 16,
+  "raw_repair_canonicity": "FAIL",
+  "result": "PASS",
+  "rows": [
+    {
+      "contract_deletion": [],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm"
+      ],
+      "contract_repair": true,
+      "grouped_repair": true,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "un"
+      ],
+      "contract_repair": true,
+      "grouped_repair": true,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "un"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "minlib"
+      ],
+      "contract_repair": true,
+      "grouped_repair": true,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "minlib"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "un",
+        "minlib"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "no_cycle4"
+      ],
+      "contract_repair": true,
+      "grouped_repair": true,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "un",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    },
+    {
+      "contract_deletion": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "contract_repair": false,
+      "grouped_repair": false,
+      "match": true
+    }
+  ],
+  "schema_version": "m3-candidate-b-grouped-correctness-pointwise-v1",
+  "true_points": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ]
+}

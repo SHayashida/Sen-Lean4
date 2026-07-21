@@ -22,7 +22,8 @@ Current publication-unit status:
 | `papers/m1_5/` | Canonical manuscript workspace | M1.5 standalone source and witness claim boundary; also an input to the integrated CPP unit. |
 | `papers/m2/` | Public/preprint and archived canonical workspace | M2 standalone unit; reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
 | `papers/cpp2027_m1_5_m3/` | Canonical integrated conference working draft | M1.5+M3 CPP 2027 v1 workspace through PR #19; not represented as accepted or submission-ready. |
-| `tools/check_cm_witness.py` plus the anonymous-supplement workflow | Artifact-only evidence binding | Canonical M1.5 C1-C5 checker and hashes; the full Candidate B M3 application evidence is not frozen as a canonical package or immutable release. |
+| `tools/check_cm_witness.py` plus the M1.5 anonymous-supplement workflow | Artifact-only evidence binding | Canonical M1.5 C1-C5 checker and hashes. |
+| `m3/candidate_b/` | Canonical artifact-defined application evidence | Full finite Candidate B M3-B package, independent validator, manifest, fault tests, and separate anonymous builder; not a Lean theorem or semantic validation. |
 | `papers/m4/` | Repository-local tagged RC workspace | Sen24 claim-boundary RC; not a GitHub Release or the immediate publication track. The institutional-warrant M4 theorem remains future work. |
 | M2.1 | Deferred manuscript | Evidence is partly canonical through PR #9; no canonical manuscript workspace is claimed. |
 
@@ -38,10 +39,11 @@ working-draft workspace. Its abstract characterization uses the M3 Lean core;
 its concrete witness remains artifact-checked.
 
 PR #18 made the M1.5 C1-C5 witness binding canonical through a deterministic
-checker, exact hashes, and the anonymous-supplement builder. The full Candidate
-B M3 application evidence is still artifact-defined and not frozen as a
-canonical package or immutable release. Neither status makes Candidate B a Lean
-theorem or validates its contract atoms semantically.
+checker, exact hashes, and the anonymous-supplement builder. The distinct
+`m3/candidate_b/` package now freezes the full finite M3-B application evidence
+and recomputes its contract-relative obligations. Neither status makes
+Candidate B a Lean theorem, validates its contract atoms semantically, or
+verifies the encoder or solver.
 
 Any separate future M3 submission needs its own workspace, claim boundary,
 exact tag, and archival record.
@@ -50,8 +52,8 @@ exact tag, and archival record.
 
 - M2.1 evidence is partly canonical through PR #9, but its manuscript workspace
   is not currently a canonical `main` workspace.
-- Candidate B M3 application evidence packaging is pending; do not confuse it
-  with the canonical, narrower M1.5 witness binding.
+- Candidate B has no immutable tag or public Release; do not confuse release
+  status with the canonical repository package or the narrower M1.5 binding.
 - M4 now has a `papers/m4/` v0.1 draft preprint workspace. The Lean
   right-atom bridge check and finite-audit replay wrapper are recorded. This is
   a repository-local release-candidate workspace, not a public release; Level C

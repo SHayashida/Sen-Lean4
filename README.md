@@ -39,7 +39,7 @@ witness-validated, assumed, and re-verified.
 | M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO`; major revision required before submission |
 | M2.1 | Companion boundary evidence; paper integration pending |
 | M3 | Abstract M3-A/B/C theorem core canonical on `main`; integrated CPP 2027 working draft |
-| Candidate B | Artifact-defined M3-B application; M1.5 witness binding is canonical, but a frozen M3 application evidence package or immutable release is still pending |
+| Candidate B | Canonical artifact-defined M3-B application evidence package and independent validator under `m3/candidate_b/`; not Lean-verified or semantically validated |
 | Dafny pilot | Public minimum-example workflow validation; not a general validation of M3 or evidence of prevalence |
 | M4 | Future institutional-warrant track; repository-local Sen24 claim-boundary RC is not the immediate publication track |
 
@@ -86,10 +86,12 @@ lake build
 ```
 
 The canonical M1.5 claim boundary and deterministic checker bind the concrete
-C1-C5 witness claims used by the integrated draft. Candidate B nevertheless
-remains an artifact-defined M3-B application: its full application evidence is
-not frozen as a canonical package or immutable release, and the Lean core does
-not formalize it.
+C1-C5 witness claims used by the integrated draft. The separate
+`m3/candidate_b/` freeze now binds the full finite M3-B application evidence,
+recomputes all repair and grouped-report families, checks GroupSoundness over
+all 32 implementation deletions, and provides a deterministic anonymous
+archive builder. Candidate B remains artifact-defined: the Lean core does not
+formalize it or establish semantic validity of its contract atoms.
 
 The companion Dafny repository contains one hand-constructed formal-model
 repair pilot with distinct caller-contract, callee-contract, and implementation

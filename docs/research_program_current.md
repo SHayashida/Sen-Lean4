@@ -33,7 +33,7 @@ institutional action are not interchangeable.
 | M2 | Generic O2/O3/O4 semantic obstruction bridge and general Sen theorem | Canonical, tagged, DOI archived; reviewer audit complete | Required major manuscript revision before submission |
 | M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts partly canonical through PR #9; manuscript not canonical | Defer separate paper integration |
 | M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16; integrated CPP workspace through PR #19 | Continue integrated manuscript review |
-| Candidate B | Artifact-defined M3-B instantiation | M1.5 C1-C5 witness binding is canonical; full M3 application evidence is not frozen canonically | Curated M3 evidence package or immutable release binding |
+| Candidate B | Artifact-defined M3-B instantiation | Canonical curated application package and independent validator under `m3/candidate_b/`; not Lean-verified or semantically validated | Release review after license and redistribution gates |
 | Dafny pilot | Formal-model-repair workflow minimum example | Public external pilot at `SHayashida/dafny-m3-repair` commit `208c2a59aa24fc1d2befe22842a7b07af8ced576` | Add multiple cases and real-workflow evidence |
 | XAI companion | Deferred or parallel companion track | No public artifact status is established by the inspected Sen `main` branch | Do not infer status until explicitly published |
 | M4 | Institutional warrant / authority configuration | Future/deferred theory track; repository-local Sen24 RC exists under `papers/m4/` | Keep outside the immediate publication track |
@@ -186,20 +186,23 @@ independently reconstructed the Candidate B artifact audit:
 
 PR #18 added a canonical deterministic checker and anonymous-supplement builder
 for the narrower M1.5 C1-C5 witness claims, together with exact hashes in
-`papers/m1_5/CLAIM_BOUNDARY.md`. The builder still takes the full Candidate B
-tree from the documented off-main source SHA, and the generated anonymous
-archive is intentionally not committed or released.
+`papers/m1_5/CLAIM_BOUNDARY.md`.
 
-Accordingly, the M1.5 witness claim binding is canonical, but Candidate B as a
-full M3-B application is not yet frozen as canonical evidence. That status
-requires either:
+The full Candidate B M3 application is now separately frozen under
+`m3/candidate_b/` at evidence-freeze commit
+`99cba5cd45cadab283aab3784c9ff2180c8d8609`. The whitelist-only package binds
+99 source evidence files to the exact off-main source commit, independently
+recomputes the 16-row ResidualFaithfulness table, the complete 16/32 deletion
+lattices and repair families, direct GroupSoundness, bundled deletion
+monotonicity, and pointwise grouped correctness. All 15 required fault
+injections fail at their expected gates. A separate deterministic anonymous
+builder sanitizes and rehashes its review archive.
 
-- a curated evidence package plus canonical validator; or
-- immutable release binding.
-
-Candidate B is artifact-defined. Its application evidence remains outside the
-M3 Lean theorem core, and it does not establish semantic or Lean-level validity
-of the contract atoms.
+Candidate B is artifact-defined. Its evidence remains outside the M3 Lean
+theorem core, and the package does not establish semantic atom validity,
+encoder or solver correctness, proof replay, normative grouping, or
+family-scale transfer. No tag or public release has been created; release is
+gated by license and redistribution review.
 
 ## 9. CPP integrated manuscript status
 
@@ -268,8 +271,8 @@ that pre-atomicization can never prevent the reportability problem.
 
 1. Continue the canonical M1.5+M3 CPP 2027 integrated working-draft review and
    submission-freeze work without broadening its claim boundary.
-2. Create the Candidate B curated M3 application evidence package, or bind an
-   immutable release.
+2. Review the frozen Candidate B package for a future immutable release only
+   after license, redistribution, and clean-clone release gates pass.
 3. Expand the Dafny pilot to multiple cases and a real workflow, with explicit
    candidate users and technical-versus-specification reporting contracts.
 4. Complete the required M2 manuscript revision before submission.
@@ -287,7 +290,7 @@ doctoral enrollment or accepted plan is claimed.
 
 - M3 linter-warning cleanup, only in a separately audited code task.
 - Stale M3 skeleton retention/archival policy.
-- Candidate B release packaging.
+- Candidate B license, redistribution, and immutable-release review.
 - Dafny multi-case and real-workflow validation.
 - M2 manuscript major revision.
 - M2.1 publication packaging.

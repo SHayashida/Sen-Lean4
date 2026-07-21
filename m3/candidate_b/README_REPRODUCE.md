@@ -2,9 +2,18 @@
 
 > Candidate B is an artifact-defined M3-B instantiation under the declared bundled contract.
 
+Evidence mode: `artifact-recomputed`.
+
 This directory is the curated, hash-bound evidence freeze for the finite
 Candidate B application. The package recomputes every reported family from the
 frozen SAT/UNSAT status tables. It does not rerun the encoder or solver.
+
+## Scientific question
+
+Under the declared bundled contract, do the complete artifact-defined bundled
+and split residual lattices satisfy ResidualFaithfulness, GroupSoundness, and
+pointwise grouped correctness even though their raw repair families are not
+canonical under representation change?
 
 ## Declared contract
 
@@ -17,6 +26,11 @@ frozen SAT/UNSAT status tables. It does not rerun the encoder or solver.
 - `no_cycle3` is fixed inactive and is outside this application contract.
 
 ## One-command replay
+
+Prerequisites are Python 3.9 or later using only the standard library and Lean
+`leanprover/lean4:v4.15.0` for the focused theorem-core gate. The local freeze
+used Python 3.9.6; CI uses Python 3.11. Exact environment fields are recorded
+in `environment.json`.
 
 From the repository root:
 
@@ -40,6 +54,11 @@ present locally. Ordinary package replay does not require that historical Git
 object because each copied file is independently SHA-256- and Git-blob-bound
 in `source_artifacts.json` and closed by `MANIFEST.sha256`.
 
+The exact evidence source commit is
+`1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`. The exact theorem-core source
+commit, file blobs, declarations, smoke script, and allowed axiom set are bound
+in `theorem_binding.json`.
+
 ## Evidence coverage
 
 - residual faithfulness: 16/16 block-aligned rows, zero mismatches;
@@ -53,6 +72,22 @@ in `source_artifacts.json` and closed by `MANIFEST.sha256`.
 Raw repairs are not canonical under the bundled representation. The validated
 grouped result is only the finite artifact-defined result under this declared
 contract.
+
+Expected independently recomputed families are:
+
+- raw: `{asymm}`, `{un}`, `{decisive_voter0}`, `{decisive_voter1}`,
+  `{no_cycle4}`;
+- grouped: `{asymm}`, `{un}`, `{minlib}`, `{no_cycle4}`;
+- contract: `{asymm}`, `{un}`, `{minlib}`, `{no_cycle4}`.
+
+Any missing row, unknown field, schema drift, hash mismatch, case-map mismatch,
+or failed finite implication terminates with a non-zero exit. A failure means
+the frozen artifact-defined claim is not reproduced; it does not diagnose the
+social-choice semantics automatically.
+
+No new solver run or UNSAT-proof replay is performed. The package trusts the
+hash-bound SAT/UNSAT statuses only as artifact inputs, then independently
+recomputes repair minimality, grouping, soundness, monotonicity, and exactness.
 
 ## Package map
 
@@ -71,3 +106,19 @@ contract.
 The anonymous package must be built separately with
 `build_anonymous_package.py`; the public package is never renamed and reused as
 an anonymous archive.
+
+```bash
+python3 m3/candidate_b/build_anonymous_package.py \
+  --output /tmp/m3-candidate-b-anonymous.zip
+```
+
+The expected terminal verdict includes both:
+
+```text
+Raw repair canonicity: FAIL
+Grouped contract-level correctness: PASS
+```
+
+Known limitations are the lack of semantic contract validation, encoder and
+solver verification, proof replay, family-scale transfer, multi-scope evidence,
+and an explicit repository redistribution license.

@@ -859,6 +859,7 @@ def validate_package(
         + "- PsiDeletionMonotonicity: PASS (81 comparable pairs)\n"
         + "- Pointwise grouped correctness: PASS (16 points, 0 mismatches)\n"
         + "- Raw repair canonicity: FAIL\n\n"
+        + "Grouped contract-level correctness: **PASS**\n\n"
         + "Candidate B Lean formalization: NOT CLAIMED\n\n"
         + "Semantic contract validity: NOT CLAIMED\n\n"
         + "Family-scale validity: NOT CLAIMED\n",
@@ -923,6 +924,7 @@ def main(argv: Sequence[str] = ()) -> int:
     print("PASS: %s" % result["claim"])
     print("Evidence mode: %s" % result["evidence_mode"])
     print("Raw repair canonicity: FAIL")
+    print("Grouped contract-level correctness: PASS")
     print("Artifact-defined grouped correctness: PASS")
     return 0
 

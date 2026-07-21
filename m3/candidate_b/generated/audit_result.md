@@ -14,6 +14,8 @@ Evidence mode: `artifact-recomputed`
 - Pointwise grouped correctness: PASS (16 points, 0 mismatches)
 - Raw repair canonicity: FAIL
 
+Grouped contract-level correctness: **PASS**
+
 Candidate B Lean formalization: NOT CLAIMED
 
 Semantic contract validity: NOT CLAIMED

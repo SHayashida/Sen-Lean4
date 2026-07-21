@@ -469,7 +469,7 @@ def validate_theorem_binding(binding: Mapping[str, Any], repo_root: Path, verify
     require(binding["lean_files"] == THEOREM_FILES, gate, "Lean file binding differs")
     require(binding["theorems"] == THEOREMS, gate, "bound theorem list differs")
     require(binding["focused_smoke_gate"] == "scripts/ci_m3_smoke.sh", gate, "focused smoke path changed")
-    require(binding["focused_smoke_sha256"] == "31efce4413f5a7803a5dd803a7cb07fe1aae078fc06a923f1a87fc5bcebb030b", gate, "focused smoke hash changed")
+    require(binding["focused_smoke_sha256"] == "d8683e1cdae374e0149421823f1f5e248b59fb11f6c2eefa65db8b6a203b1e8c", gate, "focused smoke hash changed")
     require(binding["expected_axioms"] == ["Classical.choice", "Quot.sound", "propext"], gate, "expected axiom set changed")
     require(binding["theorem_core_smoke"] == "PASS" and binding["axiom_audit_result"] == "PASS", gate, "Lean smoke or axiom audit is not recorded PASS")
     require(binding["candidate_b_formalized_in_lean"] is False, gate, "Candidate B must not be marked Lean-formalized")

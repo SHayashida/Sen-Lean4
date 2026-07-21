@@ -8,7 +8,7 @@
     "propext"
   ],
   "focused_smoke_gate": "scripts/ci_m3_smoke.sh",
-  "focused_smoke_sha256": "31efce4413f5a7803a5dd803a7cb07fe1aae078fc06a923f1a87fc5bcebb030b",
+  "focused_smoke_sha256": "d8683e1cdae374e0149421823f1f5e248b59fb11f6c2eefa65db8b6a203b1e8c",
   "lean_files": {
     "SocialChoiceAtlas/Reportability/Defs.lean": {
       "content_sha256": "9f776f7da057c1ae8e3f1394119b52ae55902567185823f6fa10ede89fab1e8a",

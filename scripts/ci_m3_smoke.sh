@@ -13,6 +13,10 @@ MODULE_FILES=(
   "SocialChoiceAtlas/Reportability/Examples.lean"
 )
 
+# Materialize the focused module graph in Lake's build directory first. Direct
+# `lean` invocations do not install imported `.olean` files in a fresh clone.
+lake build SocialChoiceAtlas.Reportability.Examples
+
 for module_file in "${MODULE_FILES[@]}"; do
   lake env lean "$module_file"
 done
@@ -83,4 +87,3 @@ for decl in decls:
 
 print("M3 axiom audit passed")
 PY
-

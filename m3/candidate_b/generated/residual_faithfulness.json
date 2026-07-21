@@ -1,0 +1,189 @@
+{
+  "fully_active": {
+    "bundled": "UNSAT",
+    "split": "UNSAT"
+  },
+  "mismatches": 0,
+  "proper_residuals": "SAT / SAT",
+  "result": "PASS",
+  "rows": [
+    {
+      "bundled_case_id": "case_00000",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [],
+      "split_case_id": "case_000000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10000",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm"
+      ],
+      "split_case_id": "case_100000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01000",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "un"
+      ],
+      "split_case_id": "case_010000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11000",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "un"
+      ],
+      "split_case_id": "case_110000",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00100",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "minlib"
+      ],
+      "split_case_id": "case_001100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10100",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "minlib"
+      ],
+      "split_case_id": "case_101100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01100",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "un",
+        "minlib"
+      ],
+      "split_case_id": "case_011100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11100",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "split_case_id": "case_111100",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00001",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "no_cycle4"
+      ],
+      "split_case_id": "case_000001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10001",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_100001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01001",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "un",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_010001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11001",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_110001",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_00101",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_001101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_10101",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_101101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_01101",
+      "bundled_status": "SAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_011101",
+      "split_status": "SAT"
+    },
+    {
+      "bundled_case_id": "case_11101",
+      "bundled_status": "UNSAT",
+      "match": true,
+      "retained_contract_atoms": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "split_case_id": "case_111101",
+      "split_status": "UNSAT"
+    }
+  ],
+  "rows_expected": 16,
+  "rows_observed": 16,
+  "schema_version": "m3-candidate-b-residual-faithfulness-v1"
+}

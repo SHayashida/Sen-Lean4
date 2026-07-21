@@ -1,0 +1,23 @@
+{
+  "deletions_checked": 32,
+  "non_singleton_minimal_repairs": [],
+  "repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "decisive_voter0"
+    ],
+    [
+      "decisive_voter1"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "result": "PASS",
+  "schema_version": "m3-candidate-b-raw-repairs-v1"
+}

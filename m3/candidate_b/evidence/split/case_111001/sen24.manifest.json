@@ -1,0 +1,104 @@
+{
+  "alts": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "aux_var_range": [
+    6913,
+    6936
+  ],
+  "axioms": [
+    "asymm",
+    "un",
+    "decisive_voter0",
+    "no_cycle4"
+  ],
+  "category_counts": {
+    "asymm": 6912,
+    "decisive_voter0": 6913,
+    "minlib": 0,
+    "no_cycle3": 0,
+    "no_cycle4": 13824,
+    "un": 1728
+  },
+  "cnf_sha256": "6a0dbee583e787d12c54419f08df94e3c362f44817c3813092e6b096bf0ef99c",
+  "encoding": "finite_schema_v1",
+  "minlib": {
+    "mode": "selectors_v1"
+  },
+  "n_alts": 4,
+  "n_p_vars": 6912,
+  "n_voters": 2,
+  "nclauses": 29377,
+  "npairs": 12,
+  "nprofiles": 576,
+  "nquads": 24,
+  "nranks": 24,
+  "ntriples": 24,
+  "nvars": 6936,
+  "p_var_range": [
+    1,
+    6912
+  ],
+  "pair_order": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "profile_order": "itertools.product(range(nranks), repeat=2) lex",
+  "quad_order": "itertools.permutations(ALT,4) lex",
+  "ranking_order": "itertools.permutations(ALT,4) lex",
+  "schema_version": 1,
+  "triple_order": "itertools.permutations(ALT,3) lex",
+  "voters": [
+    0,
+    1
+  ]
+}

@@ -1,0 +1,1122 @@
+{
+  "bundled_universe": [
+    "asymm",
+    "un",
+    "minlib",
+    "no_cycle3",
+    "no_cycle4"
+  ],
+  "candidate_b_assessment": {
+    "classification": "granularity-sensitive under logical equivalence",
+    "cleanest_witness": {
+      "bundled_case_id": "case_11101",
+      "bundled_contains_minlib_singleton": true,
+      "bundled_min_repairs": [
+        "no_cycle4",
+        "minlib",
+        "un",
+        "asymm"
+      ],
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle4",
+      "classification": "granularity-sensitive under logical equivalence",
+      "evidence_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "repair_explanation_changed": true,
+      "split_case_id": "case_111101",
+      "split_contains_person_specific_singletons": true,
+      "split_min_repairs": [
+        "no_cycle4",
+        "decisive_voter1",
+        "decisive_voter0",
+        "un",
+        "asymm"
+      ],
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle4"
+    },
+    "evidence_levels": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "supported": true
+  },
+  "date": "20260401",
+  "experiment": "candidate_b_minlib_granularity",
+  "generated_at_utc": "2026-03-31T23:02:45.304033+00:00",
+  "logical_relation": {
+    "classification": "logically equivalent",
+    "detail": "exact clause-multiset equivalence under the bundled\u2192split mapping",
+    "mapped_cases_total": 32,
+    "mapped_clause_multiset_equal": true,
+    "mapped_status_equal": true
+  },
+  "mapped_cases": [
+    {
+      "bundled_case_id": "case_00000",
+      "bundled_package": [],
+      "bundled_package_key": "(empty)",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_000000",
+      "split_package": [],
+      "split_package_key": "(empty)",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10000",
+      "bundled_package": [
+        "asymm"
+      ],
+      "bundled_package_key": "asymm",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_100000",
+      "split_package": [
+        "asymm"
+      ],
+      "split_package_key": "asymm",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01000",
+      "bundled_package": [
+        "un"
+      ],
+      "bundled_package_key": "un",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_010000",
+      "split_package": [
+        "un"
+      ],
+      "split_package_key": "un",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11000",
+      "bundled_package": [
+        "asymm",
+        "un"
+      ],
+      "bundled_package_key": "asymm+un",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_110000",
+      "split_package": [
+        "asymm",
+        "un"
+      ],
+      "split_package_key": "asymm+un",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00100",
+      "bundled_package": [
+        "minlib"
+      ],
+      "bundled_package_key": "minlib",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_001100",
+      "split_package": [
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_package_key": "decisive_voter0+decisive_voter1",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10100",
+      "bundled_package": [
+        "asymm",
+        "minlib"
+      ],
+      "bundled_package_key": "asymm+minlib",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_101100",
+      "split_package": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_package_key": "asymm+decisive_voter0+decisive_voter1",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01100",
+      "bundled_package": [
+        "un",
+        "minlib"
+      ],
+      "bundled_package_key": "un+minlib",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_011100",
+      "split_package": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_package_key": "un+decisive_voter0+decisive_voter1",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11100",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "bundled_package_key": "asymm+un+minlib",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_111100",
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00010",
+      "bundled_package": [
+        "no_cycle3"
+      ],
+      "bundled_package_key": "no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_000010",
+      "split_package": [
+        "no_cycle3"
+      ],
+      "split_package_key": "no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10010",
+      "bundled_package": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "asymm+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_100010",
+      "split_package": [
+        "asymm",
+        "no_cycle3"
+      ],
+      "split_package_key": "asymm+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01010",
+      "bundled_package": [
+        "un",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "un+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_010010",
+      "split_package": [
+        "un",
+        "no_cycle3"
+      ],
+      "split_package_key": "un+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11010",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "asymm+un+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_110010",
+      "split_package": [
+        "asymm",
+        "un",
+        "no_cycle3"
+      ],
+      "split_package_key": "asymm+un+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00110",
+      "bundled_package": [
+        "minlib",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "minlib+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_001110",
+      "split_package": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "split_package_key": "decisive_voter0+decisive_voter1+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10110",
+      "bundled_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "asymm+minlib+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_101110",
+      "split_package": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "split_package_key": "asymm+decisive_voter0+decisive_voter1+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01110",
+      "bundled_package": [
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "un+minlib+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_011110",
+      "split_package": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "split_package_key": "un+decisive_voter0+decisive_voter1+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11110",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle3",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_111110",
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle3",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00001",
+      "bundled_package": [
+        "no_cycle4"
+      ],
+      "bundled_package_key": "no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_000001",
+      "split_package": [
+        "no_cycle4"
+      ],
+      "split_package_key": "no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10001",
+      "bundled_package": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_100001",
+      "split_package": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01001",
+      "bundled_package": [
+        "un",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "un+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_010001",
+      "split_package": [
+        "un",
+        "no_cycle4"
+      ],
+      "split_package_key": "un+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11001",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_110001",
+      "split_package": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00101",
+      "bundled_package": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "minlib+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_001101",
+      "split_package": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "decisive_voter0+decisive_voter1+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10101",
+      "bundled_package": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+minlib+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_101101",
+      "split_package": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+decisive_voter0+decisive_voter1+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01101",
+      "bundled_package": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "un+minlib+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_011101",
+      "split_package": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "un+decisive_voter0+decisive_voter1+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11101",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle4",
+      "bundled_status": "UNSAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_111101",
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle4",
+      "split_status": "UNSAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00011",
+      "bundled_package": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_000011",
+      "split_package": [
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10011",
+      "bundled_package": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_100011",
+      "split_package": [
+        "asymm",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01011",
+      "bundled_package": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "un+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_010011",
+      "split_package": [
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "un+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11011",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_110011",
+      "split_package": [
+        "asymm",
+        "un",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_00111",
+      "bundled_package": [
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "minlib+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_001111",
+      "split_package": [
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "decisive_voter0+decisive_voter1+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_10111",
+      "bundled_package": [
+        "asymm",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+minlib+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_101111",
+      "split_package": [
+        "asymm",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+decisive_voter0+decisive_voter1+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_01111",
+      "bundled_package": [
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "un+minlib+no_cycle3+no_cycle4",
+      "bundled_status": "SAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_011111",
+      "split_package": [
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "un+decisive_voter0+decisive_voter1+no_cycle3+no_cycle4",
+      "split_status": "SAT",
+      "status_equal": true
+    },
+    {
+      "bundled_case_id": "case_11111",
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "bundled_status": "UNSAT",
+      "clause_multiset_equal": true,
+      "split_case_id": "case_111111",
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle3+no_cycle4",
+      "split_status": "UNSAT",
+      "status_equal": true
+    }
+  ],
+  "n_alternatives": 4,
+  "n_voters": 2,
+  "one_sided_split_cases": {
+    "rows": [
+      {
+        "case_id": "case_001000",
+        "package": [
+          "decisive_voter0"
+        ],
+        "package_key": "decisive_voter0",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_101000",
+        "package": [
+          "asymm",
+          "decisive_voter0"
+        ],
+        "package_key": "asymm+decisive_voter0",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_011000",
+        "package": [
+          "un",
+          "decisive_voter0"
+        ],
+        "package_key": "un+decisive_voter0",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_111000",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter0"
+        ],
+        "package_key": "asymm+un+decisive_voter0",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_000100",
+        "package": [
+          "decisive_voter1"
+        ],
+        "package_key": "decisive_voter1",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_100100",
+        "package": [
+          "asymm",
+          "decisive_voter1"
+        ],
+        "package_key": "asymm+decisive_voter1",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_010100",
+        "package": [
+          "un",
+          "decisive_voter1"
+        ],
+        "package_key": "un+decisive_voter1",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_110100",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter1"
+        ],
+        "package_key": "asymm+un+decisive_voter1",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_001010",
+        "package": [
+          "decisive_voter0",
+          "no_cycle3"
+        ],
+        "package_key": "decisive_voter0+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_101010",
+        "package": [
+          "asymm",
+          "decisive_voter0",
+          "no_cycle3"
+        ],
+        "package_key": "asymm+decisive_voter0+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_011010",
+        "package": [
+          "un",
+          "decisive_voter0",
+          "no_cycle3"
+        ],
+        "package_key": "un+decisive_voter0+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_111010",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter0",
+          "no_cycle3"
+        ],
+        "package_key": "asymm+un+decisive_voter0+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_000110",
+        "package": [
+          "decisive_voter1",
+          "no_cycle3"
+        ],
+        "package_key": "decisive_voter1+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_100110",
+        "package": [
+          "asymm",
+          "decisive_voter1",
+          "no_cycle3"
+        ],
+        "package_key": "asymm+decisive_voter1+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_010110",
+        "package": [
+          "un",
+          "decisive_voter1",
+          "no_cycle3"
+        ],
+        "package_key": "un+decisive_voter1+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_110110",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter1",
+          "no_cycle3"
+        ],
+        "package_key": "asymm+un+decisive_voter1+no_cycle3",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_001001",
+        "package": [
+          "decisive_voter0",
+          "no_cycle4"
+        ],
+        "package_key": "decisive_voter0+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_101001",
+        "package": [
+          "asymm",
+          "decisive_voter0",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+decisive_voter0+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_011001",
+        "package": [
+          "un",
+          "decisive_voter0",
+          "no_cycle4"
+        ],
+        "package_key": "un+decisive_voter0+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_111001",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter0",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+un+decisive_voter0+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_000101",
+        "package": [
+          "decisive_voter1",
+          "no_cycle4"
+        ],
+        "package_key": "decisive_voter1+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_100101",
+        "package": [
+          "asymm",
+          "decisive_voter1",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+decisive_voter1+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_010101",
+        "package": [
+          "un",
+          "decisive_voter1",
+          "no_cycle4"
+        ],
+        "package_key": "un+decisive_voter1+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_110101",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter1",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+un+decisive_voter1+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_001011",
+        "package": [
+          "decisive_voter0",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "decisive_voter0+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_101011",
+        "package": [
+          "asymm",
+          "decisive_voter0",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+decisive_voter0+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_011011",
+        "package": [
+          "un",
+          "decisive_voter0",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "un+decisive_voter0+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_111011",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter0",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+un+decisive_voter0+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_000111",
+        "package": [
+          "decisive_voter1",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "decisive_voter1+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_100111",
+        "package": [
+          "asymm",
+          "decisive_voter1",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+decisive_voter1+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_010111",
+        "package": [
+          "un",
+          "decisive_voter1",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "un+decisive_voter1+no_cycle3+no_cycle4",
+        "status": "SAT"
+      },
+      {
+        "case_id": "case_110111",
+        "package": [
+          "asymm",
+          "un",
+          "decisive_voter1",
+          "no_cycle3",
+          "no_cycle4"
+        ],
+        "package_key": "asymm+un+decisive_voter1+no_cycle3+no_cycle4",
+        "status": "SAT"
+      }
+    ],
+    "status_counts": {
+      "SAT": 32
+    },
+    "total": 32
+  },
+  "repair_comparison": [
+    {
+      "bundled_case_id": "case_11101",
+      "bundled_contains_minlib_singleton": true,
+      "bundled_min_repairs": [
+        "no_cycle4",
+        "minlib",
+        "un",
+        "asymm"
+      ],
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle4",
+      "classification": "granularity-sensitive under logical equivalence",
+      "evidence_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "repair_explanation_changed": true,
+      "split_case_id": "case_111101",
+      "split_contains_person_specific_singletons": true,
+      "split_min_repairs": [
+        "no_cycle4",
+        "decisive_voter1",
+        "decisive_voter0",
+        "un",
+        "asymm"
+      ],
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle4"
+    },
+    {
+      "bundled_case_id": "case_11111",
+      "bundled_contains_minlib_singleton": true,
+      "bundled_min_repairs": [
+        "no_cycle4",
+        "minlib",
+        "un",
+        "asymm"
+      ],
+      "bundled_package": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "bundled_package_key": "asymm+un+minlib+no_cycle3+no_cycle4",
+      "classification": "granularity-sensitive under logical equivalence",
+      "evidence_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "repair_explanation_changed": true,
+      "split_case_id": "case_111111",
+      "split_contains_person_specific_singletons": true,
+      "split_min_repairs": [
+        "no_cycle4",
+        "decisive_voter1",
+        "decisive_voter0",
+        "un",
+        "asymm"
+      ],
+      "split_package": [
+        "asymm",
+        "un",
+        "decisive_voter0",
+        "decisive_voter1",
+        "no_cycle3",
+        "no_cycle4"
+      ],
+      "split_package_key": "asymm+un+decisive_voter0+decisive_voter1+no_cycle3+no_cycle4"
+    }
+  ],
+  "scope_note": "This Candidate B experiment stays inside the restricted local-rationality family defined by no_cycle3 and no_cycle4. It is not evidence about full SocialAcyclic. See docs/no_cycle_interpretation_note.md and docs/axiom_semantics_scaling.md.",
+  "split_universe": [
+    "asymm",
+    "un",
+    "decisive_voter0",
+    "decisive_voter1",
+    "no_cycle3",
+    "no_cycle4"
+  ]
+}

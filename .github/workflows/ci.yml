@@ -41,3 +41,6 @@ jobs:
 
       - name: M2 bridge smoke
         run: ./scripts/ci_m2_smoke.sh
+
+      - name: M3 Candidate B evidence replay
+        run: ./scripts/ci_m3_candidate_b.sh

@@ -1,0 +1,1046 @@
+{
+  "comparable_pairs_checked": 81,
+  "counterexample_rows": [],
+  "premises_true": 65,
+  "result": "PASS",
+  "rows": [
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "SAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un",
+        "minlib"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "SAT",
+      "superset_status": "UNSAT"
+    },
+    {
+      "implication_result": "PASS",
+      "retained_subset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "retained_superset": [
+        "asymm",
+        "un",
+        "minlib",
+        "no_cycle4"
+      ],
+      "subset_status": "UNSAT",
+      "superset_status": "UNSAT"
+    }
+  ],
+  "schema_version": "m3-candidate-b-psi-deletion-monotonicity-v1",
+  "violations": 0
+}

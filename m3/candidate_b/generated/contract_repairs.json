@@ -1,0 +1,19 @@
+{
+  "deletions_checked": 16,
+  "repairs": [
+    [
+      "asymm"
+    ],
+    [
+      "un"
+    ],
+    [
+      "minlib"
+    ],
+    [
+      "no_cycle4"
+    ]
+  ],
+  "result": "PASS",
+  "schema_version": "m3-candidate-b-contract-repairs-v1"
+}

@@ -1,0 +1,159 @@
+{
+  "all_rejected": true,
+  "faults_expected": 15,
+  "faults_observed": 15,
+  "result": "PASS",
+  "rows": [
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "fully_active_bundled",
+      "expected_message_contains": "not UNSAT",
+      "fault": "fully_active_bundled_status",
+      "observed_exit_code": 1,
+      "observed_gate": "fully_active_bundled",
+      "observed_message": "fully active bundled row is not UNSAT",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "fully_active_split",
+      "expected_message_contains": "not UNSAT",
+      "fault": "fully_active_split_status",
+      "observed_exit_code": 1,
+      "observed_gate": "fully_active_split",
+      "observed_message": "fully active split row is not UNSAT",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "residual_faithfulness",
+      "expected_message_contains": "exactly 32",
+      "fault": "delete_mapped_row",
+      "observed_exit_code": 1,
+      "observed_gate": "residual_faithfulness",
+      "observed_message": "comparison must contain exactly 32 mapped rows",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "residual_faithfulness",
+      "expected_message_contains": "block map",
+      "fault": "swap_case_id",
+      "observed_exit_code": 1,
+      "observed_gate": "residual_faithfulness",
+      "observed_message": "mapped split case ID disagrees with block map",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "contract_schema",
+      "expected_message_contains": "scope differs",
+      "fault": "activate_no_cycle3",
+      "observed_exit_code": 1,
+      "observed_gate": "contract_schema",
+      "observed_message": "declared scope differs from the frozen Candidate B scope",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "precomputed_claim_crosscheck",
+      "expected_message_contains": "differs",
+      "fault": "delete_d0_precomputed",
+      "observed_exit_code": 1,
+      "observed_gate": "precomputed_claim_crosscheck",
+      "observed_message": "recorded split repair family differs from independent recomputation",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "precomputed_claim_crosscheck",
+      "expected_message_contains": "unknown or non-singleton",
+      "fault": "add_fake_nonsingleton",
+      "observed_exit_code": 1,
+      "observed_gate": "precomputed_claim_crosscheck",
+      "observed_message": "unknown or non-singleton split repair cross-check",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "residual_faithfulness",
+      "expected_message_contains": "status mismatch",
+      "fault": "mutate_bundled_residual",
+      "observed_exit_code": 1,
+      "observed_gate": "residual_faithfulness",
+      "observed_message": "bundled/split status mismatch",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "contract_schema",
+      "expected_message_contains": "block map differs",
+      "fault": "remove_d1_block",
+      "observed_exit_code": 1,
+      "observed_gate": "contract_schema",
+      "observed_message": "block map differs from the frozen map",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "contract_schema",
+      "expected_message_contains": "touch-any",
+      "fault": "touch_all_grouping",
+      "observed_exit_code": 1,
+      "observed_gate": "contract_schema",
+      "observed_message": "grouping must be touch-any",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "source_artifact_binding",
+      "expected_message_contains": "content hash mismatch",
+      "fault": "source_content_hash",
+      "observed_exit_code": 1,
+      "observed_gate": "source_artifact_binding",
+      "observed_message": "content hash mismatch: evidence/bundled/atlas.json",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "theorem_binding",
+      "expected_message_contains": "source commit changed",
+      "fault": "theorem_source_sha",
+      "observed_exit_code": 1,
+      "observed_gate": "theorem_binding",
+      "observed_message": "theorem-core source commit changed",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "residual_faithfulness",
+      "expected_message_contains": "exactly 32",
+      "fault": "duplicate_mapped_row",
+      "observed_exit_code": 1,
+      "observed_gate": "residual_faithfulness",
+      "observed_message": "comparison must contain exactly 32 mapped rows",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "contract_schema",
+      "expected_message_contains": "scope differs",
+      "fault": "unknown_contract_atom",
+      "observed_exit_code": 1,
+      "observed_gate": "contract_schema",
+      "observed_message": "declared scope differs from the frozen Candidate B scope",
+      "result": "PASS"
+    },
+    {
+      "expected_exit_code": 1,
+      "expected_gate": "case_schema",
+      "expected_message_contains": "case schema changed",
+      "fault": "bit_order_change",
+      "observed_exit_code": 1,
+      "observed_gate": "case_schema",
+      "observed_message": "bundled case schema changed",
+      "result": "PASS"
+    }
+  ],
+  "schema_version": "m3-candidate-b-fault-injection-v1"
+}

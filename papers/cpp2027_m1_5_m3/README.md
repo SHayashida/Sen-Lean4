@@ -24,8 +24,9 @@ A Lean-Verified Characterization of Contract-Relative Reportability**
 - Sections 4-5 characterization: Lean-kernel checked finite-set theorem core
   under `SocialChoiceAtlas/Reportability/`.
 - Section 6 concrete grouped report: bound to the independently recomputed
-  finite package under `../../m3/candidate_b/`; artifact-level audit, not a
-  Lean theorem or semantic validation of the contract atoms.
+  finite package canonical on `main` under `../../m3/candidate_b/` through PR
+  #21; artifact-level audit, not a Lean theorem, solver/proof replay, or
+  semantic validation of the contract atoms.
 
 ## Build
 

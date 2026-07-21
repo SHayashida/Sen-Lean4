@@ -140,6 +140,7 @@ All claims are intentionally scoped to sen24 and the current axiom universe. The
     `m3/candidate_b/case_schema.json`
   - exact source binding: `m3/candidate_b/source_artifacts.json`
   - independent outputs: `m3/candidate_b/generated/`
+  - canonical package closure: `m3/candidate_b/MANIFEST.sha256`
   - guarantee ceiling: `m3/candidate_b/CLAIM_BOUNDARY.md`
 - **Canonical command**:
 
@@ -156,4 +157,6 @@ All claims are intentionally scoped to sen24 and the current axiom universe. The
 
 This claim is artifact-defined. It does not establish Candidate B in Lean,
 semantic validity of the contract atoms, encoder or solver correctness,
-normative optimality of grouping, or family-scale transfer.
+solver/proof replay, normative optimality of grouping, or family-scale
+transfer. The validator-backed package is canonical on `main`; immutable
+release binding and redistribution review remain pending.

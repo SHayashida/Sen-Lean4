@@ -23,7 +23,7 @@ Current publication-unit status:
 | `papers/m2/` | Public/preprint and archived canonical workspace | M2 standalone unit; reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
 | `papers/cpp2027_m1_5_m3/` | Canonical integrated conference working draft | M1.5+M3 CPP 2027 v1 workspace through PR #19; not represented as accepted or submission-ready. |
 | `tools/check_cm_witness.py` plus the M1.5 anonymous-supplement workflow | Artifact-only evidence binding | Canonical M1.5 C1-C5 checker and hashes. |
-| `m3/candidate_b/` | Canonical artifact-defined application evidence | Full finite Candidate B M3-B package, independent validator, manifest, fault tests, and separate anonymous builder; not a Lean theorem or semantic validation. |
+| `m3/candidate_b/` | Canonical artifact-defined application evidence on `main` | Full finite Candidate B M3-B package, independent validator, manifest, fault tests, and separate anonymous builder; immutable release/redistribution review pending; not a Lean theorem or semantic validation. |
 | `papers/m4/` | Repository-local tagged RC workspace | Sen24 claim-boundary RC; not a GitHub Release or the immediate publication track. The institutional-warrant M4 theorem remains future work. |
 | M2.1 | Deferred manuscript | Evidence is partly canonical through PR #9; no canonical manuscript workspace is claimed. |
 
@@ -41,7 +41,9 @@ its concrete witness remains artifact-checked.
 PR #18 made the M1.5 C1-C5 witness binding canonical through a deterministic
 checker, exact hashes, and the anonymous-supplement builder. The distinct
 `m3/candidate_b/` package now freezes the full finite M3-B application evidence
-and recomputes its contract-relative obligations. Neither status makes
+and recomputes its contract-relative obligations. Its default curated rebuild
+is self-contained in a clean clone; historical mode retains the exact source
+provenance audit. Neither status makes
 Candidate B a Lean theorem, validates its contract atoms semantically, or
 verifies the encoder or solver.
 

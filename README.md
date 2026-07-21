@@ -39,7 +39,7 @@ witness-validated, assumed, and re-verified.
 | M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO`; major revision required before submission |
 | M2.1 | Companion boundary evidence; paper integration pending |
 | M3 | Abstract M3-A/B/C theorem core canonical on `main`; integrated CPP 2027 working draft |
-| Candidate B | Canonical artifact-defined M3-B application evidence package and independent validator under `m3/candidate_b/`; not Lean-verified or semantically validated |
+| Candidate B | Canonical validator-backed, artifact-defined M3-B application evidence package on `main` under `m3/candidate_b/`; immutable release binding and redistribution review remain pending |
 | Dafny pilot | Public minimum-example workflow validation; not a general validation of M3 or evidence of prevalence |
 | M4 | Future institutional-warrant track; repository-local Sen24 claim-boundary RC is not the immediate publication track |
 
@@ -92,6 +92,12 @@ recomputes all repair and grouped-report families, checks GroupSoundness over
 all 32 implementation deletions, and provides a deterministic anonymous
 archive builder. Candidate B remains artifact-defined: the Lean core does not
 formalize it or establish semantic validity of its contract atoms.
+
+Candidate B has a canonical validator-backed evidence package on `main`;
+immutable release binding and redistribution review remain pending. It does
+not establish semantic contract validity, encoder correctness, Candidate B
+formalization in Lean, solver/proof replay, normative optimality, or
+family-scale validity.
 
 The companion Dafny repository contains one hand-constructed formal-model
 repair pilot with distinct caller-contract, callee-contract, and implementation

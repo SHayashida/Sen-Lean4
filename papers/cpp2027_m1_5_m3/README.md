@@ -48,3 +48,6 @@ The Makefile writes the default output to `build/main.pdf`.
 - Anonymous source contains no author-identifying metadata.
 - Terminology follows `docs/cpp2027/terminology_map_frozen.md`.
 - No superseded variable-renaming phrasing remains in the paper body.
+- Candidate B claims are bound to exact manuscript text and exact evidence by
+  `CLAIM_MAP_CANDIDATE_B.md`, `claim_map_candidate_b.json`, and
+  `tools/cpp2027/check_candidate_b_claim_map.py` (`make claim-check`).

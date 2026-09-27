@@ -69,7 +69,7 @@ in the inspected repository state.
 ### Canonical on `main`
 
 - `papers/m1_5/`;
-- `papers/cpp2027_m1_5_m3/`;
+- `papers/m1_5_m3/`;
 - `SocialChoiceAtlas/Reportability/Defs.lean`;
 - `SocialChoiceAtlas/Reportability/Atomic.lean`;
 - `SocialChoiceAtlas/Reportability/GroupSound.lean`;

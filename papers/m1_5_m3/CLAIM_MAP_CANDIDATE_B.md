@@ -10,16 +10,16 @@ internal artifact codename.
 ## Repository and evidence inventory
 
 - Authoritative branch at start: `main`.
-- Task branch: `codex/cpp-candidate-b-claim-freeze`.
+- Task branch: `codex/candidate-b-claim-freeze`.
 - Starting commit: `bf8153b5a4d06c0be7507b1840d162b8c3123a0f`.
-- Authoritative manuscript: `papers/cpp2027_m1_5_m3/main.tex`.
+- Authoritative manuscript: `papers/m1_5_m3/main.tex`.
 - Candidate B artifacts: `m3/candidate_b/`, the C1--C5 boundary in
   `papers/m1_5/CLAIM_BOUNDARY.md`, and `tools/check_cm_witness.py`.
 - M3 theorem sources: `SocialChoiceAtlas/Reportability/{Defs,Atomic,GroupSound,Monotone,Examples}.lean`.
 - Existing freeze/audit records: `m3/candidate_b/CLAIM_BOUNDARY.md`,
   `m3/candidate_b/README_REPRODUCE.md`, and the Candidate B documents under
   `docs/gates/`.
-- Authoritative manuscript build: `make -C papers/cpp2027_m1_5_m3`.
+- Authoritative manuscript build: `make -C papers/m1_5_m3`.
 - Focused application replay: `./scripts/ci_m3_candidate_b.sh`.
 
 ## Initial inventory scope
@@ -57,7 +57,7 @@ hash bindings. Any wording or evidence drift fails closed.
 Run:
 
 ```bash
-python3 tools/cpp2027/check_candidate_b_claim_map.py
+python3 tools/m1_5_m3/check_candidate_b_claim_map.py
 ```
 
 `--refresh` is intentionally a deliberate audit action, not part of normal

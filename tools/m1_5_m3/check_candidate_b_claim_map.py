@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed CPP Candidate B manuscript claim-map checker.
+"""Fail-closed integrated-draft Candidate B claim-map checker.
 
 Use ``--refresh`` only after a deliberate manuscript audit. It binds each
 ``% CLAIM: CB-*`` span to the exact final TeX text and materializes the audit
@@ -19,8 +19,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-PAPER = ROOT / "papers/cpp2027_m1_5_m3/main.tex"
-MAP = ROOT / "papers/cpp2027_m1_5_m3/claim_map_candidate_b.json"
+PAPER = ROOT / "papers/m1_5_m3/main.tex"
+MAP = ROOT / "papers/m1_5_m3/claim_map_candidate_b.json"
 START_RE = re.compile(r"^% CLAIM: (CB-\d{3})\s*$")
 END_RE = re.compile(r"^% END CLAIM: (CB-\d{3})\s*$")
 
@@ -161,7 +161,7 @@ def evidence_for(cid: str) -> list[dict[str, Any]]:
     if cid == "CB-053": return [LEAN["conv"], LEAN["iff"]]
     if cid == "CB-054": return [F("scripts/ci_m3_smoke.sh"), LEAN["iff"]]
     if cid == "CB-055": return C5 + [LEAN["iff"]]
-    if cid == "CB-056": return C1 + C5 + [F("papers/cpp2027_m1_5_m3/refs.bib")]
+    if cid == "CB-056": return C1 + C5 + [F("papers/m1_5_m3/refs.bib")]
     if cid == "CB-057": return [LEAN["iff"]]
     if cid == "CB-058": return REPRO + [S("papers/m1_5/CLAIM_BOUNDARY.md", "## Common Archive Binding")]
     if cid == "CB-004": return C1 + C5
@@ -308,8 +308,8 @@ def refresh(data: dict[str, Any], extracted: dict[str, dict[str, Any]]) -> None:
         "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
         "candidate_b_evidence_freeze_commit": "99cba5cd45cadab283aab3784c9ff2180c8d8609",
         "candidate_b_scientific_source_commit": "1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689",
-        "manuscript_build_command": "make -C papers/cpp2027_m1_5_m3",
-        "claim_check_command": "python3 tools/cpp2027/check_candidate_b_claim_map.py",
+        "manuscript_build_command": "make -C papers/m1_5_m3",
+        "claim_check_command": "python3 tools/m1_5_m3/check_candidate_b_claim_map.py",
     }
     MAP.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

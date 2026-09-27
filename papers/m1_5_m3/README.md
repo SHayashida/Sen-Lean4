@@ -1,6 +1,6 @@
-# CPP 2027 Integration Draft
+# M1.5+M3 Integrated Research Draft
 
-This directory contains the CPP 2027 submission draft:
+This directory contains the venue-neutral integrated research draft:
 
 **Certified Impossibility Witnesses Do Not Determine Repair Reports:
 A Lean-Verified Characterization of Contract-Relative Reportability**
@@ -9,12 +9,13 @@ A Lean-Verified Characterization of Contract-Relative Reportability**
 
 - Draft version: v1
 - Workspace status: canonical on `main` through PR #19
-- Publication status: integrated working draft; not represented as accepted or
-  submission-ready
-- Format: ACM acmart SIGPLAN review / anonymous
+- Publication status: the CPP 2027 submission plan was discontinued on
+  2026-08-19; retained as a research draft with no current submission target
+- Format: venue-neutral draft using the existing non-ACM-output `acmart`
+  SIGPLAN layout for continuity
 - Main source: `main.tex`
 - Bibliography: `refs.bib`
-- Frozen terminology map: `../../docs/cpp2027/terminology_map_frozen.md`
+- Frozen terminology map: `../../docs/m1_5_m3/terminology_map_frozen.md`
 
 ## Claim Boundary
 
@@ -46,8 +47,8 @@ The Makefile writes the default output to `build/main.pdf`.
 
 - PDF builds.
 - Anonymous source contains no author-identifying metadata.
-- Terminology follows `docs/cpp2027/terminology_map_frozen.md`.
+- Terminology follows `docs/m1_5_m3/terminology_map_frozen.md`.
 - No superseded variable-renaming phrasing remains in the paper body.
 - Candidate B claims are bound to exact manuscript text and exact evidence by
   `CLAIM_MAP_CANDIDATE_B.md`, `claim_map_candidate_b.json`, and
-  `tools/cpp2027/check_candidate_b_claim_map.py` (`make claim-check`).
+  `tools/m1_5_m3/check_candidate_b_claim_map.py` (`make claim-check`).

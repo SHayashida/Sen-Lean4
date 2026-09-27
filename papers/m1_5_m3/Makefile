@@ -7,7 +7,7 @@ PDF := $(BUILD_DIR)/$(MAIN).pdf
 all: $(PDF)
 
 claim-check:
-	python3 ../../tools/cpp2027/check_candidate_b_claim_map.py
+	python3 ../../tools/m1_5_m3/check_candidate_b_claim_map.py
 
 $(PDF): $(MAIN).tex refs.bib
 	mkdir -p $(BUILD_DIR)

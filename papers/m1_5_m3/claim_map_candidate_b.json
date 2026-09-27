@@ -1,10 +1,10 @@
 {
-  "schema_version": "cpp-candidate-b-claim-map-v1",
+  "schema_version": "candidate-b-claim-map-v1",
   "status": "FROZEN",
   "repository": "SHayashida/Sen-Lean4",
   "authoritative_branch_at_start": "main",
   "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
-  "authoritative_manuscript": "papers/cpp2027_m1_5_m3/main.tex",
+  "authoritative_manuscript": "papers/m1_5_m3/main.tex",
   "inventory_scope": [
     "title",
     "abstract",
@@ -39,7 +39,7 @@
       "manuscript_anchor": "CB-001",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 46,
           "end_line": 51
         }
@@ -117,7 +117,7 @@
       "manuscript_anchor": "CB-002",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 54,
           "end_line": 60
         }
@@ -162,7 +162,7 @@
       "manuscript_anchor": "CB-003",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 63,
           "end_line": 67
         }
@@ -217,7 +217,7 @@
       "manuscript_anchor": "CB-004",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 99,
           "end_line": 102
         }
@@ -310,7 +310,7 @@
       "manuscript_anchor": "CB-005",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 110,
           "end_line": 117
         }
@@ -388,7 +388,7 @@
       "manuscript_anchor": "CB-006",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 120,
           "end_line": 123
         }
@@ -445,7 +445,7 @@
       "manuscript_anchor": "CB-007",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 132,
           "end_line": 142
         }
@@ -490,7 +490,7 @@
       "manuscript_anchor": "CB-008",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 147,
           "end_line": 153
         }
@@ -544,7 +544,7 @@
       "manuscript_anchor": "CB-009",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 159,
           "end_line": 172
         }
@@ -604,7 +604,7 @@
       "manuscript_anchor": "CB-010",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 180,
           "end_line": 189
         }
@@ -662,7 +662,7 @@
       "manuscript_anchor": "CB-011",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 193,
           "end_line": 205
         }
@@ -722,7 +722,7 @@
       "manuscript_anchor": "CB-012",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 209,
           "end_line": 215
         }
@@ -782,7 +782,7 @@
       "manuscript_anchor": "CB-013",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 226,
           "end_line": 232
         }
@@ -860,7 +860,7 @@
       "manuscript_anchor": "CB-014",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 236,
           "end_line": 240
         }
@@ -902,7 +902,7 @@
       "manuscript_anchor": "CB-015",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 266,
           "end_line": 276
         }
@@ -980,7 +980,7 @@
       "manuscript_anchor": "CB-016",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 282,
           "end_line": 290
         }
@@ -1058,7 +1058,7 @@
       "manuscript_anchor": "CB-017",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 294,
           "end_line": 298
         }
@@ -1110,7 +1110,7 @@
       "manuscript_anchor": "CB-018",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 302,
           "end_line": 305
         }
@@ -1163,7 +1163,7 @@
       "manuscript_anchor": "CB-019",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 309,
           "end_line": 312
         }
@@ -1223,7 +1223,7 @@
       "manuscript_anchor": "CB-020",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 318,
           "end_line": 323
         }
@@ -1280,7 +1280,7 @@
       "manuscript_anchor": "CB-021",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 329,
           "end_line": 332
         }
@@ -1337,7 +1337,7 @@
       "manuscript_anchor": "CB-022",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 338,
           "end_line": 344
         }
@@ -1401,7 +1401,7 @@
       "manuscript_anchor": "CB-023",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 580,
           "end_line": 587
         }
@@ -1475,7 +1475,7 @@
       "manuscript_anchor": "CB-024",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 591,
           "end_line": 595
         }
@@ -1549,7 +1549,7 @@
       "manuscript_anchor": "CB-025",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 598,
           "end_line": 600
         }
@@ -1594,7 +1594,7 @@
       "manuscript_anchor": "CB-026",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 605,
           "end_line": 614
         }
@@ -1681,7 +1681,7 @@
       "manuscript_anchor": "CB-027",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 730,
           "end_line": 733
         }
@@ -1738,7 +1738,7 @@
       "manuscript_anchor": "CB-028",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 736,
           "end_line": 742
         }
@@ -1783,7 +1783,7 @@
       "manuscript_anchor": "CB-029",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 745,
           "end_line": 749
         }
@@ -1841,7 +1841,7 @@
       "manuscript_anchor": "CB-030",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 760,
           "end_line": 763
         }
@@ -1895,7 +1895,7 @@
       "manuscript_anchor": "CB-031",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 813,
           "end_line": 815
         }
@@ -1973,7 +1973,7 @@
       "manuscript_anchor": "CB-032",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 818,
           "end_line": 818
         }
@@ -2026,7 +2026,7 @@
       "manuscript_anchor": "CB-033",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 821,
           "end_line": 822
         }
@@ -2078,7 +2078,7 @@
       "manuscript_anchor": "CB-034",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 825,
           "end_line": 826
         }
@@ -2131,7 +2131,7 @@
       "manuscript_anchor": "CB-035",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 829,
           "end_line": 830
         }
@@ -2191,7 +2191,7 @@
       "manuscript_anchor": "CB-036",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 835,
           "end_line": 840
         }
@@ -2272,7 +2272,7 @@
       "manuscript_anchor": "CB-037",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 431,
           "end_line": 436
         }
@@ -2317,7 +2317,7 @@
       "manuscript_anchor": "CB-038",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 441,
           "end_line": 444
         }
@@ -2355,7 +2355,7 @@
       "manuscript_anchor": "CB-039",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 450,
           "end_line": 452
         }
@@ -2395,7 +2395,7 @@
       "manuscript_anchor": "CB-040",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 458,
           "end_line": 464
         }
@@ -2435,7 +2435,7 @@
       "manuscript_anchor": "CB-041",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 471,
           "end_line": 475
         }
@@ -2475,7 +2475,7 @@
       "manuscript_anchor": "CB-042",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 485,
           "end_line": 489
         }
@@ -2513,7 +2513,7 @@
       "manuscript_anchor": "CB-043",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 504,
           "end_line": 506
         }
@@ -2553,7 +2553,7 @@
       "manuscript_anchor": "CB-044",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 523,
           "end_line": 525
         }
@@ -2593,7 +2593,7 @@
       "manuscript_anchor": "CB-045",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 532,
           "end_line": 534
         }
@@ -2633,7 +2633,7 @@
       "manuscript_anchor": "CB-046",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 548,
           "end_line": 553
         }
@@ -2678,7 +2678,7 @@
       "manuscript_anchor": "CB-047",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 560,
           "end_line": 564
         }
@@ -2723,7 +2723,7 @@
       "manuscript_anchor": "CB-048",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 569,
           "end_line": 572
         }
@@ -2766,7 +2766,7 @@
       "manuscript_anchor": "CB-049",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 26,
           "end_line": 27
         }
@@ -2864,7 +2864,7 @@
       "manuscript_anchor": "CB-050",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 39,
           "end_line": 42
         }
@@ -2957,7 +2957,7 @@
       "manuscript_anchor": "CB-051",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 407,
           "end_line": 413
         }
@@ -3069,7 +3069,7 @@
       "manuscript_anchor": "CB-052",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 422,
           "end_line": 423
         }
@@ -3129,7 +3129,7 @@
       "manuscript_anchor": "CB-053",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 495,
           "end_line": 498
         }
@@ -3172,7 +3172,7 @@
       "manuscript_anchor": "CB-054",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 673,
           "end_line": 676
         }
@@ -3217,7 +3217,7 @@
       "manuscript_anchor": "CB-055",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 700,
           "end_line": 703
         }
@@ -3273,7 +3273,7 @@
       "manuscript_anchor": "CB-056",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 708,
           "end_line": 712
         }
@@ -3343,7 +3343,7 @@
         },
         {
           "type": "file",
-          "path": "papers/cpp2027_m1_5_m3/refs.bib"
+          "path": "papers/m1_5_m3/refs.bib"
         }
       ],
       "supporting_evidence": [
@@ -3370,7 +3370,7 @@
       "manuscript_anchor": "CB-057",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 720,
           "end_line": 722
         }
@@ -3410,7 +3410,7 @@
       "manuscript_anchor": "CB-058",
       "manuscript_locations": [
         {
-          "path": "papers/cpp2027_m1_5_m3/main.tex",
+          "path": "papers/m1_5_m3/main.tex",
           "start_line": 804,
           "end_line": 808
         }
@@ -3478,9 +3478,9 @@
   ],
   "repository_inventory": {
     "current_authoritative_branch": "main",
-    "task_branch": "codex/cpp-candidate-b-claim-freeze",
+    "task_branch": "codex/candidate-b-claim-freeze",
     "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
-    "authoritative_cpp_manuscript": "papers/cpp2027_m1_5_m3/main.tex",
+    "authoritative_integrated_manuscript": "papers/m1_5_m3/main.tex",
     "candidate_b_artifact_references": [
       "m3/candidate_b/",
       "papers/m1_5/CLAIM_BOUNDARY.md",
@@ -3500,9 +3500,9 @@
       "docs/gates/m3_candidate_b_post_merge_audit.md"
     ],
     "reproducibility_build_commands": [
-      "make -C papers/cpp2027_m1_5_m3",
+      "make -C papers/m1_5_m3",
       "./scripts/ci_m3_candidate_b.sh",
-      "python3 tools/cpp2027/check_candidate_b_claim_map.py",
+      "python3 tools/m1_5_m3/check_candidate_b_claim_map.py",
       "lake build"
     ]
   },
@@ -3603,7 +3603,7 @@
     "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
     "candidate_b_evidence_freeze_commit": "99cba5cd45cadab283aab3784c9ff2180c8d8609",
     "candidate_b_scientific_source_commit": "1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689",
-    "manuscript_build_command": "make -C papers/cpp2027_m1_5_m3",
-    "claim_check_command": "python3 tools/cpp2027/check_candidate_b_claim_map.py"
+    "manuscript_build_command": "make -C papers/m1_5_m3",
+    "claim_check_command": "python3 tools/m1_5_m3/check_candidate_b_claim_map.py"
   }
 }

@@ -10,8 +10,8 @@ Current paper workspaces on `main`:
 - `paper/`: M1 finite Sen24 evidence and auditability manuscript workspace.
 - `papers/m1_5/`: M1.5 raw repair non-canonicity manuscript workspace.
 - `papers/m2/`: M2 finite semantic obstruction-bridge manuscript workspace.
-- `papers/cpp2027_m1_5_m3/`: integrated M1.5+M3 CPP 2027 working-draft
-  workspace.
+- `papers/m1_5_m3/`: venue-neutral integrated M1.5+M3 research-draft
+  workspace; the former CPP 2027 submission plan is discontinued.
 - `papers/m4/`: M4 auditable claim-boundary preprint workspace (Sen24 case study).
 
 Current publication-unit status:
@@ -19,9 +19,9 @@ Current publication-unit status:
 | Workspace or evidence | Artifact class | Publication-unit status |
 |---|---|---|
 | `paper/` | Public/preprint manuscript workspace | M1 / Sen24 finite-evidence unit. |
-| `papers/m1_5/` | Canonical manuscript workspace | M1.5 standalone source and witness claim boundary; also an input to the integrated CPP unit. |
+| `papers/m1_5/` | Canonical manuscript workspace | M1.5 standalone source and witness claim boundary; also an input to the integrated M1.5+M3 draft. |
 | `papers/m2/` | Public/preprint and archived canonical workspace | M2 standalone unit; reviewer-audited `CONDITIONAL GO`; major revision required before submission. |
-| `papers/cpp2027_m1_5_m3/` | Canonical integrated conference working draft | M1.5+M3 CPP 2027 v1 workspace through PR #19; not represented as accepted or submission-ready. |
+| `papers/m1_5_m3/` | Canonical venue-neutral integrated research draft | Former CPP 2027 v1 workspace through PR #19; submission plan discontinued on 2026-08-19, with no current venue target. |
 | `tools/check_cm_witness.py` plus the M1.5 anonymous-supplement workflow | Artifact-only evidence binding | Canonical M1.5 C1-C5 checker and hashes. |
 | `m3/candidate_b/` | Canonical artifact-defined application evidence on `main` | Full finite Candidate B M3-B package, independent validator, manifest, fault tests, and separate anonymous builder; immutable release/redistribution review pending; not a Lean theorem or semantic validation. |
 | `papers/m4/` | Repository-local tagged RC workspace | Sen24 claim-boundary RC; not a GitHub Release or the immediate publication track. The institutional-warrant M4 theorem remains future work. |
@@ -34,7 +34,7 @@ The M3 abstract Lean theorem core is canonical in the shared code trunk under
 canonical M3 manuscript workspace.
 
 There is no separate canonical `papers/m3/` workspace on `main`.
-`papers/cpp2027_m1_5_m3/` is instead the canonical integrated M1.5+M3
+`papers/m1_5_m3/` is instead the canonical integrated M1.5+M3
 working-draft workspace. Its abstract characterization uses the M3 Lean core;
 its concrete witness remains artifact-checked.
 

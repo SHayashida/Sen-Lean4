@@ -28,6 +28,15 @@ A Lean-Verified Characterization of Contract-Relative Reportability**
   #21; artifact-level audit, not a Lean theorem, solver/proof replay, or
   semantic validation of the contract atoms.
 
+## Prior-art claim discipline
+
+The paper-facing M3 prior-art and current-vs-proposed contribution matrix is
+maintained in `../../docs/m3_prior_art_claim_matrix.md`.
+
+That document is a research-positioning audit, not a theorem or manuscript
+claim by itself. The Lean source remains authoritative for current theorem
+statements.
+
 ## Build
 
 ```bash

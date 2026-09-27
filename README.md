@@ -6,7 +6,9 @@ evidence; M1.5 establishes representation-sensitive raw repair
 non-canonicity; M2 provides the canonical semantic obstruction bridge; M3
 provides the canonical finite-set reportability theorem core; and
 `papers/cpp2027_m1_5_m3/` is the canonical workspace for the integrated M1.5+M3
-CPP 2027 working draft. The draft is not represented as accepted or
+CPP 2027 working draft. M3 theory is complete for the current paper, and its
+prior-art and manuscript claim boundary is synchronized and frozen in
+`docs/m3_current_paper_freeze.md`. The draft is not represented as accepted or
 submission-ready. M4 remains a future institutional-warrant track;
 `papers/m4/` records a repository-local Sen24 claim-boundary RC, not a
 completed M4 theorem or public release.
@@ -38,7 +40,7 @@ witness-validated, assumed, and re-verified.
 | M1.5 | Raw repair non-canonicity result; concrete witness claims bound on `main`; integrated CPP 2027 working draft |
 | M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO`; major revision required before submission |
 | M2.1 | Companion boundary evidence; paper integration pending |
-| M3 | Abstract M3-A/B/C theorem core canonical on `main`; integrated CPP 2027 working draft |
+| M3 | Abstract M3-A/B/C theorem core canonical; current-paper theory frozen and prior-art/manuscript boundary synchronized |
 | Candidate B | Canonical validator-backed, artifact-defined M3-B application evidence package on `main` under `m3/candidate_b/`; immutable release binding and redistribution review remain pending |
 | Dafny pilot | Public minimum-example workflow validation; not a general validation of M3 or evidence of prevalence |
 | M4 | Future institutional-warrant track; repository-local Sen24 claim-boundary RC is not the immediate publication track |
@@ -76,6 +78,9 @@ Canonical M3 files:
 - `SocialChoiceAtlas/Reportability/Monotone.lean`
 - `SocialChoiceAtlas/Reportability/Examples.lean`
 - `docs/m3_canonical_integration_precheck.md`
+- `docs/m3_prior_art_claim_matrix.md`
+- `docs/m3_current_paper_freeze.md`
+- `docs/advisor/m3_prior_art_delta_ishikawa_2026-09.md`
 
 Focused M3 validation commands:
 
@@ -104,8 +109,9 @@ repair pilot with distinct caller-contract, callee-contract, and implementation
 repairs. It tests workflow questions about fixed repair scopes, candidate users,
 and technical-verification versus specification-decision reports. It does not
 establish real-workflow prevalence, multi-case generality, or general M3
-validity. The XAI companion is deferred or parallel; this repository makes no
-claim about a public XAI artifact.
+validity, and additional Dafny cases are not a blocker for the current paper.
+The XAI companion is deferred or parallel; this repository makes no claim
+about a public XAI artifact.
 
 ## Current canonical M2 result
 

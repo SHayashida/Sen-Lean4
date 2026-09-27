@@ -8,9 +8,9 @@
   `e33805d0ff0a64f12e450ba7aaa150729901d7d2`
 - Latest theorem milestone commit:
   `be4132ba3b6f8168b75644e0928d7b2609048049`
-- Latest manuscript milestone: M1.5+M3 CPP 2027 v1 working draft through
-  PR #19.
-- Program status date: 2026-07-21
+- Latest manuscript milestone: completed M3 prior-art/manuscript
+  synchronization and current-paper freeze.
+- Program status date: 2026-09-27
 - Potential doctoral-scope candidate record (not an enrollment or accepted-plan
   claim): `docs/doctoral_scope_lock.md`
 
@@ -29,10 +29,10 @@ institutional action are not interchangeable.
 | Milestone | Scientific result | Canonical remote state | Next action |
 |---|---|---|---|
 | M1 | Audited finite Sen24 evidence; Proof/Audit/Witness/Assumption separation | Canonical on `main` | Preserve claim boundary |
-| M1.5 | Raw repair non-canonicity under controlled representation comparison | Result, manuscript workspace, and C1-C5 witness binding canonical on `main` | Continue integrated CPP manuscript review and artifact freeze |
+| M1.5 | Raw repair non-canonicity under controlled representation comparison | Result, manuscript workspace, and C1-C5 witness binding canonical on `main` | Preserve the frozen integrated-paper claim boundary |
 | M2 | Generic O2/O3/O4 semantic obstruction bridge and general Sen theorem | Canonical, tagged, DOI archived; reviewer audit complete | Required major manuscript revision before submission |
 | M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts partly canonical through PR #9; manuscript not canonical | Defer separate paper integration |
-| M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16; integrated CPP workspace through PR #19 | Continue integrated manuscript review |
+| M3 | M3-A/B/C finite-set reportability theorem core | Current-paper theory complete; prior-art matrix and integrated manuscript synchronized | Decide publication timing or submission preparation without reopening theory by default |
 | Candidate B | Artifact-defined M3-B instantiation | Canonical validator-backed, self-contained application package on `main` under `m3/candidate_b/`; not Lean-verified or semantically validated | Release review after license and redistribution gates |
 | Dafny pilot | Formal-model-repair workflow minimum example | Public external pilot at `SHayashida/dafny-m3-repair` commit `208c2a59aa24fc1d2befe22842a7b07af8ced576` | Add multiple cases and real-workflow evidence |
 | XAI companion | Deferred or parallel companion track | No public artifact status is established by the inspected Sen `main` branch | Do not infer status until explicitly published |
@@ -41,9 +41,9 @@ institutional action are not interchangeable.
 Candidate B is an application/status row under M3, not an additional program
 milestone.
 
-M1.5 and M3 now have a canonical integrated CPP 2027 working-draft workspace.
-The submission freeze is not final, and the paper is not represented as
-accepted or submission-ready.
+M1.5 and M3 now have a canonical integrated CPP 2027 working-draft workspace
+and a current-paper scope freeze. The research claim boundary is frozen, but
+the paper is not represented as accepted or submission-ready.
 
 ## 3. M4 repository-local RC workspace status
 
@@ -173,6 +173,12 @@ axioms. The M3 Lean modules do not formalize Candidate B artifacts.
 The core is abstract and contract-relative. It does not establish semantic
 validity of social-choice contract atoms.
 
+The current-paper stopping point, prior-art synchronization, deferred theorem
+queue, and re-entry rule are recorded in `docs/m3_current_paper_freeze.md`.
+The advisor-facing research delta is summarized in
+`docs/advisor/m3_prior_art_delta_ishikawa_2026-09.md`. No new M3 theorem should
+be started merely because it is mathematically available.
+
 ## 8. Candidate B application status
 
 The integration precheck in `docs/m3_canonical_integration_precheck.md`
@@ -263,8 +269,8 @@ that pre-atomicization can never prevent the reportability problem.
   manuscript revision remains before submission.
 - M1.5 and M3 form the current integrated CPP 2027 working-draft unit under
   `papers/cpp2027_m1_5_m3/`.
-- The workspace is canonical on `main`, but submission freeze and artifact
-  release are not complete.
+- The current theorem and research claim boundary are frozen; submission
+  preparation and artifact release remain separate decisions.
 - No separate canonical `papers/m3/` workspace exists; the integrated workspace
   is the current manuscript unit.
 - `papers/m4/` is a repository-local RC preprint workspace for claim-boundary
@@ -277,12 +283,12 @@ that pre-atomicization can never prevent the reportability problem.
 
 ## 12. Active next actions
 
-1. Continue the canonical M1.5+M3 CPP 2027 integrated working-draft review and
-   submission-freeze work without broadening its claim boundary.
+1. Decide whether to hold the frozen M1.5+M3 unit for doctoral publication
+   timing or prepare it for submission without broadening its claim boundary.
 2. Review the frozen Candidate B package for a future immutable release only
    after license and redistribution gates pass.
-3. Expand the Dafny pilot to multiple cases and a real workflow, with explicit
-   candidate users and technical-versus-specification reporting contracts.
+3. Keep any Dafny multi-case or real-workflow extension as separate follow-up
+   evidence, not as a blocker or theorem premise for the current paper.
 4. Complete the required M2 manuscript revision before submission.
 5. Keep the XAI companion deferred or parallel until its public status is
    explicit.

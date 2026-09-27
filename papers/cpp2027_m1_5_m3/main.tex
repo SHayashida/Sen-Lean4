@@ -42,11 +42,15 @@ impossibility instance---the base case of Sen's Paretian-liberal impossibility
 clause multisets are \emph{equal under the identity variable map}, yet whose
 implementation-level minimal-repair families disagree under the natural module
 correspondence. Second, a characterization: moving the reporting axis to a
-declared \emph{abstraction contract}, we prove that grouped repair reports
-coincide with contract-level repairs precisely when the realization is
-\emph{group sound}, for deletion-monotone reference contracts; as a corollary,
-any two group-sound, residually faithful realizations of one contract induce
-pointwise identical grouped reports. The characterization and its boundary
+separately specified \emph{abstraction contract}, we ask when verified
+low-level repairs may be reinterpreted under its target semantics. The target
+predicate is not definitionally induced by projection, but neither is it
+unrelated: residual faithfulness explicitly bridges block-aligned residuals.
+For disjoint, residually faithful realizations over deletion-monotone reference
+contracts, grouped repairs coincide with contract repairs precisely when the
+realization is \emph{group sound}; as a corollary, two group-sound, residually
+faithful realizations of one contract induce pointwise identical grouped
+reports. The characterization and its boundary
 counterexamples are mechanized in Lean~4 over Mathlib with no \code{sorry};
 the SAT witness is re-verifiable by a single command against a SHA-256-bound
 artifact. Together the results delimit what an impossibility certificate does
@@ -85,7 +89,8 @@ inconsistent. The repair report additionally depends on the partition of the
 encoding into deletable units---which clauses belong to which assumption. That
 partition is an engineering choice, and nothing in the certificate records it.
 
-\subparagraph*{Contributions.} We give a two-sided answer.
+\subparagraph*{Contributions.} We separate the negative witness, the current
+reportability theorems, and their evidence layers.
 
 \begin{enumerate}[leftmargin=1.6em]
 \item \textbf{A no-go theorem (Section~\ref{sec:nogo}).} We exhibit two
@@ -100,23 +105,34 @@ strongest representation equivalence short of syntactic file identity, no
 notion of logical equivalence of the encodings can, by itself, make raw repair
 reports canonical.
 
-\item \textbf{A characterization (Sections~\ref{sec:contracts}
-and~\ref{sec:char}).} We then move the reporting axis. An \emph{abstraction
-contract} declares the atoms an audience is entitled to hear about and how
-each atom is realized by constraint modules. Reports are made at the contract
-level by grouping an implementation repair through the touched-atom map. Our
-main theorems show that grouped reports coincide with contract-level repairs
-whenever the realization is \emph{group sound} (Theorem~\ref{thm:suff}); that
-for deletion-monotone reference contracts group soundness is also
-\emph{necessary}, yielding an exact characterization
-(Theorems~\ref{thm:conv} and~\ref{thm:iff}); and that any two group-sound,
-residually faithful realizations of one contract produce pointwise identical
-grouped reports (Corollary~\ref{cor:tworeal})---restoring, at the contract
-level, exactly the invariance that Theorem~\ref{thm:nogo} refutes at the raw
-level. Kernel-checked counterexamples show the hypotheses are not removable
+This witness motivates the constructive part; it is not a claim that post-hoc
+mapping or changes of minimal families under abstraction are themselves new.
+
+\item \textbf{A separately specified reporting semantics
+(Sections~\ref{sec:contracts} and~\ref{sec:char}).} An \emph{abstraction
+contract} declares the atoms an audience is entitled to hear about and a
+target feasibility predicate that is not definitionally induced by the
+low-level predicate or touched-atom map. Residual faithfulness supplies an
+explicit bridge rather than permitting arbitrary unrelated semantics. Under
+disjoint blocks, residual faithfulness, and group soundness, grouped
+implementation repairs coincide pointwise with contract repairs
+(Theorem~\ref{thm:suff}); two realizations satisfying those obligations induce
+the same grouped reports (Corollary~\ref{cor:tworeal}).
+
+\item \textbf{An exactness and audit boundary
+(Section~\ref{sec:char}).} For a deletion-monotone target contract, grouped
+correctness implies group soundness without assuming residual faithfulness in
+the converse itself (Theorem~\ref{thm:conv}). With disjoint blocks and
+residual faithfulness this gives the exact characterization of
+Theorem~\ref{thm:iff}. The same target-side monotonicity reduces an unrestricted
+group-soundness audit to target-feasibility checks on raw minimal repairs
+(Lemma~\ref{lem:audit}); no deletion monotonicity of $\SatPhi$ is assumed.
+Kernel-checked examples separately show that atomicity is not necessary and
+that target-side monotonicity matters for the converse
 (Section~\ref{sec:cex}).
 
-\item \textbf{Mechanization and artifact (Section~\ref{sec:design}).} The
+\item \textbf{Mechanization and separated artifact evidence
+(Section~\ref{sec:design}).} The
 contract theory, the characterization, and the boundary counterexamples are
 formalized in Lean~4 over Mathlib; the development contains no \code{sorry}
 or \code{admit}. The SAT witness for Theorem~\ref{thm:nogo} is bound to the
@@ -126,9 +142,11 @@ repair enumeration) by one command.
 \end{enumerate}
 
 \subparagraph*{Claim boundary.} We are explicit throughout about three
-distinct evidence layers. \emph{Kernel-checked}: all statements in
-Sections~\ref{sec:contracts}--\ref{sec:cex} are Lean theorems
-(Appendix~\ref{app:lean} gives the correspondence).
+distinct evidence layers. \emph{Kernel-checked}: the definitions and the
+numbered theorem, corollary, lemma, and example claims in
+Sections~\ref{sec:contracts}--\ref{sec:cex} correspond to Lean declarations
+(Appendix~\ref{app:lean} gives the correspondence); the explicitly labeled
+future question after Lemma~\ref{lem:hier} is not a current result.
 \emph{Solver- and artifact-audited}: the witness claims C1--C5 of
 Section~\ref{sec:nogo} are checked by the archived re-verification script;
 they rely on a deterministic generator, SHA-256 binding, and a SAT solver, not
@@ -309,6 +327,12 @@ feasibility predicate $\SatPhi$ on finite sets of modules. The \emph{active
 interface} is $\Lam(I) = \bigcup_{a \in I} \beta(a)$.
 \end{definition}
 
+The target predicate $\SatPsi$ is supplied independently: it is not
+definitionally constructed from $\SatPhi$ or from the touched-atom map below.
+This does not make it an arbitrary unrelated semantics;
+\emph{residual faithfulness} supplies the explicit cross-semantic bridge on
+block-aligned retained sets.
+
 \begin{definition}[Repairs at both levels]
 \label{def:repairs}
 For a finite-set predicate $P$, a set $X$ is \emph{inclusion-minimal} for $P$
@@ -348,8 +372,10 @@ constrains $\SatPhi$ on the block-aligned sets $\bigcup_{a \in T} \beta(a)$;
 a feasible deletion $R$ may cut \emph{strictly into} a block, leaving a
 residual that is not block-aligned, and group soundness is exactly the promise
 that such partial cuts never certify feasibility that the contract residual
-lacks. The witness of Section~\ref{sec:nogo} fails at precisely this point:
-deleting $D_0$ alone cuts into the minimal-liberalism block.
+lacks. The raw-family divergence of Section~\ref{sec:nogo} arises at such a
+partial cut: deleting $D_0$ alone cuts into the minimal-liberalism block. The
+declared grouping for the concrete case is separately audited as group sound
+at the artifact level (Section~\ref{sec:back}).
 
 %=====================================================================
 \section{The Characterization}
@@ -370,10 +396,10 @@ $\bigcup_{a\in G}\beta_1(a)$ is a raw repair for the first iff
 $\bigcup_{a\in G}\beta_2(a)$ is for the second.
 \end{theorem}
 
-In the atomic case grouping is a bijective relabeling, so nothing can go
-wrong---this is the (rarely stated) folklore assumption under which raw
-reports are silently treated as canonical. The substance begins when blocks
-are genuinely plural.
+In the atomic case grouping is a bijective relabeling under the stated
+hypotheses. Atomicity is therefore a strong syntactic sufficient regime, not a
+necessary condition for grouped correctness; the non-atomic theorem below is
+the substantive extension.
 
 \begin{theorem}[Sufficiency of group soundness]
 \label{thm:suff}
@@ -415,7 +441,8 @@ global universe (Section~\ref{sec:design}).
 \subsection{Necessity and the characterization}
 
 Sufficiency alone would leave group soundness as one workable condition among
-many. The converse shows it is the right one.
+many. Under target-side deletion monotonicity, the converse makes it necessary
+for pointwise coincidence of grouped and contract repairs.
 
 \begin{theorem}[Necessity under deletion-monotone references]
 \label{thm:conv}
@@ -441,12 +468,24 @@ deletion-monotone reference contract: the realization is group sound iff
 grouped repairs coincide with contract repairs for every $G$.
 \end{theorem}
 
+\begin{lemma}[Audit-cost collapse]
+\label{lem:audit}
+If the reference contract is deletion monotone and every raw minimal repair
+$R$ satisfies $\SatPsi(I \setminus \tau(R))$, then the realization is group
+sound for every feasible implementation deletion. This reduction does not
+assume deletion monotonicity of $\SatPhi$.
+\end{lemma}
+
 \begin{lemma}[Hierarchy]
 \label{lem:hier}
 Under disjoint blocks and residual faithfulness, atomicity implies group
 soundness. The converse fails (Example~\ref{ex:nonatomic}); thus
 Theorem~\ref{thm:atomic} is a strict special case of Theorem~\ref{thm:suff}.
 \end{lemma}
+
+A remaining question is to characterize conditions strictly weaker than
+atomicity under which coarse repair search is extensionally equivalent to
+fine-grained repair followed by post-hoc reporting.
 
 \subsection{Boundary counterexamples}
 \label{sec:cex}
@@ -474,10 +513,9 @@ set breaks $\SatPsi$; group soundness fails. Hence the monotonicity
 hypothesis of Theorem~\ref{thm:conv} cannot be dropped.
 \end{example}
 
-The examples close the two natural gaps: group soundness sits strictly
-between atomicity and mere correctness of grouped reports, and the necessity
-direction genuinely uses the shape of the reference contract, not just the
-combinatorics of grouping.
+The examples establish two separate boundaries: atomicity is not necessary
+for group soundness, while grouped correctness without target-side monotonicity
+need not imply group soundness.
 
 %=====================================================================
 \section{The Instance, Read Through the Contract}
@@ -579,32 +617,58 @@ Gammie's Archive of Formal Proofs entries cover further social choice
 results~\cite{GammieAFP}. Computer-aided (SAT-based, not kernel-checked)
 proofs of impossibility theorems begin with Tang and
 Lin~\cite{TangLin2009} and were developed extensively by Geist, Brandt, and
-collaborators~\cite{GeistEndriss2011,BrandtGeist2016}. All of these certify
-\emph{theorems}; our subject is the meta-theory of the \emph{reports}
-derived from such theorems, which to our knowledge has not been formalized.
+collaborators~\cite{GeistEndriss2011,BrandtGeist2016}. Those results certify
+\emph{theorems}; our narrower subject is the contract-relative justification
+of \emph{reports} derived from verified low-level repairs.
 
-\subparagraph*{Diagnosis, MUS/MCS.} Minimal correction sets and their duality
+\subparagraph*{Model-based diagnosis and MUS/MCS.} Minimal correction sets and their duality
 with minimal unsatisfiable subsets originate in model-based
 diagnosis~\cite{Reiter1987} and are a mature algorithmic
 area~\cite{LiffitonSakallah2008,MarquesSilva2013}. Group-oriented variants
-(group-MUS) attribute clauses to named groups, exactly the granularity
-mechanism whose report-level consequences we study; the non-canonicity of
-Theorem~\ref{thm:nogo} can be read as a statement about group-MCS families
-under regrouping, and the characterization as identifying when regrouped
-reports are contract-stable.
+(group-MUS) also attribute clauses to named groups. We therefore claim neither
+minimal-set machinery nor grouping as such as novel. Theorem~\ref{thm:nogo}
+uses that established substrate as a concrete motivation for the separate
+reporting contract.
+
+\subparagraph*{Hierarchical and structural diagnosis abstraction.}
+Hierarchical model-based diagnosis has long used multiple model granularities
+and structural abstraction~\cite{Mozetic1991,ChittaroRanon2004}. Accordingly,
+we do not claim to introduce multilevel diagnosis, coarse diagnostic
+vocabularies, or abstraction of diagnosis models.
+
+\subparagraph*{Post-hoc diagnosis abstraction.} Grastien, Haslum, and
+Thi\'ebaux define abstraction relations between diagnosis hypothesis spaces
+and study how a minimal diagnosis in a refined space maps to, and is minimized
+in, an abstract space~\cite{GrastienEtAl2023}. This is strong prior art for
+post-hoc projection and the interaction between projection and minimization.
+We do not claim as novel many-to-one projection, projection followed by
+re-minimization, or the generic fact that abstraction can change a minimal
+family.
+
+\subparagraph*{Adjacent abstraction theory.} Abstraction-refinement in model
+checking~\cite{Clarke2003CEGAR} and related abstraction theories already make
+soundness, completeness, and preservation obligations central. We do not
+claim those generic distinctions. The distinction pursued here is narrower:
+$\SatPsi$ is separately specified rather than definitionally induced by the
+projection from low-level repair semantics, and report correctness is therefore
+an explicit cross-semantic obligation.
 
 \subparagraph*{Certificates and certified checkers.} DRAT and LRAT proof
 formats~\cite{WetzlerHeuleHunt2014,CruzFilipe2017} and verified checkers
 such as \code{cake\_lpr}~\cite{TanHeuleMyreen2021} make unsatisfiability
-independently checkable. Our results are complementary: they concern the
-data such certificates do not carry.
+independently checkable. Certificates and checkers in general are not our
+novelty claim. Our results are complementary: they concern the semantic
+evidence needed to justify a report, which an unsatisfiability certificate
+alone does not carry.
 
-\subparagraph*{Abstraction in verification.} Declaring the vocabulary of an
-explanation separately from the implementation echoes abstraction-refinement
-in model checking~\cite{Clarke2003CEGAR} and recent work on formal
-abstraction-based explanations; our contribution is an exact
-(iff) condition, mechanized, for when abstraction-level repair reporting is
-faithful.
+\subparagraph*{Positioning of the current theorem.} The remaining question
+studied here is: when may verified low-level repairs be reinterpreted under an
+independently specified reporting semantics? M3 answers through the explicit
+\emph{ResidualFaithfulness} and \emph{GroupSoundness} obligations; under
+target-side deletion monotonicity, Theorem~\ref{thm:iff} characterizes when
+the minimal grouped image of implementation repairs coincides with the minimal
+repairs admitted by that target contract. This claim is about the stated
+interface, not abstraction-level repair reporting in general.
 
 %=====================================================================
 \section{Conclusion}
@@ -614,11 +678,14 @@ An impossibility certificate licenses the claim that a set of assumptions is
 jointly untenable. It does not, by itself, license any particular story about
 which assumptions to withdraw: Theorem~\ref{thm:nogo} shows the story can
 change while the certificate---and even the clause multiset---stays fixed.
-The constructive counterpart is a discipline, not a fix: declare the contract,
-audit group soundness, and report at the contract level, where
-Theorem~\ref{thm:iff} says the audit is exactly what canonical reporting
-requires and Corollary~\ref{cor:tworeal} says the report no longer depends on
-the realization. Limitations mark the roadmap: the concrete witness lives in
+The constructive counterpart is a discipline, not a fix: declare a target
+contract independently, discharge residual faithfulness, and audit group
+soundness. Under the disjointness, residual-faithfulness, and target-side
+monotonicity hypotheses of Theorem~\ref{thm:iff}, group soundness is exactly
+equivalent to coincidence of grouped and contract repairs;
+Corollary~\ref{cor:tworeal} then removes realization dependence only among the
+group-sound, residually faithful realizations it covers. Limitations mark the
+roadmap: the concrete witness lives in
 the Sen instance and a restricted rationality family; the instance-level audit
 is not formalized; and the transfer of repair families across instance
 \emph{sizes} (rather than across encodings of one instance) is a separate
@@ -657,6 +724,7 @@ Thm.~\ref{thm:suff} & \code{m3b\_grouped\_correctness} & \code{GroupSound.lean} 
 Cor.~\ref{cor:tworeal} & \code{m3b\_two\_realization} & \code{GroupSound.lean} \\
 Thm.~\ref{thm:conv} & \code{m3c\_converse} & \code{Monotone.lean} \\
 Thm.~\ref{thm:iff} & \code{groupSoundness\_iff} & \code{Monotone.lean} \\
+Lem.~\ref{lem:audit} & \code{audit\_cost\_collapse} & \code{Monotone.lean} \\
 Lem.~\ref{lem:hier} & \code{atomicity\_implies\_}& \code{Monotone.lean} \\
  & \quad\code{groupSoundness} & \\
 Ex.~\ref{ex:nonatomic} & \code{Examples.NonAtomic} & \code{Examples.lean} \\

@@ -20,7 +20,10 @@ a scope and status record, not a new theorem, experiment, or novelty proof.
 - prior-art matrix commit: `30f2c0a`;
 - completed manuscript-sync commit:
   `bfabbb65b7c4604c4846a1d1cf9cff1f62da9b8f`;
-- canonicalization PR: `CANONICALIZATION_PR_PENDING`;
+- current-paper freeze commit:
+  `9f1cd4cd83eac2cd8855941cddb2a4280e7a5952`;
+- canonicalization PR:
+  [#24](https://github.com/SHayashida/Sen-Lean4/pull/24);
 - pre-canonicalization `origin/main`:
   `bf8153b5a4d06c0be7507b1840d162b8c3123a0f`;
 - merge commit and authoritative post-merge `main`:

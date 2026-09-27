@@ -5,9 +5,10 @@ theorem and now contains a staged research program. M1 provides audited finite
 evidence; M1.5 establishes representation-sensitive raw repair
 non-canonicity; M2 provides the canonical semantic obstruction bridge; M3
 provides the canonical finite-set reportability theorem core; and
-`papers/cpp2027_m1_5_m3/` is the canonical workspace for the integrated M1.5+M3
-CPP 2027 working draft. The draft is not represented as accepted or
-submission-ready. M4 remains a future institutional-warrant track;
+`papers/m1_5_m3/` is the canonical workspace for the integrated M1.5+M3
+venue-neutral research draft. The former CPP 2027 submission plan was
+discontinued on 2026-08-19; the workspace is retained for research and future
+editorial reuse, with no current submission target. M4 remains a future institutional-warrant track;
 `papers/m4/` records a repository-local Sen24 claim-boundary RC, not a
 completed M4 theorem or public release.
 
@@ -35,10 +36,10 @@ witness-validated, assumed, and re-verified.
 | Layer | Canonical status |
 |---|---|
 | M1 | Canonical finite Sen24 evidence |
-| M1.5 | Raw repair non-canonicity result; concrete witness claims bound on `main`; integrated CPP 2027 working draft |
+| M1.5 | Raw repair non-canonicity result; concrete witness claims bound on `main`; venue-neutral integrated working draft |
 | M2 | Canonical semantic obstruction bridge; archived; reviewer audit `CONDITIONAL GO`; major revision required before submission |
 | M2.1 | Companion boundary evidence; paper integration pending |
-| M3 | Abstract M3-A/B/C theorem core canonical on `main`; integrated CPP 2027 working draft |
+| M3 | Abstract M3-A/B/C theorem core canonical on `main`; venue-neutral integrated working draft |
 | Candidate B | Canonical validator-backed, artifact-defined M3-B application evidence package on `main` under `m3/candidate_b/`; immutable release binding and redistribution review remain pending |
 | Dafny pilot | Public minimum-example workflow validation; not a general validation of M3 or evidence of prevalence |
 | M4 | Future institutional-warrant track; repository-local Sen24 claim-boundary RC is not the immediate publication track |
@@ -152,8 +153,8 @@ This repository uses one shared code/data trunk and separate in-repo manuscript 
 - `paper/` is the protected M1 manuscript workspace.
 - `papers/m1_5/` is the dedicated M1.5 manuscript workspace.
 - `papers/m2/` is the M2 semantic obstruction-bridge manuscript workspace.
-- `papers/cpp2027_m1_5_m3/` is the canonical integrated M1.5+M3 CPP 2027
-  working-draft workspace.
+- `papers/m1_5_m3/` is the canonical venue-neutral integrated M1.5+M3
+  research-draft workspace; the former CPP 2027 submission plan is discontinued.
 - `papers/m4/` is a repository-local M4/Sen24 claim-boundary release-candidate preprint
   workspace, not a public release.
 - Shared code, Lean artifacts, scripts, and reusable data stay on the common repository line.

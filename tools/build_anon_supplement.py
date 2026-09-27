@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build cpp2027-anon-supplement.zip (G1-b' of the M1.5+M3 integration plan).
+"""Rebuild the historically named CPP anonymous supplement for the M1.5+M3 draft.
 
 Whitelist-based staging: only explicitly listed paths enter the archive.
 After staging, an identity scan runs over every text file; any hit outside the
@@ -10,7 +10,7 @@ Usage:
     python3 tools/build_anon_supplement.py \
         --lean-root  <checkout of canonical main> \
         --witness-root <checkout of witness source SHA (file-level extraction)> \
-        --extras-dir tools/cpp2027 \
+        --extras-dir tools/m1_5_m3 \
         --out cpp2027-anon-supplement.zip
 """
 from __future__ import annotations

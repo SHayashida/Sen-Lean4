@@ -1,0 +1,3609 @@
+{
+  "schema_version": "candidate-b-claim-map-v1",
+  "status": "FROZEN",
+  "repository": "SHayashida/Sen-Lean4",
+  "authoritative_branch_at_start": "main",
+  "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
+  "authoritative_manuscript": "papers/m1_5_m3/main.tex",
+  "inventory_scope": [
+    "title",
+    "abstract",
+    "introduction",
+    "contribution list",
+    "claim boundary",
+    "concrete instance",
+    "no-go theorem and proof",
+    "theorem application discussion",
+    "contract-level Candidate B section",
+    "conclusion",
+    "limitations",
+    "data availability",
+    "artifact appendix"
+  ],
+  "reviewed_without_candidate_b_claims": [
+    "title",
+    "related work",
+    "Lean-paper correspondence table"
+  ],
+  "initial_counts": {
+    "INITIAL_MANUSCRIPT_CLAIMS": 58
+  },
+  "claims": [
+    {
+      "claim_id": "CB-001",
+      "initial_location": "abstract",
+      "initial_text": "There exist two module-structured CNF encodings of the same Sen impossibility instance whose clause multisets are equal under the identity variable map, yet whose implementation-level minimal-repair families disagree under the natural module correspondence.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "a no-go theorem: there exist two module-structured CNF encodings of the same\nimpossibility instance---the base case of Sen's Paretian-liberal impossibility\n(two individuals, four alternatives)---whose\nclause multisets are \\emph{equal under the identity variable map}, yet whose\nimplementation-level minimal-repair families disagree under the natural module\ncorrespondence.",
+      "claim_text_sha256": "771a7c63c625b7a962dbb1ac6a9038b397b609b07eb9466985fd77823f365c09",
+      "manuscript_anchor": "CB-001",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 46,
+          "end_line": 51
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "a no-go theorem: there exist two module-structured CNF encodings of the same\nimpossibility instance---the base case of Sen's Paretian-liberal impossibility\n(two individuals, four alternatives)---whose\nclause multisets are \\emph{equal under the identity variable map}, yet whose\nimplementation-level minimal-repair families disagree under the natural module\ncorrespondence.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-002",
+      "initial_location": "abstract",
+      "initial_text": "Grouped repair reports coincide with contract-level repairs precisely when the realization is group sound, for deletion-monotone reference contracts; two group-sound, residually faithful realizations induce identical grouped reports.",
+      "initial_status": "OVERCLAIM",
+      "claim_text_exact": "Second, a characterization: moving the reporting axis to a declared\n\\emph{abstraction contract}, we prove that, for a disjoint-block, residually\nfaithful realization over a deletion-monotone reference contract, grouped\nrepair reports coincide with contract-level repairs precisely when the\nrealization is \\emph{group sound}; as a corollary, any two disjoint-block,\ngroup-sound, residually faithful realizations of one contract induce pointwise\nidentical grouped reports.",
+      "claim_text_sha256": "862045006c2d59c5df24a5b2ad6f36a9dc5035e9451cf820dffd3927adb02bd3",
+      "manuscript_anchor": "CB-002",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 54,
+          "end_line": 60
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "Second, a characterization: moving the reporting axis to a declared\n\\emph{abstraction contract}, we prove that, for a disjoint-block, residually\nfaithful realization over a deletion-monotone reference contract, grouped\nrepair reports coincide with contract-level repairs precisely when the\nrealization is \\emph{group sound}; as a corollary, any two disjoint-block,\ngroup-sound, residually faithful realizations of one contract induce pointwise\nidentical grouped reports.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-003",
+      "initial_location": "abstract",
+      "initial_text": "The characterization and boundary counterexamples are mechanized in Lean 4 without sorry, while the SAT witness is re-verifiable against a SHA-256-bound artifact.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The characterization and its boundary\ncounterexamples are mechanized in Lean~4 over Mathlib with no \\code{sorry};\nthe SAT witness is re-verifiable by a single command against a SHA-256-bound\nartifact. Together the results delimit what an impossibility certificate does\nand does not license an auditor to report.",
+      "claim_text_sha256": "997f8a97ad1cba1cb980cc1a59c969c9ad953d33009145a0ae9616e7be431285",
+      "manuscript_anchor": "CB-003",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 63,
+          "end_line": 67
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        },
+        {
+          "type": "file",
+          "path": "tools/check_cm_witness.py"
+        },
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_candidate_b.sh"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The characterization and its boundary\ncounterexamples are mechanized in Lean~4 over Mathlib with no \\code{sorry};\nthe SAT witness is re-verifiable by a single command against a SHA-256-bound\nartifact. Together the results delimit what an impossibility certificate does\nand does not license an auditor to report.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED",
+      "inference_boundary": "Lean symbols support the theorem portion; the witness checker and SHA-bound artifacts support the concrete portion. Neither evidence layer upgrades the other."
+    },
+    {
+      "claim_id": "CB-004",
+      "initial_location": "introduction",
+      "initial_text": "A certificate fixes encoded inconsistency, but a repair report additionally depends on the engineering choice of how clauses are partitioned into deletable units, which the certificate does not record.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The certificate pins down \\emph{that} the encoded assumption set is\ninconsistent. The repair report additionally depends on the partition of the\nencoding into deletable units---which clauses belong to which assumption. That\npartition is an engineering choice, and nothing in the certificate records it.",
+      "claim_text_sha256": "6d85218174ecde7d86e0a22de8aa3c1bcf6b402c6b782718d75edca6ae89ac2d",
+      "manuscript_anchor": "CB-004",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 99,
+          "end_line": 102
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The certificate pins down \\emph{that} the encoded assumption set is\ninconsistent. The repair report additionally depends on the partition of the\nencoding into deletable units---which clauses belong to which assumption. That\npartition is an engineering choice, and nothing in the certificate records it.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-005",
+      "initial_location": "contributions/no-go",
+      "initial_text": "The paired encodings contain the same 36,290 clauses over the same 6,936 variables under the identity map, are both UNSAT, and have different raw minimal-repair families under the natural module correspondence.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "We exhibit two\nmodule-structured CNF encodings of the Sen instance~\\cite{Sen1970} whose\nclause multisets are equal\n\\emph{under the identity variable map}: the very same $36{,}290$ clauses over\nthe very same $6{,}936$ variables, partitioned differently into modules. Both\nare $\\UNSAT$. Yet the two implementation-level minimal-repair families\ndisagree under the natural module correspondence\n(Theorem~\\ref{thm:nogo}).",
+      "claim_text_sha256": "277de432c92a71d12b386cad4d6e9de15242f669a51bb2e47ad7275f10f8f77d",
+      "manuscript_anchor": "CB-005",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 110,
+          "end_line": 117
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "We exhibit two\nmodule-structured CNF encodings of the Sen instance~\\cite{Sen1970} whose\nclause multisets are equal\n\\emph{under the identity variable map}: the very same $36{,}290$ clauses over\nthe very same $6{,}936$ variables, partitioned differently into modules. Both\nare $\\UNSAT$. Yet the two implementation-level minimal-repair families\ndisagree under the natural module correspondence\n(Theorem~\\ref{thm:nogo}).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-006",
+      "initial_location": "contributions/no-go",
+      "initial_text": "No notion of logical equivalence of the encodings can by itself make raw repair reports canonical.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Since identity-map clause-multiset equality is the\nstrongest representation equivalence short of syntactic file identity, no\nnotion of logical equivalence of the encodings can, by itself, make raw repair\nreports canonical.",
+      "claim_text_sha256": "edba9d09fd67abf5938f50d8fc620f32134e938a0245ebefa639070454cb9586",
+      "manuscript_anchor": "CB-006",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 120,
+          "end_line": 123
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Since identity-map clause-multiset equality is the\nstrongest representation equivalence short of syntactic file identity, no\nnotion of logical equivalence of the encodings can, by itself, make raw repair\nreports canonical.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-007",
+      "initial_location": "contributions/characterization",
+      "initial_text": "Grouped reports coincide with contract-level repairs whenever a realization is group sound; for deletion-monotone references group soundness is necessary; and two group-sound, residually faithful realizations give identical grouped reports.",
+      "initial_status": "OVERCLAIM",
+      "claim_text_exact": "Our main theorems show that grouped reports coincide with contract-level\nrepairs whenever a realization has disjoint blocks, is residually faithful,\nand is \\emph{group sound} (Theorem~\\ref{thm:suff}); that for deletion-monotone\nreference contracts group soundness is also \\emph{necessary}, yielding an\nexact characterization when the sufficiency hypotheses also hold\n(Theorems~\\ref{thm:conv} and~\\ref{thm:iff}); and that any two disjoint-block,\ngroup-sound, residually faithful realizations of one contract produce\npointwise identical grouped reports (Corollary~\\ref{cor:tworeal})---restoring, at the contract\nlevel, exactly the invariance that Theorem~\\ref{thm:nogo} refutes at the raw\nlevel. Kernel-checked counterexamples show the hypotheses are not removable\n(Section~\\ref{sec:cex}).",
+      "claim_text_sha256": "9b9e6e5115528aaf92189b1fa9ae2a101d7ac7d163f35145dff6a3a4ac5a14d5",
+      "manuscript_anchor": "CB-007",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 132,
+          "end_line": 142
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "Our main theorems show that grouped reports coincide with contract-level\nrepairs whenever a realization has disjoint blocks, is residually faithful,\nand is \\emph{group sound} (Theorem~\\ref{thm:suff}); that for deletion-monotone\nreference contracts group soundness is also \\emph{necessary}, yielding an\nexact characterization when the sufficiency hypotheses also hold\n(Theorems~\\ref{thm:conv} and~\\ref{thm:iff}); and that any two disjoint-block,\ngroup-sound, residually faithful realizations of one contract produce\npointwise identical grouped reports (Corollary~\\ref{cor:tworeal})---restoring, at the contract\nlevel, exactly the invariance that Theorem~\\ref{thm:nogo} refutes at the raw\nlevel. Kernel-checked counterexamples show the hypotheses are not removable\n(Section~\\ref{sec:cex}).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-008",
+      "initial_location": "contributions/mechanization",
+      "initial_text": "The contract theory and counterexamples are formalized in Lean without sorry or admit, and the SAT witness is SHA-256-bound and re-verifiable end to end by one command.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The\ncontract theory, the characterization, and the boundary counterexamples are\nformalized in Lean~4 over Mathlib; the development contains no \\code{sorry}\nor \\code{admit}. The SAT witness for Theorem~\\ref{thm:nogo} is bound to the\nsupplementary archive by SHA-256 manifests and is re-verified end to end\n(regeneration, hashing, clause-multiset comparison, solving, and exhaustive\nrepair enumeration) by one command.",
+      "claim_text_sha256": "e540e3b889bae4bcf52d5993d5afeb451deb76d7f680aad01e8127091dcc44b3",
+      "manuscript_anchor": "CB-008",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 147,
+          "end_line": 153
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        },
+        {
+          "type": "file",
+          "path": "tools/check_cm_witness.py"
+        },
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_candidate_b.sh"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The\ncontract theory, the characterization, and the boundary counterexamples are\nformalized in Lean~4 over Mathlib; the development contains no \\code{sorry}\nor \\code{admit}. The SAT witness for Theorem~\\ref{thm:nogo} is bound to the\nsupplementary archive by SHA-256 manifests and is re-verified end to end\n(regeneration, hashing, clause-multiset comparison, solving, and exhaustive\nrepair enumeration) by one command.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-009",
+      "initial_location": "introduction/claim boundary",
+      "initial_text": "The concrete witness claims are solver- and artifact-audited, the concrete group-soundness claim is artifact-audited rather than formalized, and reading the encodings as one contract is a modeling judgment.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "We are explicit throughout about three\ndistinct evidence layers. \\emph{Kernel-checked}: all statements in\nSections~\\ref{sec:contracts}--\\ref{sec:cex} are Lean theorems\n(Appendix~\\ref{app:lean} gives the correspondence).\n\\emph{Solver- and artifact-audited}: the witness claims C1--C5 of\nSection~\\ref{sec:nogo} are checked by the archived re-verification script;\nthey rely on a deterministic generator, SHA-256 binding, and a SAT solver, not\non the Lean kernel. \\emph{Interpretive}: reading the two encodings of\nSection~\\ref{sec:instance} as realizations of one declared contract\n(Section~\\ref{sec:back}) is a modeling judgment; in particular, the group\nsoundness of the concrete instance is audited at the artifact level and is\ndeliberately \\emph{not} formalized. Keeping these layers separate is, we\nargue, itself part of the contribution: it is precisely the discipline the\npaper's subject matter recommends.",
+      "claim_text_sha256": "4414b95afd2fed49ec6de22416fe203ea9244feb274ed09911183c36d28db7bc",
+      "manuscript_anchor": "CB-009",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 159,
+          "end_line": 172
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/residual_faithfulness.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/group_soundness_full.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/grouped_correctness_pointwise.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/theorem_binding.json",
+          "pointer": "/candidate_b_formalized_in_lean",
+          "expected": false
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "We are explicit throughout about three\ndistinct evidence layers. \\emph{Kernel-checked}: all statements in\nSections~\\ref{sec:contracts}--\\ref{sec:cex} are Lean theorems\n(Appendix~\\ref{app:lean} gives the correspondence).\n\\emph{Solver- and artifact-audited}: the witness claims C1--C5 of\nSection~\\ref{sec:nogo} are checked by the archived re-verification script;\nthey rely on a deterministic generator, SHA-256 binding, and a SAT solver, not\non the Lean kernel. \\emph{Interpretive}: reading the two encodings of\nSection~\\ref{sec:instance} as realizations of one declared contract\n(Section~\\ref{sec:back}) is a modeling judgment; in particular, the group\nsoundness of the concrete instance is audited at the artifact level and is\ndeliberately \\emph{not} formalized. Keeping these layers separate is, we\nargue, itself part of the contribution: it is precisely the discipline the\npaper's subject matter recommends.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-010",
+      "initial_location": "instance/scope",
+      "initial_text": "The instance uses two individuals and four alternatives with a restricted local-rationality family and does not claim full acyclicity.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The Sen instance is the finite base case of Sen's\nParetian-liberal impossibility~\\cite{Sen1970}. The theorem shows that no social decision procedure can\nsimultaneously satisfy unrestricted domain, weak Pareto, minimal liberalism\n(two individuals each decisive on at least one pair of alternatives), and\nacyclicity of strict social preference. We work with two individuals, four\nalternatives, and---in place of full acyclicity---a\n\\emph{restricted local-rationality family} consisting of prohibitions of\nshort strict cycles; the witness below activates the 4-cycle prohibition\n$\\mathsf{C}_4$. Nothing in this paper claims anything about full acyclicity;\nthe restriction is inherited from the artifact and stated here once.",
+      "claim_text_sha256": "ea4cd73fbf617a22012bcf5c1bdff05ed12932f5d647a51730478eff0b4af8fa",
+      "manuscript_anchor": "CB-010",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 180,
+          "end_line": 189
+        }
+      ],
+      "claim_class": "LIMITATION",
+      "evidence_level": "LIMITATION",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/scope/active_contract_atoms",
+          "expected": [
+            "asymm",
+            "un",
+            "minlib",
+            "no_cycle4"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/block_map/minlib",
+          "expected": [
+            "decisive_voter0",
+            "decisive_voter1"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/grouping",
+          "expected": "touch-any"
+        },
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "supporting_evidence": [],
+      "assumptions": [],
+      "scope": "explicit non-claim and scope boundary",
+      "allowed_wording": "The Sen instance is the finite base case of Sen's\nParetian-liberal impossibility~\\cite{Sen1970}. The theorem shows that no social decision procedure can\nsimultaneously satisfy unrestricted domain, weak Pareto, minimal liberalism\n(two individuals each decisive on at least one pair of alternatives), and\nacyclicity of strict social preference. We work with two individuals, four\nalternatives, and---in place of full acyclicity---a\n\\emph{restricted local-rationality family} consisting of prohibitions of\nshort strict cycles; the witness below activates the 4-cycle prohibition\n$\\mathsf{C}_4$. Nothing in this paper claims anything about full acyclicity;\nthe restriction is inherited from the artifact and stated here once.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-011",
+      "initial_location": "instance/encoding size",
+      "initial_text": "The deterministic CNF instance has 36,290 clauses over 6,936 variables, with 6,912 primary and 24 auxiliary variables.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The instance is compiled to CNF by a deterministic generator. Primary\nvariables encode the strict social preference on each ordered pair of\nalternatives at each preference profile ($6{,}912$ variables); $24$ auxiliary\nselector variables support the minimal-liberalism and decisiveness modules;\nthe full instance has\n$36{,}290$ clauses over $6{,}936$ variables. Each clause is tagged with the\n\\emph{constraint module} that emitted it. The active commitments of the\nwitness are\n\\[\nS \\;=\\; \\{\\modsym{A},\\ \\modsym{U},\\ \\mathsf{Lib},\\ \\mathsf{C}_4\\},\n\\]\nwith $\\modsym{A}$ asymmetry, $\\modsym{U}$ unanimity (weak Pareto), and\n$\\mathsf{Lib}$ realized as below.",
+      "claim_text_sha256": "f159c892c659669bf6e2d6d0ae446418e4176b6ad795a2013bbe7d210dfd3821",
+      "manuscript_anchor": "CB-011",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 193,
+          "end_line": 205
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The instance is compiled to CNF by a deterministic generator. Primary\nvariables encode the strict social preference on each ordered pair of\nalternatives at each preference profile ($6{,}912$ variables); $24$ auxiliary\nselector variables support the minimal-liberalism and decisiveness modules;\nthe full instance has\n$36{,}290$ clauses over $6{,}936$ variables. Each clause is tagged with the\n\\emph{constraint module} that emitted it. The active commitments of the\nwitness are\n\\[\nS \\;=\\; \\{\\modsym{A},\\ \\modsym{U},\\ \\mathsf{Lib},\\ \\mathsf{C}_4\\},\n\\]\nwith $\\modsym{A}$ asymmetry, $\\modsym{U}$ unanimity (weak Pareto), and\n$\\mathsf{Lib}$ realized as below.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-012",
+      "initial_location": "instance/module split",
+      "initial_text": "The bundled minimal-liberalism module has 13,826 clauses and the two split decisiveness modules have 6,913 clauses each.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The two encodings differ in exactly one reporting decision:\n\\begin{description}[leftmargin=1.4em]\n\\item[Bundled.] The bundled minimal-liberalism module $\\ML$ contributes\n$13{,}826$ clauses.\n\\item[Split.] The per-individual decisiveness modules\n$D_0, D_1$, contributing $6{,}913$ clauses each.\n\\end{description}",
+      "claim_text_sha256": "fcc16a642f6fc7fed9a4674631673717c5d2e8e7d864e03148fcc1c6978e769b",
+      "manuscript_anchor": "CB-012",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 209,
+          "end_line": 215
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The two encodings differ in exactly one reporting decision:\n\\begin{description}[leftmargin=1.4em]\n\\item[Bundled.] The bundled minimal-liberalism module $\\ML$ contributes\n$13{,}826$ clauses.\n\\item[Split.] The per-individual decisiveness modules\n$D_0, D_1$, contributing $6{,}913$ clauses each.\n\\end{description}",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-013",
+      "initial_location": "instance/equivalence",
+      "initial_text": "The bundled and split instances are identical as normalized clause multisets, both are UNSAT, and the archived comparison extends equality to all 32 mapped subsets.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The bundled and split witness instances are $\\CM$-equivalent in this\nidentity-map sense: they consist of literally the same clauses, differently\nattributed. Both are $\\UNSAT$. The generator is deterministic, so both facts\nare re-checkable from source; the archived manifests record the CNF hashes\n(claim C1 of Appendix~\\ref{app:artifact}), and the archived comparison table\nextends the equivalence to all $32$ mapped module subsets, not only the\nwitness.",
+      "claim_text_sha256": "705428c3a9f5854a6f8792552631d55fdc2272138c7f3a5bc17924f028306318",
+      "manuscript_anchor": "CB-013",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 226,
+          "end_line": 232
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The bundled and split witness instances are $\\CM$-equivalent in this\nidentity-map sense: they consist of literally the same clauses, differently\nattributed. Both are $\\UNSAT$. The generator is deterministic, so both facts\nare re-checkable from source; the archived manifests record the CNF hashes\n(claim C1 of Appendix~\\ref{app:artifact}), and the archived comparison table\nextends the equivalence to all $32$ mapped module subsets, not only the\nwitness.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-014",
+      "initial_location": "instance/monotonicity",
+      "initial_text": "Reference deletion is monotone for this CNF instance because deleting modules only removes clauses.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Reference deletion over module subsets is monotone here: feasibility of a\nretained assumption set means propositional satisfiability of its clauses,\nand deleting further modules removes clauses, preserving satisfiability. This\nobservation instantiates the monotonicity hypothesis of\nTheorem~\\ref{thm:conv} for the present instance.",
+      "claim_text_sha256": "3e47cbae7f313150ab5103fecd56c855ca41a9157937d4dbae4ace6937c28163",
+      "manuscript_anchor": "CB-014",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 236,
+          "end_line": 240
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/psi_deletion_monotonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Reference deletion over module subsets is monotone here: feasibility of a\nretained assumption set means propositional satisfiability of its clauses,\nand deleting further modules removes clauses, preserving satisfiability. This\nobservation instantiates the monotonicity hypothesis of\nTheorem~\\ref{thm:conv} for the present instance.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-015",
+      "initial_location": "no-go theorem",
+      "initial_text": "The bundled/split realization pair witnesses clause-multiset identity, joint UNSAT status, and disagreement of transported raw minimal-repair families.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "There exist module-structured encodings\n$(\\Lam_b, \\mathcal{S}_b, \\varphi_b)$ and\n$(\\Lam_s, \\mathcal{S}_s, \\varphi_s)$, active sets\n$S_b \\in \\mathcal{S}_b$, $S_s \\in \\mathcal{S}_s$, and a module correspondence\n$\\pi$ with:\n\\begin{enumerate}[label=(\\arabic*),leftmargin=1.8em]\n\\item $\\varphi_b(S_b) \\CM \\varphi_s(S_s)$ under the identity variable map;\n\\item both $\\varphi_b(S_b)$ and $\\varphi_s(S_s)$ are $\\UNSAT$;\n\\item $\\pi_*\\!\\bigl(\\Rep^{\\mathrm{raw}}_{\\Lam_b}(\\varphi_b(S_b))\\bigr)\n      \\neq \\Rep^{\\mathrm{raw}}_{\\Lam_s}(\\varphi_s(S_s))$.\n\\end{enumerate}",
+      "claim_text_sha256": "fc9e3c96c3ab3fae10b6b2cfc83ecd365f211198da5ff2854893095a2c50a1cb",
+      "manuscript_anchor": "CB-015",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 266,
+          "end_line": 276
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "There exist module-structured encodings\n$(\\Lam_b, \\mathcal{S}_b, \\varphi_b)$ and\n$(\\Lam_s, \\mathcal{S}_s, \\varphi_s)$, active sets\n$S_b \\in \\mathcal{S}_b$, $S_s \\in \\mathcal{S}_s$, and a module correspondence\n$\\pi$ with:\n\\begin{enumerate}[label=(\\arabic*),leftmargin=1.8em]\n\\item $\\varphi_b(S_b) \\CM \\varphi_s(S_s)$ under the identity variable map;\n\\item both $\\varphi_b(S_b)$ and $\\varphi_s(S_s)$ are $\\UNSAT$;\n\\item $\\pi_*\\!\\bigl(\\Rep^{\\mathrm{raw}}_{\\Lam_b}(\\varphi_b(S_b))\\bigr)\n      \\neq \\Rep^{\\mathrm{raw}}_{\\Lam_s}(\\varphi_s(S_s))$.\n\\end{enumerate}",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-016",
+      "initial_location": "no-go proof/equivalence",
+      "initial_text": "Both instances regenerate to archived hashes, have equal normalized clause multisets, and are UNSAT.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Take the bundled and split encodings of Section~\\ref{sec:instance} with\n$S_b = \\{\\modsym{A}, \\modsym{U}, \\ML, \\mathsf{C}_4\\}$ and\n$S_s = \\{\\modsym{A}, \\modsym{U}, D_0, D_1, \\mathsf{C}_4\\}$, and let $\\pi$ map\n$\\ML \\mapsto \\{D_0, D_1\\}$ and every other module to its singleton.\n\n\\emph{Step 1 (equivalence and status).} Both instances regenerate\ndeterministically to the archived SHA-256 values; their normalized clause\nmultisets are equal (claim C1), and both are $\\UNSAT$ (claim C2). This gives\n(1) and (2).",
+      "claim_text_sha256": "d7ceaaf9df5020d2c720b4ab28c32453a2e1112365a86041d21ca11725e1d1de",
+      "manuscript_anchor": "CB-016",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 282,
+          "end_line": 290
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Take the bundled and split encodings of Section~\\ref{sec:instance} with\n$S_b = \\{\\modsym{A}, \\modsym{U}, \\ML, \\mathsf{C}_4\\}$ and\n$S_s = \\{\\modsym{A}, \\modsym{U}, D_0, D_1, \\mathsf{C}_4\\}$, and let $\\pi$ map\n$\\ML \\mapsto \\{D_0, D_1\\}$ and every other module to its singleton.\n\n\\emph{Step 1 (equivalence and status).} Both instances regenerate\ndeterministically to the archived SHA-256 values; their normalized clause\nmultisets are equal (claim C1), and both are $\\UNSAT$ (claim C2). This gives\n(1) and (2).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-017",
+      "initial_location": "no-go proof/bundled repairs",
+      "initial_text": "The bundled raw minimal-repair family is exactly the four singleton deletions A, U, ML, and C4.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\emph{Step 2 (bundled family).} The full bundled instance is infeasible, and\ndeleting any single module of $S_b$ restores satisfiability; hence the raw\nminimal-repair family is exactly the four singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{\\ML\\}, \\{\\mathsf{C}_4\\}$ (claim C3;\nsingletons over an infeasible full set are minimal if and only if feasible).",
+      "claim_text_sha256": "4f5346a55a44783f467b6edeb7545229f9fecea27e9c0f9a64a94db5c75ffabd",
+      "manuscript_anchor": "CB-017",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 294,
+          "end_line": 298
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/bundled_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "minlib",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C3 |"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\emph{Step 2 (bundled family).} The full bundled instance is infeasible, and\ndeleting any single module of $S_b$ restores satisfiability; hence the raw\nminimal-repair family is exactly the four singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{\\ML\\}, \\{\\mathsf{C}_4\\}$ (claim C3;\nsingletons over an infeasible full set are minimal if and only if feasible).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-018",
+      "initial_location": "no-go proof/split repairs",
+      "initial_text": "The split raw minimal-repair family is exactly the five singleton deletions A, U, D0, D1, and C4.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\emph{Step 3 (split family).} Likewise all five singleton deletions on the\nsplit side restore satisfiability, so the split family is the five singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{D_0\\}, \\{D_1\\}, \\{\\mathsf{C}_4\\}$\n(claim C4).",
+      "claim_text_sha256": "790d26463be45804df0018dbc104d3904fdb98c3700d1f44069eec839202bd70",
+      "manuscript_anchor": "CB-018",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 302,
+          "end_line": 305
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/split_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "decisive_voter1",
+            "decisive_voter0",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C4 |"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\emph{Step 3 (split family).} Likewise all five singleton deletions on the\nsplit side restore satisfiability, so the split family is the five singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{D_0\\}, \\{D_1\\}, \\{\\mathsf{C}_4\\}$\n(claim C4).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-019",
+      "initial_location": "no-go proof/transport",
+      "initial_text": "Transport maps ML to {D0,D1}, which is not split-minimal, and D0 and D1 singleton repairs have no bundled preimage.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\emph{Step 4 (transport failure).} Transporting the bundled family sends\n$\\{\\ML\\}$ to $\\{D_0, D_1\\}$, which is feasible on the split side but not\ninclusion-minimal, since $\\{D_0\\}$ already is; and the split singletons\n$\\{D_0\\}, \\{D_1\\}$ have no preimage. Hence (3) (claim C5).",
+      "claim_text_sha256": "d9f62119119158cacd5e4c15e67b32b9f04e925f6732735423f7d9b2bdd5bf50",
+      "manuscript_anchor": "CB-019",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 309,
+          "end_line": 312
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\emph{Step 4 (transport failure).} Transporting the bundled family sends\n$\\{\\ML\\}$ to $\\{D_0, D_1\\}$, which is feasible on the split side but not\ninclusion-minimal, since $\\{D_0\\}$ already is; and the split singletons\n$\\{D_0\\}, \\{D_1\\}$ have no preimage. Hence (3) (claim C5).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-020",
+      "initial_location": "no-go discussion/equivalence",
+      "initial_text": "The two instances are the same clause multiset and vary only in module attribution, so logical equivalence alone cannot make the raw reports invariant.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Condition (1) is stronger than any semantic notion of encoding equivalence:\nthe instances are the \\emph{same multiset of clauses}. Any result of the form\n``repair reports are invariant under logical equivalence of encodings''\nis therefore refuted a fortiori. What varies between the encodings is only\nthe attribution of clauses to modules---exactly the data a proof certificate\ndoes not carry.",
+      "claim_text_sha256": "5cd0ded496e6d1db2a58c564809a896f01346f73b0aef1497d0073820a3b22d3",
+      "manuscript_anchor": "CB-020",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 318,
+          "end_line": 323
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Condition (1) is stronger than any semantic notion of encoding equivalence:\nthe instances are the \\emph{same multiset of clauses}. Any result of the form\n``repair reports are invariant under logical equivalence of encodings''\nis therefore refuted a fortiori. What varies between the encodings is only\nthe attribution of clauses to modules---exactly the data a proof certificate\ndoes not carry.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-021",
+      "initial_location": "no-go discussion/layers",
+      "initial_text": "Unsatisfiability remains shared while only the report layer changes, separating witness correctness from report canonicity.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Nothing is wrong with the certificate: unsatisfiability, and even the\ncertified refutation, is shared. The failure is confined to the report layer.\nThe theorem thus separates two guarantees that pipelines routinely conflate:\n\\emph{witness correctness} and \\emph{report canonicity}.",
+      "claim_text_sha256": "f41e378ec5c2b740085b05c2e4dbbb4c5e30f58f5cf6b8373e1ba7fab482afa5",
+      "manuscript_anchor": "CB-021",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Nothing is wrong with the certificate: unsatisfiability, and even the\ncertified refutation, is shared. The failure is confined to the report layer.\nThe theorem thus separates two guarantees that pipelines routinely conflate:\n\\emph{witness correctness} and \\emph{report canonicity}.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-022",
+      "initial_location": "no-go discussion/modeling",
+      "initial_text": "Whether minimal liberalism is one commitment or one commitment per individual is a genuine modeling ambiguity in the source theorem.",
+      "initial_status": "UNSUPPORTED",
+      "claim_text_exact": "The Sen instance is small enough to enumerate exhaustively yet is a live\nexample of the target use case: an impossibility theorem consumed as advice\nabout which axiom to withdraw. The pair deliberately tests two plausible\nreporting granularities: one minimal-liberalism module or one decisiveness\nmodule per individual. The artifact comparison establishes what changes under\nthat choice; it does not establish that either grouping is organizationally or\nnormatively valid.",
+      "claim_text_sha256": "5e459e0b4fa49f3c26ef7475c343d48f7704842d3f86dbec7dc53eda2222da00",
+      "manuscript_anchor": "CB-022",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 338,
+          "end_line": 344
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/scope/active_contract_atoms",
+          "expected": [
+            "asymm",
+            "un",
+            "minlib",
+            "no_cycle4"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/block_map/minlib",
+          "expected": [
+            "decisive_voter0",
+            "decisive_voter1"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/grouping",
+          "expected": "touch-any"
+        },
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The Sen instance is small enough to enumerate exhaustively yet is a live\nexample of the target use case: an impossibility theorem consumed as advice\nabout which axiom to withdraw. The pair deliberately tests two plausible\nreporting granularities: one minimal-liberalism module or one decisiveness\nmodule per individual. The artifact comparison establishes what changes under\nthat choice; it does not establish that either grouping is organizationally or\nnormatively valid.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-023",
+      "initial_location": "contract reading/declaration",
+      "initial_text": "The concrete contract has atoms A, U, Lib, and C4; bundled ML and split {D0,D1} realize Lib; both realizations have disjoint blocks; and reference deletion is monotone.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Return to Section~\\ref{sec:instance}. Declare the contract with active atoms\n$I = \\{\\modsym{A}, \\modsym{U}, \\mathsf{Lib}, \\mathsf{C}_4\\}$, where\n$\\mathsf{Lib}$ is the minimal-liberalism commitment, and $\\SatPsi(T)$ =\nsatisfiability of the clauses of the modules realizing $T$. The bundled\nencoding realizes $\\mathsf{Lib}$ by the bundled minimal-liberalism module\n$\\ML$; the split encoding realizes it by the per-individual decisiveness\nmodules $\\{D_0, D_1\\}$. Both realizations have disjoint blocks, and reference\ndeletion is monotone (Section~\\ref{sec:instance}).",
+      "claim_text_sha256": "39a8b3a1faf52506963b16c0b49f847735dd957d2e9ead5c5485bf40b7aa61e2",
+      "manuscript_anchor": "CB-023",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 580,
+          "end_line": 587
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/scope/active_contract_atoms",
+          "expected": [
+            "asymm",
+            "un",
+            "minlib",
+            "no_cycle4"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/block_map/minlib",
+          "expected": [
+            "decisive_voter0",
+            "decisive_voter1"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/grouping",
+          "expected": "touch-any"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/residual_faithfulness.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/group_soundness_full.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Return to Section~\\ref{sec:instance}. Declare the contract with active atoms\n$I = \\{\\modsym{A}, \\modsym{U}, \\mathsf{Lib}, \\mathsf{C}_4\\}$, where\n$\\mathsf{Lib}$ is the minimal-liberalism commitment, and $\\SatPsi(T)$ =\nsatisfiability of the clauses of the modules realizing $T$. The bundled\nencoding realizes $\\mathsf{Lib}$ by the bundled minimal-liberalism module\n$\\ML$; the split encoding realizes it by the per-individual decisiveness\nmodules $\\{D_0, D_1\\}$. Both realizations have disjoint blocks, and reference\ndeletion is monotone (Section~\\ref{sec:instance}).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-024",
+      "initial_location": "contract reading/grouped families",
+      "initial_text": "Touch-any grouping makes both concrete grouped families coincide with the four singleton contract repairs.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "At the raw level the two reports disagree (Theorem~\\ref{thm:nogo}). At the\ncontract level, grouping the split-side raw repairs through $\\tau$ collapses\n$\\{D_0\\}$ and $\\{D_1\\}$ to $\\{\\mathsf{Lib}\\}$, and the grouped families of\nthe two realizations coincide with the four contract singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{\\mathsf{Lib}\\}, \\{\\mathsf{C}_4\\}$.",
+      "claim_text_sha256": "6f5d808bbdc0348f13b6f73136516be1c56d666ef3b9654640dae3c2d1a7a62e",
+      "manuscript_anchor": "CB-024",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 591,
+          "end_line": 595
+        }
+      ],
+      "claim_class": "DERIVED_FINITE_FACT",
+      "evidence_level": "DERIVED_FINITE_FACT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/grouped_repairs.json",
+          "pointer": "/grouped_repairs",
+          "expected": [
+            [
+              "asymm"
+            ],
+            [
+              "un"
+            ],
+            [
+              "minlib"
+            ],
+            [
+              "no_cycle4"
+            ]
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/contract_repairs.json",
+          "pointer": "/repairs",
+          "expected": [
+            [
+              "asymm"
+            ],
+            [
+              "un"
+            ],
+            [
+              "minlib"
+            ],
+            [
+              "no_cycle4"
+            ]
+          ]
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "At the raw level the two reports disagree (Theorem~\\ref{thm:nogo}). At the\ncontract level, grouping the split-side raw repairs through $\\tau$ collapses\n$\\{D_0\\}$ and $\\{D_1\\}$ to $\\{\\mathsf{Lib}\\}$, and the grouped families of\nthe two realizations coincide with the four contract singletons\n$\\{\\modsym{A}\\}, \\{\\modsym{U}\\}, \\{\\mathsf{Lib}\\}, \\{\\mathsf{C}_4\\}$.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-025",
+      "initial_location": "contract reading/theorem application",
+      "initial_text": "The four-singleton coincidence is the behavior predicted by the two-realization corollary for group-sound realizations.",
+      "initial_status": "OVERCLAIM",
+      "claim_text_exact": "Together with the artifact-audited residual faithfulness and group soundness\nstated below, this is the behavior Corollary~\\ref{cor:tworeal} predicts for two\ndisjoint-block, residually faithful, group-sound realizations of one contract.",
+      "claim_text_sha256": "b6c428aaa32dd08d9bec81e4b03d0d715fac2937ba0b82195bdf92a5cd0760d1",
+      "manuscript_anchor": "CB-025",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 598,
+          "end_line": 600
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "Together with the artifact-audited residual faithfulness and group soundness\nstated below, this is the behavior Corollary~\\ref{cor:tworeal} predicts for two\ndisjoint-block, residually faithful, group-sound realizations of one contract.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-026",
+      "initial_location": "contract reading/claim boundary",
+      "initial_text": "Concrete grouped coincidence and group soundness are artifact-level audits rather than Lean theorems; Lean supplies only the general implications.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The raw families and their transport are solver- and artifact-audited by the\nC3--C5 witness checker. The concrete residual-faithfulness, group-soundness,\nand pointwise grouped-correctness facts are independently recomputed from the\nfrozen status tables by the curated paired-realization validator. These are\nartifact-level audits, \\emph{not} Lean theorems; the Lean development supplies\nonly the general implications, and the development docstrings state this\ndivision explicitly. We regard the\ndivision as a feature: the general theory is exactly the part that deserves\nkernel checking, while instance audits are the part a pipeline must\nre-execute per deployment anyway.",
+      "claim_text_sha256": "b7a5c2035e421da89f1e8af450d83284d33190b618e8423fb20af488906a1cfc",
+      "manuscript_anchor": "CB-026",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 605,
+          "end_line": 614
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/bundled_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "minlib",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C3 |"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/split_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "decisive_voter1",
+            "decisive_voter0",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C4 |"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/residual_faithfulness.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/group_soundness_full.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/grouped_correctness_pointwise.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The raw families and their transport are solver- and artifact-audited by the\nC3--C5 witness checker. The concrete residual-faithfulness, group-soundness,\nand pointwise grouped-correctness facts are independently recomputed from the\nfrozen status tables by the curated paired-realization validator. These are\nartifact-level audits, \\emph{not} Lean theorems; the Lean development supplies\nonly the general implications, and the development docstrings state this\ndivision explicitly. We regard the\ndivision as a feature: the general theory is exactly the part that deserves\nkernel checking, while instance audits are the part a pipeline must\nre-execute per deployment anyway.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "EDITORIAL_ONLY"
+    },
+    {
+      "claim_id": "CB-027",
+      "initial_location": "conclusion/no-go",
+      "initial_text": "The concrete no-go shows that a repair story can change while the certificate and clause multiset remain fixed.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "An impossibility certificate licenses the claim that a set of assumptions is\njointly untenable. It does not, by itself, license any particular story about\nwhich assumptions to withdraw: Theorem~\\ref{thm:nogo} shows the story can\nchange while the certificate---and even the clause multiset---stays fixed.",
+      "claim_text_sha256": "ce0e57023b6deb8a5c2c193dd686497fa0f637cfeda39d401d515f4c93209e80",
+      "manuscript_anchor": "CB-027",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 730,
+          "end_line": 733
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "An impossibility certificate licenses the claim that a set of assumptions is\njointly untenable. It does not, by itself, license any particular story about\nwhich assumptions to withdraw: Theorem~\\ref{thm:nogo} shows the story can\nchange while the certificate---and even the clause multiset---stays fixed.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-028",
+      "initial_location": "conclusion/discipline",
+      "initial_text": "Auditing group soundness and reporting at contract level is exactly what canonical reporting requires, and then the report no longer depends on the realization.",
+      "initial_status": "OVERCLAIM",
+      "claim_text_exact": "The constructive counterpart is a conditional discipline: for a\ndisjoint-block, residually faithful realization over a deletion-monotone\nreference contract, declare the contract, audit group soundness, and report at\nthe contract level. Under those hypotheses Theorem~\\ref{thm:iff} gives the\nexact equivalence with contract-level repairs, while\nCorollary~\\ref{cor:tworeal} gives invariance between any two such group-sound\nrealizations.",
+      "claim_text_sha256": "32b8ff3158a54786a6117b431415d481b57eff957bbfddb6fddc7f98c3de5b31",
+      "manuscript_anchor": "CB-028",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 736,
+          "end_line": 742
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "The constructive counterpart is a conditional discipline: for a\ndisjoint-block, residually faithful realization over a deletion-monotone\nreference contract, declare the contract, audit group soundness, and report at\nthe contract level. Under those hypotheses Theorem~\\ref{thm:iff} gives the\nexact equivalence with contract-level repairs, while\nCorollary~\\ref{cor:tworeal} gives invariance between any two such group-sound\nrealizations.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-029",
+      "initial_location": "conclusion/limitations",
+      "initial_text": "The witness is limited to the Sen instance and restricted rationality family; the instance audit is not formalized; family transfer across sizes is out of scope.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Limitations mark the roadmap: the concrete witness lives in\nthe Sen instance and a restricted rationality family; the instance-level audit\nis not formalized; and the transfer of repair families across instance\n\\emph{sizes} (rather than across encodings of one instance) is a separate\nquestion outside this paper's scope.",
+      "claim_text_sha256": "468e63cdc21fb4f29762fcbf5ade468646d512d3047abd5a0680a0e5c395b605",
+      "manuscript_anchor": "CB-029",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 745,
+          "end_line": 749
+        }
+      ],
+      "claim_class": "LIMITATION",
+      "evidence_level": "LIMITATION",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/scope/active_contract_atoms",
+          "expected": [
+            "asymm",
+            "un",
+            "minlib",
+            "no_cycle4"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/block_map/minlib",
+          "expected": [
+            "decisive_voter0",
+            "decisive_voter1"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/grouping",
+          "expected": "touch-any"
+        },
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "supporting_evidence": [],
+      "assumptions": [],
+      "scope": "explicit non-claim and scope boundary",
+      "allowed_wording": "Limitations mark the roadmap: the concrete witness lives in\nthe Sen instance and a restricted rationality family; the instance-level audit\nis not formalized; and the transfer of repair families across instance\n\\emph{sizes} (rather than across encodings of one instance) is a separate\nquestion outside this paper's scope.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-030",
+      "initial_location": "data availability",
+      "initial_text": "The supplementary archive contains the Lean development, deterministic generator, SHA-256-bound witness artifacts, and one-command re-verification script.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The supplementary archive contains the\nfull Lean development, the deterministic generator, the archived witness\nartifacts with SHA-256 manifests, and a one-command re-verification script;\nsee Appendix~\\ref{app:artifact}.",
+      "claim_text_sha256": "64436c2c8f43465649c507645002946c5bd7e780a19f3c6b77572bddbcb33a35",
+      "manuscript_anchor": "CB-030",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 760,
+          "end_line": 763
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        },
+        {
+          "type": "file",
+          "path": "tools/check_cm_witness.py"
+        },
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_candidate_b.sh"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The supplementary archive contains the\nfull Lean development, the deterministic generator, the archived witness\nartifacts with SHA-256 manifests, and a one-command re-verification script;\nsee Appendix~\\ref{app:artifact}.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-031",
+      "initial_location": "artifact appendix/C1",
+      "initial_text": "Both instances regenerate to archived hashes, have 6,936 variables and 36,290 clauses, and are clause-multiset equivalent under the identity map.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\item[C1] Both witness instances regenerate deterministically (SHA-256 equal\nto the archived manifests; $6{,}936$ variables, $36{,}290$ clauses each) and\nare clause-multiset equivalent under the identity variable map.",
+      "claim_text_sha256": "208c20e6b42fa0bfba90e7b4d431ee1a3eb5ff487e433c41d3474f08a609ebfa",
+      "manuscript_anchor": "CB-031",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 813,
+          "end_line": 815
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\item[C1] Both witness instances regenerate deterministically (SHA-256 equal\nto the archived manifests; $6{,}936$ variables, $36{,}290$ clauses each) and\nare clause-multiset equivalent under the identity variable map.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-032",
+      "initial_location": "artifact appendix/C2",
+      "initial_text": "Both full instances are UNSAT when re-solved with CaDiCaL.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\item[C2] Both instances are $\\UNSAT$ (re-solved with CaDiCaL).",
+      "claim_text_sha256": "a1bee48b7f959824a4ef9674468137cc3e061577e332108edada9dcb020c1244",
+      "manuscript_anchor": "CB-032",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 818,
+          "end_line": 818
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/audit_result.json",
+          "pointer": "/fully_active_bundled_unsat",
+          "expected": true
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/audit_result.json",
+          "pointer": "/fully_active_split_unsat",
+          "expected": true
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C2 |"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\item[C2] Both instances are $\\UNSAT$ (re-solved with CaDiCaL).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-033",
+      "initial_location": "artifact appendix/C3",
+      "initial_text": "The bundled raw minimal-repair family is the four named singletons.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\item[C3] The bundled singleton repairs are exactly\n$\\modsym{A},\\modsym{U},\\ML,\\mathsf{C}_4$.",
+      "claim_text_sha256": "82706cf070ba709d17da36f8b219822d31d7d8b122a1190cf99b9a9628fbfaa4",
+      "manuscript_anchor": "CB-033",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 821,
+          "end_line": 822
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/bundled_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "minlib",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C3 |"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\item[C3] The bundled singleton repairs are exactly\n$\\modsym{A},\\modsym{U},\\ML,\\mathsf{C}_4$.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "EDITORIAL_ONLY"
+    },
+    {
+      "claim_id": "CB-034",
+      "initial_location": "artifact appendix/C4",
+      "initial_text": "The split raw minimal-repair family is the five named singletons.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\item[C4] The split singleton repairs are exactly\n$\\modsym{A},\\modsym{U},D_0,D_1,\\mathsf{C}_4$.",
+      "claim_text_sha256": "183d1f11646a8574831567411ff043dff21719a4efc7c02966d217d144070273",
+      "manuscript_anchor": "CB-034",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 825,
+          "end_line": 826
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/split_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "decisive_voter1",
+            "decisive_voter0",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C4 |"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\item[C4] The split singleton repairs are exactly\n$\\modsym{A},\\modsym{U},D_0,D_1,\\mathsf{C}_4$.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "EDITORIAL_ONLY"
+    },
+    {
+      "claim_id": "CB-035",
+      "initial_location": "artifact appendix/C5",
+      "initial_text": "The transported bundled family differs from the split family because {D0,D1} is transported but not split-minimal.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\item[C5] The transported bundled family differs from the split family;\n$\\{D_0, D_1\\}$ is transported but not inclusion-minimal on the split side.",
+      "claim_text_sha256": "ae82e36d5897914f7c7dd8415bc9c47b8488449ca762e4c24211481a5a7722ea",
+      "manuscript_anchor": "CB-035",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 829,
+          "end_line": 830
+        }
+      ],
+      "claim_class": "ARTIFACT_MEASUREMENT",
+      "evidence_level": "ARTIFACT_MEASUREMENT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\item[C5] The transported bundled family differs from the split family;\n$\\{D_0, D_1\\}$ is transported but not inclusion-minimal on the split side.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-036",
+      "initial_location": "artifact appendix/coverage",
+      "initial_text": "C3-C4 exhaust all singleton deletions, C5 is derived from C1-C4, and the archive contains full 32-case and 64-case atlases plus their mapped comparison.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Because the full instances are infeasible (C2), a singleton module deletion\nis inclusion-minimal iff it restores satisfiability; C3--C4 check all\nsingleton deletions exhaustively, and C5 is re-derived from C1--C4 at the set\nlevel. The archive additionally contains the full $32$-case bundled and\n$64$-case split atlases and the mapped case-by-case comparison table\nextending C1 to all mapped module subsets.",
+      "claim_text_sha256": "b14f6f75cb1b6530eba3dcf4be7766a8f99f78f63c2c42256d3513dc464f0152",
+      "manuscript_anchor": "CB-036",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 835,
+          "end_line": 840
+        }
+      ],
+      "claim_class": "DERIVED_FINITE_FACT",
+      "evidence_level": "DERIVED_FINITE_FACT",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/bundled_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "minlib",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C3 |"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/split_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "decisive_voter1",
+            "decisive_voter0",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C4 |"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/case_schema.json",
+          "pointer": "/bundled/expected_atlas_rows",
+          "expected": 32
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/case_schema.json",
+          "pointer": "/split/expected_atlas_rows",
+          "expected": 64
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Because the full instances are infeasible (C2), a singleton module deletion\nis inclusion-minimal iff it restores satisfiability; C3--C4 check all\nsingleton deletions exhaustively, and C5 is re-derived from C1--C4 at the set\nlevel. The archive additionally contains the full $32$-case bundled and\n$64$-case split atlases and the mapped case-by-case comparison table\nextending C1 to all mapped module subsets.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-037",
+      "initial_location": "theorem discussion/atomic coincidence",
+      "initial_text": "Under disjoint blocks, atomicity, and residual faithfulness, grouped and contract repairs coincide pointwise and full-block raw repairs transport between realizations.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "If the realization has disjoint blocks, is atomic, and is residually\nfaithful, then for every $G$: $G$ is a grouped repair iff $G$ is a contract\nrepair. Moreover raw repairs transport: for $G \\subseteq I$ and any two such\nrealizations $(\\beta_1,\\SatPhi_1)$, $(\\beta_2,\\SatPhi_2)$, the block image\n$\\bigcup_{a\\in G}\\beta_1(a)$ is a raw repair for the first iff\n$\\bigcup_{a\\in G}\\beta_2(a)$ is for the second.",
+      "claim_text_sha256": "d42993c4aef97b51722b5db486fa2c0fea3efc705106e2b9d65831e142173905",
+      "manuscript_anchor": "CB-037",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 431,
+          "end_line": 436
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Atomic.lean",
+          "symbol": "m3a_grouped_correctness"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Atomic.lean",
+          "symbol": "m3a_raw_transport"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "If the realization has disjoint blocks, is atomic, and is residually\nfaithful, then for every $G$: $G$ is a grouped repair iff $G$ is a contract\nrepair. Moreover raw repairs transport: for $G \\subseteq I$ and any two such\nrealizations $(\\beta_1,\\SatPhi_1)$, $(\\beta_2,\\SatPhi_2)$, the block image\n$\\bigcup_{a\\in G}\\beta_1(a)$ is a raw repair for the first iff\n$\\bigcup_{a\\in G}\\beta_2(a)$ is for the second.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-038",
+      "initial_location": "theorem discussion/atomic interpretation",
+      "initial_text": "In the atomic case grouping is a bijective relabeling; this is a folklore assumption under which raw reports are treated as canonical.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "In the atomic case grouping is a bijective relabeling, so nothing can go\nwrong---this is the (rarely stated) folklore assumption under which raw\nreports are silently treated as canonical. The substance begins when blocks\nare genuinely plural.",
+      "claim_text_sha256": "0d8f6d6d064f0c09b820da64fadb02f3f26f5455bbdeaa524f0f54f68a69127c",
+      "manuscript_anchor": "CB-038",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 441,
+          "end_line": 444
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Atomic.lean",
+          "symbol": "m3a_grouped_correctness"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "In the atomic case grouping is a bijective relabeling, so nothing can go\nwrong---this is the (rarely stated) folklore assumption under which raw\nreports are silently treated as canonical. The substance begins when blocks\nare genuinely plural.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-039",
+      "initial_location": "theorem discussion/group-sound sufficiency",
+      "initial_text": "Disjoint blocks, residual faithfulness, and group soundness suffice for pointwise coincidence of grouped and contract repairs.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "If the realization has disjoint blocks, is residually faithful, and is group\nsound, then for every $G$: $G$ is a grouped repair iff $G$ is a contract\nrepair.",
+      "claim_text_sha256": "75c9c62afbc6f9b750320ac74e12a74619d0daf72900a011078d54e563f0e65d",
+      "manuscript_anchor": "CB-039",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 450,
+          "end_line": 452
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_grouped_correctness"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "If the realization has disjoint blocks, is residually faithful, and is group\nsound, then for every $G$: $G$ is a grouped repair iff $G$ is a contract\nrepair.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-040",
+      "initial_location": "theorem discussion/sufficiency proof",
+      "initial_text": "Group soundness supplies contract feasibility for a raw repair's image, while residual faithfulness realizes a contract repair by a full-block deletion; disjointness and finite minimality establish both directions.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "For one direction, a raw repair $R$ yields, by group soundness, a\ncontract-feasible $\\tau(R)$; minimality of grouped repairs then descends to\ncontract minimality using disjointness to compare deletions blockwise. For\nthe converse, a contract repair $G$ is realized by deleting its full block\nimage $\\bigcup_{a \\in G}\\beta(a)$, which is raw-feasible by faithfulness;\nextracting an inclusion-minimal raw repair inside it and regrouping recovers\n$G$, again by disjointness and minimality.",
+      "claim_text_sha256": "9c4092c4e8d0730216dac2b4c5a70fe01157355f4fbd91114ac8f101ae596842",
+      "manuscript_anchor": "CB-040",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 458,
+          "end_line": 464
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_grouped_correctness"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "For one direction, a raw repair $R$ yields, by group soundness, a\ncontract-feasible $\\tau(R)$; minimality of grouped repairs then descends to\ncontract minimality using disjointness to compare deletions blockwise. For\nthe converse, a contract repair $G$ is realized by deleting its full block\nimage $\\bigcup_{a \\in G}\\beta(a)$, which is raw-feasible by faithfulness;\nextracting an inclusion-minimal raw repair inside it and regrouping recovers\n$G$, again by disjointness and minimality.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-041",
+      "initial_location": "theorem discussion/two-realization corollary",
+      "initial_text": "Two disjoint-block, residually faithful, group-sound realizations of one reference contract have pointwise identical grouped repair predicates.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Let $(\\beta_1, \\SatPhi_1)$ and $(\\beta_2, \\SatPhi_2)$ be realizations of the\nsame reference contract, over possibly different module types, each with\ndisjoint blocks, residually faithful, and group sound. Then for every $G$:\n$G$ is a grouped repair of the first iff it is a grouped repair of the\nsecond.",
+      "claim_text_sha256": "57eb1f026068031a8d6bbc6017fbd5a0d891a8cd93e1d4c172f720c8c7848d6f",
+      "manuscript_anchor": "CB-041",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 471,
+          "end_line": 475
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "Let $(\\beta_1, \\SatPhi_1)$ and $(\\beta_2, \\SatPhi_2)$ be realizations of the\nsame reference contract, over possibly different module types, each with\ndisjoint blocks, residually faithful, and group sound. Then for every $G$:\n$G$ is a grouped repair of the first iff it is a grouped repair of the\nsecond.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-042",
+      "initial_location": "theorem discussion/two-realization interpretation",
+      "initial_text": "The corollary restores contract-level invariance across different module types and motivates explicit realization parameters.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Corollary~\\ref{cor:tworeal} is the exact repair, at the contract level, of\nthe invariance that Theorem~\\ref{thm:nogo} refutes at the raw level---and its\nstatement quantifies over two \\emph{different} module types, which is why the\nformalization keeps realizations as explicit parameters rather than fixing a\nglobal universe (Section~\\ref{sec:design}).",
+      "claim_text_sha256": "61ec4da99f64890e40257c24d0e76f5c735d36c86ce7385bc2064e60736ab3b4",
+      "manuscript_anchor": "CB-042",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 485,
+          "end_line": 489
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Corollary~\\ref{cor:tworeal} is the exact repair, at the contract level, of\nthe invariance that Theorem~\\ref{thm:nogo} refutes at the raw level---and its\nstatement quantifies over two \\emph{different} module types, which is why the\nformalization keeps realizations as explicit parameters rather than fixing a\nglobal universe (Section~\\ref{sec:design}).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-043",
+      "initial_location": "theorem discussion/necessity",
+      "initial_text": "For a deletion-monotone reference, pointwise grouped/contract correctness implies group soundness without residual faithfulness.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "If the reference contract is deletion monotone and grouped repairs coincide\nwith contract repairs (for every $G$), then the realization is group sound.\nResidual faithfulness is not assumed.",
+      "claim_text_sha256": "7936b9f53b045e81b9d6c41ed4cb45e1d7a98fa0625086780b90dfcf99bedf93",
+      "manuscript_anchor": "CB-043",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 504,
+          "end_line": 506
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "m3c_converse"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "If the reference contract is deletion monotone and grouped repairs coincide\nwith contract repairs (for every $G$), then the realization is group sound.\nResidual faithfulness is not assumed.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-044",
+      "initial_location": "theorem discussion/characterization",
+      "initial_text": "With disjoint blocks and residual faithfulness over a deletion-monotone reference, group soundness is equivalent to pointwise grouped/contract correctness.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "For a realization with disjoint blocks and residual faithfulness over a\ndeletion-monotone reference contract: the realization is group sound iff\ngrouped repairs coincide with contract repairs for every $G$.",
+      "claim_text_sha256": "541c9d47935436c3d352569e8b0f0a8d9e2cfca65991eaea6c034e4214d67164",
+      "manuscript_anchor": "CB-044",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 523,
+          "end_line": 525
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "For a realization with disjoint blocks and residual faithfulness over a\ndeletion-monotone reference contract: the realization is group sound iff\ngrouped repairs coincide with contract repairs for every $G$.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-045",
+      "initial_location": "theorem discussion/hierarchy",
+      "initial_text": "Under disjoint blocks and residual faithfulness atomicity implies group soundness, but the converse fails.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Under disjoint blocks and residual faithfulness, atomicity implies group\nsoundness. The converse fails (Example~\\ref{ex:nonatomic}); thus\nTheorem~\\ref{thm:atomic} is a strict special case of Theorem~\\ref{thm:suff}.",
+      "claim_text_sha256": "d3a2a8c9090f10061e450e6c95c1fa445b1e733ccf5940b3008a399ab0c62317",
+      "manuscript_anchor": "CB-045",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 532,
+          "end_line": 534
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "atomicity_implies_groupSoundness"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "Under disjoint blocks and residual faithfulness, atomicity implies group\nsoundness. The converse fails (Example~\\ref{ex:nonatomic}); thus\nTheorem~\\ref{thm:atomic} is a strict special case of Theorem~\\ref{thm:suff}.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-046",
+      "initial_location": "theorem discussion/non-atomic example",
+      "initial_text": "A finite one-atom, two-module model has group soundness and coincident grouped/contract repairs despite failure of atomicity.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "One atom, two modules: $I = \\{a\\}$, $\\beta(a) = \\{x_0, x_1\\}$,\n$\\SatPsi(T) \\iff T = \\emptyset$, and $\\SatPhi(L) \\iff L \\neq \\{x_0,x_1\\}$.\nThe block has two elements, so atomicity fails; but every feasible deletion\ntouches $a$, so grouping lands on the feasible contract residual\n$\\emptyset$, and group soundness holds. Grouped and contract repairs both\nconsist of exactly $\\{a\\}$.",
+      "claim_text_sha256": "3cec315978f55da4473436129e1f0aaff599d2f7a2f36ba9c82353d213f2c2cb",
+      "manuscript_anchor": "CB-046",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 548,
+          "end_line": 553
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Examples.lean",
+          "symbol": "repairAtomicity_fails"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Examples.lean",
+          "symbol": "groupSoundness"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "One atom, two modules: $I = \\{a\\}$, $\\beta(a) = \\{x_0, x_1\\}$,\n$\\SatPsi(T) \\iff T = \\emptyset$, and $\\SatPhi(L) \\iff L \\neq \\{x_0,x_1\\}$.\nThe block has two elements, so atomicity fails; but every feasible deletion\ntouches $a$, so grouping lands on the feasible contract residual\n$\\emptyset$, and group soundness holds. Grouped and contract repairs both\nconsist of exactly $\\{a\\}$.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-047",
+      "initial_location": "theorem discussion/non-monotone example",
+      "initial_text": "A finite non-monotone reference can have coincident grouped/contract repairs while group soundness fails, so monotonicity cannot be removed from the necessity theorem.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "With a non-monotone $\\SatPsi$ (feasible at the retained set $\\{b\\}$ but\ninfeasible at the retained set $\\emptyset$), grouped and contract repairs can\ncoincide while a feasible implementation deletion grouping onto a larger atom\nset breaks $\\SatPsi$; group soundness fails. Hence the monotonicity\nhypothesis of Theorem~\\ref{thm:conv} cannot be dropped.",
+      "claim_text_sha256": "49e81cd3c9497012c158fd8bbf911d3745f3efb2c8253eaea8083447363fcd50",
+      "manuscript_anchor": "CB-047",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 560,
+          "end_line": 564
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Examples.lean",
+          "symbol": "grouped_correctness"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Examples.lean",
+          "symbol": "groupSoundness_fails"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "With a non-monotone $\\SatPsi$ (feasible at the retained set $\\{b\\}$ but\ninfeasible at the retained set $\\emptyset$), grouped and contract repairs can\ncoincide while a feasible implementation deletion grouping onto a larger atom\nset breaks $\\SatPsi$; group soundness fails. Hence the monotonicity\nhypothesis of Theorem~\\ref{thm:conv} cannot be dropped.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-048",
+      "initial_location": "theorem discussion/boundary interpretation",
+      "initial_text": "The examples show that group soundness strictly extends atomicity and that the necessity direction genuinely depends on the reference-contract shape.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The examples close the two natural gaps: group soundness sits strictly\nbetween atomicity and mere correctness of grouped reports, and the necessity\ndirection genuinely uses the shape of the reference contract, not just the\ncombinatorics of grouping.",
+      "claim_text_sha256": "076f47d6baa90b119057ebb5a2d7e6f268ccc8864e7febfd694c147f2ffffeac",
+      "manuscript_anchor": "CB-048",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 569,
+          "end_line": 572
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "atomicity_implies_groupSoundness"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Examples.lean",
+          "symbol": "groupSoundness_fails"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The examples close the two natural gaps: group soundness sits strictly\nbetween atomicity and mere correctness of grouped reports, and the necessity\ndirection genuinely uses the shape of the reference contract, not just the\ncombinatorics of grouping.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-049",
+      "initial_location": "title",
+      "initial_text": "Certified impossibility witnesses do not determine repair reports; the contract-relative reportability characterization is Lean-verified.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "\\title[Contract-Relative Repair Reports]{Certified Impossibility Witnesses Do Not Determine Repair Reports:\nA Lean-Verified Characterization of Contract-Relative Reportability}",
+      "claim_text_sha256": "7984187dc8248aec29c55485fd0da4473acdb7c1a5c9a578260405d160410d4e",
+      "manuscript_anchor": "CB-049",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 26,
+          "end_line": 27
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "\\title[Contract-Relative Repair Reports]{Certified Impossibility Witnesses Do Not Determine Repair Reports:\nA Lean-Verified Characterization of Contract-Relative Reportability}",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "EDITORIAL_ONLY"
+    },
+    {
+      "claim_id": "CB-050",
+      "initial_location": "abstract/evidence dependence",
+      "initial_text": "Proof certificates independently check unsatisfiability, but repair reports also depend on the partition into deletable units, which the certificate does not record.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Proof certificates make the\nunsatisfiability claim independently checkable, but the repair report also\ndepends on how assumptions are partitioned into deletable units---a choice the\ncertificate does not record.",
+      "claim_text_sha256": "af3f890591f5410166cf9dee0abb62414edab2981e24650cccaa29c55efc6da0",
+      "manuscript_anchor": "CB-050",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 39,
+          "end_line": 42
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Proof certificates make the\nunsatisfiability claim independently checkable, but the repair report also\ndepends on how assumptions are partitioned into deletable units---a choice the\ncertificate does not record.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-051",
+      "initial_location": "contract discussion/load-bearing condition",
+      "initial_text": "Group soundness covers partial-block deletions not constrained by residual faithfulness; the split D0 singleton cuts into the minimal-liberalism block.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "Group soundness is the load-bearing notion. Residual faithfulness only\nconstrains $\\SatPhi$ on the block-aligned sets $\\bigcup_{a \\in T} \\beta(a)$;\na feasible deletion $R$ may cut \\emph{strictly into} a block, leaving a\nresidual that is not block-aligned, and group soundness is exactly the promise\nthat such partial cuts never certify feasibility that the contract residual\nlacks. The witness of Section~\\ref{sec:nogo} fails at precisely this point:\ndeleting $D_0$ alone cuts into the minimal-liberalism block.",
+      "claim_text_sha256": "69c1be6c4e1eaa010f3d234410b5958fa6af2c2ddae804e8da33e385d6cced60",
+      "manuscript_anchor": "CB-051",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 407,
+          "end_line": 413
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/scope/active_contract_atoms",
+          "expected": [
+            "asymm",
+            "un",
+            "minlib",
+            "no_cycle4"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/block_map/minlib",
+          "expected": [
+            "decisive_voter0",
+            "decisive_voter1"
+          ]
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/contract.json",
+          "pointer": "/grouping",
+          "expected": "touch-any"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/candidate_b_assessment/cleanest_witness/split_min_repairs",
+          "expected": [
+            "no_cycle4",
+            "decisive_voter1",
+            "decisive_voter0",
+            "un",
+            "asymm"
+          ]
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "| C4 |"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/residual_faithfulness.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/group_soundness_full.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/grouped_correctness_pointwise.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Group soundness is the load-bearing notion. Residual faithfulness only\nconstrains $\\SatPhi$ on the block-aligned sets $\\bigcup_{a \\in T} \\beta(a)$;\na feasible deletion $R$ may cut \\emph{strictly into} a block, leaving a\nresidual that is not block-aligned, and group soundness is exactly the promise\nthat such partial cuts never certify feasibility that the contract residual\nlacks. The witness of Section~\\ref{sec:nogo} fails at precisely this point:\ndeleting $D_0$ alone cuts into the minimal-liberalism block.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-052",
+      "initial_location": "theorem discussion/evidence status",
+      "initial_text": "All characterization theorems are kernel-checked and the paper proof sketches follow the Lean proofs.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "All\ntheorems are kernel-checked; proof sketches below follow the Lean proofs.",
+      "claim_text_sha256": "b47efc930e3972d7a835ee86e7015398d7054403653a8889ce06b08ba856a545",
+      "manuscript_anchor": "CB-052",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 422,
+          "end_line": 423
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_grouped_correctness"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "m3c_converse"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+          "symbol": "m3b_two_realization"
+        },
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_smoke.sh"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "All\ntheorems are kernel-checked; proof sketches below follow the Lean proofs.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-053",
+      "initial_location": "theorem discussion/necessity interpretation",
+      "initial_text": "The converse makes group soundness the right sufficiency condition rather than merely one workable condition.",
+      "initial_status": "OVERCLAIM",
+      "claim_text_exact": "Sufficiency alone would leave group soundness as one workable condition among\nmany. For deletion-monotone references, the converse shows that pointwise\ngrouped correctness entails group soundness; with the sufficiency hypotheses,\nthis yields the exact characterization.",
+      "claim_text_sha256": "3bd889b7e2349e68441d76e5b6598b75fe84235ea122e1c07c19a7155cbc1332",
+      "manuscript_anchor": "CB-053",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 495,
+          "end_line": 498
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "m3c_converse"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "Sufficiency alone would leave group soundness as one workable condition among\nmany. For deletion-monotone references, the converse shows that pointwise\ngrouped correctness entails group soundness; with the sufficiency hypotheses,\nthis yields the exact characterization.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "WEAKENED"
+    },
+    {
+      "claim_id": "CB-054",
+      "initial_location": "formalization design/continuous checking",
+      "initial_text": "The development builds in CI and the absence of sorry/admit is mechanically checked and archive-reproducible.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The development builds in CI on every\nchange; absence of \\code{sorry}/\\code{admit} is checked mechanically and can\nbe re-confirmed from the archive in one command\n(Appendix~\\ref{app:artifact}).",
+      "claim_text_sha256": "a5eedea825bc4f7fdb7ed55efdcbdfde1acecd8d01cd9e09e7e10390b9435822",
+      "manuscript_anchor": "CB-054",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 673,
+          "end_line": 676
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_smoke.sh"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The development builds in CI on every\nchange; absence of \\code{sorry}/\\code{admit} is checked mechanically and can\nbe re-confirmed from the archive in one command\n(Appendix~\\ref{app:artifact}).",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-055",
+      "initial_location": "related work/group-MCS interpretation",
+      "initial_text": "The no-go can be read as a group-MCS regrouping result, and the characterization identifies conditions for contract-stable regrouped reports.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "the non-canonicity of\nTheorem~\\ref{thm:nogo} can be read as a statement about group-MCS families\nunder regrouping, and the characterization as identifying when regrouped\nreports are contract-stable.",
+      "claim_text_sha256": "01bebc16330563055e314b9d05abdfcd8913bdd0698952ed364d7e0b5cfa1513",
+      "manuscript_anchor": "CB-055",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 700,
+          "end_line": 703
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "the non-canonicity of\nTheorem~\\ref{thm:nogo} can be read as a statement about group-MCS families\nunder regrouping, and the characterization as identifying when regrouped\nreports are contract-stable.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-056",
+      "initial_location": "related work/certificates",
+      "initial_text": "Certified unsatisfiability formats check refutations but do not carry the reporting partition studied here.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "DRAT and LRAT proof\nformats~\\cite{WetzlerHeuleHunt2014,CruzFilipe2017} and verified checkers\nsuch as \\code{cake\\_lpr}~\\cite{TanHeuleMyreen2021} make unsatisfiability\nindependently checkable. Our results are complementary: they concern the\ndata such certificates do not carry.",
+      "claim_text_sha256": "68833935d70b1bb748f2774d6dd8b24d4355d808cc98386ea9f97176f533c025",
+      "manuscript_anchor": "CB-056",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 708,
+          "end_line": 712
+        }
+      ],
+      "claim_class": "INTERPRETIVE_CLAIM",
+      "evidence_level": "INTERPRETIVE_CLAIM",
+      "primary_evidence": [
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nvars",
+          "expected": 6936
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/nclauses",
+          "expected": 36290
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/bundled/case_11101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "6570c79cdf3e5fb3235924793bdb53968470095ebd7dc19d8707c508d0fbe384"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/split/case_111101/sen24.manifest.json",
+          "pointer": "/cnf_sha256",
+          "expected": "35d24434bf66fbdf8f4ad0a734562b3527c665ad77e5e9c93594c1aae4e3b292"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/evidence/comparison.json",
+          "pointer": "/logical_relation/mapped_clause_multiset_equal",
+          "expected": true
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/families_equal",
+          "expected": false
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/raw_repair_canonicity",
+          "expected": "FAIL"
+        },
+        {
+          "type": "json_field",
+          "path": "m3/candidate_b/generated/raw_noncanonicity.json",
+          "pointer": "/result",
+          "expected": "PASS"
+        },
+        {
+          "type": "file",
+          "path": "papers/m1_5_m3/refs.bib"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "DRAT and LRAT proof\nformats~\\cite{WetzlerHeuleHunt2014,CruzFilipe2017} and verified checkers\nsuch as \\code{cake\\_lpr}~\\cite{TanHeuleMyreen2021} make unsatisfiability\nindependently checkable. Our results are complementary: they concern the\ndata such certificates do not carry.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-057",
+      "initial_location": "related work/abstraction",
+      "initial_text": "The contribution is a mechanized iff condition for faithful abstraction-level repair reporting.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "our contribution is an exact\n(iff) condition, mechanized, for when abstraction-level repair reporting is\nfaithful.",
+      "claim_text_sha256": "4b4a7cedca9f84b7f2ac777fc217666cfebc49ba274ced19684386bffef17411",
+      "manuscript_anchor": "CB-057",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 720,
+          "end_line": 722
+        }
+      ],
+      "claim_class": "FORMAL_THEOREM",
+      "evidence_level": "FORMAL_THEOREM",
+      "primary_evidence": [
+        {
+          "type": "lean_symbol",
+          "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+          "symbol": "groupSoundness_iff"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "all theorem hypotheses stated in the manuscript claim"
+      ],
+      "scope": "abstract finite-set theorem under stated hypotheses",
+      "allowed_wording": "our contribution is an exact\n(iff) condition, mechanized, for when abstraction-level repair reporting is\nfaithful.",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    },
+    {
+      "claim_id": "CB-058",
+      "initial_location": "artifact appendix/reverification interface",
+      "initial_text": "The archive is SHA-256 integrity-checked and the witness claims are reverified by the documented checker, with python-sat required for C2-C5.",
+      "initial_status": "SUPPORTED",
+      "claim_text_exact": "The supplementary archive is integrity-checked by\n\\code{sha256sum -c MANIFEST.sha256}. The witness claims are re-verified by\n\\code{python3 tools/check\\_cm\\_witness.py} (from the archive's\n\\code{witness/} directory; C1 needs only the Python standard library, C2--C5\nadditionally a SAT solver via \\code{python-sat}):",
+      "claim_text_sha256": "52d90945ec948f134798d0573062b1bd6a75678fdea337a50d72fce7d7c34b67",
+      "manuscript_anchor": "CB-058",
+      "manuscript_locations": [
+        {
+          "path": "papers/m1_5_m3/main.tex",
+          "start_line": 804,
+          "end_line": 808
+        }
+      ],
+      "claim_class": "ARTIFACT_AUDIT",
+      "evidence_level": "ARTIFACT_AUDIT",
+      "primary_evidence": [
+        {
+          "type": "file",
+          "path": "tools/check_cm_witness.py"
+        },
+        {
+          "type": "file",
+          "path": "scripts/ci_m3_candidate_b.sh"
+        },
+        {
+          "type": "document_section",
+          "path": "papers/m1_5/CLAIM_BOUNDARY.md",
+          "section": "## Common Archive Binding"
+        }
+      ],
+      "supporting_evidence": [
+        {
+          "type": "document_section",
+          "path": "m3/candidate_b/CLAIM_BOUNDARY.md",
+          "section": "## Not established"
+        }
+      ],
+      "assumptions": [
+        "frozen finite n=2, m=4 artifact scope",
+        "no_cycle3 fixed inactive"
+      ],
+      "scope": "single finite bundled/split artifact-defined realization pair",
+      "allowed_wording": "The supplementary archive is integrity-checked by\n\\code{sha256sum -c MANIFEST.sha256}. The witness claims are re-verified by\n\\code{python3 tools/check\\_cm\\_witness.py} (from the archive's\n\\code{witness/} directory; C1 needs only the Python standard library, C2--C5\nadditionally a SAT solver via \\code{python-sat}):",
+      "forbidden_upgrade": "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade.",
+      "final_status": "SUPPORTED",
+      "action": "UNCHANGED"
+    }
+  ],
+  "final_counts": {
+    "INITIAL_MANUSCRIPT_CLAIMS": 58,
+    "FINAL_MANUSCRIPT_CLAIMS": 58,
+    "UNCHANGED_CLAIMS": 48,
+    "WEAKENED_CLAIMS": 6,
+    "DELETED_CLAIMS": 0,
+    "MERGED_CLAIMS": 0,
+    "EDITORIAL_ONLY_CLAIMS": 4,
+    "SUPPORTED_COUNT": 58,
+    "UNSUPPORTED_COUNT": 0,
+    "OVERCLAIM_COUNT": 0,
+    "UNMAPPED_MANUSCRIPT_CLAIMS": 0,
+    "CLAIM_TEXT_HASH_MISMATCH": 0,
+    "EVIDENCE_REFERENCE_ERRORS": 0,
+    "UNACCOUNTED_DELETIONS": 0
+  },
+  "deletion_records": [],
+  "claim_class_definitions": [
+    "FORMAL_THEOREM",
+    "ARTIFACT_MEASUREMENT",
+    "ARTIFACT_AUDIT",
+    "DERIVED_FINITE_FACT",
+    "INTERPRETIVE_CLAIM",
+    "LIMITATION",
+    "OUT_OF_SCOPE"
+  ],
+  "repository_inventory": {
+    "current_authoritative_branch": "main",
+    "task_branch": "codex/candidate-b-claim-freeze",
+    "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
+    "authoritative_integrated_manuscript": "papers/m1_5_m3/main.tex",
+    "candidate_b_artifact_references": [
+      "m3/candidate_b/",
+      "papers/m1_5/CLAIM_BOUNDARY.md",
+      "tools/check_cm_witness.py"
+    ],
+    "m3_theorem_sources": [
+      "SocialChoiceAtlas/Reportability/Defs.lean",
+      "SocialChoiceAtlas/Reportability/Atomic.lean",
+      "SocialChoiceAtlas/Reportability/GroupSound.lean",
+      "SocialChoiceAtlas/Reportability/Monotone.lean",
+      "SocialChoiceAtlas/Reportability/Examples.lean"
+    ],
+    "candidate_b_audit_freeze_documents": [
+      "m3/candidate_b/CLAIM_BOUNDARY.md",
+      "m3/candidate_b/README_REPRODUCE.md",
+      "docs/gates/m3_candidate_b_freeze_precheck.md",
+      "docs/gates/m3_candidate_b_post_merge_audit.md"
+    ],
+    "reproducibility_build_commands": [
+      "make -C papers/m1_5_m3",
+      "./scripts/ci_m3_candidate_b.sh",
+      "python3 tools/m1_5_m3/check_candidate_b_claim_map.py",
+      "lake build"
+    ]
+  },
+  "mandatory_nonclaims": [
+    {
+      "nonclaim": "Candidate B is a general Dafny result.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Candidate B establishes real-world prevalence.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Candidate B proves post-hoc audit is always superior.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Candidate B proves organizational report groups are valid.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Artifact-defined contract equals a semantic contract.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Artifact-defined contract equals a Lean-level contract.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "M3-A applies to non-atomic Candidate B.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "M3-B makes raw repairs canonical.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "GroupSoundness is necessary without the M3-C assumptions.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "M3-C applies when PsiDeletionMonotonicity fails.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Family-scale transfer follows automatically.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Candidate B establishes general social-choice repair theory.",
+      "disposition": "OUT_OF_SCOPE"
+    },
+    {
+      "nonclaim": "Dafny Case B grouping/minimality evidence is M3 GroupSoundness or M3 exactness.",
+      "disposition": "OUT_OF_SCOPE"
+    }
+  ],
+  "artifact_hash_bindings": [
+    {
+      "type": "file_sha256",
+      "path": "m3/candidate_b/MANIFEST.sha256",
+      "sha256": "167a2a1f08c33e57ed3e227bc7fa8efd21df27d958272199a4a9a3f8d4c3454c"
+    },
+    {
+      "type": "file_sha256",
+      "path": "tools/check_cm_witness.py",
+      "sha256": "ec402aa9af468eb825c8f1e21e18c91ef9949eb3deb8281ccb6e14d887124a4f"
+    },
+    {
+      "type": "file_sha256",
+      "path": "SocialChoiceAtlas/Reportability/GroupSound.lean",
+      "sha256": "fdf0251a3f44e5c1e9cc2b7d4ee580fb500f9370adad29b4f5be07a947f85b5b"
+    },
+    {
+      "type": "file_sha256",
+      "path": "SocialChoiceAtlas/Reportability/Monotone.lean",
+      "sha256": "4614e5b747d278196d73be882a535c3d53a4e53c2266f12dbdf4fde7ccb89641"
+    }
+  ],
+  "coverage_scan": {
+    "method": "Every TeX paragraph containing a Candidate B/reportability sentinel must contain a CB marker or match an exact SHA-256 exemption reviewed as non-claim/supporting text.",
+    "sentinel_regex": "bundled|split|witness|certificate|clause.multiset|group sound|grouped report|grouped repair|contract.level repair|raw repair|Sen instance|Candidate B|artifact",
+    "exemptions": {
+      "9bf3583edbd0cd510041850554f39e934795a16074d6a02a87d8b0d9bf5a2a86": "General motivation about verification pipelines; it states no Candidate B result.",
+      "0dd53c808c80a7ef477c3543c4f3fb78a50afeea63d31a2ceb61ab30483c99f1": "Definition of clause-multiset equivalence, not an evidentiary assertion.",
+      "be7489beac5a21f6e3bf20c7dbd5ade0b40edbd5b66c4e00181ad5bda23b90d8": "Section heading and label only.",
+      "f53b5903f77d0799de4c58f86f07cca511cabb1b6775d5979d908caf71432386": "Definition of module correspondence, not an evidentiary assertion.",
+      "15c545b5209cf7e4d69c55855686873c2fde39a679b735cc458d066394554741": "Definitions of raw and contract repair, not evidentiary assertions.",
+      "b4a3610622cc2e37d47a5d1bafe3335bfd285f76d3132747bdd116442df9eb8b": "Definition of grouping, not an evidentiary assertion.",
+      "b1536261cfee3437eeca0b00d55051cf59c5210fc4ef6514bb99e79e175db641": "Definitions of structural hypotheses, not evidentiary assertions.",
+      "0de60b1f242ff322880bb322117576a654d2374afdc0cdf068fec1c5c83d5de7": "Proof sketch supporting marked theorem CB-043, not a separate manuscript claim.",
+      "0f395e764e507f5308610fc833c415d91109e0c57684ebad00bb16eddcb158cd": "Formalization-design rationale supporting marked CB-041/CB-042, not a separate result claim.",
+      "d801c92ba21d2d515f6cc1b3a2485b7cdceaf043f1a29fd89e66b805a1ab612f": "AI-use disclosure, not a Candidate B scientific claim.",
+      "778ec00f09321b0f8d2397e5e26f7abfe326e7cacc9e9cbad6e8d1b28bb91f75": "Appendix heading and label only."
+    }
+  },
+  "freeze_contract": {
+    "starting_commit": "bf8153b5a4d06c0be7507b1840d162b8c3123a0f",
+    "candidate_b_evidence_freeze_commit": "99cba5cd45cadab283aab3784c9ff2180c8d8609",
+    "candidate_b_scientific_source_commit": "1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689",
+    "manuscript_build_command": "make -C papers/m1_5_m3",
+    "claim_check_command": "python3 tools/m1_5_m3/check_candidate_b_claim_map.py"
+  }
+}

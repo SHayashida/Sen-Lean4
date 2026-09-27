@@ -32,7 +32,7 @@ This package does not claim that:
   or generality;
 - the result transfers to Arrow, other scopes, or full acyclicity outside the
   declared base scope;
-- the CPP manuscript is accepted or submission-ready.
+- the integrated manuscript has a current venue target or is submission-ready.
 
 The Lean binding checks the abstract theorem core and its allowed axioms. It
 does not import, define, or prove Candidate B.

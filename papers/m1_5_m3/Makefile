@@ -1,10 +1,13 @@
-.PHONY: all clean
+.PHONY: all claim-check clean
 
 MAIN := main
 BUILD_DIR := build
 PDF := $(BUILD_DIR)/$(MAIN).pdf
 
 all: $(PDF)
+
+claim-check:
+	python3 ../../tools/m1_5_m3/check_candidate_b_claim_map.py
 
 $(PDF): $(MAIN).tex refs.bib
 	mkdir -p $(BUILD_DIR)

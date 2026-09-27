@@ -8,9 +8,10 @@
   `e33805d0ff0a64f12e450ba7aaa150729901d7d2`
 - Latest theorem milestone commit:
   `be4132ba3b6f8168b75644e0928d7b2609048049`
-- Latest manuscript milestone: M1.5+M3 CPP 2027 v1 working draft through
-  PR #19.
-- Program status date: 2026-07-21
+- Latest manuscript milestone: the former CPP 2027 v1 draft from PR #19 is
+  retained as the venue-neutral M1.5+M3 research draft; the submission plan was
+  discontinued on 2026-08-19.
+- Program status date: 2026-08-19
 - Potential doctoral-scope candidate record (not an enrollment or accepted-plan
   claim): `docs/doctoral_scope_lock.md`
 
@@ -29,10 +30,10 @@ institutional action are not interchangeable.
 | Milestone | Scientific result | Canonical remote state | Next action |
 |---|---|---|---|
 | M1 | Audited finite Sen24 evidence; Proof/Audit/Witness/Assumption separation | Canonical on `main` | Preserve claim boundary |
-| M1.5 | Raw repair non-canonicity under controlled representation comparison | Result, manuscript workspace, and C1-C5 witness binding canonical on `main` | Continue integrated CPP manuscript review and artifact freeze |
+| M1.5 | Raw repair non-canonicity under controlled representation comparison | Result, manuscript workspace, and C1-C5 witness binding canonical on `main` | Maintain the venue-neutral integrated draft and artifact freeze |
 | M2 | Generic O2/O3/O4 semantic obstruction bridge and general Sen theorem | Canonical, tagged, DOI archived; reviewer audit complete | Required major manuscript revision before submission |
 | M2.1 | Alternative-dimension persistence and voter-dimension boundary | Evidence/scripts partly canonical through PR #9; manuscript not canonical | Defer separate paper integration |
-| M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16; integrated CPP workspace through PR #19 | Continue integrated manuscript review |
+| M3 | M3-A/B/C finite-set reportability theorem core | Canonical on `main` through PR #16; venue-neutral integrated workspace derived from PR #19 | Maintain the integrated manuscript and claim boundary |
 | Candidate B | Artifact-defined M3-B instantiation | Canonical validator-backed, self-contained application package on `main` under `m3/candidate_b/`; not Lean-verified or semantically validated | Release review after license and redistribution gates |
 | Dafny pilot | Formal-model-repair workflow minimum example | Public external pilot at `SHayashida/dafny-m3-repair` commit `208c2a59aa24fc1d2befe22842a7b07af8ced576` | Add multiple cases and real-workflow evidence |
 | XAI companion | Deferred or parallel companion track | No public artifact status is established by the inspected Sen `main` branch | Do not infer status until explicitly published |
@@ -41,9 +42,9 @@ institutional action are not interchangeable.
 Candidate B is an application/status row under M3, not an additional program
 milestone.
 
-M1.5 and M3 now have a canonical integrated CPP 2027 working-draft workspace.
-The submission freeze is not final, and the paper is not represented as
-accepted or submission-ready.
+M1.5 and M3 have a canonical venue-neutral integrated research-draft
+workspace. The former CPP 2027 submission plan was discontinued on 2026-08-19.
+No current submission target or submission-ready status is claimed.
 
 ## 3. M4 repository-local RC workspace status
 
@@ -212,11 +213,12 @@ not establish semantic contract validity, encoder correctness, Candidate B
 formalization in Lean, solver/proof replay, normative optimality, or
 family-scale validity.
 
-## 9. CPP integrated manuscript status
+## 9. Integrated manuscript status
 
-PR #19 added `papers/cpp2027_m1_5_m3/` as the canonical workspace for the
-integrated M1.5+M3 CPP 2027 v1 working draft. Its evidence layers remain
-separate:
+PR #19 originally added the manuscript as a CPP 2027 v1 working draft. The
+workspace is now retained at `papers/m1_5_m3/` as the canonical venue-neutral
+integrated M1.5+M3 research draft. The CPP submission plan was discontinued on
+2026-08-19. Its evidence layers remain separate:
 
 - the Section 3 concrete no-go witness is artifact-checked through the M1.5
   C1-C5 binding;
@@ -224,9 +226,9 @@ separate:
   `SocialChoiceAtlas/Reportability/`;
 - the concrete grouped reading is artifact-level and is not a Lean theorem.
 
-The workspace has passed its recorded G2 draft-integration checks. No inspected
-GitHub state establishes acceptance, final submission readiness, a submission
-tag, or a public artifact release.
+The workspace has passed its recorded draft-integration checks. It has no
+current venue target. No inspected GitHub state establishes acceptance,
+submission readiness, a submission tag, or a public artifact release.
 
 ## 10. Dafny workflow pilot status
 
@@ -261,10 +263,10 @@ that pre-atomicization can never prevent the reportability problem.
 
 - M2 standalone publication decision is `CONDITIONAL GO`; required major
   manuscript revision remains before submission.
-- M1.5 and M3 form the current integrated CPP 2027 working-draft unit under
-  `papers/cpp2027_m1_5_m3/`.
-- The workspace is canonical on `main`, but submission freeze and artifact
-  release are not complete.
+- M1.5 and M3 form the current venue-neutral integrated research-draft unit
+  under `papers/m1_5_m3/`.
+- The workspace is canonical on `main`, but it has no current submission
+  target; artifact release remains separate and incomplete.
 - No separate canonical `papers/m3/` workspace exists; the integrated workspace
   is the current manuscript unit.
 - `papers/m4/` is a repository-local RC preprint workspace for claim-boundary
@@ -277,8 +279,8 @@ that pre-atomicization can never prevent the reportability problem.
 
 ## 12. Active next actions
 
-1. Continue the canonical M1.5+M3 CPP 2027 integrated working-draft review and
-   submission-freeze work without broadening its claim boundary.
+1. Maintain the canonical venue-neutral M1.5+M3 integrated research draft and
+   frozen claim map without broadening its claim boundary.
 2. Review the frozen Candidate B package for a future immutable release only
    after license and redistribution gates pass.
 3. Expand the Dafny pilot to multiple cases and a real workflow, with explicit

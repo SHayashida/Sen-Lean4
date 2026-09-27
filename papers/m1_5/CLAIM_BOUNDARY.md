@@ -1,7 +1,9 @@
 # M1.5 Claim Boundary
 
 This file is the paper-specific claim boundary for the M1.5 witness layer in
-the M1.5+M3 CPP 2027 integrated submission workstream.
+the venue-neutral M1.5+M3 integrated research draft. The former CPP 2027
+submission plan was discontinued on 2026-08-19; historical archive and tag
+identifiers below remain unchanged for reproducibility.
 
 ## Status
 
@@ -70,7 +72,7 @@ No paper-level claim is authorized beyond C1-C5 by this file.
 
 The paper text must record the C1 strengthening precisely. In the M1.5
 abstract, M1.5 Section 3 theorem statement and proof Step 2, the M1.5 appendix
-description of the variable-renaming map, and Sections 2-3 of the M1.5+M3 CPP
+description of the variable-renaming map, and Sections 2-3 of the M1.5+M3
 integrated draft, replace "up to variable renaming" and
 "designated variable-renaming map" with "under the identity variable map".
 
@@ -79,7 +81,7 @@ equality and applies no nontrivial renaming. Therefore the concrete witness
 establishes clause-multiset equivalence under the identity variable map, which
 is stronger than equivalence under an unspecified renaming.
 
-## Private Metadata and Submission Freeze
+## Private Metadata and Historical Submission Freeze
 
 The following metadata may be recorded in this public repository claim-boundary
 file, but it must not be included in the anonymous supplementary archive:
@@ -87,14 +89,13 @@ file, but it must not be included in the anonymous supplementary archive:
 - Witness artifact source: file-level extraction from off-main source SHA
   `1c2b9e7b979ba1a4b08c1d69f5400907cf2ca689`; no cherry-pick is claimed here.
 - Lean source: canonical `main` containing the Reportability core.
-- Provisional submission tag: `papers-m1_5-m3-cpp2027-submission`; G4 must
-  confirm or replace this tag before final submission.
+- Historical provisional submission tag: `papers-m1_5-m3-cpp2027-submission`;
+  it was never finalized and must not be presented as an active target.
 - Archive anonymity rule: names, affiliations, GitHub URLs, Codex branch names,
   Zenodo/SSRN identifiers, private absolute paths, and local workflow metadata
   must remain outside `cpp2027-anon-supplement.zip`.
-- Promotion path after acceptance or identity disclosure: create a public
-  release artifact and archival DOI record, then update this boundary with the
-  final public identifiers.
+- Any future publication or public artifact release requires a new target,
+  explicit review, and updated archival identifiers.
 
 ## Local Verification Record
 

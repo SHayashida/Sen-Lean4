@@ -2,7 +2,7 @@
 
 ## Canonical state
 
-- Last updated: 2026-07-22
+- Last updated: 2026-08-19
 - Branch: `main`
 - Inspected GitHub `main` HEAD:
   `abec37c61a7c1217d8debf76b31366f1ff02e57f`.
@@ -10,8 +10,9 @@
   `e33805d0ff0a64f12e450ba7aaa150729901d7d2`; the later Candidate B
   integration changes evidence/release engineering, not the scientific claim.
 - Latest canonical theorem milestone: M3 finite-set reportability theorem core.
-- Latest manuscript milestone: PR #19 integrated the M1.5+M3 CPP 2027 v1
-  working draft under `papers/cpp2027_m1_5_m3/`.
+- Latest manuscript milestone: the former CPP 2027 draft is retained as a
+  venue-neutral M1.5+M3 research draft under `papers/m1_5_m3/`; the CPP
+  submission plan was discontinued on 2026-08-19.
 - PR #14 completed the M2 reviewer audit.
 - PR #16 completed canonical integration of the M3-A/B/C theorem core.
 - PR #18 canonically bound the M1.5 C1-C5 witness claims to the deterministic
@@ -29,10 +30,10 @@
 | Milestone | Status | Canonical location |
 |---|---|---|
 | M1 | Complete in declared finite Sen24 scope | `main` |
-| M1.5 | Raw repair non-canonicity established; C1-C5 witness binding canonical; integrated CPP working draft present | `papers/m1_5/`, `tools/check_cm_witness.py`, PR #18/#19 |
+| M1.5 | Raw repair non-canonicity established; C1-C5 witness binding canonical; venue-neutral integrated working draft present | `papers/m1_5/`, `tools/check_cm_witness.py`, PR #18/#19 |
 | M2 | Semantic obstruction bridge complete, archived, and reviewer-audited `CONDITIONAL GO` | `main`, tag, GitHub Release, Zenodo DOI |
 | M2.1 | Evidence partly canonical; paper integration deferred | PR #9 evidence |
-| M3 | Abstract finite-set reportability theorem core canonical; integrated M1.5+M3 manuscript workspace present | `SocialChoiceAtlas/Reportability/`, `papers/cpp2027_m1_5_m3/` |
+| M3 | Abstract finite-set reportability theorem core canonical; integrated M1.5+M3 manuscript workspace present | `SocialChoiceAtlas/Reportability/`, `papers/m1_5_m3/` |
 | Candidate B | Canonical validator-backed, artifact-defined M3-B application evidence package on `main`; no Lean or semantic upgrade | `m3/candidate_b/`, freeze commit `99cba5cd45cadab283aab3784c9ff2180c8d8609`, main integration `abec37c61a7c1217d8debf76b31366f1ff02e57f` |
 | Dafny pilot | One public minimum example of formal-model-repair workflow choices | `SHayashida/dafny-m3-repair` at `208c2a59aa24fc1d2befe22842a7b07af8ced576` |
 | XAI companion | Deferred or parallel; no public artifact status is claimed here | not found on the inspected Sen `main` branch |
@@ -67,10 +68,10 @@ family-scale validity.
 
 ## Immediate main track
 
-Advance the canonical M1.5+M3 integrated CPP 2027 working draft while keeping
-its artifact-checked witness claims separate from its Lean-kernel-checked
-abstract characterization. The current v1 workspace is not represented as
-accepted or submission-ready.
+Maintain the canonical venue-neutral M1.5+M3 integrated research draft while
+keeping its artifact-checked witness claims separate from its
+Lean-kernel-checked abstract characterization. It has no current submission
+target; any future venue requires a separate editorial and claim-map audit.
 
 ## Parallel tracks
 
@@ -93,7 +94,7 @@ accepted or submission-ready.
 
 ## Next actions
 
-1. Continue the M1.5+M3 integrated CPP 2027 manuscript review and freeze work.
+1. Maintain the venue-neutral M1.5+M3 integrated research draft and frozen claim map.
 2. Review the frozen Candidate B package for a future immutable release only
    after the license and redistribution gates are satisfied.
 3. Expand the Dafny pilot to multiple cases and a real workflow before making

@@ -26,8 +26,8 @@ a scope and status record, not a new theorem, experiment, or novelty proof.
   [#24](https://github.com/SHayashida/Sen-Lean4/pull/24);
 - pre-canonicalization `origin/main`:
   `bf8153b5a4d06c0be7507b1840d162b8c3123a0f`;
-- merge commit and authoritative post-merge `main`:
-  `CANONICALIZATION_MERGE_PENDING`.
+- canonicalization merge commit and authoritative `main` at completion:
+  `2d64e2230ebfb7bfa47452806c6f2f0f42aed8d4`.
 
 The PR merge record and final task report are the authoritative Git records
 for the post-merge SHA.

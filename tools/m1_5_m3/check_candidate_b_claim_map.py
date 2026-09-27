@@ -126,6 +126,9 @@ INTERPRETIVE = {"CB-004", "CB-006", "CB-020", "CB-021", "CB-022", "CB-027", "CB-
 LIMITATION = {"CB-010", "CB-029"}
 WEAKENED = {"CB-002", "CB-007", "CB-022", "CB-025", "CB-028", "CB-053"}
 EDITORIAL = {"CB-026", "CB-033", "CB-034", "CB-049"}
+LOCAL_FREEZE_COMMITS = {"starting_commit", "candidate_b_evidence_freeze_commit"}
+OFF_TREE_FREEZE_COMMITS = {"candidate_b_scientific_source_commit"}
+FORBIDDEN_UPGRADE = "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade."
 
 
 def evidence_for(cid: str) -> list[dict[str, Any]]:
@@ -176,6 +179,39 @@ def claim_class(cid: str) -> str:
     if cid in INTERPRETIVE: return "INTERPRETIVE_CLAIM"
     if cid in LIMITATION: return "LIMITATION"
     raise KeyError(cid)
+
+
+def canonical_fields(cid: str, extracted: dict[str, Any]) -> dict[str, Any]:
+    """Return every claim field derived by the audited refresh policy."""
+    klass = claim_class(cid)
+    fields = {
+        **extracted,
+        "claim_class": klass,
+        "evidence_level": klass,
+        "primary_evidence": evidence_for(cid),
+        "supporting_evidence": BOUNDARY if cid not in LIMITATION else [],
+        "assumptions": (
+            ["all theorem hypotheses stated in the manuscript claim"]
+            if cid in FORMAL
+            else ["frozen finite n=2, m=4 artifact scope", "no_cycle3 fixed inactive"]
+            if cid not in INTERPRETIVE | LIMITATION
+            else []
+        ),
+        "scope": (
+            "abstract finite-set theorem under stated hypotheses"
+            if cid in FORMAL
+            else "single finite bundled/split artifact-defined realization pair"
+            if cid not in LIMITATION
+            else "explicit non-claim and scope boundary"
+        ),
+        "allowed_wording": extracted["claim_text_exact"],
+        "forbidden_upgrade": FORBIDDEN_UPGRADE,
+        "final_status": "SUPPORTED",
+        "action": "WEAKENED" if cid in WEAKENED else "EDITORIAL_ONLY" if cid in EDITORIAL else "UNCHANGED",
+    }
+    if cid == "CB-003":
+        fields["inference_boundary"] = "Lean symbols support the theorem portion; the witness checker and SHA-bound artifacts support the concrete portion. Neither evidence layer upgrades the other."
+    return fields
 
 
 def extract_claims(text: str) -> tuple[dict[str, dict[str, Any]], list[str]]:
@@ -273,19 +309,7 @@ def refresh(data: dict[str, Any], extracted: dict[str, dict[str, Any]]) -> None:
         raise SystemExit(f"claim IDs differ: map-only={sorted(set(records)-set(extracted))}, manuscript-only={sorted(set(extracted)-set(records))}")
     for cid in sorted(records):
         record = records[cid]
-        record.update(extracted[cid])
-        record["claim_class"] = claim_class(cid)
-        record["evidence_level"] = claim_class(cid)
-        record["primary_evidence"] = evidence_for(cid)
-        record["supporting_evidence"] = BOUNDARY if cid not in LIMITATION else []
-        record["assumptions"] = (["all theorem hypotheses stated in the manuscript claim"] if cid in FORMAL else ["frozen finite n=2, m=4 artifact scope", "no_cycle3 fixed inactive"] if cid not in INTERPRETIVE | LIMITATION else [])
-        record["scope"] = "abstract finite-set theorem under stated hypotheses" if cid in FORMAL else "single finite bundled/split artifact-defined realization pair" if cid not in LIMITATION else "explicit non-claim and scope boundary"
-        record["allowed_wording"] = extracted[cid]["claim_text_exact"]
-        record["forbidden_upgrade"] = "No semantic-contract, Lean-level Candidate B, organizational-validity, prevalence, family-transfer, necessity-without-hypotheses, or unconditional-canonicity upgrade."
-        record["final_status"] = "SUPPORTED"
-        record["action"] = "WEAKENED" if cid in WEAKENED else "EDITORIAL_ONLY" if cid in EDITORIAL else "UNCHANGED"
-        if cid == "CB-003":
-            record["inference_boundary"] = "Lean symbols support the theorem portion; the witness checker and SHA-bound artifacts support the concrete portion. Neither evidence layer upgrades the other."
+        record.update(canonical_fields(cid, extracted[cid]))
     data["status"] = "FROZEN"
     data["final_counts"] = {
         "INITIAL_MANUSCRIPT_CLAIMS": len(records),
@@ -329,17 +353,25 @@ def check(data: dict[str, Any], extracted: dict[str, dict[str, Any]], marker_err
         missing = required - set(record)
         if missing: errors.append(f"{cid}: missing fields {sorted(missing)}"); continue
         if cid in extracted:
-            for field in ("claim_text_exact", "claim_text_sha256", "manuscript_anchor"):
-                if record[field] != extracted[cid][field]: errors.append(f"{cid}: {field} mismatch")
-        if record["final_status"] != "SUPPORTED": errors.append(f"{cid}: final status is {record['final_status']}")
+            for field, expected in canonical_fields(cid, extracted[cid]).items():
+                if record.get(field) != expected:
+                    errors.append(f"{cid}: canonical {field} mismatch")
         if not record["primary_evidence"]: errors.append(f"{cid}: no primary evidence")
         for ref in record["primary_evidence"] + record["supporting_evidence"]:
             err = validate_ref(ref)
             if err: errors.append(f"{cid}: {err}")
-    for commit in data.get("freeze_contract", {}).values():
+    freeze_contract = data.get("freeze_contract", {})
+    for key in LOCAL_FREEZE_COMMITS:
+        commit = freeze_contract.get(key)
         if isinstance(commit, str) and re.fullmatch(r"[0-9a-f]{40}", commit):
             err = validate_ref(G(commit))
             if err: errors.append(err)
+        else:
+            errors.append(f"missing or invalid local freeze commit: {key}")
+    for key in OFF_TREE_FREEZE_COMMITS:
+        commit = freeze_contract.get(key)
+        if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit):
+            errors.append(f"missing or invalid off-tree source commit: {key}")
     for ref in data.get("artifact_hash_bindings", []):
         err = validate_ref(ref)
         if err: errors.append(err)

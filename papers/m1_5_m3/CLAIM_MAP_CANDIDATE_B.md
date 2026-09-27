@@ -51,8 +51,12 @@ Every manuscript claim is enclosed by exactly one `% CLAIM: CB-*` / `% END
 CLAIM: CB-*` pair. The checker binds the exact intervening TeX to SHA-256,
 checks marker/map bijection, scans sentinel-bearing unmarked paragraphs against
 an exact-hash reviewed exemption list, resolves JSON pointers and expected
-values, resolves Lean symbols and Git commits, and verifies stored artifact
-hash bindings. Any wording or evidence drift fails closed.
+values, resolves Lean symbols and repository-owned freeze commits, validates
+the documented off-tree source SHA as a provenance identifier without requiring
+that object in a clean clone, and verifies stored artifact hash bindings. It
+also compares every refresh-derived classification, evidence mapping, scope,
+and action with the canonical policy. Any wording or evidence drift fails
+closed.
 
 Run:
 
